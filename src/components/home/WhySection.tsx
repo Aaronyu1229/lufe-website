@@ -58,7 +58,7 @@ export function WhySection() {
           <br />
           才能走完一條路
         </h2>
-        <p className="text-[15px] text-white/50 max-w-[480px] leading-[1.7] mb-12 font-normal">
+        <p className="text-[15px] text-white/60 max-w-[480px] leading-[1.7] mb-12 font-normal">
           市場上的選擇，每一家都只做你的一部分。鹿飛把它們串成一條線。
         </p>
 
@@ -70,7 +70,7 @@ export function WhySection() {
                 className={`w-[100px] md:w-[100px] text-[12.5px] text-right font-normal flex-shrink-0 ${
                   bar.variant === "lufe"
                     ? "text-gold font-medium"
-                    : "text-white/50"
+                    : "text-white/60"
                 }`}
                 style={{ width: 100 }}
               >
@@ -90,7 +90,7 @@ export function WhySection() {
               </div>
             </div>
           ))}
-          <div className="flex justify-between px-0 md:px-[116px] mt-2 text-[10.5px] text-white/25 font-normal">
+          <div className="flex justify-between px-0 md:px-[116px] mt-2 text-[10.5px] text-white/30 font-normal">
             <span>市場評估</span>
             <span>產品測試</span>
             <span>通路進入</span>
@@ -108,11 +108,11 @@ export function WhySection() {
         >
           {stats.map((stat, i) => (
             <div key={stat.label} className="text-center">
-              <div className="font-heading text-[36px] text-gold font-bold">
+              <div className="font-heading text-[36px] text-gold font-semibold">
                 {values[i]}
                 {stat.suffix}
               </div>
-              <div className="text-[12px] text-white/35 font-normal mt-0.5">
+              <div className="text-[12px] text-white/50 font-normal mt-0.5">
                 {stat.label}
               </div>
             </div>
@@ -130,7 +130,7 @@ export function WhySection() {
               的團隊幫我們在 6
               個月內把產品從台灣帶進 Costco。從合規到通路，全程不用我們操心。」
             </q>
-            <cite className="text-[12.5px] text-white/35 not-italic font-normal">
+            <cite className="text-[12.5px] text-white/50 not-italic font-normal">
               陳先生 — 保健品品牌負責人
             </cite>
           </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
 
 export function CTASection() {
@@ -79,20 +80,20 @@ export function CTASection() {
           都值得試試看
         </h2>
         <p className="text-[15px] text-tx2 max-w-[440px] mx-auto leading-[1.7] mb-10 font-normal">
-          不確定從哪開始？沒關係。聊聊你的產品，我們一起看看。
+          不確定從哪開始？沒關係。兩分鐘評估，找到你的起點。
         </p>
         <div className="flex justify-center gap-3 flex-wrap">
+          <Link
+            href="/assess"
+            className="inline-block bg-gold text-navy px-[30px] py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-cream-d"
+          >
+            免費出海評估 →
+          </Link>
           <button
             onClick={open}
-            className="bg-gold text-navy px-[30px] py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
-          >
-            聊聊你的出海計畫 →
-          </button>
-          <button
-            onClick={() => window.open("https://calendly.com", "_blank")}
             className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
           >
-            預約 30 分鐘了解 →
+            直接聊聊 →
           </button>
         </div>
       </div>

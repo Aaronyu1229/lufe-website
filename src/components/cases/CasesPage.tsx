@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 /* ───────── data ───────── */
 
@@ -162,7 +164,7 @@ function CaseDetail({
       <div className="flex gap-6 mb-10 flex-wrap">
         {caseItem.stats.map((s) => (
           <div key={s.label}>
-            <div className="font-heading text-[32px] text-gold leading-none font-normal">
+            <div className="font-heading text-[32px] text-gold leading-none font-semibold">
               {s.value}
             </div>
             <div className="text-[12px] text-tx3 mt-1">{s.label}</div>
@@ -203,12 +205,12 @@ function CaseDetail({
         <p className="text-[15px] font-medium mb-4">
           想知道你的產品是否也有類似的機會？
         </p>
-        <button
-          onClick={() => window.open("https://calendly.com", "_blank")}
-          className="bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-gold-l"
+        <Link
+          href="/assess"
+          className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-gold-l"
         >
-          預約 30 分鐘聊聊 →
-        </button>
+          免費出海評估 →
+        </Link>
       </div>
 
       {/* Related cases */}
@@ -222,7 +224,7 @@ function CaseDetail({
               <button
                 key={rc.slug}
                 onClick={() => onNavigate(rc.slug)}
-                className="p-6 bg-white border border-bd rounded-none text-left cursor-pointer transition-colors hover:border-gold"
+                className="p-6 bg-white border border-bd rounded-none text-left cursor-pointer transition-all hover:border-gold hover:shadow-lg"
               >
                 <div className="flex gap-1.5 mb-2">
                   {rc.tags.map((t) => (
@@ -234,7 +236,7 @@ function CaseDetail({
                     </span>
                   ))}
                 </div>
-                <div className="font-heading text-[28px] text-gold leading-none font-normal mb-2">
+                <div className="font-heading text-[28px] text-gold leading-none font-semibold mb-2">
                   {rc.num}
                 </div>
                 <h4 className="text-[15px] font-medium leading-[1.4]">
@@ -252,7 +254,23 @@ function CaseDetail({
 /* ───────── main ───────── */
 
 export function CasesPage() {
-  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [activeSlug, setActiveSlug] = useState<string | null>(
+    searchParams.get("case")
+  );
+
+  // Sync URL → state when searchParams change
+  useEffect(() => {
+    setActiveSlug(searchParams.get("case"));
+  }, [searchParams]);
+
+  const navigateTo = (slug: string | null) => {
+    const url = slug ? `/cases?case=${slug}` : "/cases";
+    router.push(url, { scroll: false });
+    setActiveSlug(slug);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const activeCase = casesData.find((c) => c.slug === activeSlug);
 
@@ -264,12 +282,8 @@ export function CasesPage() {
             <CaseDetail
               key={activeCase.slug}
               caseItem={activeCase}
-              onBack={() => setActiveSlug(null)}
-              onNavigate={(slug) => {
-                setActiveSlug(null);
-                setTimeout(() => setActiveSlug(slug), 50);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+              onBack={() => navigateTo(null)}
+              onNavigate={(slug) => navigateTo(slug)}
             />
           ) : (
             <motion.div
@@ -292,10 +306,7 @@ export function CasesPage() {
                 {casesData.map((c) => (
                   <button
                     key={c.slug}
-                    onClick={() => {
-                      setActiveSlug(c.slug);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
+                    onClick={() => navigateTo(c.slug)}
                     className="group bg-white border border-bd rounded-none text-left cursor-pointer transition-all hover:border-gold hover:shadow-lg relative overflow-hidden"
                   >
                     <div className="h-[140px] overflow-hidden">
@@ -312,7 +323,7 @@ export function CasesPage() {
                         </span>
                       ))}
                     </div>
-                    <div className="font-heading text-[46px] text-gold leading-none font-normal mb-3">
+                    <div className="font-heading text-[46px] text-gold leading-none font-semibold mb-3">
                       {c.num}
                     </div>
                     <h3 className="font-heading text-[18px] leading-[1.4] mb-2 font-normal">
@@ -334,14 +345,12 @@ export function CasesPage() {
                 <p className="text-[15px] text-tx2 font-normal mb-4">
                   想知道你的產品適合哪條路？
                 </p>
-                <button
-                  onClick={() =>
-                    window.open("https://calendly.com", "_blank")
-                  }
-                  className="bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-gold-l"
+                <Link
+                  href="/assess"
+                  className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-gold-l"
                 >
-                  預約 30 分鐘聊聊 →
-                </button>
+                  免費出海評估 →
+                </Link>
               </div>
             </motion.div>
           )}

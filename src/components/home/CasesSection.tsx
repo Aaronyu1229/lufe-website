@@ -83,7 +83,7 @@ export function CasesSection() {
                     </span>
                   ))}
                 </div>
-                <div className="font-heading text-[56px] font-bold text-gold mb-2.5 leading-none">
+                <div className="font-heading text-[56px] font-semibold text-gold mb-2.5 leading-none">
                   {c.num}
                 </div>
                 <h3 className="font-heading text-[22px] leading-[1.4] mb-2 font-bold">
@@ -135,7 +135,7 @@ export function CasesSection() {
                     </span>
                   ))}
                 </div>
-                <div className="font-heading text-[42px] font-bold text-gold mb-2.5 leading-none">
+                <div className="font-heading text-[42px] font-semibold text-gold mb-2.5 leading-none">
                   {c.num}
                 </div>
                 <h3 className="font-heading text-[18px] leading-[1.4] mb-2 font-bold">
@@ -154,12 +154,12 @@ export function CasesSection() {
       </div>
 
       <div className="text-center mt-11">
-        <button
-          onClick={() => window.open("https://calendly.com", "_blank")}
-          className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
+        <Link
+          href="/assess"
+          className="inline-block px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium transition-colors duration-300 hover:border-gold hover:text-gold"
         >
-          想知道你的產品適合哪條路？預約 30 分鐘聊聊 →
-        </button>
+          想知道你的產品適合哪條路？免費評估 →
+        </Link>
       </div>
     </section>
   );

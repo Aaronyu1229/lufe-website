@@ -75,6 +75,12 @@ const stageOptions = [
   "其他",
 ];
 
+/* ───────── validation helpers ───────── */
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 /* ───────── component ───────── */
 
 export function ContactPage() {
@@ -88,17 +94,56 @@ export function ContactPage() {
     stage: "",
     message: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitted, setSubmitted] = useState(false);
+
+  const validate = (fields = formState) => {
+    const errs: Record<string, string> = {};
+    if (!fields.name.trim()) errs.name = "請填寫姓名";
+    if (!fields.email.trim()) errs.email = "請填寫 Email";
+    else if (!isValidEmail(fields.email)) errs.email = "Email 格式不正確";
+    if (!fields.message.trim()) errs.message = "請填寫你的問題";
+    return errs;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const next = { ...formState, [e.target.name]: e.target.value };
+    setFormState(next);
+    // Clear error on change if field was touched
+    if (touched[e.target.name]) {
+      const errs = validate(next);
+      setErrors((prev) => {
+        const updated = { ...prev };
+        if (errs[e.target.name]) updated[e.target.name] = errs[e.target.name];
+        else delete updated[e.target.name];
+        return updated;
+      });
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const name = e.target.name;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    const errs = validate();
+    setErrors((prev) => {
+      const updated = { ...prev };
+      if (errs[name]) updated[name] = errs[name];
+      else delete updated[name];
+      return updated;
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    const errs = validate();
+    setErrors(errs);
+    setTouched({ name: true, email: true, message: true });
+    if (Object.keys(errs).length === 0) {
+      setSubmitted(true);
+    }
   };
 
   const handleChannelClick = (action: string) => {
@@ -117,6 +162,15 @@ export function ContactPage() {
         break;
     }
   };
+
+  const isFormValid = !formState.name.trim() || !formState.email.trim() || !isValidEmail(formState.email) || !formState.message.trim();
+
+  const inputClass = (name: string) =>
+    `w-full px-4 py-3 border rounded-none text-[14px] outline-none transition-colors ${
+      errors[name] && touched[name]
+        ? "border-red-400 focus:border-red-500"
+        : "border-bd focus:border-gold"
+    }`;
 
   return (
     <>
@@ -141,7 +195,7 @@ export function ContactPage() {
                 <button
                   key={ch.title}
                   onClick={() => handleChannelClick(ch.action)}
-                  className={`p-5 bg-white rounded-none border border-bd text-left cursor-pointer transition-colors ${c.border}`}
+                  className={`p-5 bg-white rounded-none border border-bd text-left cursor-pointer transition-all hover:shadow-lg ${c.border}`}
                 >
                   <div
                     className={`w-12 h-12 rounded-none ${c.iconBg} ${c.iconText} flex items-center justify-center mb-3`}
@@ -202,7 +256,7 @@ export function ContactPage() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               {/* Row: Name + Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
@@ -212,12 +266,15 @@ export function ContactPage() {
                   <input
                     type="text"
                     name="name"
-                    required
                     value={formState.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
+                    onBlur={handleBlur}
+                    className={inputClass("name")}
                     placeholder="你的姓名"
                   />
+                  {errors.name && touched.name && (
+                    <p className="text-[12px] text-red-500 mt-1">{errors.name}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-[12px] font-medium tracking-[1px] mb-1.5">
@@ -226,12 +283,15 @@ export function ContactPage() {
                   <input
                     type="email"
                     name="email"
-                    required
                     value={formState.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
+                    onBlur={handleBlur}
+                    className={inputClass("email")}
                     placeholder="you@company.com"
                   />
+                  {errors.email && touched.email && (
+                    <p className="text-[12px] text-red-500 mt-1">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
@@ -307,19 +367,23 @@ export function ContactPage() {
                 </label>
                 <textarea
                   name="message"
-                  required
                   rows={4}
                   value={formState.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors resize-none"
+                  onBlur={handleBlur}
+                  className={`${inputClass("message")} resize-none`}
                   placeholder="任何問題都可以，不確定也沒關係。"
                 />
+                {errors.message && touched.message && (
+                  <p className="text-[12px] text-red-500 mt-1">{errors.message}</p>
+                )}
               </div>
 
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-gold text-navy py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:border-gold"
+                disabled={isFormValid}
+                className="w-full bg-gold text-navy py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-gold-l disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 送出表單
               </button>

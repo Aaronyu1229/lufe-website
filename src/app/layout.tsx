@@ -42,7 +42,7 @@ export default function RootLayout({
       <body>
         <MessageBoxProvider>
           <Navbar />
-          {children}
+          <main id="main-content">{children}</main>
           <Footer />
           <MessageBox />
         </MessageBoxProvider>

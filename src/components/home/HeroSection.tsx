@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
@@ -18,8 +18,8 @@ const SLIDES: readonly Slide[] = [
     image: "/hero-bg.jpg",
     headline: "好產品值得一條順暢的出海路",
     subtitle: "從市場驗證到落地營運，我們陪你走完全程。",
-    cta: "聊聊你的產品 →",
-    action: "message",
+    cta: "兩分鐘免費評估 →",
+    action: { href: "/assess" },
   },
   {
     image: "/hero-2.jpg",
@@ -31,9 +31,9 @@ const SLIDES: readonly Slide[] = [
   {
     image: "/hero-3.jpg",
     headline: "出海不是冒險，是有計畫的探索",
-    subtitle: "兩分鐘免費評估，找到你的起點。",
-    cta: "免費評估 →",
-    action: { href: "/assess" },
+    subtitle: "不確定從哪開始？聊聊你的產品。",
+    cta: "聊聊你的產品 →",
+    action: "message",
   },
 ] as const;
 
@@ -42,20 +42,44 @@ const INTERVAL_MS = 6000;
 export function HeroSection() {
   const { open } = useMessageBox();
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchStartX = useRef(0);
 
   const advance = useCallback(() => {
     setCurrent((prev) => (prev + 1) % SLIDES.length);
   }, []);
 
+  const goBack = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+  }, []);
+
   useEffect(() => {
+    if (paused) return;
     const id = setInterval(advance, INTERVAL_MS);
     return () => clearInterval(id);
-  }, [advance]);
+  }, [advance, paused]);
 
   const slide = SLIDES[current];
 
   return (
-    <section className="min-h-screen relative overflow-hidden flex items-center">
+    <section
+      className="min-h-screen relative overflow-hidden flex items-center"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="精選內容輪播"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onTouchStart={(e) => {
+        touchStartX.current = e.touches[0].clientX;
+      }}
+      onTouchEnd={(e) => {
+        const diff = e.changedTouches[0].clientX - touchStartX.current;
+        if (Math.abs(diff) > 50) {
+          if (diff < 0) advance();
+          else goBack();
+        }
+      }}
+    >
       {/* Background slides with crossfade */}
       <AnimatePresence mode="sync">
         <motion.div
@@ -65,6 +89,9 @@ export function HeroSection() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1, ease: "easeInOut" }}
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${current + 1} / ${SLIDES.length}: ${slide.headline}`}
         >
           <div
             className="absolute inset-0 bg-cover bg-center"
@@ -73,6 +100,26 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-navy/90 to-navy/60" />
         </motion.div>
       </AnimatePresence>
+
+      {/* Left / Right arrows */}
+      <button
+        onClick={goBack}
+        aria-label="上一張"
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-white/70 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+      >
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      <button
+        onClick={advance}
+        aria-label="下一張"
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-white/70 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+      >
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
 
       {/* Content */}
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-[180px] pb-[120px] relative z-10">
@@ -126,7 +173,8 @@ export function HeroSection() {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            aria-label={`Slide ${i + 1}`}
+            aria-label={`前往第 ${i + 1} 張`}
+            aria-current={i === current ? "true" : undefined}
             className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 cursor-pointer ${
               i === current ? "bg-gold" : "bg-white/40"
             }`}
