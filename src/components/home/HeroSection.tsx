@@ -1,52 +1,137 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
+
+interface Slide {
+  readonly image: string;
+  readonly headline: string;
+  readonly subtitle: string;
+  readonly cta: string;
+  readonly action: "message" | { href: string };
+}
+
+const SLIDES: readonly Slide[] = [
+  {
+    image: "/hero-bg.jpg",
+    headline: "好產品值得一條順暢的出海路",
+    subtitle: "從市場驗證到落地營運，我們陪你走完全程。",
+    cta: "聊聊你的產品 →",
+    action: "message",
+  },
+  {
+    image: "/hero-2.jpg",
+    headline: "六個月，從台灣到北美 Costco",
+    subtitle: "真實案例，真實成果。",
+    cta: "看案例 →",
+    action: { href: "/cases" },
+  },
+  {
+    image: "/hero-3.jpg",
+    headline: "出海不是冒險，是有計畫的探索",
+    subtitle: "兩分鐘免費評估，找到你的起點。",
+    cta: "免費評估 →",
+    action: { href: "/assess" },
+  },
+] as const;
+
+const INTERVAL_MS = 6000;
 
 export function HeroSection() {
   const { open } = useMessageBox();
+  const [current, setCurrent] = useState(0);
+
+  const advance = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % SLIDES.length);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(advance, INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [advance]);
+
+  const slide = SLIDES[current];
 
   return (
-    <section
-      className="min-h-screen flex items-center relative overflow-hidden"
-      style={{
-        backgroundImage: "url('/hero-bg.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Dark gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-navy/90 to-navy/60" />
+    <section className="min-h-screen relative overflow-hidden flex items-center">
+      {/* Background slides with crossfade */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={current}
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url('${slide.image}')` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/90 to-navy/60" />
+        </motion.div>
+      </AnimatePresence>
 
+      {/* Content */}
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-[180px] pb-[120px] relative z-10">
         <div className="max-w-[680px]">
           <div className="inline-block border-b-2 border-gold/40 text-gold text-[12.5px] font-medium mb-8 tracking-[1.5px] uppercase pb-1">
             企業出海的導航系統
           </div>
-          <h1 className="font-sans text-[clamp(40px,5.5vw,64px)] text-white leading-[1.1] mb-6 font-bold tracking-[-1.5px]">
-            好產品值得一條
-            <br />
-            順暢的<span className="text-gold">出海路</span>
-          </h1>
-          <p className="text-[17px] text-white/60 max-w-[480px] leading-[1.75] mb-4">
-            從市場驗證到落地營運，我們陪你走完全程。
-            <br />
-            別人幫你開車，我們幫你找路。
-          </p>
-          <p className="text-[14px] text-gold/80 mb-10">
-            平均 6-9 個月，讓你的產品站上海外貨架。
-          </p>
-          <div className="flex items-center gap-4 flex-wrap">
-            <button
-              onClick={open}
-              className="bg-gold text-navy px-8 py-4 rounded-none text-[15px] font-semibold cursor-pointer transition-all hover:bg-gold-l"
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-              聊聊你的產品 →
-            </button>
-            <span className="text-[13px] text-white/30">
-              不確定該不該出海？先聊聊，不收費。
-            </span>
-          </div>
+              <h1
+                className="font-sans text-white leading-[1.1] mb-6 font-bold tracking-[-1.5px]"
+                style={{ fontSize: "clamp(42px, 5.5vw, 68px)" }}
+              >
+                {slide.headline}
+              </h1>
+
+              <p className="text-[18px] text-white/70 font-normal mb-10">
+                {slide.subtitle}
+              </p>
+
+              {slide.action === "message" ? (
+                <button
+                  onClick={open}
+                  className="bg-gold text-navy px-8 py-4 rounded-none text-[15px] font-semibold cursor-pointer transition-all hover:bg-gold-l"
+                >
+                  {slide.cta}
+                </button>
+              ) : (
+                <Link
+                  href={slide.action.href}
+                  className="inline-block bg-gold text-navy px-8 py-4 rounded-none text-[15px] font-semibold transition-all hover:bg-gold-l"
+                >
+                  {slide.cta}
+                </Link>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
+      </div>
+
+      {/* Navigation dots */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex gap-3">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            aria-label={`Slide ${i + 1}`}
+            className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 cursor-pointer ${
+              i === current ? "bg-gold" : "bg-white/40"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

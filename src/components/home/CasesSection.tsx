@@ -13,6 +13,7 @@ const cases = [
     title: "保健品怎麼從台灣走進北美 Costco？",
     desc: "從 FDA 註冊到通路談判，打進全球最大會員制零售通路。完整走過評估、測試、通路進入的每一步。",
     route: { from: "台灣", to: "Costco" },
+    image: "/case-costco.jpg",
   },
   {
     tags: [
@@ -22,6 +23,7 @@ const cases = [
     num: "-15%",
     title: "電子大廠怎麼靠產地轉移省下關稅？",
     desc: "從大陸轉越南出貨，找到中美關稅戰中的最優路徑。",
+    image: "/case-electronics.jpg",
   },
   {
     tags: [
@@ -31,6 +33,7 @@ const cases = [
     num: "3x",
     title: "知名皮鞋品牌為什麼改賣襪子大賺？",
     desc: "分析亞馬遜數據後調整品類策略，找到高毛利藍海品項。",
+    image: "/case-shoes.jpg",
   },
   {
     tags: [
@@ -40,6 +43,7 @@ const cases = [
     num: "10 家",
     title: "珍珠奶茶品牌怎麼在菲律賓成功落地？",
     desc: "從市場探索到門市營運，建立穩定營收基地。",
+    image: "/case-bubbletea.jpg",
   },
 ];
 
@@ -66,7 +70,7 @@ export function CasesSection() {
           c.featured ? (
             <div
               key={c.title}
-              className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-10 bg-white border border-bd rounded-none transition-colors duration-300 cursor-pointer hover:border-gold"
+              className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-10 bg-white border border-bd rounded-none transition-all duration-300 cursor-pointer hover:border-gold hover:shadow-lg"
             >
               <div>
                 <div className="flex gap-1.5 mb-2.5">
@@ -104,17 +108,21 @@ export function CasesSection() {
                   </div>
                 )}
               </div>
-              <div className="bg-cream-d rounded-none h-full min-h-[200px] flex items-center justify-center overflow-hidden">
-                <div className="text-[11px] text-tx3/40 tracking-[2px] uppercase">Case Study</div>
+              <div className="rounded-none h-full min-h-[200px] overflow-hidden">
+                <img
+                  src={c.image}
+                  alt={c.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
               </div>
             </div>
           ) : (
             <div
               key={c.title}
-              className="bg-white border border-bd rounded-none transition-colors duration-300 cursor-pointer relative overflow-hidden hover:border-gold"
+              className="group bg-white border border-bd rounded-none transition-all duration-300 cursor-pointer relative overflow-hidden hover:border-gold hover:shadow-lg"
             >
-              <div className="h-[140px] bg-cream-d flex items-center justify-center">
-                <div className="text-[11px] text-tx3/40 tracking-[2px] uppercase">Case Study</div>
+              <div className="h-[140px] overflow-hidden">
+                <img src={c.image} alt={c.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="p-[30px]">
                 <div className="flex gap-1.5 mb-2.5">

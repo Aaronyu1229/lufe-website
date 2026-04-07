@@ -15,7 +15,7 @@
   --color-tx3: #8A8F9E;
   --color-bd: rgba(26,26,46,0.07);
 
-  --font-heading: var(--font-inter);
+  --font-heading: var(--font-playfair);
   --font-sans: var(--font-inter);
   --font-zh: var(--font-noto-sans-tc);
   --font-accent: var(--font-playfair);

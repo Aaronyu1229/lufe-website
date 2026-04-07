@@ -120,34 +120,15 @@ export function InsightsPage() {
           {filtered.map((article) => (
             <div
               key={article.title}
-              className="group bg-white rounded-none border border-bd overflow-hidden transition-colors hover:border-gold cursor-pointer"
+              className="group bg-white rounded-none border border-bd overflow-hidden transition-all hover:border-gold hover:shadow-lg cursor-pointer"
             >
-              {/* Cover placeholder */}
-              <div className="h-[160px] bg-cream-d flex items-center justify-center">
-                <svg
-                  width="40"
-                  height="40"
-                  viewBox="0 0 40 40"
-                  fill="none"
-                  className="text-tx3 opacity-30"
-                >
-                  <rect
-                    x="4"
-                    y="4"
-                    width="32"
-                    height="32"
-                    rx="4"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                  <circle cx="14" cy="16" r="3" stroke="currentColor" strokeWidth="1.5" />
-                  <path
-                    d="M4 28L14 20L22 26L28 22L36 28"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              {/* Cover image */}
+              <div className="h-[160px] overflow-hidden">
+                <img
+                  src={article.title.includes("東南亞") || article.title.includes("產地轉移") ? "/insight-sea.jpg" : article.title.includes("Checklist") || article.title.includes("亞馬遜") ? "/insight-checklist.jpg" : "/insight-fda.jpg"}
+                  alt={article.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
               </div>
 
               {/* Content */}

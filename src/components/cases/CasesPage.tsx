@@ -296,10 +296,10 @@ export function CasesPage() {
                       setActiveSlug(c.slug);
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="group bg-white border border-bd rounded-none text-left cursor-pointer transition-colors hover:border-gold relative overflow-hidden"
+                    className="group bg-white border border-bd rounded-none text-left cursor-pointer transition-all hover:border-gold hover:shadow-lg relative overflow-hidden"
                   >
-                    <div className="h-[140px] bg-cream-d flex items-center justify-center">
-                      <div className="text-[11px] text-tx3/40 tracking-[2px] uppercase">Case Study</div>
+                    <div className="h-[140px] overflow-hidden">
+                      <img src={`/case-${c.slug === "costco-health" ? "costco" : c.slug === "electronics-tariff" ? "electronics" : c.slug === "shoe-brand" ? "shoes" : "bubbletea"}.jpg`} alt={c.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     </div>
                     <div className="p-7">
                     <div className="flex gap-1.5 mb-3">

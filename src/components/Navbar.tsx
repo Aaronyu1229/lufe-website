@@ -17,7 +17,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -25,7 +25,9 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-100">
       {/* Utility bar */}
-      <div className="bg-navy text-white/50 text-[11px] hidden md:block">
+      <div className={`bg-navy text-white/50 text-[11px] hidden md:block transition-all duration-300 ${
+        scrolled ? "opacity-0 h-0 overflow-hidden" : "opacity-100 h-[32px]"
+      }`}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 flex items-center justify-between h-[32px]">
           <div className="flex items-center gap-5">
             <span className="hover:text-white/80 transition-colors cursor-pointer">繁體中文</span>
@@ -44,14 +46,16 @@ export function Navbar() {
       <nav
         className={`transition-all duration-300 ${
           scrolled
-            ? "bg-white/95 backdrop-blur-[20px] border-b border-bd"
-            : "bg-white/95 backdrop-blur-[20px] border-b border-bd"
+            ? "bg-white/95 backdrop-blur-md shadow-sm"
+            : "bg-transparent"
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 flex items-center justify-between h-[64px]">
           <Link
             href="/"
-            className="font-sans font-bold text-[22px] text-navy tracking-[-0.5px]"
+            className={`font-sans font-bold text-[22px] tracking-[-0.5px] transition-colors duration-300 ${
+              scrolled ? "text-navy" : "text-white"
+            }`}
           >
             鹿飛 LUF<span className="text-gold">É</span>
           </Link>
@@ -62,7 +66,11 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[13px] text-tx2 font-medium hover:text-tx transition-colors"
+                className={`text-[13px] font-medium transition-colors duration-300 ${
+                  scrolled
+                    ? "text-tx hover:text-navy"
+                    : "text-white/80 hover:text-white"
+                }`}
               >
                 {link.label}
               </Link>
@@ -71,7 +79,11 @@ export function Navbar() {
 
           <div className="hidden md:flex gap-2.5">
             <button
-              className="px-4 py-[9px] border border-bd rounded-none text-[13px] font-medium text-tx2 hover:border-tx transition-colors cursor-pointer"
+              className={`px-4 py-[9px] border rounded-none text-[13px] font-medium transition-colors duration-300 cursor-pointer ${
+                scrolled
+                  ? "border-bd text-tx hover:border-tx"
+                  : "border-white/30 text-white/80 hover:text-white hover:border-white/60"
+              }`}
               onClick={() =>
                 window.open("https://calendly.com", "_blank")
               }
@@ -88,13 +100,13 @@ export function Navbar() {
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-5 h-0.5 bg-navy transition-transform ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${scrolled ? "bg-navy" : "bg-white"} ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
             />
             <span
-              className={`block w-5 h-0.5 bg-navy transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${scrolled ? "bg-navy" : "bg-white"} ${mobileOpen ? "opacity-0" : ""}`}
             />
             <span
-              className={`block w-5 h-0.5 bg-navy transition-transform ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${scrolled ? "bg-navy" : "bg-white"} ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
             />
           </button>
         </div>
