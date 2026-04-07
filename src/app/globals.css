@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ── 雲際 Design System ── */
+  --color-navy: #101B30;
+  --color-navy-l: #1A2B48;
+  --color-gold: #D4A85C;
+  --color-gold-l: #EDD9AE;
+  --color-cream: #F5F2EC;
+  --color-cream-d: #E8E3DA;
+  --color-sky: #5B8FA8;
+  --color-ember: #D98B4A;
+  --color-tx: #1A1A2E;
+  --color-tx2: #5A6070;
+  --color-tx3: #8A8F9E;
+  --color-bd: rgba(26,26,46,0.07);
+
+  --font-heading: var(--font-inter);
+  --font-sans: var(--font-inter);
+  --font-zh: var(--font-noto-sans-tc);
+  --font-accent: var(--font-playfair);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans), var(--font-zh), sans-serif;
+  color: var(--color-tx);
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* Section label style */
+.section-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 12px;
+}
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Section description */
+.section-desc {
+  font-size: 17px;
+  color: var(--color-tx2);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 56px;
+  font-weight: 400;
+}
