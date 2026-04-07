@@ -102,7 +102,7 @@ export function AssessWizard() {
   };
 
   return (
-    <section className="min-h-screen pt-[120px] pb-20 px-5 md:px-10 bg-cream">
+    <section className="min-h-screen pt-[120px] pb-20 px-5 md:px-10 bg-[#FAFAF8]">
       <div className="max-w-[680px] mx-auto">
         <AnimatePresence mode="wait">
           {/* Entry */}

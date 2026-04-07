@@ -121,7 +121,7 @@ export function ContactPage() {
   return (
     <>
       {/* ─── Hero + Channel Cards ─── */}
-      <section className="bg-cream pt-[120px] pb-[60px] px-5 md:px-10">
+      <section className="bg-[#FAFAF8] pt-[120px] pb-[60px] px-5 md:px-10">
         <div className="max-w-[1000px] mx-auto">
           <div className="section-label">聯絡</div>
           <h1 className="section-heading">
@@ -144,7 +144,7 @@ export function ContactPage() {
                   className={`p-5 bg-white rounded-none border border-bd text-left cursor-pointer transition-colors ${c.border}`}
                 >
                   <div
-                    className={`w-12 h-12 rounded-sm ${c.iconBg} ${c.iconText} flex items-center justify-center mb-3`}
+                    className={`w-12 h-12 rounded-none ${c.iconBg} ${c.iconText} flex items-center justify-center mb-3`}
                   >
                     {ch.icon}
                   </div>
@@ -215,7 +215,7 @@ export function ContactPage() {
                     required
                     value={formState.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-sm text-[14px] outline-none focus:border-gold transition-colors"
+                    className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
                     placeholder="你的姓名"
                   />
                 </div>
@@ -229,7 +229,7 @@ export function ContactPage() {
                     required
                     value={formState.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-sm text-[14px] outline-none focus:border-gold transition-colors"
+                    className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
                     placeholder="you@company.com"
                   />
                 </div>
@@ -246,7 +246,7 @@ export function ContactPage() {
                     name="company"
                     value={formState.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-sm text-[14px] outline-none focus:border-gold transition-colors"
+                    className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
                     placeholder="公司名稱"
                   />
                 </div>
@@ -259,7 +259,7 @@ export function ContactPage() {
                     name="phone"
                     value={formState.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-sm text-[14px] outline-none focus:border-gold transition-colors"
+                    className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
                     placeholder="09xx-xxx-xxx"
                   />
                 </div>
@@ -275,7 +275,7 @@ export function ContactPage() {
                   name="product"
                   value={formState.product}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd rounded-sm text-[14px] outline-none focus:border-gold transition-colors"
+                  className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
                   placeholder="簡單描述你的產品或品牌"
                 />
               </div>
@@ -289,7 +289,7 @@ export function ContactPage() {
                   name="stage"
                   value={formState.stage}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd rounded-sm text-[14px] outline-none focus:border-gold transition-colors bg-white appearance-none"
+                  className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors bg-white appearance-none"
                 >
                   <option value="">請選擇</option>
                   {stageOptions.map((opt) => (
@@ -311,7 +311,7 @@ export function ContactPage() {
                   rows={4}
                   value={formState.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd rounded-sm text-[14px] outline-none focus:border-gold transition-colors resize-none"
+                  className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors resize-none"
                   placeholder="任何問題都可以，不確定也沒關係。"
                 />
               </div>
@@ -319,7 +319,7 @@ export function ContactPage() {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-gold text-navy py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-colors hover:border-gold"
+                className="w-full bg-gold text-navy py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:border-gold"
               >
                 送出表單
               </button>

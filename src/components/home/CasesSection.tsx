@@ -104,36 +104,41 @@ export function CasesSection() {
                   </div>
                 )}
               </div>
-              <div className="bg-cream rounded-none h-full min-h-[200px] flex items-center justify-center text-[13px] text-tx3">
-                案例詳情圖
+              <div className="bg-cream-d rounded-none h-full min-h-[200px] flex items-center justify-center overflow-hidden">
+                <div className="text-[11px] text-tx3/40 tracking-[2px] uppercase">Case Study</div>
               </div>
             </div>
           ) : (
             <div
               key={c.title}
-              className="p-[30px] bg-white border border-bd rounded-none transition-colors duration-300 cursor-pointer relative overflow-hidden hover:border-gold"
+              className="bg-white border border-bd rounded-none transition-colors duration-300 cursor-pointer relative overflow-hidden hover:border-gold"
             >
-              <div className="flex gap-1.5 mb-2.5">
-                {c.tags.map((t) => (
-                  <span
-                    key={t.label}
-                    className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${tagStyles[t.variant]}`}
-                  >
-                    {t.label}
-                  </span>
-                ))}
+              <div className="h-[140px] bg-cream-d flex items-center justify-center">
+                <div className="text-[11px] text-tx3/40 tracking-[2px] uppercase">Case Study</div>
               </div>
-              <div className="font-heading text-[42px] font-bold text-gold mb-2.5 leading-none">
-                {c.num}
-              </div>
-              <h3 className="font-heading text-[18px] leading-[1.4] mb-2 font-bold">
-                {c.title}
-              </h3>
-              <p className="text-[13px] text-tx2 leading-[1.65] font-normal">
-                {c.desc}
-              </p>
-              <div className="absolute bottom-[18px] right-[18px] text-[16px] text-tx3 transition-colors duration-300">
-                →
+              <div className="p-[30px]">
+                <div className="flex gap-1.5 mb-2.5">
+                  {c.tags.map((t) => (
+                    <span
+                      key={t.label}
+                      className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${tagStyles[t.variant]}`}
+                    >
+                      {t.label}
+                    </span>
+                  ))}
+                </div>
+                <div className="font-heading text-[42px] font-bold text-gold mb-2.5 leading-none">
+                  {c.num}
+                </div>
+                <h3 className="font-heading text-[18px] leading-[1.4] mb-2 font-bold">
+                  {c.title}
+                </h3>
+                <p className="text-[13px] text-tx2 leading-[1.65] font-normal">
+                  {c.desc}
+                </p>
+                <div className="absolute bottom-[18px] right-[18px] text-[16px] text-tx3 transition-colors duration-300">
+                  →
+                </div>
               </div>
             </div>
           )
@@ -143,9 +148,9 @@ export function CasesSection() {
       <div className="text-center mt-11">
         <button
           onClick={() => window.open("https://calendly.com", "_blank")}
-          className="px-7 py-[13px] border border-bd bg-white text-tx rounded-sm text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
+          className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
         >
-          想知道你的產品適合哪條路？預約 30 分鐘聊聊
+          想知道你的產品適合哪條路？預約 30 分鐘聊聊 →
         </button>
       </div>
     </section>

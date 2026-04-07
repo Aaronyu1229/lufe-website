@@ -176,7 +176,7 @@ function StageCard({
         </div>
         <button
           onClick={onToggle}
-          className="mt-1 w-9 h-9 rounded-sm border border-bd flex items-center justify-center transition-colors hover:bg-cream shrink-0 cursor-pointer"
+          className="mt-1 w-9 h-9 rounded-none border border-bd flex items-center justify-center transition-colors hover:bg-cream shrink-0 cursor-pointer"
           aria-label={isOpen ? "收合" : "展開"}
         >
           <svg
@@ -210,7 +210,7 @@ function StageCard({
                   </li>
                 ))}
               </ul>
-              <div className={`${c.bg} rounded-sm px-5 py-4`}>
+              <div className={`${c.bg} rounded-none px-5 py-4`}>
                 <span className="text-[12px] font-semibold tracking-wider text-tx3 uppercase">
                   交付成果
                 </span>
@@ -291,7 +291,7 @@ export function ServicesPage() {
   return (
     <>
       {/* ─── Hero / Why section ─── */}
-      <section className="bg-cream pt-[120px] pb-[80px] px-5 md:px-10">
+      <section className="bg-[#FAFAF8] pt-[120px] pb-[80px] px-5 md:px-10">
         <div className="max-w-[1400px] mx-auto text-center">
           <div className="section-label">服務</div>
           <h1 className="section-heading">
@@ -310,7 +310,7 @@ export function ServicesPage() {
               href="#path"
               className="group block p-7 bg-white rounded-none border-l-4 border-sky text-left transition-colors hover:border-gold"
             >
-              <div className="w-12 h-12 rounded-sm bg-[rgba(91,143,168,0.1)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-none bg-[rgba(91,143,168,0.1)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M12 2L12 22M12 2L6 8M12 2L18 8" stroke="#5B8FA8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -329,7 +329,7 @@ export function ServicesPage() {
               href="#optimize"
               className="group block p-7 bg-white rounded-none border-l-4 border-ember text-left transition-colors hover:border-gold"
             >
-              <div className="w-12 h-12 rounded-sm bg-[rgba(217,139,74,0.1)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-none bg-[rgba(217,139,74,0.1)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#D98B4A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -378,7 +378,7 @@ export function ServicesPage() {
             <div className="flex justify-center gap-3 flex-wrap">
               <button
                 onClick={open}
-                className="bg-gold text-navy px-7 py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
+                className="bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
               >
                 聊聊你的產品
               </button>
@@ -387,7 +387,7 @@ export function ServicesPage() {
                   const email = prompt("輸入你的 Email，我們會寄出海指南 PDF 給你：");
                   if (email) alert(`感謝！我們會將出海指南寄到 ${email}`);
                 }}
-                className="px-7 py-[13px] border border-bd bg-white text-tx rounded-sm text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
+                className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
               >
                 下載出海指南 PDF
               </button>
@@ -397,7 +397,7 @@ export function ServicesPage() {
       </section>
 
       {/* ─── FAQ ─── */}
-      <section className="bg-cream py-[120px] px-5 md:px-10">
+      <section className="bg-[#FAFAF8] py-[120px] px-5 md:px-10">
         <div className="max-w-[700px] mx-auto">
           <div className="section-label">常見問題</div>
           <h2 className="section-heading mb-8">你可能會想知道</h2>
@@ -452,7 +452,7 @@ export function ServicesPage() {
               >
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="text-[17px] font-semibold">{svc.title}</h3>
-                  <span className="text-[12px] text-ember font-medium bg-[rgba(217,139,74,0.08)] px-2.5 py-0.5 rounded-sm">
+                  <span className="text-[12px] text-ember font-medium bg-[rgba(217,139,74,0.08)] px-2.5 py-0.5 rounded-none">
                     {svc.timeline}
                   </span>
                 </div>
@@ -480,13 +480,13 @@ export function ServicesPage() {
             <div className="flex justify-center gap-3 flex-wrap">
               <button
                 onClick={() => window.open("https://calendly.com", "_blank")}
-                className="bg-ember text-white px-7 py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
+                className="bg-ember text-white px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
               >
                 預約 60 分鐘診斷
               </button>
               <button
                 onClick={open}
-                className="px-7 py-[13px] border border-bd bg-white text-tx rounded-sm text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
+                className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
               >
                 先用訊息聊聊
               </button>

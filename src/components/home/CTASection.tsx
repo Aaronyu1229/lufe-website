@@ -6,7 +6,7 @@ export function CTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="bg-cream py-[120px] px-5 md:px-10">
+    <section className="bg-[#FAFAF8] py-[120px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto text-center">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
           開始
@@ -84,15 +84,15 @@ export function CTASection() {
         <div className="flex justify-center gap-3 flex-wrap">
           <button
             onClick={open}
-            className="bg-gold text-navy px-[30px] py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
+            className="bg-gold text-navy px-[30px] py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
           >
-            聊聊你的出海計畫
+            聊聊你的出海計畫 →
           </button>
           <button
             onClick={() => window.open("https://calendly.com", "_blank")}
-            className="px-7 py-[13px] border border-bd bg-white text-tx rounded-sm text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
+            className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
           >
-            預約 30 分鐘了解
+            預約 30 分鐘了解 →
           </button>
         </div>
       </div>

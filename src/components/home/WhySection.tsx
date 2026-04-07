@@ -76,9 +76,9 @@ export function WhySection() {
               >
                 {bar.label}
               </div>
-              <div className="flex-1 h-8 bg-white/[0.03] rounded-sm relative overflow-hidden">
+              <div className="flex-1 h-8 bg-white/[0.03] rounded-none relative overflow-hidden">
                 <div
-                  className={`h-full rounded-sm flex items-center px-3 text-[11px] font-medium text-white/70 ${
+                  className={`h-full rounded-none flex items-center px-3 text-[11px] font-medium text-white/70 ${
                     bar.variant === "lufe"
                       ? "bg-gradient-to-r from-[rgba(212,168,92,0.15)] to-[rgba(212,168,92,0.25)]"
                       : "bg-white/[0.08]"
@@ -121,7 +121,7 @@ export function WhySection() {
 
         {/* Testimonial */}
         <div className="mt-12 p-8 rounded-none border-l-4 border-gold pl-8 bg-white/[0.02] max-w-[600px] mx-auto flex flex-col md:flex-row gap-5 items-center md:items-start text-center md:text-left">
-          <div className="w-[52px] h-[52px] rounded-sm bg-[rgba(212,168,92,0.15)] flex items-center justify-center text-[16px] font-semibold text-gold flex-shrink-0 font-heading">
+          <div className="w-[52px] h-[52px] rounded-none bg-[rgba(212,168,92,0.15)] flex items-center justify-center text-[16px] font-semibold text-gold flex-shrink-0 font-heading">
             陳
           </div>
           <div>

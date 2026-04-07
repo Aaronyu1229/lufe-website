@@ -56,7 +56,7 @@ const colorMap: Record<string, { hover: string; link: string; dot: string }> = {
 
 export function StagesSection() {
   return (
-    <section className="py-[120px] px-5 md:px-10 bg-cream">
+    <section className="py-[120px] px-5 md:px-10 bg-[#FAFAF8]">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
           你的出海階段

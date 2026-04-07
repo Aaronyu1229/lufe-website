@@ -146,7 +146,7 @@ function CaseDetail({
         {caseItem.tags.map((t) => (
           <span
             key={t.label}
-            className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${tagStyles[t.variant]}`}
+            className={`text-[11px] px-2.5 py-[3px] rounded-none font-medium ${tagStyles[t.variant]}`}
           >
             {t.label}
           </span>
@@ -205,9 +205,9 @@ function CaseDetail({
         </p>
         <button
           onClick={() => window.open("https://calendly.com", "_blank")}
-          className="bg-gold text-navy px-7 py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-colors hover:border-gold"
+          className="bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-gold-l"
         >
-          預約 30 分鐘聊聊
+          預約 30 分鐘聊聊 →
         </button>
       </div>
 
@@ -228,7 +228,7 @@ function CaseDetail({
                   {rc.tags.map((t) => (
                     <span
                       key={t.label}
-                      className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${tagStyles[t.variant]}`}
+                      className={`text-[11px] px-2.5 py-[3px] rounded-none font-medium ${tagStyles[t.variant]}`}
                     >
                       {t.label}
                     </span>
@@ -257,7 +257,7 @@ export function CasesPage() {
   const activeCase = casesData.find((c) => c.slug === activeSlug);
 
   return (
-    <section className="bg-cream min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
+    <section className="bg-[#FAFAF8] min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
       <div className="max-w-[1000px] mx-auto">
         <AnimatePresence mode="wait">
           {activeCase ? (
@@ -296,13 +296,17 @@ export function CasesPage() {
                       setActiveSlug(c.slug);
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="group p-7 bg-white border border-bd rounded-none text-left cursor-pointer transition-colors hover:border-gold relative overflow-hidden"
+                    className="group bg-white border border-bd rounded-none text-left cursor-pointer transition-colors hover:border-gold relative overflow-hidden"
                   >
+                    <div className="h-[140px] bg-cream-d flex items-center justify-center">
+                      <div className="text-[11px] text-tx3/40 tracking-[2px] uppercase">Case Study</div>
+                    </div>
+                    <div className="p-7">
                     <div className="flex gap-1.5 mb-3">
                       {c.tags.map((t) => (
                         <span
                           key={t.label}
-                          className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${tagStyles[t.variant]}`}
+                          className={`text-[11px] px-2.5 py-[3px] rounded-none font-medium ${tagStyles[t.variant]}`}
                         >
                           {t.label}
                         </span>
@@ -320,6 +324,7 @@ export function CasesPage() {
                     <span className="absolute bottom-5 right-5 text-[14px] text-tx3 transition-colors group-hover:text-gold">
                       →
                     </span>
+                    </div>
                   </button>
                 ))}
               </div>
@@ -333,9 +338,9 @@ export function CasesPage() {
                   onClick={() =>
                     window.open("https://calendly.com", "_blank")
                   }
-                  className="bg-gold text-navy px-7 py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-colors hover:border-gold"
+                  className="bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-gold-l"
                 >
-                  預約 30 分鐘聊聊
+                  預約 30 分鐘聊聊 →
                 </button>
               </div>
             </motion.div>

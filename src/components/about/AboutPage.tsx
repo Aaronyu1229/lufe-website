@@ -99,7 +99,7 @@ export function AboutPage() {
 
           {/* Avatar + Name */}
           <div className="flex items-center gap-5 mb-8">
-            <div className="w-[72px] h-[72px] rounded-sm bg-gold flex items-center justify-center text-navy text-[24px] font-heading font-semibold shrink-0">
+            <div className="w-[72px] h-[72px] rounded-none bg-gold flex items-center justify-center text-navy text-[24px] font-heading font-semibold shrink-0">
               A
             </div>
             <div>
@@ -151,7 +151,7 @@ export function AboutPage() {
       </section>
 
       {/* ─── Resource Network ─── */}
-      <section className="bg-cream py-[80px] px-5 md:px-10">
+      <section className="bg-[#FAFAF8] py-[80px] px-5 md:px-10">
         <div className="max-w-[900px] mx-auto">
           <div className="section-label">資源網絡</div>
           <h2 className="section-heading">
@@ -172,7 +172,7 @@ export function AboutPage() {
                   className={`p-7 bg-white rounded-none border border-bd transition-colors ${c.border}`}
                 >
                   <div
-                    className={`w-14 h-14 rounded-sm ${c.iconBg} flex items-center justify-center mb-4`}
+                    className={`w-14 h-14 rounded-none ${c.iconBg} flex items-center justify-center mb-4`}
                   >
                     {card.icon}
                   </div>
@@ -199,7 +199,7 @@ export function AboutPage() {
                 key={item.title}
                 className="flex gap-5 items-start p-6 rounded-none bg-cream"
               >
-                <div className="w-8 h-8 rounded-sm bg-gold flex items-center justify-center text-navy text-[14px] font-heading font-semibold shrink-0 mt-0.5">
+                <div className="w-8 h-8 rounded-none bg-gold flex items-center justify-center text-navy text-[14px] font-heading font-semibold shrink-0 mt-0.5">
                   {i + 1}
                 </div>
                 <div>
@@ -224,7 +224,7 @@ export function AboutPage() {
             </p>
             <button
               onClick={open}
-              className="bg-gold text-navy px-7 py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
+              className="bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
             >
               聊聊你的產品
             </button>

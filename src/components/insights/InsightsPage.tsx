@@ -90,7 +90,7 @@ export function InsightsPage() {
       : articles.filter((a) => a.category === active);
 
   return (
-    <section className="bg-cream min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
+    <section className="bg-[#FAFAF8] min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
       <div className="max-w-[1000px] mx-auto">
         <div className="section-label">洞察與資源</div>
         <h1 className="section-heading">出海路上，知識就是捷徑</h1>
@@ -104,7 +104,7 @@ export function InsightsPage() {
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-4 py-2 rounded-sm text-[13px] font-medium cursor-pointer transition-all ${
+              className={`px-4 py-2 rounded-none text-[13px] font-medium cursor-pointer transition-all ${
                 active === cat
                   ? "bg-navy text-white"
                   : "bg-white text-tx2 border border-bd hover:border-tx"
@@ -154,7 +154,7 @@ export function InsightsPage() {
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <span
-                    className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${colorMap[article.color]}`}
+                    className={`text-[11px] px-2.5 py-[3px] rounded-none font-medium ${colorMap[article.color]}`}
                   >
                     {article.category}
                   </span>
@@ -189,7 +189,7 @@ export function InsightsPage() {
           </p>
           <Link
             href="/assess"
-            className="inline-block bg-gold text-navy px-7 py-3.5 rounded-sm text-[15px] font-semibold transition-colors hover:border-gold"
+            className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-gold-l"
           >
             免費出海評估 →
           </Link>
