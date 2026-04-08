@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 
 /* ───────── data ───────── */
@@ -120,12 +118,7 @@ function CaseDetail({
   );
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
-    >
+    <div>
       {/* Back */}
       <button
         onClick={onBack}
@@ -247,52 +240,48 @@ function CaseDetail({
           </div>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
 
 /* ───────── main ───────── */
 
 export function CasesPage() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const [activeSlug, setActiveSlug] = useState<string | null>(
-    searchParams.get("case")
-  );
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
-  // Sync URL → state when searchParams change
   useEffect(() => {
-    setActiveSlug(searchParams.get("case"));
-  }, [searchParams]);
+    setActiveSlug(new URLSearchParams(window.location.search).get("case"));
+  }, []);
 
-  const navigateTo = (slug: string | null) => {
+  useEffect(() => {
+    const onPopState = () => {
+      setActiveSlug(new URLSearchParams(window.location.search).get("case"));
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  const navigateTo = useCallback((slug: string | null) => {
     const url = slug ? `/cases?case=${slug}` : "/cases";
-    router.push(url, { scroll: false });
+    window.history.pushState({}, "", url);
     setActiveSlug(slug);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, []);
 
   const activeCase = casesData.find((c) => c.slug === activeSlug);
 
   return (
     <section className="bg-[#FAFAF8] min-h-screen pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
       <div className="max-w-[1000px] mx-auto">
-        <AnimatePresence mode="wait">
-          {activeCase ? (
-            <CaseDetail
-              key={activeCase.slug}
-              caseItem={activeCase}
-              onBack={() => navigateTo(null)}
-              onNavigate={(slug) => navigateTo(slug)}
-            />
-          ) : (
-            <motion.div
-              key="list"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
+        {activeCase ? (
+          <CaseDetail
+            key={activeCase.slug}
+            caseItem={activeCase}
+            onBack={() => navigateTo(null)}
+            onNavigate={(slug) => navigateTo(slug)}
+          />
+        ) : (
+          <div>
               <div className="section-label">案例</div>
               <h1 className="section-heading">
                 這些企業都找到了自己的出海路
@@ -352,9 +341,8 @@ export function CasesPage() {
                   免費出海評估 →
                 </Link>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          </div>
+        )}
       </div>
     </section>
   );

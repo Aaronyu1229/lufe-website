@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useMessageBox } from "../MessageBox";
 
 type Route = "A" | "C" | null;
@@ -40,12 +39,6 @@ const concernsC = [
   "合規風險不確定",
   "想進新市場",
 ];
-
-const slideVariants = {
-  enter: { opacity: 0, x: 40 },
-  center: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -40 },
-};
 
 export function AssessWizard() {
   const { open } = useMessageBox();
@@ -104,17 +97,9 @@ export function AssessWizard() {
   return (
     <section className="min-h-screen pt-[100px] md:pt-[120px] pb-16 md:pb-20 px-5 md:px-10 bg-[#FAFAF8]">
       <div className="max-w-[680px] mx-auto">
-        <AnimatePresence mode="wait">
-          {/* Entry */}
+        {/* Entry */}
           {step === "entry" && (
-            <motion.div
-              key="entry"
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3 }}
-            >
+            <div>
               <div className="text-center mb-10">
                 <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
                   免費出海評估
@@ -161,19 +146,12 @@ export function AssessWizard() {
                   </p>
                 </button>
               </div>
-            </motion.div>
+            </div>
           )}
 
           {/* Questions */}
           {(step === "q1" || step === "q2" || step === "q3" || step === "q4") && (
-            <motion.div
-              key={step}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3 }}
-            >
+            <div>
               {/* Progress bar */}
               <div className="mb-10">
                 <div className="flex justify-between text-[12px] text-tx3 mb-2">
@@ -298,19 +276,11 @@ export function AssessWizard() {
               >
                 {step === "q4" ? "看我的評估結果" : "下一題"}
               </button>
-            </motion.div>
+            </div>
           )}
 
           {/* Result */}
           {step === "result" && route === "A" && (
-            <motion.div
-              key="resultA"
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3 }}
-            >
               <ResultA
                 product={product}
                 markets={markets}
@@ -318,26 +288,15 @@ export function AssessWizard() {
                 onReset={reset}
                 onOpenMsg={open}
               />
-            </motion.div>
           )}
 
           {step === "result" && route === "C" && (
-            <motion.div
-              key="resultC"
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3 }}
-            >
               <ResultC
                 concerns={concerns}
                 onReset={reset}
                 onOpenMsg={open}
               />
-            </motion.div>
           )}
-        </AnimatePresence>
       </div>
     </section>
   );

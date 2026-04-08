@@ -15,7 +15,7 @@ const resourceLinks = [
 const contactLinks = [
   { label: "hello@lufe.co", href: "mailto:hello@lufe.co" },
   { label: "LINE 官方帳號", href: "https://line.me", external: true },
-  { label: "台北市", href: "#" },
+  { label: "台北市", href: "" },
 ];
 
 export function Footer() {
@@ -39,7 +39,7 @@ export function Footer() {
             <Link
               key={link.label}
               href={link.href}
-              className="block text-[14px] text-white/50 mb-2 font-light hover:text-gold transition-colors"
+              className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
             >
               {link.label}
             </Link>
@@ -57,7 +57,7 @@ export function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-[14px] text-white/50 mb-2 font-light hover:text-gold transition-colors"
+                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
               >
                 {link.label}
               </a>
@@ -65,7 +65,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="block text-[14px] text-white/50 mb-2 font-light hover:text-gold transition-colors"
+                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
               >
                 {link.label}
               </Link>
@@ -84,18 +84,25 @@ export function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-[14px] text-white/50 mb-2 font-light hover:text-gold transition-colors"
+                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
+              >
+                {link.label}
+              </a>
+            ) : link.href ? (
+              <a
+                key={link.label}
+                href={link.href}
+                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
               >
                 {link.label}
               </a>
             ) : (
-              <a
+              <span
                 key={link.label}
-                href={link.href}
-                className="block text-[14px] text-white/50 mb-2 font-light hover:text-gold transition-colors"
+                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light"
               >
                 {link.label}
-              </a>
+              </span>
             )
           )}
         </div>

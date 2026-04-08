@@ -176,7 +176,7 @@ function StageCard({
         </div>
         <button
           onClick={onToggle}
-          className="mt-1 w-9 h-9 rounded-none border border-bd flex items-center justify-center transition-colors hover:bg-cream shrink-0 cursor-pointer"
+          className="mt-1 w-11 h-11 rounded-none border border-bd flex items-center justify-center transition-colors hover:bg-cream shrink-0 cursor-pointer"
           aria-label={isOpen ? "收合" : "展開"}
         >
           <svg

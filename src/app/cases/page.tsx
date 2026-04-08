@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { CasesPage } from "@/components/cases/CasesPage";
 
 export const metadata = {
@@ -8,9 +7,5 @@ export const metadata = {
 };
 
 export default function Cases() {
-  return (
-    <Suspense>
-      <CasesPage />
-    </Suspense>
-  );
+  return <CasesPage />;
 }

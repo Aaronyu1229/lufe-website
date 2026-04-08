@@ -79,7 +79,7 @@ export function Navbar() {
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 flex items-center justify-between h-[64px]">
           <Link
             href="/"
-            className={`font-sans font-bold text-[22px] tracking-[-0.5px] transition-colors duration-300 ${
+            className={`font-sans font-bold text-[22px] tracking-[-0.5px] transition-colors duration-300 py-1.5 ${
               useDark ? "text-navy" : "text-white"
             }`}
           >
@@ -119,9 +119,9 @@ export function Navbar() {
             <MessageBoxTrigger />
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger — 44x44 touch target */}
           <button
-            className="md:hidden flex flex-col gap-1.5 cursor-pointer"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-11 h-11 -mr-2 cursor-pointer"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "關閉選單" : "開啟選單"}
             aria-expanded={mobileOpen}

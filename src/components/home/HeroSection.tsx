@@ -167,18 +167,20 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Navigation dots */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex gap-3">
+      {/* Navigation dots — 44x44 touch target with visual dot inside */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-0">
         {SLIDES.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
             aria-label={`前往第 ${i + 1} 張`}
             aria-current={i === current ? "true" : undefined}
-            className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 cursor-pointer ${
+            className="w-11 h-11 flex items-center justify-center cursor-pointer"
+          >
+            <span className={`block w-2.5 h-2.5 rounded-full transition-colors duration-300 ${
               i === current ? "bg-gold" : "bg-white/40"
-            }`}
-          />
+            }`} />
+          </button>
         ))}
       </div>
     </section>

@@ -104,7 +104,7 @@ export function InsightsPage() {
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-4 py-2 rounded-none text-[13px] font-medium cursor-pointer transition-all ${
+              className={`px-4 py-2.5 rounded-none text-[13px] font-medium cursor-pointer transition-all ${
                 active === cat
                   ? "bg-navy text-white"
                   : "bg-white text-tx2 border border-bd hover:border-tx"
