@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
 
@@ -80,26 +79,21 @@ export function HeroSection() {
         }
       }}
     >
-      {/* Background slides with crossfade */}
-      <AnimatePresence mode="sync">
-        <motion.div
-          key={current}
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          role="group"
-          aria-roledescription="slide"
-          aria-label={`${current + 1} / ${SLIDES.length}: ${slide.headline}`}
+      {/* Background slides — all rendered, CSS opacity crossfade */}
+      {SLIDES.map((s, i) => (
+        <div
+          key={s.image}
+          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          style={{ opacity: i === current ? 1 : 0 }}
+          aria-hidden={i !== current}
         >
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url('${slide.image}')` }}
+            style={{ backgroundImage: `url('${s.image}')` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/80 to-navy/40" />
-        </motion.div>
-      </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/80 to-navy/35" />
+        </div>
+      ))}
 
       {/* Left / Right arrows */}
       <button
@@ -122,48 +116,45 @@ export function HeroSection() {
       </button>
 
       {/* Content */}
-      <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-[140px] md:pt-[180px] pb-[80px] md:pb-[120px] relative z-10">
+      <div
+        className="max-w-[1400px] mx-auto px-5 md:px-10 pt-[140px] md:pt-[180px] pb-[80px] md:pb-[120px] relative z-10"
+        role="group"
+        aria-roledescription="slide"
+        aria-label={`${current + 1} / ${SLIDES.length}: ${slide.headline}`}
+      >
         <div className="max-w-[680px]">
           <div className="inline-block border-b-2 border-gold/40 text-gold text-[12.5px] font-medium mb-8 tracking-[1.5px] uppercase pb-1">
             企業出海的導航系統
           </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
+          <div key={current} className="animate-fade-in-up">
+            <h1
+              className="font-sans text-white leading-[1.1] mb-6 font-bold tracking-[-1.5px] drop-shadow-lg"
+              style={{ fontSize: "clamp(32px, 5.5vw, 68px)" }}
             >
-              <h1
-                className="font-sans text-white leading-[1.1] mb-6 font-bold tracking-[-1.5px]"
-                style={{ fontSize: "clamp(32px, 5.5vw, 68px)" }}
+              {slide.headline}
+            </h1>
+
+            <p className="text-[18px] text-white/80 font-normal mb-10 drop-shadow-md">
+              {slide.subtitle}
+            </p>
+
+            {slide.action === "message" ? (
+              <button
+                onClick={open}
+                className="bg-gold text-navy px-8 py-4 rounded-none text-[15px] font-semibold cursor-pointer transition-all hover:bg-gold-l"
               >
-                {slide.headline}
-              </h1>
-
-              <p className="text-[18px] text-white/70 font-normal mb-10">
-                {slide.subtitle}
-              </p>
-
-              {slide.action === "message" ? (
-                <button
-                  onClick={open}
-                  className="bg-gold text-navy px-8 py-4 rounded-none text-[15px] font-semibold cursor-pointer transition-all hover:bg-gold-l"
-                >
-                  {slide.cta}
-                </button>
-              ) : (
-                <Link
-                  href={slide.action.href}
-                  className="inline-block bg-gold text-navy px-8 py-4 rounded-none text-[15px] font-semibold transition-all hover:bg-gold-l"
-                >
-                  {slide.cta}
-                </Link>
-              )}
-            </motion.div>
-          </AnimatePresence>
+                {slide.cta}
+              </button>
+            ) : (
+              <Link
+                href={slide.action.href}
+                className="inline-block bg-gold text-navy px-8 py-4 rounded-none text-[15px] font-semibold transition-all hover:bg-gold-l"
+              >
+                {slide.cta}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
