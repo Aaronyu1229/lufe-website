@@ -97,7 +97,7 @@ export function HeroSection() {
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url('${slide.image}')` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/90 to-navy/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/80 to-navy/40" />
         </motion.div>
       </AnimatePresence>
 
