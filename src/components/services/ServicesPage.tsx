@@ -291,7 +291,7 @@ export function ServicesPage() {
   return (
     <>
       {/* ─── Hero / Why section ─── */}
-      <section className="bg-[#FAFAF8] pt-[120px] pb-[80px] px-5 md:px-10">
+      <section className="bg-[#FAFAF8] pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
         <div className="max-w-[1400px] mx-auto text-center">
           <div className="section-label">服務</div>
           <h1 className="section-heading">
@@ -397,7 +397,7 @@ export function ServicesPage() {
       </section>
 
       {/* ─── FAQ ─── */}
-      <section className="bg-[#FAFAF8] py-[120px] px-5 md:px-10">
+      <section className="bg-[#FAFAF8] py-[80px] md:py-[120px] px-5 md:px-10">
         <div className="max-w-[700px] mx-auto">
           <div className="section-label">常見問題</div>
           <h2 className="section-heading mb-8">你可能會想知道</h2>

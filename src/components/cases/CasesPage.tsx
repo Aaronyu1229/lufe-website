@@ -201,7 +201,7 @@ function CaseDetail({
       </div>
 
       {/* CTA */}
-      <div className="mt-12 p-7 bg-cream rounded-none text-center">
+      <div className="mt-10 md:mt-12 p-5 md:p-7 bg-cream rounded-none text-center">
         <p className="text-[15px] font-medium mb-4">
           想知道你的產品是否也有類似的機會？
         </p>
@@ -275,7 +275,7 @@ export function CasesPage() {
   const activeCase = casesData.find((c) => c.slug === activeSlug);
 
   return (
-    <section className="bg-[#FAFAF8] min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
+    <section className="bg-[#FAFAF8] min-h-screen pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
       <div className="max-w-[1000px] mx-auto">
         <AnimatePresence mode="wait">
           {activeCase ? (

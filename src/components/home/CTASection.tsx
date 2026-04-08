@@ -7,7 +7,7 @@ export function CTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="bg-[#FAFAF8] py-[120px] px-5 md:px-10">
+    <section className="bg-[#FAFAF8] py-[80px] md:py-[120px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto text-center">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
           開始

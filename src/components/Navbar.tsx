@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMessageBox } from "./MessageBox";
 
@@ -14,8 +15,13 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // On non-home pages, always use dark (scrolled) style
+  const useDark = !isHome || scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -43,9 +49,9 @@ export function Navbar() {
         跳到主要內容
       </a>
 
-      {/* Utility bar */}
+      {/* Utility bar — only on home */}
       <div className={`bg-navy text-white/50 text-[11px] hidden md:block transition-all duration-300 ${
-        scrolled ? "opacity-0 h-0 overflow-hidden" : "opacity-100 h-[32px]"
+        useDark ? "opacity-0 h-0 overflow-hidden" : "opacity-100 h-[32px]"
       }`}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 flex items-center justify-between h-[32px]">
           <div className="flex items-center gap-5">
@@ -64,7 +70,7 @@ export function Navbar() {
       {/* Main nav */}
       <nav
         className={`transition-all duration-300 ${
-          scrolled
+          useDark
             ? "bg-white/95 backdrop-blur-md shadow-sm"
             : "bg-transparent"
         }`}
@@ -74,7 +80,7 @@ export function Navbar() {
           <Link
             href="/"
             className={`font-sans font-bold text-[22px] tracking-[-0.5px] transition-colors duration-300 ${
-              scrolled ? "text-navy" : "text-white"
+              useDark ? "text-navy" : "text-white"
             }`}
           >
             鹿飛 LUF<span className="text-gold">É</span>
@@ -87,7 +93,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`text-[13px] font-medium transition-colors duration-300 ${
-                  scrolled
+                  useDark
                     ? "text-tx hover:text-navy"
                     : "text-white/80 hover:text-white"
                 }`}
@@ -100,7 +106,7 @@ export function Navbar() {
           <div className="hidden md:flex gap-2.5">
             <button
               className={`px-4 py-[9px] border rounded-none text-[13px] font-medium transition-colors duration-300 cursor-pointer ${
-                scrolled
+                useDark
                   ? "border-bd text-tx hover:border-tx"
                   : "border-white/30 text-white/80 hover:text-white hover:border-white/60"
               }`}
@@ -121,13 +127,13 @@ export function Navbar() {
             aria-expanded={mobileOpen}
           >
             <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${scrolled ? "bg-navy" : "bg-white"} ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${useDark ? "bg-navy" : "bg-white"} ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
             />
             <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${scrolled ? "bg-navy" : "bg-white"} ${mobileOpen ? "opacity-0" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${useDark ? "bg-navy" : "bg-white"} ${mobileOpen ? "opacity-0" : ""}`}
             />
             <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${scrolled ? "bg-navy" : "bg-white"} ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${useDark ? "bg-navy" : "bg-white"} ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
             />
           </button>
         </div>

@@ -21,8 +21,8 @@ const contactLinks = [
 export function Footer() {
   return (
     <footer className="bg-navy text-white/50 pt-[72px] pb-8 px-5 md:px-10">
-      <div className="max-w-[1400px] mx-auto flex justify-between flex-wrap gap-8">
-        <div>
+      <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="col-span-2 md:col-span-1">
           <span className="font-sans font-bold text-[18px] text-white">
             鹿飛 LUF<span className="text-gold">É</span>
           </span>

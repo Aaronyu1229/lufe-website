@@ -54,7 +54,7 @@ const tagStyles = {
 
 export function CasesSection() {
   return (
-    <section className="py-[120px] px-5 md:px-10 max-w-[1400px] mx-auto">
+    <section className="py-[80px] md:py-[120px] px-5 md:px-10 max-w-[1400px] mx-auto">
       <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
         案例
       </div>
@@ -70,7 +70,7 @@ export function CasesSection() {
           c.featured ? (
             <div
               key={c.title}
-              className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-10 bg-white border border-bd rounded-none transition-all duration-300 cursor-pointer hover:border-gold hover:shadow-lg"
+              className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center p-5 md:p-10 bg-white border border-bd rounded-none transition-all duration-300 cursor-pointer hover:border-gold hover:shadow-lg"
             >
               <div>
                 <div className="flex gap-1.5 mb-2.5">

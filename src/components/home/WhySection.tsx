@@ -48,7 +48,7 @@ export function WhySection() {
   }, [counted]);
 
   return (
-    <section className="bg-navy py-[120px] px-5 md:px-10">
+    <section className="bg-navy py-[80px] md:py-[120px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
           為什麼是鹿飛
@@ -67,18 +67,17 @@ export function WhySection() {
           {coverageBars.map((bar) => (
             <div key={bar.label} className="flex items-center gap-4 mb-3.5">
               <div
-                className={`w-[100px] md:w-[100px] text-[12.5px] text-right font-normal flex-shrink-0 ${
+                className={`w-[72px] md:w-[100px] text-[11px] md:text-[12.5px] text-right font-normal flex-shrink-0 ${
                   bar.variant === "lufe"
                     ? "text-gold font-medium"
                     : "text-white/60"
                 }`}
-                style={{ width: 100 }}
               >
                 {bar.label}
               </div>
               <div className="flex-1 h-8 bg-white/[0.03] rounded-none relative overflow-hidden">
                 <div
-                  className={`h-full rounded-none flex items-center px-3 text-[11px] font-medium text-white/70 ${
+                  className={`h-full rounded-none flex items-center px-2 md:px-3 text-[10px] md:text-[11px] font-medium text-white/70 whitespace-nowrap overflow-hidden ${
                     bar.variant === "lufe"
                       ? "bg-gradient-to-r from-[rgba(212,168,92,0.15)] to-[rgba(212,168,92,0.25)]"
                       : "bg-white/[0.08]"
@@ -90,7 +89,7 @@ export function WhySection() {
               </div>
             </div>
           ))}
-          <div className="flex justify-between px-0 md:px-[116px] mt-2 text-[10.5px] text-white/30 font-normal">
+          <div className="flex justify-between pl-[72px] md:pl-[116px] pr-0 md:pr-[16px] mt-2 text-[10px] md:text-[10.5px] text-white/30 font-normal">
             <span>市場評估</span>
             <span>產品測試</span>
             <span>通路進入</span>
@@ -104,7 +103,7 @@ export function WhySection() {
         {/* Stats */}
         <div
           ref={statsRef}
-          className="flex justify-center gap-16 flex-wrap"
+          className="flex justify-center gap-8 md:gap-16 flex-wrap"
         >
           {stats.map((stat, i) => (
             <div key={stat.label} className="text-center">
@@ -120,7 +119,7 @@ export function WhySection() {
         </div>
 
         {/* Testimonial */}
-        <div className="mt-12 p-8 rounded-none border-l-4 border-gold pl-8 bg-white/[0.02] max-w-[600px] mx-auto flex flex-col md:flex-row gap-5 items-center md:items-start text-center md:text-left">
+        <div className="mt-12 p-5 md:p-8 rounded-none border-l-4 border-gold pl-5 md:pl-8 bg-white/[0.02] max-w-[600px] mx-auto flex flex-col md:flex-row gap-4 md:gap-5 items-center md:items-start text-center md:text-left">
           <div className="w-[52px] h-[52px] rounded-none bg-[rgba(212,168,92,0.15)] flex items-center justify-center text-[16px] font-semibold text-gold flex-shrink-0 font-heading">
             陳
           </div>

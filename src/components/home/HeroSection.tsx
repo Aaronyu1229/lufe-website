@@ -105,7 +105,7 @@ export function HeroSection() {
       <button
         onClick={goBack}
         aria-label="上一張"
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-white/70 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 hidden md:flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-white/70 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -114,7 +114,7 @@ export function HeroSection() {
       <button
         onClick={advance}
         aria-label="下一張"
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-white/70 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 hidden md:flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm text-white/70 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -122,7 +122,7 @@ export function HeroSection() {
       </button>
 
       {/* Content */}
-      <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-[180px] pb-[120px] relative z-10">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-[140px] md:pt-[180px] pb-[80px] md:pb-[120px] relative z-10">
         <div className="max-w-[680px]">
           <div className="inline-block border-b-2 border-gold/40 text-gold text-[12.5px] font-medium mb-8 tracking-[1.5px] uppercase pb-1">
             企業出海的導航系統
@@ -138,7 +138,7 @@ export function HeroSection() {
             >
               <h1
                 className="font-sans text-white leading-[1.1] mb-6 font-bold tracking-[-1.5px]"
-                style={{ fontSize: "clamp(42px, 5.5vw, 68px)" }}
+                style={{ fontSize: "clamp(32px, 5.5vw, 68px)" }}
               >
                 {slide.headline}
               </h1>

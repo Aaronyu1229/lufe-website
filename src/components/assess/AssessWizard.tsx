@@ -102,7 +102,7 @@ export function AssessWizard() {
   };
 
   return (
-    <section className="min-h-screen pt-[120px] pb-20 px-5 md:px-10 bg-[#FAFAF8]">
+    <section className="min-h-screen pt-[100px] md:pt-[120px] pb-16 md:pb-20 px-5 md:px-10 bg-[#FAFAF8]">
       <div className="max-w-[680px] mx-auto">
         <AnimatePresence mode="wait">
           {/* Entry */}
@@ -394,7 +394,7 @@ function ResultA({
       </p>
 
       {/* Traffic lights */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
         {lights.map((l) => (
           <div key={l.label} className="bg-white rounded-none p-5 border border-bd text-center">
             <div className={`w-5 h-5 rounded-full ${l.color} mx-auto mb-3`} />
@@ -504,8 +504,8 @@ function ResultC({
       {/* Diagnosis cards */}
       <div className="space-y-4 mb-8">
         {diagnoses.map((d) => (
-          <div key={d.title} className="bg-white rounded-none p-6 border border-bd flex gap-5 items-start">
-            <div className="font-heading text-[28px] text-ember font-normal flex-shrink-0 min-w-[60px] text-center">
+          <div key={d.title} className="bg-white rounded-none p-4 md:p-6 border border-bd flex gap-3 md:gap-5 items-start">
+            <div className="font-heading text-[24px] md:text-[28px] text-ember font-normal flex-shrink-0 min-w-[50px] md:min-w-[60px] text-center">
               {d.saving}
             </div>
             <div>
