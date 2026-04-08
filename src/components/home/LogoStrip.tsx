@@ -14,7 +14,7 @@ export function LogoStrip() {
   const doubled = [...partners, ...partners];
 
   return (
-    <section className="py-12 px-5 md:px-10 border-b border-bd bg-white overflow-hidden">
+    <section className="py-14 px-5 md:px-10 border-b border-bd bg-white overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         <p className="text-[11px] text-tx3 tracking-[2px] uppercase text-center mb-8 font-medium">
           我們的客戶進入過這些通路

@@ -7,7 +7,7 @@ export function CTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="bg-[#FAFAF8] py-[80px] md:py-[120px] px-5 md:px-10">
+    <section className="bg-[#FAFAF8] py-[100px] md:py-[140px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto text-center">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
           開始
@@ -74,7 +74,7 @@ export function CTASection() {
           </div>
         </div>
 
-        <h2 className="font-heading text-[clamp(28px,3.5vw,42px)] leading-[1.2] mb-3 font-bold tracking-[-0.5px]">
+        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-bold tracking-[-0.5px]">
           每一家有好產品的公司
           <br />
           都值得試試看
@@ -82,18 +82,21 @@ export function CTASection() {
         <p className="text-[15px] text-tx2 max-w-[440px] mx-auto leading-[1.7] mb-10 font-normal">
           不確定從哪開始？沒關係。兩分鐘評估，找到你的起點。
         </p>
-        <div className="flex justify-center gap-3 flex-wrap">
+        <div className="flex justify-center gap-4 flex-wrap">
           <Link
             href="/assess"
-            className="inline-block bg-gold text-navy px-[30px] py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-cream-d"
+            className="inline-block bg-navy text-white px-8 py-3.5 rounded-none text-[14px] font-semibold tracking-[0.3px] transition-colors hover:bg-navy-l"
           >
-            免費出海評估 →
+            免費出海評估
           </Link>
           <button
             onClick={open}
-            className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
+            className="group inline-flex items-center gap-2 text-tx text-[14px] font-semibold tracking-[0.3px] cursor-pointer transition-colors duration-300 hover:text-navy"
           >
-            直接聊聊 →
+            <span className="border-b border-tx/30 pb-0.5 group-hover:border-navy transition-colors">
+              直接聊聊
+            </span>
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
           </button>
         </div>
       </div>

@@ -48,12 +48,12 @@ export function WhySection() {
   }, [counted]);
 
   return (
-    <section className="bg-navy py-[80px] md:py-[120px] px-5 md:px-10">
+    <section className="bg-navy py-[100px] md:py-[140px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
           為什麼是鹿飛
         </div>
-        <h2 className="font-heading text-[clamp(28px,3.5vw,42px)] leading-[1.2] mb-3 font-bold tracking-[-0.5px] text-white">
+        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-bold tracking-[-0.5px] text-white">
           你不需要找三家公司
           <br />
           才能走完一條路
@@ -107,7 +107,7 @@ export function WhySection() {
         >
           {stats.map((stat, i) => (
             <div key={stat.label} className="text-center">
-              <div className="font-heading text-[36px] text-gold font-semibold">
+              <div className="font-sans text-[36px] text-gold font-semibold">
                 {values[i]}
                 {stat.suffix}
               </div>
@@ -120,7 +120,7 @@ export function WhySection() {
 
         {/* Testimonial */}
         <div className="mt-12 p-5 md:p-8 rounded-none border-l-4 border-gold pl-5 md:pl-8 bg-white/[0.02] max-w-[600px] mx-auto flex flex-col md:flex-row gap-4 md:gap-5 items-center md:items-start text-center md:text-left">
-          <div className="w-[52px] h-[52px] rounded-none bg-[rgba(212,168,92,0.15)] flex items-center justify-center text-[16px] font-semibold text-gold flex-shrink-0 font-heading">
+          <div className="w-[52px] h-[52px] rounded-none bg-[rgba(212,168,92,0.15)] flex items-center justify-center text-[16px] font-semibold text-gold flex-shrink-0 font-sans">
             陳
           </div>
           <div>

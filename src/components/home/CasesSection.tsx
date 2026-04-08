@@ -54,11 +54,11 @@ const tagStyles = {
 
 export function CasesSection() {
   return (
-    <section className="py-[80px] md:py-[120px] px-5 md:px-10 max-w-[1400px] mx-auto">
+    <section className="py-[100px] md:py-[140px] px-5 md:px-10 max-w-[1400px] mx-auto">
       <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
         案例
       </div>
-      <h2 className="font-heading text-[clamp(28px,3.5vw,42px)] leading-[1.2] mb-3 font-bold tracking-[-0.5px]">
+      <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-bold tracking-[-0.5px]">
         這些企業都找到了自己的出海路
       </h2>
       <p className="text-[15px] text-tx2 max-w-[480px] leading-[1.7] mb-11 font-normal">
@@ -83,10 +83,10 @@ export function CasesSection() {
                     </span>
                   ))}
                 </div>
-                <div className="font-heading text-[56px] font-semibold text-gold mb-2.5 leading-none">
+                <div className="font-sans text-[56px] font-semibold text-gold mb-2.5 leading-none">
                   {c.num}
                 </div>
-                <h3 className="font-heading text-[22px] leading-[1.4] mb-2 font-bold">
+                <h3 className="font-sans text-[22px] leading-[1.4] mb-2 font-bold">
                   {c.title}
                 </h3>
                 <p className="text-[13px] text-tx2 leading-[1.65] font-normal">
@@ -135,10 +135,10 @@ export function CasesSection() {
                     </span>
                   ))}
                 </div>
-                <div className="font-heading text-[42px] font-semibold text-gold mb-2.5 leading-none">
+                <div className="font-sans text-[42px] font-semibold text-gold mb-2.5 leading-none">
                   {c.num}
                 </div>
-                <h3 className="font-heading text-[18px] leading-[1.4] mb-2 font-bold">
+                <h3 className="font-sans text-[18px] leading-[1.4] mb-2 font-bold">
                   {c.title}
                 </h3>
                 <p className="text-[13px] text-tx2 leading-[1.65] font-normal">
@@ -153,12 +153,15 @@ export function CasesSection() {
         )}
       </div>
 
-      <div className="text-center mt-11">
+      <div className="text-center mt-14">
         <Link
           href="/assess"
-          className="inline-block px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium transition-colors duration-300 hover:border-gold hover:text-gold"
+          className="group inline-flex items-center gap-2 text-tx text-[14px] font-semibold tracking-[0.3px] transition-colors duration-300 hover:text-navy"
         >
-          想知道你的產品適合哪條路？免費評估 →
+          <span className="border-b border-tx/30 pb-0.5 group-hover:border-navy transition-colors">
+            想知道你的產品適合哪條路？免費評估
+          </span>
+          <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
         </Link>
       </div>
     </section>

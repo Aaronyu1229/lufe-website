@@ -9,11 +9,11 @@ const stats = [
 
 export function StatsBanner() {
   return (
-    <section className="bg-navy py-[72px] px-5 md:px-10">
+    <section className="bg-navy py-[80px] md:py-[100px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 text-center">
         {stats.map((s) => (
           <div key={s.label}>
-            <div className="font-heading text-[clamp(36px,4vw,52px)] text-gold leading-none font-semibold mb-2">
+            <div className="font-sans text-[clamp(36px,4vw,52px)] text-gold leading-none font-semibold mb-2">
               {s.value}
             </div>
             <div className="text-[13px] text-white/70 font-normal tracking-wide">
