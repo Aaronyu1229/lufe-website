@@ -63,7 +63,7 @@ export function WhySection() {
         </p>
 
         {/* Coverage bars */}
-        <div className="mb-14">
+        <div className="mb-16">
           {coverageBars.map((bar) => (
             <div key={bar.label} className="flex items-center gap-4 mb-3.5">
               <div
@@ -119,7 +119,7 @@ export function WhySection() {
         </div>
 
         {/* Testimonial */}
-        <div className="mt-12 p-5 md:p-8 rounded-none border-l-4 border-gold pl-5 md:pl-8 bg-white/[0.02] max-w-[600px] mx-auto flex flex-col md:flex-row gap-4 md:gap-5 items-center md:items-start text-center md:text-left">
+        <div className="mt-16 border-t border-gold/10 pt-8 p-5 md:p-8 rounded-none border-l-4 border-gold pl-5 md:pl-8 bg-white/[0.02] max-w-[600px] mx-auto flex flex-col md:flex-row gap-4 md:gap-5 items-center md:items-start text-center md:text-left">
           <div className="w-[52px] h-[52px] rounded-none bg-[rgba(212,168,92,0.15)] flex items-center justify-center text-[16px] font-semibold text-gold flex-shrink-0 font-sans">
             陳
           </div>

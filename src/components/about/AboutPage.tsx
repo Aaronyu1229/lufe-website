@@ -99,8 +99,8 @@ export function AboutPage() {
 
           {/* Avatar + Name */}
           <div className="flex items-center gap-5 mb-8">
-            <div className="w-[72px] h-[72px] rounded-none bg-gold flex items-center justify-center text-navy text-[24px] font-heading font-semibold shrink-0">
-              A
+            <div className="w-[72px] h-[72px] rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[22px] font-heading font-semibold shrink-0 shadow-lg shadow-gold/20">
+              AY
             </div>
             <div>
               <div className="text-[18px] font-semibold">Aaron Yu</div>

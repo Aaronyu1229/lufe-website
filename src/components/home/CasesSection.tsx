@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 const cases = [
@@ -70,6 +71,7 @@ export function CasesSection() {
           c.featured ? (
             <div
               key={c.title}
+              role="article"
               className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center p-5 md:p-10 bg-white border border-bd rounded-none transition-all duration-300 cursor-pointer hover:border-gold hover:shadow-lg"
             >
               <div>
@@ -83,7 +85,7 @@ export function CasesSection() {
                     </span>
                   ))}
                 </div>
-                <div className="font-sans text-[56px] font-semibold text-gold mb-2.5 leading-none">
+                <div className="font-sans text-[48px] font-semibold text-gold mb-2.5 leading-none">
                   {c.num}
                 </div>
                 <h3 className="font-sans text-[22px] leading-[1.4] mb-2 font-bold">
@@ -108,21 +110,23 @@ export function CasesSection() {
                   </div>
                 )}
               </div>
-              <div className="rounded-none h-full min-h-[200px] overflow-hidden">
-                <img
+              <div className="rounded-none h-full min-h-[200px] overflow-hidden relative">
+                <Image
                   src={c.image}
                   alt={c.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
             </div>
           ) : (
             <div
               key={c.title}
+              role="article"
               className="group bg-white border border-bd rounded-none transition-all duration-300 cursor-pointer relative overflow-hidden hover:border-gold hover:shadow-lg"
             >
-              <div className="h-[140px] overflow-hidden">
-                <img src={c.image} alt={c.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="h-[180px] overflow-hidden relative">
+                <Image src={c.image} alt={c.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="p-[30px]">
                 <div className="flex gap-1.5 mb-2.5">
@@ -144,9 +148,9 @@ export function CasesSection() {
                 <p className="text-[13px] text-tx2 leading-[1.65] font-normal">
                   {c.desc}
                 </p>
-                <div className="absolute bottom-[18px] right-[18px] text-[16px] text-tx3 transition-colors duration-300">
-                  →
-                </div>
+                <span className="absolute bottom-[18px] right-[18px] text-[13px] font-medium text-tx3 transition-colors duration-300 group-hover:text-gold">
+                  閱讀案例 →
+                </span>
               </div>
             </div>
           )

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 /* ───────── data ───────── */
 
@@ -120,14 +121,16 @@ export function InsightsPage() {
           {filtered.map((article) => (
             <div
               key={article.title}
+              role="article"
               className="group bg-white rounded-none border border-bd overflow-hidden transition-all hover:border-gold hover:shadow-lg cursor-pointer"
             >
               {/* Cover image */}
-              <div className="h-[160px] overflow-hidden">
-                <img
+              <div className="h-[160px] overflow-hidden relative">
+                <Image
                   src={article.title.includes("東南亞") || article.title.includes("產地轉移") ? "/insight-sea.jpg" : article.title.includes("Checklist") || article.title.includes("亞馬遜") ? "/insight-checklist.jpg" : "/insight-fda.jpg"}
                   alt={article.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
 
@@ -147,7 +150,12 @@ export function InsightsPage() {
                 <p className="text-[13px] text-tx2 leading-[1.7] font-normal line-clamp-3">
                   {article.summary}
                 </p>
-                <div className="mt-4 text-[12px] text-tx3">{article.date}</div>
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="text-[12px] text-tx3">{article.date}</span>
+                  <span className="text-[13px] font-medium text-gold opacity-0 group-hover:opacity-100 transition-opacity">
+                    閱讀更多 →
+                  </span>
+                </div>
               </div>
             </div>
           ))}

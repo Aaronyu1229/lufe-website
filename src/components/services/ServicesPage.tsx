@@ -346,8 +346,23 @@ export function ServicesPage() {
         </div>
       </section>
 
+      {/* Sticky page nav */}
+      <div className="sticky top-[64px] z-40 bg-white/95 backdrop-blur-md border-b border-bd">
+        <div className="max-w-[900px] mx-auto px-5 md:px-10 flex gap-6 overflow-x-auto">
+          <a href="#path" className="py-3.5 text-[13px] font-medium text-tx2 hover:text-navy border-b-2 border-transparent hover:border-gold transition-all whitespace-nowrap">
+            完整路徑
+          </a>
+          <a href="#faq" className="py-3.5 text-[13px] font-medium text-tx2 hover:text-navy border-b-2 border-transparent hover:border-gold transition-all whitespace-nowrap">
+            常見問題
+          </a>
+          <a href="#optimize" className="py-3.5 text-[13px] font-medium text-tx2 hover:text-navy border-b-2 border-transparent hover:border-gold transition-all whitespace-nowrap">
+            進階優化
+          </a>
+        </div>
+      </div>
+
       {/* ─── Full Path Section ─── */}
-      <section id="path" className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[80px]">
+      <section id="path" className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[120px]">
         <div className="max-w-[900px] mx-auto">
           <div className="section-label">完整路徑</div>
           <h2 className="section-heading">四個階段，一條完整的出海路</h2>
@@ -397,7 +412,7 @@ export function ServicesPage() {
       </section>
 
       {/* ─── FAQ ─── */}
-      <section className="bg-[#FAFAF8] py-[80px] md:py-[120px] px-5 md:px-10">
+      <section id="faq" className="bg-[#FAFAF8] py-[80px] md:py-[120px] px-5 md:px-10 scroll-mt-[120px]">
         <div className="max-w-[700px] mx-auto">
           <div className="section-label">常見問題</div>
           <h2 className="section-heading mb-8">你可能會想知道</h2>
@@ -415,7 +430,7 @@ export function ServicesPage() {
       </section>
 
       {/* ─── Optimize Section ─── */}
-      <section id="optimize" className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[80px]">
+      <section id="optimize" className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[120px]">
         <div className="max-w-[900px] mx-auto">
           <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-ember mb-3">
             進階優化

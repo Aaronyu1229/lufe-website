@@ -105,10 +105,10 @@ export function Navbar() {
 
           <div className="hidden md:flex gap-2.5">
             <button
-              className={`px-4 py-[9px] border rounded-none text-[13px] font-medium transition-colors duration-300 cursor-pointer ${
+              className={`text-[13px] font-medium transition-colors duration-300 cursor-pointer ${
                 useDark
-                  ? "border-bd text-tx hover:border-tx"
-                  : "border-white/30 text-white/80 hover:text-white hover:border-white/60"
+                  ? "text-tx2 hover:text-navy"
+                  : "text-white/60 hover:text-white"
               }`}
               onClick={() =>
                 window.open("https://calendly.com", "_blank")

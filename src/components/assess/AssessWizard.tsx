@@ -345,7 +345,7 @@ function ResultA({
         </button>
       </div>
 
-      <h2 className="font-heading text-[32px] mb-2 font-normal leading-[1.2]">
+      <h2 className="font-heading text-[32px] mb-2 font-semibold leading-[1.2]">
         {product}出海，看起來值得一試
       </h2>
       <p className="text-[15px] text-tx2 mb-8 font-normal leading-[1.7]">
@@ -453,7 +453,7 @@ function ResultC({
         </button>
       </div>
 
-      <h2 className="font-heading text-[32px] mb-2 font-normal leading-[1.2]">
+      <h2 className="font-heading text-[32px] mb-2 font-semibold leading-[1.2]">
         我們看到幾個可以改善的地方
       </h2>
       <p className="text-[15px] text-tx2 mb-8 font-normal leading-[1.7]">

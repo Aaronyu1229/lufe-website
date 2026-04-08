@@ -39,7 +39,7 @@ export function CTASection() {
                 <text x="150" y="70" fill="#8A8F9E" fontSize="14" opacity="0.5">?</text>
               </svg>
             </div>
-            <p className="text-[12.5px] text-tx3 font-normal mt-2">
+            <p className="text-[12.5px] text-tx2 font-normal mt-2">
               找了三家公司、走了三條路
               <br />
               中間全靠自己串
@@ -66,7 +66,7 @@ export function CTASection() {
                 <text x="170" y="52" textAnchor="middle" fill="#D4A85C" fontSize="9" opacity="0.7">海外</text>
               </svg>
             </div>
-            <p className="text-[12.5px] text-gold font-normal mt-2">
+            <p className="text-[12.5px] text-gold font-medium mt-2">
               一個窗口、一條線
               <br />
               從評估到落地全程搞定

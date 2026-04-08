@@ -88,7 +88,7 @@ export function StagesSection() {
               <Link
                 key={stage.color}
                 href={stage.link.href}
-                className={`group p-[30px] rounded-none border border-bd bg-white transition-all duration-400 cursor-pointer relative overflow-hidden hover:shadow-lg ${colors.hover}`}
+                className={`group p-[30px] rounded-none border border-bd bg-white transition-all duration-400 cursor-pointer relative overflow-hidden hover:shadow-lg hover:-translate-y-1 ${colors.hover}`}
               >
                 <div className="mb-[18px]">{stage.icon}</div>
                 <h3 className="text-[16px] font-semibold mb-2 leading-[1.3] whitespace-pre-line">

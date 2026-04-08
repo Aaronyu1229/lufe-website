@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 /* ───────── data ───────── */
 
@@ -298,8 +299,8 @@ export function CasesPage() {
                     onClick={() => navigateTo(c.slug)}
                     className="group bg-white border border-bd rounded-none text-left cursor-pointer transition-all hover:border-gold hover:shadow-lg relative overflow-hidden"
                   >
-                    <div className="h-[140px] overflow-hidden">
-                      <img src={`/case-${c.slug === "costco-health" ? "costco" : c.slug === "electronics-tariff" ? "electronics" : c.slug === "shoe-brand" ? "shoes" : "bubbletea"}.jpg`} alt={c.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="h-[180px] overflow-hidden relative">
+                      <Image src={`/case-${c.slug === "costco-health" ? "costco" : c.slug === "electronics-tariff" ? "electronics" : c.slug === "shoe-brand" ? "shoes" : "bubbletea"}.jpg`} alt={c.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     </div>
                     <div className="p-7">
                     <div className="flex gap-1.5 mb-3">
@@ -321,8 +322,8 @@ export function CasesPage() {
                     <p className="text-[13px] text-tx2 leading-[1.65] font-normal">
                       {c.summary}
                     </p>
-                    <span className="absolute bottom-5 right-5 text-[14px] text-tx3 transition-colors group-hover:text-gold">
-                      →
+                    <span className="absolute bottom-5 right-5 text-[13px] font-medium text-tx3 transition-colors group-hover:text-gold">
+                      閱讀案例 →
                     </span>
                     </div>
                   </button>

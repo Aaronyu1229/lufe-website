@@ -82,6 +82,11 @@ export function HeroSection() {
           else goBack();
         }
       }}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowRight") advance();
+        else if (e.key === "ArrowLeft") goBack();
+      }}
+      tabIndex={0}
     >
       {/* Background slides — all rendered, CSS opacity crossfade */}
       {SLIDES.map((s, i) => (

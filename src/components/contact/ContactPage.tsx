@@ -18,6 +18,7 @@ const channels = [
     action: "open-message" as const,
     actionLabel: "開啟訊息框",
     color: "gold",
+    recommended: true as const,
   },
   {
     icon: (
@@ -195,8 +196,13 @@ export function ContactPage() {
                 <button
                   key={ch.title}
                   onClick={() => handleChannelClick(ch.action)}
-                  className={`p-5 bg-white rounded-none border border-bd text-left cursor-pointer transition-all hover:shadow-lg ${c.border}`}
+                  className={`relative p-5 bg-white rounded-none border border-bd text-left cursor-pointer transition-all hover:shadow-lg ${c.border}`}
                 >
+                  {'recommended' in ch && ch.recommended && (
+                    <span className="absolute top-3 right-3 text-[10px] font-semibold bg-gold text-navy px-2 py-0.5 rounded-sm">
+                      最快回覆
+                    </span>
+                  )}
                   <div
                     className={`w-12 h-12 rounded-none ${c.iconBg} ${c.iconText} flex items-center justify-center mb-3`}
                   >
