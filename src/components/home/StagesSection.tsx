@@ -56,13 +56,13 @@ const colorMap: Record<string, { hover: string; link: string; dot: string }> = {
 
 export function StagesSection() {
   return (
-    <section className="py-[120px] md:py-[160px] px-5 md:px-10 bg-white">
+    <section className="py-[60px] md:py-[80px] px-5 md:px-10 bg-white">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold/60 mb-3">
           你的出海階段
         </div>
         <div className="flex items-center gap-6 mb-3">
-          <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] whitespace-nowrap">
+          <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] md:whitespace-nowrap">
             每條出海路的起點都不一樣
           </h2>
           <div className="hidden md:block flex-1 h-px bg-bd" />

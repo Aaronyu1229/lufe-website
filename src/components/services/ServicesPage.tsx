@@ -158,8 +158,12 @@ function StageCard({
   const c = colorMap[stage.color];
   return (
     <div className={`border-l-4 ${c.border} bg-white rounded-none p-7 md:p-9 transition-colors hover:border-gold`}>
-      {/* header */}
-      <div className="flex items-start justify-between gap-4">
+      {/* header — entire row is clickable */}
+      <button
+        onClick={onToggle}
+        className="w-full flex items-start justify-between gap-4 text-left cursor-pointer"
+        aria-expanded={isOpen}
+      >
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2">
             <span className={`text-[13px] font-semibold ${c.text} tracking-wider`}>
@@ -174,22 +178,23 @@ function StageCard({
           </h3>
           <p className="text-[14px] text-tx2 font-normal">{stage.desc}</p>
         </div>
-        <button
-          onClick={onToggle}
-          className="mt-1 w-11 h-11 rounded-none border border-bd flex items-center justify-center transition-colors hover:bg-cream shrink-0 cursor-pointer"
-          aria-label={isOpen ? "收合" : "展開"}
-        >
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-          >
-            <path d="M3 5.5L7 9.5L11 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      </div>
+        <div className="mt-1 flex items-center gap-2 shrink-0">
+          <span className={`text-[12px] font-medium transition-colors ${isOpen ? "text-tx3" : "text-gold"}`}>
+            {isOpen ? "收合" : "查看詳情"}
+          </span>
+          <div className="w-9 h-9 rounded-none border border-bd flex items-center justify-center transition-colors hover:bg-cream">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+            >
+              <path d="M3 5.5L7 9.5L11 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+        </div>
+      </button>
 
       {/* expandable */}
       <AnimatePresence>
@@ -412,7 +417,7 @@ export function ServicesPage() {
       </section>
 
       {/* ─── FAQ ─── */}
-      <section id="faq" className="bg-white py-[80px] md:py-[120px] px-5 md:px-10 scroll-mt-[120px]">
+      <section id="faq" className="bg-white py-[60px] md:py-[80px] px-5 md:px-10 scroll-mt-[120px]">
         <div className="max-w-[700px] mx-auto">
           <div className="section-label">常見問題</div>
           <h2 className="section-heading mb-8">你可能會想知道</h2>
@@ -494,7 +499,7 @@ export function ServicesPage() {
             </p>
             <div className="flex justify-center gap-3 flex-wrap">
               <button
-                onClick={() => window.open("https://calendly.com", "_blank")}
+                onClick={() => window.open("https://calendly.com/lufe-co/30min", "_blank")}
                 className="bg-ember text-white px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
               >
                 預約 60 分鐘診斷

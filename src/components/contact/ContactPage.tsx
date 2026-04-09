@@ -153,7 +153,7 @@ export function ContactPage() {
         open();
         break;
       case "calendly":
-        window.open("https://calendly.com", "_blank");
+        window.open("https://calendly.com/lufe-co/30min", "_blank");
         break;
       case "line":
         window.open("https://line.me", "_blank");
@@ -188,9 +188,44 @@ export function ContactPage() {
             不確定該不該出海？沒關係。聊聊你的產品，我們一起看看。
           </p>
 
-          {/* 4 channel cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {channels.map((ch) => {
+          {/* Primary channel — 快速留言 (full width) */}
+          {(() => {
+            const primary = channels[0];
+            const c = cardColorMap[primary.color];
+            return (
+              <button
+                onClick={() => handleChannelClick(primary.action)}
+                className={`relative w-full p-6 md:p-8 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer transition-all hover:shadow-lg border-2 border-gold/20 hover:border-gold mb-4 flex items-center gap-6`}
+              >
+                <div
+                  className={`w-14 h-14 rounded-none ${c.iconBg} ${c.iconText} flex items-center justify-center flex-shrink-0`}
+                >
+                  {primary.icon}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-[17px] font-semibold">{primary.title}</h3>
+                    <span className="text-[10px] font-semibold bg-gold text-navy px-2 py-0.5 rounded-sm">
+                      最快回覆
+                    </span>
+                  </div>
+                  <p className="text-[13px] text-tx2 font-normal leading-[1.5]">
+                    {primary.desc}
+                  </p>
+                </div>
+                <span className="text-[13px] font-semibold text-gold flex-shrink-0 hidden md:block">
+                  {primary.actionLabel} →
+                </span>
+              </button>
+            );
+          })()}
+
+          {/* Secondary channels — 3 columns */}
+          <p className="text-[12px] text-tx3 font-normal mb-3">
+            或者選擇其他方式聯繫我們：
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {channels.slice(1).map((ch) => {
               const c = cardColorMap[ch.color];
               return (
                 <button
@@ -198,11 +233,6 @@ export function ContactPage() {
                   onClick={() => handleChannelClick(ch.action)}
                   className={`relative p-5 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer transition-all hover:shadow-lg ${c.border}`}
                 >
-                  {'recommended' in ch && ch.recommended && (
-                    <span className="absolute top-3 right-3 text-[10px] font-semibold bg-gold text-navy px-2 py-0.5 rounded-sm">
-                      最快回覆
-                    </span>
-                  )}
                   <div
                     className={`w-12 h-12 rounded-none ${c.iconBg} ${c.iconText} flex items-center justify-center mb-3`}
                   >

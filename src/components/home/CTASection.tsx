@@ -7,20 +7,28 @@ export function CTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="bg-navy py-[120px] md:py-[160px] px-5 md:px-10">
+    <section className="bg-navy py-[60px] md:py-[80px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto text-center">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold/70 mb-3">
           開始
         </div>
 
         {/* Before / After */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[640px] mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 max-w-[760px] mx-auto mb-12 relative">
+          {/* VS separator */}
+          <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-navy border border-white/20 items-center justify-center">
+            <span className="text-[11px] font-bold text-white/50 tracking-wider">VS</span>
+          </div>
+          <div className="md:hidden flex justify-center py-3">
+            <span className="text-[11px] font-bold text-white/30 tracking-wider">VS</span>
+          </div>
+
           {/* Before */}
-          <div className="p-7 rounded-none text-center bg-white/[0.04] border border-white/10">
-            <h4 className="text-[13px] font-semibold mb-3.5 tracking-[0.5px] text-white/40">
+          <div className="p-8 md:p-10 rounded-none text-center bg-white/[0.04] border border-white/10">
+            <h4 className="text-[13px] font-semibold mb-4 tracking-[0.5px] text-white/40">
               沒有鹿飛
             </h4>
-            <div className="h-[100px] flex items-center justify-center">
+            <div className="h-[120px] flex items-center justify-center">
               <svg viewBox="0 0 180 80" width="180">
                 <path d="M20,40 L50,20" stroke="#8A8F9E" strokeWidth="1" strokeDasharray="4,4" opacity="0.5" />
                 <path d="M20,40 L60,60" stroke="#8A8F9E" strokeWidth="1" strokeDasharray="4,4" opacity="0.5" />
@@ -47,11 +55,11 @@ export function CTASection() {
           </div>
 
           {/* After */}
-          <div className="p-7 rounded-none text-center bg-[rgba(212,168,92,0.08)] border border-gold/20">
-            <h4 className="text-[13px] font-semibold mb-3.5 tracking-[0.5px] text-gold">
+          <div className="p-8 md:p-10 rounded-none text-center bg-[rgba(212,168,92,0.08)] border border-gold/20">
+            <h4 className="text-[13px] font-semibold mb-4 tracking-[0.5px] text-gold">
               有鹿飛
             </h4>
-            <div className="h-[100px] flex items-center justify-center">
+            <div className="h-[120px] flex items-center justify-center">
               <svg viewBox="0 0 180 80" width="180">
                 <path d="M20,40 Q60,20 100,40 Q140,60 170,35" stroke="#D4A85C" strokeWidth="2" fill="none" strokeLinecap="round" />
                 <circle cx="20" cy="40" r="5" fill="#D4A85C" />

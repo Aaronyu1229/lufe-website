@@ -328,6 +328,27 @@ export function CasesPage() {
                     </div>
                   </button>
                 ))}
+
+                {/* CTA placeholder card — fills odd-count gap */}
+                {casesData.length % 2 !== 0 && (
+                  <Link
+                    href="/assess"
+                    className="group flex flex-col items-center justify-center p-10 rounded-none border-2 border-dashed border-gold/20 hover:border-gold/40 transition-all text-center min-h-[300px]"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors">
+                      <span className="text-gold text-[20px]">+</span>
+                    </div>
+                    <h3 className="text-[16px] font-medium mb-2 text-tx">
+                      你的產品也能出海嗎？
+                    </h3>
+                    <p className="text-[13px] text-tx2 font-normal mb-4">
+                      兩分鐘免費評估，找到你的出海起點。
+                    </p>
+                    <span className="text-[13px] font-semibold text-gold group-hover:underline">
+                      開始評估 →
+                    </span>
+                  </Link>
+                )}
               </div>
 
               {/* Bottom CTA */}

@@ -483,7 +483,7 @@ function ResultC({
         </p>
         <div className="flex gap-3 flex-wrap">
           <button
-            onClick={() => window.open("https://calendly.com", "_blank")}
+            onClick={() => window.open("https://calendly.com/lufe-co/30min", "_blank")}
             className="bg-ember text-white px-6 py-3 rounded-sm text-[14px] font-semibold cursor-pointer transition-colors hover:border-gold"
           >
             預約 60 分鐘諮詢

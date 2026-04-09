@@ -3,69 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { articles, categories, getArticleImage } from "@/data/articles";
+import type { Category } from "@/data/articles";
 
-/* ───────── data ───────── */
-
-const categories = ["全部", "市場趨勢", "實戰指南", "法規解讀", "工具推薦"] as const;
-
-type Category = (typeof categories)[number];
-
-const articles = [
-  {
-    category: "市場趨勢" as Category,
-    date: "2026-03-28",
-    title: "2026 東南亞電商市場：台灣品牌的三大機會",
-    summary:
-      "東南亞電商市場預計在 2026 年突破 2,000 億美元。我們分析了菲律賓、越南、泰國三個市場，找到台灣品牌最有機會切入的品類和通路。",
-    readTime: "8 分鐘",
-    color: "sky" as const,
-  },
-  {
-    category: "實戰指南" as Category,
-    date: "2026-03-15",
-    title: "第一次出海就上手：從零到上架的完整 Checklist",
-    summary:
-      "我們把十年來幫客戶出海的經驗濃縮成一份 Checklist。從市場評估到產品上架，每個階段該做什麼、要注意什麼，一次講清楚。",
-    readTime: "12 分鐘",
-    color: "gold" as const,
-  },
-  {
-    category: "法規解讀" as Category,
-    date: "2026-03-01",
-    title: "美國 FDA 註冊全攻略：保健品出海必讀",
-    summary:
-      "想把保健品賣到美國？FDA 註冊是第一關。這篇文章完整解析註冊流程、費用、時程，以及台灣企業最常踩的五個坑。",
-    readTime: "10 分鐘",
-    color: "ember" as const,
-  },
-  {
-    category: "工具推薦" as Category,
-    date: "2026-02-20",
-    title: "TradePilot 使用教學：三分鐘查完目標市場關稅",
-    summary:
-      "我們自主開發的關稅查詢工具 TradePilot，已有 2,400+ 用戶。這篇手把手教你如何用它計算出海成本，做出更精準的定價決策。",
-    readTime: "5 分鐘",
-    color: "sky" as const,
-  },
-  {
-    category: "市場趨勢" as Category,
-    date: "2026-02-10",
-    title: "中美關稅戰下的產地轉移策略：越南還是印度？",
-    summary:
-      "越來越多企業考慮將產線從中國轉移。我們比較了越南和印度在成本、效率、法規上的優劣，幫你選對下一個生產基地。",
-    readTime: "9 分鐘",
-    color: "sky" as const,
-  },
-  {
-    category: "實戰指南" as Category,
-    date: "2026-01-25",
-    title: "亞馬遜品類分析：如何找到你的藍海品項",
-    summary:
-      "在亞馬遜上賣什麼比怎麼賣更重要。這篇分享我們幫客戶做品類分析的方法論，以及如何用數據找到高毛利、低競爭的品項。",
-    readTime: "11 分鐘",
-    color: "gold" as const,
-  },
-];
+/* ───────── style maps ───────── */
 
 const colorMap: Record<string, string> = {
   sky: "bg-[rgba(91,143,168,0.08)] text-sky",
@@ -73,17 +14,12 @@ const colorMap: Record<string, string> = {
   ember: "bg-[rgba(217,139,74,0.08)] text-ember",
 };
 
-const categoryColorMap: Record<string, string> = {
-  "市場趨勢": "sky",
-  "實戰指南": "gold",
-  "法規解讀": "ember",
-  "工具推薦": "sky",
-};
-
 /* ───────── component ───────── */
 
+type FilterCategory = Category | "全部";
+
 export function InsightsPage() {
-  const [active, setActive] = useState<Category>("全部");
+  const [active, setActive] = useState<FilterCategory>("全部");
 
   const filtered =
     active === "全部"
@@ -119,15 +55,15 @@ export function InsightsPage() {
         {/* Article cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {filtered.map((article) => (
-            <div
-              key={article.title}
-              role="article"
-              className="group bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] overflow-hidden transition-all hover:shadow-lg cursor-pointer"
+            <Link
+              key={article.slug}
+              href={`/insights/${article.slug}`}
+              className="group bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] overflow-hidden transition-all hover:shadow-lg"
             >
               {/* Cover image */}
               <div className="h-[160px] overflow-hidden relative">
                 <Image
-                  src={article.title.includes("東南亞") || article.title.includes("產地轉移") ? "/insight-sea.jpg" : article.title.includes("Checklist") || article.title.includes("亞馬遜") ? "/insight-checklist.jpg" : "/insight-fda.jpg"}
+                  src={getArticleImage(article)}
                   alt={article.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -157,7 +93,7 @@ export function InsightsPage() {
                   </span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

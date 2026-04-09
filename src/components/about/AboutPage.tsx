@@ -98,14 +98,17 @@ export function AboutPage() {
           </h1>
 
           {/* Avatar + Name */}
-          <div className="flex items-center gap-5 mb-8">
-            <div className="w-[72px] h-[72px] rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[22px] font-heading font-semibold shrink-0 shadow-lg shadow-gold/20">
+          <div className="flex items-center gap-6 mb-10 border-l-4 border-gold pl-6 py-2">
+            <div className="w-[88px] h-[88px] rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[28px] font-heading font-semibold shrink-0 shadow-lg shadow-gold/20">
               AY
             </div>
             <div>
-              <div className="text-[18px] font-semibold">Aaron Yu</div>
-              <div className="text-[13px] text-gold-l font-normal">
+              <div className="text-[20px] font-semibold">Aaron Yu</div>
+              <div className="text-[14px] text-gold font-medium">
                 鹿飛 LUFÉ 創辦人
+              </div>
+              <div className="text-[12px] text-white/50 font-normal mt-1">
+                十年國際物流實戰・500+ 出口案件・30+ 國家覆蓋
               </div>
             </div>
           </div>

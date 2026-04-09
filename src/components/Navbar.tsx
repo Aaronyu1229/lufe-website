@@ -104,18 +104,6 @@ export function Navbar() {
           </div>
 
           <div className="hidden md:flex gap-2.5">
-            <button
-              className={`text-[13px] font-medium transition-colors duration-300 cursor-pointer ${
-                useDark
-                  ? "text-tx2 hover:text-navy"
-                  : "text-white/60 hover:text-white"
-              }`}
-              onClick={() =>
-                window.open("https://calendly.com", "_blank")
-              }
-            >
-              預約諮詢
-            </button>
             <MessageBoxTrigger />
           </div>
 
@@ -170,12 +158,6 @@ export function Navbar() {
                   </Link>
                 ))}
                 <div className="flex gap-2.5 mt-3">
-                  <button
-                    className="flex-1 py-2.5 border border-bd rounded-none text-[13px] font-medium text-tx2 cursor-pointer"
-                    onClick={() => window.open("https://calendly.com", "_blank")}
-                  >
-                    預約諮詢
-                  </button>
                   <MessageBoxTrigger className="flex-1" />
                 </div>
               </motion.div>
@@ -191,7 +173,7 @@ function MessageBoxTrigger({ className = "" }: { className?: string }) {
   const { open } = useMessageBox();
   return (
     <button
-      className={`border border-navy text-navy px-5 py-[9px] rounded-none text-[13px] font-medium hover:bg-navy hover:text-white transition-all cursor-pointer ${className}`}
+      className={`bg-gold text-navy px-5 py-[9px] rounded-none text-[13px] font-semibold hover:bg-gold-l transition-all cursor-pointer ${className}`}
       onClick={open}
     >
       聊聊你的產品 →

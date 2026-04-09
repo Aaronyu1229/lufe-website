@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { useMessageBox } from "../MessageBox";
 
 interface Slide {
   readonly image: string;
@@ -10,7 +9,7 @@ interface Slide {
   readonly headline: string;
   readonly subtitle: string;
   readonly cta: string;
-  readonly action: "message" | { href: string };
+  readonly action: { href: string };
 }
 
 const SLIDES: readonly Slide[] = [
@@ -19,7 +18,7 @@ const SLIDES: readonly Slide[] = [
     label: "策略顧問",
     headline: "好產品值得一條\n順暢的出海路",
     subtitle: "從市場驗證到落地營運，我們陪你走完全程。",
-    cta: "兩分鐘免費評估",
+    cta: "免費評估你的產品 →",
     action: { href: "/assess" },
   },
   {
@@ -27,23 +26,22 @@ const SLIDES: readonly Slide[] = [
     label: "成功案例",
     headline: "六個月，從台灣\n到北美 Costco",
     subtitle: "真實案例，真實成果。",
-    cta: "看案例",
-    action: { href: "/cases" },
+    cta: "看看怎麼開始 →",
+    action: { href: "/services" },
   },
   {
     image: "/hero-3.jpg",
     label: "開始對話",
     headline: "出海不是冒險\n是有計畫的探索",
     subtitle: "不確定從哪開始？聊聊你的產品。",
-    cta: "聊聊你的產品",
-    action: "message",
+    cta: "免費評估你的產品 →",
+    action: { href: "/assess" },
   },
 ] as const;
 
 const INTERVAL_MS = 6000;
 
 export function HeroSection() {
-  const { open } = useMessageBox();
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef(0);
@@ -132,56 +130,15 @@ export function HeroSection() {
               {slide.subtitle}
             </p>
 
-            {/* CTA — Bain-style text link with underline + arrow */}
-            {slide.action === "message" ? (
-              <button
-                onClick={open}
-                className="group inline-flex items-center gap-2.5 text-white text-[14px] font-semibold tracking-[0.3px] cursor-pointer transition-colors hover:text-gold"
-              >
-                <span className="border-b border-white/30 pb-0.5 group-hover:border-gold transition-colors">
-                  {slide.cta}
-                </span>
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  <path
-                    d="M4 9H14M14 9L10 5M14 9L10 13"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            ) : (
-              <Link
-                href={slide.action.href}
-                className="group inline-flex items-center gap-2.5 text-white text-[14px] font-semibold tracking-[0.3px] transition-colors hover:text-gold"
-              >
-                <span className="border-b border-white/30 pb-0.5 group-hover:border-gold transition-colors">
-                  {slide.cta}
-                </span>
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  <path
-                    d="M4 9H14M14 9L10 5M14 9L10 13"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
-            )}
+            {/* CTA — Bain-style text link with underline */}
+            <Link
+              href={slide.action.href}
+              className="group inline-flex items-center gap-2.5 text-white text-[14px] font-semibold tracking-[0.3px] transition-colors hover:text-gold"
+            >
+              <span className="border-b border-white/30 pb-0.5 group-hover:border-gold transition-colors">
+                {slide.cta}
+              </span>
+            </Link>
           </div>
         </div>
       </div>

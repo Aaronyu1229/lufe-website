@@ -48,7 +48,7 @@ export function WhySection() {
   }, [counted]);
 
   return (
-    <section className="bg-navy py-[120px] md:py-[160px] px-5 md:px-10">
+    <section className="bg-navy py-[60px] md:py-[80px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
           為什麼是鹿飛
@@ -65,27 +65,41 @@ export function WhySection() {
         {/* Coverage bars */}
         <div className="mb-16">
           {coverageBars.map((bar) => (
-            <div key={bar.label} className="flex items-center gap-4 mb-3.5">
+            <div
+              key={bar.label}
+              className={`flex items-center gap-4 mb-2 py-2.5 px-3 rounded-none ${
+                bar.variant === "lufe"
+                  ? "bg-gold/[0.06] border border-gold/10"
+                  : "bg-white/[0.02]"
+              }`}
+            >
               <div
-                className={`w-[72px] md:w-[100px] text-[11px] md:text-[12.5px] text-right font-normal flex-shrink-0 ${
+                className={`w-[72px] md:w-[100px] text-[11px] md:text-[12.5px] text-right font-normal flex-shrink-0 flex items-center justify-end gap-1.5 ${
                   bar.variant === "lufe"
-                    ? "text-gold font-medium"
-                    : "text-white/60"
+                    ? "text-gold font-semibold"
+                    : "text-white/40"
                 }`}
               >
                 {bar.label}
               </div>
               <div className="flex-1 h-8 bg-white/[0.03] rounded-none relative overflow-hidden">
                 <div
-                  className={`h-full rounded-none flex items-center px-2 md:px-3 text-[10px] md:text-[11px] font-medium text-white/70 whitespace-nowrap overflow-hidden ${
+                  className={`h-full rounded-none flex items-center px-2 md:px-3 text-[10px] md:text-[11px] font-medium whitespace-nowrap overflow-hidden ${
                     bar.variant === "lufe"
-                      ? "bg-gradient-to-r from-[rgba(212,168,92,0.15)] to-[rgba(212,168,92,0.25)]"
-                      : "bg-white/[0.08]"
+                      ? "bg-gradient-to-r from-gold/20 to-gold/35 text-gold/90"
+                      : "bg-white/[0.06] text-white/50"
                   }`}
                   style={{ width: bar.width, marginLeft: bar.marginLeft }}
                 >
                   {bar.text}
                 </div>
+              </div>
+              <div className="flex-shrink-0 w-5 text-center">
+                {bar.variant === "lufe" ? (
+                  <span className="text-gold text-[14px]">✓</span>
+                ) : (
+                  <span className="text-white/20 text-[14px]">✗</span>
+                )}
               </div>
             </div>
           ))}
