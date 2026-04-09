@@ -218,7 +218,7 @@ function CaseDetail({
               <button
                 key={rc.slug}
                 onClick={() => onNavigate(rc.slug)}
-                className="p-6 bg-white border border-bd rounded-none text-left cursor-pointer transition-all hover:border-gold hover:shadow-lg"
+                className="p-6 bg-white rounded-none text-left cursor-pointer transition-all shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg"
               >
                 <div className="flex gap-1.5 mb-2">
                   {rc.tags.map((t) => (
@@ -272,7 +272,7 @@ export function CasesPage() {
   const activeCase = casesData.find((c) => c.slug === activeSlug);
 
   return (
-    <section className="bg-[#FAFAF8] min-h-screen pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
+    <section className="bg-white min-h-screen pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
       <div className="max-w-[1000px] mx-auto">
         {activeCase ? (
           <CaseDetail
@@ -297,7 +297,7 @@ export function CasesPage() {
                   <button
                     key={c.slug}
                     onClick={() => navigateTo(c.slug)}
-                    className="group bg-white border border-bd rounded-none text-left cursor-pointer transition-all hover:border-gold hover:shadow-lg relative overflow-hidden"
+                    className="group bg-white rounded-none text-left cursor-pointer transition-all shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg relative overflow-hidden"
                   >
                     <div className="h-[180px] overflow-hidden relative">
                       <Image src={`/case-${c.slug === "costco-health" ? "costco" : c.slug === "electronics-tariff" ? "electronics" : c.slug === "shoe-brand" ? "shoes" : "bubbletea"}.jpg`} alt={c.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />

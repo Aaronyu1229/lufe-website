@@ -7,17 +7,17 @@ export function CTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="bg-[#FAFAF8] py-[100px] md:py-[140px] px-5 md:px-10">
+    <section className="bg-navy py-[120px] md:py-[160px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto text-center">
-        <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
+        <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold/70 mb-3">
           開始
         </div>
 
         {/* Before / After */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[640px] mx-auto mb-12">
           {/* Before */}
-          <div className="p-7 rounded-none text-center bg-[rgba(26,26,46,0.04)] border border-bd">
-            <h4 className="text-[13px] font-semibold mb-3.5 tracking-[0.5px] text-tx3">
+          <div className="p-7 rounded-none text-center bg-white/[0.04] border border-white/10">
+            <h4 className="text-[13px] font-semibold mb-3.5 tracking-[0.5px] text-white/40">
               沒有鹿飛
             </h4>
             <div className="h-[100px] flex items-center justify-center">
@@ -39,7 +39,7 @@ export function CTASection() {
                 <text x="150" y="70" fill="#8A8F9E" fontSize="14" opacity="0.5">?</text>
               </svg>
             </div>
-            <p className="text-[12.5px] text-tx2 font-normal mt-2">
+            <p className="text-[12.5px] text-white/40 font-normal mt-2">
               找了三家公司、走了三條路
               <br />
               中間全靠自己串
@@ -47,7 +47,7 @@ export function CTASection() {
           </div>
 
           {/* After */}
-          <div className="p-7 rounded-none text-center bg-[rgba(212,168,92,0.08)] border border-[rgba(212,168,92,0.2)]">
+          <div className="p-7 rounded-none text-center bg-[rgba(212,168,92,0.08)] border border-gold/20">
             <h4 className="text-[13px] font-semibold mb-3.5 tracking-[0.5px] text-gold">
               有鹿飛
             </h4>
@@ -74,26 +74,26 @@ export function CTASection() {
           </div>
         </div>
 
-        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-bold tracking-[-0.5px]">
+        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-light tracking-[-0.5px] text-white">
           每一家有好產品的公司
           <br />
           都值得試試看
         </h2>
-        <p className="text-[15px] text-tx2 max-w-[440px] mx-auto leading-[1.7] mb-10 font-normal">
+        <p className="text-[15px] text-white/50 max-w-[440px] mx-auto leading-[1.7] mb-10 font-normal">
           不確定從哪開始？沒關係。兩分鐘評估，找到你的起點。
         </p>
-        <div className="flex justify-center gap-4 flex-wrap">
+        <div className="flex justify-center gap-6 flex-wrap">
           <Link
             href="/assess"
-            className="inline-block bg-navy text-white px-8 py-3.5 rounded-none text-[14px] font-semibold tracking-[0.3px] transition-colors hover:bg-navy-l"
+            className="inline-block border border-white text-white px-10 py-4 rounded-none text-[13px] font-semibold tracking-[1px] uppercase transition-all hover:bg-white hover:text-navy"
           >
             免費出海評估
           </Link>
           <button
             onClick={open}
-            className="group inline-flex items-center gap-2 text-tx text-[14px] font-semibold tracking-[0.3px] cursor-pointer transition-colors duration-300 hover:text-navy"
+            className="group inline-flex items-center gap-2 text-white/70 text-[14px] font-semibold tracking-[0.3px] cursor-pointer transition-colors duration-300 hover:text-white"
           >
-            <span className="border-b border-tx/30 pb-0.5 group-hover:border-navy transition-colors">
+            <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
               直接聊聊
             </span>
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>

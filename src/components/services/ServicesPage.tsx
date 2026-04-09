@@ -291,13 +291,13 @@ export function ServicesPage() {
   return (
     <>
       {/* ─── Hero / Why section ─── */}
-      <section className="bg-[#FAFAF8] pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
+      <section className="bg-white pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
         <div className="max-w-[1400px] mx-auto text-center">
           <div className="section-label">服務</div>
           <h1 className="section-heading">
             出海不難，難的是沒人告訴你
             <br />
-            <span className="font-bold text-gold">完整的路怎麼走</span>
+            <span className="font-light text-gold">完整的路怎麼走</span>
           </h1>
           <p className="section-desc mx-auto text-center">
             我們不只做其中一段，而是從評估到落地，幫你把整條路串起來。
@@ -412,7 +412,7 @@ export function ServicesPage() {
       </section>
 
       {/* ─── FAQ ─── */}
-      <section id="faq" className="bg-[#FAFAF8] py-[80px] md:py-[120px] px-5 md:px-10 scroll-mt-[120px]">
+      <section id="faq" className="bg-white py-[80px] md:py-[120px] px-5 md:px-10 scroll-mt-[120px]">
         <div className="max-w-[700px] mx-auto">
           <div className="section-label">常見問題</div>
           <h2 className="section-heading mb-8">你可能會想知道</h2>
@@ -438,7 +438,7 @@ export function ServicesPage() {
           <h2 className="section-heading">
             已經在海外了，但總覺得
             <br />
-            <span className="font-bold text-ember">可以做得更好？</span>
+            <span className="font-light text-ember">可以做得更好？</span>
           </h2>
 
           {/* Pain point questions */}

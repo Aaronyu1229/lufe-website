@@ -48,12 +48,12 @@ export function WhySection() {
   }, [counted]);
 
   return (
-    <section className="bg-navy py-[100px] md:py-[140px] px-5 md:px-10">
+    <section className="bg-navy py-[120px] md:py-[160px] px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
           為什麼是鹿飛
         </div>
-        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-bold tracking-[-0.5px] text-white">
+        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-light tracking-[-0.5px] text-white">
           你不需要找三家公司
           <br />
           才能走完一條路
@@ -107,7 +107,7 @@ export function WhySection() {
         >
           {stats.map((stat, i) => (
             <div key={stat.label} className="text-center">
-              <div className="font-sans text-[36px] text-gold font-semibold">
+              <div className="font-sans text-[36px] text-white font-light">
                 {values[i]}
                 {stat.suffix}
               </div>

@@ -91,7 +91,7 @@ export function InsightsPage() {
       : articles.filter((a) => a.category === active);
 
   return (
-    <section className="bg-[#FAFAF8] min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
+    <section className="bg-white min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
       <div className="max-w-[1000px] mx-auto">
         <div className="section-label">洞察與資源</div>
         <h1 className="section-heading">出海路上，知識就是捷徑</h1>
@@ -122,7 +122,7 @@ export function InsightsPage() {
             <div
               key={article.title}
               role="article"
-              className="group bg-white rounded-none border border-bd overflow-hidden transition-all hover:border-gold hover:shadow-lg cursor-pointer"
+              className="group bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] overflow-hidden transition-all hover:shadow-lg cursor-pointer"
             >
               {/* Cover image */}
               <div className="h-[160px] overflow-hidden relative">
@@ -169,7 +169,7 @@ export function InsightsPage() {
         )}
 
         {/* Bottom CTA */}
-        <div className="mt-14 p-8 bg-white rounded-none border border-bd text-center">
+        <div className="mt-14 p-8 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-center">
           <h3 className="text-[18px] font-medium mb-2">
             看完文章，想知道你的產品適不適合出海？
           </h3>

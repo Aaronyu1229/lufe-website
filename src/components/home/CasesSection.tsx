@@ -55,14 +55,17 @@ const tagStyles = {
 
 export function CasesSection() {
   return (
-    <section className="py-[100px] md:py-[140px] px-5 md:px-10 max-w-[1400px] mx-auto">
-      <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
+    <section className="py-[120px] md:py-[160px] px-5 md:px-10 max-w-[1400px] mx-auto">
+      <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold/60 mb-3">
         案例
       </div>
-      <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-bold tracking-[-0.5px]">
-        這些企業都找到了自己的出海路
-      </h2>
-      <p className="text-[15px] text-tx2 max-w-[480px] leading-[1.7] mb-11 font-normal">
+      <div className="flex items-center gap-6 mb-8">
+        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] whitespace-nowrap">
+          這些企業都找到了自己的出海路
+        </h2>
+        <div className="hidden md:block flex-1 h-px bg-bd" />
+      </div>
+      <p className="text-[15px] text-tx2 max-w-[480px] leading-[1.7] mb-11 font-normal -mt-4">
         不同產業、不同市場，但都用對的方法做了對的決策。
       </p>
 
@@ -72,7 +75,7 @@ export function CasesSection() {
             <div
               key={c.title}
               role="article"
-              className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center p-5 md:p-10 bg-white border border-bd rounded-none transition-all duration-300 cursor-pointer hover:border-gold hover:shadow-lg"
+              className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center p-5 md:p-10 bg-white rounded-none transition-all duration-300 cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg"
             >
               <div>
                 <div className="flex gap-1.5 mb-2.5">
@@ -123,7 +126,7 @@ export function CasesSection() {
             <div
               key={c.title}
               role="article"
-              className="group bg-white border border-bd rounded-none transition-all duration-300 cursor-pointer relative overflow-hidden hover:border-gold hover:shadow-lg"
+              className="group bg-white rounded-none transition-all duration-300 cursor-pointer relative overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg"
             >
               <div className="h-[180px] overflow-hidden relative">
                 <Image src={c.image} alt={c.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />

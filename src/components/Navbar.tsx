@@ -191,7 +191,7 @@ function MessageBoxTrigger({ className = "" }: { className?: string }) {
   const { open } = useMessageBox();
   return (
     <button
-      className={`bg-navy text-white px-5 py-[9px] rounded-none text-[13px] font-medium hover:bg-navy-l transition-colors cursor-pointer ${className}`}
+      className={`border border-navy text-navy px-5 py-[9px] rounded-none text-[13px] font-medium hover:bg-navy hover:text-white transition-all cursor-pointer ${className}`}
       onClick={open}
     >
       聊聊你的產品 →

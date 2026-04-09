@@ -56,14 +56,17 @@ const colorMap: Record<string, { hover: string; link: string; dot: string }> = {
 
 export function StagesSection() {
   return (
-    <section className="py-[100px] md:py-[140px] px-5 md:px-10 bg-[#FAFAF8]">
+    <section className="py-[120px] md:py-[160px] px-5 md:px-10 bg-white">
       <div className="max-w-[1400px] mx-auto">
-        <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
+        <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold/60 mb-3">
           你的出海階段
         </div>
-        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-3 font-bold tracking-[-0.5px]">
-          每條出海路的起點都不一樣
-        </h2>
+        <div className="flex items-center gap-6 mb-3">
+          <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] whitespace-nowrap">
+            每條出海路的起點都不一樣
+          </h2>
+          <div className="hidden md:block flex-1 h-px bg-bd" />
+        </div>
         <p className="text-[15px] text-tx2 max-w-[480px] leading-[1.7] mb-11 font-normal">
           找到你現在的位置，我們告訴你下一步。
         </p>
@@ -88,7 +91,7 @@ export function StagesSection() {
               <Link
                 key={stage.color}
                 href={stage.link.href}
-                className={`group p-[30px] rounded-none border border-bd bg-white transition-all duration-400 cursor-pointer relative overflow-hidden hover:shadow-lg hover:-translate-y-1 ${colors.hover}`}
+                className={`group p-[30px] rounded-none bg-white transition-all duration-400 cursor-pointer relative overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg hover:-translate-y-1 ${colors.hover}`}
               >
                 <div className="mb-[18px]">{stage.icon}</div>
                 <h3 className="text-[16px] font-semibold mb-2 leading-[1.3] whitespace-pre-line">

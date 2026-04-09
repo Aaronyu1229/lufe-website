@@ -91,10 +91,10 @@ export function AboutPage() {
           <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
             關於我們
           </div>
-          <h1 className="font-heading text-[clamp(28px,3.5vw,42px)] leading-[1.2] font-bold tracking-[-0.5px] mb-10">
+          <h1 className="font-heading text-[clamp(28px,3.5vw,42px)] leading-[1.2] font-light tracking-[-0.5px] mb-10">
             每個出海的企業
             <br />
-            <span className="font-bold text-gold">都值得一個懂路的人</span>
+            <span className="font-light text-gold">都值得一個懂路的人</span>
           </h1>
 
           {/* Avatar + Name */}
@@ -151,7 +151,7 @@ export function AboutPage() {
       </section>
 
       {/* ─── Resource Network ─── */}
-      <section className="bg-[#FAFAF8] py-[80px] px-5 md:px-10">
+      <section className="bg-white py-[80px] px-5 md:px-10">
         <div className="max-w-[900px] mx-auto">
           <div className="section-label">資源網絡</div>
           <h2 className="section-heading">
@@ -169,7 +169,7 @@ export function AboutPage() {
               return (
                 <div
                   key={card.title}
-                  className={`p-7 bg-white rounded-none border border-bd transition-colors ${c.border}`}
+                  className={`p-7 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-all hover:shadow-lg ${c.border}`}
                 >
                   <div
                     className={`w-14 h-14 rounded-none ${c.iconBg} flex items-center justify-center mb-4`}

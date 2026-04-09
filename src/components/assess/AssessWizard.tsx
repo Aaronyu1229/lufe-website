@@ -95,7 +95,7 @@ export function AssessWizard() {
   };
 
   return (
-    <section className="min-h-screen pt-[100px] md:pt-[120px] pb-16 md:pb-20 px-5 md:px-10 bg-[#FAFAF8]">
+    <section className="min-h-screen pt-[100px] md:pt-[120px] pb-16 md:pb-20 px-5 md:px-10 bg-white">
       <div className="max-w-[680px] mx-auto">
         {/* Entry */}
           {step === "entry" && (

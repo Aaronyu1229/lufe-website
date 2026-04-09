@@ -176,13 +176,13 @@ export function ContactPage() {
   return (
     <>
       {/* ─── Hero + Channel Cards ─── */}
-      <section className="bg-[#FAFAF8] pt-[120px] pb-[60px] px-5 md:px-10">
+      <section className="bg-white pt-[120px] pb-[60px] px-5 md:px-10">
         <div className="max-w-[1000px] mx-auto">
           <div className="section-label">聯絡</div>
           <h1 className="section-heading">
             選一個你最方便的方式
             <br />
-            <span className="font-bold text-gold">我們來聊聊</span>
+            <span className="font-light text-gold">我們來聊聊</span>
           </h1>
           <p className="section-desc">
             不確定該不該出海？沒關係。聊聊你的產品，我們一起看看。
@@ -196,7 +196,7 @@ export function ContactPage() {
                 <button
                   key={ch.title}
                   onClick={() => handleChannelClick(ch.action)}
-                  className={`relative p-5 bg-white rounded-none border border-bd text-left cursor-pointer transition-all hover:shadow-lg ${c.border}`}
+                  className={`relative p-5 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer transition-all hover:shadow-lg ${c.border}`}
                 >
                   {'recommended' in ch && ch.recommended && (
                     <span className="absolute top-3 right-3 text-[10px] font-semibold bg-gold text-navy px-2 py-0.5 rounded-sm">

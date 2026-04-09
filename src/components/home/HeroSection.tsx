@@ -122,8 +122,8 @@ export function HeroSection() {
             </div>
 
             <h1
-              className="font-sans text-white leading-[1.08] mb-7 font-bold tracking-[-1.5px] whitespace-pre-line"
-              style={{ fontSize: "clamp(34px, 5vw, 60px)" }}
+              className="font-sans text-white leading-[1.05] mb-7 font-extralight tracking-[-2px] whitespace-pre-line"
+              style={{ fontSize: "clamp(38px, 5.5vw, 68px)" }}
             >
               {slide.headline}
             </h1>
