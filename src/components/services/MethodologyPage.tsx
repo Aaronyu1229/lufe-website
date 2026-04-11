@@ -128,10 +128,20 @@ export function MethodologyPage() {
       <section className="relative bg-navy pt-[140px] md:pt-[180px] pb-[80px] md:pb-[100px] px-5 md:px-10 overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0"
+          className="absolute inset-0 animate-hero-glow-drift"
           style={{
             background:
               "radial-gradient(ellipse at center top, rgba(212,168,92,0.12) 0%, rgba(212,168,92,0.02) 40%, transparent 70%)",
+          }}
+        />
+        {/* Secondary off-center glow for layered depth */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 animate-hero-glow-drift"
+          style={{
+            animationDelay: "-11s",
+            background:
+              "radial-gradient(ellipse 50% 40% at 75% 20%, rgba(91,143,168,0.10) 0%, transparent 60%)",
           }}
         />
 

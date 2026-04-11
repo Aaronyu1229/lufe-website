@@ -155,6 +155,23 @@ body {
   }
 }
 
+/* Gold glow drift — for hero sections without a bg image (methodology).
+   Subtly drifts and breathes the radial gradient so the hero doesn't
+   feel static next to Ken Burns image heroes. Longer 22s cycle. */
+@keyframes hero-glow-drift {
+  0%, 100% { transform: translate(0, 0) scale(1);       opacity: 1; }
+  50%      { transform: translate(-1.5%, 2%) scale(1.1); opacity: 0.82; }
+}
+.animate-hero-glow-drift {
+  animation: hero-glow-drift 22s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-glow-drift {
+    animation: none;
+  }
+}
+
 /* SubsidyCard slide-in from bottom-right */
 @keyframes subsidy-slide-in {
   0% {
