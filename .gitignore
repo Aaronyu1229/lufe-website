@@ -39,6 +39,9 @@ yarn-error.log*
 # claude code local config
 .claude/
 
+# local audit reports
+/.health-check/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
