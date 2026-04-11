@@ -170,28 +170,26 @@ export function SubsidyCard() {
             {copy.eyebrow}
           </div>
 
-          {/* Headline — contextual, single strong line */}
-          <h3 className="font-sans text-[22px] md:text-[24px] font-light leading-[1.25] tracking-[-0.5px] text-white mb-3">
+          {/* Headline — larger, more visual weight */}
+          <h3 className="font-sans text-[28px] md:text-[32px] font-light leading-[1.1] tracking-[-0.8px] text-white mb-3">
             {copy.headline}
           </h3>
 
           {/* One-liner — contextual explanation */}
-          <p className="text-[12.5px] text-white/65 leading-[1.65] mb-5 pr-2">
+          <p className="text-[12.5px] text-white/65 leading-[1.7] mb-6 pr-2">
             {copy.oneLiner}
           </p>
 
-          {/* CTA — single promise */}
-          <div className="flex items-center justify-between pt-4 border-t border-white/10">
-            <span className="text-[13px] font-semibold text-white group-hover:text-gold transition-colors">
-              {copy.cta}
-            </span>
+          {/* CTA — filled gold button */}
+          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-[13px] text-[13.5px] font-semibold tracking-[0.5px] transition-colors group-hover:bg-gold-l">
+            {copy.cta}
             <span
-              className="text-gold text-[16px] transition-transform duration-300 group-hover:translate-x-1"
+              className="text-[15px] transition-transform duration-300 group-hover:translate-x-0.5"
               aria-hidden="true"
             >
               →
             </span>
-          </div>
+          </span>
         </Link>
       </div>
     </div>
