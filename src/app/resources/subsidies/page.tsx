@@ -1,34 +1,46 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { SUBSIDIES, STAGE_LABELS, type Subsidy } from "@/data/subsidies";
+import { SUBSIDIES, STAGE_LABELS, SUBSIDY_CARD_COPY, type Subsidy } from "@/data/subsidies";
+import { SubsidyIcon } from "@/components/subsidy/SubsidyIcons";
+import { SubsidiesCTASection } from "@/components/subsidy/SubsidiesCTASection";
 
 export const metadata: Metadata = {
   title: "2026 政府出海補助 — 鹿飛 LUFÉ",
   description:
-    "貿易署、經濟部、中小企業署——四個正在開放的計畫，幫台灣企業降低出海成本。鹿飛整理的實戰版本，直接告訴你哪個適合你。",
+    "貿易署、經濟部、中企署——四個正在開放的計畫，幫台灣企業降低出海成本。鹿飛整理的實戰版本，直接告訴你哪個適合你。",
 };
 
 const accentMap: Record<
   Subsidy["accent"],
-  { badge: string; num: string; border: string; bar: string }
+  {
+    badge: string;
+    num: string;
+    border: string;
+    bar: string;
+    iconBg: string;
+  }
 > = {
   sky: {
     badge: "bg-sky/10 text-sky",
     num: "text-sky",
     border: "hover:border-sky",
     bar: "bg-sky",
+    iconBg: "bg-[rgba(91,143,168,0.08)] text-sky",
   },
   gold: {
     badge: "bg-gold/15 text-[#8A6A2C]",
     num: "text-gold",
     border: "hover:border-gold",
     bar: "bg-gold",
+    iconBg: "bg-[rgba(212,168,92,0.1)] text-gold",
   },
   ember: {
     badge: "bg-ember/10 text-ember",
     num: "text-ember",
     border: "hover:border-ember",
     bar: "bg-ember",
+    iconBg: "bg-[rgba(217,139,74,0.08)] text-ember",
   },
 };
 
@@ -37,14 +49,29 @@ export default function SubsidiesPage() {
     <div className="bg-white">
       {/* ───── Hero ───── */}
       <section className="relative bg-navy text-white overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src={SUBSIDY_CARD_COPY.hero}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-[0.22]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/75 via-navy/65 to-navy" />
+        </div>
+
+        {/* Ambient accents */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.08] pointer-events-none"
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
           style={{
             backgroundImage:
               "radial-gradient(circle at 20% 30%, #D4A85C 0%, transparent 40%), radial-gradient(circle at 80% 70%, #5B8FA8 0%, transparent 45%)",
           }}
         />
+
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 pt-[120px] md:pt-[160px] pb-[72px] md:pb-[100px] relative">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-5 h-px bg-gold/70" />
@@ -63,9 +90,13 @@ export default function SubsidiesPage() {
           </h1>
 
           <p className="text-[17px] md:text-[18px] text-white/70 font-normal leading-[1.75] max-w-[680px] mb-12">
-            貿易署、經濟部、中小企業署——每年都有上億元的預算在幫台灣企業走出去。
+            貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業走出去。
             但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫。
-            我們替你整理了 <span className="text-white font-medium">4 個正在開放、而且和鹿飛服務高度對齊</span> 的計畫。
+            我們替你整理了{" "}
+            <span className="text-white font-medium">
+              4 個正在開放、而且和鹿飛服務高度對齊
+            </span>{" "}
+            的計畫。
           </p>
 
           {/* Stat strip */}
@@ -78,6 +109,27 @@ export default function SubsidiesPage() {
         </div>
       </section>
 
+      {/* ───── Agency strip ───── */}
+      <section className="bg-cream/60 border-y border-bd/60 py-7 px-5 md:px-10 lg:px-16">
+        <div className="max-w-[1100px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+            <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold shrink-0">
+              主管機關
+            </div>
+            <div className="flex-1 flex flex-wrap items-center gap-x-8 gap-y-2">
+              <AgencyBadge name="國際貿易署" sub="TITA · 貿易署" />
+              <span className="hidden md:block w-px h-5 bg-bd" aria-hidden="true" />
+              <AgencyBadge name="經濟部" sub="MOEA" />
+              <span className="hidden md:block w-px h-5 bg-bd" aria-hidden="true" />
+              <AgencyBadge name="中小及新創企業署" sub="SMEA · 中企署" />
+            </div>
+            <div className="text-[11.5px] text-tx3 md:text-right shrink-0">
+              最後更新 2026.04
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ───── Why this matters ───── */}
       <section className="py-[72px] md:py-[96px] px-5 md:px-10 lg:px-16 bg-cream">
         <div className="max-w-[1100px] mx-auto">
@@ -85,7 +137,8 @@ export default function SubsidiesPage() {
             為什麼這件事值得花十分鐘了解
           </div>
           <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] leading-[1.2] font-light tracking-[-0.5px] max-w-[780px] mb-10">
-            補助不是額外收入，是<span className="text-gold font-normal">降低你出海的實際成本</span>
+            補助不是額外收入，是
+            <span className="text-gold font-normal">降低你出海的實際成本</span>
           </h2>
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             <Pillar
@@ -115,10 +168,12 @@ export default function SubsidiesPage() {
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
             <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] max-w-[780px]">
-              4 個計畫，對應你出海的<span className="text-gold font-normal">不同階段</span>
+              4 個計畫，對應你出海的
+              <span className="text-gold font-normal">不同階段</span>
             </h2>
             <div className="text-[13px] text-tx3 md:text-right">
-              最後更新 2026.04<br />
+              最後更新 2026.04
+              <br />
               名額有限，建議盡早申請
             </div>
           </div>
@@ -130,7 +185,8 @@ export default function SubsidiesPage() {
               return (
                 <article
                   key={s.slug}
-                  className={`group relative bg-white border border-bd p-7 md:p-9 transition-all duration-400 ${c.border} hover:shadow-lg hover:-translate-y-0.5`}
+                  id={s.slug}
+                  className={`group relative bg-white border border-bd p-7 md:p-9 transition-all duration-400 ${c.border} hover:shadow-lg hover:-translate-y-0.5 scroll-mt-[100px]`}
                 >
                   {/* Accent bar */}
                   <div
@@ -140,22 +196,31 @@ export default function SubsidiesPage() {
 
                   {/* Header row */}
                   <div className="flex items-start justify-between gap-4 mb-5">
-                    <div>
-                      <div className="flex items-baseline gap-3 mb-2">
-                        <span
-                          className={`font-sans text-[32px] font-light tabular-nums leading-none ${c.num}`}
-                        >
-                          {s.num}
-                        </span>
-                        <span className="text-[10.5px] font-semibold tracking-[1.5px] uppercase text-tx3">
-                          {s.agency}
-                        </span>
+                    <div className="flex items-start gap-4 min-w-0">
+                      {/* Icon */}
+                      <div
+                        className={`shrink-0 w-14 h-14 ${c.iconBg} flex items-center justify-center rounded-none`}
+                      >
+                        <SubsidyIcon iconKey={s.iconKey} size={26} />
                       </div>
-                      <h3 className="text-[19px] md:text-[21px] font-semibold leading-[1.3] text-tx mb-1">
-                        {s.shortTitle}
-                      </h3>
-                      <div className="text-[12.5px] text-tx3 leading-snug">
-                        {s.program}
+
+                      <div className="min-w-0">
+                        <div className="flex items-baseline gap-2.5 mb-1">
+                          <span
+                            className={`font-sans text-[24px] font-light tabular-nums leading-none ${c.num}`}
+                          >
+                            {s.num}
+                          </span>
+                          <span className="text-[10.5px] font-semibold tracking-[1.5px] uppercase text-tx3">
+                            {s.agency}
+                          </span>
+                        </div>
+                        <h3 className="text-[19px] md:text-[21px] font-semibold leading-[1.3] text-tx mb-1">
+                          {s.shortTitle}
+                        </h3>
+                        <div className="text-[12.5px] text-tx3 leading-snug">
+                          {s.program}
+                        </div>
                       </div>
                     </div>
                     <span
@@ -165,19 +230,32 @@ export default function SubsidiesPage() {
                     </span>
                   </div>
 
-                  {/* Amount */}
-                  <div className="mb-5 pb-5 border-b border-bd/60">
-                    <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
-                      補助額度
-                    </div>
-                    <div className={`text-[22px] font-sans font-light ${c.num}`}>
-                      {s.amount}
-                    </div>
-                    {s.amountNote && (
-                      <div className="text-[11.5px] text-tx3 mt-1">
-                        {s.amountNote}
+                  {/* Amount + Deadline row */}
+                  <div className="grid grid-cols-[1fr_auto] gap-5 mb-5 pb-5 border-b border-bd/60">
+                    <div>
+                      <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
+                        補助額度
                       </div>
-                    )}
+                      <div className={`text-[22px] font-sans font-light ${c.num}`}>
+                        {s.amount}
+                      </div>
+                      {s.amountNote && (
+                        <div className="text-[11.5px] text-tx3 mt-1">
+                          {s.amountNote}
+                        </div>
+                      )}
+                    </div>
+                    <div className="text-right">
+                      <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
+                        申請時程
+                      </div>
+                      <div className="text-[14px] font-medium text-tx">
+                        {s.deadline}
+                      </div>
+                      <div className="text-[11.5px] text-tx3 mt-1">
+                        {s.applicationNote}
+                      </div>
+                    </div>
                   </div>
 
                   {/* One-liner */}
@@ -259,14 +337,15 @@ export default function SubsidiesPage() {
         </div>
       </section>
 
-      {/* ───── Stage mapping (延續性連結到 hero 三階段) ───── */}
+      {/* ───── Stage mapping ───── */}
       <section className="py-[72px] md:py-[96px] px-5 md:px-10 lg:px-16 bg-cream">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
             對應你的出海階段
           </div>
           <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] leading-[1.2] font-light tracking-[-0.5px] max-w-[780px] mb-10">
-            不知道哪個適合？先看你<span className="text-gold font-normal">現在在哪一步</span>
+            不知道哪個適合？先看你
+            <span className="text-gold font-normal">現在在哪一步</span>
           </h2>
 
           <div className="grid md:grid-cols-3 gap-5 md:gap-6">
@@ -297,10 +376,15 @@ export default function SubsidiesPage() {
                             key={s.slug}
                             className="text-[13px] text-tx2 leading-snug"
                           >
-                            <span className="text-gold font-semibold">
-                              {s.num}
-                            </span>{" "}
-                            {s.shortTitle}
+                            <Link
+                              href={`#${s.slug}`}
+                              className="hover:text-gold transition-colors"
+                            >
+                              <span className="text-gold font-semibold">
+                                {s.num}
+                              </span>{" "}
+                              {s.shortTitle}
+                            </Link>
                           </li>
                         ))
                       )}
@@ -349,46 +433,7 @@ export default function SubsidiesPage() {
       </section>
 
       {/* ───── CTA ───── */}
-      <section className="py-[72px] md:py-[100px] px-5 md:px-10 lg:px-16 bg-navy text-white relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 70% 50%, #D4A85C 0%, transparent 50%)",
-          }}
-        />
-        <div className="max-w-[900px] mx-auto text-center relative">
-          <h2
-            className="font-sans text-white leading-[1.1] mb-6 font-extralight tracking-[-1.5px]"
-            style={{ fontSize: "clamp(30px, 4vw, 50px)" }}
-          >
-            不確定哪個適合你？
-            <br />
-            <span className="text-gold">先花 2 分鐘測測看</span>
-          </h2>
-          <p className="text-[16px] text-white/70 max-w-[600px] mx-auto mb-10 leading-[1.75]">
-            告訴我們你的產品、市場目標和現在卡在哪一步，
-            我們會告訴你哪個補助最適合、下一步怎麼走。
-          </p>
-          <div className="flex items-center justify-center gap-6 flex-wrap">
-            <Link
-              href="/assess"
-              className="inline-block bg-gold text-navy px-8 py-[14px] text-[13px] font-semibold tracking-[0.5px] hover:bg-gold-l transition-all"
-            >
-              2 分鐘評估 →
-            </Link>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2.5 text-white text-[14px] font-semibold tracking-[0.3px] transition-colors hover:text-gold"
-            >
-              <span className="border-b border-white/30 pb-0.5 group-hover:border-gold transition-colors">
-                直接聊聊
-              </span>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <SubsidiesCTASection />
     </div>
   );
 }
@@ -402,6 +447,19 @@ function Stat({ num, label }: { num: string; label: string }) {
       <div className="text-[11.5px] text-white/60 font-medium tracking-wider uppercase">
         {label}
       </div>
+    </div>
+  );
+}
+
+function AgencyBadge({ name, sub }: { name: string; sub: string }) {
+  return (
+    <div className="flex items-baseline gap-2.5">
+      <span className="text-[14px] md:text-[15px] font-semibold text-tx tracking-[-0.2px]">
+        {name}
+      </span>
+      <span className="text-[10.5px] text-tx3 font-medium tracking-wider uppercase">
+        {sub}
+      </span>
     </div>
   );
 }

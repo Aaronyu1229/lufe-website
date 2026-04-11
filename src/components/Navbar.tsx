@@ -512,7 +512,7 @@ function AboutMenu() {
             <div className="text-[14px] font-semibold">Aaron Yu</div>
             <div className="text-[12px] text-gold font-medium">鹿飛 LUFÉ 創辦人</div>
             <div className="text-[11px] text-tx3 mt-1 leading-[1.5]">
-              十年國際物流實戰
+              42+ 年國際物流實戰
               <br />
               500+ 出口案件 · 30+ 國家
             </div>

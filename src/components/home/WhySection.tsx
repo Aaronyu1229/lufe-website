@@ -10,7 +10,7 @@ const coverageBars = [
 ];
 
 const stats = [
-  { target: 10, suffix: "+", label: "年國際物流實戰" },
+  { target: 42, suffix: "+", label: "年國際物流實戰" },
   { target: 30, suffix: "+", label: "國家與地區覆蓋" },
   { target: 500, suffix: "+", label: "出口案件處理" },
   { target: 2400, suffix: "+", label: "人使用免費關稅工具" },

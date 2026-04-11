@@ -24,6 +24,9 @@ export type Subsidy = {
   readonly lufeAngle: string;
   readonly stage: SubsidyStage;
   readonly accent: "sky" | "gold" | "ember";
+  readonly deadline: string;
+  readonly applicationNote: string;
+  readonly iconKey: "globe" | "booth" | "factory" | "cart";
   readonly sourceUrl?: string;
 };
 
@@ -54,8 +57,10 @@ export const SUBSIDIES: readonly Subsidy[] = [
       "鹿飛的完整路徑——評估、測試、通路、落地——每一階段都可以納入這個補助。你用補助金來降低找我們的成本。",
     stage: "enter",
     accent: "gold",
-    sourceUrl:
-      "https://www.trade.gov.tw/Pages/List.aspx?nodeID=3054",
+    deadline: "2026.09.30",
+    applicationNote: "每年 2 期 · 名額有限",
+    iconKey: "globe",
+    sourceUrl: "https://www.trade.gov.tw/Pages/List.aspx?nodeID=3054",
   },
   {
     slug: "overseas-exhibition",
@@ -63,7 +68,7 @@ export const SUBSIDIES: readonly Subsidy[] = [
     agency: "國際貿易署",
     program: "補助公司或商號參加海外國際展覽",
     shortTitle: "海外展覽參展補助",
-    amount: "新創企業年度最高 NT$40 萬",
+    amount: "新創年度最高 NT$40 萬",
     amountNote: "一般企業另有補助級距",
     oneLiner:
       "參加北美、東南亞等大型展覽是接觸買手的最快路徑。場地、佈置、運費、口譯全可補。",
@@ -83,8 +88,10 @@ export const SUBSIDIES: readonly Subsidy[] = [
       "我們幫客戶規劃展覽策略、媒合買手、設計展位話術。補助解決錢的問題，鹿飛解決要和誰談、怎麼談的問題。",
     stage: "enter",
     accent: "sky",
-    sourceUrl:
-      "https://www.trade.gov.tw/Pages/List.aspx?nodeID=3054",
+    deadline: "依各展覽檔期",
+    applicationNote: "展前 60 天申請",
+    iconKey: "booth",
+    sourceUrl: "https://www.trade.gov.tw/Pages/List.aspx?nodeID=3054",
   },
   {
     slug: "supply-chain-support",
@@ -111,6 +118,9 @@ export const SUBSIDIES: readonly Subsidy[] = [
       "鹿飛有實際案例做過「中國轉越南」的產地轉移，從設廠評估、供應商媒合到出口流程全程陪跑。這個補助是我們關稅優化服務的財務助力。",
     stage: "optimize",
     accent: "ember",
+    deadline: "長期開放",
+    applicationNote: "依個案評估",
+    iconKey: "factory",
     sourceUrl: "https://www.moea.gov.tw/",
   },
   {
@@ -138,21 +148,98 @@ export const SUBSIDIES: readonly Subsidy[] = [
       "培訓讓你懂怎麼操作平台，鹿飛幫你決定賣什麼、定價多少、如何選品、怎麼打廣告。兩者疊加使用最有效率。",
     stage: "assess",
     accent: "sky",
+    deadline: "常態招生",
+    applicationNote: "依梯次報名",
+    iconKey: "cart",
     sourceUrl: "https://www.taiwantrade.com/",
   },
 ] as const;
 
-/** 卡片顯示的 hook 文案。改文案不用動 UI 代碼。*/
+/** 卡片顯示的 hook 文案。改文案不用動 UI 代碼。 */
 export const SUBSIDY_CARD_COPY = {
   eyebrow: "2026 政府出海補助",
-  title: "最高補助 NT$1,000 萬",
-  subtitle: "4 個正在開放的計畫，幫你降低出海成本",
-  cta: "看看哪個適合我的企業",
+  title: "最高 NT$1,000 萬",
+  subtitle: "補助你出海的實際成本",
+  contextualTitle: "這個階段有補助",
+  contextualSubtitle: "政府正在幫你出海，別放過",
+  agencies: "國際貿易署 · 經濟部 · 中小企業署",
+  cta: "看看哪個適合你",
   dismissAria: "關閉補助通知",
+  image: "/images/subsidies/card-document.jpg",
+  hero: "/images/subsidies/hero-handshake.jpg",
 } as const;
 
-/** 延續性：把補助對應到 hero 的三個階段。*/
-export const STAGE_LABELS: Record<SubsidyStage, { label: string; desc: string }> = {
+/**
+ * Contextual routing.
+ * 當使用者在特定頁面時，顯示最相關的補助而非泛用版本。
+ * 路徑前綴比對——最長匹配優先。
+ */
+export const CONTEXT_SUBSIDY_MAP: readonly {
+  readonly pathPrefix: string;
+  readonly subsidySlug: string;
+}[] = [
+  {
+    pathPrefix: "/services/market-assessment",
+    subsidySlug: "cross-border-ecommerce",
+  },
+  {
+    pathPrefix: "/services/product-testing",
+    subsidySlug: "overseas-exhibition",
+  },
+  {
+    pathPrefix: "/services/channel-entry",
+    subsidySlug: "market-expansion",
+  },
+  {
+    pathPrefix: "/services/localization",
+    subsidySlug: "market-expansion",
+  },
+  {
+    pathPrefix: "/services/optimize",
+    subsidySlug: "supply-chain-support",
+  },
+  {
+    pathPrefix: "/cases/electronics-tariff",
+    subsidySlug: "supply-chain-support",
+  },
+  {
+    pathPrefix: "/cases/costco-health",
+    subsidySlug: "market-expansion",
+  },
+  {
+    pathPrefix: "/cases/bubble-tea",
+    subsidySlug: "market-expansion",
+  },
+  {
+    pathPrefix: "/cases/shoe-brand",
+    subsidySlug: "cross-border-ecommerce",
+  },
+];
+
+export function getSubsidyBySlug(slug: string): Subsidy | undefined {
+  return SUBSIDIES.find((s) => s.slug === slug);
+}
+
+/** Find the best-matching subsidy for a given pathname. Returns null if none match. */
+export function getContextualSubsidy(pathname: string): Subsidy | null {
+  // Longest prefix wins so /services/channel-entry matches before /services
+  const sorted = [...CONTEXT_SUBSIDY_MAP].sort(
+    (a, b) => b.pathPrefix.length - a.pathPrefix.length
+  );
+  for (const entry of sorted) {
+    if (pathname.startsWith(entry.pathPrefix)) {
+      const s = getSubsidyBySlug(entry.subsidySlug);
+      if (s) return s;
+    }
+  }
+  return null;
+}
+
+/** 延續性：把補助對應到 hero 的三個階段。 */
+export const STAGE_LABELS: Record<
+  SubsidyStage,
+  { label: string; desc: string }
+> = {
   assess: {
     label: "不確定能不能出海",
     desc: "先用政府資源低成本試水溫",

@@ -189,7 +189,7 @@ export function AboutPage() {
                 鹿飛 LUFÉ 創辦人
               </div>
               <div className="text-[12px] text-white/50 font-normal mt-1">
-                十年國際物流實戰・500+ 出口案件・30+ 國家覆蓋
+                42+ 年國際物流實戰・500+ 出口案件・30+ 國家覆蓋
               </div>
             </div>
           </div>
