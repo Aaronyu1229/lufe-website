@@ -442,3 +442,60 @@ export const MARKETS = [
 
 export type IndustryFilter = (typeof INDUSTRIES)[number]["value"];
 export type MarketFilter = (typeof MARKETS)[number]["value"];
+
+/* ────────── Card-level meta (for /cases list UI) ──────────
+ * Short, action-led copy used by CasesPage cards:
+ *   — headline: one-line action phrase shown next to the big num
+ *   — painTitle: the user's pain statement, used as the card H3
+ *   — beats: the 4-segment story (情境 / 卡點 / 決策 / 結果) shown when
+ *     the card is expanded in-place on the list page.
+ */
+
+export interface CaseCardMeta {
+  readonly headline: string;
+  readonly painTitle: string;
+  readonly beats: readonly [string, string, string, string];
+}
+
+export const CASE_CARD_META: Record<string, CaseCardMeta> = {
+  "costco-health": {
+    headline: "6 個月進 Costco 120+ 門市",
+    painTitle: "產品在台灣很好，但北美通路都說「不認識」",
+    beats: [
+      "台灣保健品牌在國內穩定，想打進全球最大會員制零售通路 Costco。",
+      "找過貿易商只管物流、找過顧問只丟 80 頁報告，沒人真的做執行。",
+      "從消費者口感倒推配方、合約付款期硬談進 45 天、首批為了準時自掏腰包空運補救。",
+      "6 個月上架 120+ 家門市，首月銷量超標 40%，直接進入第二批訂單談判。",
+    ],
+  },
+  "electronics-tariff": {
+    headline: "關稅降 15%，年省 200 萬美金",
+    painTitle: "中美關稅戰吃掉毛利，客戶再殺一刀訂單就要掉",
+    beats: [
+      "工廠在大陸、客戶在美國，25% 額外關稅把毛利直接打到負數。",
+      "搬整條產線要 6 個月起跳，但客戶降價要求已經在信件裡了。",
+      "四地（越南、印度、墨西哥、馬來）打分後選越南，大陸越南雙線並行 6 個月當保險。",
+      "關稅成本降 15%、物流時效反而縮短 3 天、一年省下 200 萬美金。",
+    ],
+  },
+  "shoe-brand": {
+    headline: "襪子賣出皮鞋 3 倍營收",
+    painTitle: "200 萬行銷砸下去，半年只換回 50 萬",
+    beats: [
+      "台灣皮鞋品牌上亞馬遜，前 20 名競品全是國際品牌、退貨率高達 30%。",
+      "品牌方堅持「我們叫 XX 鞋業，不能賣襪子」——情感擋在數據前面。",
+      "兩小時會議把 CAC 和 LTV 攤在桌上，說服品牌先用襪子賺進場票。",
+      "三個月做到皮鞋品類 3 倍、4.7 星評分，反過來拉動皮鞋銷量 +120%。",
+    ],
+  },
+  "bubble-tea": {
+    headline: "一年 10 家店，單店超母店 1.2x",
+    painTitle: "前兩次進菲律賓都失敗，一次被拿走配方、一次選錯區",
+    beats: [
+      "台灣珍奶第三次進馬尼拉，市場已被日出茶太、COCO、Tiger Sugar 佔住。",
+      "低價打不過規模、高端市場太窄、加盟合約怎麼寫都有被反吃掉的風險。",
+      "鎖定 P150–200 中高端、第一家開在 BGC 當行銷投資、混合直營與加盟。",
+      "一年開 10 家店（含 6 家加盟）、單店月營收做到台灣母店的 1.2 倍。",
+    ],
+  },
+};
