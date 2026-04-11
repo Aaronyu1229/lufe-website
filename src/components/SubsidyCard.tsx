@@ -1,21 +1,19 @@
 "use client";
 
 /**
- * SubsidyCard — Bain-style floating "selected for you" card
+ * SubsidyCard — 單一目的的 floating wedge
  *
  * 行為：
  *  - 進站 12 秒後從右下角滑入
- *  - 使用者按 X 關閉後，當次 session 不再出現 (sessionStorage)
- *  - 手機：改為 inline bottom sheet (靠底)
+ *  - 按 X 關閉 → 當次 session 不再出現
+ *  - 手機：底部 sheet
  *  - 尊重 prefers-reduced-motion
- *  - 點卡片 → /resources/subsidies
- *  - 智慧 context：根據當前 pathname 顯示最相關的補助 (CONTEXT_SUBSIDY_MAP)
+ *  - 點卡片 → /resources/subsidies#match（直接到 quiz 區段）
  *
- * 視覺：
- *  - 頂部 120px 圖像帶 (regulatory document) + navy overlay
- *  - agency strip 顯示三個主管機關，取代抽象的 01 02 03 04 圓點
- *  - 大字金額在視覺中心
- *  - 有 context 時顯示該補助的名稱與圖標；無 context 時顯示總覽版
+ * 內容：
+ *  - 根據當前 pathname 從 CONTEXTUAL_COPY 取出對應的文案
+ *  - 彈窗只講一句話 + 一個 CTA，其他深度全部放在 landing page
+ *  - 避免 dual variant 和決策爆炸
  */
 
 import { useEffect, useMemo, useState } from "react";
@@ -23,27 +21,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  SUBSIDIES,
   SUBSIDY_CARD_COPY,
-  getContextualSubsidy,
-  type Subsidy,
+  getContextualCopy,
 } from "@/data/subsidies";
-import { SubsidyIcon } from "./subsidy/SubsidyIcons";
 
 const DELAY_MS = 12_000;
 const SESSION_KEY = "lufe.subsidyCard.dismissed";
 
 // 不顯示卡片的頁面
 const HIDDEN_PATHS = ["/assess", "/contact", "/resources/subsidies"];
-
-const accentClasses: Record<
-  Subsidy["accent"],
-  { text: string; glow: string }
-> = {
-  sky: { text: "text-sky", glow: "shadow-[0_0_0_1px_rgba(91,143,168,0.3)]" },
-  gold: { text: "text-gold", glow: "shadow-[0_0_0_1px_rgba(212,168,92,0.35)]" },
-  ember: { text: "text-ember", glow: "shadow-[0_0_0_1px_rgba(217,139,74,0.3)]" },
-};
 
 export function SubsidyCard() {
   const pathname = usePathname();
@@ -52,11 +38,8 @@ export function SubsidyCard() {
 
   const isHidden = HIDDEN_PATHS.some((p) => pathname?.startsWith(p));
 
-  // Determine which subsidy (if any) to show contextually
-  const contextSubsidy = useMemo(() => {
-    if (!pathname) return null;
-    return getContextualSubsidy(pathname);
-  }, [pathname]);
+  // Pick contextual copy based on current page
+  const copy = useMemo(() => getContextualCopy(pathname ?? ""), [pathname]);
 
   useEffect(() => {
     if (isHidden) return;
@@ -89,11 +72,6 @@ export function SubsidyCard() {
 
   if (isHidden || !visible) return null;
 
-  // Decide link target — contextual version deep-links to its anchor on the subsidies page
-  const linkHref = contextSubsidy
-    ? `/resources/subsidies#${contextSubsidy.slug}`
-    : "/resources/subsidies";
-
   return (
     <div
       role="complementary"
@@ -102,7 +80,7 @@ export function SubsidyCard() {
         fixed z-[90]
         bottom-5 right-5
         md:bottom-7 md:right-7
-        w-[calc(100vw-40px)] max-w-[380px]
+        w-[calc(100vw-40px)] max-w-[360px]
         transition-all duration-[420ms] ease-out
         motion-reduce:transition-none
         ${
@@ -114,12 +92,12 @@ export function SubsidyCard() {
     >
       <div className="relative bg-navy text-white shadow-[0_20px_60px_-12px_rgba(16,27,48,0.6)] overflow-hidden">
         {/* ─── Top image strip ─── */}
-        <div className="relative h-[120px] overflow-hidden">
+        <div className="relative h-[104px] overflow-hidden">
           <Image
             src={SUBSIDY_CARD_COPY.image}
             alt=""
             fill
-            sizes="380px"
+            sizes="360px"
             className="object-cover"
             aria-hidden="true"
           />
@@ -129,10 +107,10 @@ export function SubsidyCard() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(10,26,58,0.5) 0%, rgba(10,26,58,0.85) 70%, rgba(10,26,58,1) 100%)",
+                "linear-gradient(180deg, rgba(10,26,58,0.4) 0%, rgba(10,26,58,0.9) 75%, rgba(10,26,58,1) 100%)",
             }}
           />
-          {/* Urgency badge */}
+          {/* Urgency pulse indicator — small and subtle */}
           <div className="absolute top-3 left-4 flex items-center gap-2">
             <span
               className="w-1.5 h-1.5 rounded-full bg-gold motion-safe:animate-pulse"
@@ -144,7 +122,7 @@ export function SubsidyCard() {
           </div>
         </div>
 
-        {/* Top accent line */}
+        {/* Accent line */}
         <div className="h-[2px] bg-gradient-to-r from-gold/0 via-gold to-gold/0" />
 
         {/* Dismiss button */}
@@ -177,7 +155,7 @@ export function SubsidyCard() {
         </button>
 
         <Link
-          href={linkHref}
+          href={SUBSIDY_CARD_COPY.href}
           className="block px-6 pt-5 pb-6 group"
           onClick={() => {
             try {
@@ -187,82 +165,31 @@ export function SubsidyCard() {
             }
           }}
         >
-          {/* Eyebrow */}
+          {/* Eyebrow — contextual */}
           <div className="text-gold text-[10px] font-semibold tracking-[2px] uppercase mb-3">
-            {contextSubsidy
-              ? SUBSIDY_CARD_COPY.contextualTitle
-              : SUBSIDY_CARD_COPY.eyebrow}
+            {copy.eyebrow}
           </div>
 
-          {contextSubsidy ? (
-            // ─── Contextual variant ───
-            <>
-              <div className="flex items-start gap-3 mb-3">
-                <div
-                  className={`shrink-0 w-11 h-11 bg-white/5 border border-white/15 flex items-center justify-center ${
-                    accentClasses[contextSubsidy.accent].text
-                  }`}
-                >
-                  <SubsidyIcon iconKey={contextSubsidy.iconKey} size={22} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-sans text-[18px] font-semibold leading-[1.3] text-white mb-1">
-                    {contextSubsidy.shortTitle}
-                  </h3>
-                  <p
-                    className={`text-[12px] font-medium ${
-                      accentClasses[contextSubsidy.accent].text
-                    }`}
-                  >
-                    {contextSubsidy.amount}
-                  </p>
-                </div>
-              </div>
-              <p className="text-[12.5px] text-white/65 leading-[1.65] mb-4">
-                {contextSubsidy.oneLiner}
-              </p>
-            </>
-          ) : (
-            // ─── General/overview variant ───
-            <>
-              <h3 className="font-sans text-[30px] md:text-[32px] font-extralight leading-[1.05] tracking-[-1px] text-white mb-1">
-                {SUBSIDY_CARD_COPY.title}
-              </h3>
-              <p className="text-[13px] text-white/65 leading-[1.6] mb-4 pr-4">
-                {SUBSIDY_CARD_COPY.subtitle}
-              </p>
-            </>
-          )}
+          {/* Headline — contextual, single strong line */}
+          <h3 className="font-sans text-[22px] md:text-[24px] font-light leading-[1.25] tracking-[-0.5px] text-white mb-3">
+            {copy.headline}
+          </h3>
 
-          {/* Agency strip — replaces the old 01/02/03/04 dots */}
-          <div className="flex items-center gap-2 py-3 border-t border-b border-white/10 mb-4">
-            <span
-              className="w-4 h-px bg-white/25"
-              aria-hidden="true"
-            />
-            <span className="text-[10px] font-medium tracking-[1px] uppercase text-white/50">
-              {SUBSIDY_CARD_COPY.agencies}
+          {/* One-liner — contextual explanation */}
+          <p className="text-[12.5px] text-white/65 leading-[1.65] mb-5 pr-2">
+            {copy.oneLiner}
+          </p>
+
+          {/* CTA — single promise */}
+          <div className="flex items-center justify-between pt-4 border-t border-white/10">
+            <span className="text-[13px] font-semibold text-white group-hover:text-gold transition-colors">
+              {copy.cta}
             </span>
-          </div>
-
-          {/* CTA row */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-baseline gap-2">
-              <span className="font-sans text-[18px] font-semibold text-gold tabular-nums leading-none">
-                {SUBSIDIES.length}
-              </span>
-              <span className="text-[11px] text-white/55 tracking-wide">
-                個計畫 · 立即可申請
-              </span>
-            </div>
-            <span className="flex items-center gap-1.5 text-[12.5px] font-semibold text-white group-hover:text-gold transition-colors">
-              {SUBSIDY_CARD_COPY.cta}
-              <span
-                className="transition-transform duration-300 group-hover:translate-x-0.5"
-                aria-hidden="true"
-              >
-                →
-              </span>
+            <span
+              className="text-gold text-[16px] transition-transform duration-300 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
             </span>
           </div>
         </Link>

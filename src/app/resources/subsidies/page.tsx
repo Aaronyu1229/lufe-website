@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SUBSIDIES, STAGE_LABELS, SUBSIDY_CARD_COPY, type Subsidy } from "@/data/subsidies";
 import { SubsidyIcon } from "@/components/subsidy/SubsidyIcons";
+import { SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
 import { SubsidiesCTASection } from "@/components/subsidy/SubsidiesCTASection";
 
 export const metadata: Metadata = {
@@ -159,6 +160,9 @@ export default function SubsidiesPage() {
           </div>
         </div>
       </section>
+
+      {/* ───── Interactive matcher quiz ───── */}
+      <SubsidyMatcher />
 
       {/* ───── The 4 subsidies ───── */}
       <section className="py-[72px] md:py-[96px] px-5 md:px-10 lg:px-16 bg-white">
