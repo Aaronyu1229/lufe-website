@@ -22,7 +22,7 @@ export function CaseDetailPage({ caseItem }: Props) {
   return (
     <>
       {/* ─── Hero ─── */}
-      <section className="relative bg-navy pt-[120px] md:pt-[140px] pb-[60px] md:pb-[80px] px-5 md:px-10 overflow-hidden">
+      <section className="relative bg-navy pt-[130px] md:pt-[170px] pb-[60px] md:pb-[80px] px-5 md:px-10 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={caseItem.heroImage}

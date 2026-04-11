@@ -73,7 +73,7 @@ export default function SubsidiesPage() {
           }}
         />
 
-        <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 pt-[120px] md:pt-[160px] pb-[72px] md:pb-[100px] relative">
+        <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 pt-[130px] md:pt-[170px] pb-[72px] md:pb-[100px] relative">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-5 h-px bg-gold/70" />
             <span className="text-gold/80 text-[11px] font-medium tracking-[2.5px] uppercase">

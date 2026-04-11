@@ -26,21 +26,29 @@ const navItems: readonly NavItem[] = [
 ];
 
 /**
- * Pages whose first-screen hero is navy — navbar starts transparent
- * and overlays the hero, turns white on scroll / hover / menu open.
- * Exact match only (so /services/[stage] keeps the solid-white navbar).
+ * Does this pathname render a navy first-screen hero?
+ *
+ * When true: navbar starts transparent over the hero, turns white on
+ * scroll (50px+), mouse-enter, or mega-menu open.
+ *
+ * Prefix matching on /services and /cases covers every nested page
+ * (stage, optimize, methodology, case detail — all have bg-navy heroes).
+ * Insights is exact-match: /insights list is dark, but /insights/[slug]
+ * article detail uses a light hero.
  */
-const DARK_HERO_PATHS: readonly string[] = [
-  "/",
-  "/services",
-  "/cases",
-  "/about",
-  "/insights",
-];
+function pathnameHasDarkHero(pathname: string): boolean {
+  if (pathname === "/" || pathname === "/about" || pathname === "/insights") {
+    return true;
+  }
+  if (pathname === "/resources/subsidies") return true;
+  if (pathname.startsWith("/services")) return true;
+  if (pathname.startsWith("/cases")) return true;
+  return false;
+}
 
 export function Navbar() {
   const pathname = usePathname();
-  const isDarkHero = DARK_HERO_PATHS.includes(pathname ?? "");
+  const isDarkHero = pathnameHasDarkHero(pathname ?? "");
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuKey>(null);
