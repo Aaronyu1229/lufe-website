@@ -4,15 +4,23 @@
   /* ── 雲際 Design System ── */
   --color-navy: #101B30;
   --color-navy-l: #1A2B48;
+  /* Base gold for navy / dark backgrounds (original brand tone). */
   --color-gold: #D4A85C;
+  /* Darker gold variant — for gold text on WHITE / CREAM backgrounds.
+     Passes WCAG AA (≈4.6:1) on #FFFFFF while keeping the warm hue.
+     Use via `text-gold-d` / `border-gold-d` on light surfaces. */
+  --color-gold-d: #8F6A1F;
   --color-gold-l: #EDD9AE;
   --color-cream: #F5F2EC;
   --color-cream-d: #E8E3DA;
-  --color-sky: #5B8FA8;
-  --color-ember: #D98B4A;
+  /* Darkened for WCAG AA on white (previously #5B8FA8 ≈ 3.5:1). */
+  --color-sky: #3A6B84;
+  /* Darkened for WCAG AA on white (previously #D98B4A ≈ 3.0:1). */
+  --color-ember: #A45A20;
   --color-tx: #1A1A2E;
   --color-tx2: #5A6070;
-  --color-tx3: #8A8F9E;
+  /* Darkened for WCAG AA on white (previously #8A8F9E ≈ 3.5:1). */
+  --color-tx3: #6A6F80;
   --color-bd: rgba(26,26,46,0.07);
 
   --font-heading: var(--font-playfair);
@@ -32,13 +40,15 @@ body {
   overflow-x: hidden;
 }
 
-/* Section label style */
+/* Section label style
+   Uses dark-gold variant because section labels sit on light backgrounds
+   (white / cream). Passes WCAG AA on #FFFFFF. */
 .section-label {
   font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--color-gold-d);
   margin-bottom: 12px;
 }
 

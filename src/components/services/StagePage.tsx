@@ -268,14 +268,14 @@ export function StagePage({ stage }: Props) {
                         className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${
                           t.variant === "sky"
                             ? "bg-[rgba(91,143,168,0.08)] text-sky"
-                            : "bg-[rgba(212,168,92,0.12)] text-gold"
+                            : "bg-[rgba(212,168,92,0.12)] text-gold-d"
                         }`}
                       >
                         {t.label}
                       </span>
                     ))}
                   </div>
-                  <div className="font-heading text-[40px] md:text-[48px] text-gold leading-none font-semibold mb-3">
+                  <div className="font-heading text-[40px] md:text-[48px] text-gold-d leading-none font-semibold mb-3">
                     {relatedCase.num}
                   </div>
                   <h3 className="font-heading text-[20px] md:text-[22px] leading-[1.35] font-bold mb-3">
@@ -284,7 +284,7 @@ export function StagePage({ stage }: Props) {
                   <p className="text-[13.5px] text-tx2 leading-[1.7] mb-4">
                     {relatedCase.summary}
                   </p>
-                  <span className="text-[13px] font-semibold text-gold group-hover:translate-x-1 transition-transform inline-block">
+                  <span className="text-[13px] font-semibold text-gold-d group-hover:translate-x-1 transition-transform inline-block">
                     看完整案例 →
                   </span>
                 </div>

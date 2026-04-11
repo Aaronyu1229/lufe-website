@@ -487,7 +487,7 @@ function QuestionBody<T extends string>({
 }) {
   return (
     <div>
-      <div className="text-[10.5px] md:text-[11px] font-semibold tracking-[2.5px] uppercase text-gold mb-4">
+      <div className="text-[10.5px] md:text-[11px] font-semibold tracking-[2.5px] uppercase text-gold-d mb-4">
         {eyebrow}
       </div>
       <h2 className="font-heading text-[clamp(26px,3.4vw,38px)] leading-[1.25] text-tx font-normal tracking-[-0.3px] mb-10 md:mb-12">
@@ -575,7 +575,7 @@ function ResultScreen({
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
             <span className="block w-8 h-px bg-gold" />
-            <span className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold">
+            <span className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold-d">
               比對結果
             </span>
           </div>
@@ -692,13 +692,13 @@ function ResultScreen({
                   <span className="text-[10.5px] tracking-[1.5px] uppercase text-tx3 font-semibold">
                     也值得一看
                   </span>
-                  <span className="text-[10.5px] tracking-[0.5px] text-gold font-semibold">
+                  <span className="text-[10.5px] tracking-[0.5px] text-gold-d font-semibold">
                     吻合 {alternative.score}/3
                   </span>
                 </div>
-                <h4 className="text-[15px] md:text-[16px] text-tx font-semibold leading-[1.5] mb-2">
+                <h2 className="text-[15px] md:text-[16px] text-tx font-semibold leading-[1.5] mb-2">
                   {altCase.title}
-                </h4>
+                </h2>
                 <Link
                   href={`/cases/${altCase.slug}`}
                   className="text-[12.5px] text-tx2 font-medium hover:text-gold transition-colors inline-flex items-center gap-1"
@@ -758,7 +758,7 @@ function DimCell({
         </span>
         <span
           className={`text-[11px] font-semibold ${
-            matched ? "text-gold" : "text-tx3/70"
+            matched ? "text-gold-d" : "text-tx3/70"
           }`}
         >
           {matched ? "✓ 相同" : "× 不同"}

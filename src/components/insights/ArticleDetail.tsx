@@ -7,7 +7,7 @@ import { useMessageBox } from "../MessageBox";
 
 const colorMap: Record<string, string> = {
   sky: "bg-[rgba(91,143,168,0.08)] text-sky",
-  gold: "bg-[rgba(212,168,92,0.12)] text-gold",
+  gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
   ember: "bg-[rgba(217,139,74,0.08)] text-ember",
 };
 

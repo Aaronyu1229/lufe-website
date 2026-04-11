@@ -10,9 +10,16 @@ interface Props {
   readonly caseItem: CaseStudy;
 }
 
+// Hero uses navy bg → keep bright gold for contrast
 const tagStyles: Record<string, string> = {
   sky: "bg-[rgba(91,143,168,0.08)] text-sky",
   gold: "bg-[rgba(212,168,92,0.12)] text-gold",
+};
+
+// Related cases cards use cream/white bg → need darker gold for WCAG AA
+const lightTagStyles: Record<string, string> = {
+  sky: "bg-[rgba(91,143,168,0.08)] text-sky",
+  gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
 };
 
 export function CaseDetailPage({ caseItem }: Props) {
@@ -95,7 +102,7 @@ export function CaseDetailPage({ caseItem }: Props) {
             </div>
 
             <div>
-              <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
+              <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold-d mb-3">
                 02 我們的做法
               </div>
               <h2 className="text-[22px] md:text-[26px] font-light leading-tight mb-4">
@@ -120,7 +127,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                           href={`/services/${stageSlug}`}
                           className="group inline-flex items-center gap-2 px-3 py-2 border border-bd hover:border-gold transition-colors text-[12.5px]"
                         >
-                          <span className="font-sans font-semibold text-gold tabular-nums">
+                          <span className="font-sans font-semibold text-gold-d tabular-nums">
                             {stage.num}
                           </span>
                           <span className="text-tx2 group-hover:text-tx transition-colors">
@@ -158,7 +165,7 @@ export function CaseDetailPage({ caseItem }: Props) {
           <div className="max-w-[900px] mx-auto">
             <div className="section-label">關鍵決策</div>
             <h2 className="section-heading">
-              過程中<span className="font-normal text-gold">做過的判斷</span>
+              過程中<span className="font-normal text-gold-d">做過的判斷</span>
             </h2>
             <p className="section-desc">
               不只寫「發生了什麼」，把當時的選項和為什麼這樣選也攤出來——這才是經驗真正的價值。
@@ -170,7 +177,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                   key={i}
                   className="bg-white rounded-none p-6 md:p-8 border-l-4 border-gold"
                 >
-                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-3">
+                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-3">
                     決策 {i + 1}
                   </div>
                   <h3 className="text-[18px] md:text-[20px] font-semibold mb-5 leading-tight">
@@ -206,7 +213,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                   </div>
 
                   <div className="pt-4 border-t border-bd">
-                    <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-gold mb-2">
+                    <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-gold-d mb-2">
                       我們選了：{d.choice}
                     </div>
                     <p className="text-[13.5px] text-tx2 leading-[1.8]">
@@ -227,7 +234,7 @@ export function CaseDetailPage({ caseItem }: Props) {
           <div className="max-w-[820px] mx-auto">
             <div className="section-label">時間軸</div>
             <h2 className="section-heading">
-              從啟動到收尾的<span className="font-normal text-gold">時間節奏</span>
+              從啟動到收尾的<span className="font-normal text-gold-d">時間節奏</span>
             </h2>
 
             <div className="relative mt-12">
@@ -241,7 +248,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                       {i + 1}
                     </div>
                     <div className="pt-1">
-                      <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1">
+                      <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1">
                         {t.when}
                       </div>
                       <h3 className="text-[16px] md:text-[17px] font-semibold mb-1 leading-tight">
@@ -279,7 +286,7 @@ export function CaseDetailPage({ caseItem }: Props) {
       <section className="bg-cream py-[72px] md:py-[96px] px-5 md:px-10">
         <div className="max-w-[720px] mx-auto text-center">
           <h2 className="font-sans text-[clamp(24px,3vw,36px)] leading-[1.2] font-light tracking-[-0.4px] mb-4">
-            你的產品也有<span className="text-gold font-normal">類似的機會</span>嗎？
+            你的產品也有<span className="text-gold-d font-normal">類似的機會</span>嗎？
           </h2>
           <p className="text-[15px] text-tx2 leading-[1.75] mb-10 max-w-[520px] mx-auto">
             每個案子的起點都是一場對話。聊聊你的狀況，我們會告訴你這個故事裡哪一段跟你最相關。
@@ -332,13 +339,13 @@ export function CaseDetailPage({ caseItem }: Props) {
                       {rc.tags.map((t) => (
                         <span
                           key={t.label}
-                          className={`text-[11px] px-2.5 py-[3px] rounded-none font-medium ${tagStyles[t.variant]}`}
+                          className={`text-[11px] px-2.5 py-[3px] rounded-none font-medium ${lightTagStyles[t.variant]}`}
                         >
                           {t.label}
                         </span>
                       ))}
                     </div>
-                    <div className="font-heading text-[36px] text-gold leading-none font-semibold mb-2.5">
+                    <div className="font-heading text-[36px] text-gold-d leading-none font-semibold mb-2.5">
                       {rc.num}
                     </div>
                     <h3 className="font-heading text-[17px] leading-[1.4] mb-2 font-bold">
@@ -347,7 +354,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                     <p className="text-[13px] text-tx2 leading-[1.65] font-normal mb-3">
                       {rc.summary}
                     </p>
-                    <span className="text-[13px] font-semibold text-gold group-hover:translate-x-0.5 inline-block transition-transform">
+                    <span className="text-[13px] font-semibold text-gold-d group-hover:translate-x-0.5 inline-block transition-transform">
                       看完整案例 →
                     </span>
                   </div>

@@ -59,9 +59,14 @@ const stages = [
   },
 ];
 
+/**
+ * Accent map — StagesSection lives on a CREAM background, so gold text
+ * uses the dark-gold variant (`text-gold-d`) to reach WCAG AA.
+ * Sky / ember tokens are already darkened at the CSS level.
+ */
 const accentMap: Record<string, { num: string; dot: string; hover: string }> = {
   sky: { num: "text-sky", dot: "bg-sky", hover: "hover:border-sky" },
-  gold: { num: "text-gold", dot: "bg-gold", hover: "hover:border-gold" },
+  gold: { num: "text-gold-d", dot: "bg-gold", hover: "hover:border-gold" },
   ember: { num: "text-ember", dot: "bg-ember", hover: "hover:border-ember" },
 };
 
@@ -69,12 +74,12 @@ export function StagesSection() {
   return (
     <section className="py-[72px] md:py-[96px] px-5 md:px-10 bg-cream">
       <div className="max-w-[1400px] mx-auto">
-        <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold/70 mb-3">
+        <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold-d mb-3">
           完整路徑
         </div>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-3">
           <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] max-w-[720px]">
-            四個階段，一條<span className="text-gold font-normal">完整</span>的跨境路
+            四個階段，一條<span className="text-gold-d font-normal">完整</span>的跨境路
           </h2>
           <Link
             href="/services"

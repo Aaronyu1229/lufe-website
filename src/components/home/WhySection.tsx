@@ -169,6 +169,12 @@ export function WhySection() {
                   {row.stages.map((covered, idx) => (
                     <div
                       key={idx}
+                      role="img"
+                      aria-label={
+                        covered
+                          ? `${row.label}涵蓋${STAGES[idx]}`
+                          : `${row.label}不涵蓋${STAGES[idx]}`
+                      }
                       className={`h-8 md:h-10 flex items-center justify-center text-[11px] md:text-[13px] transition-all ${
                         covered
                           ? isLufe
@@ -176,13 +182,8 @@ export function WhySection() {
                             : "bg-white/[0.07] border border-white/10 text-white/55"
                           : "border border-dashed border-white/[0.06]"
                       }`}
-                      aria-label={
-                        covered
-                          ? `${row.label}涵蓋${STAGES[idx]}`
-                          : `${row.label}不涵蓋${STAGES[idx]}`
-                      }
                     >
-                      {covered ? "●" : ""}
+                      <span aria-hidden="true">{covered ? "●" : ""}</span>
                     </div>
                   ))}
                 </div>

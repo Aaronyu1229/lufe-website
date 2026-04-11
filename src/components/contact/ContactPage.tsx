@@ -64,7 +64,7 @@ const channels = [
 ];
 
 const cardColorMap: Record<string, { border: string; iconBg: string; iconText: string }> = {
-  gold: { border: "hover:border-gold", iconBg: "bg-[rgba(212,168,92,0.08)]", iconText: "text-gold" },
+  gold: { border: "hover:border-gold", iconBg: "bg-[rgba(212,168,92,0.08)]", iconText: "text-gold-d" },
   sky: { border: "hover:border-sky", iconBg: "bg-[rgba(91,143,168,0.08)]", iconText: "text-sky" },
   line: { border: "hover:border-[#06C755]", iconBg: "bg-[rgba(6,199,85,0.08)]", iconText: "text-[#06C755]" },
   ember: { border: "hover:border-ember", iconBg: "bg-[rgba(217,139,74,0.08)]", iconText: "text-ember" },
@@ -190,28 +190,28 @@ export function ContactPage() {
           {/* Business info strip — gives contact page a functional anchor */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 mb-12 pb-8 border-b border-bd text-[13px]">
             <div>
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1.5">
+              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
                 公司
               </div>
               <div className="font-medium text-tx">鹿飛 LUFÉ</div>
               <div className="text-tx3 text-[12px] mt-0.5">Aaron Yu 創辦</div>
             </div>
             <div>
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1.5">
+              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
                 地點
               </div>
               <div className="font-medium text-tx">台北市</div>
               <div className="text-tx3 text-[12px] mt-0.5">線上為主</div>
             </div>
             <div>
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1.5">
+              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
                 回覆時間
               </div>
               <div className="font-medium text-tx">週一 – 週五</div>
               <div className="text-tx3 text-[12px] mt-0.5">09:00 – 18:00</div>
             </div>
             <div>
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1.5">
+              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
                 一般回覆
               </div>
               <div className="font-medium text-tx">1 個工作天內</div>
@@ -235,7 +235,7 @@ export function ContactPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-[17px] font-semibold">{primary.title}</h3>
+                    <h2 className="text-[17px] font-semibold">{primary.title}</h2>
                     <span className="text-[10px] font-semibold bg-gold text-navy px-2 py-0.5 rounded-sm">
                       最快回覆
                     </span>
@@ -244,7 +244,7 @@ export function ContactPage() {
                     {primary.desc}
                   </p>
                 </div>
-                <span className="text-[13px] font-semibold text-gold flex-shrink-0 hidden md:block">
+                <span className="text-[13px] font-semibold text-gold-d flex-shrink-0 hidden md:block">
                   {primary.actionLabel} →
                 </span>
               </button>
@@ -273,7 +273,7 @@ export function ContactPage() {
                   <p className="text-[12px] text-tx2 font-normal leading-[1.5] mb-3">
                     {ch.desc}
                   </p>
-                  <span className="text-[12px] font-semibold text-gold">
+                  <span className="text-[12px] font-semibold text-gold-d">
                     {ch.actionLabel} →
                   </span>
                 </button>

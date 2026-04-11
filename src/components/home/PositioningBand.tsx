@@ -64,8 +64,8 @@ const accentMap: Record<
     glow: "group-hover:shadow-[0_0_0_6px_rgba(91,143,168,0.12)]",
   },
   gold: {
-    border: "border-gold",
-    text: "text-gold",
+    border: "border-gold-d",
+    text: "text-gold-d",
     glow: "group-hover:shadow-[0_0_0_6px_rgba(212,168,92,0.15)]",
   },
   ember: {
@@ -98,12 +98,12 @@ export function PositioningBand() {
       <div className="relative max-w-[1100px] mx-auto">
         {/* Identity header — centered, single memorable headline */}
         <div className="text-center mb-14 md:mb-20">
-          <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold/80 mb-5">
+          <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold-d mb-5">
             鹿飛是什麼
           </div>
           <h2 className="font-sans text-[clamp(32px,5vw,58px)] leading-[1.05] font-light tracking-[-0.8px] text-navy mb-6">
             一個團隊，
-            <span className="text-gold font-normal">一條線。</span>
+            <span className="text-gold-d font-normal">一條線。</span>
           </h2>
           <p className="text-[15px] md:text-[17px] text-tx2 max-w-[640px] mx-auto leading-[1.75] font-normal">
             從「<span className="text-tx font-medium">值不值得去</span>」走到「

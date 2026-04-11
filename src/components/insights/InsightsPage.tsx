@@ -12,7 +12,7 @@ import { useMessageBox } from "../MessageBox";
 
 const colorMap: Record<string, string> = {
   sky: "bg-[rgba(91,143,168,0.08)] text-sky",
-  gold: "bg-[rgba(212,168,92,0.12)] text-gold",
+  gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
   ember: "bg-[rgba(217,139,74,0.08)] text-ember",
 };
 
@@ -153,9 +153,9 @@ function InsightsPageInner() {
                 </div>
               </div>
               <div className="p-5">
-                <h3 className="text-[16px] md:text-[17px] font-semibold leading-[1.45] text-white group-hover:text-gold transition-colors mb-2 line-clamp-2">
+                <h2 className="text-[16px] md:text-[17px] font-semibold leading-[1.45] text-white group-hover:text-gold transition-colors mb-2 line-clamp-2">
                   {featured.title}
-                </h3>
+                </h2>
                 <p className="text-[12.5px] text-white/55 leading-[1.75] line-clamp-2 mb-3">
                   {featured.summary}
                 </p>
@@ -217,9 +217,9 @@ function InsightsPageInner() {
                   </span>
                   <span className="text-[11px] text-tx3">{article.readTime}</span>
                 </div>
-                <h3 className="text-[16px] font-semibold leading-[1.5] mb-2 group-hover:text-gold transition-colors">
+                <h2 className="text-[16px] font-semibold leading-[1.5] mb-2 group-hover:text-gold transition-colors">
                   {article.title}
-                </h3>
+                </h2>
                 <p className="text-[13px] text-tx2 leading-[1.7] font-normal line-clamp-3">
                   {article.summary}
                 </p>
@@ -243,9 +243,9 @@ function InsightsPageInner() {
 
         {/* Bottom CTA */}
         <div className="mt-14 p-8 bg-cream rounded-none text-center">
-          <h3 className="text-[18px] font-medium mb-2">
+          <h2 className="text-[18px] font-medium mb-2">
             看完文章，想聊聊你的狀況？
-          </h3>
+          </h2>
           <p className="text-[14px] text-tx2 font-normal mb-6 max-w-[440px] mx-auto">
             聊聊，不收費、不承諾。我們會老實告訴你值不值得一試。
           </p>

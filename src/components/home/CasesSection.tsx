@@ -54,13 +54,13 @@ const cases = [
 
 const tagStyles = {
   sky: "bg-[rgba(91,143,168,0.08)] text-sky",
-  gold: "bg-[rgba(212,168,92,0.12)] text-gold",
+  gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
 };
 
 export function CasesSection() {
   return (
     <section className="py-[60px] md:py-[80px] px-5 md:px-10 max-w-[1400px] mx-auto">
-      <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold/60 mb-3">
+      <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold-d mb-3">
         案例
       </div>
       <div className="flex items-center gap-6 mb-8">
@@ -92,7 +92,7 @@ export function CasesSection() {
                     </span>
                   ))}
                 </div>
-                <div className="font-sans text-[48px] font-semibold text-gold mb-2.5 leading-none">
+                <div className="font-sans text-[48px] font-semibold text-gold-d mb-2.5 leading-none">
                   {c.num}
                 </div>
                 <h3 className="font-sans text-[22px] leading-[1.4] mb-2 font-bold">
@@ -146,7 +146,7 @@ export function CasesSection() {
                     </span>
                   ))}
                 </div>
-                <div className="font-sans text-[42px] font-semibold text-gold mb-2.5 leading-none">
+                <div className="font-sans text-[42px] font-semibold text-gold-d mb-2.5 leading-none">
                   {c.num}
                 </div>
                 <h3 className="font-sans text-[18px] leading-[1.4] mb-2 font-bold">

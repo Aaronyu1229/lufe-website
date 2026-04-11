@@ -46,9 +46,9 @@ export function CTASection() {
 
           {/* Before */}
           <div className="p-8 md:p-10 rounded-none text-center bg-white/[0.04] border border-white/10">
-            <h4 className="text-[13px] font-semibold mb-4 tracking-[0.5px] text-white/40">
+            <div className="text-[13px] font-semibold mb-4 tracking-[0.5px] text-white/40">
               沒有鹿飛
-            </h4>
+            </div>
             <div className="h-[120px] flex items-center justify-center">
               <svg viewBox="0 0 180 80" width="180">
                 <path d="M20,40 L50,20" stroke="#8A8F9E" strokeWidth="1" strokeDasharray="4,4" opacity="0.5" />
@@ -77,9 +77,9 @@ export function CTASection() {
 
           {/* After */}
           <div className="p-8 md:p-10 rounded-none text-center bg-[rgba(212,168,92,0.08)] border border-gold/20">
-            <h4 className="text-[13px] font-semibold mb-4 tracking-[0.5px] text-gold">
+            <div className="text-[13px] font-semibold mb-4 tracking-[0.5px] text-gold">
               有鹿飛
-            </h4>
+            </div>
             <div className="h-[120px] flex items-center justify-center">
               <svg viewBox="0 0 180 80" width="180">
                 <path d="M20,40 Q60,20 100,40 Q140,60 170,35" stroke="#D4A85C" strokeWidth="2" fill="none" strokeLinecap="round" />

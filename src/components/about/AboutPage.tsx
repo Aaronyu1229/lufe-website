@@ -255,9 +255,9 @@ export function AboutPage() {
           <div className="space-y-8">
             {/* 看到問題 */}
             <div>
-              <h3 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
+              <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
                 看到的問題
-              </h3>
+              </h2>
               <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
                 在國際物流業打滾十年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。
                 找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸。每一段都有人做，但沒有人幫你串起來。
@@ -267,9 +267,9 @@ export function AboutPage() {
 
             {/* 相信什麼 */}
             <div>
-              <h3 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
+              <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
                 相信的事
-              </h3>
+              </h2>
               <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
                 我相信每一家有好產品的台灣公司，都值得試試走向海外。不是每個產品都適合，但至少應該有人幫你搞清楚。
                 跨境不應該是一場冒險，而應該是一次有計畫的探索。有人帶路，風險就小了一半。
@@ -278,9 +278,9 @@ export function AboutPage() {
 
             {/* 做了什麼 */}
             <div>
-              <h3 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
+              <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
                 做了什麼
-              </h3>
+              </h2>
               <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
                 所以我創立了鹿飛——一個企業跨境的導航系統。結合十年物流實戰經驗和科技工具，
                 從市場評估、產品測試、通路進入到海外落地，提供一條龍的服務。
@@ -301,7 +301,7 @@ export function AboutPage() {
           <h2 className="section-heading">
             不是 Aaron 一個人，
             <br />
-            是一個<span className="text-gold font-normal">小而精</span>的團隊 + 全球節點
+            是一個<span className="text-gold-d font-normal">小而精</span>的團隊 + 全球節點
           </h2>
           <p className="section-desc">
             我們刻意不做大型顧問公司。規模保持在能讓創辦人親自過目每一個案子，
@@ -314,7 +314,7 @@ export function AboutPage() {
                 key={role.title}
                 className="bg-white border border-bd p-6 rounded-none transition-colors hover:border-gold"
               >
-                <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-2">
+                <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-2">
                   {role.scale}
                 </div>
                 <h3 className="text-[16px] font-semibold mb-2 leading-tight">
@@ -341,7 +341,7 @@ export function AboutPage() {
         <div className="max-w-[900px] mx-auto">
           <div className="section-label">我們怎麼合作</div>
           <h2 className="section-heading">
-            從第一次對話到交付，<span className="text-gold font-normal">四個階段</span>
+            從第一次對話到交付，<span className="text-gold-d font-normal">四個階段</span>
           </h2>
           <p className="section-desc">
             我們的流程很清楚——每一步你都知道接下來會發生什麼、要做什麼、需要多久。
@@ -353,7 +353,7 @@ export function AboutPage() {
                 key={step.num}
                 className="flex items-start gap-5 md:gap-7 p-5 md:p-7 bg-cream rounded-none border-l-4 border-gold/40"
               >
-                <span className="font-sans text-[28px] md:text-[32px] font-light text-gold tabular-nums leading-none shrink-0">
+                <span className="font-sans text-[28px] md:text-[32px] font-light text-gold-d tabular-nums leading-none shrink-0">
                   {step.num}
                 </span>
                 <div>

@@ -194,9 +194,9 @@ export function CasesPage() {
                             <div className="text-[10.5px] tracking-[1.8px] uppercase text-tx3 font-semibold mb-3">
                               客戶的原話
                             </div>
-                            <h3 className="font-heading text-[20px] md:text-[24px] text-tx font-semibold leading-[1.5]">
+                            <h2 className="font-heading text-[20px] md:text-[24px] text-tx font-semibold leading-[1.5]">
                               「{meta.painTitle}」
-                            </h3>
+                            </h2>
                           </div>
                           <span
                             aria-hidden="true"
@@ -227,7 +227,7 @@ export function CasesPage() {
                           {meta.beats.map((text, i) => (
                             <div key={BEAT_LABELS[i]} className="relative">
                               <div className="flex items-baseline gap-3 mb-2.5">
-                                <span className="font-heading text-[13px] font-semibold text-gold tabular-nums tracking-[0.5px]">
+                                <span className="font-heading text-[13px] font-semibold text-gold-d tabular-nums tracking-[0.5px]">
                                   {String(i + 1).padStart(2, "0")}
                                 </span>
                                 <span className="text-[11px] font-semibold tracking-[2px] uppercase text-tx3">

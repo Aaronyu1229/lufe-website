@@ -36,9 +36,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-[11.5px] font-semibold text-white/60 mb-3 tracking-[1px] uppercase">
+          <h2 className="text-[11.5px] font-semibold text-white/60 mb-3 tracking-[1px] uppercase">
             服務
-          </h4>
+          </h2>
           {serviceLinks.map((link) => (
             <Link
               key={link.label}
@@ -51,9 +51,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-[11.5px] font-semibold text-white/60 mb-3 tracking-[1px] uppercase">
+          <h2 className="text-[11.5px] font-semibold text-white/60 mb-3 tracking-[1px] uppercase">
             資源
-          </h4>
+          </h2>
           {resourceLinks.map((link) =>
             link.external ? (
               <a
@@ -78,9 +78,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-[11.5px] font-semibold text-white/60 mb-3 tracking-[1px] uppercase">
+          <h2 className="text-[11.5px] font-semibold text-white/60 mb-3 tracking-[1px] uppercase">
             聯絡
-          </h4>
+          </h2>
           {contactLinks.map((link) =>
             link.external ? (
               <a

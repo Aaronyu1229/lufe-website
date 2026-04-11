@@ -118,12 +118,12 @@ const accentMap: Record<
     takeawayText: "text-sky",
   },
   gold: {
-    border: "border-gold",
-    text: "text-gold",
-    numText: "text-gold",
-    iconBg: "bg-[rgba(212,168,92,0.1)] text-gold",
+    border: "border-gold-d",
+    text: "text-gold-d",
+    numText: "text-gold-d",
+    iconBg: "bg-[rgba(212,168,92,0.1)] text-gold-d",
     takeawayBg: "bg-[rgba(212,168,92,0.08)]",
-    takeawayText: "text-[#8A6A2C]",
+    takeawayText: "text-gold-d",
   },
   ember: {
     border: "border-ember",
@@ -159,11 +159,11 @@ export function HomeFAQ() {
       <div className="relative max-w-[1200px] mx-auto">
         {/* Header */}
         <div className="text-center mb-14 md:mb-16">
-          <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold/80 mb-4">
+          <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold-d mb-4">
             你可能會想知道
           </div>
           <h2 className="font-sans text-[clamp(28px,3.8vw,44px)] leading-[1.15] font-light tracking-[-0.6px] text-navy mb-4">
-            三個最常被問到的<span className="text-gold font-normal">問題</span>
+            三個最常被問到的<span className="text-gold-d font-normal">問題</span>
           </h2>
           <p className="text-[14.5px] md:text-[15.5px] text-tx2 max-w-[560px] mx-auto leading-[1.75]">
             在你決定聊聊之前，先回答你心裡可能已經冒出來的那幾個疑問。

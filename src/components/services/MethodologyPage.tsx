@@ -184,13 +184,13 @@ export function MethodologyPage() {
           <div className="grid grid-cols-5 gap-2 md:gap-4 mt-10 mb-3">
             {dimensions.map((d) => (
               <div key={d.code} className="text-center">
-                <div className="w-14 h-14 md:w-20 md:h-20 mx-auto bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold font-heading text-[22px] md:text-[32px] font-semibold mb-2">
+                <div className="w-14 h-14 md:w-20 md:h-20 mx-auto bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d font-heading text-[22px] md:text-[32px] font-semibold mb-2">
                   {d.code}
                 </div>
                 <div className="text-[11px] md:text-[13px] font-semibold text-tx">
                   {d.name}
                 </div>
-                <div className="text-[10px] md:text-[11px] text-gold font-medium mt-0.5">
+                <div className="text-[10px] md:text-[11px] text-gold-d font-medium mt-0.5">
                   {d.weight}
                 </div>
               </div>
@@ -217,7 +217,7 @@ export function MethodologyPage() {
                 className="bg-white p-6 md:p-8 border-l-4 border-gold/40"
               >
                 <div className="flex items-start gap-5">
-                  <div className="w-14 h-14 bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold font-heading text-[22px] font-semibold shrink-0">
+                  <div className="w-14 h-14 bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d font-heading text-[22px] font-semibold shrink-0">
                     {d.code}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -225,7 +225,7 @@ export function MethodologyPage() {
                       <h3 className="text-[19px] md:text-[21px] font-semibold">
                         {d.name}
                       </h3>
-                      <span className="text-[11px] font-semibold tracking-wider uppercase text-gold bg-gold/10 px-2 py-0.5">
+                      <span className="text-[11px] font-semibold tracking-wider uppercase text-gold-d bg-gold/10 px-2 py-0.5">
                         權重 {d.weight}
                       </span>
                     </div>

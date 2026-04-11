@@ -154,7 +154,7 @@ export function ServicesPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="section-label">完整路徑</div>
           <h2 className="section-heading">
-            四個階段，<span className="font-normal text-gold">一條完整的跨境路</span>
+            四個階段，<span className="font-normal text-gold-d">一條完整的跨境路</span>
           </h2>
           <p className="section-desc">
             每個階段都是獨立的服務，也可以從任一階段切入。點進去看每個階段的詳細流程、交付物、紅燈警示與相關案例。
@@ -210,7 +210,7 @@ export function ServicesPage() {
         <div className="max-w-[1100px] mx-auto">
           <div className="section-label">其他方案</div>
           <h2 className="section-heading">
-            不走完整路徑？<span className="font-normal text-gold">還有兩條路</span>
+            不走完整路徑？<span className="font-normal text-gold-d">還有兩條路</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
@@ -249,7 +249,7 @@ export function ServicesPage() {
                   ⚙
                 </span>
                 <div>
-                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold">
+                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d">
                     方法論
                   </div>
                   <h3 className="text-[19px] font-semibold mt-0.5 group-hover:text-gold transition-colors">
@@ -261,7 +261,7 @@ export function ServicesPage() {
                 我們怎麼判斷一個案子值不值得做？
                 MBCPR 五維評分矩陣、紅燈判準、一個真實案例的完整評分過程。
               </p>
-              <span className="text-[13px] font-semibold text-gold group-hover:translate-x-1 inline-block transition-transform">
+              <span className="text-[13px] font-semibold text-gold-d group-hover:translate-x-1 inline-block transition-transform">
                 看方法論 →
               </span>
             </Link>

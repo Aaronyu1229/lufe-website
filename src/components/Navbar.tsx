@@ -173,7 +173,7 @@ export function Navbar() {
               useDark ? "text-navy" : "text-white"
             }`}
           >
-            鹿飛 LUF<span className="text-gold">É</span>
+            鹿飛 LUF<span className={useDark ? "text-gold-d" : "text-gold"}>É</span>
           </Link>
 
           {/* Desktop nav */}
@@ -191,7 +191,7 @@ export function Navbar() {
                     useDark
                       ? "text-tx hover:text-navy"
                       : "text-white/85 hover:text-white"
-                  } ${activeMenu === item.key ? "text-gold" : ""}`}
+                  } ${activeMenu === item.key ? (useDark ? "text-gold-d" : "text-gold") : ""}`}
                 >
                   {item.label}
                 </Link>
@@ -292,7 +292,7 @@ function MenuColumn({
 }) {
   return (
     <div>
-      <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+      <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
         {label}
       </div>
       <div className="space-y-3">{children}</div>
@@ -391,7 +391,7 @@ function ServicesMenu() {
         </MenuColumn>
       </div>
       <div className="col-span-3">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
           精選案例
         </div>
         {featuredCase && (
@@ -409,7 +409,7 @@ function ServicesMenu() {
               />
             </div>
             <div className="p-4">
-              <div className="font-heading text-[22px] text-gold font-semibold leading-none mb-1.5">
+              <div className="font-heading text-[22px] text-gold-d font-semibold leading-none mb-1.5">
                 {featuredCase.num}
               </div>
               <div className="text-[13px] font-semibold text-tx leading-tight mb-1.5">
@@ -430,7 +430,7 @@ function CasesMenu() {
   return (
     <div className="grid grid-cols-12 gap-8">
       <div className="col-span-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
           精選案例
         </div>
         <div className="grid grid-cols-2 gap-x-8 gap-y-3">
@@ -440,7 +440,7 @@ function CasesMenu() {
               href={`/cases/${c.slug}`}
               className="group flex items-start gap-3 py-2"
             >
-              <div className="font-heading text-[20px] text-gold leading-none font-semibold shrink-0 min-w-[60px] tabular-nums">
+              <div className="font-heading text-[20px] text-gold-d leading-none font-semibold shrink-0 min-w-[60px] tabular-nums">
                 {c.num}
               </div>
               <div className="min-w-0">
@@ -456,7 +456,7 @@ function CasesMenu() {
         </div>
       </div>
       <div className="col-span-4 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
           分類瀏覽
         </div>
         <div className="space-y-2 mb-5">
@@ -471,9 +471,9 @@ function CasesMenu() {
         </div>
         <Link
           href="/cases"
-          className="group inline-flex items-center gap-2 text-[13px] font-semibold text-gold"
+          className="group inline-flex items-center gap-2 text-[13px] font-semibold text-gold-d"
         >
-          <span className="border-b border-gold/40 pb-0.5 group-hover:border-gold transition-colors">
+          <span className="border-b border-gold-d/40 pb-0.5 group-hover:border-gold-d transition-colors">
             看所有案例
           </span>
           <span className="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -527,7 +527,7 @@ function AboutMenu() {
         </MenuColumn>
       </div>
       <div className="col-span-4 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
           創辦人
         </div>
         <div className="flex items-start gap-4">
@@ -536,7 +536,7 @@ function AboutMenu() {
           </div>
           <div>
             <div className="text-[14px] font-semibold">Aaron Yu</div>
-            <div className="text-[12px] text-gold font-medium">鹿飛 LUFÉ 創辦人</div>
+            <div className="text-[12px] text-gold-d font-medium">鹿飛 LUFÉ 創辦人</div>
             <div className="text-[11px] text-tx3 mt-1 leading-[1.5]">
               42+ 年國際物流實戰
               <br />
@@ -583,7 +583,7 @@ function InsightsMenu() {
         </MenuColumn>
       </div>
       <div className="col-span-5 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
           最新文章
         </div>
         {latestArticle && (
@@ -601,7 +601,7 @@ function InsightsMenu() {
               />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-[10.5px] font-semibold tracking-wider uppercase text-gold mb-1">
+              <div className="text-[10.5px] font-semibold tracking-wider uppercase text-gold-d mb-1">
                 {latestArticle.category}
               </div>
               <div className="text-[13.5px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-1">
