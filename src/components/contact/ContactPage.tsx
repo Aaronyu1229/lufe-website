@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useMessageBox } from "../MessageBox";
 
 /* ───────── channel cards ───────── */
@@ -178,15 +179,45 @@ export function ContactPage() {
       {/* ─── Hero + Channel Cards ─── */}
       <section className="bg-white pt-[120px] pb-[60px] px-5 md:px-10">
         <div className="max-w-[1000px] mx-auto">
-          <div className="section-label">聯絡</div>
+          <div className="section-label">聯絡我們</div>
           <h1 className="section-heading">
             選一個你最方便的方式
-            <br />
-            <span className="font-light text-gold">我們來聊聊</span>
           </h1>
           <p className="section-desc">
-            不確定該不該出海？沒關係。聊聊你的產品，我們一起看看。
+            四個管道都會收到。訊息我們通常一個工作天內回覆。
           </p>
+
+          {/* Business info strip — gives contact page a functional anchor */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 mb-12 pb-8 border-b border-bd text-[13px]">
+            <div>
+              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1.5">
+                公司
+              </div>
+              <div className="font-medium text-tx">鹿飛 LUFÉ</div>
+              <div className="text-tx3 text-[12px] mt-0.5">Aaron Yu 創辦</div>
+            </div>
+            <div>
+              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1.5">
+                地點
+              </div>
+              <div className="font-medium text-tx">台北市</div>
+              <div className="text-tx3 text-[12px] mt-0.5">線上為主</div>
+            </div>
+            <div>
+              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1.5">
+                回覆時間
+              </div>
+              <div className="font-medium text-tx">週一 – 週五</div>
+              <div className="text-tx3 text-[12px] mt-0.5">09:00 – 18:00</div>
+            </div>
+            <div>
+              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold mb-1.5">
+                一般回覆
+              </div>
+              <div className="font-medium text-tx">1 個工作天內</div>
+              <div className="text-tx3 text-[12px] mt-0.5">LINE 更快</div>
+            </div>
+          </div>
 
           {/* Primary channel — 快速留言 (full width) */}
           {(() => {
@@ -252,14 +283,25 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* ─── Full Form ─── */}
-      <section className="bg-white py-[80px] px-5 md:px-10">
-        <div className="max-w-[640px] mx-auto">
+      {/* ─── Full Form (with subtle conversation bg) ─── */}
+      <section className="relative bg-cream py-[80px] px-5 md:px-10 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/contact/form-bg-conversation.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.06]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-cream via-cream/92 to-cream" />
+        </div>
+        <div className="relative max-w-[640px] mx-auto">
+          <div className="section-label text-center">完整表單</div>
           <h2 className="section-heading text-center">
-            或者，填寫完整表單
+            想一次講完所有細節？
           </h2>
-          <p className="text-[14px] text-tx2 text-center font-normal mb-10">
-            讓我們更了解你的需求，給你更精準的建議。
+          <p className="text-[14px] text-tx2 text-center font-normal mb-10 max-w-[480px] mx-auto">
+            填這份表單，我們能在第一次回覆時就給你比較精準的建議，省下幾輪來回。
           </p>
 
           {submitted ? (

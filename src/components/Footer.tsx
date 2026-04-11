@@ -1,13 +1,17 @@
 import Link from "next/link";
 
 const serviceLinks = [
-  { label: "從零開始出海", href: "/services" },
-  { label: "讓出海跑得更好", href: "/services#optimize" },
-  { label: "免費出海評估", href: "/assess" },
+  { label: "市場評估", href: "/services/market-assessment" },
+  { label: "產品測試", href: "/services/product-testing" },
+  { label: "通路進入", href: "/services/channel-entry" },
+  { label: "海外落地", href: "/services/localization" },
+  { label: "進階優化方案", href: "/services/optimize" },
+  { label: "方法論", href: "/services/methodology" },
 ];
 
 const resourceLinks = [
   { label: "洞察與指南", href: "/insights" },
+  { label: "2 分鐘自助評估", href: "/assess" },
   { label: "TradePilot 工具", href: "https://tradepiloter.com", external: true },
   { label: "關於我們", href: "/about" },
 ];
@@ -27,7 +31,7 @@ export function Footer() {
             鹿飛 LUF<span className="text-gold">É</span>
           </span>
           <p className="text-[13px] max-w-[250px] leading-[1.7] font-light mt-2 text-white/55">
-            企業出海的導航系統。結合十年物流實戰與科技，從策略到落地一站式搞定。
+            跨境顧問與執行團隊。結合十年物流實戰與科技，從策略到落地一條線搞定。
           </p>
         </div>
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const cases = [
   {
+    slug: "costco-health",
     featured: true,
     tags: [
       { label: "食品", variant: "sky" as const },
@@ -14,9 +15,10 @@ const cases = [
     title: "保健品怎麼從台灣走進北美 Costco？",
     desc: "從 FDA 註冊到通路談判，打進全球最大會員制零售通路。完整走過評估、測試、通路進入的每一步。",
     route: { from: "台灣", to: "Costco" },
-    image: "/case-costco.jpg",
+    image: "/images/cases/case-1-costco.jpg",
   },
   {
+    slug: "electronics-tariff",
     tags: [
       { label: "電子", variant: "sky" as const },
       { label: "美國", variant: "gold" as const },
@@ -24,9 +26,10 @@ const cases = [
     num: "-15%",
     title: "電子大廠怎麼靠產地轉移省下關稅？",
     desc: "從大陸轉越南出貨，找到中美關稅戰中的最優路徑。",
-    image: "/case-electronics.jpg",
+    image: "/images/cases/case-2-tariff.jpg",
   },
   {
+    slug: "shoe-brand",
     tags: [
       { label: "服飾", variant: "sky" as const },
       { label: "美國", variant: "gold" as const },
@@ -34,9 +37,10 @@ const cases = [
     num: "3x",
     title: "知名皮鞋品牌為什麼改賣襪子大賺？",
     desc: "分析亞馬遜數據後調整品類策略，找到高毛利藍海品項。",
-    image: "/case-shoes.jpg",
+    image: "/images/cases/case-3-pivot.jpg",
   },
   {
+    slug: "bubble-tea",
     tags: [
       { label: "飲品", variant: "sky" as const },
       { label: "東南亞", variant: "gold" as const },
@@ -44,7 +48,7 @@ const cases = [
     num: "10 家",
     title: "珍珠奶茶品牌怎麼在菲律賓成功落地？",
     desc: "從市場探索到門市營運，建立穩定營收基地。",
-    image: "/case-bubbletea.jpg",
+    image: "/images/cases/case-4-manila.jpg",
   },
 ];
 
@@ -61,7 +65,7 @@ export function CasesSection() {
       </div>
       <div className="flex items-center gap-6 mb-8">
         <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] md:whitespace-nowrap">
-          這些企業都找到了自己的出海路
+          這些企業都找到了自己的路
         </h2>
         <div className="hidden md:block flex-1 h-px bg-bd" />
       </div>
@@ -72,9 +76,9 @@ export function CasesSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {cases.map((c) =>
           c.featured ? (
-            <div
+            <Link
               key={c.title}
-              role="article"
+              href={`/cases/${c.slug}`}
               className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center p-5 md:p-10 bg-white rounded-none transition-all duration-300 cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg"
             >
               <div>
@@ -121,11 +125,11 @@ export function CasesSection() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-            </div>
+            </Link>
           ) : (
-            <div
+            <Link
               key={c.title}
-              role="article"
+              href={`/cases/${c.slug}`}
               className="group bg-white rounded-none transition-all duration-300 cursor-pointer relative overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg"
             >
               <div className="h-[180px] overflow-hidden relative">
@@ -155,20 +159,20 @@ export function CasesSection() {
                   閱讀案例 →
                 </span>
               </div>
-            </div>
+            </Link>
           )
         )}
       </div>
 
       <div className="text-center mt-14">
         <Link
-          href="/assess"
-          className="group inline-flex items-center gap-2 text-tx text-[14px] font-semibold tracking-[0.3px] transition-colors duration-300 hover:text-navy"
+          href="/cases"
+          className="group inline-flex items-center gap-2 text-tx2 text-[14px] font-medium tracking-[0.3px] transition-colors duration-300 hover:text-navy"
         >
-          <span className="border-b border-tx/30 pb-0.5 group-hover:border-navy transition-colors">
-            想知道你的產品適合哪條路？免費評估
+          <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
+            看更多案例
           </span>
-          <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+          <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
         </Link>
       </div>
     </section>

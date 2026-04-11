@@ -1,165 +1,295 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
-interface Slide {
-  readonly image: string;
-  readonly label: string;
-  readonly headline: string;
-  readonly subtitle: string;
-  readonly cta: string;
-  readonly action: { href: string };
-}
+type SlideMedia = {
+  type: "video";
+  src: string;
+  portraitSrc?: string;
+  poster: string;
+  playbackRate?: number;
+};
 
-const SLIDES: readonly Slide[] = [
+type Slide = {
+  id: string;
+  chipLabel: string;
+  chipHref: string;
+  eyebrow: string;
+  titleLines: [string, string];
+  subtitle: string;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+  media: SlideMedia;
+};
+
+const slides: Slide[] = [
   {
-    image: "/hero-bg.jpg",
-    label: "策略顧問",
-    headline: "好產品值得一條\n順暢的出海路",
+    id: "stage-1",
+    chipLabel: "不確定能不能出海",
+    chipHref: "/services",
+    eyebrow: "企業出海導航",
+    titleLines: ["好產品值得一條", "順暢的出海路"],
     subtitle: "從市場驗證到落地營運，我們陪你走完全程。",
-    cta: "免費評估你的產品 →",
-    action: { href: "/assess" },
+    primary: { label: "免費評估你的產品", href: "/assess" },
+    secondary: { label: "看完整出海路徑", href: "/services" },
+    media: {
+      type: "video",
+      src: "/videos/hero/hero-cai-mep-1080.mp4",
+      portraitSrc: "/videos/hero/hero-portrait-720.mp4",
+      poster: "/images/hero/hero-poster.jpg",
+      playbackRate: 1.0,
+    },
   },
   {
-    image: "/hero-2.jpg",
-    label: "成功案例",
-    headline: "六個月，從台灣\n到北美 Costco",
-    subtitle: "真實案例，真實成果。",
-    cta: "看看怎麼開始 →",
-    action: { href: "/services" },
+    id: "stage-2",
+    chipLabel: "準備出海找方向",
+    chipHref: "/services/market-assessment",
+    eyebrow: "出海路徑規劃",
+    titleLines: ["方向對了", "後面都省力"],
+    subtitle: "選對市場、定好節奏、鋪好通路——一次講清楚。",
+    primary: { label: "看完整出海路徑", href: "/services" },
+    secondary: { label: "兩分鐘測一下", href: "/assess" },
+    media: {
+      type: "video",
+      src: "/videos/hero/hero-map-planning-1080.mp4",
+      poster: "/images/hero/hero-slide-2-poster.jpg",
+      playbackRate: 1.0,
+    },
   },
   {
-    image: "/hero-3.jpg",
-    label: "開始對話",
-    headline: "出海不是冒險\n是有計畫的探索",
-    subtitle: "不確定從哪開始？聊聊你的產品。",
-    cta: "免費評估你的產品 →",
-    action: { href: "/assess" },
+    id: "stage-3",
+    chipLabel: "出海中想優化",
+    chipHref: "/services/optimize",
+    eyebrow: "進階優化方案",
+    titleLines: ["跑起來了", "該讓每公里更省"],
+    subtitle: "成本、效率、合規同步優化，放大獲利空間。",
+    primary: { label: "看進階優化方案", href: "/services#optimize" },
+    secondary: { label: "直接聊聊", href: "/contact" },
+    media: {
+      type: "video",
+      src: "/videos/hero/hero-highway-aerial-1080.mp4",
+      poster: "/images/hero/hero-slide-3-poster.jpg",
+      playbackRate: 1.0,
+    },
   },
-] as const;
+];
 
-const INTERVAL_MS = 6000;
+const AUTOPLAY_MS = 10000;
 
 export function HeroSection() {
-  const [current, setCurrent] = useState(0);
+  const [isPortrait, setIsPortrait] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const touchStartX = useRef(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [readyMap, setReadyMap] = useState<Record<number, boolean>>({});
+  const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
+  const progressKey = useRef(0);
 
-  const advance = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % SLIDES.length);
-  }, []);
-
-  const goBack = useCallback(() => {
-    setCurrent((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-  }, []);
-
+  // Detect portrait orientation
   useEffect(() => {
-    if (paused) return;
-    const id = setInterval(advance, INTERVAL_MS);
-    return () => clearInterval(id);
-  }, [advance, paused]);
+    const mql = window.matchMedia("(max-aspect-ratio: 1/1)");
+    const update = () => setIsPortrait(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
 
-  const slide = SLIDES[current];
+  // Respect reduced motion
+  useEffect(() => {
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setPrefersReducedMotion(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
+  // Autoplay carousel
+  useEffect(() => {
+    if (paused || prefersReducedMotion) return;
+    const timer = window.setTimeout(() => {
+      setActiveIndex((i) => (i + 1) % slides.length);
+    }, AUTOPLAY_MS);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, paused, prefersReducedMotion]);
+
+  // Play the active slide's video; pause the others. Apply per-slide playbackRate.
+  useEffect(() => {
+    videoRefs.current.forEach((video, i) => {
+      if (!video) return;
+      if (i === activeIndex) {
+        const rate = slides[i].media.playbackRate ?? 1.0;
+        video.playbackRate = rate;
+        video.currentTime = 0;
+        const playPromise = video.play();
+        if (playPromise) playPromise.catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, [activeIndex, isPortrait]);
+
+  // Bump progress key on every slide change so the fill bar animation restarts
+  progressKey.current += 1;
+
+  const goTo = useCallback((index: number) => {
+    setActiveIndex(index);
+  }, []);
+
+  const handleCanPlay = (index: number) => {
+    setReadyMap((prev) => (prev[index] ? prev : { ...prev, [index]: true }));
+  };
+
+  const active = slides[activeIndex];
 
   return (
     <section
-      className="h-[82vh] min-h-[560px] max-h-[860px] relative overflow-hidden flex items-center"
+      className="h-screen min-h-[640px] relative overflow-hidden flex items-center"
       role="region"
-      aria-roledescription="carousel"
-      aria-label="精選內容輪播"
+      aria-label="好產品值得一條順暢的出海路"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      onTouchStart={(e) => {
-        touchStartX.current = e.touches[0].clientX;
-      }}
-      onTouchEnd={(e) => {
-        const diff = e.changedTouches[0].clientX - touchStartX.current;
-        if (Math.abs(diff) > 50) {
-          if (diff < 0) advance();
-          else goBack();
-        }
-      }}
-      onKeyDown={(e) => {
-        if (e.key === "ArrowRight") advance();
-        else if (e.key === "ArrowLeft") goBack();
-      }}
-      tabIndex={0}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
     >
-      {/* Background slides — all rendered, CSS opacity crossfade */}
-      {SLIDES.map((s, i) => (
-        <div
-          key={s.image}
-          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-          style={{ opacity: i === current ? 1 : 0 }}
-          aria-hidden={i !== current}
-        >
+      {/* Layered backgrounds — cross-fade between slides */}
+      {slides.map((slide, i) => {
+        const isActive = i === activeIndex;
+        const useSrc =
+          isPortrait && slide.media.portraitSrc
+            ? slide.media.portraitSrc
+            : slide.media.src;
+        const ready = readyMap[i] ?? false;
+        return (
           <div
-            className="absolute inset-0 bg-cover bg-center scale-[1.03]"
-            style={{ backgroundImage: `url('${s.image}')` }}
-          />
-          <div className="absolute inset-0 bg-navy/75" />
-        </div>
-      ))}
-
-      {/* Content */}
-      <div
-        className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 relative z-10 w-full"
-        role="group"
-        aria-roledescription="slide"
-        aria-label={`${current + 1} / ${SLIDES.length}: ${slide.headline}`}
-      >
-        <div className="max-w-[640px]">
-          <div key={current} className="animate-fade-in-up">
-            {/* Eyebrow label — Bain-style category tag */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-5 h-px bg-gold/70" />
-              <span className="text-gold/70 text-[11px] font-medium tracking-[2.5px] uppercase">
-                {slide.label}
-              </span>
-            </div>
-
-            <h1
-              className="font-sans text-white leading-[1.05] mb-7 font-extralight tracking-[-2px] whitespace-pre-line"
-              style={{ fontSize: "clamp(38px, 5.5vw, 68px)" }}
+            key={slide.id}
+            className="absolute inset-0 transition-opacity duration-[900ms] ease-out"
+            style={{ opacity: isActive ? 1 : 0 }}
+            aria-hidden="true"
+          >
+            {/* Poster underneath the video — always visible until video fades in */}
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url('${slide.media.poster}')` }}
+            />
+            <video
+              ref={(el) => {
+                videoRefs.current[i] = el;
+              }}
+              key={useSrc}
+              className="bg-video"
+              style={{
+                opacity: ready ? 1 : 0,
+                transition: "opacity 800ms ease-out",
+              }}
+              autoPlay={i === 0}
+              loop
+              muted
+              playsInline
+              preload={i === 0 ? "auto" : "metadata"}
+              poster={slide.media.poster}
+              onCanPlay={() => handleCanPlay(i)}
             >
-              {slide.headline}
-            </h1>
+              <source src={useSrc} type="video/mp4" />
+            </video>
+          </div>
+        );
+      })}
 
-            <p className="text-[17px] text-white/50 font-normal mb-10 leading-relaxed max-w-[440px]">
-              {slide.subtitle}
-            </p>
+      {/* Directional overlay — stays above all slides */}
+      <div className="bg-video-overlay" />
 
-            {/* CTA — Bain-style text link with underline */}
+      {/* Content — keyed to remount on slide change for fade-in animation */}
+      <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 relative z-10 w-full">
+        <div key={active.id} className="max-w-[640px] animate-fade-in-up">
+          {/* Eyebrow */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-5 h-px bg-gold/70" />
+            <span className="text-gold/70 text-[11px] font-medium tracking-[2.5px] uppercase">
+              {active.eyebrow}
+            </span>
+          </div>
+
+          <h1
+            className="font-sans text-white leading-[1.05] mb-7 font-extralight tracking-[-2px]"
+            style={{ fontSize: "clamp(38px, 5.5vw, 68px)" }}
+          >
+            {active.titleLines[0]}
+            <br />
+            {active.titleLines[1]}
+          </h1>
+
+          <p className="text-[17px] text-white/60 font-normal mb-10 leading-relaxed max-w-[480px]">
+            {active.subtitle}
+          </p>
+
+          <div className="flex items-center gap-8 flex-wrap">
             <Link
-              href={slide.action.href}
+              href={active.primary.href}
+              className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[13px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l"
+            >
+              {active.primary.label} →
+            </Link>
+            <Link
+              href={active.secondary.href}
               className="group inline-flex items-center gap-2.5 text-white text-[14px] font-semibold tracking-[0.3px] transition-colors hover:text-gold"
             >
               <span className="border-b border-white/30 pb-0.5 group-hover:border-gold transition-colors">
-                {slide.cta}
+                {active.secondary.label}
               </span>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Progress line indicators — Bain-style minimal */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            aria-label={`前往第 ${i + 1} 張`}
-            aria-current={i === current ? "true" : undefined}
-            className="py-3 px-0.5 cursor-pointer"
-          >
-            <div
-              className={`rounded-full transition-all duration-500 h-[2px] ${
-                i === current ? "w-10 bg-white/90" : "w-5 bg-white/20"
-              }`}
-            />
-          </button>
-        ))}
+      {/* Bottom slide navigator — Bain-style chip bar */}
+      <div className="absolute left-0 right-0 bottom-0 z-10 border-t border-white/10 bg-gradient-to-t from-black/30 to-transparent backdrop-blur-[2px]">
+        <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 h-[60px] md:h-[72px] flex items-center justify-between gap-4">
+          {/* Chips */}
+          <div className="flex items-center gap-5 md:gap-9 overflow-x-auto scrollbar-none h-full">
+            {slides.map((slide, i) => {
+              const isActive = i === activeIndex;
+              return (
+                <Link
+                  key={slide.id}
+                  href={slide.chipHref}
+                  onMouseEnter={() => goTo(i)}
+                  onFocus={() => goTo(i)}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative flex-shrink-0 text-[12px] md:text-[13px] font-medium tracking-[0.3px] h-full flex items-center transition-colors duration-300 cursor-pointer ${
+                    isActive ? "text-white" : "text-white/55 hover:text-white/85"
+                  }`}
+                >
+                  {slide.chipLabel}
+                  {/* Track */}
+                  <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-white/10" />
+                  {/* Progress fill — only animates on active chip */}
+                  <span
+                    key={isActive ? `fill-${progressKey.current}` : `idle-${slide.id}`}
+                    className={`absolute left-0 bottom-0 h-[2px] bg-gold origin-left ${
+                      isActive && !paused && !prefersReducedMotion
+                        ? "animate-hero-progress"
+                        : isActive
+                          ? "w-full"
+                          : "w-0"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Slide counter */}
+          <div className="hidden sm:flex items-center gap-3 text-white/60 flex-shrink-0 tabular-nums">
+            <span className="text-[11px] font-medium tracking-[1.5px] text-white">
+              {String(activeIndex + 1).padStart(2, "0")}
+            </span>
+            <span className="w-8 h-px bg-white/30" />
+            <span className="text-[11px] font-medium tracking-[1.5px]">
+              {String(slides.length).padStart(2, "0")}
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );

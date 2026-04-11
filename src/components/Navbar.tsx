@@ -1,27 +1,40 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMessageBox } from "./MessageBox";
+import { STAGE_ORDER, STAGES } from "@/data/services";
+import { CASES } from "@/data/cases";
+import { articles, getArticleImage } from "@/data/articles";
 
-const navLinks = [
-  { label: "服務", href: "/services" },
-  { label: "案例", href: "/cases" },
-  { label: "關於我們", href: "/about" },
-  { label: "洞察", href: "/insights" },
-  { label: "聯絡", href: "/contact" },
+type MenuKey = "services" | "cases" | "about" | "insights" | null;
+
+interface NavItem {
+  readonly key: Exclude<MenuKey, null>;
+  readonly label: string;
+  readonly href: string;
+}
+
+const navItems: readonly NavItem[] = [
+  { key: "services", label: "服務", href: "/services" },
+  { key: "cases", label: "案例", href: "/cases" },
+  { key: "about", label: "關於我們", href: "/about" },
+  { key: "insights", label: "洞察", href: "/insights" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<MenuKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const closeTimer = useRef<number | null>(null);
 
-  // On non-home pages, always use dark (scrolled) style
-  const useDark = !isHome || scrolled;
+  const useDark = !isHome || scrolled || hovered || activeMenu !== null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -29,18 +42,49 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
+  // Close mega menu on route change
+  useEffect(() => {
+    setActiveMenu(null);
+    setMobileOpen(false);
+  }, [pathname]);
+
+  const openMenu = (key: Exclude<MenuKey, null>) => {
+    if (closeTimer.current) {
+      window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setActiveMenu(key);
+  };
+
+  const scheduleClose = () => {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    closeTimer.current = window.setTimeout(() => {
+      setActiveMenu(null);
+    }, 180);
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-100">
+    <header
+      className="fixed top-0 left-0 right-0 z-100"
+      onMouseEnter={() => {
+        if (isHome) setHovered(true);
+      }}
+      onMouseLeave={() => {
+        if (isHome) setHovered(false);
+        scheduleClose();
+      }}
+    >
       {/* Skip to content */}
       <a
         href="#main-content"
@@ -49,20 +93,40 @@ export function Navbar() {
         跳到主要內容
       </a>
 
-      {/* Utility bar — only on home */}
-      <div className={`bg-navy text-white/50 text-[11px] hidden md:block transition-all duration-300 ${
-        useDark ? "opacity-0 h-0 overflow-hidden" : "opacity-100 h-[32px]"
-      }`}>
+      {/* Utility bar — only on home, only when not scrolled */}
+      <div
+        className={`text-white/60 text-[11px] hidden md:block transition-all duration-300 ${
+          useDark
+            ? "opacity-0 h-0 overflow-hidden bg-transparent"
+            : "opacity-100 h-[32px] bg-transparent border-b border-white/10"
+        }`}
+      >
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 flex items-center justify-between h-[32px]">
           <div className="flex items-center gap-5">
-            <span className="hover:text-white/80 transition-colors cursor-pointer">繁體中文</span>
+            <span className="hover:text-white transition-colors cursor-pointer">
+              繁體中文
+            </span>
             <span className="text-white/20">|</span>
-            <span className="hover:text-white/80 transition-colors cursor-pointer">English</span>
+            <span className="hover:text-white transition-colors cursor-pointer">
+              English
+            </span>
           </div>
           <div className="flex items-center gap-5">
-            <a href="mailto:hello@lufe.co" className="hover:text-white/80 transition-colors">hello@lufe.co</a>
+            <a
+              href="mailto:hello@lufe.co"
+              className="hover:text-white transition-colors"
+            >
+              hello@lufe.co
+            </a>
             <span className="text-white/20">|</span>
-            <a href="https://tradepiloter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white/80 transition-colors">TradePilot 工具</a>
+            <a
+              href="https://tradepiloter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              TradePilot 工具
+            </a>
           </div>
         </div>
       </div>
@@ -71,7 +135,7 @@ export function Navbar() {
       <nav
         className={`transition-all duration-300 ${
           useDark
-            ? "bg-white/95 backdrop-blur-md shadow-sm"
+            ? "bg-white/98 backdrop-blur-md shadow-sm"
             : "bg-transparent"
         }`}
         aria-label="主要導航"
@@ -88,18 +152,24 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-[28px]">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[13px] font-medium transition-colors duration-300 ${
-                  useDark
-                    ? "text-tx hover:text-navy"
-                    : "text-white/80 hover:text-white"
-                }`}
+            {navItems.map((item) => (
+              <div
+                key={item.key}
+                onMouseEnter={() => openMenu(item.key)}
+                onMouseLeave={scheduleClose}
+                className="relative h-[64px] flex items-center"
               >
-                {link.label}
-              </Link>
+                <Link
+                  href={item.href}
+                  className={`text-[13px] font-medium transition-colors duration-300 py-2 ${
+                    useDark
+                      ? "text-tx hover:text-navy"
+                      : "text-white/85 hover:text-white"
+                  } ${activeMenu === item.key ? "text-gold" : ""}`}
+                >
+                  {item.label}
+                </Link>
+              </div>
             ))}
           </div>
 
@@ -107,7 +177,7 @@ export function Navbar() {
             <MessageBoxTrigger />
           </div>
 
-          {/* Mobile hamburger — 44x44 touch target */}
+          {/* Mobile hamburger */}
           <button
             className="md:hidden flex flex-col items-center justify-center gap-1.5 w-11 h-11 -mr-2 cursor-pointer"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -115,22 +185,51 @@ export function Navbar() {
             aria-expanded={mobileOpen}
           >
             <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${useDark ? "bg-navy" : "bg-white"} ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${
+                useDark ? "bg-navy" : "bg-white"
+              } ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
             />
             <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${useDark ? "bg-navy" : "bg-white"} ${mobileOpen ? "opacity-0" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${
+                useDark ? "bg-navy" : "bg-white"
+              } ${mobileOpen ? "opacity-0" : ""}`}
             />
             <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${useDark ? "bg-navy" : "bg-white"} ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
+              className={`block w-5 h-0.5 transition-all duration-300 ${
+                useDark ? "bg-navy" : "bg-white"
+              } ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
             />
           </button>
         </div>
 
-        {/* Mobile menu with overlay + slide animation */}
+        {/* Desktop mega-menu panel */}
+        <AnimatePresence>
+          {activeMenu && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="hidden md:block absolute top-full left-0 right-0 bg-white border-t border-bd shadow-xl"
+              onMouseEnter={() => {
+                if (closeTimer.current) window.clearTimeout(closeTimer.current);
+              }}
+              onMouseLeave={scheduleClose}
+            >
+              <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-10">
+                {activeMenu === "services" && <ServicesMenu />}
+                {activeMenu === "cases" && <CasesMenu />}
+                {activeMenu === "about" && <AboutMenu />}
+                {activeMenu === "insights" && <InsightsMenu />}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Mobile menu */}
         <AnimatePresence>
           {mobileOpen && (
             <>
-              {/* Overlay */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -139,27 +238,14 @@ export function Navbar() {
                 className="md:hidden fixed inset-0 top-[64px] bg-black/50 z-40"
                 onClick={() => setMobileOpen(false)}
               />
-              {/* Panel */}
               <motion.div
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="md:hidden bg-white border-t border-bd px-5 pb-5 relative z-50"
+                className="md:hidden bg-white border-t border-bd px-5 pb-5 relative z-50 overflow-y-auto max-h-[calc(100vh-64px)]"
               >
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="block py-3 text-[14px] text-tx2 font-medium"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className="flex gap-2.5 mt-3">
-                  <MessageBoxTrigger className="flex-1" />
-                </div>
+                <MobileMenu onClose={() => setMobileOpen(false)} />
               </motion.div>
             </>
           )}
@@ -167,6 +253,540 @@ export function Navbar() {
       </nav>
     </header>
   );
+}
+
+/* ───────── Mega menu contents ───────── */
+
+function MenuColumn({
+  label,
+  children,
+}: {
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div>
+      <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+        {label}
+      </div>
+      <div className="space-y-3">{children}</div>
+    </div>
+  );
+}
+
+function MenuLink({
+  href,
+  title,
+  desc,
+  external = false,
+}: {
+  href: string;
+  title: string;
+  desc?: string;
+  external?: boolean;
+}) {
+  const content = (
+    <>
+      <div className="text-[14px] font-semibold text-tx group-hover:text-gold transition-colors">
+        {title}
+      </div>
+      {desc && (
+        <div className="text-[12px] text-tx3 font-normal mt-0.5 leading-[1.5]">
+          {desc}
+        </div>
+      )}
+    </>
+  );
+  if (external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block py-1"
+      >
+        {content}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className="group block py-1">
+      {content}
+    </Link>
+  );
+}
+
+function ServicesMenu() {
+  const featuredCase = CASES[0];
+  return (
+    <div className="grid grid-cols-12 gap-8">
+      <div className="col-span-4">
+        <MenuColumn label="完整路徑">
+          {STAGE_ORDER.map((slug) => {
+            const stage = STAGES[slug];
+            return (
+              <MenuLink
+                key={slug}
+                href={`/services/${slug}`}
+                title={stage.title}
+                desc={stage.subtitle}
+              />
+            );
+          })}
+        </MenuColumn>
+      </div>
+      <div className="col-span-3">
+        <MenuColumn label="進階方案">
+          <MenuLink
+            href="/services/optimize"
+            title="運營優化方案"
+            desc="已經在海外，想做更好"
+          />
+          <MenuLink
+            href="/services/methodology"
+            title="鹿飛方法論"
+            desc="我們的決策框架"
+          />
+        </MenuColumn>
+      </div>
+      <div className="col-span-2">
+        <MenuColumn label="工具資源">
+          <MenuLink
+            href="https://tradepiloter.com"
+            title="TradePilot"
+            desc="免費關稅查詢工具"
+            external
+          />
+          <MenuLink
+            href="/assess"
+            title="2 分鐘評估"
+            desc="找到你的起點"
+          />
+        </MenuColumn>
+      </div>
+      <div className="col-span-3">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+          精選案例
+        </div>
+        {featuredCase && (
+          <Link
+            href={`/cases/${featuredCase.slug}`}
+            className="group block bg-cream rounded-none overflow-hidden transition-all hover:shadow-md"
+          >
+            <div className="relative h-[100px] overflow-hidden">
+              <Image
+                src={featuredCase.heroImage}
+                alt={featuredCase.title}
+                fill
+                sizes="220px"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-4">
+              <div className="font-heading text-[22px] text-gold font-semibold leading-none mb-1.5">
+                {featuredCase.num}
+              </div>
+              <div className="text-[13px] font-semibold text-tx leading-tight mb-1.5">
+                {featuredCase.title}
+              </div>
+              <div className="text-[11px] text-tx3 group-hover:text-gold transition-colors">
+                看完整案例 →
+              </div>
+            </div>
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function CasesMenu() {
+  return (
+    <div className="grid grid-cols-12 gap-8">
+      <div className="col-span-8">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+          精選案例
+        </div>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+          {CASES.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/cases/${c.slug}`}
+              className="group flex items-start gap-3 py-2"
+            >
+              <div className="font-heading text-[20px] text-gold leading-none font-semibold shrink-0 min-w-[60px] tabular-nums">
+                {c.num}
+              </div>
+              <div className="min-w-0">
+                <div className="text-[13.5px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-0.5">
+                  {c.title}
+                </div>
+                <div className="text-[11px] text-tx3">
+                  {c.tags.map((t) => t.label).join(" · ")}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="col-span-4 border-l border-bd pl-8">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+          分類瀏覽
+        </div>
+        <div className="space-y-2 mb-5">
+          <div className="text-[12px] text-tx3">按產業</div>
+          <div className="text-[13px] text-tx2">
+            食品 · 電子 · 服飾 · 餐飲
+          </div>
+        </div>
+        <div className="space-y-2 mb-6">
+          <div className="text-[12px] text-tx3">按市場</div>
+          <div className="text-[13px] text-tx2">北美 · 東南亞</div>
+        </div>
+        <Link
+          href="/cases"
+          className="group inline-flex items-center gap-2 text-[13px] font-semibold text-gold"
+        >
+          <span className="border-b border-gold/40 pb-0.5 group-hover:border-gold transition-colors">
+            看所有案例
+          </span>
+          <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+            →
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function AboutMenu() {
+  return (
+    <div className="grid grid-cols-12 gap-8">
+      <div className="col-span-4">
+        <MenuColumn label="認識鹿飛">
+          <MenuLink
+            href="/about#story"
+            title="創辦故事"
+            desc="我們為什麼做這件事"
+          />
+          <MenuLink
+            href="/about#team"
+            title="團隊組成"
+            desc="台灣核心團隊 + 全球節點"
+          />
+          <MenuLink
+            href="/about#how-we-work"
+            title="我們怎麼合作"
+            desc="你會得到什麼樣的陪跑"
+          />
+        </MenuColumn>
+      </div>
+      <div className="col-span-4">
+        <MenuColumn label="立場與網絡">
+          <MenuLink
+            href="/about#network"
+            title="合作夥伴網絡"
+            desc="北美 / 東南亞 / 全球物流"
+          />
+          <MenuLink
+            href="/about#philosophy"
+            title="品牌理念"
+            desc="我們相信的事"
+          />
+          <MenuLink
+            href="/about#what-we-dont-do"
+            title="我們不做什麼"
+            desc="誠實的邊界"
+          />
+        </MenuColumn>
+      </div>
+      <div className="col-span-4 border-l border-bd pl-8">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+          創辦人
+        </div>
+        <div className="flex items-start gap-4">
+          <div className="w-14 h-14 rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[18px] font-heading font-semibold shrink-0">
+            AY
+          </div>
+          <div>
+            <div className="text-[14px] font-semibold">Aaron Yu</div>
+            <div className="text-[12px] text-gold font-medium">鹿飛 LUFÉ 創辦人</div>
+            <div className="text-[11px] text-tx3 mt-1 leading-[1.5]">
+              十年國際物流實戰
+              <br />
+              500+ 出口案件 · 30+ 國家
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InsightsMenu() {
+  const latestArticle = articles[0];
+  const categoryGroups = [
+    { label: "市場趨勢", cat: "市場趨勢" },
+    { label: "實戰指南", cat: "實戰指南" },
+    { label: "法規解讀", cat: "法規解讀" },
+    { label: "工具推薦", cat: "工具推薦" },
+  ] as const;
+
+  return (
+    <div className="grid grid-cols-12 gap-8">
+      <div className="col-span-4">
+        <MenuColumn label="主題分類">
+          {categoryGroups.map((g) => (
+            <MenuLink
+              key={g.cat}
+              href={`/insights?cat=${encodeURIComponent(g.cat)}`}
+              title={g.label}
+            />
+          ))}
+        </MenuColumn>
+      </div>
+      <div className="col-span-3">
+        <MenuColumn label="工具資源">
+          <MenuLink
+            href="https://tradepiloter.com"
+            title="TradePilot 關稅工具"
+            external
+          />
+          <MenuLink href="/services/methodology" title="鹿飛方法論" />
+          <MenuLink href="/insights" title="看所有文章" />
+        </MenuColumn>
+      </div>
+      <div className="col-span-5 border-l border-bd pl-8">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold/80 mb-4">
+          最新文章
+        </div>
+        {latestArticle && (
+          <Link
+            href={`/insights/${latestArticle.slug}`}
+            className="group flex gap-4"
+          >
+            <div className="relative w-[120px] h-[80px] shrink-0 overflow-hidden">
+              <Image
+                src={getArticleImage(latestArticle)}
+                alt={latestArticle.title}
+                fill
+                sizes="120px"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-[10.5px] font-semibold tracking-wider uppercase text-gold mb-1">
+                {latestArticle.category}
+              </div>
+              <div className="text-[13.5px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-1">
+                {latestArticle.title}
+              </div>
+              <div className="text-[11px] text-tx3">
+                {latestArticle.date} · {latestArticle.readTime}
+              </div>
+            </div>
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ───────── Mobile menu ───────── */
+
+function MobileMenu({ onClose }: { onClose: () => void }) {
+  const [expanded, setExpanded] = useState<MenuKey>(null);
+  const { open: openMessageBox } = useMessageBox();
+
+  const toggle = (key: Exclude<MenuKey, null>) => {
+    setExpanded((cur) => (cur === key ? null : key));
+  };
+
+  return (
+    <div className="py-2">
+      {navItems.map((item) => (
+        <div key={item.key} className="border-b border-bd last:border-b-0">
+          <button
+            onClick={() => toggle(item.key)}
+            className="w-full flex items-center justify-between py-4 text-left cursor-pointer"
+            aria-expanded={expanded === item.key}
+          >
+            <span className="text-[15px] font-semibold text-tx">
+              {item.label}
+            </span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              className={`transition-transform duration-300 text-tx3 ${
+                expanded === item.key ? "rotate-180" : ""
+              }`}
+            >
+              <path
+                d="M4 6L8 10L12 6"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <AnimatePresence initial={false}>
+            {expanded === item.key && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                <div className="pb-4 pl-3 space-y-2">
+                  <MobileMenuContent itemKey={item.key} onClose={onClose} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ))}
+
+      <div className="mt-5 flex gap-2.5">
+        <button
+          onClick={() => {
+            openMessageBox();
+            onClose();
+          }}
+          className="flex-1 bg-gold text-navy px-5 py-[11px] rounded-none text-[13px] font-semibold hover:bg-gold-l transition-all cursor-pointer"
+        >
+          聊聊你的產品 →
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function MobileSubLink({
+  href,
+  title,
+  onClose,
+}: {
+  href: string;
+  title: string;
+  onClose: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      className="block py-2 text-[13.5px] text-tx2 hover:text-gold transition-colors"
+      onClick={onClose}
+    >
+      {title}
+    </Link>
+  );
+}
+
+function MobileMenuContent({
+  itemKey,
+  onClose,
+}: {
+  itemKey: Exclude<MenuKey, null>;
+  onClose: () => void;
+}) {
+  if (itemKey === "services") {
+    return (
+      <>
+        <div className="text-[10px] font-semibold tracking-wider uppercase text-tx3 mt-1 mb-1">
+          完整路徑
+        </div>
+        {STAGE_ORDER.map((slug) => {
+          const stage = STAGES[slug];
+          return (
+            <MobileSubLink
+              key={slug}
+              href={`/services/${slug}`}
+              title={stage.title}
+              onClose={onClose}
+            />
+          );
+        })}
+        <div className="text-[10px] font-semibold tracking-wider uppercase text-tx3 mt-3 mb-1">
+          進階方案
+        </div>
+        <MobileSubLink
+          href="/services/optimize"
+          title="運營優化方案"
+          onClose={onClose}
+        />
+        <MobileSubLink
+          href="/services/methodology"
+          title="鹿飛方法論"
+          onClose={onClose}
+        />
+        <MobileSubLink href="/services" title="服務總覽" onClose={onClose} />
+      </>
+    );
+  }
+  if (itemKey === "cases") {
+    return (
+      <>
+        {CASES.map((c) => (
+          <MobileSubLink
+            key={c.slug}
+            href={`/cases/${c.slug}`}
+            title={`${c.num} ${c.title}`}
+            onClose={onClose}
+          />
+        ))}
+        <MobileSubLink href="/cases" title="看所有案例" onClose={onClose} />
+      </>
+    );
+  }
+  if (itemKey === "about") {
+    return (
+      <>
+        <MobileSubLink href="/about#story" title="創辦故事" onClose={onClose} />
+        <MobileSubLink href="/about#team" title="團隊組成" onClose={onClose} />
+        <MobileSubLink
+          href="/about#how-we-work"
+          title="我們怎麼合作"
+          onClose={onClose}
+        />
+        <MobileSubLink
+          href="/about#network"
+          title="合作夥伴網絡"
+          onClose={onClose}
+        />
+        <MobileSubLink
+          href="/about#what-we-dont-do"
+          title="我們不做什麼"
+          onClose={onClose}
+        />
+      </>
+    );
+  }
+  if (itemKey === "insights") {
+    return (
+      <>
+        <MobileSubLink href="/insights" title="所有文章" onClose={onClose} />
+        <MobileSubLink
+          href="/insights?cat=市場趨勢"
+          title="市場趨勢"
+          onClose={onClose}
+        />
+        <MobileSubLink
+          href="/insights?cat=實戰指南"
+          title="實戰指南"
+          onClose={onClose}
+        />
+        <MobileSubLink
+          href="/insights?cat=法規解讀"
+          title="法規解讀"
+          onClose={onClose}
+        />
+      </>
+    );
+  }
+  return null;
 }
 
 function MessageBoxTrigger({ className = "" }: { className?: string }) {

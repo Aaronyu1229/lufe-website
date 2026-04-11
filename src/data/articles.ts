@@ -130,6 +130,81 @@ export const articles: readonly Article[] = [
     ],
   },
   {
+    slug: "go-no-go-framework",
+    category: "實戰指南",
+    date: "2026-04-02",
+    title: "跨境 Go / No-Go 決策框架：我們怎麼判斷一個案子值不值得做",
+    summary:
+      "多數顧問的建議靠個人經驗，我們靠一套五維評分矩陣。這篇文章把 MBCPR 框架完整攤開，包含每個維度的紅線與一個真實案例的打分過程。",
+    readTime: "14 分鐘",
+    color: "gold",
+    content: [
+      "「我們該不該進這個市場？」是跨境決策最難的一個問題。難不是因為沒資訊，而是因為資訊太多、維度太多，老闆在會議桌上靠直覺下判斷，事後才發現漏掉關鍵變數。",
+      "我們在鹿飛內部用的決策框架叫 MBCPR，是五個維度的縮寫：Market（市場）、Barrier（門檻）、Competition（競爭）、Profitability（獲利）、Regulatory（法規）。每個維度我們打 0–100 分，各自有權重，加權後的總分直接對應到四種結論：Go、Conditional Go、Hold、No-Go。",
+      "## 為什麼要寫成框架？",
+      "兩個原因。第一，它強迫我們在接案前必須誠實地跑完整個流程——有時候客戶很想做，我們也很想接，但總分跑出來不到 60，那就該說「不」。第二，客戶有權利知道我們的判斷是怎麼得出來的。寫成框架就能攤在桌上討論，而不是靠「我們很有經驗」來說服你。",
+      "## 每個維度打什麼？",
+      "Market 評的是「這市場夠大嗎」。具體指標包括可觸達市場規模（SAM）、年複合成長率、消費者支付意願。紅線：如果 SAM 小於預估年營收的 20 倍，我們會建議換市場。",
+      "Barrier 評的是「進去的門檻多高」。包括認證要求、通路進入難度、在地化成本、合規風險。紅線：如果認證成本超過預估首年毛利的一半，直接 No-Go。",
+      "Competition 評的是「你打得過嗎」。包括 CR3（前三大品牌市佔總和）、競品的品牌護城河深度、弱點。紅線：CR3 超過 70% 我們不建議正面競爭。",
+      "Profitability 評的是「做得動嗎」。到岸成本、通路佣金、退貨預估、匯率風險。紅線：悲觀情境下淨利率低於 5% 我們會建議回頭調整產品或定價。",
+      "Regulatory 評的是「法規會不會突然改變」。包括政治風險、法規歷史、退出成本。",
+      "## 一個真實案例的打分",
+      "以我們服務過的某保健品進入北美 Costco 為例：Market 82（市場夠大）、Barrier 62（FDA 註冊可控但 Costco 關係是關鍵）、Competition 71（中位集中度）、Profitability 78（毛利空間充足）、Regulatory 80（北美法規穩定）。加權總分 74，結論是 Conditional Go——條件是配方需先調整符合北美口感偏好。",
+      "這個案子後來 6 個月內成功上架，首月銷量超標 40%。但關鍵不是結果好，而是我們在決策前就知道「哪裡是弱點」，所以提前補了。",
+      "## 想用這套框架評估你的產品？",
+      "如果你想知道你的產品跑一次 MBCPR 會得幾分，直接跟我們聊聊。30 分鐘的免費對話我們會幫你粗跑一次，不收費。",
+    ],
+  },
+  {
+    slug: "vietnam-market-entry-guide",
+    category: "市場趨勢",
+    date: "2026-03-20",
+    title: "越南市場進入指南：台灣品牌該知道的 5 個關鍵",
+    summary:
+      "越南是東南亞經濟成長最快的市場之一，但多數台灣品牌進去後才發現通路結構、消費習慣、物流生態都跟台灣完全不同。這篇整理你該先知道的 5 件事。",
+    readTime: "9 分鐘",
+    color: "sky",
+    content: [
+      "越南的中產階級人口預計在 2026 年達到 4,400 萬，比台灣總人口還多一倍。對台灣品牌來說，越南既是生產基地也是消費市場——這個雙重身份讓它成為跨境佈局最值得評估的選項之一。但我們過去幾年陪客戶進越南的經驗告訴我們：進去之前你必須先搞清楚 5 件事。",
+      "## 1. 電商通路比你想像的分散",
+      "Shopee、Lazada 是主力，但 TikTok Shop 在越南的成長速度超乎想像——尤其是年輕族群的消費行為已經從「先搜尋再購買」轉變成「在直播間衝動下單」。單一通路的策略在越南行不通，你至少要同時經營 2–3 個通路才能觸及不同世代。",
+      "## 2. 地理分布造成的兩個市場",
+      "胡志明市（南越）與河內（北越）幾乎是兩個完全不同的市場。南越消費力較強、對進口品牌接受度高、價格敏感度相對低；北越更保守、對品質要求更嚴、更看品牌信譽。一個行銷策略打全越南通常兩邊都打不好。",
+      "## 3. 通路商的帳期普遍比台灣長",
+      "越南的通路商付款週期通常 60–90 天，部分大型通路甚至到 120 天。台灣品牌如果沒準備足夠的週轉金，進去之後容易被現金流壓垮——這是我們看過最多案例中招的地方。",
+      "## 4. 物流成本可能比你預期高",
+      "越南的路況和倉儲基礎設施還在發展中，到最後一哩的物流成本常常超過品牌預估。尤其是從胡志明市配送到南部其他省份，運費可能是台灣宅配的 3–4 倍。建議在定價時把物流成本「預算 × 1.3」當做安全係數。",
+      "## 5. 在地合作夥伴的品質落差極大",
+      "越南的顧問公司和代理商品質落差極大，從「世界級專業」到「收了錢就消失」都有。我們的建議是：不要光靠 Google 或 LinkedIn 找，一定要透過既有人脈介紹，而且至少見面談過 2–3 次才能確認對方的可靠度。",
+      "## 總結",
+      "越南是個值得進的市場，但它不是「東南亞版的台灣」。你的心態要調整成「這是一個完全不同的地方」而不是「這是一個便宜版的市場」。",
+    ],
+  },
+  {
+    slug: "product-testing-best-practices",
+    category: "實戰指南",
+    date: "2026-03-10",
+    title: "產品測試該怎麼做？避開三個常見的錯誤",
+    summary:
+      "產品測試是跨境路上最常被誤解的階段。很多品牌把它當成「小量出貨看反應」，結果數據沒用、時間白花。這篇拆解真正有用的產品測試該怎麼設計。",
+    readTime: "7 分鐘",
+    color: "ember",
+    content: [
+      "過去幾年我們陪客戶做過上百次產品測試，發現大家最常犯的錯誤不是「測試做得不夠」，而是「測試設計得沒用」。測試本身是對的，但方法錯了，數據就變成垃圾——你花了錢卻沒拿到可以做決策的資訊。",
+      "## 錯誤一：樣本數太少",
+      "很多品牌會說「我們先測 50 件看看反應」。50 件的問題不是量太少，而是數據噪音會完全蓋掉訊號。退貨率 10% 可能是「真的有問題」也可能只是「剛好那 5 個人有奇怪需求」——你無法區分。我們的經驗是至少要 200 件才能讓主要指標的變異降到可信範圍，更嚴謹的測試需要 500+。",
+      "## 錯誤二：測試期間同時做廣告",
+      "這是我們看過最常見的污染。品牌想「趁機也推廣一下」，結果自然流量被廣告污染，你根本無法判斷「這個產品真的有市場需求」還是「只是廣告打得好」。測試期最好完全關掉付費流量，讓你看到的是純自然表現。",
+      "## 錯誤三：只看銷量，不看「為什麼」",
+      "銷量好不代表產品真的對。我們有一個客戶測試期銷量爆表，但 Q3 我們發現 70% 的訂單來自同一個華人 Facebook 社團——意思是這個產品的觸及是靠「鄉愁購買」，不是真正的市場需求。這種銷量放大後會死得很慘。",
+      "## 正確的測試設計",
+      "一個有用的產品測試至少要回答四個問題：有沒有人買？買的人是誰（人口統計）？為什麼買（動機）？會不會再買（回購意願）？前兩個看數據就行，後兩個必須主動訪談——我們通常會對至少 10 位實際購買者做深度訪談，才能真正了解「產品 / 市場契合度」。",
+      "## 測試期要多久才夠？",
+      "最少 4 週，理想 6–8 週。短於 4 週數據還沒穩定；超過 8 週你已經在「做生意」而不是「測試」了。測試期結束後要有一個明確的決策點：放大、調整、還是放棄——不要卡在灰色地帶繼續燒錢。",
+    ],
+  },
+  {
     slug: "amazon-category-analysis",
     category: "實戰指南",
     date: "2026-01-25",
@@ -156,7 +231,26 @@ export function getArticleBySlug(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);
 }
 
+/**
+ * Per-slug cover image map. Each article has its own distinct image.
+ * Fallback order: exact slug match → title keyword match → generic.
+ */
+const SLUG_IMAGE_MAP: Record<string, string> = {
+  "southeast-asia-ecommerce-2026": "/images/insights/southeast-asia-ecommerce.jpg",
+  "first-time-export-checklist": "/images/insights/first-time-export-checklist.jpg",
+  "us-fda-registration-guide": "/images/insights/us-fda-registration.jpg",
+  "tradepilot-tariff-tutorial": "/images/insights/tradepilot-tariff.jpg",
+  "china-tariff-relocation-strategy": "/images/insights/china-relocation.jpg",
+  "amazon-category-analysis": "/images/insights/amazon-category.jpg",
+  // New articles — fallback to existing imagery until bespoke covers are ready
+  "go-no-go-framework": "/images/insights/first-time-export-checklist.jpg",
+  "vietnam-market-entry-guide": "/images/insights/southeast-asia-ecommerce.jpg",
+  "product-testing-best-practices": "/images/insights/amazon-category.jpg",
+};
+
 export function getArticleImage(article: Article): string {
+  if (SLUG_IMAGE_MAP[article.slug]) return SLUG_IMAGE_MAP[article.slug];
+  // Fallback to legacy generic images for any future articles
   if (article.title.includes("東南亞") || article.title.includes("產地轉移")) {
     return "/insight-sea.jpg";
   }

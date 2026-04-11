@@ -1,14 +1,35 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
+
+/**
+ * CTASection — final conversion block.
+ * CTA rule (site-wide): primary "聊聊你的產品" → MessageBox,
+ * secondary "先做 2 分鐘評估" → /assess. No other labels.
+ */
 
 export function CTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="bg-navy py-[60px] md:py-[80px] px-5 md:px-10">
-      <div className="max-w-[1400px] mx-auto text-center">
+    <section className="relative bg-navy py-[60px] md:py-[80px] px-5 md:px-10 overflow-hidden">
+      {/* Background executive image */}
+      <Image
+        src="/images/cta/cta-executive.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        aria-hidden="true"
+        className="object-cover object-[70%_center] img-navy-unify opacity-50"
+      />
+      {/* Navy gradient from left so text stays readable */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40"
+      />
+      <div className="relative z-10 max-w-[1400px] mx-auto text-center">
         <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold/70 mb-3">
           開始
         </div>
@@ -87,25 +108,26 @@ export function CTASection() {
           <br />
           都值得試試看
         </h2>
-        <p className="text-[15px] text-white/50 max-w-[440px] mx-auto leading-[1.7] mb-10 font-normal">
-          不確定從哪開始？沒關係。兩分鐘評估，找到你的起點。
+        <p className="text-[15px] text-white/55 max-w-[460px] mx-auto leading-[1.7] mb-10 font-normal">
+          不確定從哪開始？先聊聊，不收費、不承諾、不賣課。
+          我們會老實告訴你值不值得出去。
         </p>
-        <div className="flex justify-center gap-6 flex-wrap">
-          <Link
-            href="/assess"
-            className="inline-block border border-white text-white px-10 py-4 rounded-none text-[13px] font-semibold tracking-[1px] uppercase transition-all hover:bg-white hover:text-navy"
-          >
-            免費出海評估
-          </Link>
+        <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
           <button
             onClick={open}
-            className="group inline-flex items-center gap-2 text-white/70 text-[14px] font-semibold tracking-[0.3px] cursor-pointer transition-colors duration-300 hover:text-white"
+            className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+          >
+            聊聊你的產品 →
+          </button>
+          <Link
+            href="/assess"
+            className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium tracking-[0.3px] transition-colors duration-300 hover:text-white"
           >
             <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
-              直接聊聊
+              先做 2 分鐘評估
             </span>
-            <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
-          </button>
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+          </Link>
         </div>
       </div>
     </section>

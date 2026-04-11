@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { articles, categories, getArticleImage } from "@/data/articles";
 import type { Category } from "@/data/articles";
+import { useMessageBox } from "../MessageBox";
 
 /* ───────── style maps ───────── */
 
@@ -18,8 +20,32 @@ const colorMap: Record<string, string> = {
 
 type FilterCategory = Category | "全部";
 
-export function InsightsPage() {
-  const [active, setActive] = useState<FilterCategory>("全部");
+const VALID_CATEGORIES: readonly FilterCategory[] = [
+  "全部",
+  "市場趨勢",
+  "實戰指南",
+  "法規解讀",
+  "工具推薦",
+];
+
+function isValidCategory(value: string | null): value is FilterCategory {
+  return value !== null && VALID_CATEGORIES.includes(value as FilterCategory);
+}
+
+function InsightsPageInner() {
+  const searchParams = useSearchParams();
+  const catParam = searchParams.get("cat");
+  const initial: FilterCategory = isValidCategory(catParam) ? catParam : "全部";
+  const [active, setActive] = useState<FilterCategory>(initial);
+  const { open } = useMessageBox();
+
+  // Sync URL → state when back/forward nav changes the query
+  useEffect(() => {
+    if (isValidCategory(catParam) && catParam !== active) {
+      setActive(catParam);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [catParam]);
 
   const filtered =
     active === "全部"
@@ -30,9 +56,9 @@ export function InsightsPage() {
     <section className="bg-white min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
       <div className="max-w-[1000px] mx-auto">
         <div className="section-label">洞察與資源</div>
-        <h1 className="section-heading">出海路上，知識就是捷徑</h1>
+        <h1 className="section-heading">跨境路上，知識就是捷徑</h1>
         <p className="section-desc">
-          市場趨勢、實戰經驗、法規解讀——幫你用最少的時間搞懂出海。
+          市場趨勢、實戰經驗、法規解讀——幫你用最少的時間搞懂跨境這件事。
         </p>
 
         {/* Category chips */}
@@ -105,21 +131,46 @@ export function InsightsPage() {
         )}
 
         {/* Bottom CTA */}
-        <div className="mt-14 p-8 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-center">
+        <div className="mt-14 p-8 bg-cream rounded-none text-center">
           <h3 className="text-[18px] font-medium mb-2">
-            看完文章，想知道你的產品適不適合出海？
+            看完文章，想聊聊你的狀況？
           </h3>
-          <p className="text-[14px] text-tx2 font-normal mb-5">
-            兩分鐘免費評估，找到你的出海起點。
+          <p className="text-[14px] text-tx2 font-normal mb-6 max-w-[440px] mx-auto">
+            聊聊，不收費、不承諾。我們會老實告訴你值不值得一試。
           </p>
-          <Link
-            href="/assess"
-            className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-gold-l"
-          >
-            免費出海評估 →
-          </Link>
+          <div className="flex justify-center items-center gap-6 flex-wrap">
+            <button
+              onClick={open}
+              className="inline-block bg-gold text-navy px-8 py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-gold-l cursor-pointer"
+            >
+              聊聊你的產品 →
+            </button>
+            <Link
+              href="/assess"
+              className="group inline-flex items-center gap-2 text-tx2 text-[14px] font-medium transition-colors hover:text-navy"
+            >
+              <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
+                先做 2 分鐘評估
+              </span>
+              <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+export function InsightsPage() {
+  return (
+    <Suspense
+      fallback={
+        <section className="bg-white min-h-screen pt-[120px] pb-[80px] px-5 md:px-10">
+          <div className="max-w-[1000px] mx-auto" />
+        </section>
+      }
+    >
+      <InsightsPageInner />
+    </Suspense>
   );
 }
