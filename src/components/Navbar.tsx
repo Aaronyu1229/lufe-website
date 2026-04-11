@@ -25,16 +25,29 @@ const navItems: readonly NavItem[] = [
   { key: "insights", label: "洞察", href: "/insights" },
 ];
 
+/**
+ * Pages whose first-screen hero is navy — navbar starts transparent
+ * and overlays the hero, turns white on scroll / hover / menu open.
+ * Exact match only (so /services/[stage] keeps the solid-white navbar).
+ */
+const DARK_HERO_PATHS: readonly string[] = [
+  "/",
+  "/services",
+  "/cases",
+  "/about",
+  "/insights",
+];
+
 export function Navbar() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isDarkHero = DARK_HERO_PATHS.includes(pathname ?? "");
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimer = useRef<number | null>(null);
 
-  const useDark = !isHome || scrolled || hovered || activeMenu !== null;
+  const useDark = !isDarkHero || scrolled || hovered || activeMenu !== null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -78,10 +91,10 @@ export function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 z-100"
       onMouseEnter={() => {
-        if (isHome) setHovered(true);
+        if (isDarkHero) setHovered(true);
       }}
       onMouseLeave={() => {
-        if (isHome) setHovered(false);
+        if (isDarkHero) setHovered(false);
         scheduleClose();
       }}
     >
