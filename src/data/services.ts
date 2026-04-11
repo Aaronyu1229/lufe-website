@@ -190,7 +190,7 @@ const productTesting: Stage = {
   purpose:
     "評估報告告訴你「應該可以」，但真的出海前你還需要實證。這個階段我們用小批量投放的方式，讓真實消費者用錢投票。數據會告訴你：這個定價站得住嗎？這個包裝打動人嗎？這個通路導得了流嗎？",
   image: "/images/services/stage-02-product-test.jpg",
-  imageAlt: "產品包裝與品質檢測 — 小批量測試",
+  imageAlt: "消費者在貨架前挑選商品 — 真實市場反應",
   outcomes: [
     "一組真實的銷售數據（不是問卷調查的偏好）",
     "不同定價 / 包裝 / 通路組合的 AB 測試結果",
