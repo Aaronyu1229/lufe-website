@@ -38,7 +38,7 @@ export function ServicesPage() {
   return (
     <>
       {/* ─── Hero ─── */}
-      <section className="relative bg-navy pt-[140px] md:pt-[180px] pb-[80px] md:pb-[100px] px-5 md:px-10 overflow-hidden">
+      <section className="relative bg-navy pt-[130px] md:pt-[170px] pb-[70px] md:pb-[90px] px-5 md:px-10 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/services/services-hero-dhl.jpg"
@@ -46,23 +46,106 @@ export function ServicesPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.28]"
+            className="object-cover opacity-[0.3]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/55 to-navy" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/75 via-navy/55 to-navy" />
         </div>
 
-        <div className="relative max-w-[1100px] mx-auto text-center">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            服務
+        {/* Soft gold glow top-right */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 55% 40% at 80% 0%, rgba(212,168,92,0.14) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative max-w-[1200px] mx-auto">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
+            <Link href="/" className="hover:text-gold transition-colors">首頁</Link>
+            <span className="mx-2 text-white/30">/</span>
+            <span className="text-white/75">服務</span>
+          </nav>
+
+          {/* Eyebrow — bilingual */}
+          <div className="flex items-center gap-3 mb-5">
+            <span className="block w-8 h-px bg-gold" />
+            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
+              服務 · SERVICES
+            </span>
           </div>
-          <h1 className="font-heading text-[clamp(30px,4.5vw,54px)] text-white leading-[1.1] font-light tracking-[-0.6px] mb-6">
+
+          {/* Headline */}
+          <h1 className="font-heading text-[clamp(34px,5vw,60px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-6 max-w-[900px]">
             跨境不難，難的是沒人告訴你
             <br />
             <span className="font-normal text-gold">完整的路怎麼走</span>
           </h1>
-          <p className="text-[16px] md:text-[18px] text-white/70 max-w-[620px] mx-auto font-light leading-[1.65]">
+          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[620px] font-light leading-[1.75] mb-12 md:mb-14">
             我們不只做其中一段，而是從評估到落地，幫你把整條路串起來。
           </p>
+
+          {/* 4-stage mini path preview */}
+          <div className="hidden md:block mb-12">
+            <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-white/40 mb-4">
+              完整路徑
+            </div>
+            <div className="relative flex items-center justify-between gap-3">
+              {/* Connector line */}
+              <div className="absolute left-0 right-0 top-[18px] h-px bg-gradient-to-r from-sky/50 via-gold/50 to-ember/50" />
+              {STAGE_ORDER.map((slug, i) => {
+                const stage = STAGES[slug];
+                const c = ACCENT_CLASSES[stage.accent];
+                return (
+                  <Link
+                    key={slug}
+                    href={`/services/${slug}`}
+                    className="group relative flex-1 text-left"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <span
+                        className={`relative z-10 w-[38px] h-[38px] flex items-center justify-center border bg-navy ${c.border} ${c.text} text-[13px] font-semibold tabular-nums transition-all group-hover:scale-110`}
+                      >
+                        {stage.num}
+                      </span>
+                      {i < STAGE_ORDER.length - 1 && (
+                        <span className="text-white/20 text-[11px]">→</span>
+                      )}
+                    </div>
+                    <div className="pl-[2px]">
+                      <div className={`text-[13.5px] font-semibold text-white group-hover:${c.text} transition-colors leading-tight`}>
+                        {stage.title}
+                      </div>
+                      <div className="text-[11px] text-white/40 mt-0.5">
+                        {stage.timeline}
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Stats strip */}
+          <div className="border-t border-white/10 pt-7 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
+            {[
+              { n: "42+", l: "年國際物流實戰" },
+              { n: "500+", l: "出口案件" },
+              { n: "30+", l: "國家覆蓋" },
+              { n: "4", l: "核心階段" },
+            ].map((s) => (
+              <div key={s.l}>
+                <div className="font-heading text-[24px] md:text-[28px] font-light text-gold leading-none tabular-nums">
+                  {s.n}
+                </div>
+                <div className="text-[11px] md:text-[11.5px] text-white/50 mt-1.5 tracking-[0.5px]">
+                  {s.l}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

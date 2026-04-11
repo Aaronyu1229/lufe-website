@@ -32,16 +32,114 @@ export function CasesPage() {
   );
 
   return (
-    <section className="bg-white min-h-screen pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
-      <div className="max-w-[1100px] mx-auto">
-        <div className="section-label">案例</div>
-        <h1 className="section-heading">
-          這些企業都找到了自己的路
-        </h1>
-        <p className="section-desc">
-          不同產業、不同市場，但都用對的方法做了對的決策。點進去看完整的思考過程。
-        </p>
+    <>
+      {/* ─── Hero ─── */}
+      <section className="relative bg-navy pt-[130px] md:pt-[170px] pb-[70px] md:pb-[90px] px-5 md:px-10 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/cases/cases-hero-collab.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-[0.32]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/55 to-navy" />
+        </div>
 
+        {/* Soft gold glow */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 50% 40% at 20% 10%, rgba(212,168,92,0.14) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative max-w-[1200px] mx-auto">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
+            <Link href="/" className="hover:text-gold transition-colors">首頁</Link>
+            <span className="mx-2 text-white/30">/</span>
+            <span className="text-white/75">案例</span>
+          </nav>
+
+          {/* Eyebrow — bilingual */}
+          <div className="flex items-center gap-3 mb-5">
+            <span className="block w-8 h-px bg-gold" />
+            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
+              案例 · CASE STUDIES
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="font-heading text-[clamp(34px,5vw,60px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-6 max-w-[900px]">
+            這些企業都找到了
+            <br />
+            <span className="font-normal text-gold">自己的路</span>
+          </h1>
+          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[640px] font-light leading-[1.75] mb-12 md:mb-14">
+            不同產業、不同市場，但都用對的方法做了對的決策。每一個案例都是一次真實的思考過程。
+          </p>
+
+          {/* 4 case preview chips */}
+          <div className="hidden md:block mb-12">
+            <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-white/40 mb-4">
+              收錄案例
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {CASES.map((c) => (
+                <a
+                  key={c.slug}
+                  href={`#case-${c.slug}`}
+                  className="group bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-gold/40 p-4 transition-all"
+                >
+                  <div className="flex items-baseline gap-2 mb-1.5 flex-wrap">
+                    {c.tags.slice(0, 1).map((t) => (
+                      <span
+                        key={t.label}
+                        className="text-[10px] text-white/50 uppercase tracking-[1px]"
+                      >
+                        {t.label}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="text-[13px] font-semibold text-white leading-tight mb-1.5 group-hover:text-gold transition-colors line-clamp-2">
+                    {c.title}
+                  </div>
+                  <div className="font-heading text-[15px] text-gold font-normal tabular-nums">
+                    {c.num}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Stats strip */}
+          <div className="border-t border-white/10 pt-7 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
+            {[
+              { n: "4", l: "真實案例" },
+              { n: "4", l: "產業別" },
+              { n: "2", l: "主要市場" },
+              { n: "100%", l: "真實數據" },
+            ].map((s) => (
+              <div key={s.l}>
+                <div className="font-heading text-[24px] md:text-[28px] font-light text-gold leading-none tabular-nums">
+                  {s.n}
+                </div>
+                <div className="text-[11px] md:text-[11.5px] text-white/50 mt-1.5 tracking-[0.5px]">
+                  {s.l}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Filters + Card wall ─── */}
+      <section className="bg-white pt-[60px] md:pt-[80px] pb-[60px] md:pb-[80px] px-5 md:px-10">
+        <div className="max-w-[1100px] mx-auto">
         {/* Filters */}
         <div className="mt-10 mb-8 space-y-4">
           <div>
@@ -96,8 +194,9 @@ export function CasesPage() {
             {filtered.map((c) => (
               <Link
                 key={c.slug}
+                id={`case-${c.slug}`}
                 href={`/cases/${c.slug}`}
-                className="group bg-white rounded-none text-left cursor-pointer transition-all shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg relative overflow-hidden border border-bd"
+                className="group bg-white rounded-none text-left cursor-pointer transition-all shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg relative overflow-hidden border border-bd scroll-mt-[100px]"
               >
                 <div className="h-[200px] overflow-hidden relative">
                   <Image
@@ -143,8 +242,9 @@ export function CasesPage() {
 
         {/* Bottom CTA */}
         <CasesListBottomCTA />
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }
 

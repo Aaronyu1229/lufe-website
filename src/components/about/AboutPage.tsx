@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
 
 /* ───────── data ───────── */
@@ -150,48 +151,104 @@ export function AboutPage() {
 
   return (
     <>
-      {/* ─── Founder Story (with writing-notebook bg) ─── */}
+      {/* ─── Founder Story (executive window hero) ─── */}
       <section
         id="story"
-        className="relative bg-navy text-white pt-[120px] pb-[80px] px-5 md:px-10 overflow-hidden scroll-mt-[80px]"
+        className="relative bg-navy text-white pt-[130px] md:pt-[170px] pb-[80px] md:pb-[100px] px-5 md:px-10 overflow-hidden scroll-mt-[80px]"
       >
-        {/* Subtle candid-writing bg */}
+        {/* Executive window photo — conveys senior, reflective experience */}
         <div className="absolute inset-0">
           <Image
-            src="/images/about/founder-writing.jpg"
+            src="/images/about/about-hero-executive.jpg"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.18]"
+            className="object-cover object-[65%_center] opacity-[0.35]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/35" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy" />
         </div>
 
-        <div className="relative max-w-[900px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            關於我們
+        {/* Soft gold glow */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 50% 40% at 15% 10%, rgba(212,168,92,0.15) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative max-w-[1200px] mx-auto">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
+            <Link href="/" className="hover:text-gold transition-colors">首頁</Link>
+            <span className="mx-2 text-white/30">/</span>
+            <span className="text-white/75">關於我們</span>
+          </nav>
+
+          {/* Eyebrow — bilingual */}
+          <div className="flex items-center gap-3 mb-5">
+            <span className="block w-8 h-px bg-gold" />
+            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
+              關於我們 · ABOUT LUFÉ
+            </span>
           </div>
-          <h1 className="font-heading text-[clamp(28px,3.5vw,42px)] leading-[1.2] font-light tracking-[-0.5px] mb-10">
+
+          {/* Headline */}
+          <h1 className="font-heading text-[clamp(34px,5vw,58px)] leading-[1.1] font-light tracking-[-0.8px] mb-7 max-w-[880px]">
             每一家想走向世界的企業
             <br />
-            <span className="font-light text-gold">都值得一個懂路的人</span>
+            <span className="font-normal text-gold">都值得一個懂路的人</span>
           </h1>
 
-          {/* Avatar + Name */}
-          <div className="flex items-center gap-6 mb-10 border-l-4 border-gold pl-6 py-2">
-            <div className="w-[88px] h-[88px] rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[28px] font-heading font-semibold shrink-0 shadow-lg shadow-gold/20">
+          {/* Signature quote */}
+          <p className="text-[15.5px] md:text-[17px] text-white/60 max-w-[620px] font-light leading-[1.8] italic mb-12">
+            「別人幫你開車，我們幫你找路。」
+          </p>
+
+          {/* Founder block — larger, with stats row */}
+          <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 mb-10 border-l-[3px] border-gold pl-6 md:pl-8 py-3 max-w-[780px]">
+            <div className="w-[108px] h-[108px] md:w-[120px] md:h-[120px] rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[32px] md:text-[36px] font-heading font-semibold shrink-0 shadow-lg shadow-gold/20">
               AY
             </div>
-            <div>
-              <div className="text-[20px] font-semibold">Aaron Yu</div>
-              <div className="text-[14px] text-gold font-medium">
+            <div className="flex-1">
+              <div className="text-[22px] md:text-[24px] font-semibold leading-tight">Aaron Yu</div>
+              <div className="text-[14px] md:text-[15px] text-gold font-medium mt-1">
                 鹿飛 LUFÉ 創辦人
               </div>
-              <div className="text-[12px] text-white/50 font-normal mt-1">
-                42+ 年國際物流實戰・500+ 出口案件・30+ 國家覆蓋
-              </div>
+              <p className="text-[13px] md:text-[13.5px] text-white/55 font-normal mt-3 leading-[1.75] max-w-[480px]">
+                從國際物流第一線走到全程跨境陪跑。四十二年，五百多個案子，三十多個國家——這些不是數字，是我看過多少產品走對、走錯、走回頭路的經驗值。
+              </p>
             </div>
+          </div>
+
+          {/* Stats strip */}
+          <div className="border-t border-white/10 pt-7 grid grid-cols-3 gap-5 md:gap-10 max-w-[780px]">
+            {[
+              { n: "42+", l: "年國際物流實戰" },
+              { n: "500+", l: "出口案件" },
+              { n: "30+", l: "國家覆蓋" },
+            ].map((s) => (
+              <div key={s.l}>
+                <div className="font-heading text-[26px] md:text-[30px] font-light text-gold leading-none tabular-nums">
+                  {s.n}
+                </div>
+                <div className="text-[11px] md:text-[11.5px] text-white/50 mt-1.5 tracking-[0.5px]">
+                  {s.l}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Story: 3 parts ─── */}
+      <section className="bg-navy text-white py-[70px] md:py-[90px] px-5 md:px-10 border-t border-white/5">
+        <div className="max-w-[900px] mx-auto">
+          <div className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold mb-6">
+            創辦人的話
           </div>
 
           {/* Story: 3 parts */}
