@@ -83,6 +83,9 @@ export function HeroSection() {
   const [paused, setPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [readyMap, setReadyMap] = useState<Record<number, boolean>>({});
+  // Only mount videos as they approach being active — keeps initial page load lean.
+  // Slide 0 mounts immediately (LCP); others mount when they become the active index.
+  const [mountedMap, setMountedMap] = useState<Record<number, boolean>>({ 0: true });
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const progressKey = useRef(0);
 
@@ -112,6 +115,16 @@ export function HeroSection() {
     }, AUTOPLAY_MS);
     return () => window.clearTimeout(timer);
   }, [activeIndex, paused, prefersReducedMotion]);
+
+  // Mount the active slide and warm up the next one so its video is ready before
+  // the cross-fade. Never un-mounts to avoid re-downloading once seen.
+  useEffect(() => {
+    const nextIndex = (activeIndex + 1) % slides.length;
+    setMountedMap((prev) => {
+      if (prev[activeIndex] && prev[nextIndex]) return prev;
+      return { ...prev, [activeIndex]: true, [nextIndex]: true };
+    });
+  }, [activeIndex]);
 
   // Play the active slide's video; pause the others. Apply per-slide playbackRate.
   useEffect(() => {
@@ -160,6 +173,7 @@ export function HeroSection() {
             ? slide.media.portraitSrc
             : slide.media.src;
         const ready = readyMap[i] ?? false;
+        const mounted = mountedMap[i] ?? false;
         return (
           <div
             key={slide.id}
@@ -172,26 +186,28 @@ export function HeroSection() {
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url('${slide.media.poster}')` }}
             />
-            <video
-              ref={(el) => {
-                videoRefs.current[i] = el;
-              }}
-              key={useSrc}
-              className="bg-video"
-              style={{
-                opacity: ready ? 1 : 0,
-                transition: "opacity 800ms ease-out",
-              }}
-              autoPlay={i === 0}
-              loop
-              muted
-              playsInline
-              preload={i === 0 ? "auto" : "metadata"}
-              poster={slide.media.poster}
-              onCanPlay={() => handleCanPlay(i)}
-            >
-              <source src={useSrc} type="video/mp4" />
-            </video>
+            {mounted && (
+              <video
+                ref={(el) => {
+                  videoRefs.current[i] = el;
+                }}
+                key={useSrc}
+                className="bg-video"
+                style={{
+                  opacity: ready ? 1 : 0,
+                  transition: "opacity 800ms ease-out",
+                }}
+                autoPlay={i === 0}
+                loop
+                muted
+                playsInline
+                preload={i === 0 ? "auto" : "metadata"}
+                poster={slide.media.poster}
+                onCanPlay={() => handleCanPlay(i)}
+              >
+                <source src={useSrc} type="video/mp4" />
+              </video>
+            )}
           </div>
         );
       })}
