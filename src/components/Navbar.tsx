@@ -74,10 +74,15 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
-  // Close mega menu on route change
+  // Close mega menu on route change. Also reset `hovered` — when the user
+  // clicks a nav link, their cursor is still physically over the navbar
+  // on the new page, but React's onMouseEnter won't re-fire (no boundary
+  // crossed). Without this reset, a dark-hero page would stay stuck on
+  // the white navbar until the cursor leaves and re-enters the header.
   useEffect(() => {
     setActiveMenu(null);
     setMobileOpen(false);
+    setHovered(false);
   }, [pathname]);
 
   const openMenu = (key: Exclude<MenuKey, null>) => {
