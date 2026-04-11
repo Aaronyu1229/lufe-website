@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
+import { SubsidyCard } from "@/components/SubsidyCard";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -45,6 +46,7 @@ export default function RootLayout({
           <main id="main-content">{children}</main>
           <Footer />
           <MessageBox />
+          <SubsidyCard />
         </MessageBoxProvider>
       </body>
     </html>
