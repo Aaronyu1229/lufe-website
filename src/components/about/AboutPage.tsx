@@ -164,7 +164,7 @@ export function AboutPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[65%_center] opacity-[0.35]"
+            className="object-cover object-[65%_center] opacity-[0.35] animate-hero-kenburns"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/35" />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy" />

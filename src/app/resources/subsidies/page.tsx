@@ -58,7 +58,7 @@ export default function SubsidiesPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.22]"
+            className="object-cover opacity-[0.22] animate-hero-kenburns"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/75 via-navy/65 to-navy" />
         </div>

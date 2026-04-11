@@ -88,7 +88,7 @@ export function OptimizePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.18]"
+            className="object-cover opacity-[0.18] animate-hero-kenburns"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/60 to-navy" />
         </div>

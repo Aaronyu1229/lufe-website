@@ -135,6 +135,26 @@ body {
 .scrollbar-none::-webkit-scrollbar { display: none; }
 .scrollbar-none { scrollbar-width: none; }
 
+/* Subtle Ken Burns — slow zoom + pan for static sub-page hero images.
+   Echoes the home page's video motion without heavy video assets.
+   Min scale 1.05 ensures the image still fully covers during translate.
+   28s duration feels ambient, not distracting. */
+@keyframes hero-ken-burns {
+  0%   { transform: scale(1.05) translate(0, 0); }
+  50%  { transform: scale(1.12) translate(-1.2%, -0.8%); }
+  100% { transform: scale(1.05) translate(0, 0); }
+}
+.animate-hero-kenburns {
+  animation: hero-ken-burns 28s ease-in-out infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-kenburns {
+    animation: none;
+    transform: scale(1.02);
+  }
+}
+
 /* SubsidyCard slide-in from bottom-right */
 @keyframes subsidy-slide-in {
   0% {

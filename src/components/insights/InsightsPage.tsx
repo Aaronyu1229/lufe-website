@@ -65,7 +65,7 @@ function InsightsPageInner() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.3]"
+            className="object-cover opacity-[0.3] animate-hero-kenburns"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-navy/40" />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-transparent to-navy" />

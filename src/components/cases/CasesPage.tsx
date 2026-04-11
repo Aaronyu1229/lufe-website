@@ -45,7 +45,7 @@ export function CasesPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.28]"
+            className="object-cover opacity-[0.28] animate-hero-kenburns"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
         </div>
