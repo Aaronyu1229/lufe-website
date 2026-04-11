@@ -1,508 +1,828 @@
 "use client";
 
-import { useState } from "react";
+/**
+ * AssessWizard — β 策略（案例後暖身轉化器）
+ *
+ * 舊版問題：
+ *   - 4 題問卷 → 紅綠燈 + 免費諮詢，價值交換不對等
+ *   - if/else 邏輯肉眼可見，TA 識破後信任反而下降
+ *   - 「免費評估」框架被 B2B 決策者視為廉價
+ *
+ * 新版策略：
+ *   - 定位為「比對你的處境跟哪個案例最像」，而非「幫你評估」
+ *   - 3 題（階段 / 卡點 / 市場）直接對上案例簽章
+ *   - 結果 = 真實案例 + 吻合度 X/3 + 誠實的 verdict
+ *   - 入口可從 /cases 帶 ?case=slug 鎖定焦點案例
+ *   - 反向高冷：首頁「請先別按——我們人手很有限」過濾閒逛者
+ */
+
+import { Suspense, useMemo, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useMessageBox } from "../MessageBox";
+import { CASES, CASE_CARD_META, getCase, type CaseStudy } from "@/data/cases";
 
-type Route = "A" | "C" | null;
-type Step = "entry" | "q1" | "q2" | "q3" | "q4" | "result";
+/* ────────── Types ────────── */
 
-const productCategories = [
-  "食品 / 保健品",
-  "美妝 / 日用品",
-  "電子 / 3C",
-  "服飾 / 時尚",
-  "農產品 / 生鮮",
-  "其他",
+type Stage = "idea" | "tested" | "scaling";
+type Blocker = "market" | "channel" | "cost" | "execution";
+type AssessMarket = "us" | "sea" | "japan" | "europe" | "other";
+
+interface Answers {
+  readonly stage: Stage | null;
+  readonly blocker: Blocker | null;
+  readonly market: AssessMarket | null;
+}
+
+type Dim = "stage" | "blocker" | "market";
+
+interface CaseSignature {
+  readonly slug: string;
+  readonly stage: Stage;
+  readonly blocker: Blocker;
+  readonly market: AssessMarket;
+}
+
+interface MatchResult {
+  readonly slug: string;
+  readonly score: number; // 0-3
+  readonly matched: readonly Dim[];
+  readonly missed: readonly Dim[];
+}
+
+type Step = 0 | 1 | 2 | 3 | 4;
+
+/* ────────── Case signatures ──────────
+ * 每個案例當初客戶找上門時的真實處境，用來跟用戶答案做 dim-by-dim 比對。
+ */
+
+const CASE_SIGNATURES: readonly CaseSignature[] = [
+  // 保健品進 Costco：已經在國內穩定、想放大到北美、卡在通路不認識你
+  { slug: "costco-health", stage: "scaling", blocker: "channel", market: "us" },
+  // 電子廠關稅轉移：已經在出海、卡在成本被吃掉、美國客戶
+  { slug: "electronics-tariff", stage: "scaling", blocker: "cost", market: "us" },
+  // 皮鞋品牌轉襪子：少量試過但沒跑起來、卡在沒人做執行、北美
+  { slug: "shoe-brand", stage: "tested", blocker: "execution", market: "us" },
+  // 珍奶進菲律賓：已經在出海、卡在落地執行、東南亞
+  { slug: "bubble-tea", stage: "scaling", blocker: "execution", market: "sea" },
 ];
 
-const targetMarkets = ["美國", "東南亞", "其他"];
+/* ────────── Pure matching ────────── */
 
-const revenueRanges = [
-  "500 萬以下",
-  "500 萬 – 3,000 萬",
-  "3,000 萬 – 1 億",
-  "1 億以上",
+function computeMatch(answers: Answers, sig: CaseSignature): MatchResult {
+  const matched: Dim[] = [];
+  const missed: Dim[] = [];
+
+  if (answers.stage === sig.stage) matched.push("stage");
+  else missed.push("stage");
+
+  if (answers.blocker === sig.blocker) matched.push("blocker");
+  else missed.push("blocker");
+
+  if (answers.market === sig.market) matched.push("market");
+  else missed.push("market");
+
+  return {
+    slug: sig.slug,
+    score: matched.length,
+    matched,
+    missed,
+  };
+}
+
+function rankMatches(answers: Answers): readonly MatchResult[] {
+  return [...CASE_SIGNATURES]
+    .map((sig) => computeMatch(answers, sig))
+    .sort((a, b) => b.score - a.score);
+}
+
+/* ────────── Verdict copy ────────── */
+
+const DIM_LABEL: Record<Dim, string> = {
+  stage: "階段",
+  blocker: "卡點",
+  market: "市場",
+};
+
+function buildVerdict(result: MatchResult): { readonly headline: string; readonly body: string } {
+  const m = result.matched.map((d) => DIM_LABEL[d]);
+  const miss = result.missed.map((d) => DIM_LABEL[d]);
+
+  if (result.score === 3) {
+    return {
+      headline: "你的處境幾乎就是他們當時遇到的事",
+      body: "階段、卡點、市場三個都對上。這份案例值得你讀到最後一個字——他們當初的判斷過程，多半能直接用在你身上。",
+    };
+  }
+  if (result.score === 2) {
+    return {
+      headline: `你們在${m.join("和")}上是同路人`,
+      body: `一樣的${m.join("、")}，差在${miss.join("、")}不同——所以請把他們的「判斷邏輯」帶走，但「具體做法」要換成你的版本。這份案例可以看，但不要照抄。`,
+    };
+  }
+  if (result.score === 1) {
+    return {
+      headline: `只有${m.join("")}這一點相通`,
+      body: `其他兩個維度都不一樣。可以當背景故事讀，但如果你想看更接近的案例，建議直接聊聊——我們手上還有一些沒放上網的。`,
+    };
+  }
+  return {
+    headline: "這個案例跟你沒有重疊",
+    body: "三個維度都不同。別浪費時間硬套——你的處境需要另外聊，我們直接幫你看有沒有接得起來的經驗。",
+  };
+}
+
+/* ────────── Question definitions ────────── */
+
+interface Option<T extends string> {
+  readonly value: T;
+  readonly label: string;
+  readonly hint?: string;
+}
+
+const STAGE_OPTIONS: readonly Option<Stage>[] = [
+  { value: "idea", label: "還在台灣賣，沒真的外銷過", hint: "產品成熟，想踏出第一步" },
+  { value: "tested", label: "少量試過外銷，但還沒穩定", hint: "跑過單，但抓不到節奏" },
+  { value: "scaling", label: "已經在出海，想放大或修正", hint: "在跑了，但卡住某處" },
 ];
 
-const concernsA = [
-  "不知道有沒有市場",
-  "不懂當地法規",
-  "物流太複雜",
-  "預算有限",
-  "找不到通路",
+const BLOCKER_OPTIONS: readonly Option<Blocker>[] = [
+  { value: "market", label: "不知道該去哪個市場", hint: "方向還沒定" },
+  { value: "channel", label: "找不到對的通路或合作夥伴", hint: "進不去、進得去也沒聲量" },
+  { value: "cost", label: "成本算不清、毛利被吃掉", hint: "關稅、物流、匯率在咬" },
+  { value: "execution", label: "方向知道，但沒人真的做執行", hint: "顧問給策略，貿易商只出貨" },
 ];
 
-const concernsC = [
-  "物流成本太高",
-  "通關總出問題",
-  "通路表現不如預期",
-  "合規風險不確定",
-  "想進新市場",
+const MARKET_OPTIONS: readonly Option<AssessMarket>[] = [
+  { value: "us", label: "美國 / 北美" },
+  { value: "sea", label: "東南亞" },
+  { value: "japan", label: "日韓" },
+  { value: "europe", label: "歐洲" },
+  { value: "other", label: "還沒決定 / 多市場並行" },
 ];
+
+/* ────────── Main wrapper (Suspense for useSearchParams) ────────── */
 
 export function AssessWizard() {
-  const { open } = useMessageBox();
-  const [route, setRoute] = useState<Route>(null);
-  const [step, setStep] = useState<Step>("entry");
-  const [product, setProduct] = useState("");
-  const [markets, setMarkets] = useState<string[]>([]);
-  const [revenue, setRevenue] = useState("");
-  const [concerns, setConcerns] = useState<string[]>([]);
-
-  const totalSteps = 4;
-  const currentStep =
-    step === "q1" ? 1 : step === "q2" ? 2 : step === "q3" ? 3 : step === "q4" ? 4 : 0;
-
-  const toggleMarket = (m: string) => {
-    setMarkets((prev) =>
-      prev.includes(m) ? prev.filter((x) => x !== m) : [...prev, m]
-    );
-  };
-
-  const toggleConcern = (c: string) => {
-    setConcerns((prev) =>
-      prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]
-    );
-  };
-
-  const canProceed = () => {
-    if (step === "q1") return product !== "";
-    if (step === "q2") return markets.length > 0;
-    if (step === "q3") return revenue !== "";
-    if (step === "q4") return concerns.length > 0;
-    return true;
-  };
-
-  const nextStep = () => {
-    if (step === "q1") setStep("q2");
-    else if (step === "q2") setStep("q3");
-    else if (step === "q3") setStep("q4");
-    else if (step === "q4") setStep("result");
-  };
-
-  const startRoute = (r: Route) => {
-    setRoute(r);
-    setStep("q1");
-  };
-
-  const reset = () => {
-    setRoute(null);
-    setStep("entry");
-    setProduct("");
-    setMarkets([]);
-    setRevenue("");
-    setConcerns([]);
-  };
-
   return (
-    <section className="min-h-screen pt-[100px] md:pt-[120px] pb-16 md:pb-20 px-5 md:px-10 bg-white">
-      <div className="max-w-[680px] mx-auto">
-        {/* Entry */}
-          {step === "entry" && (
-            <div>
-              <div className="text-center mb-10">
-                <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-                  免費出海評估
-                </div>
-                <h1 className="font-heading text-[clamp(28px,3.5vw,42px)] leading-[1.2] mb-3 font-normal tracking-[-0.5px]">
-                  兩分鐘，找到你的出海起點
-                </h1>
-                <p className="text-[15px] text-tx2 leading-[1.7] font-normal">
-                  選擇你目前的狀態，我們幫你快速評估。
-                </p>
-              </div>
+    <Suspense fallback={<AssessFallback />}>
+      <AssessWizardInner />
+    </Suspense>
+  );
+}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button
-                  onClick={() => startRoute("A")}
-                  className="group p-8 rounded-none border border-sky/20 bg-white text-left cursor-pointer transition-colors duration-300 hover:border-sky"
-                >
-                  <div className="w-12 h-12 rounded-sm bg-[rgba(91,143,168,0.08)] flex items-center justify-center mb-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="8" stroke="#5B8FA8" strokeWidth="1.5" />
-                      <circle cx="12" cy="12" r="2" fill="#5B8FA8" />
-                      <path d="M12,4 L12,8" stroke="#5B8FA8" strokeWidth="1.5" />
-                    </svg>
-                  </div>
-                  <h3 className="text-[18px] font-semibold mb-2 text-sky">還沒出海</h3>
-                  <p className="text-[13.5px] text-tx2 leading-[1.65] font-normal">
-                    想知道出海可不可行、該怎麼開始。
-                  </p>
-                </button>
-
-                <button
-                  onClick={() => startRoute("C")}
-                  className="group p-8 rounded-none border border-ember/20 bg-white text-left cursor-pointer transition-colors duration-300 hover:border-ember"
-                >
-                  <div className="w-12 h-12 rounded-sm bg-[rgba(217,139,74,0.08)] flex items-center justify-center mb-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <path d="M6,16 Q10,8 14,14 Q18,20 22,10" stroke="#D98B4A" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                      <path d="M18,8 L22,10 L20,14" stroke="#D98B4A" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                  <h3 className="text-[18px] font-semibold mb-2 text-ember">已經在出海</h3>
-                  <p className="text-[13.5px] text-tx2 leading-[1.65] font-normal">
-                    想降低成本、提升效率、打開新市場。
-                  </p>
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Questions */}
-          {(step === "q1" || step === "q2" || step === "q3" || step === "q4") && (
-            <div>
-              {/* Progress bar */}
-              <div className="mb-10">
-                <div className="flex justify-between text-[12px] text-tx3 mb-2">
-                  <span>第 {currentStep} / {totalSteps} 題</span>
-                  <button onClick={reset} className="text-tx3 hover:text-tx cursor-pointer transition-colors">
-                    重新開始
-                  </button>
-                </div>
-                <div className="h-1 bg-bd rounded-sm overflow-hidden">
-                  <div
-                    className="h-full bg-gold rounded-sm transition-all duration-500"
-                    style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* Q1: Product category */}
-              {step === "q1" && (
-                <div>
-                  <h2 className="font-heading text-[28px] mb-2 font-normal">你的產品類別是？</h2>
-                  <p className="text-[14px] text-tx2 mb-8 font-normal">選擇最接近的一個。</p>
-                  <div className="space-y-3">
-                    {productCategories.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => setProduct(cat)}
-                        className={`w-full text-left px-5 py-3.5 rounded-sm border transition-all duration-200 cursor-pointer text-[14px] ${
-                          product === cat
-                            ? "border-gold bg-[rgba(212,168,92,0.08)] text-tx font-medium"
-                            : "border-bd bg-white text-tx2 hover:border-gold/50"
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Q2: Target markets */}
-              {step === "q2" && (
-                <div>
-                  <h2 className="font-heading text-[28px] mb-2 font-normal">想去哪些市場？</h2>
-                  <p className="text-[14px] text-tx2 mb-8 font-normal">可以多選。</p>
-                  <div className="flex flex-wrap gap-3">
-                    {targetMarkets.map((m) => (
-                      <button
-                        key={m}
-                        onClick={() => toggleMarket(m)}
-                        className={`px-6 py-3 rounded-sm border text-[14px] font-medium cursor-pointer transition-all duration-200 ${
-                          markets.includes(m)
-                            ? "border-gold bg-gold text-navy"
-                            : "border-bd bg-white text-tx2 hover:border-gold/50"
-                        }`}
-                      >
-                        {m}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Q3: Revenue */}
-              {step === "q3" && (
-                <div>
-                  <h2 className="font-heading text-[28px] mb-2 font-normal">目前年營收規模？</h2>
-                  <p className="text-[14px] text-tx2 mb-8 font-normal">大概就好，幫我們判斷適合哪種方案。</p>
-                  <div className="space-y-3">
-                    {revenueRanges.map((r) => (
-                      <button
-                        key={r}
-                        onClick={() => setRevenue(r)}
-                        className={`w-full text-left px-5 py-3.5 rounded-sm border transition-all duration-200 cursor-pointer text-[14px] ${
-                          revenue === r
-                            ? "border-gold bg-[rgba(212,168,92,0.08)] text-tx font-medium"
-                            : "border-bd bg-white text-tx2 hover:border-gold/50"
-                        }`}
-                      >
-                        {r}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Q4: Concerns */}
-              {step === "q4" && (
-                <div>
-                  <h2 className="font-heading text-[28px] mb-2 font-normal">
-                    {route === "A" ? "你最大的顧慮是？" : "你最想改善什麼？"}
-                  </h2>
-                  <p className="text-[14px] text-tx2 mb-8 font-normal">可以多選。</p>
-                  <div className="flex flex-wrap gap-3">
-                    {(route === "A" ? concernsA : concernsC).map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => toggleConcern(c)}
-                        className={`px-5 py-2.5 rounded-sm border text-[13.5px] font-medium cursor-pointer transition-all duration-200 ${
-                          concerns.includes(c)
-                            ? route === "A"
-                              ? "border-sky bg-sky text-white"
-                              : "border-ember bg-ember text-white"
-                            : "border-bd bg-white text-tx2 hover:border-tx3"
-                        }`}
-                      >
-                        {c}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Next button */}
-              <button
-                onClick={nextStep}
-                disabled={!canProceed()}
-                className={`mt-10 w-full py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-all duration-300 ${
-                  canProceed()
-                    ? "bg-navy text-white hover:bg-navy-l"
-                    : "bg-bd text-tx3 cursor-not-allowed"
-                }`}
-              >
-                {step === "q4" ? "看我的評估結果" : "下一題"}
-              </button>
-            </div>
-          )}
-
-          {/* Result */}
-          {step === "result" && route === "A" && (
-              <ResultA
-                product={product}
-                markets={markets}
-                concerns={concerns}
-                onReset={reset}
-                onOpenMsg={open}
-              />
-          )}
-
-          {step === "result" && route === "C" && (
-              <ResultC
-                concerns={concerns}
-                onReset={reset}
-                onOpenMsg={open}
-              />
-          )}
+function AssessFallback() {
+  return (
+    <section className="min-h-screen bg-navy pt-[140px] pb-20 px-5 md:px-10">
+      <div className="max-w-[720px] mx-auto text-center text-white/50 text-[14px]">
+        載入中…
       </div>
     </section>
   );
 }
 
-/* ─── Route A Result ─── */
-function ResultA({
-  product,
-  markets,
-  concerns,
-  onReset,
-  onOpenMsg,
-}: {
-  product: string;
-  markets: string[];
-  concerns: string[];
-  onReset: () => void;
-  onOpenMsg: () => void;
-}) {
-  const lights = [
-    {
-      color: "bg-sky",
-      label: "市場需求",
-      value: markets.includes("美國") ? "潛力高" : "需驗證",
-    },
-    {
-      color: "bg-gold",
-      label: "合規難度",
-      value: concerns.includes("不懂當地法規") ? "中高" : "中等",
-    },
-    {
-      color: concerns.includes("預算有限") ? "bg-[#E5A800]" : "bg-sky",
-      label: "預算匹配",
-      value: concerns.includes("預算有限") ? "需評估" : "可行",
-    },
-  ];
+/* ────────── Inner (has access to searchParams) ────────── */
+
+function AssessWizardInner() {
+  const searchParams = useSearchParams();
+  const focusSlug = searchParams.get("case");
+  const focusCase = focusSlug ? getCase(focusSlug) : undefined;
+
+  const [step, setStep] = useState<Step>(0);
+  const [answers, setAnswers] = useState<Answers>({
+    stage: null,
+    blocker: null,
+    market: null,
+  });
+
+  const ranked = useMemo(() => {
+    if (answers.stage && answers.blocker && answers.market) {
+      return rankMatches(answers);
+    }
+    return [];
+  }, [answers]);
+
+  // 如果從 /cases?case=x 進來，結果頁優先拿那個案例當主比對
+  const primaryResult = useMemo(() => {
+    if (ranked.length === 0) return null;
+    if (focusCase) {
+      const focused = ranked.find((r) => r.slug === focusCase.slug);
+      if (focused && focused.score >= 1) return focused;
+    }
+    return ranked[0];
+  }, [ranked, focusCase]);
+
+  const alternativeResult = useMemo(() => {
+    if (!primaryResult || ranked.length < 2) return null;
+    const alt = ranked.find((r) => r.slug !== primaryResult.slug && r.score >= 1);
+    return alt ?? null;
+  }, [ranked, primaryResult]);
+
+  const setStage = (stage: Stage) => {
+    setAnswers((prev) => ({ ...prev, stage }));
+    setStep(2);
+  };
+  const setBlocker = (blocker: Blocker) => {
+    setAnswers((prev) => ({ ...prev, blocker }));
+    setStep(3);
+  };
+  const setMarket = (market: AssessMarket) => {
+    setAnswers((prev) => ({ ...prev, market }));
+    setStep(4);
+  };
+
+  const reset = () => {
+    setStep(0);
+    setAnswers({ stage: null, blocker: null, market: null });
+  };
+
+  if (step === 0) {
+    return (
+      <EntryScreen focusCase={focusCase} onStart={() => setStep(1)} />
+    );
+  }
+
+  if (step >= 1 && step <= 3) {
+    return (
+      <QuestionScreen
+        step={step}
+        total={3}
+        onBack={() => setStep((s) => (s > 1 ? ((s - 1) as Step) : 0))}
+        onReset={reset}
+      >
+        {step === 1 && (
+          <QuestionBody
+            eyebrow="01 / 03 · 階段"
+            question="你目前在出海這條路上的哪個位置？"
+            options={STAGE_OPTIONS}
+            onPick={setStage}
+          />
+        )}
+        {step === 2 && (
+          <QuestionBody
+            eyebrow="02 / 03 · 卡點"
+            question="最讓你睡不著的是哪一件事？"
+            options={BLOCKER_OPTIONS}
+            onPick={setBlocker}
+          />
+        )}
+        {step === 3 && (
+          <QuestionBody
+            eyebrow="03 / 03 · 市場"
+            question="你主要在看哪個市場？"
+            options={MARKET_OPTIONS}
+            onPick={setMarket}
+          />
+        )}
+      </QuestionScreen>
+    );
+  }
+
+  // step === 4
+  if (!primaryResult) {
+    return <NoMatchScreen onReset={reset} />;
+  }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-sky">
-          你的評估結果
+    <ResultScreen
+      primary={primaryResult}
+      alternative={alternativeResult}
+      answers={answers}
+      onReset={reset}
+    />
+  );
+}
+
+/* ────────── Entry screen ────────── */
+
+function EntryScreen({
+  focusCase,
+  onStart,
+}: {
+  focusCase: CaseStudy | undefined;
+  onStart: () => void;
+}) {
+  return (
+    <section className="relative min-h-screen bg-navy pt-[130px] md:pt-[160px] pb-20 md:pb-28 px-5 md:px-10 overflow-hidden">
+      {/* Gold glow */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 25% 15%, rgba(212,168,92,0.12) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative max-w-[720px] mx-auto">
+        {/* Breadcrumb */}
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-8 text-[11px] font-medium tracking-[1px] text-white/50"
+        >
+          <Link href="/" className="hover:text-gold transition-colors">
+            首頁
+          </Link>
+          <span className="mx-2 text-white/30">/</span>
+          {focusCase ? (
+            <>
+              <Link href="/cases" className="hover:text-gold transition-colors">
+                案例
+              </Link>
+              <span className="mx-2 text-white/30">/</span>
+              <span className="text-white/75">比對</span>
+            </>
+          ) : (
+            <span className="text-white/75">處境比對</span>
+          )}
+        </nav>
+
+        {/* Eyebrow */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="block w-8 h-px bg-gold" />
+          <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
+            三題 · 兩分鐘 · 不問 email
+          </span>
         </div>
-        <button onClick={onReset} className="text-[13px] text-tx3 hover:text-tx cursor-pointer transition-colors">
-          重新測試
-        </button>
-      </div>
 
-      <h2 className="font-heading text-[32px] mb-2 font-semibold leading-[1.2]">
-        {product}出海，看起來值得一試
-      </h2>
-      <p className="text-[15px] text-tx2 mb-8 font-normal leading-[1.7]">
-        根據你的回答，我們快速幫你看了三個關鍵指標。
-      </p>
-
-      {/* Traffic lights */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-        {lights.map((l) => (
-          <div key={l.label} className="bg-white rounded-none p-5 border border-bd text-center">
-            <div className={`w-5 h-5 rounded-full ${l.color} mx-auto mb-3`} />
-            <div className="text-[12px] text-tx3 font-medium mb-1">{l.label}</div>
-            <div className="text-[15px] font-semibold">{l.value}</div>
+        {/* Focus case strip (if arrived from a case page) */}
+        {focusCase && (
+          <div className="mb-6 flex items-center gap-4 px-5 py-4 bg-white/[0.04] border border-gold/20 rounded-none">
+            <div className="relative w-[68px] h-[50px] flex-shrink-0 overflow-hidden">
+              <Image
+                src={focusCase.heroImage}
+                alt=""
+                fill
+                sizes="68px"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-[10.5px] tracking-[1.5px] uppercase text-gold/80 font-semibold mb-1">
+                正在比對
+              </div>
+              <div className="text-[13.5px] text-white/85 font-medium truncate">
+                {focusCase.title}
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
+        )}
 
-      {/* Insight */}
-      <div className="bg-[rgba(212,168,92,0.06)] border-l-[3px] border-gold rounded-r-sm p-6 mb-8">
-        <h4 className="text-[14px] font-semibold text-gold mb-2">我們的洞察</h4>
-        <p className="text-[13.5px] text-tx2 leading-[1.7] font-normal">
-          {markets.includes("美國")
-            ? `${product}在美國市場有穩定需求。建議先從小批量測試開始，驗證產品定位與定價策略，再逐步擴大。`
-            : `${product}在${markets.join("、")}市場有成長空間。建議先進行市場調查，了解當地消費習慣與競品狀況。`}
+        {/* Headline */}
+        <h1 className="font-heading text-[clamp(32px,4.8vw,52px)] text-white leading-[1.12] font-light tracking-[-0.6px] mb-6">
+          先確認你值不值得出海。
+          <br />
+          <span className="font-normal text-gold">我們會老實說。</span>
+        </h1>
+
+        <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[560px] font-light leading-[1.8] mb-10">
+          三題、不問 email、不給紅綠燈。
+          <br className="hidden md:block" />
+          我們只告訴你：你的處境，跟我們做過的四個案例，哪一個最像。
         </p>
-      </div>
 
-      {/* Next steps */}
-      <div className="bg-white rounded-none p-6 border border-bd mb-8">
-        <h4 className="text-[15px] font-semibold mb-3">建議下一步</h4>
-        <ol className="space-y-2 text-[13.5px] text-tx2 leading-[1.7] font-normal list-decimal list-inside">
-          <li>免費 30 分鐘諮詢，深入了解你的產品與目標</li>
-          <li>我們提供完整市場評估報告</li>
-          <li>制定專屬出海路徑與時程</li>
-        </ol>
-      </div>
+        {/* Honest warning box — reverse high-cold filter */}
+        <div className="mb-10 border-l-2 border-gold/60 pl-5 py-1">
+          <p className="text-[13px] md:text-[13.5px] text-white/55 leading-[1.85] font-normal">
+            我們沒做 AI 評估、沒自動報價、沒「你的產品 87 分」那種東西。
+            <br />
+            按下去之後，會看到的是三題問答，跟一份「你跟哪個案例最像」的誠實比對。
+            <br />
+            如果你只是隨便逛逛，
+            <span className="text-gold/80">請先別按</span>
+            ——我們人手很有限，資源留給真的在卡點上的人。
+          </p>
+        </div>
 
-      <div className="flex gap-3 flex-wrap">
-        <button
-          onClick={onOpenMsg}
-          className="bg-gold text-navy px-7 py-3.5 rounded-sm text-[15px] font-semibold cursor-pointer transition-colors hover:border-gold"
-        >
-          聊聊你的產品
-        </button>
-        <a
-          href="/services"
-          className="px-7 py-3.5 border border-bd bg-white text-tx rounded-sm text-[14px] font-medium transition-all duration-300 hover:border-tx inline-flex items-center"
-        >
-          看完整出海路徑 →
-        </a>
+        {/* CTAs */}
+        <div className="flex items-center gap-8 flex-wrap">
+          <button
+            type="button"
+            onClick={onStart}
+            className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+          >
+            好，開始比對 →
+          </button>
+          <Link
+            href="/cases"
+            className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-gold"
+          >
+            <span className="border-b border-white/20 pb-0.5 group-hover:border-gold transition-colors">
+              先看案例再決定
+            </span>
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+              →
+            </span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────── Question screen wrapper ────────── */
+
+function QuestionScreen({
+  step,
+  total,
+  onBack,
+  onReset,
+  children,
+}: {
+  step: Step;
+  total: number;
+  onBack: () => void;
+  onReset: () => void;
+  children: React.ReactNode;
+}) {
+  const progress = Math.max(0, Math.min(1, step / total));
+  return (
+    <section className="min-h-screen bg-cream pt-[120px] md:pt-[150px] pb-20 px-5 md:px-10">
+      <div className="max-w-[680px] mx-auto">
+        {/* Progress row */}
+        <div className="mb-10 md:mb-12">
+          <div className="flex items-center justify-between text-[11.5px] text-tx3 font-medium tracking-[0.5px] mb-3">
+            <button
+              type="button"
+              onClick={onBack}
+              className="hover:text-tx transition-colors cursor-pointer"
+            >
+              ← 上一步
+            </button>
+            <button
+              type="button"
+              onClick={onReset}
+              className="hover:text-tx transition-colors cursor-pointer"
+            >
+              重新開始
+            </button>
+          </div>
+          <div className="h-[2px] bg-bd overflow-hidden">
+            <div
+              className="h-full bg-gold transition-all duration-500 ease-out"
+              style={{ width: `${progress * 100}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="animate-fade-in-up">{children}</div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────── Question body (options list) ────────── */
+
+function QuestionBody<T extends string>({
+  eyebrow,
+  question,
+  options,
+  onPick,
+}: {
+  eyebrow: string;
+  question: string;
+  options: readonly Option<T>[];
+  onPick: (value: T) => void;
+}) {
+  return (
+    <div>
+      <div className="text-[10.5px] md:text-[11px] font-semibold tracking-[2.5px] uppercase text-gold mb-4">
+        {eyebrow}
+      </div>
+      <h2 className="font-heading text-[clamp(26px,3.4vw,38px)] leading-[1.25] text-tx font-normal tracking-[-0.3px] mb-10 md:mb-12">
+        {question}
+      </h2>
+
+      <div className="space-y-3 md:space-y-4">
+        {options.map((opt) => (
+          <button
+            key={opt.value}
+            type="button"
+            onClick={() => onPick(opt.value)}
+            className="group w-full text-left px-6 py-5 md:px-7 md:py-6 bg-white border border-bd hover:border-gold hover:shadow-[0_6px_24px_rgba(18,38,63,0.08)] transition-all cursor-pointer"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="text-[15px] md:text-[16.5px] text-tx font-medium leading-[1.5]">
+                  {opt.label}
+                </div>
+                {opt.hint && (
+                  <div className="mt-1.5 text-[12.5px] md:text-[13px] text-tx3 font-normal leading-[1.6]">
+                    {opt.hint}
+                  </div>
+                )}
+              </div>
+              <span
+                aria-hidden="true"
+                className="flex-shrink-0 mt-1 text-tx3 text-[16px] transition-all duration-300 group-hover:text-gold group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </div>
+          </button>
+        ))}
       </div>
     </div>
   );
 }
 
-/* ─── Route C Result ─── */
-function ResultC({
-  concerns,
+/* ────────── Result screen ────────── */
+
+function ResultScreen({
+  primary,
+  alternative,
+  answers,
   onReset,
-  onOpenMsg,
 }: {
-  concerns: string[];
+  primary: MatchResult;
+  alternative: MatchResult | null;
+  answers: Answers;
   onReset: () => void;
-  onOpenMsg: () => void;
 }) {
-  const diagnoses = concerns.slice(0, 3).map((c) => {
-    const map: Record<string, { title: string; desc: string; saving: string }> = {
-      "物流成本太高": {
-        title: "物流成本偏高",
-        desc: "透過路線優化與合併出貨，平均可降低 15-25% 物流成本。",
-        saving: "-20%",
-      },
-      "通關總出問題": {
-        title: "通關效率不佳",
-        desc: "合規文件標準化 + 預審機制，可將通關時間縮短 40%。",
-        saving: "-40%",
-      },
-      "通路表現不如預期": {
-        title: "通路策略需調整",
-        desc: "重新定位品類與定價策略，平均提升 2-3 倍通路表現。",
-        saving: "2-3x",
-      },
-      "合規風險不確定": {
-        title: "合規風險需釐清",
-        desc: "全面合規健檢，確保你的產品符合目標市場所有法規要求。",
-        saving: "100%",
-      },
-      "想進新市場": {
-        title: "新市場開拓",
-        desc: "評估新市場潛力、找到最適進入策略，縮短試錯時間。",
-        saving: "6 個月",
-      },
-    };
-    return map[c] ?? { title: c, desc: "我們會根據你的狀況提供具體建議。", saving: "—" };
-  });
+  const { open } = useMessageBox();
+  const primaryCase = getCase(primary.slug);
+  const altCase = alternative ? getCase(alternative.slug) : null;
+
+  if (!primaryCase) return <NoMatchScreen onReset={onReset} />;
+
+  const verdict = buildVerdict(primary);
+  const meta = CASE_CARD_META[primaryCase.slug];
+
+  // Map answers back to human labels for the breakdown
+  const stageLabel =
+    STAGE_OPTIONS.find((o) => o.value === answers.stage)?.label ?? "—";
+  const blockerLabel =
+    BLOCKER_OPTIONS.find((o) => o.value === answers.blocker)?.label ?? "—";
+  const marketLabel =
+    MARKET_OPTIONS.find((o) => o.value === answers.market)?.label ?? "—";
+
+  const sig = CASE_SIGNATURES.find((s) => s.slug === primaryCase.slug);
+  const caseStageLabel = sig
+    ? STAGE_OPTIONS.find((o) => o.value === sig.stage)?.label ?? "—"
+    : "—";
+  const caseBlockerLabel = sig
+    ? BLOCKER_OPTIONS.find((o) => o.value === sig.blocker)?.label ?? "—"
+    : "—";
+  const caseMarketLabel = sig
+    ? MARKET_OPTIONS.find((o) => o.value === sig.market)?.label ?? "—"
+    : "—";
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-ember">
-          你的優化診斷
+    <section className="min-h-screen bg-white pt-[120px] md:pt-[150px] pb-20 md:pb-28 px-5 md:px-10">
+      <div className="max-w-[860px] mx-auto">
+        {/* Header row */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <span className="block w-8 h-px bg-gold" />
+            <span className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold">
+              比對結果
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={onReset}
+            className="text-[12.5px] text-tx3 font-medium hover:text-tx transition-colors cursor-pointer"
+          >
+            重新比對
+          </button>
         </div>
-        <button onClick={onReset} className="text-[13px] text-tx3 hover:text-tx cursor-pointer transition-colors">
-          重新測試
-        </button>
-      </div>
 
-      <h2 className="font-heading text-[32px] mb-2 font-semibold leading-[1.2]">
-        我們看到幾個可以改善的地方
-      </h2>
-      <p className="text-[15px] text-tx2 mb-8 font-normal leading-[1.7]">
-        根據你選擇的痛點，以下是初步診斷。
-      </p>
+        {/* Verdict */}
+        <h1 className="font-heading text-[clamp(28px,4vw,44px)] text-tx leading-[1.2] font-normal tracking-[-0.4px] mb-5">
+          {verdict.headline}
+        </h1>
+        <p className="text-[15px] md:text-[16.5px] text-tx2 leading-[1.85] font-normal max-w-[640px] mb-10 md:mb-12">
+          {verdict.body}
+        </p>
 
-      {/* Diagnosis cards */}
-      <div className="space-y-4 mb-8">
-        {diagnoses.map((d) => (
-          <div key={d.title} className="bg-white rounded-none p-4 md:p-6 border border-bd flex gap-3 md:gap-5 items-start">
-            <div className="font-heading text-[24px] md:text-[28px] text-ember font-normal flex-shrink-0 min-w-[50px] md:min-w-[60px] text-center">
-              {d.saving}
+        {/* Primary case card */}
+        <article className="bg-white border border-gold/40 shadow-[0_12px_40px_rgba(18,38,63,0.08)] mb-6">
+          <div className="relative h-[240px] md:h-[300px] overflow-hidden">
+            <Image
+              src={primaryCase.heroImage}
+              alt={primaryCase.title}
+              fill
+              sizes="(max-width: 860px) 100vw, 860px"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/35 to-transparent" />
+
+            {/* Score badge */}
+            <div className="absolute right-6 md:right-8 top-6 md:top-8 flex items-center gap-2 px-3 py-1.5 bg-gold text-navy">
+              <span className="text-[10.5px] tracking-[1.5px] uppercase font-bold">
+                吻合
+              </span>
+              <span className="font-heading text-[15px] font-semibold tabular-nums">
+                {primary.score}/3
+              </span>
             </div>
-            <div>
-              <h4 className="text-[15px] font-semibold mb-1">{d.title}</h4>
-              <p className="text-[13.5px] text-tx2 leading-[1.7] font-normal">{d.desc}</p>
+
+            {/* Title overlay */}
+            <div className="absolute left-6 md:left-10 right-6 md:right-10 bottom-6 md:bottom-8">
+              <div className="font-heading text-[38px] md:text-[52px] text-gold font-light leading-[0.95] tabular-nums mb-2">
+                {primaryCase.num}
+              </div>
+              <div className="text-[14px] md:text-[16px] text-white/85 font-normal leading-snug">
+                {meta?.headline ?? primaryCase.title}
+              </div>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* CTA */}
-      <div className="bg-[rgba(217,139,74,0.04)] rounded-none p-6 border border-ember/10 mb-8">
-        <h4 className="text-[15px] font-semibold mb-2">想要更詳細的診斷？</h4>
-        <p className="text-[13.5px] text-tx2 leading-[1.7] font-normal mb-4">
-          預約 60 分鐘深度諮詢，我們會根據你的實際數據提供完整優化方案。
-        </p>
-        <div className="flex gap-3 flex-wrap">
+          {/* Dim-by-dim breakdown */}
+          <div className="px-6 md:px-10 pt-8 md:pt-10 pb-8 md:pb-9">
+            <div className="text-[10.5px] font-semibold tracking-[1.8px] uppercase text-tx3 mb-5">
+              三維度比對
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+              <DimCell
+                label="階段"
+                matched={primary.matched.includes("stage")}
+                you={stageLabel}
+                them={caseStageLabel}
+              />
+              <DimCell
+                label="卡點"
+                matched={primary.matched.includes("blocker")}
+                you={blockerLabel}
+                them={caseBlockerLabel}
+              />
+              <DimCell
+                label="市場"
+                matched={primary.matched.includes("market")}
+                you={marketLabel}
+                them={caseMarketLabel}
+              />
+            </div>
+
+            {meta && (
+              <div className="mt-8 pt-6 border-t border-bd">
+                <div className="text-[11px] font-semibold tracking-[1.8px] uppercase text-tx3 mb-3">
+                  客戶當時的原話
+                </div>
+                <blockquote className="font-heading text-[18px] md:text-[21px] text-tx font-normal leading-[1.55] mb-6">
+                  「{meta.painTitle}」
+                </blockquote>
+                <Link
+                  href={`/cases/${primaryCase.slug}`}
+                  className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-none text-[13px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
+                >
+                  讀完整案例 →
+                </Link>
+              </div>
+            )}
+          </div>
+        </article>
+
+        {/* Alternative case */}
+        {altCase && alternative && (
+          <div className="bg-cream border border-bd px-6 md:px-8 py-6 md:py-7 mb-10 md:mb-12">
+            <div className="flex items-start gap-5">
+              <div className="relative w-[88px] h-[66px] md:w-[120px] md:h-[88px] flex-shrink-0 overflow-hidden">
+                <Image
+                  src={altCase.heroImage}
+                  alt=""
+                  fill
+                  sizes="120px"
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[10.5px] tracking-[1.5px] uppercase text-tx3 font-semibold">
+                    也值得一看
+                  </span>
+                  <span className="text-[10.5px] tracking-[0.5px] text-gold font-semibold">
+                    吻合 {alternative.score}/3
+                  </span>
+                </div>
+                <h4 className="text-[15px] md:text-[16px] text-tx font-semibold leading-[1.5] mb-2">
+                  {altCase.title}
+                </h4>
+                <Link
+                  href={`/cases/${altCase.slug}`}
+                  className="text-[12.5px] text-tx2 font-medium hover:text-gold transition-colors inline-flex items-center gap-1"
+                >
+                  看另一條路 →
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* CTA row */}
+        <div className="border-t border-bd pt-8 md:pt-10 flex items-center justify-between flex-wrap gap-6">
+          <div className="max-w-[420px]">
+            <div className="text-[15px] text-tx font-medium mb-1.5">
+              想知道這個方法放在你身上會長什麼樣？
+            </div>
+            <div className="text-[13px] text-tx3 font-normal leading-[1.7]">
+              直接聊。不收費、不賣課、不承諾一定接。
+            </div>
+          </div>
           <button
-            onClick={() => window.open("https://calendly.com/lufe-co/30min", "_blank")}
-            className="bg-ember text-white px-6 py-3 rounded-sm text-[14px] font-semibold cursor-pointer transition-colors hover:border-gold"
+            type="button"
+            onClick={open}
+            className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[14px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors cursor-pointer"
           >
-            預約 60 分鐘諮詢
+            聊聊你的狀況 →
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────── Dim cell ────────── */
+
+function DimCell({
+  label,
+  matched,
+  you,
+  them,
+}: {
+  label: string;
+  matched: boolean;
+  you: string;
+  them: string;
+}) {
+  return (
+    <div
+      className={`px-4 py-4 md:px-5 md:py-5 border ${
+        matched ? "border-gold/40 bg-[rgba(212,168,92,0.06)]" : "border-bd bg-white"
+      }`}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-[10.5px] font-semibold tracking-[1.5px] uppercase text-tx3">
+          {label}
+        </span>
+        <span
+          className={`text-[11px] font-semibold ${
+            matched ? "text-gold" : "text-tx3/70"
+          }`}
+        >
+          {matched ? "✓ 相同" : "× 不同"}
+        </span>
+      </div>
+      <div className="text-[11px] text-tx3 uppercase tracking-[1px] mb-1">你</div>
+      <div className="text-[13px] text-tx font-medium leading-snug mb-3">{you}</div>
+      <div className="text-[11px] text-tx3 uppercase tracking-[1px] mb-1">他們</div>
+      <div className="text-[13px] text-tx2 font-normal leading-snug">{them}</div>
+    </div>
+  );
+}
+
+/* ────────── No match fallback ────────── */
+
+function NoMatchScreen({ onReset }: { onReset: () => void }) {
+  const { open } = useMessageBox();
+  return (
+    <section className="min-h-screen bg-white pt-[140px] pb-20 px-5 md:px-10">
+      <div className="max-w-[620px] mx-auto text-center">
+        <div className="text-[11px] font-semibold tracking-[2.5px] uppercase text-tx3 mb-4">
+          比對結果
+        </div>
+        <h1 className="font-heading text-[clamp(28px,4vw,40px)] text-tx leading-[1.2] font-normal mb-5">
+          你的處境，不在我們公開過的案例裡
+        </h1>
+        <p className="text-[15px] text-tx2 leading-[1.8] font-normal mb-10">
+          這不代表我們沒做過類似的事——只是沒寫進網站。直接聊比較快。
+        </p>
+        <div className="flex items-center justify-center gap-6 flex-wrap">
+          <button
+            type="button"
+            onClick={open}
+            className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[14px] font-semibold hover:bg-gold-l transition-colors cursor-pointer"
+          >
+            直接聊聊 →
           </button>
           <button
-            onClick={onOpenMsg}
-            className="px-6 py-3 border border-bd bg-white text-tx rounded-sm text-[14px] font-medium cursor-pointer transition-all duration-300 hover:border-tx"
+            type="button"
+            onClick={onReset}
+            className="text-[14px] text-tx2 font-medium hover:text-tx transition-colors cursor-pointer border-b border-bd pb-0.5"
           >
-            先留個訊息
+            重新比對
           </button>
         </div>
       </div>
 
-      <a
-        href="/services#optimize"
-        className="text-[14px] text-ember font-medium hover:underline inline-flex items-center gap-1"
-      >
-        看進階優化方案 →
-      </a>
-    </div>
+      {/* List of cases as consolation */}
+      <div className="max-w-[720px] mx-auto mt-16 pt-10 border-t border-bd">
+        <div className="text-[11px] font-semibold tracking-[1.8px] uppercase text-tx3 mb-5 text-center">
+          或者直接看四個案例
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {CASES.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/cases/${c.slug}`}
+              className="px-4 py-3 border border-bd hover:border-gold hover:bg-[rgba(212,168,92,0.04)] transition-all text-[13px] text-tx font-medium"
+            >
+              {c.title}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

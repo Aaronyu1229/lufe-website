@@ -31,8 +31,8 @@ const slides: Slide[] = [
     eyebrow: "企業出海導航",
     titleLines: ["好產品值得一條", "順暢的出海路"],
     subtitle: "從市場驗證到落地營運，我們陪你走完全程。",
-    primary: { label: "免費評估你的產品", href: "/assess" },
-    secondary: { label: "看完整出海路徑", href: "/services" },
+    primary: { label: "看真實案例", href: "/cases" },
+    secondary: { label: "比對你的處境", href: "/assess" },
     media: {
       type: "video",
       src: "/videos/hero/hero-cai-mep-1080.mp4",

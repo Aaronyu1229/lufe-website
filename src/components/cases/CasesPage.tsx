@@ -245,12 +245,25 @@ export function CasesPage() {
                           <div className="text-[12.5px] text-tx3 font-normal leading-relaxed">
                             完整時間軸、關鍵決策推理、客戶回饋——都在內頁
                           </div>
-                          <Link
-                            href={`/cases/${c.slug}`}
-                            className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-none text-[13px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
-                          >
-                            讀完整案例 →
-                          </Link>
+                          <div className="flex items-center gap-5 flex-wrap">
+                            <Link
+                              href={`/assess?case=${c.slug}`}
+                              className="group inline-flex items-center gap-1.5 text-[13px] text-tx2 font-semibold tracking-[0.3px] hover:text-gold transition-colors"
+                            >
+                              <span className="border-b border-tx3/40 pb-0.5 group-hover:border-gold transition-colors">
+                                比對你的處境
+                              </span>
+                              <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                                →
+                              </span>
+                            </Link>
+                            <Link
+                              href={`/cases/${c.slug}`}
+                              className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-none text-[13px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
+                            >
+                              讀完整案例 →
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     )}
