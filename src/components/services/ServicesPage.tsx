@@ -1,516 +1,278 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { useMessageBox } from "../MessageBox";
+import { STAGE_ORDER, STAGES, ACCENT_CLASSES } from "@/data/services";
 
-/* ───────── data ───────── */
+/**
+ * ServicesPage (hub).
+ * Previously a 576-line scroll-everything page. Now a lightweight hub that
+ * routes visitors into the real content, which lives on sub-pages:
+ *   /services/[stage]  — four stage sub-pages with full depth
+ *   /services/optimize — standalone optimize page
+ *   /services/methodology — the framework page
+ */
 
-const stages = [
+const topFaqs = [
   {
-    num: "01",
-    color: "sky" as const,
-    title: "搞清楚值不值得出去",
-    timeline: "2-4 週",
-    subtitle: "市場評估",
-    desc: "在你花大錢之前，先花小錢搞清楚。",
-    items: [
-      "目標市場需求分析（消費者行為、競品、法規）",
-      "產品定位與差異化策略",
-      "價格帶分析與利潤結構估算",
-      "進入門檻評估（認證、關稅、合規）",
-      "Go / No-Go 建議報告",
-    ],
-    deliverable: "一份清楚告訴你「值不值得去」的評估報告",
+    q: "我該從哪個階段開始？",
+    a: "多數客戶從階段 01 市場評估開始，因為沒有評估就跳到產品測試通常是在燒錢。少數已經有明確市場目標的客戶可以從階段 02 直接切入。如果你不確定，就先聊聊。",
   },
   {
-    num: "02",
-    color: "sky" as const,
-    title: "用真實數據驗證你的直覺",
-    timeline: "4-6 週",
-    subtitle: "產品測試",
-    desc: "小批量投放，讓市場幫你回答。",
-    items: [
-      "測試市場選擇與通路規劃",
-      "小批量產品寄送與鋪貨",
-      "消費者反饋收集與分析",
-      "定價策略微調",
-      "測試期銷售數據追蹤",
-    ],
-    deliverable: "一組真實的市場反饋數據，而不是猜測",
-  },
-  {
-    num: "03",
-    color: "gold" as const,
-    title: "讓市場告訴你答案",
-    timeline: "2-3 個月",
-    subtitle: "通路進入",
-    desc: "從試水溫到正式上架，一步步走穩。",
-    items: [
-      "通路商談判與合約簽訂",
-      "產品合規與認證協助",
-      "包裝與標示在地化",
-      "首批正式訂單執行",
-      "物流與倉儲方案落實",
-    ],
-    deliverable: "產品正式上架海外通路",
-  },
-  {
-    num: "04",
-    color: "ember" as const,
-    title: "從試水溫到真正扎根",
-    timeline: "持續",
-    subtitle: "落地營運",
-    desc: "不只是賣出去，還要站穩腳步。",
-    items: [
-      "在地團隊建立與管理",
-      "行銷與品牌推廣策略",
-      "供應鏈持續優化",
-      "客戶服務與售後體系",
-      "擴展到更多通路與市場",
-    ],
-    deliverable: "一個可持續的海外營運體系",
-  },
-];
-
-const faqData = [
-  {
-    q: "出海前需要準備多少資金？",
-    a: "取決於你的產品類型和目標市場。一般來說，初步評估階段的投入不大（幾萬到十幾萬台幣），測試階段可能需要 50-100 萬。我們會在評估報告中給出具體的預算建議，幫你在每個階段做最有效率的投資。",
-  },
-  {
-    q: "我的產品適不適合出海？",
-    a: "大多數有品質優勢的台灣產品都有出海機會。關鍵是找到對的市場和對的方式。我們的免費評估工具可以在兩分鐘內給你初步方向，或者直接跟我們聊聊，不收費。",
-  },
-  {
-    q: "從開始到產品上架要多久？",
-    a: "平均 6-9 個月，取決於產品類型和目標市場的認證要求。食品和保健品可能需要更長的認證時間，而消費電子產品可能較快。我們會在評估階段給出明確的時間表。",
+    q: "跨境前需要準備多少資金？",
+    a: "取決於你的產品類型和目標市場。評估階段幾萬到十幾萬台幣，測試階段 50-100 萬。我們會在第一次聊天時給你合理的預算範圍。",
   },
   {
     q: "鹿飛跟傳統貿易商有什麼不同？",
-    a: "傳統貿易商通常只做買賣——幫你找到買家，賺取中間價差。鹿飛做的是全程導航：從市場評估、產品測試、通路進入到落地營運，我們陪你走完全程，而且我們不賺價差，我們賺的是讓你的品牌在海外建立起來的服務費。",
-  },
-  {
-    q: "如果評估結果顯示不適合出海怎麼辦？",
-    a: "那就是最好的結果之一——你省下了大量的時間和金錢。我們的評估報告會告訴你具體原因，以及如果未來條件改變，什麼時候可以再考慮。有時候「現在不適合」只是「換個方式更好」。",
+    a: "傳統貿易商只做買賣，賺價差。鹿飛做的是全程導航：從評估到落地，陪你走完全程，而且我們不賺價差，賺的是讓品牌在海外建立的服務費。",
   },
 ];
-
-const optimizeServices = [
-  {
-    title: "出海效率診斷",
-    desc: "全面檢視你的出海流程，找出效率瓶頸",
-    timeline: "2-3 週",
-    items: [
-      "供應鏈與物流效率分析",
-      "通路績效評估",
-      "成本結構優化建議",
-      "合規風險盤點",
-    ],
-  },
-  {
-    title: "營運優化方案",
-    desc: "針對診斷結果，執行具體的改善計畫",
-    timeline: "1-3 個月",
-    items: [
-      "物流路線重新規劃",
-      "倉儲方案優化",
-      "通路結構調整",
-      "行銷策略升級",
-    ],
-  },
-];
-
-/* ───────── color map ───────── */
-
-const colorMap: Record<string, { border: string; bg: string; text: string; dot: string }> = {
-  sky: {
-    border: "border-sky",
-    bg: "bg-[rgba(91,143,168,0.08)]",
-    text: "text-sky",
-    dot: "bg-sky",
-  },
-  gold: {
-    border: "border-gold",
-    bg: "bg-[rgba(212,168,92,0.08)]",
-    text: "text-gold",
-    dot: "bg-gold",
-  },
-  ember: {
-    border: "border-ember",
-    bg: "bg-[rgba(217,139,74,0.08)]",
-    text: "text-ember",
-    dot: "bg-ember",
-  },
-};
-
-/* ───────── components ───────── */
-
-function StageCard({
-  stage,
-  isOpen,
-  onToggle,
-}: {
-  stage: (typeof stages)[number];
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  const c = colorMap[stage.color];
-  return (
-    <div className={`border-l-4 ${c.border} bg-white rounded-none p-7 md:p-9 transition-colors hover:border-gold`}>
-      {/* header — entire row is clickable */}
-      <button
-        onClick={onToggle}
-        className="w-full flex items-start justify-between gap-4 text-left cursor-pointer"
-        aria-expanded={isOpen}
-      >
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2">
-            <span className={`text-[13px] font-semibold ${c.text} tracking-wider`}>
-              STAGE {stage.num}
-            </span>
-            <span className="text-[12px] text-tx3 font-normal">
-              {stage.timeline}
-            </span>
-          </div>
-          <h3 className="font-heading text-[clamp(20px,2.5vw,26px)] leading-[1.3] font-bold tracking-[-0.3px] mb-1">
-            {stage.title}
-          </h3>
-          <p className="text-[14px] text-tx2 font-normal">{stage.desc}</p>
-        </div>
-        <div className="mt-1 flex items-center gap-2 shrink-0">
-          <span className={`text-[12px] font-medium transition-colors ${isOpen ? "text-tx3" : "text-gold"}`}>
-            {isOpen ? "收合" : "查看詳情"}
-          </span>
-          <div className="w-9 h-9 rounded-none border border-bd flex items-center justify-center transition-colors hover:bg-cream">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-            >
-              <path d="M3 5.5L7 9.5L11 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </div>
-      </button>
-
-      {/* expandable */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
-          >
-            <div className="mt-6 pt-6 border-t border-bd">
-              <ul className="space-y-3 mb-5">
-                {stage.items.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[14px] text-tx2">
-                    <span className={`w-1.5 h-1.5 rounded-full ${c.dot} mt-[7px] shrink-0`} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className={`${c.bg} rounded-none px-5 py-4`}>
-                <span className="text-[12px] font-semibold tracking-wider text-tx3 uppercase">
-                  交付成果
-                </span>
-                <p className={`text-[14px] font-medium mt-1 ${c.text}`}>
-                  {stage.deliverable}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-function FAQItem({ item, isOpen, onToggle }: { item: (typeof faqData)[number]; isOpen: boolean; onToggle: () => void }) {
-  return (
-    <div className="border-b border-bd">
-      <button
-        onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 text-left cursor-pointer"
-      >
-        <span className="text-[15px] font-medium pr-4">{item.q}</span>
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-          className={`transition-transform duration-300 shrink-0 ${isOpen ? "rotate-180" : ""}`}
-        >
-          <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden"
-          >
-            <p className="pb-5 text-[14px] text-tx2 leading-[1.8] font-normal">
-              {item.a}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-/* ───────── main ───────── */
 
 export function ServicesPage() {
   const { open } = useMessageBox();
-  const [openStages, setOpenStages] = useState<Set<number>>(new Set([0]));
-  const [openFAQ, setOpenFAQ] = useState<Set<number>>(new Set());
-
-  const toggleStage = (i: number) => {
-    setOpenStages((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i);
-      else next.add(i);
-      return next;
-    });
-  };
-
-  const toggleFAQ = (i: number) => {
-    setOpenFAQ((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i);
-      else next.add(i);
-      return next;
-    });
-  };
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <>
-      {/* ─── Hero / Why section ─── */}
-      <section className="bg-white pt-[100px] md:pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-10">
-        <div className="max-w-[1400px] mx-auto text-center">
-          <div className="section-label">服務</div>
-          <h1 className="section-heading">
-            出海不難，難的是沒人告訴你
+      {/* ─── Hero ─── */}
+      <section className="relative bg-navy pt-[140px] md:pt-[180px] pb-[80px] md:pb-[100px] px-5 md:px-10 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/services/services-hero-dhl.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-[0.28]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/55 to-navy" />
+        </div>
+
+        <div className="relative max-w-[1100px] mx-auto text-center">
+          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
+            服務
+          </div>
+          <h1 className="font-heading text-[clamp(30px,4.5vw,54px)] text-white leading-[1.1] font-light tracking-[-0.6px] mb-6">
+            跨境不難，難的是沒人告訴你
             <br />
-            <span className="font-light text-gold">完整的路怎麼走</span>
+            <span className="font-normal text-gold">完整的路怎麼走</span>
           </h1>
-          <p className="section-desc mx-auto text-center">
+          <p className="text-[16px] md:text-[18px] text-white/70 max-w-[620px] mx-auto font-light leading-[1.65]">
             我們不只做其中一段，而是從評估到落地，幫你把整條路串起來。
           </p>
-
-          {/* Two entry cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[720px] mx-auto mt-8">
-            {/* Card A */}
-            <a
-              href="#path"
-              className="group block p-7 bg-white rounded-none border-l-4 border-sky text-left transition-colors hover:border-gold"
-            >
-              <div className="w-12 h-12 rounded-none bg-[rgba(91,143,168,0.1)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2L12 22M12 2L6 8M12 2L18 8" stroke="#5B8FA8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-              <h3 className="text-[17px] font-semibold mb-1.5">從零開始出海</h3>
-              <p className="text-[13px] text-tx2 font-normal leading-[1.6] mb-3">
-                還沒出過海？我們帶你從評估走到上架。
-              </p>
-              <span className="text-[13px] font-semibold text-sky group-hover:translate-x-1 transition-transform inline-block">
-                看完整出海路徑 →
-              </span>
-            </a>
-
-            {/* Card B */}
-            <a
-              href="#optimize"
-              className="group block p-7 bg-white rounded-none border-l-4 border-ember text-left transition-colors hover:border-gold"
-            >
-              <div className="w-12 h-12 rounded-none bg-[rgba(217,139,74,0.1)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#D98B4A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-              <h3 className="text-[17px] font-semibold mb-1.5">讓出海跑得更好</h3>
-              <p className="text-[13px] text-tx2 font-normal leading-[1.6] mb-3">
-                已經在海外？我們幫你優化效率、降低成本。
-              </p>
-              <span className="text-[13px] font-semibold text-ember group-hover:translate-x-1 transition-transform inline-block">
-                看進階優化方案 →
-              </span>
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* Sticky page nav */}
-      <div className="sticky top-[64px] z-40 bg-white/95 backdrop-blur-md border-b border-bd">
-        <div className="max-w-[900px] mx-auto px-5 md:px-10 flex gap-6 overflow-x-auto">
-          <a href="#path" className="py-3.5 text-[13px] font-medium text-tx2 hover:text-navy border-b-2 border-transparent hover:border-gold transition-all whitespace-nowrap">
-            完整路徑
-          </a>
-          <a href="#faq" className="py-3.5 text-[13px] font-medium text-tx2 hover:text-navy border-b-2 border-transparent hover:border-gold transition-all whitespace-nowrap">
-            常見問題
-          </a>
-          <a href="#optimize" className="py-3.5 text-[13px] font-medium text-tx2 hover:text-navy border-b-2 border-transparent hover:border-gold transition-all whitespace-nowrap">
-            進階優化
-          </a>
-        </div>
-      </div>
-
-      {/* ─── Full Path Section ─── */}
-      <section id="path" className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[120px]">
-        <div className="max-w-[900px] mx-auto">
+      {/* ─── Four stages path ─── */}
+      <section className="bg-white py-[80px] md:py-[100px] px-5 md:px-10">
+        <div className="max-w-[1200px] mx-auto">
           <div className="section-label">完整路徑</div>
-          <h2 className="section-heading">四個階段，一條完整的出海路</h2>
+          <h2 className="section-heading">
+            四個階段，<span className="font-normal text-gold">一條完整的跨境路</span>
+          </h2>
           <p className="section-desc">
-            每個階段都有明確的目標和交付成果。你不用猜下一步，我們陪你走。
+            每個階段都是獨立的服務，也可以從任一階段切入。點進去看每個階段的詳細流程、交付物、紅燈警示與相關案例。
           </p>
 
-          {/* Timeline */}
-          <div className="space-y-5">
-            {stages.map((stage, i) => (
-              <StageCard
-                key={stage.num}
-                stage={stage}
-                isOpen={openStages.has(i)}
-                onToggle={() => toggleStage(i)}
-              />
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="mt-14 text-center">
-            <h3 className="text-[18px] font-medium mb-2">
-              想知道你的產品適合從哪個階段開始？
-            </h3>
-            <p className="text-[14px] text-tx2 font-normal mb-6">
-              聊聊你的狀況，我們幫你規劃最適合的路徑。
-            </p>
-            <div className="flex justify-center gap-3 flex-wrap">
-              <button
-                onClick={open}
-                className="bg-gold text-navy px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
-              >
-                聊聊你的產品
-              </button>
-              <button
-                onClick={() => {
-                  const email = prompt("輸入你的 Email，我們會寄出海指南 PDF 給你：");
-                  if (email) alert(`感謝！我們會將出海指南寄到 ${email}`);
-                }}
-                className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
-              >
-                下載出海指南 PDF
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── FAQ ─── */}
-      <section id="faq" className="bg-white py-[60px] md:py-[80px] px-5 md:px-10 scroll-mt-[120px]">
-        <div className="max-w-[700px] mx-auto">
-          <div className="section-label">常見問題</div>
-          <h2 className="section-heading mb-8">你可能會想知道</h2>
-          <div>
-            {faqData.map((item, i) => (
-              <FAQItem
-                key={i}
-                item={item}
-                isOpen={openFAQ.has(i)}
-                onToggle={() => toggleFAQ(i)}
-              />
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+            {STAGE_ORDER.map((slug) => {
+              const stage = STAGES[slug];
+              const c = ACCENT_CLASSES[stage.accent];
+              return (
+                <Link
+                  key={slug}
+                  href={`/services/${slug}`}
+                  className={`group block bg-white rounded-none border border-bd transition-all duration-400 relative overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg hover:-translate-y-1 hover:border-gold`}
+                >
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-navy">
+                    <Image
+                      src={stage.image}
+                      alt={stage.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                      className="object-cover img-navy-unify transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-baseline gap-3 mb-2">
+                      <span className={`font-sans text-[28px] font-light tabular-nums ${c.text}`}>
+                        {stage.num}
+                      </span>
+                      <span className="text-[11px] text-tx3 font-normal tracking-wider uppercase">
+                        {stage.timeline}
+                      </span>
+                    </div>
+                    <h3 className="text-[17px] font-semibold mb-2 leading-tight">
+                      {stage.title}
+                    </h3>
+                    <p className="text-[13px] text-tx2 leading-[1.65] font-normal mb-4 min-h-[3.3em]">
+                      {stage.subtitle}
+                    </p>
+                    <span className={`text-[12.5px] font-semibold inline-flex items-center gap-1 ${c.text} group-hover:gap-2 transition-all`}>
+                      看這個階段 →
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ─── Optimize Section ─── */}
-      <section id="optimize" className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[120px]">
-        <div className="max-w-[900px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-ember mb-3">
-            進階優化
-          </div>
+      {/* ─── Two routes: Optimize / Methodology ─── */}
+      <section className="bg-cream py-[72px] md:py-[96px] px-5 md:px-10">
+        <div className="max-w-[1100px] mx-auto">
+          <div className="section-label">其他方案</div>
           <h2 className="section-heading">
-            已經在海外了，但總覺得
-            <br />
-            <span className="font-light text-ember">可以做得更好？</span>
+            不走完整路徑？<span className="font-normal text-gold">還有兩條路</span>
           </h2>
 
-          {/* Pain point questions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 mb-12">
-            {[
-              { icon: "📦", q: "物流成本太高，利潤被吃掉？" },
-              { icon: "📉", q: "通路表現不穩，銷量起伏大？" },
-              { icon: "⚙️", q: "營運流程卡卡，效率上不去？" },
-            ].map((item) => (
-              <div
-                key={item.q}
-                className="p-5 rounded-none bg-[rgba(217,139,74,0.04)] border border-[rgba(217,139,74,0.1)] text-center"
-              >
-                <div className="text-2xl mb-2">{item.icon}</div>
-                <p className="text-[14px] font-medium leading-[1.6]">{item.q}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Two services */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {optimizeServices.map((svc) => (
-              <div
-                key={svc.title}
-                className="p-7 bg-white rounded-none border border-[rgba(217,139,74,0.15)] transition-colors hover:border-gold"
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <h3 className="text-[17px] font-semibold">{svc.title}</h3>
-                  <span className="text-[12px] text-ember font-medium bg-[rgba(217,139,74,0.08)] px-2.5 py-0.5 rounded-none">
-                    {svc.timeline}
-                  </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+            <Link
+              href="/services/optimize"
+              className="group block bg-white rounded-none p-7 md:p-9 border-l-4 border-ember transition-all hover:shadow-lg"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="w-10 h-10 rounded-none bg-[rgba(217,139,74,0.08)] flex items-center justify-center text-[18px]">
+                  ⚡
+                </span>
+                <div>
+                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-ember">
+                    進階方案
+                  </div>
+                  <h3 className="text-[19px] font-semibold mt-0.5 group-hover:text-ember transition-colors">
+                    運營優化方案
+                  </h3>
                 </div>
-                <p className="text-[14px] text-tx2 font-normal mb-4">{svc.desc}</p>
-                <ul className="space-y-2">
-                  {svc.items.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-[13px] text-tx2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-ember mt-[6px] shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
-            ))}
-          </div>
+              <p className="text-[14px] text-tx2 leading-[1.75] mb-5">
+                產品已經在海外，但物流成本高、通路績效不穩、營運流程卡卡？
+                這個方案為已經在跑的你設計。
+              </p>
+              <span className="text-[13px] font-semibold text-ember group-hover:translate-x-1 inline-block transition-transform">
+                看優化方案 →
+              </span>
+            </Link>
 
-          {/* CTA */}
-          <div className="text-center">
-            <h3 className="text-[18px] font-medium mb-2">
-              想知道你的出海效率能提升多少？
-            </h3>
-            <p className="text-[14px] text-tx2 font-normal mb-6">
-              預約 60 分鐘深度診斷，我們幫你找到最值得優化的環節。
-            </p>
-            <div className="flex justify-center gap-3 flex-wrap">
-              <button
-                onClick={() => window.open("https://calendly.com/lufe-co/30min", "_blank")}
-                className="bg-ember text-white px-7 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-cream-d"
-              >
-                預約 60 分鐘診斷
-              </button>
-              <button
-                onClick={open}
-                className="px-7 py-[13px] border border-bd bg-white text-tx rounded-none text-[14px] font-medium cursor-pointer transition-colors duration-300 hover:border-tx"
-              >
-                先用訊息聊聊
-              </button>
-            </div>
+            <Link
+              href="/services/methodology"
+              className="group block bg-white rounded-none p-7 md:p-9 border-l-4 border-gold transition-all hover:shadow-lg"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="w-10 h-10 rounded-none bg-[rgba(212,168,92,0.1)] flex items-center justify-center text-[18px]">
+                  ⚙
+                </span>
+                <div>
+                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold">
+                    方法論
+                  </div>
+                  <h3 className="text-[19px] font-semibold mt-0.5 group-hover:text-gold transition-colors">
+                    鹿飛的決策框架
+                  </h3>
+                </div>
+              </div>
+              <p className="text-[14px] text-tx2 leading-[1.75] mb-5">
+                我們怎麼判斷一個案子值不值得做？
+                MBCPR 五維評分矩陣、紅燈判準、一個真實案例的完整評分過程。
+              </p>
+              <span className="text-[13px] font-semibold text-gold group-hover:translate-x-1 inline-block transition-transform">
+                看方法論 →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Top FAQs ─── */}
+      <section className="bg-white py-[72px] md:py-[96px] px-5 md:px-10">
+        <div className="max-w-[760px] mx-auto">
+          <div className="section-label">最常被問到</div>
+          <h2 className="section-heading">三個關鍵問題</h2>
+          <p className="section-desc">
+            更多細節在每個階段的子頁。這裡先回答最常見的三題。
+          </p>
+
+          <div className="border-t border-bd mt-10">
+            {topFaqs.map((f, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div key={i} className="border-b border-bd">
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    className="w-full flex items-center justify-between py-5 md:py-6 text-left cursor-pointer group"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="text-[15.5px] md:text-[16.5px] font-medium pr-4 group-hover:text-navy transition-colors">
+                      {f.q}
+                    </span>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      className={`shrink-0 transition-transform duration-300 text-tx3 group-hover:text-gold ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path
+                        d="M4 7L9 12L14 7"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="pb-6 text-[14.5px] text-tx2 leading-[1.85] font-normal">
+                          {f.a}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA ─── */}
+      <section className="bg-navy py-[80px] md:py-[100px] px-5 md:px-10">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-sans text-[clamp(26px,3.2vw,38px)] text-white leading-[1.2] font-light tracking-[-0.4px] mb-4">
+            想知道你的產品適合從<span className="text-gold font-normal">哪個階段</span>開始？
+          </h2>
+          <p className="text-[15px] text-white/60 leading-[1.75] mb-10 max-w-[520px] mx-auto">
+            聊聊你的狀況，我們幫你規劃最適合的路徑，不收費、不承諾、不賣課。
+          </p>
+          <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
+            <button
+              onClick={open}
+              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+            >
+              聊聊你的產品 →
+            </button>
+            <Link
+              href="/assess"
+              className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-white"
+            >
+              <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
+                先做 2 分鐘評估
+              </span>
+              <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            </Link>
           </div>
         </div>
       </section>
