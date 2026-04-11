@@ -242,53 +242,41 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom slide navigator — Bain-style chip bar */}
+      {/* Bottom slide navigator — Bain-style distributed bar */}
       <div className="absolute left-0 right-0 bottom-0 z-10 border-t border-white/10 bg-gradient-to-t from-black/30 to-transparent backdrop-blur-[2px]">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 h-[60px] md:h-[72px] flex items-center justify-between gap-4">
-          {/* Chips */}
-          <div className="flex items-center gap-5 md:gap-9 overflow-x-auto scrollbar-none h-full">
-            {slides.map((slide, i) => {
-              const isActive = i === activeIndex;
-              return (
-                <Link
-                  key={slide.id}
-                  href={slide.chipHref}
-                  onMouseEnter={() => goTo(i)}
-                  onFocus={() => goTo(i)}
-                  aria-current={isActive ? "true" : undefined}
-                  className={`relative flex-shrink-0 text-[12px] md:text-[13px] font-medium tracking-[0.3px] h-full flex items-center transition-colors duration-300 cursor-pointer ${
-                    isActive ? "text-white" : "text-white/55 hover:text-white/85"
+        <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 h-[60px] md:h-[76px] flex items-stretch">
+          {slides.map((slide, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <Link
+                key={slide.id}
+                href={slide.chipHref}
+                onMouseEnter={() => goTo(i)}
+                onFocus={() => goTo(i)}
+                aria-current={isActive ? "true" : undefined}
+                className={`relative flex-1 min-w-0 flex items-center justify-center text-center px-2 text-[12px] md:text-[13px] tracking-[0.3px] transition-colors duration-300 cursor-pointer ${
+                  isActive
+                    ? "text-white font-semibold"
+                    : "text-white/55 hover:text-white/85 font-medium"
+                }`}
+              >
+                <span className="truncate">{slide.chipLabel}</span>
+                {/* Track — full width of slot */}
+                <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-white/10" />
+                {/* Progress fill — spans full slot width */}
+                <span
+                  key={isActive ? `fill-${progressKey.current}` : `idle-${slide.id}`}
+                  className={`absolute left-0 bottom-0 h-[2px] bg-gold origin-left ${
+                    isActive && !paused && !prefersReducedMotion
+                      ? "animate-hero-progress"
+                      : isActive
+                        ? "w-full"
+                        : "w-0"
                   }`}
-                >
-                  {slide.chipLabel}
-                  {/* Track */}
-                  <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-white/10" />
-                  {/* Progress fill — only animates on active chip */}
-                  <span
-                    key={isActive ? `fill-${progressKey.current}` : `idle-${slide.id}`}
-                    className={`absolute left-0 bottom-0 h-[2px] bg-gold origin-left ${
-                      isActive && !paused && !prefersReducedMotion
-                        ? "animate-hero-progress"
-                        : isActive
-                          ? "w-full"
-                          : "w-0"
-                    }`}
-                  />
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Slide counter */}
-          <div className="hidden sm:flex items-center gap-3 text-white/60 flex-shrink-0 tabular-nums">
-            <span className="text-[11px] font-medium tracking-[1.5px] text-white">
-              {String(activeIndex + 1).padStart(2, "0")}
-            </span>
-            <span className="w-8 h-px bg-white/30" />
-            <span className="text-[11px] font-medium tracking-[1.5px]">
-              {String(slides.length).padStart(2, "0")}
-            </span>
-          </div>
+                />
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
