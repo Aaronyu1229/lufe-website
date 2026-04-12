@@ -23,6 +23,9 @@ import { usePathname } from "next/navigation";
 import {
   SUBSIDY_CARD_COPY,
   getContextualCopy,
+  getActiveSubsidyCount,
+  getNearestDeadline,
+  getTodayFormatted,
 } from "@/data/subsidies";
 
 const DELAY_MS = 12_000;
@@ -36,7 +39,14 @@ export function SubsidyCard() {
   const [visible, setVisible] = useState(false);
   const [exiting, setExiting] = useState(false);
 
+  const activeCount = useMemo(() => getActiveSubsidyCount(), []);
+  const nearestDeadline = useMemo(() => getNearestDeadline(), []);
+  const todayStr = useMemo(() => getTodayFormatted(), []);
+
   const isHidden = HIDDEN_PATHS.some((p) => pathname?.startsWith(p));
+
+  // If all concrete-deadline subsidies have expired, hide the card
+  const isExpired = activeCount === 0;
 
   // Pick contextual copy based on current page
   const copy = useMemo(() => getContextualCopy(pathname ?? ""), [pathname]);
@@ -70,7 +80,7 @@ export function SubsidyCard() {
     }, 300);
   };
 
-  if (isHidden || !visible) return null;
+  if (isHidden || isExpired || !visible) return null;
 
   return (
     <div
@@ -110,16 +120,28 @@ export function SubsidyCard() {
                 "linear-gradient(180deg, rgba(10,26,58,0.4) 0%, rgba(10,26,58,0.9) 75%, rgba(10,26,58,1) 100%)",
             }}
           />
-          {/* Urgency pulse indicator — small and subtle */}
+          {/* Live status indicator — date-aware */}
           <div className="absolute top-3 left-4 flex items-center gap-2">
             <span
-              className="w-1.5 h-1.5 rounded-full bg-gold motion-safe:animate-pulse"
+              className="w-1.5 h-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse"
               aria-hidden="true"
             />
             <span className="text-[9.5px] font-semibold tracking-[2px] uppercase text-gold">
-              2026 開放中
+              {todayStr} 更新 · {activeCount} 個計畫開放中
             </span>
           </div>
+          {nearestDeadline && (
+            <div className="absolute bottom-2 left-4">
+              <span className="text-[9px] font-medium tracking-[1px] text-white/50">
+                最近截止 {nearestDeadline.formatted}
+                {nearestDeadline.daysLeft <= 60 && (
+                  <span className="text-amber-400 ml-1">
+                    · 剩 {nearestDeadline.daysLeft} 天
+                  </span>
+                )}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Accent line */}
@@ -165,9 +187,12 @@ export function SubsidyCard() {
             }
           }}
         >
-          {/* Eyebrow — contextual */}
+          {/* Eyebrow — contextual, with live count */}
           <div className="text-gold text-[10px] font-semibold tracking-[2px] uppercase mb-3">
             {copy.eyebrow}
+          </div>
+          <div className="text-[10.5px] text-white/40 font-medium mb-2">
+            截至 {todayStr}，共 {activeCount} 個補助計畫仍可申請
           </div>
 
           {/* Headline — larger, more visual weight */}

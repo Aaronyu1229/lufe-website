@@ -25,6 +25,8 @@ export type Subsidy = {
   readonly stage: SubsidyStage;
   readonly accent: "sky" | "gold" | "ember";
   readonly deadline: string;
+  /** ISO date string (YYYY-MM-DD) for subsidies with a concrete deadline. Omit for open-ended programs. */
+  readonly deadlineDate?: string;
   readonly applicationNote: string;
   readonly iconKey: "globe" | "booth" | "factory" | "cart";
   readonly sourceUrl?: string;
@@ -58,6 +60,7 @@ export const SUBSIDIES: readonly Subsidy[] = [
     stage: "enter",
     accent: "gold",
     deadline: "2026.09.30",
+    deadlineDate: "2026-09-30",
     applicationNote: "每年 2 期 · 名額有限",
     iconKey: "globe",
     sourceUrl: "https://www.trade.gov.tw/Pages/List.aspx?nodeID=3054",
@@ -505,6 +508,52 @@ export interface MatchResult {
     readonly reason: string;
   }[];
   readonly verdict: string;
+}
+
+/* ────────────────────────────────────────────────
+ * Date-aware helpers — powers the SubsidyCard "still open" logic
+ * ──────────────────────────────────────────────── */
+
+/** Returns true if a subsidy is still active (no concrete deadline, or deadline is in the future). */
+export function isSubsidyActive(subsidy: Subsidy): boolean {
+  if (!subsidy.deadlineDate) return true; // open-ended programs are always active
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const deadline = new Date(subsidy.deadlineDate + "T23:59:59");
+  return deadline >= today;
+}
+
+/** Returns count of currently active subsidies. */
+export function getActiveSubsidyCount(): number {
+  return SUBSIDIES.filter(isSubsidyActive).length;
+}
+
+/** Returns the nearest upcoming deadline (formatted), or null if none have concrete dates. */
+export function getNearestDeadline(): { formatted: string; daysLeft: number } | null {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  let nearest: { formatted: string; daysLeft: number } | null = null;
+
+  for (const s of SUBSIDIES) {
+    if (!s.deadlineDate) continue;
+    const deadline = new Date(s.deadlineDate + "T00:00:00");
+    if (deadline < today) continue;
+    const daysLeft = Math.ceil((deadline.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    if (!nearest || daysLeft < nearest.daysLeft) {
+      const m = deadline.getMonth() + 1;
+      const d = deadline.getDate();
+      nearest = { formatted: `${m}/${d}`, daysLeft };
+    }
+  }
+
+  return nearest;
+}
+
+/** Format today's date as M/D for display. */
+export function getTodayFormatted(): string {
+  const now = new Date();
+  return `${now.getMonth() + 1}/${now.getDate()}`;
 }
 
 export function matchSubsidies(answers: MatcherAnswers): MatchResult {
