@@ -17,7 +17,6 @@
  */
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -101,78 +100,17 @@ export function SubsidyCard() {
       `}
     >
       <div className="relative bg-navy text-white shadow-[0_20px_60px_-12px_rgba(16,27,48,0.6)] overflow-hidden">
-        {/* ─── Top image strip ─── */}
-        <div className="relative h-[104px] overflow-hidden">
-          <Image
-            src={SUBSIDY_CARD_COPY.image}
-            alt=""
-            fill
-            sizes="360px"
-            className="object-cover"
-            aria-hidden="true"
-          />
-          {/* Navy gradient overlay for legibility */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(10,26,58,0.4) 0%, rgba(10,26,58,0.9) 75%, rgba(10,26,58,1) 100%)",
-            }}
-          />
-          {/* Live status indicator — date-aware */}
-          <div className="absolute top-3 left-4 flex items-center gap-2">
-            <span
-              className="w-1.5 h-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse"
-              aria-hidden="true"
-            />
-            <span className="text-[9.5px] font-semibold tracking-[2px] uppercase text-gold">
-              {todayStr} 更新 · {activeCount} 個計畫開放中
-            </span>
-          </div>
-          {nearestDeadline && (
-            <div className="absolute bottom-2 left-4">
-              <span className="text-[9px] font-medium tracking-[1px] text-white/50">
-                最近截止 {nearestDeadline.formatted}
-                {nearestDeadline.daysLeft <= 60 && (
-                  <span className="text-amber-400 ml-1">
-                    · 剩 {nearestDeadline.daysLeft} 天
-                  </span>
-                )}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Accent line */}
-        <div className="h-[2px] bg-gradient-to-r from-gold/0 via-gold to-gold/0" />
+        {/* Top accent line */}
+        <div className="h-[2px] bg-gradient-to-r from-gold/40 via-gold to-gold/40" />
 
         {/* Dismiss button */}
         <button
           onClick={dismiss}
           aria-label={SUBSIDY_CARD_COPY.dismissAria}
-          className="
-            absolute top-3 right-3 z-10
-            w-8 h-8 flex items-center justify-center
-            text-white/70 hover:text-white
-            bg-black/40 hover:bg-black/60
-            backdrop-blur-sm rounded-full
-            transition-colors cursor-pointer
-          "
+          className="absolute top-3 right-3 z-10 w-7 h-7 flex items-center justify-center text-white/50 hover:text-white transition-colors cursor-pointer"
         >
-          <svg
-            width="11"
-            height="11"
-            viewBox="0 0 12 12"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M1 1L11 11M11 1L1 11"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>
 
@@ -187,33 +125,34 @@ export function SubsidyCard() {
             }
           }}
         >
-          {/* Eyebrow — contextual, with live count */}
-          <div className="text-gold text-[10px] font-semibold tracking-[2px] uppercase mb-3">
-            {copy.eyebrow}
-          </div>
-          <div className="text-[10.5px] text-white/40 font-medium mb-2">
-            截至 {todayStr}，共 {activeCount} 個補助計畫仍可申請
+          {/* Live status — single line */}
+          <div className="flex items-center gap-2 mb-4">
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse shrink-0"
+              aria-hidden="true"
+            />
+            <span className="text-[12px] text-white/50 font-medium">
+              {todayStr} 更新 · {activeCount} 個補助開放中
+              {nearestDeadline && nearestDeadline.daysLeft <= 60 && (
+                <span className="text-amber-400"> · 剩 {nearestDeadline.daysLeft} 天</span>
+              )}
+            </span>
           </div>
 
-          {/* Headline — larger, more visual weight */}
-          <h3 className="font-sans text-[28px] md:text-[32px] font-light leading-[1.1] tracking-[-0.8px] text-white mb-3">
+          {/* Headline */}
+          <h3 className="font-sans text-[24px] font-light leading-[1.2] tracking-[-0.5px] text-white mb-2">
             {copy.headline}
           </h3>
 
-          {/* One-liner — contextual explanation */}
-          <p className="text-[13.5px] text-white/65 leading-[1.8] mb-6 pr-2">
+          {/* One-liner */}
+          <p className="text-[14px] text-white/55 leading-[1.7] mb-5">
             {copy.oneLiner}
           </p>
 
-          {/* CTA — filled gold button */}
-          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-[13px] text-[15px] font-semibold tracking-[0.5px] transition-colors group-hover:bg-gold-l">
+          {/* CTA */}
+          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-3 text-[14.5px] font-semibold transition-colors group-hover:bg-gold-l">
             {copy.cta}
-            <span
-              className="text-[16.5px] transition-transform duration-300 group-hover:translate-x-0.5"
-              aria-hidden="true"
-            >
-              →
-            </span>
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
           </span>
         </Link>
       </div>
