@@ -175,11 +175,19 @@ export function Navbar() {
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 flex items-center justify-between h-[64px]">
           <Link
             href="/"
-            className={`font-sans font-bold text-[22px] tracking-[-0.5px] transition-colors duration-300 py-1.5 ${
+            className={`flex items-center gap-2.5 font-sans font-bold text-[22px] tracking-[-0.5px] transition-colors duration-300 py-1.5 ${
               useDark ? "text-navy" : "text-white"
             }`}
           >
-            鹿飛 LUF<span className={useDark ? "text-gold-d" : "text-gold"}>É</span>
+            <Image
+              src={useDark ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"}
+              alt="鹿飛 LUFÉ"
+              width={36}
+              height={41}
+              className="transition-opacity duration-300"
+              priority
+            />
+            <span>鹿飛 LUF<span className={useDark ? "text-gold-d" : "text-gold"}>É</span></span>
           </Link>
 
           {/* Desktop nav */}

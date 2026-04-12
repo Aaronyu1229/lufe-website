@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const serviceLinks = [
   { label: "01 產品適配性", href: "/services#pillar-fit" },
@@ -29,9 +30,17 @@ export function Footer() {
     <footer className="bg-navy text-white/50 pt-[72px] pb-8 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
         <div className="col-span-2 md:col-span-1">
-          <span className="font-sans font-bold text-[19px] text-white">
-            鹿飛 LUF<span className="text-gold">É</span>
-          </span>
+          <Link href="/" className="flex items-center gap-2.5">
+            <Image
+              src="/images/logo/logo-mark-white.png"
+              alt="鹿飛 LUFÉ"
+              width={32}
+              height={36}
+            />
+            <span className="font-sans font-bold text-[19px] text-white">
+              鹿飛 LUF<span className="text-gold">É</span>
+            </span>
+          </Link>
           <p className="text-[14.5px] max-w-[260px] leading-[1.8] font-light mt-2 text-white/55">
             協助台灣企業在北美與東南亞落地。產品適配、通路銷售、團隊體質——三個支柱，兩個主戰場。
           </p>
