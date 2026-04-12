@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const PILLARS = ["產品適配", "通路銷售", "團隊體質"] as const;
+const PILLARS = ["產品適配", "通路銷售", "國際物流"] as const;
 
 type CoverageRow = {
   label: string;
@@ -25,14 +25,14 @@ const coverage: readonly CoverageRow[] = [
     variant: "default",
   },
   {
-    label: "代操 / SaaS",
-    note: "只賣工具不導入",
+    label: "貨代 / 物流商",
+    note: "只跑後段運輸",
     pillars: [false, false, true],
     variant: "default",
   },
   {
     label: "鹿飛 LUFÉ",
-    note: "三支柱全程自營",
+    note: "三件事全程自營",
     pillars: [true, true, true],
     variant: "lufe",
   },
@@ -100,17 +100,17 @@ export function WhySection() {
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
           <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold mb-4">
-            從第一年到第二年 · 一個團隊
+            適配 · 通路 · 物流 · 一個團隊
           </div>
           <h2 className="font-sans text-[clamp(32px,4.8vw,56px)] leading-[1.1] font-light tracking-[-0.8px] text-white max-w-[880px] mx-auto">
-            從落地到長大，
+            從評估市場到貨上架，
             <br />
             你面對的<span className="text-gold font-normal">只有我們</span>
           </h2>
           <p className="text-[16px] text-white/55 max-w-[640px] leading-[1.75] mx-auto mt-6 font-normal">
-            第一年的產品適配跟通路銷售，第二年的團隊跟 AI ——
+            產品適配、通路銷售、躍馬 42 年國際物流 ——
             <br className="hidden md:block" />
-            一個專案經理、一份合約、一條進度線。底下還有躍馬 42 年物流實戰當基礎。
+            不是三家拼起來的拼盤，是一個團隊從頭跑到尾。一個專案經理、一份合約、一條進度線。
           </p>
         </div>
 
@@ -202,7 +202,7 @@ export function WhySection() {
 
           {/* Footnote: the promise, in plain words */}
           <p className="mt-6 text-center text-[11.5px] md:text-[12.5px] text-white/40 font-normal leading-[1.7]">
-            對手做完一個支柱交給下一家，鹿飛三個支柱<span className="text-gold/80">全程自營</span>——
+            對手做完一件事交給下一家，鹿飛三件事<span className="text-gold/80">全程自營</span>——
             <br className="hidden md:block" />
             沒有責任轉交，沒有窗口切換，沒有進度真空。
           </p>
