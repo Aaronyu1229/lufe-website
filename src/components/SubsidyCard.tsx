@@ -113,7 +113,15 @@ export function SubsidyCard() {
           />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-navy/20 to-navy/80" />
         </div>
-        <div className="h-[2px] bg-gradient-to-r from-gold/40 via-gold to-gold/40" />
+        <div className="relative h-[2px] bg-gradient-to-r from-gold/40 via-gold to-gold/40 overflow-hidden">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 motion-safe:animate-subsidy-gold-sweep"
+            style={{
+              background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%)",
+            }}
+          />
+        </div>
 
         {/* Dismiss button */}
         <button
@@ -137,14 +145,14 @@ export function SubsidyCard() {
             }
           }}
         >
-          {/* Live status — single line */}
-          <div className="flex items-center gap-2 mb-4">
+          {/* Live status — single line with count animation */}
+          <div className="flex items-center gap-2 mb-4 motion-safe:animate-subsidy-count">
             <span
               className="w-1.5 h-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse shrink-0"
               aria-hidden="true"
             />
             <span className="text-[12px] text-white/50 font-medium">
-              {todayStr} 更新 · {activeCount} 個補助開放中
+              {todayStr} 更新 · <span className="text-emerald-400 font-semibold">{activeCount}</span> 個補助開放中
               {nearestDeadline && nearestDeadline.daysLeft <= 60 && (
                 <span className="text-amber-400"> · 剩 {nearestDeadline.daysLeft} 天</span>
               )}
@@ -161,8 +169,8 @@ export function SubsidyCard() {
             {copy.oneLiner}
           </p>
 
-          {/* CTA */}
-          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-3 text-[14.5px] font-semibold transition-colors group-hover:bg-gold-l">
+          {/* CTA with breathe animation */}
+          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-3 text-[14.5px] font-semibold transition-colors group-hover:bg-gold-l motion-safe:animate-subsidy-cta">
             {copy.cta}
             <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
           </span>

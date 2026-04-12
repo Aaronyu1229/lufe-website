@@ -233,3 +233,32 @@ body {
 .animate-subsidy-slide-in {
   animation: subsidy-slide-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* SubsidyCard — gold line sweep */
+@keyframes subsidy-gold-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-subsidy-gold-sweep {
+  animation: subsidy-gold-sweep 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+}
+
+/* SubsidyCard — count tick up */
+@keyframes subsidy-count-pop {
+  0% { opacity: 0; transform: translateY(6px); }
+  60% { opacity: 1; transform: translateY(-2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-subsidy-count {
+  animation: subsidy-count-pop 0.4s ease-out 0.7s both;
+}
+
+/* SubsidyCard — CTA button breathe */
+@keyframes subsidy-cta-breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+.animate-subsidy-cta {
+  animation: subsidy-cta-breathe 0.6s ease-in-out 1.2s both;
+}
