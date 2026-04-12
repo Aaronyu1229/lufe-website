@@ -17,6 +17,7 @@
  */
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -100,7 +101,18 @@ export function SubsidyCard() {
       `}
     >
       <div className="relative bg-navy text-white shadow-[0_20px_60px_-12px_rgba(16,27,48,0.6)] overflow-hidden">
-        {/* Top accent line */}
+        {/* Compact image strip */}
+        <div className="relative h-[64px] overflow-hidden">
+          <Image
+            src={SUBSIDY_CARD_COPY.image}
+            alt=""
+            fill
+            sizes="360px"
+            className="object-cover"
+            aria-hidden="true"
+          />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-navy/20 to-navy/80" />
+        </div>
         <div className="h-[2px] bg-gradient-to-r from-gold/40 via-gold to-gold/40" />
 
         {/* Dismiss button */}
