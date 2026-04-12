@@ -299,6 +299,133 @@ export function ServicesPage() {
         );
       })}
 
+      {/* ─── 兩條路徑 ─── */}
+      <section className="bg-white py-[80px] md:py-[110px] px-5 md:px-10 border-t border-bd/40">
+        <div className="max-w-[960px] mx-auto">
+          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold-d mb-3">
+            你的狀況
+          </div>
+          <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] leading-[1.15] font-light tracking-[-0.5px] mb-4">
+            同一套方法論，<span className="font-normal text-gold-d">兩種走法</span>
+          </h2>
+          <p className="text-[16.5px] md:text-[17.5px] text-tx2 leading-[1.8] max-w-[620px] mb-10 font-normal">
+            三個支柱是骨架，但落地方式會因為你的市場和階段不同。
+            看看哪條路比較像你現在的狀況。
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+            {/* 探路 */}
+            <div className="group border border-bd hover:border-sky transition-all p-7 md:p-9 flex flex-col">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 flex items-center justify-center bg-[rgba(91,143,168,0.08)] border border-sky/25">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="9" stroke="#5B8FA8" strokeWidth="1.5" />
+                    <path d="M12 3C16 7 16 17 12 21M12 3C8 7 8 17 12 21M3 12H21" stroke="#5B8FA8" strokeWidth="1.2" />
+                  </svg>
+                </div>
+                <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-sky">
+                  出海探路
+                </div>
+              </div>
+              <h3 className="text-[22px] md:text-[24px] font-semibold leading-tight mb-3">
+                還不確定能不能賣
+              </h3>
+              <p className="text-[15px] text-tx2 leading-[1.8] font-normal mb-5 flex-1">
+                幫你把產品送進東南亞市場測試——從出口合規、報關物流到找第一個通路對接。
+                先用最小成本驗證，再決定要不要放大。
+              </p>
+              <div className="space-y-2.5 mb-6">
+                <div className="flex items-start gap-2.5">
+                  <span className="text-sky text-[14px] mt-0.5">→</span>
+                  <span className="text-[14px] text-tx2">產品證 + 出海證準備</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="text-sky text-[14px] mt-0.5">→</span>
+                  <span className="text-[14px] text-tx2">報關、物流全程處理</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="text-sky text-[14px] mt-0.5">→</span>
+                  <span className="text-[14px] text-tx2">在地通路對接與回饋</span>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-bd/60">
+                <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
+                  適合你如果
+                </div>
+                <p className="text-[13.5px] text-tx2 leading-[1.7]">
+                  有產品但還沒出過海，想先測試東南亞市場的反應再決定下一步。
+                </p>
+              </div>
+              <div className="mt-5 pt-4 border-t border-bd/60">
+                <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
+                  收費方式
+                </div>
+                <p className="text-[13.5px] text-tx2 leading-[1.7]">
+                  按階段固定費用，每一步花多少錢事前講清楚。
+                </p>
+              </div>
+            </div>
+
+            {/* 落地 */}
+            <div className="group border border-bd hover:border-gold transition-all p-7 md:p-9 flex flex-col">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 flex items-center justify-center bg-[rgba(212,168,92,0.08)] border border-gold-d/25">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="8" width="18" height="12" rx="1" stroke="#8F6A1F" strokeWidth="1.5" />
+                    <path d="M3 12H21" stroke="#8F6A1F" strokeWidth="1.2" />
+                    <path d="M8 5L8 8M16 5L16 8" stroke="#8F6A1F" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d">
+                  通路落地
+                </div>
+              </div>
+              <h3 className="text-[22px] md:text-[24px] font-semibold leading-tight mb-3">
+                產品準備好了，要進通路
+              </h3>
+              <p className="text-[15px] text-tx2 leading-[1.8] font-normal mb-5 flex-1">
+                幫你打進北美主流通路——市場研究、展覽佈局、引進買家、上桌談判。
+                我們出人、出策略，幫你把品牌帶到貨架上。
+              </p>
+              <div className="space-y-2.5 mb-6">
+                <div className="flex items-start gap-2.5">
+                  <span className="text-gold-d text-[14px] mt-0.5">→</span>
+                  <span className="text-[14px] text-tx2">北美市場研究與選品策略</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="text-gold-d text-[14px] mt-0.5">→</span>
+                  <span className="text-[14px] text-tx2">展覽佈置、銷售、買家引進</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="text-gold-d text-[14px] mt-0.5">→</span>
+                  <span className="text-[14px] text-tx2">通路談判與成交協助</span>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-bd/60">
+                <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
+                  適合你如果
+                </div>
+                <p className="text-[13.5px] text-tx2 leading-[1.7]">
+                  產品已經成熟，想進 Costco、Walmart、Amazon 等北美主流通路。
+                </p>
+              </div>
+              <div className="mt-5 pt-4 border-t border-bd/60">
+                <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
+                  收費方式
+                </div>
+                <p className="text-[13.5px] text-tx2 leading-[1.7]">
+                  前期低服務費 + 成交抽成——我們幫你賣出去才真的賺錢。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-[14px] text-tx3 font-normal italic mt-8 text-center">
+            不確定自己該走哪條？先聊聊，我們幫你判斷。
+          </p>
+        </div>
+      </section>
+
       {/* ─── 底層物流 敘事 strip ─── */}
       <section className="bg-navy py-[72px] md:py-[96px] px-5 md:px-10">
         <div className="max-w-[900px] mx-auto">
