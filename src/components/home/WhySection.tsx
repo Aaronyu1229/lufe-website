@@ -99,9 +99,6 @@ export function WhySection() {
       <div className="relative max-w-[1200px] mx-auto">
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
-          <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold mb-4">
-            適配 · 通路 · 物流 · 一個團隊
-          </div>
           <h2 className="font-sans text-[clamp(32px,4.8vw,56px)] leading-[1.1] font-light tracking-[-0.8px] text-white max-w-[880px] mx-auto">
             從評估市場到貨上架，
             <br />

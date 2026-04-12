@@ -26,9 +26,9 @@ type Slide = {
 const slides: Slide[] = [
   {
     id: "pillar-fit",
-    chipLabel: "核心 · 產品適配性",
+    chipLabel: "產品適配性",
     chipHref: "/services#pillar-fit",
-    eyebrow: "核心服務 · 01 · 第一年",
+    eyebrow: "產品適配性",
     titleLines: ["協助台灣企業", "在北美與東南亞落地"],
     subtitle: "這個市場真的要你嗎？市場評估、產品測試、決策框架 — 先把勝率搞清楚。",
     primary: { label: "看真實案例", href: "/cases" },
@@ -43,9 +43,9 @@ const slides: Slide[] = [
   },
   {
     id: "pillar-channel",
-    chipLabel: "核心 · 通路銷售力",
+    chipLabel: "通路銷售力",
     chipHref: "/services#pillar-channel",
-    eyebrow: "核心服務 · 02 · 第一年",
+    eyebrow: "通路銷售力",
     titleLines: ["上得了架", "還要賣得動"],
     subtitle: "通路進入、展會佈局、數位集客 — 把產品放進對的通路，讓消費者找得到。",
     primary: { label: "看完整服務內容", href: "/services" },
@@ -61,7 +61,7 @@ const slides: Slide[] = [
     id: "logistics-moat",
     chipLabel: "基石 · 42 年國際物流",
     chipHref: "/about",
-    eyebrow: "真正的基石 · 躍馬 42 年",
+    eyebrow: "躍馬國際 · 42 年實戰",
     titleLines: ["真的跑過船的人，", "才懂出海的眉角"],
     subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬國際 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通。",
     primary: { label: "認識躍馬國際", href: "/about" },

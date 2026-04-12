@@ -263,9 +263,6 @@ export function CasesSection() {
   return (
     <section className="py-[60px] md:py-[80px] px-5 md:px-10 max-w-[1400px] mx-auto">
       {/* ─── Heading ─── */}
-      <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold-d mb-3">
-        案例
-      </div>
       <div className="flex items-center gap-6 mb-4">
         <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] md:whitespace-nowrap">
           這些企業都找到了自己的路

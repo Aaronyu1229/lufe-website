@@ -66,9 +66,6 @@ export function PositioningBand() {
       <div className="relative max-w-[1200px] mx-auto">
         {/* ─── Identity header ─── */}
         <div className="text-center mb-12 md:mb-16">
-          <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold-d mb-5">
-            鹿飛是什麼
-          </div>
           <h2 className="font-sans text-[clamp(32px,5vw,58px)] leading-[1.08] font-light tracking-[-0.8px] text-navy mb-6">
             真的跑過船的人,
             <br className="md:hidden" />
@@ -86,10 +83,6 @@ export function PositioningBand() {
         {/* ─── 真正的基石 · 物流 hero card ─── */}
         <div className="mb-12 md:mb-16 max-w-[1000px] mx-auto">
           <div className="flex items-center gap-3 mb-5 md:mb-6">
-            <div className="w-8 h-px bg-navy/40" />
-            <span className="text-[10.5px] md:text-[11px] font-semibold tracking-[2.5px] uppercase text-navy/70">
-              真正的基石 · The Moat
-            </span>
             <div className="flex-1 h-px bg-bd/70" />
           </div>
 
@@ -112,9 +105,6 @@ export function PositioningBand() {
             <div className="relative p-8 md:p-12 grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center">
               {/* Left — narrative */}
               <div>
-                <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-                  Yueh Ma International · 躍馬國際
-                </div>
                 <h3 className="font-sans text-[26px] md:text-[34px] leading-[1.2] font-light tracking-[-0.5px] mb-5">
                   出海不是報告寫得出來的,
                   <br />
@@ -159,11 +149,7 @@ export function PositioningBand() {
 
         {/* ─── 在這個基石上 · 兩件核心服務 section label ─── */}
         <div className="flex items-center gap-3 mb-6 md:mb-8 max-w-[1000px] mx-auto">
-          <div className="w-8 h-px bg-gold-d/60" />
-          <span className="text-[10.5px] md:text-[11px] font-semibold tracking-[2.5px] uppercase text-gold-d">
-            在這個基石上 · 我們做兩件事
-          </span>
-          <div className="flex-1 h-px bg-bd/70" />
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gold-d/30 to-transparent" />
         </div>
 
         {/* ─── 2 Core Pillar cards ─── */}
@@ -189,7 +175,7 @@ export function PositioningBand() {
                     </span>
                   </div>
                   <span
-                    className={`text-[10.5px] font-semibold tracking-[2px] uppercase ${c.text} pt-3`}
+                    className={`text-[13px] font-medium ${c.text} pt-3`}
                   >
                     {p.subtitle}
                   </span>
@@ -239,10 +225,8 @@ export function PositioningBand() {
             href="/services#pillar-team"
             className="group inline-flex items-center gap-2.5 text-[13.5px] md:text-[14.5px] text-tx3 hover:text-navy transition-colors"
           >
-            <span className="text-tx3/70 tracking-[1.5px] uppercase">進階</span>
-            <span aria-hidden="true" className="w-px h-3 bg-tx3/30" />
             <span className="border-b border-tx3/30 pb-0.5 group-hover:border-navy transition-colors">
-              第二年想把團隊長大?看進階模組
+              想把海外團隊長大？看進階模組
             </span>
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">
               →

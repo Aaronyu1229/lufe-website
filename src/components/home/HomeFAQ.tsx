@@ -159,9 +159,6 @@ export function HomeFAQ() {
       <div className="relative max-w-[1200px] mx-auto">
         {/* Header */}
         <div className="text-center mb-14 md:mb-16">
-          <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold-d mb-4">
-            你可能會想知道
-          </div>
           <h2 className="font-sans text-[clamp(28px,3.8vw,44px)] leading-[1.15] font-light tracking-[-0.6px] text-navy mb-4">
             三個最常被問到的<span className="text-gold-d font-normal">問題</span>
           </h2>
