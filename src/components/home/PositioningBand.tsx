@@ -75,7 +75,7 @@ export function PositioningBand() {
             <span className="text-gold-d font-normal">才懂出海的眉角</span>
           </h2>
           <p className="text-[16.5px] md:text-[18px] text-tx2 max-w-[720px] mx-auto leading-[1.8] font-normal">
-            出海不是 PowerPoint 顧問畫得出來的。鹿飛站在躍馬國際{" "}
+            出海不是報告寫得出來的。鹿飛站在躍馬國際{" "}
             <span className="text-tx font-medium">42 年</span>{" "}
             的國際物流實戰上,幫你把
             <span className="text-tx font-medium">產品適配</span>跟
