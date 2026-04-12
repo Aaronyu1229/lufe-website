@@ -83,24 +83,24 @@ export function CasesPage() {
 
           {/* Headline */}
           <h1 className="font-heading text-[clamp(34px,5vw,58px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-7 max-w-[880px]">
-            四條不同的路，
+            兩個主戰場，
             <br />
             <span className="font-normal text-gold">同一組人走出來的</span>
           </h1>
-          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[580px] font-light leading-[1.75] mb-12 md:mb-14">
-            從卡點、判斷、到落地——每一段我們都真的做過。
+          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[600px] font-light leading-[1.75] mb-12 md:mb-14">
+            北美和東南亞，不同產業、不同卡點，但每一個案例我們都真的做過、
             <br className="hidden md:block" />
-            案例不多，但每一則都能翻到底。
+            都能翻到最後一個決策。
           </p>
 
-          {/* Single-line tagline strip (replaces inflated stats) */}
+          {/* Single-line tagline strip */}
           <div className="border-t border-white/10 pt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] md:text-[13.5px] text-white/55 font-normal">
             <span>
-              <span className="text-gold font-medium">4</span> 種產業
+              <span className="text-gold font-medium">北美</span> · 保健品 / 電子 / 服飾
             </span>
             <span className="text-white/20">·</span>
             <span>
-              <span className="text-gold font-medium">2</span> 條出海路徑
+              <span className="text-gold font-medium">東南亞</span> · 餐飲連鎖
             </span>
             <span className="text-white/20">·</span>
             <span>

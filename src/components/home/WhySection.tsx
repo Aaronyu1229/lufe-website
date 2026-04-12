@@ -2,38 +2,38 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const STAGES = ["評估", "測試", "通路", "物流", "落地"] as const;
+const PILLARS = ["產品適配", "通路銷售", "團隊體質"] as const;
 
 type CoverageRow = {
   label: string;
   note: string;
-  stages: readonly [boolean, boolean, boolean, boolean, boolean];
+  pillars: readonly [boolean, boolean, boolean];
   variant: "default" | "lufe";
 };
 
 const coverage: readonly CoverageRow[] = [
   {
     label: "傳統顧問",
-    note: "只做前期策略",
-    stages: [true, false, false, false, false],
+    note: "只出策略報告",
+    pillars: [true, false, false],
     variant: "default",
   },
   {
     label: "貿易商",
     note: "只做中段通路",
-    stages: [false, true, true, false, false],
+    pillars: [false, true, false],
     variant: "default",
   },
   {
-    label: "物流公司",
-    note: "只做尾段執行",
-    stages: [false, false, false, true, true],
+    label: "代操 / SaaS",
+    note: "只賣工具不導入",
+    pillars: [false, false, true],
     variant: "default",
   },
   {
     label: "鹿飛 LUFÉ",
-    note: "五階段全程自營",
-    stages: [true, true, true, true, true],
+    note: "三支柱全程自營",
+    pillars: [true, true, true],
     variant: "lufe",
   },
 ];
@@ -45,10 +45,10 @@ type Stat = {
 };
 
 const stats: readonly Stat[] = [
-  { target: 42, suffix: "+", label: "年國際物流實戰" },
+  { target: 42, suffix: "+", label: "年國際物流底層" },
   { target: 30, suffix: "+", label: "國家與地區覆蓋" },
-  { target: 500, suffix: "+", label: "出海專案經驗" },
-  { target: 5, suffix: "", label: "階段全程自營" },
+  { target: 500, suffix: "+", label: "出海案件經驗" },
+  { target: 3, suffix: "", label: "支柱全程自營" },
 ];
 
 export function WhySection() {
@@ -100,31 +100,31 @@ export function WhySection() {
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
           <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold mb-4">
-            端到端 · 同一組人
+            三個支柱 · 一個團隊
           </div>
-          <h2 className="font-sans text-[clamp(32px,4.8vw,56px)] leading-[1.1] font-light tracking-[-0.8px] text-white max-w-[840px] mx-auto">
-            從評估到落地，
+          <h2 className="font-sans text-[clamp(32px,4.8vw,56px)] leading-[1.1] font-light tracking-[-0.8px] text-white max-w-[880px] mx-auto">
+            從產品適配到團隊體質，
             <br />
-            你面對的<span className="text-gold font-normal">只有我們</span>。
+            你面對的<span className="text-gold font-normal">只有我們</span>
           </h2>
-          <p className="text-[16px] text-white/55 max-w-[560px] leading-[1.75] mx-auto mt-6 font-normal">
+          <p className="text-[16px] text-white/55 max-w-[620px] leading-[1.75] mx-auto mt-6 font-normal">
             一個專案經理、一份合約、一條進度線。
             <br className="hidden md:block" />
-            市場上沒有全能的玩家，但你需要一個把五個階段縫起來的團隊。
+            底下還有躍馬國際 42 年物流實戰當基礎，不會因為顧問不懂現場而卡在海上。
           </p>
         </div>
 
-        {/* Coverage matrix — 5-stage grid per row */}
-        <div className="mb-20 md:mb-24 max-w-[960px] mx-auto">
-          {/* Stage header row */}
+        {/* Coverage matrix — 3-pillar grid per row */}
+        <div className="mb-20 md:mb-24 max-w-[900px] mx-auto">
+          {/* Pillar header row */}
           <div className="flex items-end gap-3 md:gap-4 mb-4 pl-[92px] md:pl-[148px] pr-[36px] md:pr-[44px]">
-            <div className="flex-1 grid grid-cols-5 gap-2 md:gap-3">
-              {STAGES.map((stage) => (
+            <div className="flex-1 grid grid-cols-3 gap-3 md:gap-4">
+              {PILLARS.map((pillar) => (
                 <div
-                  key={stage}
+                  key={pillar}
                   className="text-center text-[10px] md:text-[11px] font-medium tracking-[1.5px] text-white/50 uppercase"
                 >
-                  {stage}
+                  {pillar}
                 </div>
               ))}
             </div>
@@ -164,16 +164,16 @@ export function WhySection() {
                   </div>
                 </div>
 
-                {/* 5-stage cells */}
-                <div className="flex-1 grid grid-cols-5 gap-2 md:gap-3">
-                  {row.stages.map((covered, idx) => (
+                {/* 3-pillar cells */}
+                <div className="flex-1 grid grid-cols-3 gap-3 md:gap-4">
+                  {row.pillars.map((covered, idx) => (
                     <div
                       key={idx}
                       role="img"
                       aria-label={
                         covered
-                          ? `${row.label}涵蓋${STAGES[idx]}`
-                          : `${row.label}不涵蓋${STAGES[idx]}`
+                          ? `${row.label}涵蓋${PILLARS[idx]}`
+                          : `${row.label}不涵蓋${PILLARS[idx]}`
                       }
                       className={`h-8 md:h-10 flex items-center justify-center text-[11px] md:text-[13px] transition-all ${
                         covered
@@ -202,7 +202,7 @@ export function WhySection() {
 
           {/* Footnote: the promise, in plain words */}
           <p className="mt-6 text-center text-[11.5px] md:text-[12.5px] text-white/40 font-normal leading-[1.7]">
-            對手做完一段交給下一家，鹿飛五個階段<span className="text-gold/80">全程自營</span>——
+            對手做完一個支柱交給下一家，鹿飛三個支柱<span className="text-gold/80">全程自營</span>——
             <br className="hidden md:block" />
             沒有責任轉交，沒有窗口切換，沒有進度真空。
           </p>

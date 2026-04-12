@@ -1,91 +1,54 @@
 "use client";
 
 import Link from "next/link";
+import { PILLARS, PILLAR_ORDER, type PillarSlug } from "@/data/services";
 
 /**
- * PositioningBand
- * Direction A — "一條線". Four stages shown as connected nodes on a single
- * golden path. The metaphor "one team, one line" is the visual hook: the
- * path visually links market assessment → product testing → channel entry
- * → localization, each node deep-linking to its /services/[stage] sub-page.
+ * PositioningBand — 3 Pillars framing.
  *
- * Also fixes the taxonomy bug: step 02 is now "產品測試" (not 合規認證),
- * matching the four-stage taxonomy used everywhere else on the site.
+ * Reframes the old 4-stage path as three pillars: 產品適配性 (勝率)、
+ * 通路銷售力 (潛力)、團隊體質 (成功率)，with 42 年物流 as底層敘事.
+ * Two战場 (北美 + 東南亞) woven into the proof sentence.
+ *
+ * Each pillar card shows num + title + subtitle + tagline + first 3 services,
+ * and links to /services#pillar-{slug}.
  */
 
 type Accent = "sky" | "gold" | "ember";
 
-interface Step {
-  readonly slug: string;
-  readonly num: string;
-  readonly title: string;
-  readonly desc: string;
-  readonly accent: Accent;
-}
-
-const steps: readonly Step[] = [
-  {
-    slug: "market-assessment",
-    num: "01",
-    title: "市場評估",
-    desc: "值不值得去",
-    accent: "sky",
-  },
-  {
-    slug: "product-testing",
-    num: "02",
-    title: "產品測試",
-    desc: "能不能賣出去",
-    accent: "sky",
-  },
-  {
-    slug: "channel-entry",
-    num: "03",
-    title: "通路進入",
-    desc: "用什麼條件上架",
-    accent: "gold",
-  },
-  {
-    slug: "localization",
-    num: "04",
-    title: "海外落地",
-    desc: "長期站得住腳",
-    accent: "ember",
-  },
-];
-
 const accentMap: Record<
   Accent,
-  { border: string; text: string; glow: string }
+  {
+    border: string;
+    text: string;
+    bg: string;
+    glow: string;
+  }
 > = {
   sky: {
     border: "border-sky",
     text: "text-sky",
-    glow: "group-hover:shadow-[0_0_0_6px_rgba(91,143,168,0.12)]",
+    bg: "bg-[rgba(58,107,132,0.06)]",
+    glow: "group-hover:shadow-[0_0_0_6px_rgba(58,107,132,0.10)]",
   },
   gold: {
     border: "border-gold-d",
     text: "text-gold-d",
-    glow: "group-hover:shadow-[0_0_0_6px_rgba(212,168,92,0.15)]",
+    bg: "bg-[rgba(212,168,92,0.08)]",
+    glow: "group-hover:shadow-[0_0_0_6px_rgba(212,168,92,0.14)]",
   },
   ember: {
     border: "border-ember",
     text: "text-ember",
-    glow: "group-hover:shadow-[0_0_0_6px_rgba(217,139,74,0.14)]",
+    bg: "bg-[rgba(164,90,32,0.06)]",
+    glow: "group-hover:shadow-[0_0_0_6px_rgba(164,90,32,0.12)]",
   },
 };
-
-// Horizontal gradient: sky → gold → ember, matching accent progression
-const LINE_GRADIENT_H =
-  "linear-gradient(to right, rgba(91,143,168,0.35) 0%, rgba(91,143,168,0.5) 22%, rgba(212,168,92,0.6) 50%, rgba(217,139,74,0.5) 78%, rgba(217,139,74,0.35) 100%)";
-
-const LINE_GRADIENT_V =
-  "linear-gradient(to bottom, rgba(91,143,168,0.35) 0%, rgba(91,143,168,0.5) 22%, rgba(212,168,92,0.6) 50%, rgba(217,139,74,0.5) 78%, rgba(217,139,74,0.35) 100%)";
 
 export function PositioningBand() {
   return (
     <section className="relative bg-cream py-[80px] md:py-[104px] px-5 md:px-10 overflow-hidden">
-      {/* Soft gold radial glow — gives the section visual weight without a photo */}
+      {/* Soft gold radial glow */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -95,125 +58,121 @@ export function PositioningBand() {
         }}
       />
 
-      <div className="relative max-w-[1100px] mx-auto">
-        {/* Identity header — centered, single memorable headline */}
+      <div className="relative max-w-[1200px] mx-auto">
+        {/* Identity header */}
         <div className="text-center mb-14 md:mb-20">
           <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold-d mb-5">
             鹿飛是什麼
           </div>
-          <h2 className="font-sans text-[clamp(32px,5vw,58px)] leading-[1.05] font-light tracking-[-0.8px] text-navy mb-6">
-            一個團隊，
-            <span className="text-gold-d font-normal">一條線。</span>
+          <h2 className="font-sans text-[clamp(32px,5vw,58px)] leading-[1.08] font-light tracking-[-0.8px] text-navy mb-6">
+            三個支柱，
+            <span className="text-gold-d font-normal">兩個主戰場</span>
           </h2>
-          <p className="text-[15px] md:text-[17px] text-tx2 max-w-[640px] mx-auto leading-[1.75] font-normal">
-            從「<span className="text-tx font-medium">值不值得去</span>」走到「
-            <span className="text-tx font-medium">站得住腳</span>
-            」，四個階段我們全程陪跑。
+          <p className="text-[15px] md:text-[17px] text-tx2 max-w-[680px] mx-auto leading-[1.8] font-normal">
+            從<span className="text-tx font-medium">產品適配</span>、
+            <span className="text-tx font-medium">通路銷售</span>到
+            <span className="text-tx font-medium">團隊體質</span>
+            ——一個方法論，幫台灣企業在北美與東南亞落地。
           </p>
         </div>
 
-        {/* ─── Desktop path ─── */}
-        <div className="hidden md:block relative">
-          {/* Connector line — runs through the vertical center of the circles */}
-          <div
-            aria-hidden="true"
-            className="absolute left-[12%] right-[12%] top-[36px] h-[2px]"
-            style={{ background: LINE_GRADIENT_H }}
-          />
-
-          <ul className="grid grid-cols-4 gap-6 relative list-none p-0 m-0">
-            {steps.map((s) => {
-              const c = accentMap[s.accent];
-              return (
-                <li key={s.slug}>
-                  <Link
-                    href={`/services/${s.slug}`}
-                    className="group flex flex-col items-center text-center"
+        {/* ─── 3 Pillar cards ─── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          {PILLAR_ORDER.map((slug: PillarSlug) => {
+            const p = PILLARS[slug];
+            const c = accentMap[p.accent as Accent];
+            return (
+              <Link
+                key={slug}
+                href={`/services#pillar-${slug}`}
+                className="group relative bg-white border border-bd hover:border-transparent hover:shadow-[0_12px_40px_rgba(16,27,48,0.10)] transition-all duration-300 p-7 md:p-8 flex flex-col"
+              >
+                {/* Top row — num + subtitle badge */}
+                <div className="flex items-start justify-between mb-6">
+                  <div
+                    className={`relative z-10 w-[58px] h-[58px] md:w-[64px] md:h-[64px] rounded-full border-2 ${c.border} ${c.bg} ${c.glow} flex items-center justify-center transition-all group-hover:-translate-y-0.5`}
                   >
-                    <div
-                      className={`relative z-10 w-[72px] h-[72px] rounded-full border-2 bg-cream flex items-center justify-center transition-all duration-300 ${c.border} ${c.glow} group-hover:-translate-y-1`}
+                    <span
+                      className={`font-sans text-[20px] md:text-[22px] font-semibold tabular-nums ${c.text}`}
+                    >
+                      {p.num}
+                    </span>
+                  </div>
+                  <span
+                    className={`text-[10.5px] font-semibold tracking-[2px] uppercase ${c.text} pt-3`}
+                  >
+                    {p.subtitle}
+                  </span>
+                </div>
+
+                {/* Title + tagline */}
+                <h3 className="text-[21px] md:text-[23px] font-semibold leading-tight text-tx mb-2">
+                  {p.title}
+                </h3>
+                <p className={`text-[14px] md:text-[14.5px] font-medium leading-[1.6] ${c.text} mb-5`}>
+                  {p.tagline}
+                </p>
+
+                {/* Services list — first 3 */}
+                <ul className="space-y-2.5 mb-6 flex-1">
+                  {p.services.map((s) => (
+                    <li
+                      key={s.title}
+                      className="flex items-start gap-2 text-[13px] md:text-[13.5px] text-tx2 leading-[1.65]"
                     >
                       <span
-                        className={`font-sans text-[20px] font-semibold tabular-nums ${c.text}`}
-                      >
-                        {s.num}
-                      </span>
-                    </div>
-                    <h3 className="text-[16px] lg:text-[17px] font-semibold mt-6 mb-1.5 text-tx group-hover:text-navy transition-colors">
-                      {s.title}
-                    </h3>
-                    <p className={`text-[12.5px] lg:text-[13px] font-normal ${c.text}`}>
-                      {s.desc}
-                    </p>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+                        aria-hidden="true"
+                        className={`mt-[7px] shrink-0 w-1 h-1 rounded-full ${c.text}`}
+                        style={{ backgroundColor: "currentColor" }}
+                      />
+                      <span>{s.title}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Read more link */}
+                <div
+                  className={`text-[12.5px] font-semibold inline-flex items-center gap-1 ${c.text} group-hover:gap-2 transition-all`}
+                >
+                  看這個支柱的做法 →
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
-        {/* ─── Mobile path — vertical ─── */}
-        <div className="md:hidden relative">
-          <div
-            aria-hidden="true"
-            className="absolute left-[27px] top-[27px] bottom-[27px] w-[2px]"
-            style={{ background: LINE_GRADIENT_V }}
-          />
-
-          <ul className="space-y-7 list-none p-0 m-0">
-            {steps.map((s) => {
-              const c = accentMap[s.accent];
-              return (
-                <li key={s.slug}>
-                  <Link
-                    href={`/services/${s.slug}`}
-                    className="group flex items-start gap-5"
-                  >
-                    <div
-                      className={`relative z-10 w-[54px] h-[54px] rounded-full border-2 bg-cream flex items-center justify-center shrink-0 transition-all ${c.border} group-hover:scale-105`}
-                    >
-                      <span
-                        className={`font-sans text-[16px] font-semibold tabular-nums ${c.text}`}
-                      >
-                        {s.num}
-                      </span>
-                    </div>
-                    <div className="pt-1">
-                      <h3 className="text-[16px] font-semibold text-tx mb-0.5">
-                        {s.title}
-                      </h3>
-                      <p className={`text-[13px] font-normal ${c.text}`}>
-                        {s.desc}
-                      </p>
-                    </div>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+        {/* ─── 底層物流 narrative strip ─── */}
+        <div className="mt-12 md:mt-16 px-6 md:px-8 py-6 md:py-7 bg-navy/[0.03] border-l-2 border-navy/20">
+          <div className="flex items-start gap-4">
+            <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-navy/60 shrink-0 pt-1">
+              底層
+            </div>
+            <p className="text-[13.5px] md:text-[14.5px] text-tx2 leading-[1.85] font-normal">
+              三個支柱底下是躍馬國際{" "}
+              <strong className="text-navy font-semibold tabular-nums">42</strong>{" "}
+              年的國際物流實戰。
+              我們站在真正跑船的人肩膀上——從報關、倉儲到最後一哩，不會因為顧問不懂現場而讓你的貨卡在海上。
+            </p>
+          </div>
         </div>
 
-        {/* ─── Proof narrative — numbers woven into a single sentence ─── */}
-        <div className="mt-14 md:mt-20 pt-8 border-t border-bd/50 text-center">
+        {/* ─── Proof sentence ─── */}
+        <div className="mt-10 md:mt-12 pt-8 border-t border-bd/50 text-center">
           <p className="text-[14.5px] md:text-[16px] text-tx2 leading-[1.85] font-normal">
-            這條線，我們走過{" "}
-            <strong className="text-navy font-semibold tabular-nums">
-              500+
-            </strong>{" "}
-            次，覆蓋{" "}
-            <strong className="text-navy font-semibold tabular-nums">
-              30+
-            </strong>{" "}
-            國家，累積{" "}
-            <strong className="text-navy font-semibold tabular-nums">10</strong>{" "}
-            年實戰。
+            這套方法，我們在{" "}
+            <strong className="text-navy font-semibold tabular-nums">500+</strong>{" "}
+            次出口實戰裡跑過、覆蓋{" "}
+            <strong className="text-navy font-semibold tabular-nums">30+</strong>{" "}
+            國家——主要戰場是
+            <strong className="text-navy font-semibold">北美</strong>和
+            <strong className="text-navy font-semibold">東南亞</strong>。
           </p>
           <Link
             href="/services"
             className="group inline-flex items-center gap-2 mt-6 text-[13px] font-semibold text-tx2 hover:text-navy transition-colors"
           >
             <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
-              看每個階段做什麼
+              看完整三支柱做法
             </span>
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">
               →

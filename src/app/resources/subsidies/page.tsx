@@ -77,7 +77,7 @@ export default function SubsidiesPage() {
           <div className="flex items-center gap-3 mb-8">
             <div className="w-5 h-px bg-gold/70" />
             <span className="text-gold/80 text-[11px] font-medium tracking-[2.5px] uppercase">
-              2026 政府出海補助
+              2026 · 北美與東南亞落地加速器
             </span>
           </div>
 
@@ -90,12 +90,14 @@ export default function SubsidiesPage() {
             <span className="text-gold/90">你知道怎麼拿嗎？</span>
           </h1>
 
-          <p className="text-[17px] md:text-[18px] text-white/70 font-normal leading-[1.75] max-w-[680px] mb-12">
-            貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業走出去。
+          <p className="text-[17px] md:text-[18px] text-white/70 font-normal leading-[1.75] max-w-[700px] mb-12">
+            貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入
+            <span className="text-white font-medium">北美</span>和
+            <span className="text-white font-medium">東南亞</span>兩個主戰場。
             但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫。
             我們替你整理了{" "}
             <span className="text-white font-medium">
-              4 個正在開放、而且和鹿飛服務高度對齊
+              4 個正在開放、而且和鹿飛三支柱方法論對齊
             </span>{" "}
             的計畫。
           </p>

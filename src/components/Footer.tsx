@@ -1,17 +1,18 @@
 import Link from "next/link";
 
 const serviceLinks = [
-  { label: "市場評估", href: "/services/market-assessment" },
-  { label: "產品測試", href: "/services/product-testing" },
-  { label: "通路進入", href: "/services/channel-entry" },
-  { label: "海外落地", href: "/services/localization" },
-  { label: "進階優化方案", href: "/services/optimize" },
-  { label: "方法論", href: "/services/methodology" },
+  { label: "01 產品適配性", href: "/services#pillar-fit" },
+  { label: "02 通路銷售力", href: "/services#pillar-channel" },
+  { label: "03 團隊體質", href: "/services#pillar-team" },
+  { label: "鹿飛方法論", href: "/services/methodology" },
+  { label: "三支柱總覽", href: "/services" },
 ];
 
 const resourceLinks = [
   { label: "洞察與指南", href: "/insights" },
-  { label: "2 分鐘自助評估", href: "/assess" },
+  { label: "現場紀錄", href: "/field-notes" },
+  { label: "2 分鐘處境比對", href: "/assess" },
+  { label: "政府補助整理", href: "/resources/subsidies" },
   { label: "TradePilot 工具", href: "https://tradepiloter.com", external: true },
   { label: "關於我們", href: "/about" },
 ];
@@ -19,6 +20,7 @@ const resourceLinks = [
 const contactLinks = [
   { label: "hello@lufe.co", href: "mailto:hello@lufe.co" },
   { label: "LINE 官方帳號", href: "https://line.me", external: true },
+  { label: "合作夥伴聯繫", href: "/contact#partners" },
   { label: "台北市", href: "" },
 ];
 
@@ -30,8 +32,8 @@ export function Footer() {
           <span className="font-sans font-bold text-[18px] text-white">
             鹿飛 LUF<span className="text-gold">É</span>
           </span>
-          <p className="text-[13px] max-w-[250px] leading-[1.7] font-light mt-2 text-white/55">
-            跨境顧問與執行團隊。結合十年物流實戰與科技，從策略到落地一條線搞定。
+          <p className="text-[13px] max-w-[260px] leading-[1.7] font-light mt-2 text-white/55">
+            協助台灣企業在北美與東南亞落地。產品適配、通路銷售、團隊體質——三個支柱，兩個主戰場。
           </p>
         </div>
 

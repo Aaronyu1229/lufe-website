@@ -25,7 +25,7 @@ const notoSansTC = Noto_Sans_TC({
   display: "swap",
 });
 
-const DEFAULT_TITLE = `${SITE_NAME} — 企業出海的導航系統`;
+const DEFAULT_TITLE = `${SITE_NAME} — 協助台灣企業落地北美與東南亞`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,13 +37,17 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],
   keywords: [
-    "企業出海",
-    "海外拓銷",
-    "跨境電商",
-    "品牌國際化",
-    "市場驗證",
-    "通路佈建",
-    "物流落地",
+    "台灣企業出海",
+    "東南亞落地",
+    "北美通路",
+    "菲律賓商機",
+    "印尼市場",
+    "越南市場進入",
+    "產品適配性",
+    "通路銷售",
+    "海外團隊建置",
+    "跨境顧問",
+    "企業出海方法論",
     "鹿飛",
     "LUFÉ",
   ],

@@ -1,4 +1,10 @@
-export type Category = "市場趨勢" | "實戰指南" | "法規解讀" | "工具推薦";
+export type Category =
+  | "菲律賓"
+  | "印尼"
+  | "東南亞趨勢"
+  | "北美市場"
+  | "出海實戰"
+  | "企業體質";
 
 export type ArticleColor = "sky" | "gold" | "ember";
 
@@ -13,12 +19,20 @@ export interface Article {
   readonly content: readonly string[];
 }
 
-export const categories = ["全部", "市場趨勢", "實戰指南", "法規解讀", "工具推薦"] as const;
+export const categories = [
+  "全部",
+  "菲律賓",
+  "印尼",
+  "東南亞趨勢",
+  "北美市場",
+  "出海實戰",
+  "企業體質",
+] as const;
 
 export const articles: readonly Article[] = [
   {
     slug: "southeast-asia-ecommerce-2026",
-    category: "市場趨勢",
+    category: "東南亞趨勢",
     date: "2026-03-28",
     title: "2026 東南亞電商市場：台灣品牌的三大機會",
     summary:
@@ -40,7 +54,7 @@ export const articles: readonly Article[] = [
   },
   {
     slug: "first-time-export-checklist",
-    category: "實戰指南",
+    category: "出海實戰",
     date: "2026-03-15",
     title: "第一次出海就上手：從零到上架的完整 Checklist",
     summary:
@@ -64,7 +78,7 @@ export const articles: readonly Article[] = [
   },
   {
     slug: "us-fda-registration-guide",
-    category: "法規解讀",
+    category: "北美市場",
     date: "2026-03-01",
     title: "美國 FDA 註冊全攻略：保健品出海必讀",
     summary:
@@ -87,7 +101,7 @@ export const articles: readonly Article[] = [
   },
   {
     slug: "tradepilot-tariff-tutorial",
-    category: "工具推薦",
+    category: "出海實戰",
     date: "2026-02-20",
     title: "TradePilot 使用教學：三分鐘查完目標市場關稅",
     summary:
@@ -110,7 +124,7 @@ export const articles: readonly Article[] = [
   },
   {
     slug: "china-tariff-relocation-strategy",
-    category: "市場趨勢",
+    category: "東南亞趨勢",
     date: "2026-02-10",
     title: "中美關稅戰下的產地轉移策略：越南還是印度？",
     summary:
@@ -131,7 +145,7 @@ export const articles: readonly Article[] = [
   },
   {
     slug: "go-no-go-framework",
-    category: "實戰指南",
+    category: "企業體質",
     date: "2026-04-02",
     title: "跨境 Go / No-Go 決策框架：我們怎麼判斷一個案子值不值得做",
     summary:
@@ -158,7 +172,7 @@ export const articles: readonly Article[] = [
   },
   {
     slug: "vietnam-market-entry-guide",
-    category: "市場趨勢",
+    category: "東南亞趨勢",
     date: "2026-03-20",
     title: "越南市場進入指南：台灣品牌該知道的 5 個關鍵",
     summary:
@@ -183,7 +197,7 @@ export const articles: readonly Article[] = [
   },
   {
     slug: "product-testing-best-practices",
-    category: "實戰指南",
+    category: "出海實戰",
     date: "2026-03-10",
     title: "產品測試該怎麼做？避開三個常見的錯誤",
     summary:
@@ -206,7 +220,7 @@ export const articles: readonly Article[] = [
   },
   {
     slug: "amazon-category-analysis",
-    category: "實戰指南",
+    category: "北美市場",
     date: "2026-01-25",
     title: "亞馬遜品類分析：如何找到你的藍海品項",
     summary:

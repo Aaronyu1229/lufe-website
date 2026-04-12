@@ -9,6 +9,6 @@ export const SITE_URL: string =
 export const SITE_NAME = "鹿飛 LUFÉ" as const;
 
 export const SITE_DESCRIPTION =
-  "從市場驗證到落地營運，我們陪你走完全程。平均 6-9 個月讓你的產品站上海外貨架。" as const;
+  "協助台灣企業在北美與東南亞落地：產品適配性、通路銷售力、團隊體質三個支柱，一條線陪你走完。底層還有躍馬國際 42 年的國際物流實戰。" as const;
 
 export const SITE_LOCALE = "zh_TW" as const;

@@ -196,15 +196,16 @@ export function AboutPage() {
             </span>
           </div>
 
-          {/* Headline */}
-          <h1 className="font-heading text-[clamp(34px,5vw,58px)] leading-[1.1] font-light tracking-[-0.8px] mb-7 max-w-[880px]">
-            每一家想走向世界的企業
+          {/* Headline — 3 pillars · 2 战場 framing */}
+          <h1 className="font-heading text-[clamp(34px,5vw,58px)] leading-[1.1] font-light tracking-[-0.8px] mb-7 max-w-[920px]">
+            協助台灣企業
             <br />
-            <span className="font-normal text-gold">都值得一個懂路的人</span>
+            在<span className="font-normal text-gold">北美</span>與
+            <span className="font-normal text-gold">東南亞</span>落地
           </h1>
 
           {/* Signature quote */}
-          <p className="text-[15.5px] md:text-[17px] text-white/60 max-w-[620px] font-light leading-[1.8] italic mb-12">
+          <p className="text-[15.5px] md:text-[17px] text-white/60 max-w-[640px] font-light leading-[1.8] italic mb-12">
             「別人幫你開車，我們幫你找路。」
           </p>
 
@@ -259,8 +260,8 @@ export function AboutPage() {
                 看到的問題
               </h2>
               <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
-                在國際物流業打滾十年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。
-                找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸。每一段都有人做，但沒有人幫你串起來。
+                在國際物流業做了十多年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。
+                找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸、找代操公司只買工具。每一段都有人做，但沒有人幫你串起來。
                 企業自己得當專案經理，在三四家公司之間來回溝通，效率極低，成本極高。
               </p>
             </div>
@@ -272,7 +273,10 @@ export function AboutPage() {
               </h2>
               <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
                 我相信每一家有好產品的台灣公司，都值得試試走向海外。不是每個產品都適合，但至少應該有人幫你搞清楚。
-                跨境不應該是一場冒險，而應該是一次有計畫的探索。有人帶路，風險就小了一半。
+                跨境不應該是一場冒險，而應該是一次有計畫的探索——用三個維度判斷：這個市場的
+                <span className="text-white/90 font-medium">勝率</span>（產品適配）、
+                <span className="text-white/90 font-medium">潛力</span>（通路銷售）、
+                <span className="text-white/90 font-medium">成功率</span>（團隊體質）。有人帶路、有框架可用，風險就小了一半。
               </p>
             </div>
 
@@ -282,9 +286,11 @@ export function AboutPage() {
                 做了什麼
               </h2>
               <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
-                所以我創立了鹿飛——一個企業跨境的導航系統。結合十年物流實戰經驗和科技工具，
-                從市場評估、產品測試、通路進入到海外落地，提供一條龍的服務。
-                不是做其中一段，而是陪你走完全程。別人幫你開車，我們幫你找路。
+                所以我創立了鹿飛——一個用三支柱方法論幫台灣企業落地的跨境團隊。
+                從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有躍馬國際 42 年的國際物流實戰當基礎。
+                主要戰場是<span className="text-white/90 font-medium">北美</span>和
+                <span className="text-white/90 font-medium">東南亞</span>——兩個地方我們每個月都真的有人在現場。
+                別人幫你開車，我們幫你找路。
               </p>
             </div>
           </div>

@@ -283,6 +283,67 @@ export function ContactPage() {
         </div>
       </section>
 
+      {/* ─── Partners entry ─── */}
+      <section
+        id="partners"
+        className="bg-navy py-[72px] md:py-[88px] px-5 md:px-10 scroll-mt-[100px] border-t border-b border-white/5"
+      >
+        <div className="max-w-[900px] mx-auto">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="block w-8 h-px bg-gold" />
+            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
+              合作夥伴 · PARTNERS
+            </span>
+          </div>
+          <h2 className="font-sans text-[clamp(24px,3.4vw,38px)] leading-[1.22] font-light tracking-[-0.4px] text-white mb-5">
+            商會、顧問、服務商，
+            <br />
+            <span className="font-normal text-gold">歡迎來談合作</span>
+          </h2>
+          <p className="text-[14.5px] md:text-[15.5px] text-white/65 leading-[1.85] font-normal max-w-[640px] mb-10">
+            如果你是商會、同業顧問公司、在地服務商或物流夥伴，想跟鹿飛一起幫台灣企業把海外這條路走得更順——我們有專門的合作入口。
+            不收介紹費、不綁獨家，純粹看有沒有把事情做好的機會。
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-10">
+            {[
+              {
+                label: "商會 / 公協會",
+                desc: "台商會、工商協會、進出口公會",
+              },
+              {
+                label: "同業顧問 / 事務所",
+                desc: "跨境顧問、品牌、律師、會計事務所",
+              },
+              {
+                label: "在地服務商 / 物流",
+                desc: "北美、東南亞當地倉儲、通路、代理商",
+              },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="bg-white/[0.03] border border-white/10 p-5 md:p-6"
+              >
+                <div className="text-[13.5px] md:text-[14.5px] font-semibold text-white leading-tight mb-2">
+                  {item.label}
+                </div>
+                <div className="text-[12px] md:text-[12.5px] text-white/55 leading-[1.7]">
+                  {item.desc}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href="mailto:hello@lufe.co?subject=%E5%90%88%E4%BD%9C%E5%A4%A5%E4%BC%B4%E6%B4%BD%E8%AB%87"
+            className="inline-flex items-center gap-2 bg-gold text-navy px-7 py-[14px] rounded-none text-[14px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors"
+          >
+            <span>寄信洽談合作</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
       {/* ─── Full Form (with subtle conversation bg) ─── */}
       <section className="relative bg-cream py-[80px] px-5 md:px-10 overflow-hidden">
         <div className="absolute inset-0">

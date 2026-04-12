@@ -37,7 +37,13 @@ const navItems: readonly NavItem[] = [
  * article detail uses a light hero.
  */
 function pathnameHasDarkHero(pathname: string): boolean {
-  if (pathname === "/" || pathname === "/about" || pathname === "/insights") {
+  if (
+    pathname === "/" ||
+    pathname === "/about" ||
+    pathname === "/insights" ||
+    pathname === "/field-notes" ||
+    pathname === "/assess"
+  ) {
     return true;
   }
   if (pathname === "/resources/subsidies") return true;
@@ -343,84 +349,104 @@ function MenuLink({
 }
 
 function ServicesMenu() {
-  const featuredCase = CASES[0];
   return (
     <div className="grid grid-cols-12 gap-8">
-      <div className="col-span-4">
-        <MenuColumn label="完整路徑">
-          {STAGE_ORDER.map((slug) => {
-            const stage = STAGES[slug];
-            return (
-              <MenuLink
-                key={slug}
-                href={`/services/${slug}`}
-                title={stage.title}
-                desc={stage.subtitle}
-              />
-            );
-          })}
-        </MenuColumn>
-      </div>
       <div className="col-span-3">
-        <MenuColumn label="進階方案">
+        <MenuColumn label="01 · 產品適配性 · 勝率">
           <MenuLink
-            href="/services/optimize"
-            title="運營優化方案"
-            desc="已經在海外，想做更好"
+            href="/services#pillar-fit"
+            title="支柱總覽"
+            desc="這個市場真的要你嗎？"
+          />
+          <MenuLink
+            href="/services/market-assessment"
+            title="市場機會評估"
+            desc="2–4 週搞清楚值不值得去"
+          />
+          <MenuLink
+            href="/services/product-testing"
+            title="小批量產品測試"
+            desc="真實消費者用錢投票"
           />
           <MenuLink
             href="/services/methodology"
-            title="鹿飛方法論"
-            desc="我們的決策框架"
-          />
-        </MenuColumn>
-      </div>
-      <div className="col-span-2">
-        <MenuColumn label="工具資源">
-          <MenuLink
-            href="https://tradepiloter.com"
-            title="TradePilot"
-            desc="免費關稅查詢工具"
-            external
-          />
-          <MenuLink
-            href="/assess"
-            title="2 分鐘評估"
-            desc="找到你的起點"
+            title="MBCPR 決策框架"
+            desc="Go / No-Go 五維矩陣"
           />
         </MenuColumn>
       </div>
       <div className="col-span-3">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
-          精選案例
-        </div>
-        {featuredCase && (
-          <Link
-            href={`/cases/${featuredCase.slug}`}
-            className="group block bg-cream rounded-none overflow-hidden transition-all hover:shadow-md"
-          >
-            <div className="relative h-[100px] overflow-hidden">
-              <Image
-                src={featuredCase.heroImage}
-                alt={featuredCase.title}
-                fill
-                sizes="220px"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-4">
-              <div className="font-heading text-[22px] text-gold-d font-semibold leading-none mb-1.5">
-                {featuredCase.num}
-              </div>
-              <div className="text-[13px] font-semibold text-tx leading-tight mb-1.5">
-                {featuredCase.title}
-              </div>
-              <div className="text-[11px] text-tx3 group-hover:text-gold transition-colors">
-                看完整案例 →
-              </div>
-            </div>
-          </Link>
-        )}
+        <MenuColumn label="02 · 通路銷售力 · 潛力">
+          <MenuLink
+            href="/services#pillar-channel"
+            title="支柱總覽"
+            desc="上得了架，還要賣得動"
+          />
+          <MenuLink
+            href="/services/channel-entry"
+            title="通路進入與媒合"
+            desc="北美連鎖 + 東南亞通路"
+          />
+          <MenuLink
+            href="/services#pillar-channel"
+            title="展會與加盟佈局"
+            desc="食品 / 電子 / 加盟展"
+          />
+          <MenuLink
+            href="/services#pillar-channel"
+            title="AI 集客引擎"
+            desc="SEO + AI 搜尋佈局"
+          />
+        </MenuColumn>
+      </div>
+      <div className="col-span-3">
+        <MenuColumn label="03 · 團隊體質 · 成功率">
+          <MenuLink
+            href="/services#pillar-team"
+            title="支柱總覽"
+            desc="進得去，還要留得下"
+          />
+          <MenuLink
+            href="/services/localization"
+            title="海外團隊建置"
+            desc="當地人才、落地合規"
+          />
+          <MenuLink
+            href="/services/optimize"
+            title="運營優化方案"
+            desc="已在海外的進階方案"
+          />
+          <MenuLink
+            href="/services#pillar-team"
+            title="海外營運系統五階"
+            desc="Notion + AI 數位員工"
+          />
+        </MenuColumn>
+      </div>
+      <div className="col-span-3">
+        <MenuColumn label="工具與入口">
+          <MenuLink
+            href="/assess"
+            title="2 分鐘處境比對"
+            desc="跟哪個案例最像"
+          />
+          <MenuLink
+            href="/services"
+            title="三支柱總覽"
+            desc="一頁看完整方法論"
+          />
+          <MenuLink
+            href="/resources/subsidies"
+            title="政府補助整理"
+            desc="2026 年開放計畫"
+          />
+          <MenuLink
+            href="https://tradepiloter.com"
+            title="TradePilot 關稅工具"
+            desc="免費 HS code 查詢"
+            external
+          />
+        </MenuColumn>
       </div>
     </div>
   );
@@ -552,10 +578,12 @@ function AboutMenu() {
 function InsightsMenu() {
   const latestArticle = articles[0];
   const categoryGroups = [
-    { label: "市場趨勢", cat: "市場趨勢" },
-    { label: "實戰指南", cat: "實戰指南" },
-    { label: "法規解讀", cat: "法規解讀" },
-    { label: "工具推薦", cat: "工具推薦" },
+    { label: "🇵🇭 菲律賓", cat: "菲律賓" },
+    { label: "🇮🇩 印尼", cat: "印尼" },
+    { label: "🌏 東南亞趨勢", cat: "東南亞趨勢" },
+    { label: "🌎 北美市場", cat: "北美市場" },
+    { label: "🎯 出海實戰", cat: "出海實戰" },
+    { label: "🧠 企業體質", cat: "企業體質" },
   ] as const;
 
   return (
@@ -572,7 +600,12 @@ function InsightsMenu() {
         </MenuColumn>
       </div>
       <div className="col-span-3">
-        <MenuColumn label="工具資源">
+        <MenuColumn label="其他內容">
+          <MenuLink
+            href="/field-notes"
+            title="現場紀錄"
+            desc="活動、演講、媒體露出"
+          />
           <MenuLink
             href="https://tradepiloter.com"
             title="TradePilot 關稅工具"
@@ -795,20 +828,26 @@ function MobileMenuContent({
       <>
         <MobileSubLink href="/insights" title="所有文章" onClose={onClose} />
         <MobileSubLink
-          href="/insights?cat=市場趨勢"
-          title="市場趨勢"
+          href="/insights?cat=東南亞趨勢"
+          title="🌏 東南亞趨勢"
           onClose={onClose}
         />
         <MobileSubLink
-          href="/insights?cat=實戰指南"
-          title="實戰指南"
+          href="/insights?cat=北美市場"
+          title="🌎 北美市場"
           onClose={onClose}
         />
         <MobileSubLink
-          href="/insights?cat=法規解讀"
-          title="法規解讀"
+          href="/insights?cat=出海實戰"
+          title="🎯 出海實戰"
           onClose={onClose}
         />
+        <MobileSubLink
+          href="/insights?cat=企業體質"
+          title="🧠 企業體質"
+          onClose={onClose}
+        />
+        <MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} />
       </>
     );
   }

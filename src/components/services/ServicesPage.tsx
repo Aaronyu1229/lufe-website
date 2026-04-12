@@ -5,29 +5,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMessageBox } from "../MessageBox";
-import { STAGE_ORDER, STAGES, ACCENT_CLASSES } from "@/data/services";
+import { PILLARS, PILLAR_ORDER, ACCENT_CLASSES } from "@/data/services";
 
 /**
- * ServicesPage (hub).
- * Previously a 576-line scroll-everything page. Now a lightweight hub that
- * routes visitors into the real content, which lives on sub-pages:
- *   /services/[stage]  — four stage sub-pages with full depth
- *   /services/optimize — standalone optimize page
- *   /services/methodology — the framework page
+ * ServicesPage (hub) — 3 pillars framing.
+ *
+ * Organizes all services under 3 pillars: 產品適配性 / 通路銷售力 / 團隊體質.
+ * Each pillar section lists its services (some link to existing /services/[stage]
+ * pages, some are new bolt-on services without dedicated sub-pages yet).
+ * 底層物流 is a narrative strip at the bottom, not a service.
  */
 
 const topFaqs = [
   {
-    q: "我該從哪個階段開始？",
-    a: "多數客戶從階段 01 市場評估開始，因為沒有評估就跳到產品測試通常是在燒錢。少數已經有明確市場目標的客戶可以從階段 02 直接切入。如果你不確定，就先聊聊。",
+    q: "我該從哪個支柱開始？",
+    a: "多數客戶從 01 產品適配性開始——沒把勝率算清楚就直接衝通路或做團隊，通常是在燒錢。少數已經有明確市場目標、想直接優化現有海外業務的客戶可以從 03 團隊體質切入。如果你不確定，就先聊聊。",
   },
   {
     q: "跨境前需要準備多少資金？",
-    a: "取決於你的產品類型和目標市場。評估階段幾萬到十幾萬台幣，測試階段 50-100 萬。我們會在第一次聊天時給你合理的預算範圍。",
+    a: "取決於你的產品類型和目標市場。產品適配階段幾萬到十幾萬台幣，通路與團隊階段 50–100 萬起跳。我們會在第一次聊天時給你合理的預算範圍。",
   },
   {
-    q: "鹿飛跟傳統貿易商有什麼不同？",
-    a: "傳統貿易商只做買賣，賺價差。鹿飛做的是全程導航：從評估到落地，陪你走完全程，而且我們不賺價差，賺的是讓品牌在海外建立的服務費。",
+    q: "鹿飛跟傳統貿易商或顧問公司有什麼不同？",
+    a: "傳統顧問只出報告、貿易商只做買賣、代操公司只賣工具。鹿飛做的是三個支柱全程自營：從勝率評估、通路進入到團隊體質，陪你走完全程。底層還有躍馬國際 42 年物流實戰，不會因為顧問不懂現場而卡在海上。",
   },
 ];
 
@@ -78,51 +78,51 @@ export function ServicesPage() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-heading text-[clamp(34px,5vw,60px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-6 max-w-[900px]">
-            跨境不難，難的是沒人告訴你
+          <h1 className="font-heading text-[clamp(34px,5vw,60px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-6 max-w-[920px]">
+            三個支柱，
             <br />
-            <span className="font-normal text-gold">完整的路怎麼走</span>
+            <span className="font-normal text-gold">兩個主戰場</span>
           </h1>
-          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[620px] font-light leading-[1.75] mb-12 md:mb-14">
-            我們不只做其中一段，而是從評估到落地，幫你把整條路串起來。
+          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[640px] font-light leading-[1.75] mb-12 md:mb-14">
+            產品適配性、通路銷售力、團隊體質——一個方法論，幫台灣企業在
+            <span className="text-white font-medium">北美</span>與
+            <span className="text-white font-medium">東南亞</span>落地。
+            底下是躍馬國際 42 年的物流實戰當基礎。
           </p>
 
-          {/* 4-stage mini path preview */}
+          {/* 3-pillar mini preview */}
           <div className="hidden md:block mb-12">
             <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-white/40 mb-4">
-              完整路徑
+              三個支柱
             </div>
-            <div className="relative flex items-center justify-between gap-3">
+            <div className="relative flex items-start gap-4">
               {/* Connector line */}
               <div className="absolute left-0 right-0 top-[18px] h-px bg-gradient-to-r from-sky/50 via-gold/50 to-ember/50" />
-              {STAGE_ORDER.map((slug, i) => {
-                const stage = STAGES[slug];
-                const c = ACCENT_CLASSES[stage.accent];
+              {PILLAR_ORDER.map((slug) => {
+                const p = PILLARS[slug];
+                const c = ACCENT_CLASSES[p.accent];
                 return (
-                  <Link
+                  <a
                     key={slug}
-                    href={`/services/${slug}`}
+                    href={`#pillar-${slug}`}
                     className="group relative flex-1 text-left"
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <span
-                        className={`relative z-10 w-[38px] h-[38px] flex items-center justify-center border bg-navy ${c.border} ${c.text} text-[13px] font-semibold tabular-nums transition-all group-hover:scale-110`}
+                        className={`relative z-10 w-[40px] h-[40px] flex items-center justify-center border bg-navy ${c.border} ${c.text} text-[13px] font-semibold tabular-nums transition-all group-hover:scale-110`}
                       >
-                        {stage.num}
+                        {p.num}
                       </span>
-                      {i < STAGE_ORDER.length - 1 && (
-                        <span className="text-white/20 text-[11px]">→</span>
-                      )}
                     </div>
                     <div className="pl-[2px]">
-                      <div className={`text-[13.5px] font-semibold text-white group-hover:${c.text} transition-colors leading-tight`}>
-                        {stage.title}
+                      <div className="text-[14px] font-semibold text-white leading-tight mb-0.5">
+                        {p.title}
                       </div>
-                      <div className="text-[11px] text-white/40 mt-0.5">
-                        {stage.timeline}
+                      <div className={`text-[11px] ${c.text} mt-0.5`}>
+                        {p.subtitle}
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 );
               })}
             </div>
@@ -131,10 +131,10 @@ export function ServicesPage() {
           {/* Stats strip */}
           <div className="border-t border-white/10 pt-7 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
             {[
-              { n: "42+", l: "年國際物流實戰" },
+              { n: "42+", l: "年物流底層" },
               { n: "500+", l: "出口案件" },
               { n: "30+", l: "國家覆蓋" },
-              { n: "4", l: "核心階段" },
+              { n: "2", l: "主戰場 · 北美 · 東南亞" },
             ].map((s) => (
               <div key={s.l}>
                 <div className="font-heading text-[24px] md:text-[28px] font-light text-gold leading-none tabular-nums">
@@ -149,123 +149,170 @@ export function ServicesPage() {
         </div>
       </section>
 
-      {/* ─── Four stages path ─── */}
-      <section className="bg-white py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="section-label">完整路徑</div>
-          <h2 className="section-heading">
-            四個階段，<span className="font-normal text-gold-d">一條完整的跨境路</span>
-          </h2>
-          <p className="section-desc">
-            每個階段都是獨立的服務，也可以從任一階段切入。點進去看每個階段的詳細流程、交付物、紅燈警示與相關案例。
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
-            {STAGE_ORDER.map((slug) => {
-              const stage = STAGES[slug];
-              const c = ACCENT_CLASSES[stage.accent];
-              return (
-                <Link
-                  key={slug}
-                  href={`/services/${slug}`}
-                  className={`group block bg-white rounded-none border border-bd transition-all duration-400 relative overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg hover:-translate-y-1 hover:border-gold`}
-                >
-                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-navy">
-                    <Image
-                      src={stage.image}
-                      alt={stage.imageAlt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 25vw"
-                      className="object-cover img-navy-unify transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-baseline gap-3 mb-2">
-                      <span className={`font-sans text-[28px] font-light tabular-nums ${c.text}`}>
-                        {stage.num}
-                      </span>
-                      <span className="text-[11px] text-tx3 font-normal tracking-wider uppercase">
-                        {stage.timeline}
-                      </span>
-                    </div>
-                    <h3 className="text-[17px] font-semibold mb-2 leading-tight">
-                      {stage.title}
-                    </h3>
-                    <p className="text-[13px] text-tx2 leading-[1.65] font-normal mb-4 min-h-[3.3em]">
-                      {stage.subtitle}
-                    </p>
-                    <span className={`text-[12.5px] font-semibold inline-flex items-center gap-1 ${c.text} group-hover:gap-2 transition-all`}>
-                      看這個階段 →
+      {/* ─── 3 Pillars deep sections ─── */}
+      {PILLAR_ORDER.map((slug, idx) => {
+        const p = PILLARS[slug];
+        const c = ACCENT_CLASSES[p.accent];
+        const isEven = idx % 2 === 0;
+        return (
+          <section
+            key={slug}
+            id={`pillar-${slug}`}
+            className={`scroll-mt-[100px] py-[80px] md:py-[110px] px-5 md:px-10 ${
+              isEven ? "bg-white" : "bg-cream"
+            }`}
+          >
+            <div className="max-w-[1100px] mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_1.3fr] gap-10 md:gap-14">
+                {/* Left — pillar title block */}
+                <div>
+                  <div className="flex items-baseline gap-3 mb-4">
+                    <span
+                      className={`font-heading text-[56px] md:text-[72px] font-light tabular-nums leading-none ${c.text}`}
+                    >
+                      {p.num}
+                    </span>
+                    <span
+                      className={`text-[11px] font-semibold tracking-[2px] uppercase ${c.text}`}
+                    >
+                      {p.subtitle}
                     </span>
                   </div>
-                </Link>
-              );
-            })}
+                  <h2 className="font-sans text-[clamp(28px,3.6vw,44px)] leading-[1.12] font-light tracking-[-0.5px] text-navy mb-4">
+                    {p.title}
+                  </h2>
+                  <p
+                    className={`text-[15.5px] md:text-[17px] font-medium leading-[1.6] ${c.text} mb-5`}
+                  >
+                    「{p.tagline}」
+                  </p>
+                  <p className="text-[14px] md:text-[15px] text-tx2 leading-[1.85] font-normal">
+                    {p.description}
+                  </p>
+                </div>
+
+                {/* Right — services list */}
+                <div>
+                  <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-tx3 mb-5">
+                    這個支柱底下能做的事
+                  </div>
+                  <div className="space-y-4">
+                    {p.services.map((s) => {
+                      const Wrapper = s.href
+                        ? ({ children }: { children: React.ReactNode }) =>
+                            s.external ? (
+                              <a
+                                href={s.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`group block bg-white border border-bd hover:border-transparent hover:shadow-[0_8px_28px_rgba(16,27,48,0.08)] transition-all p-5 md:p-6`}
+                              >
+                                {children}
+                              </a>
+                            ) : (
+                              <Link
+                                href={s.href!}
+                                className={`group block bg-white border border-bd hover:border-transparent hover:shadow-[0_8px_28px_rgba(16,27,48,0.08)] transition-all p-5 md:p-6`}
+                              >
+                                {children}
+                              </Link>
+                            )
+                        : ({ children }: { children: React.ReactNode }) => (
+                            <div className="bg-white border border-bd p-5 md:p-6">
+                              {children}
+                            </div>
+                          );
+                      return (
+                        <Wrapper key={s.title}>
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex-1 min-w-0">
+                              <h3
+                                className={`text-[16px] md:text-[17px] font-semibold leading-tight text-tx mb-2 ${
+                                  s.href ? "group-hover:text-navy transition-colors" : ""
+                                }`}
+                              >
+                                {s.title}
+                              </h3>
+                              <p className="text-[13px] md:text-[13.5px] text-tx2 leading-[1.75] font-normal">
+                                {s.desc}
+                              </p>
+                            </div>
+                            {s.href && (
+                              <span
+                                aria-hidden="true"
+                                className={`shrink-0 text-[15px] mt-1 transition-transform ${c.text} group-hover:translate-x-0.5`}
+                              >
+                                →
+                              </span>
+                            )}
+                          </div>
+                        </Wrapper>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* ─── 底層物流 敘事 strip ─── */}
+      <section className="bg-navy py-[72px] md:py-[96px] px-5 md:px-10">
+        <div className="max-w-[900px] mx-auto">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="block w-8 h-px bg-gold" />
+            <span className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold">
+              底層 · FOUNDATION
+            </span>
+          </div>
+          <h2 className="font-sans text-[clamp(26px,3.6vw,40px)] leading-[1.2] font-light tracking-[-0.5px] text-white mb-5">
+            三個支柱底下，是真正跑了 <span className="font-normal text-gold">42 年</span>的國際物流
+          </h2>
+          <p className="text-[15px] md:text-[16.5px] text-white/65 leading-[1.85] font-normal max-w-[720px] mb-6">
+            鹿飛不是新手上路的跨境顧問。我們底下有躍馬國際 42 年的國際貨運承攬實戰——報關、倉儲、海空運、最後一哩，每一段都是真正在做的事。
+            顧問講策略的時候，我們知道現場會長什麼樣。這就是為什麼我們的「團隊體質」支柱永遠不會空談。
+          </p>
+          <div className="flex items-center gap-6 text-[13px] text-white/50 font-normal">
+            <span>
+              <strong className="text-white font-semibold tabular-nums">42+</strong> 年
+            </span>
+            <span className="text-white/20">·</span>
+            <span>
+              <strong className="text-white font-semibold tabular-nums">30+</strong> 國家
+            </span>
+            <span className="text-white/20">·</span>
+            <span>
+              <strong className="text-white font-semibold tabular-nums">500+</strong> 出口案件
+            </span>
           </div>
         </div>
       </section>
 
-      {/* ─── Two routes: Optimize / Methodology ─── */}
+      {/* ─── Methodology CTA card ─── */}
       <section className="bg-cream py-[72px] md:py-[96px] px-5 md:px-10">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="section-label">其他方案</div>
-          <h2 className="section-heading">
-            不走完整路徑？<span className="font-normal text-gold-d">還有兩條路</span>
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-            <Link
-              href="/services/optimize"
-              className="group block bg-white rounded-none p-7 md:p-9 border-l-4 border-ember transition-all hover:shadow-lg"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-10 h-10 rounded-none bg-[rgba(217,139,74,0.08)] flex items-center justify-center text-[18px]">
-                  ⚡
-                </span>
-                <div>
-                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-ember">
-                    進階方案
-                  </div>
-                  <h3 className="text-[19px] font-semibold mt-0.5 group-hover:text-ember transition-colors">
-                    運營優化方案
-                  </h3>
+        <div className="max-w-[900px] mx-auto">
+          <Link
+            href="/services/methodology"
+            className="group block bg-white border-l-4 border-gold p-7 md:p-10 hover:shadow-lg transition-all"
+          >
+            <div className="flex items-start gap-6 flex-wrap">
+              <div className="flex-1 min-w-0">
+                <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d mb-3">
+                  決策框架
                 </div>
+                <h2 className="text-[22px] md:text-[26px] font-semibold leading-tight text-navy mb-3 group-hover:text-gold-d transition-colors">
+                  想看我們怎麼判斷 Go / No-Go？
+                </h2>
+                <p className="text-[14px] md:text-[15px] text-tx2 leading-[1.8] font-normal">
+                  MBCPR 五維評分矩陣、紅燈判準、一個真實案例的完整評分過程——顧問報告背後的決策邏輯全部攤開。
+                </p>
               </div>
-              <p className="text-[14px] text-tx2 leading-[1.75] mb-5">
-                產品已經在海外，但物流成本高、通路績效不穩、營運流程卡卡？
-                這個方案為已經在跑的你設計。
-              </p>
-              <span className="text-[13px] font-semibold text-ember group-hover:translate-x-1 inline-block transition-transform">
-                看優化方案 →
-              </span>
-            </Link>
-
-            <Link
-              href="/services/methodology"
-              className="group block bg-white rounded-none p-7 md:p-9 border-l-4 border-gold transition-all hover:shadow-lg"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-10 h-10 rounded-none bg-[rgba(212,168,92,0.1)] flex items-center justify-center text-[18px]">
-                  ⚙
-                </span>
-                <div>
-                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d">
-                    方法論
-                  </div>
-                  <h3 className="text-[19px] font-semibold mt-0.5 group-hover:text-gold transition-colors">
-                    鹿飛的決策框架
-                  </h3>
-                </div>
-              </div>
-              <p className="text-[14px] text-tx2 leading-[1.75] mb-5">
-                我們怎麼判斷一個案子值不值得做？
-                MBCPR 五維評分矩陣、紅燈判準、一個真實案例的完整評分過程。
-              </p>
-              <span className="text-[13px] font-semibold text-gold-d group-hover:translate-x-1 inline-block transition-transform">
+              <span className="text-[14px] font-semibold text-gold-d mt-2 group-hover:translate-x-1 transition-transform inline-block">
                 看方法論 →
               </span>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
       </section>
 
@@ -275,7 +322,7 @@ export function ServicesPage() {
           <div className="section-label">最常被問到</div>
           <h2 className="section-heading">三個關鍵問題</h2>
           <p className="section-desc">
-            更多細節在每個階段的子頁。這裡先回答最常見的三題。
+            更多細節在每個支柱的說明頁。這裡先回答最常見的三題。
           </p>
 
           <div className="border-t border-bd mt-10">
@@ -335,24 +382,24 @@ export function ServicesPage() {
       <section className="bg-navy py-[80px] md:py-[100px] px-5 md:px-10">
         <div className="max-w-[720px] mx-auto text-center">
           <h2 className="font-sans text-[clamp(26px,3.2vw,38px)] text-white leading-[1.2] font-light tracking-[-0.4px] mb-4">
-            想知道你的產品適合從<span className="text-gold font-normal">哪個階段</span>開始？
+            想知道你最該從<span className="text-gold font-normal">哪個支柱</span>開始？
           </h2>
-          <p className="text-[15px] text-white/60 leading-[1.75] mb-10 max-w-[520px] mx-auto">
-            聊聊你的狀況，我們幫你規劃最適合的路徑，不收費、不承諾、不賣課。
+          <p className="text-[15px] text-white/60 leading-[1.75] mb-10 max-w-[540px] mx-auto">
+            聊聊你的狀況，我們幫你判斷哪個支柱最該先動——不收費、不承諾、不賣課。
           </p>
           <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
             <button
               onClick={open}
               className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
             >
-              聊聊你的產品 →
+              聊聊你的狀況 →
             </button>
             <Link
               href="/assess"
               className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-white"
             >
               <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
-                先做 2 分鐘評估
+                先比對案例
               </span>
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
             </Link>

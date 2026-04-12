@@ -22,10 +22,12 @@ type FilterCategory = Category | "全部";
 
 const VALID_CATEGORIES: readonly FilterCategory[] = [
   "全部",
-  "市場趨勢",
-  "實戰指南",
-  "法規解讀",
-  "工具推薦",
+  "菲律賓",
+  "印尼",
+  "東南亞趨勢",
+  "北美市場",
+  "出海實戰",
+  "企業體質",
 ];
 
 function isValidCategory(value: string | null): value is FilterCategory {
@@ -103,7 +105,7 @@ function InsightsPageInner() {
               <span className="font-normal text-gold">知識就是捷徑</span>
             </h1>
             <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[540px] font-light leading-[1.75] mb-10">
-              市場趨勢、實戰經驗、法規解讀——幫你用最少的時間搞懂跨境這件事。
+              菲律賓、印尼、北美市場趨勢，出海實戰與企業體質——幫你用最少的時間搞懂跨境這件事。
             </p>
 
             {/* Stats strip */}
