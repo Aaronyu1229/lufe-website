@@ -4,11 +4,11 @@ import Link from "next/link";
 import { PILLARS, type PillarSlug } from "@/data/services";
 
 /**
- * PositioningBand — 物流為底氣 · 兩件事為核心
+ * PositioningBand — 物流為基石 · 兩件事為核心
  *
  * v3 的故事順序：
- *   1. 真正的底氣 (The Moat)：躍馬 42 年國際物流——這是別人偷不走的護城河
- *   2. 在這個底氣上,我們做兩件事：產品適配 + 通路銷售
+ *   1. 真正的基石 (The Moat)：躍馬 42 年國際物流——這是別人偷不走的護城河
+ *   2. 在這個基石上,我們做兩件事：產品適配 + 通路銷售
  *   3. 進階模組 (團隊體質)：折成一行小 link,避免「什麼都做」的稀釋
  *
  * 為什麼這樣排：
@@ -83,12 +83,12 @@ export function PositioningBand() {
           </p>
         </div>
 
-        {/* ─── 真正的底氣 · 物流 hero card ─── */}
+        {/* ─── 真正的基石 · 物流 hero card ─── */}
         <div className="mb-12 md:mb-16 max-w-[1000px] mx-auto">
           <div className="flex items-center gap-3 mb-5 md:mb-6">
             <div className="w-8 h-px bg-navy/40" />
             <span className="text-[10.5px] md:text-[11px] font-semibold tracking-[2.5px] uppercase text-navy/70">
-              真正的底氣 · The Moat
+              真正的基石 · The Moat
             </span>
             <div className="flex-1 h-px bg-bd/70" />
           </div>
@@ -157,11 +157,11 @@ export function PositioningBand() {
           </div>
         </div>
 
-        {/* ─── 在這個底氣上 · 兩件核心服務 section label ─── */}
+        {/* ─── 在這個基石上 · 兩件核心服務 section label ─── */}
         <div className="flex items-center gap-3 mb-6 md:mb-8 max-w-[1000px] mx-auto">
           <div className="w-8 h-px bg-gold-d/60" />
           <span className="text-[10.5px] md:text-[11px] font-semibold tracking-[2.5px] uppercase text-gold-d">
-            在這個底氣上 · 我們做兩件事
+            在這個基石上 · 我們做兩件事
           </span>
           <div className="flex-1 h-px bg-bd/70" />
         </div>

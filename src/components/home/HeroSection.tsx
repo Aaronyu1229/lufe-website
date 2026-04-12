@@ -59,9 +59,9 @@ const slides: Slide[] = [
   },
   {
     id: "logistics-moat",
-    chipLabel: "底氣 · 42 年國際物流",
+    chipLabel: "基石 · 42 年國際物流",
     chipHref: "/about",
-    eyebrow: "真正的底氣 · 躍馬 42 年",
+    eyebrow: "真正的基石 · 躍馬 42 年",
     titleLines: ["真的跑過船的人，", "才懂出海的眉角"],
     subtitle: "從報關、倉儲到最後一哩 — 不是教科書讀來的，是 42 年港口、海關、貨櫃場跑出來的。",
     primary: { label: "認識躍馬國際", href: "/about" },
