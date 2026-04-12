@@ -2,9 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 const serviceLinks = [
-  { label: "01 產品適配性", href: "/services#pillar-fit" },
-  { label: "02 通路銷售力", href: "/services#pillar-channel" },
-  { label: "03 團隊體質", href: "/services#pillar-team" },
+  { label: "產品適配性", href: "/services#pillar-fit" },
+  { label: "通路銷售力", href: "/services#pillar-channel" },
+  { label: "團隊體質", href: "/services#pillar-team" },
   { label: "鹿飛方法論", href: "/services/methodology" },
   { label: "三支柱總覽", href: "/services" },
 ];
