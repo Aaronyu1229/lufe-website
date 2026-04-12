@@ -17,7 +17,7 @@ export function LogoStrip() {
     <section className="py-16 px-5 md:px-10 bg-white overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         <p className="text-[11px] text-tx3 tracking-[2px] uppercase text-center mb-8 font-medium">
-          協助客戶進入 6+ 國際通路
+          合作通路夥伴
         </p>
         <div className="relative">
           <div className="flex items-center gap-12 md:gap-16 animate-marquee whitespace-nowrap">

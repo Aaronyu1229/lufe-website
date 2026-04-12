@@ -293,7 +293,7 @@ export function AboutPage() {
           </h1>
 
           {/* Signature quote */}
-          <p className="text-[15.5px] md:text-[17px] text-white/60 max-w-[640px] font-light leading-[1.8] italic mb-12">
+          <p className="text-[17px] md:text-[18px] text-white/60 max-w-[640px] font-light leading-[1.8] italic mb-12">
             「別人幫你開車，我們幫你找路。」
           </p>
 
@@ -304,10 +304,10 @@ export function AboutPage() {
             </div>
             <div className="flex-1">
               <div className="text-[22px] md:text-[24px] font-semibold leading-tight">Aaron Yu</div>
-              <div className="text-[14px] md:text-[15px] text-gold font-medium mt-1">
+              <div className="text-[15.5px] md:text-[16.5px] text-gold font-medium mt-1">
                 鹿飛 LUFÉ 創辦人
               </div>
-              <p className="text-[13px] md:text-[13.5px] text-white/55 font-normal mt-3 leading-[1.75] max-w-[480px]">
+              <p className="text-[14.5px] md:text-[15px] text-white/55 font-normal mt-3 leading-[1.8] max-w-[480px]">
                 從國際物流第一線走到全程跨境陪跑。四十二年，五百多個案子，三十多個國家——這些不是數字，是我看過多少產品走對、走錯、走回頭路的經驗值。
               </p>
             </div>
@@ -363,10 +363,10 @@ export function AboutPage() {
                 </div>
               </div>
               <div>
-                <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-4">
+                <h2 className="text-[14.5px] font-semibold tracking-wider text-gold uppercase mb-4">
                   看到的問題
                 </h2>
-                <p className="text-[15px] md:text-[16px] text-white/75 leading-[1.9] font-normal">
+                <p className="text-[16.5px] md:text-[17px] text-white/75 leading-[1.9] font-normal">
                   在國際物流業做了十多年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。
                   找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸、找代操公司只買工具。每一段都有人做，但沒有人幫你串起來。
                   企業自己得當專案經理，在三四家公司之間來回溝通，效率極低，成本極高。
@@ -377,10 +377,10 @@ export function AboutPage() {
             {/* 相信什麼 — 圖右文左 */}
             <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-8 md:gap-12 items-center">
               <div className="md:order-1">
-                <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-4">
+                <h2 className="text-[14.5px] font-semibold tracking-wider text-gold uppercase mb-4">
                   相信的事
                 </h2>
-                <p className="text-[15px] md:text-[16px] text-white/75 leading-[1.9] font-normal">
+                <p className="text-[16.5px] md:text-[17px] text-white/75 leading-[1.9] font-normal">
                   我相信每一家有好產品的台灣公司，都值得試試走向海外。不是每個產品都適合，但至少應該有人幫你搞清楚。
                   跨境不應該是一場冒險，而應該是一次有計畫的探索——用三個維度判斷：這個市場的
                   <span className="text-white/90 font-medium">勝率</span>（產品適配）、
@@ -431,10 +431,10 @@ export function AboutPage() {
                 </div>
               </div>
               <div>
-                <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-4">
+                <h2 className="text-[14.5px] font-semibold tracking-wider text-gold uppercase mb-4">
                   做了什麼
                 </h2>
-                <p className="text-[15px] md:text-[16px] text-white/75 leading-[1.9] font-normal">
+                <p className="text-[16.5px] md:text-[17px] text-white/75 leading-[1.9] font-normal">
                   所以我創立了鹿飛——一個用三支柱方法論幫台灣企業落地的跨境團隊。
                   從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有躍馬國際 42 年的國際物流實戰當基礎。
                   主要戰場是<span className="text-white/90 font-medium">北美</span>和
@@ -476,17 +476,17 @@ export function AboutPage() {
                 <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-2">
                   {role.scale}
                 </div>
-                <h3 className="text-[16px] font-semibold mb-2 leading-tight">
+                <h3 className="text-[17px] font-semibold mb-2 leading-tight">
                   {role.title}
                 </h3>
-                <p className="text-[13px] text-tx2 font-normal leading-[1.75]">
+                <p className="text-[14.5px] text-tx2 font-normal leading-[1.8]">
                   {role.desc}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-8 text-[13px] text-tx3 font-normal italic">
+          <div className="mt-8 text-[14.5px] text-tx3 font-normal italic">
             * 我們的定位是「小型精品 + 全球網絡」——不是萬人顧問公司，也不是 solo freelancer。
           </div>
         </div>
@@ -521,10 +521,10 @@ export function AboutPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-[17px] md:text-[19px] font-semibold mb-2 leading-tight">
+                  <h3 className="text-[18px] md:text-[20px] font-semibold mb-2 leading-tight">
                     {step.title}
                   </h3>
-                  <p className="text-[13.5px] md:text-[14.5px] text-tx2 leading-[1.8] font-normal">
+                  <p className="text-[15px] md:text-[16px] text-tx2 leading-[1.8] font-normal">
                     {step.desc}
                   </p>
                 </div>
@@ -554,7 +554,7 @@ export function AboutPage() {
                 <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold mb-2">
                   全球節點
                 </div>
-                <div className="text-white text-[16px] md:text-[20px] font-light tracking-[-0.3px] leading-tight">
+                <div className="text-white text-[17px] md:text-[21px] font-light tracking-[-0.3px] leading-tight">
                   30+ 國家 · 500+ 出口案件 · 10 年實戰
                 </div>
               </div>
@@ -583,8 +583,8 @@ export function AboutPage() {
                   >
                     {card.icon}
                   </div>
-                  <h3 className="text-[17px] font-semibold mb-2">{card.title}</h3>
-                  <p className="text-[14px] text-tx2 font-normal leading-[1.7]">
+                  <h3 className="text-[18px] font-semibold mb-2">{card.title}</h3>
+                  <p className="text-[15.5px] text-tx2 font-normal leading-[1.8]">
                     {card.desc}
                   </p>
                 </div>
@@ -624,11 +624,11 @@ export function AboutPage() {
                       <span className="block w-[130%] h-px bg-red-400/70 rotate-[-18deg]" />
                     </span>
                   </div>
-                  <h3 className="text-[16px] font-semibold leading-tight pt-1.5">
+                  <h3 className="text-[17px] font-semibold leading-tight pt-1.5">
                     {item.title}
                   </h3>
                 </div>
-                <p className="text-[13px] text-tx2 leading-[1.75] font-normal pl-[52px]">
+                <p className="text-[14.5px] text-tx2 leading-[1.8] font-normal pl-[52px]">
                   {item.desc}
                 </p>
               </div>
@@ -668,14 +668,14 @@ export function AboutPage() {
                 key={item.title}
                 className="flex gap-5 items-start p-6 rounded-none bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]"
               >
-                <div className="w-8 h-8 rounded-none bg-gold flex items-center justify-center text-navy text-[14px] font-heading font-semibold shrink-0 mt-0.5">
+                <div className="w-8 h-8 rounded-none bg-gold flex items-center justify-center text-navy text-[15.5px] font-heading font-semibold shrink-0 mt-0.5">
                   {i + 1}
                 </div>
                 <div>
-                  <h3 className="text-[16px] font-semibold text-white mb-1.5">
+                  <h3 className="text-[17px] font-semibold text-white mb-1.5">
                     {item.title}
                   </h3>
-                  <p className="text-[14px] text-white/65 font-normal leading-[1.7]">
+                  <p className="text-[15.5px] text-white/65 font-normal leading-[1.8]">
                     {item.desc}
                   </p>
                 </div>
@@ -695,15 +695,15 @@ export function AboutPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/20 to-navy/75" />
             </div>
-            <h3 className="text-[18px] text-white font-medium mb-2">
+            <h3 className="text-[19px] text-white font-medium mb-2">
               想認識我們？聊聊你的跨境計畫
             </h3>
-            <p className="text-[14px] text-white/60 font-normal mb-6">
+            <p className="text-[15.5px] text-white/60 font-normal mb-6">
               不確定該不該跨境？先聊聊，不收費、不承諾、不賣課。
             </p>
             <button
               onClick={open}
-              className="bg-gold text-navy px-8 py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-gold-l"
+              className="bg-gold text-navy px-8 py-3.5 rounded-none text-[16.5px] font-semibold cursor-pointer transition-colors hover:bg-gold-l"
             >
               聊聊你的產品 →
             </button>
