@@ -82,14 +82,6 @@ export function CasesPage() {
             <span className="text-white/75">案例</span>
           </nav>
 
-          {/* Eyebrow */}
-          <div className="flex items-center gap-3 mb-6">
-            <span className="block w-8 h-px bg-gold" />
-            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-              案例 · CASE STUDIES
-            </span>
-          </div>
-
           {/* Headline */}
           <h1 className="font-heading text-[clamp(34px,5vw,58px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-7 max-w-[880px]">
             兩個主戰場，

@@ -93,14 +93,6 @@ export function ServicesPage() {
             <span className="text-white/75">服務</span>
           </nav>
 
-          {/* Eyebrow — bilingual */}
-          <div className="flex items-center gap-3 mb-5">
-            <span className="block w-8 h-px bg-gold" />
-            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-              服務 · SERVICES
-            </span>
-          </div>
-
           {/* Headline */}
           <h1 className="font-heading text-[clamp(34px,5vw,60px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-6 max-w-[920px]">
             三個支柱，
@@ -429,12 +421,7 @@ export function ServicesPage() {
       {/* ─── 底層物流 敘事 strip ─── */}
       <section className="bg-navy py-[72px] md:py-[96px] px-5 md:px-10">
         <div className="max-w-[900px] mx-auto">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="block w-8 h-px bg-gold" />
-            <span className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold">
-              底層 · FOUNDATION
-            </span>
-          </div>
+          <div className="w-12 h-px bg-gold/60 mb-5" />
           <h2 className="font-sans text-[clamp(26px,3.6vw,40px)] leading-[1.2] font-light tracking-[-0.5px] text-white mb-5">
             三個支柱底下，是真正跑了 <span className="font-normal text-gold">42 年</span>的國際物流
           </h2>
@@ -488,7 +475,6 @@ export function ServicesPage() {
       {/* ─── Top FAQs ─── */}
       <section className="bg-white py-[72px] md:py-[96px] px-5 md:px-10">
         <div className="max-w-[760px] mx-auto">
-          <div className="section-label">最常被問到</div>
           <h2 className="section-heading">三個關鍵問題</h2>
           <p className="section-desc">
             更多細節在每個支柱的說明頁。這裡先回答最常見的三題。

@@ -101,13 +101,6 @@ function InsightsPageInner() {
               <span className="text-white/75">洞察與資源</span>
             </nav>
 
-            <div className="flex items-center gap-3 mb-5">
-              <span className="block w-8 h-px bg-gold" />
-              <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-                洞察與資源 · INSIGHTS
-              </span>
-            </div>
-
             <h1 className="font-heading text-[clamp(34px,4.8vw,58px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-6">
               跨境路上，
               <br />

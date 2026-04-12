@@ -179,7 +179,6 @@ export function ContactPage() {
       {/* ─── Hero + Channel Cards ─── */}
       <section className="bg-white pt-[120px] pb-[60px] px-5 md:px-10">
         <div className="max-w-[1000px] mx-auto">
-          <div className="section-label">聯絡我們</div>
           <h1 className="section-heading">
             選一個你最方便的方式
           </h1>
@@ -311,12 +310,6 @@ export function ContactPage() {
         />
 
         <div className="relative max-w-[900px] mx-auto">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="block w-8 h-px bg-gold" />
-            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-              合作夥伴 · PARTNERS
-            </span>
-          </div>
           <h2 className="font-sans text-[clamp(24px,3.4vw,38px)] leading-[1.22] font-light tracking-[-0.4px] text-white mb-5">
             商會、顧問、服務商，
             <br />

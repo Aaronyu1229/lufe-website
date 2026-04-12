@@ -50,13 +50,6 @@ export function FieldNotesPage() {
             <span className="text-white/75">現場紀錄</span>
           </nav>
 
-          <div className="flex items-center gap-3 mb-5">
-            <span className="block w-8 h-px bg-gold" />
-            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-              現場紀錄 · FIELD NOTES
-            </span>
-          </div>
-
           <h1 className="font-heading text-[clamp(34px,5vw,60px)] text-white leading-[1.08] font-light tracking-[-0.8px] mb-6 max-w-[920px]">
             我們這個月
             <br />
