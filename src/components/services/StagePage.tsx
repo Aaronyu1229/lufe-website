@@ -63,14 +63,35 @@ export function StagePage({ stage }: Props) {
 
       {/* ─── Purpose ─── */}
       <section className="bg-white py-[64px] md:py-[84px] px-5 md:px-10">
-        <div className="max-w-[840px] mx-auto">
+        <div className="max-w-[960px] mx-auto">
           <div className="section-label">這個階段在做什麼</div>
           <h2 className="section-heading">
             為什麼要有<span className={`font-normal ${c.text}`}>這個階段</span>
           </h2>
-          <p className="text-[16px] text-tx2 leading-[1.9] font-normal max-w-[720px]">
-            {stage.purpose}
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-start mt-4">
+            <div
+              className={`relative w-[120px] h-[120px] md:w-[148px] md:h-[148px] ${c.softBg} border ${c.border} flex items-center justify-center shrink-0`}
+            >
+              <span
+                className={`font-heading text-[56px] md:text-[72px] font-light tabular-nums ${c.text} leading-none`}
+              >
+                {stage.num}
+              </span>
+              <span
+                aria-hidden="true"
+                className={`absolute -top-px left-4 right-4 h-px ${c.text}`}
+                style={{ backgroundColor: "currentColor", opacity: 0.4 }}
+              />
+              <span
+                aria-hidden="true"
+                className={`absolute -bottom-px left-4 right-4 h-px ${c.text}`}
+                style={{ backgroundColor: "currentColor", opacity: 0.4 }}
+              />
+            </div>
+            <p className="text-[16px] text-tx2 leading-[1.9] font-normal max-w-[720px]">
+              {stage.purpose}
+            </p>
+          </div>
         </div>
       </section>
 
@@ -85,14 +106,31 @@ export function StagePage({ stage }: Props) {
             {stage.outcomes.map((outcome, i) => (
               <li
                 key={i}
-                className="flex items-start gap-4 bg-white p-5 border border-bd/60"
+                className="flex items-start gap-4 bg-white p-5 border border-bd/60 hover:border-bd transition-colors"
               >
-                <span className={`font-sans text-[20px] font-light tabular-nums ${c.text} shrink-0`}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-[15px] text-tx leading-[1.7] font-normal">
-                  {outcome}
-                </span>
+                <div
+                  className={`shrink-0 w-9 h-9 rounded-none ${c.softBg} border ${c.border} flex items-center justify-center ${c.text}`}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M5 12L10 17L19 7"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div className="flex-1 pt-1">
+                  <span
+                    className={`block text-[10.5px] font-semibold tracking-[1.5px] uppercase ${c.text} mb-1 tabular-nums`}
+                  >
+                    Outcome {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[15px] text-tx leading-[1.7] font-normal">
+                    {outcome}
+                  </span>
+                </div>
               </li>
             ))}
           </ul>
@@ -114,13 +152,34 @@ export function StagePage({ stage }: Props) {
             {stage.deliverables.map((d, i) => (
               <div
                 key={i}
-                className="p-6 md:p-7 bg-cream rounded-none border-l-4 border-gold/40 transition-colors hover:border-gold"
+                className="group p-6 md:p-7 bg-cream rounded-none border-l-4 border-gold/40 transition-all hover:border-gold hover:shadow-[0_6px_24px_rgba(16,27,48,0.06)]"
               >
-                <div className="flex items-center gap-3 mb-2">
-                  <span className={`font-sans text-[15px] font-semibold tabular-nums ${c.text}`}>
-                    0{i + 1}
-                  </span>
-                  <h3 className="text-[16px] font-semibold">{d.title}</h3>
+                <div className="flex items-start gap-4 mb-3">
+                  <div
+                    className={`shrink-0 w-11 h-11 rounded-none bg-white border ${c.border} flex items-center justify-center ${c.text} group-hover:scale-[1.04] transition-transform`}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinejoin="round"
+                      />
+                      <path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                      <path
+                        d="M10 13H16M10 16H16M10 19H13"
+                        stroke="currentColor"
+                        strokeWidth="1.3"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <span className={`block text-[10.5px] font-semibold tracking-[1.5px] uppercase ${c.text} tabular-nums mb-1`}>
+                      Deliverable 0{i + 1}
+                    </span>
+                    <h3 className="text-[16px] font-semibold leading-tight">{d.title}</h3>
+                  </div>
                 </div>
                 <p className="text-[13.5px] text-tx2 leading-[1.75] font-normal">
                   {d.desc}

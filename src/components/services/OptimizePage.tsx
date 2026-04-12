@@ -12,7 +12,17 @@ import { useMessageBox } from "../MessageBox";
 
 const painPoints = [
   {
-    icon: "📦",
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M3 8L12 3L21 8V16L12 21L3 16V8Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        <path d="M3 8L12 13L21 8M12 13V21" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      </svg>
+    ),
     title: "物流成本吃掉毛利",
     signs: [
       "海運報價每半年漲一次，你沒有議價籌碼",
@@ -22,7 +32,19 @@ const painPoints = [
     fix: "我們會重新盤點你的物流結構，從運輸方式、倉儲位置、退貨處理三個層面優化。通常可省 12–25%。",
   },
   {
-    icon: "📉",
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M3 6L9 12L13 8L21 16"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path d="M15 16H21V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3 21H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
     title: "通路績效起伏大",
     signs: [
       "銷量看天吃飯，節慶暴增、平常低迷",
@@ -32,7 +54,17 @@ const painPoints = [
     fix: "我們會做通路健診，檢視 listing、定價、運營節奏、競品動態，給你一份可執行的改善計畫。",
   },
   {
-    icon: "⚙️",
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
+        <path
+          d="M12 2V5M12 19V22M4.22 4.22L6.34 6.34M17.66 17.66L19.78 19.78M2 12H5M19 12H22M4.22 19.78L6.34 17.66M17.66 6.34L19.78 4.22"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
     title: "營運流程卡卡",
     signs: [
       "跨時區溝通成本高，一件事要來回好幾天",
@@ -49,6 +81,13 @@ const services = [
     timeline: "2–3 週",
     price: "定額診斷費",
     desc: "全面檢視你的海外運營，找出效率瓶頸與成本黑洞。",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="6.5" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M16 16L21 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M8 11H14M11 8V14" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      </svg>
+    ),
     items: [
       "供應鏈與物流效率分析（從工廠到終端）",
       "通路績效評估（Amazon、實體通路、自營站）",
@@ -63,6 +102,16 @@ const services = [
     timeline: "1–3 個月",
     price: "月費 + 績效獎金",
     desc: "針對診斷結果，陪你執行具體的改善計畫。",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M12 2L14 8L20 8L15 12L17 19L12 15L7 19L9 12L4 8L10 8L12 2Z"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
     items: [
       "物流路線重新規劃與簽約",
       "倉儲方案優化（整合、遷移、委外）",
@@ -132,9 +181,11 @@ export function OptimizePage() {
             {painPoints.map((p) => (
               <div
                 key={p.title}
-                className="p-6 md:p-7 bg-cream rounded-none border-l-4 border-ember/40"
+                className="p-6 md:p-7 bg-cream rounded-none border-l-4 border-ember/40 hover:border-ember transition-colors"
               >
-                <div className="text-[28px] mb-3">{p.icon}</div>
+                <div className="w-12 h-12 rounded-none bg-white border border-ember/30 flex items-center justify-center text-ember mb-4">
+                  {p.icon}
+                </div>
                 <h3 className="text-[17px] font-semibold mb-4">{p.title}</h3>
                 <ul className="space-y-2 mb-5">
                   {p.signs.map((s) => (
@@ -174,13 +225,18 @@ export function OptimizePage() {
             {services.map((svc, i) => (
               <div
                 key={svc.title}
-                className="p-7 md:p-9 bg-white rounded-none border-l-4 border-ember"
+                className="group p-7 md:p-9 bg-white rounded-none border-l-4 border-ember hover:shadow-[0_12px_36px_rgba(16,27,48,0.08)] transition-shadow"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="font-sans text-[18px] font-light text-ember tabular-nums">
-                    0{i + 1}
-                  </span>
-                  <h3 className="text-[19px] font-semibold">{svc.title}</h3>
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-none bg-[rgba(217,139,74,0.08)] border border-ember/30 flex items-center justify-center text-ember shrink-0 group-hover:bg-[rgba(217,139,74,0.14)] transition-colors">
+                    {svc.icon}
+                  </div>
+                  <div>
+                    <span className="font-sans text-[13px] font-semibold uppercase tracking-[1.5px] text-ember tabular-nums">
+                      STEP 0{i + 1}
+                    </span>
+                    <h3 className="text-[19px] font-semibold leading-tight mt-1">{svc.title}</h3>
+                  </div>
                 </div>
                 <div className="flex items-center gap-4 mb-4 text-[11px] font-medium tracking-wider uppercase">
                   <span className="text-ember bg-[rgba(217,139,74,0.08)] px-2.5 py-1">

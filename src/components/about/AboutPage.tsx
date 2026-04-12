@@ -85,16 +85,39 @@ const teamRoles = [
     title: "台灣核心團隊",
     scale: "5 人",
     desc: "創辦人 Aaron 領軍，專案經理、供應鏈顧問、合規法規專家、資料分析師各司其職。每個案子都有固定窗口，不會在多家公司之間被踢皮球。",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="11" r="4" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M7 26C7 21.0294 11.0294 17 16 17C20.9706 17 25 21.0294 25 26" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="25" cy="9" r="2" stroke="currentColor" strokeWidth="1.2" />
+        <circle cx="7" cy="9" r="2" stroke="currentColor" strokeWidth="1.2" />
+      </svg>
+    ),
   },
   {
     title: "東南亞在地夥伴",
     scale: "越南 / 菲律賓 / 泰國",
     desc: "長期合作的當地顧問與代理，熟悉當地法規、清關、通路生態。你不用自己飛一趟去找人。",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M5 16H27M16 5C19 8 19 24 16 27M16 5C13 8 13 24 16 27" stroke="currentColor" strokeWidth="1.2" />
+        <circle cx="22" cy="11" r="1.5" fill="currentColor" />
+      </svg>
+    ),
   },
   {
     title: "北美通路關係",
     scale: "Costco / Amazon / Walmart",
     desc: "十年累積的直接對接窗口。不是拿名片介紹，是能真的把你的產品推進買手會議的關係。",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+        <rect x="4" y="10" width="24" height="14" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M4 15H28" stroke="currentColor" strokeWidth="1.2" />
+        <path d="M10 6L10 10M22 6L22 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <rect x="18" y="18" width="6" height="3" rx="0.5" stroke="currentColor" strokeWidth="1" />
+      </svg>
+    ),
   },
 ];
 
@@ -103,21 +126,42 @@ const howWeWorkSteps = [
     num: "01",
     title: "第一次對話（免費）",
     desc: "30–60 分鐘，我們聽你講目前的狀況、疑問、顧慮。不推銷、不承諾。聊完後如果你覺得不適合，就直接結束；適合就進入下一步。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M4 5C4 4.44772 4.44772 4 5 4H19C19.5523 4 20 4.44772 20 5V15C20 15.5523 19.5523 16 19 16H13L8 20V16H5C4.44772 16 4 15.5523 4 15V5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      </svg>
+    ),
   },
   {
     num: "02",
     title: "範圍確認與報價",
     desc: "我們根據你的需求，給你一份明確的服務範圍、時程、報價。所有數字都透明，沒有隱藏費用。你有 1 週時間考慮。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="5" y="3" width="14" height="18" rx="1" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M9 8H15M9 12H15M9 16H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
   },
   {
     num: "03",
     title: "Kickoff 與執行",
     desc: "簽約後兩週內 kickoff。每週或雙週一次進度同步會，中間有問題隨時能直接 LINE 找到負責人——不用透過業務轉達。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M5 12L12 5L19 12M12 5V19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
   },
   {
     num: "04",
     title: "交付與後續",
     desc: "階段結束時交付完整文件與結論。我們會告訴你是否需要進入下一階段，以及為什麼。如果不需要，我們會誠實地說「就到這」。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M5 12L10 17L19 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
   },
 ];
 
@@ -125,22 +169,57 @@ const thingsWeDontDo = [
   {
     title: "不做純貿易買賣",
     desc: "我們不賺中間價差，也不替你採購。我們的收入來自服務費，而不是產品加價。這讓我們的建議可以完全站在你的角度。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M9 9C9 9 9.5 8 12 8C14.5 8 15 9.5 15 10C15 11 14 11.5 12 12C10 12.5 12 14 14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M12 6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
   },
   {
     title: "不做純物流運輸",
     desc: "物流執行我們會串接，但不是我們的主業。市面上有很多優秀的物流公司，我們不搶他們的飯碗——只會幫你找到對的那家。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="8" width="11" height="9" rx="1" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M13 11H18L21 14V17H13V11Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <circle cx="7" cy="19" r="1.5" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="17" cy="19" r="1.5" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    ),
   },
   {
     title: "不拿股權、不投資",
     desc: "我們不參股、不當股東。這是為了避免利益綁定扭曲判斷——當我們拿股權，你就不會聽到我們說「這案子不該做」。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M4 20L8 14L12 17L20 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M15 7H20V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
   },
   {
     title: "不做行銷代操",
     desc: "行銷策略我們會一起規劃，但日常的廣告投放、社群運營、KOL 合作這些執行工作，建議交給專業的 marketing agency。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M3 11V13C3 13.5523 3.44772 14 4 14H6L11 18V6L6 10H4C3.44772 10 3 10.4477 3 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M15 9C16 10 16 14 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M18 7C20 9 20 15 18 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
   },
   {
     title: "不賣課、不收招生費",
     desc: "我們不辦「出海大師班」、不賣線上課、不做付費講座招生。我們的工作是陪你實戰，不是做知識付費。",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M3 7L12 3L21 7L12 11L3 7Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M7 9V14C7 14 9 16 12 16C15 16 17 14 17 14V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M21 7V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
   },
 ];
 
@@ -389,8 +468,11 @@ export function AboutPage() {
             {teamRoles.map((role) => (
               <div
                 key={role.title}
-                className="bg-white border border-bd p-6 rounded-none transition-colors hover:border-gold"
+                className="group bg-white border border-bd p-6 rounded-none transition-all hover:border-gold hover:shadow-[0_8px_28px_rgba(16,27,48,0.07)]"
               >
+                <div className="w-12 h-12 rounded-none bg-[rgba(212,168,92,0.08)] border border-gold-d/25 flex items-center justify-center text-gold-d mb-4 group-hover:bg-[rgba(212,168,92,0.14)] transition-colors">
+                  {role.icon}
+                </div>
                 <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-2">
                   {role.scale}
                 </div>
@@ -428,11 +510,16 @@ export function AboutPage() {
             {howWeWorkSteps.map((step) => (
               <div
                 key={step.num}
-                className="flex items-start gap-5 md:gap-7 p-5 md:p-7 bg-cream rounded-none border-l-4 border-gold/40"
+                className="group flex items-start gap-5 md:gap-7 p-5 md:p-7 bg-cream rounded-none border-l-4 border-gold/40 hover:border-gold-d transition-colors"
               >
-                <span className="font-sans text-[28px] md:text-[32px] font-light text-gold-d tabular-nums leading-none shrink-0">
-                  {step.num}
-                </span>
+                <div className="flex flex-col items-center gap-2 shrink-0">
+                  <span className="font-sans text-[28px] md:text-[32px] font-light text-gold-d tabular-nums leading-none">
+                    {step.num}
+                  </span>
+                  <div className="w-10 h-10 rounded-full border border-gold-d/30 flex items-center justify-center text-gold-d bg-white/60 group-hover:bg-white transition-colors">
+                    {step.icon}
+                  </div>
+                </div>
                 <div>
                   <h3 className="text-[17px] md:text-[19px] font-semibold mb-2 leading-tight">
                     {step.title}
@@ -525,17 +612,23 @@ export function AboutPage() {
             {thingsWeDontDo.map((item) => (
               <div
                 key={item.title}
-                className="p-6 bg-white border-l-4 border-red-300/60 rounded-none"
+                className="p-6 bg-white border-l-4 border-red-300/60 rounded-none hover:border-red-400 transition-colors"
               >
                 <div className="flex items-start gap-3 mb-2">
-                  <span className="text-red-400/80 text-[18px] font-bold leading-none mt-0.5">
-                    ✗
-                  </span>
-                  <h3 className="text-[16px] font-semibold leading-tight">
+                  <div className="relative w-10 h-10 rounded-none bg-red-50 border border-red-200/60 flex items-center justify-center text-red-400/80 shrink-0">
+                    {item.icon}
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <span className="block w-[130%] h-px bg-red-400/70 rotate-[-18deg]" />
+                    </span>
+                  </div>
+                  <h3 className="text-[16px] font-semibold leading-tight pt-1.5">
                     {item.title}
                   </h3>
                 </div>
-                <p className="text-[13px] text-tx2 leading-[1.75] font-normal pl-7">
+                <p className="text-[13px] text-tx2 leading-[1.75] font-normal pl-[52px]">
                   {item.desc}
                 </p>
               </div>

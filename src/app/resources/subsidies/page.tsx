@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SUBSIDIES, STAGE_LABELS, SUBSIDY_CARD_COPY, type Subsidy } from "@/data/subsidies";
@@ -148,16 +149,47 @@ export default function SubsidiesPage() {
               num="01"
               title="錢是真的"
               desc="每年數億元的預算由貿易署、經濟部執行，不是畫大餅。重點是知道怎麼申請、寫對計畫書。"
+              icon={
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" />
+                  <path
+                    d="M9 9C9 9 9.5 8 12 8C14.5 8 15 9.5 15 10.2C15 11.1 14 11.6 12 12.2C10 12.8 9 13.5 9 14.5C9 15.5 10 16 12 16C14 16 15 15 15 15"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <path d="M12 6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              }
             />
             <Pillar
               num="02"
               title="不只是申請表"
               desc="計畫書要和你的商業目標對齊，執行過程要有產出與報告。鹿飛的服務本身就符合大多數結案標準。"
+              icon={
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                  />
+                  <path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                  <path d="M10 13L12 15L16 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              }
             />
             <Pillar
               num="03"
               title="可以疊加使用"
               desc="同一家公司可以同時申請不同計畫——例如用展覽補助去美國展，用市場布建補助建立當地通路。"
+              icon={
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="9" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="1.5" />
+                  <rect x="8" y="6" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="1.5" />
+                  <rect x="13" y="3" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+              }
             />
           </div>
         </div>
@@ -474,15 +506,22 @@ function Pillar({
   num,
   title,
   desc,
+  icon,
 }: {
   num: string;
   title: string;
   desc: string;
+  icon: ReactNode;
 }) {
   return (
-    <div className="bg-white p-7 border border-bd">
-      <div className="font-sans text-[24px] text-gold font-light tabular-nums mb-3">
-        {num}
+    <div className="group bg-white p-7 border border-bd hover:border-gold transition-colors">
+      <div className="flex items-center justify-between mb-4">
+        <div className="w-12 h-12 rounded-none bg-[rgba(212,168,92,0.08)] border border-gold/30 flex items-center justify-center text-gold-d group-hover:bg-[rgba(212,168,92,0.16)] transition-colors">
+          {icon}
+        </div>
+        <div className="font-sans text-[24px] text-gold font-light tabular-nums">
+          {num}
+        </div>
       </div>
       <h3 className="text-[17px] font-semibold mb-2 leading-tight">{title}</h3>
       <p className="text-[13.5px] text-tx2 leading-[1.75]">{desc}</p>
