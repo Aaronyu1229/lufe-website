@@ -271,6 +271,13 @@ export function CasesSection() {
           這些企業都找到了自己的路
         </h2>
         <div className="hidden md:block flex-1 h-px bg-bd" />
+        <Link
+          href="/cases"
+          className="hidden md:flex items-center gap-1.5 text-[13.5px] font-medium text-tx3 hover:text-gold-d transition-colors shrink-0"
+        >
+          全部案例
+          <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+        </Link>
       </div>
       <p className="text-[16.5px] text-tx2 max-w-[560px] leading-[1.8] mb-8 font-normal">
         4 個案例，從食品到電子、從北美到東南亞——
@@ -461,28 +468,13 @@ export function CasesSection() {
         </div>
       )}
 
-      {/* ─── Bottom CTA (cardified) ─── */}
-      <div className="mt-12 md:mt-14">
+      {/* Mobile: 全部案例 link (desktop version is in the heading row) */}
+      <div className="mt-8 text-center md:hidden">
         <Link
           href="/cases"
-          className="group block max-w-[640px] mx-auto border border-bd hover:border-navy bg-white p-6 md:p-7 transition-all duration-300"
+          className="text-[14px] font-medium text-tx3 hover:text-gold-d transition-colors"
         >
-          <div className="flex items-center justify-between gap-5 flex-wrap">
-            <div className="flex-1 min-w-0">
-              <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d mb-1.5">
-                看所有案例
-              </div>
-              <div className="text-[16.5px] font-semibold text-tx group-hover:text-navy transition-colors">
-                4 個完整故事 · 食品 / 電子 / 服飾 / 飲品
-              </div>
-              <div className="text-[13px] text-tx3 mt-1">
-                每個案例都附 3 個關鍵決策時刻 · 涵蓋北美與東南亞兩個主戰場
-              </div>
-            </div>
-            <span className="text-[21px] text-navy group-hover:translate-x-1 transition-transform duration-300">
-              →
-            </span>
-          </div>
+          全部案例 →
         </Link>
       </div>
     </section>
