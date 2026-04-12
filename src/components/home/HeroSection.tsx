@@ -26,9 +26,9 @@ type Slide = {
 const slides: Slide[] = [
   {
     id: "pillar-fit",
-    chipLabel: "產品適配性 · 勝率",
+    chipLabel: "核心 · 產品適配性",
     chipHref: "/services#pillar-fit",
-    eyebrow: "三支柱 · 01",
+    eyebrow: "核心服務 · 01 · 第一年",
     titleLines: ["協助台灣企業", "在北美與東南亞落地"],
     subtitle: "這個市場真的要你嗎？市場評估、產品測試、決策框架 — 先把勝率搞清楚。",
     primary: { label: "看真實案例", href: "/cases" },
@@ -43,12 +43,12 @@ const slides: Slide[] = [
   },
   {
     id: "pillar-channel",
-    chipLabel: "通路銷售力 · 潛力",
+    chipLabel: "核心 · 通路銷售力",
     chipHref: "/services#pillar-channel",
-    eyebrow: "三支柱 · 02",
+    eyebrow: "核心服務 · 02 · 第一年",
     titleLines: ["上得了架", "還要賣得動"],
-    subtitle: "通路進入、展會佈局、AI 集客引擎 — 把產品放進對的通路，讓消費者找得到。",
-    primary: { label: "看完整三支柱", href: "/services" },
+    subtitle: "通路進入、展會佈局、數位集客 — 把產品放進對的通路，讓消費者找得到。",
+    primary: { label: "看完整服務內容", href: "/services" },
     secondary: { label: "你跟哪個案例最像？", href: "/assess" },
     media: {
       type: "video",
@@ -59,12 +59,12 @@ const slides: Slide[] = [
   },
   {
     id: "pillar-team",
-    chipLabel: "團隊體質 · 成功率",
+    chipLabel: "進階 · 團隊 + AI",
     chipHref: "/services#pillar-team",
-    eyebrow: "三支柱 · 03",
-    titleLines: ["進得去", "還要留得下"],
-    subtitle: "海外團隊、營運系統、AI 自動化 — 讓你不用親自飛過去也能把業務跑起來。",
-    primary: { label: "看團隊體質做法", href: "/services#pillar-team" },
+    eyebrow: "進階模組 · 第二年起",
+    titleLines: ["跑起來之後", "讓團隊更強"],
+    subtitle: "海外團隊、營運系統、AI 數位員工 — 第一年跑順之後，第二年我們幫你讓它變強。",
+    primary: { label: "看進階模組", href: "/services#pillar-team" },
     secondary: { label: "直接聊聊", href: "/contact" },
     media: {
       type: "video",

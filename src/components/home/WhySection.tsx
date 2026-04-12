@@ -100,17 +100,17 @@ export function WhySection() {
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
           <div className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold mb-4">
-            三個支柱 · 一個團隊
+            從第一年到第二年 · 一個團隊
           </div>
           <h2 className="font-sans text-[clamp(32px,4.8vw,56px)] leading-[1.1] font-light tracking-[-0.8px] text-white max-w-[880px] mx-auto">
-            從產品適配到團隊體質，
+            從落地到長大，
             <br />
             你面對的<span className="text-gold font-normal">只有我們</span>
           </h2>
-          <p className="text-[16px] text-white/55 max-w-[620px] leading-[1.75] mx-auto mt-6 font-normal">
-            一個專案經理、一份合約、一條進度線。
+          <p className="text-[16px] text-white/55 max-w-[640px] leading-[1.75] mx-auto mt-6 font-normal">
+            第一年的產品適配跟通路銷售，第二年的團隊跟 AI ——
             <br className="hidden md:block" />
-            底下還有躍馬國際 42 年物流實戰當基礎，不會因為顧問不懂現場而卡在海上。
+            一個專案經理、一份合約、一條進度線。底下還有躍馬 42 年物流實戰當基礎。
           </p>
         </div>
 
