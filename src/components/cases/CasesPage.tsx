@@ -96,14 +96,14 @@ export function CasesPage() {
             <br />
             <span className="font-normal text-gold">同一組人走出來的</span>
           </h1>
-          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[600px] font-light leading-[1.75] mb-12 md:mb-14">
+          <p className="text-[17px] md:text-[18px] text-white/65 max-w-[600px] font-light leading-[1.8] mb-12 md:mb-14">
             北美和東南亞，不同產業、不同卡點，但每一個案例我們都真的做過、
             <br className="hidden md:block" />
             都能翻到最後一個決策。
           </p>
 
           {/* Single-line tagline strip */}
-          <div className="border-t border-white/10 pt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] md:text-[13.5px] text-white/55 font-normal">
+          <div className="border-t border-white/10 pt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13.5px] md:text-[15px] text-white/55 font-normal">
             <span>
               <span className="text-gold font-medium">北美</span> · 保健品 / 電子 / 服飾
             </span>
@@ -190,7 +190,7 @@ export function CasesPage() {
                           <div className="font-heading text-[54px] md:text-[72px] text-gold font-light leading-[0.95] tabular-nums mb-2">
                             {c.num}
                           </div>
-                          <div className="text-[14px] md:text-[16px] text-white/85 font-normal leading-snug">
+                          <div className="text-[15.5px] md:text-[17px] text-white/85 font-normal leading-snug">
                             {meta.headline}
                           </div>
                         </div>
@@ -203,13 +203,13 @@ export function CasesPage() {
                             <div className="text-[10.5px] tracking-[1.8px] uppercase text-tx3 font-semibold mb-3">
                               客戶的原話
                             </div>
-                            <h2 className="font-heading text-[20px] md:text-[24px] text-tx font-semibold leading-[1.5]">
+                            <h2 className="font-heading text-[21px] md:text-[24px] text-tx font-semibold leading-[1.5]">
                               「{meta.painTitle}」
                             </h2>
                           </div>
                           <span
                             aria-hidden="true"
-                            className={`flex-shrink-0 mt-1 w-10 h-10 rounded-full border border-bd flex items-center justify-center text-tx2 text-[18px] transition-all duration-300 ${
+                            className={`flex-shrink-0 mt-1 w-10 h-10 rounded-full border border-bd flex items-center justify-center text-tx2 text-[19px] transition-all duration-300 ${
                               isExpanded
                                 ? "rotate-45 bg-navy border-navy text-white"
                                 : "group-hover:border-gold group-hover:text-gold"
@@ -219,7 +219,7 @@ export function CasesPage() {
                           </span>
                         </div>
                         {!isExpanded && (
-                          <div className="mt-5 text-[12.5px] text-tx3 font-medium tracking-[0.3px]">
+                          <div className="mt-5 text-[13.5px] text-tx3 font-medium tracking-[0.3px]">
                             展開故事 · 四段 20 秒看完 →
                           </div>
                         )}
@@ -236,14 +236,14 @@ export function CasesPage() {
                           {meta.beats.map((text, i) => (
                             <div key={BEAT_LABELS[i]} className="relative">
                               <div className="flex items-baseline gap-3 mb-2.5">
-                                <span className="font-heading text-[13px] font-semibold text-gold-d tabular-nums tracking-[0.5px]">
+                                <span className="font-heading text-[14.5px] font-semibold text-gold-d tabular-nums tracking-[0.5px]">
                                   {String(i + 1).padStart(2, "0")}
                                 </span>
                                 <span className="text-[11px] font-semibold tracking-[2px] uppercase text-tx3">
                                   {BEAT_LABELS[i]}
                                 </span>
                               </div>
-                              <p className="text-[14.5px] md:text-[15px] text-tx2 leading-[1.8]">
+                              <p className="text-[16px] md:text-[16.5px] text-tx2 leading-[1.8]">
                                 {text}
                               </p>
                             </div>
@@ -251,13 +251,13 @@ export function CasesPage() {
                         </div>
 
                         <div className="mt-9 md:mt-10 pt-6 border-t border-bd/60 flex items-center justify-between gap-4 flex-wrap">
-                          <div className="text-[12.5px] text-tx3 font-normal leading-relaxed">
+                          <div className="text-[13.5px] text-tx3 font-normal leading-relaxed">
                             完整時間軸、關鍵決策推理、客戶回饋——都在內頁
                           </div>
                           <div className="flex items-center gap-5 flex-wrap">
                             <Link
                               href={`/assess?case=${c.slug}`}
-                              className="group inline-flex items-center gap-1.5 text-[13px] text-tx2 font-semibold tracking-[0.3px] hover:text-gold transition-colors"
+                              className="group inline-flex items-center gap-1.5 text-[14.5px] text-tx2 font-semibold tracking-[0.3px] hover:text-gold transition-colors"
                             >
                               <span className="border-b border-tx3/40 pb-0.5 group-hover:border-gold transition-colors">
                                 比對你的處境
@@ -268,7 +268,7 @@ export function CasesPage() {
                             </Link>
                             <Link
                               href={`/cases/${c.slug}`}
-                              className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-none text-[13px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
+                              className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-none text-[14.5px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
                             >
                               讀完整案例 →
                             </Link>
@@ -281,7 +281,7 @@ export function CasesPage() {
               })}
             </div>
           ) : (
-            <div className="py-20 text-center text-tx3 text-[14px] bg-cream border border-bd">
+            <div className="py-20 text-center text-tx3 text-[15.5px] bg-cream border border-bd">
               這個組合暫時沒有案例。試試調整篩選條件。
             </div>
           )}
@@ -328,7 +328,7 @@ function FilterGroup<T extends string>({
               <button
                 type="button"
                 onClick={() => onChange(opt.value)}
-                className={`text-[13px] tracking-[0.3px] transition-colors cursor-pointer px-0.5 py-0.5 ${
+                className={`text-[14.5px] tracking-[0.3px] transition-colors cursor-pointer px-0.5 py-0.5 ${
                   isActive
                     ? "text-navy font-semibold border-b border-gold"
                     : "text-tx3 hover:text-tx2 font-medium"
@@ -350,22 +350,22 @@ function CasesListBottomCTA() {
   const { open } = useMessageBox();
   return (
     <div className="text-center mt-20 pt-14 border-t border-bd">
-      <p className="text-[16px] text-tx font-medium mb-3">
+      <p className="text-[17px] text-tx font-medium mb-3">
         想知道你的產品適合哪條路？
       </p>
-      <p className="text-[13.5px] text-tx2 font-normal mb-6 max-w-[440px] mx-auto">
+      <p className="text-[15px] text-tx2 font-normal mb-6 max-w-[440px] mx-auto">
         聊聊，不收費、不承諾、不賣課。我們會老實告訴你值不值得一試。
       </p>
       <div className="flex justify-center items-center gap-6 flex-wrap">
         <button
           onClick={open}
-          className="inline-block bg-gold text-navy px-8 py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-gold-l cursor-pointer"
+          className="inline-block bg-gold text-navy px-8 py-3.5 rounded-none text-[16.5px] font-semibold transition-colors hover:bg-gold-l cursor-pointer"
         >
           聊聊你的產品 →
         </button>
         <Link
           href="/assess"
-          className="group inline-flex items-center gap-2 text-tx2 text-[14px] font-medium transition-colors hover:text-navy"
+          className="group inline-flex items-center gap-2 text-tx2 text-[15.5px] font-medium transition-colors hover:text-navy"
         >
           <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
             先做 2 分鐘評估

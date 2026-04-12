@@ -176,15 +176,15 @@ export function SubsidyCard() {
           </h3>
 
           {/* One-liner — contextual explanation */}
-          <p className="text-[12.5px] text-white/65 leading-[1.7] mb-6 pr-2">
+          <p className="text-[13.5px] text-white/65 leading-[1.8] mb-6 pr-2">
             {copy.oneLiner}
           </p>
 
           {/* CTA — filled gold button */}
-          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-[13px] text-[13.5px] font-semibold tracking-[0.5px] transition-colors group-hover:bg-gold-l">
+          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-[13px] text-[15px] font-semibold tracking-[0.5px] transition-colors group-hover:bg-gold-l">
             {copy.cta}
             <span
-              className="text-[15px] transition-transform duration-300 group-hover:translate-x-0.5"
+              className="text-[16.5px] transition-transform duration-300 group-hover:translate-x-0.5"
               aria-hidden="true"
             >
               →

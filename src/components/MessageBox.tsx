@@ -60,10 +60,10 @@ export function MessageBox() {
         >
           {/* Header */}
           <div className="px-5 py-4 bg-navy text-white flex justify-between items-center">
-            <h3 className="text-[14.5px] font-medium">聊聊你的產品</h3>
+            <h3 className="text-[16px] font-medium">聊聊你的產品</h3>
             <button
               onClick={handleClose}
-              className="text-white/50 text-[17px] cursor-pointer hover:text-white/80 transition-colors"
+              className="text-white/50 text-[18px] cursor-pointer hover:text-white/80 transition-colors"
             >
               ×
             </button>
@@ -77,7 +77,7 @@ export function MessageBox() {
                   你的姓名
                 </label>
                 <input
-                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[13.5px] focus:outline-none focus:border-gold"
+                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[15px] focus:outline-none focus:border-gold"
                   placeholder="怎麼稱呼你？"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -88,7 +88,7 @@ export function MessageBox() {
                   聯絡方式（Email 或電話）
                 </label>
                 <input
-                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[13.5px] focus:outline-none focus:border-gold"
+                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[15px] focus:outline-none focus:border-gold"
                   placeholder="方便我們回覆你"
                   value={form.contact}
                   onChange={(e) =>
@@ -101,7 +101,7 @@ export function MessageBox() {
                   簡單說說你的產品跟想法
                 </label>
                 <textarea
-                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[13.5px] focus:outline-none focus:border-gold resize-y min-h-[68px]"
+                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[15px] focus:outline-none focus:border-gold resize-y min-h-[68px]"
                   placeholder="例如：我們做鳳梨酥，想看看美國有沒有機會⋯⋯"
                   value={form.message}
                   onChange={(e) =>
@@ -111,15 +111,15 @@ export function MessageBox() {
               </div>
               <button
                 onClick={handleSubmit}
-                className="w-full py-3 bg-navy text-white rounded-[9px] text-[13.5px] font-semibold cursor-pointer hover:bg-navy-l transition-colors"
+                className="w-full py-3 bg-navy text-white rounded-[9px] text-[15px] font-semibold cursor-pointer hover:bg-navy-l transition-colors"
               >
                 送出，我們 24 小時內回覆
               </button>
             </div>
           ) : (
             <div className="px-5 py-8 text-center">
-              <h3 className="text-[16px] font-semibold mb-1.5">收到了！</h3>
-              <p className="text-[13px] text-tx2 font-light mb-4">
+              <h3 className="text-[17px] font-semibold mb-1.5">收到了！</h3>
+              <p className="text-[14.5px] text-tx2 font-light mb-4">
                 我們會在 24 小時內回覆你。
                 <br />
                 想更快得到回覆？
@@ -128,7 +128,7 @@ export function MessageBox() {
                 href="https://line.me"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-[18px] py-[9px] bg-[#06C755] text-white rounded-full text-[13px] font-medium"
+                className="inline-block px-[18px] py-[9px] bg-[#06C755] text-white rounded-full text-[14.5px] font-medium"
               >
                 加我們 LINE 聊聊
               </a>

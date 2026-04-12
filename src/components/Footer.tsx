@@ -29,10 +29,10 @@ export function Footer() {
     <footer className="bg-navy text-white/50 pt-[72px] pb-8 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
         <div className="col-span-2 md:col-span-1">
-          <span className="font-sans font-bold text-[18px] text-white">
+          <span className="font-sans font-bold text-[19px] text-white">
             鹿飛 LUF<span className="text-gold">É</span>
           </span>
-          <p className="text-[13px] max-w-[260px] leading-[1.7] font-light mt-2 text-white/55">
+          <p className="text-[14.5px] max-w-[260px] leading-[1.8] font-light mt-2 text-white/55">
             協助台灣企業在北美與東南亞落地。產品適配、通路銷售、團隊體質——三個支柱，兩個主戰場。
           </p>
         </div>
@@ -45,7 +45,7 @@ export function Footer() {
             <Link
               key={link.label}
               href={link.href}
-              className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
+              className="block text-[15.5px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
             >
               {link.label}
             </Link>
@@ -63,7 +63,7 @@ export function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
+                className="block text-[15.5px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
               >
                 {link.label}
               </a>
@@ -71,7 +71,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
+                className="block text-[15.5px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
               >
                 {link.label}
               </Link>
@@ -90,7 +90,7 @@ export function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
+                className="block text-[15.5px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
               >
                 {link.label}
               </a>
@@ -98,14 +98,14 @@ export function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
+                className="block text-[15.5px] text-white/50 mb-2 py-1.5 font-light hover:text-gold transition-colors"
               >
                 {link.label}
               </a>
             ) : (
               <span
                 key={link.label}
-                className="block text-[14px] text-white/50 mb-2 py-1.5 font-light"
+                className="block text-[15.5px] text-white/50 mb-2 py-1.5 font-light"
               >
                 {link.label}
               </span>

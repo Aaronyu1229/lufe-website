@@ -168,7 +168,7 @@ export function ContactPage() {
   const isFormValid = !formState.name.trim() || !formState.email.trim() || !isValidEmail(formState.email) || !formState.message.trim();
 
   const inputClass = (name: string) =>
-    `w-full px-4 py-3 border rounded-none text-[14px] outline-none transition-colors ${
+    `w-full px-4 py-3 border rounded-none text-[15.5px] outline-none transition-colors ${
       errors[name] && touched[name]
         ? "border-red-400 focus:border-red-500"
         : "border-bd focus:border-gold"
@@ -188,34 +188,34 @@ export function ContactPage() {
           </p>
 
           {/* Business info strip — gives contact page a functional anchor */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 mb-12 pb-8 border-b border-bd text-[13px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 mb-12 pb-8 border-b border-bd text-[14.5px]">
             <div>
               <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
                 公司
               </div>
               <div className="font-medium text-tx">鹿飛 LUFÉ</div>
-              <div className="text-tx3 text-[12px] mt-0.5">Aaron Yu 創辦</div>
+              <div className="text-tx3 text-[13px] mt-0.5">Aaron Yu 創辦</div>
             </div>
             <div>
               <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
                 地點
               </div>
               <div className="font-medium text-tx">台北市</div>
-              <div className="text-tx3 text-[12px] mt-0.5">線上為主</div>
+              <div className="text-tx3 text-[13px] mt-0.5">線上為主</div>
             </div>
             <div>
               <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
                 回覆時間
               </div>
               <div className="font-medium text-tx">週一 – 週五</div>
-              <div className="text-tx3 text-[12px] mt-0.5">09:00 – 18:00</div>
+              <div className="text-tx3 text-[13px] mt-0.5">09:00 – 18:00</div>
             </div>
             <div>
               <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
                 一般回覆
               </div>
               <div className="font-medium text-tx">1 個工作天內</div>
-              <div className="text-tx3 text-[12px] mt-0.5">LINE 更快</div>
+              <div className="text-tx3 text-[13px] mt-0.5">LINE 更快</div>
             </div>
           </div>
 
@@ -235,16 +235,16 @@ export function ContactPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h2 className="text-[17px] font-semibold">{primary.title}</h2>
+                    <h2 className="text-[18px] font-semibold">{primary.title}</h2>
                     <span className="text-[10px] font-semibold bg-gold text-navy px-2 py-0.5 rounded-sm">
                       最快回覆
                     </span>
                   </div>
-                  <p className="text-[13px] text-tx2 font-normal leading-[1.5]">
+                  <p className="text-[14.5px] text-tx2 font-normal leading-[1.5]">
                     {primary.desc}
                   </p>
                 </div>
-                <span className="text-[13px] font-semibold text-gold-d flex-shrink-0 hidden md:block">
+                <span className="text-[14.5px] font-semibold text-gold-d flex-shrink-0 hidden md:block">
                   {primary.actionLabel} →
                 </span>
               </button>
@@ -252,7 +252,7 @@ export function ContactPage() {
           })()}
 
           {/* Secondary channels — 3 columns */}
-          <p className="text-[12px] text-tx3 font-normal mb-3">
+          <p className="text-[13px] text-tx3 font-normal mb-3">
             或者選擇其他方式聯繫我們：
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -269,11 +269,11 @@ export function ContactPage() {
                   >
                     {ch.icon}
                   </div>
-                  <h3 className="text-[15px] font-semibold mb-1">{ch.title}</h3>
-                  <p className="text-[12px] text-tx2 font-normal leading-[1.5] mb-3">
+                  <h3 className="text-[16.5px] font-semibold mb-1">{ch.title}</h3>
+                  <p className="text-[13px] text-tx2 font-normal leading-[1.5] mb-3">
                     {ch.desc}
                   </p>
-                  <span className="text-[12px] font-semibold text-gold-d">
+                  <span className="text-[13px] font-semibold text-gold-d">
                     {ch.actionLabel} →
                   </span>
                 </button>
@@ -322,7 +322,7 @@ export function ContactPage() {
             <br />
             <span className="font-normal text-gold">歡迎來談合作</span>
           </h2>
-          <p className="text-[14.5px] md:text-[15.5px] text-white/65 leading-[1.85] font-normal max-w-[640px] mb-10">
+          <p className="text-[16px] md:text-[17px] text-white/65 leading-[1.85] font-normal max-w-[640px] mb-10">
             如果你是商會、同業顧問公司、在地服務商或物流夥伴，想跟鹿飛一起幫台灣企業把海外這條路走得更順——我們有專門的合作入口。
             不收介紹費、不綁獨家，純粹看有沒有把事情做好的機會。
           </p>
@@ -346,10 +346,10 @@ export function ContactPage() {
                 key={item.label}
                 className="bg-white/[0.03] border border-white/10 p-5 md:p-6"
               >
-                <div className="text-[13.5px] md:text-[14.5px] font-semibold text-white leading-tight mb-2">
+                <div className="text-[15px] md:text-[16px] font-semibold text-white leading-tight mb-2">
                   {item.label}
                 </div>
-                <div className="text-[12px] md:text-[12.5px] text-white/55 leading-[1.7]">
+                <div className="text-[13px] md:text-[13.5px] text-white/55 leading-[1.8]">
                   {item.desc}
                 </div>
               </div>
@@ -358,7 +358,7 @@ export function ContactPage() {
 
           <a
             href="mailto:hello@lufe.co?subject=%E5%90%88%E4%BD%9C%E5%A4%A5%E4%BC%B4%E6%B4%BD%E8%AB%87"
-            className="inline-flex items-center gap-2 bg-gold text-navy px-7 py-[14px] rounded-none text-[14px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors"
+            className="inline-flex items-center gap-2 bg-gold text-navy px-7 py-[14px] rounded-none text-[15.5px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors"
           >
             <span>寄信洽談合作</span>
             <span aria-hidden="true">→</span>
@@ -383,7 +383,7 @@ export function ContactPage() {
           <h2 className="section-heading text-center">
             想一次講完所有細節？
           </h2>
-          <p className="text-[14px] text-tx2 text-center font-normal mb-10 max-w-[480px] mx-auto">
+          <p className="text-[15.5px] text-tx2 text-center font-normal mb-10 max-w-[480px] mx-auto">
             填這份表單，我們能在第一次回覆時就給你比較精準的建議，省下幾輪來回。
           </p>
 
@@ -400,8 +400,8 @@ export function ContactPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-[20px] font-semibold mb-2">收到了！</h3>
-              <p className="text-[14px] text-tx2 font-normal leading-[1.7]">
+              <h3 className="text-[21px] font-semibold mb-2">收到了！</h3>
+              <p className="text-[15.5px] text-tx2 font-normal leading-[1.8]">
                 我們會在一個工作天內回覆你。
                 <br />
                 如果比較急，可以直接加我們的{" "}
@@ -421,7 +421,7 @@ export function ContactPage() {
               {/* Row: Name + Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-[12px] font-medium tracking-[1px] mb-1.5">
+                  <label className="block text-[13px] font-medium tracking-[1px] mb-1.5">
                     姓名 *
                   </label>
                   <input
@@ -434,11 +434,11 @@ export function ContactPage() {
                     placeholder="你的姓名"
                   />
                   {errors.name && touched.name && (
-                    <p className="text-[12px] text-red-500 mt-1">{errors.name}</p>
+                    <p className="text-[13px] text-red-500 mt-1">{errors.name}</p>
                   )}
                 </div>
                 <div>
-                  <label className="block text-[12px] font-medium tracking-[1px] mb-1.5">
+                  <label className="block text-[13px] font-medium tracking-[1px] mb-1.5">
                     Email *
                   </label>
                   <input
@@ -451,7 +451,7 @@ export function ContactPage() {
                     placeholder="you@company.com"
                   />
                   {errors.email && touched.email && (
-                    <p className="text-[12px] text-red-500 mt-1">{errors.email}</p>
+                    <p className="text-[13px] text-red-500 mt-1">{errors.email}</p>
                   )}
                 </div>
               </div>
@@ -459,7 +459,7 @@ export function ContactPage() {
               {/* Row: Company + Phone */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-[12px] font-medium tracking-[1px] mb-1.5">
+                  <label className="block text-[13px] font-medium tracking-[1px] mb-1.5">
                     公司名稱
                   </label>
                   <input
@@ -467,12 +467,12 @@ export function ContactPage() {
                     name="company"
                     value={formState.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
+                    className="w-full px-4 py-3 border border-bd rounded-none text-[15.5px] outline-none focus:border-gold transition-colors"
                     placeholder="公司名稱"
                   />
                 </div>
                 <div>
-                  <label className="block text-[12px] font-medium tracking-[1px] mb-1.5">
+                  <label className="block text-[13px] font-medium tracking-[1px] mb-1.5">
                     電話
                   </label>
                   <input
@@ -480,7 +480,7 @@ export function ContactPage() {
                     name="phone"
                     value={formState.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
+                    className="w-full px-4 py-3 border border-bd rounded-none text-[15.5px] outline-none focus:border-gold transition-colors"
                     placeholder="09xx-xxx-xxx"
                   />
                 </div>
@@ -488,7 +488,7 @@ export function ContactPage() {
 
               {/* Product */}
               <div>
-                <label className="block text-[12px] font-medium tracking-[1px] mb-1.5">
+                <label className="block text-[13px] font-medium tracking-[1px] mb-1.5">
                   你的產品
                 </label>
                 <input
@@ -496,21 +496,21 @@ export function ContactPage() {
                   name="product"
                   value={formState.product}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors"
+                  className="w-full px-4 py-3 border border-bd rounded-none text-[15.5px] outline-none focus:border-gold transition-colors"
                   placeholder="簡單描述你的產品或品牌"
                 />
               </div>
 
               {/* Stage */}
               <div>
-                <label className="block text-[12px] font-medium tracking-[1px] mb-1.5">
+                <label className="block text-[13px] font-medium tracking-[1px] mb-1.5">
                   目前出海階段
                 </label>
                 <select
                   name="stage"
                   value={formState.stage}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd rounded-none text-[14px] outline-none focus:border-gold transition-colors bg-white appearance-none"
+                  className="w-full px-4 py-3 border border-bd rounded-none text-[15.5px] outline-none focus:border-gold transition-colors bg-white appearance-none"
                 >
                   <option value="">請選擇</option>
                   {stageOptions.map((opt) => (
@@ -523,7 +523,7 @@ export function ContactPage() {
 
               {/* Message */}
               <div>
-                <label className="block text-[12px] font-medium tracking-[1px] mb-1.5">
+                <label className="block text-[13px] font-medium tracking-[1px] mb-1.5">
                   你想問什麼？ *
                 </label>
                 <textarea
@@ -536,7 +536,7 @@ export function ContactPage() {
                   placeholder="任何問題都可以，不確定也沒關係。"
                 />
                 {errors.message && touched.message && (
-                  <p className="text-[12px] text-red-500 mt-1">{errors.message}</p>
+                  <p className="text-[13px] text-red-500 mt-1">{errors.message}</p>
                 )}
               </div>
 
@@ -544,11 +544,11 @@ export function ContactPage() {
               <button
                 type="submit"
                 disabled={isFormValid}
-                className="w-full bg-gold text-navy py-3.5 rounded-none text-[15px] font-semibold cursor-pointer transition-colors hover:bg-gold-l disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full bg-gold text-navy py-3.5 rounded-none text-[16.5px] font-semibold cursor-pointer transition-colors hover:bg-gold-l disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 送出表單
               </button>
-              <p className="text-[12px] text-tx3 text-center font-normal">
+              <p className="text-[13px] text-tx3 text-center font-normal">
                 我們不會把你的資料分享給任何第三方。
               </p>
             </form>

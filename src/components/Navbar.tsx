@@ -120,7 +120,7 @@ export function Navbar() {
       {/* Skip to content */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:bg-gold focus:text-navy focus:px-4 focus:py-2 focus:text-[13px] focus:font-semibold"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:bg-gold focus:text-navy focus:px-4 focus:py-2 focus:text-[14.5px] focus:font-semibold"
       >
         跳到主要內容
       </a>
@@ -193,7 +193,7 @@ export function Navbar() {
               >
                 <Link
                   href={item.href}
-                  className={`text-[13px] font-medium transition-colors duration-300 py-2 ${
+                  className={`text-[14.5px] font-medium transition-colors duration-300 py-2 ${
                     useDark
                       ? "text-tx hover:text-navy"
                       : "text-white/85 hover:text-white"
@@ -319,11 +319,11 @@ function MenuLink({
 }) {
   const content = (
     <>
-      <div className="text-[14px] font-semibold text-tx group-hover:text-gold transition-colors">
+      <div className="text-[15.5px] font-semibold text-tx group-hover:text-gold transition-colors">
         {title}
       </div>
       {desc && (
-        <div className="text-[12px] text-tx3 font-normal mt-0.5 leading-[1.5]">
+        <div className="text-[13px] text-tx3 font-normal mt-0.5 leading-[1.5]">
           {desc}
         </div>
       )}
@@ -466,11 +466,11 @@ function CasesMenu() {
               href={`/cases/${c.slug}`}
               className="group flex items-start gap-3 py-2"
             >
-              <div className="font-heading text-[20px] text-gold-d leading-none font-semibold shrink-0 min-w-[60px] tabular-nums">
+              <div className="font-heading text-[21px] text-gold-d leading-none font-semibold shrink-0 min-w-[60px] tabular-nums">
                 {c.num}
               </div>
               <div className="min-w-0">
-                <div className="text-[13.5px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-0.5">
+                <div className="text-[15px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-0.5">
                   {c.title}
                 </div>
                 <div className="text-[11px] text-tx3">
@@ -486,18 +486,18 @@ function CasesMenu() {
           分類瀏覽
         </div>
         <div className="space-y-2 mb-5">
-          <div className="text-[12px] text-tx3">按產業</div>
-          <div className="text-[13px] text-tx2">
+          <div className="text-[13px] text-tx3">按產業</div>
+          <div className="text-[14.5px] text-tx2">
             食品 · 電子 · 服飾 · 餐飲
           </div>
         </div>
         <div className="space-y-2 mb-6">
-          <div className="text-[12px] text-tx3">按市場</div>
-          <div className="text-[13px] text-tx2">北美 · 東南亞</div>
+          <div className="text-[13px] text-tx3">按市場</div>
+          <div className="text-[14.5px] text-tx2">北美 · 東南亞</div>
         </div>
         <Link
           href="/cases"
-          className="group inline-flex items-center gap-2 text-[13px] font-semibold text-gold-d"
+          className="group inline-flex items-center gap-2 text-[14.5px] font-semibold text-gold-d"
         >
           <span className="border-b border-gold-d/40 pb-0.5 group-hover:border-gold-d transition-colors">
             看所有案例
@@ -557,12 +557,12 @@ function AboutMenu() {
           創辦人
         </div>
         <div className="flex items-start gap-4">
-          <div className="w-14 h-14 rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[18px] font-heading font-semibold shrink-0">
+          <div className="w-14 h-14 rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[19px] font-heading font-semibold shrink-0">
             AY
           </div>
           <div>
-            <div className="text-[14px] font-semibold">Aaron Yu</div>
-            <div className="text-[12px] text-gold-d font-medium">鹿飛 LUFÉ 創辦人</div>
+            <div className="text-[15.5px] font-semibold">Aaron Yu</div>
+            <div className="text-[13px] text-gold-d font-medium">鹿飛 LUFÉ 創辦人</div>
             <div className="text-[11px] text-tx3 mt-1 leading-[1.5]">
               42+ 年國際物流實戰
               <br />
@@ -642,7 +642,7 @@ function InsightsMenu() {
               <div className="text-[10.5px] font-semibold tracking-wider uppercase text-gold-d mb-1">
                 {latestArticle.category}
               </div>
-              <div className="text-[13.5px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-1">
+              <div className="text-[15px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-1">
                 {latestArticle.title}
               </div>
               <div className="text-[11px] text-tx3">
@@ -675,7 +675,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             className="w-full flex items-center justify-between py-4 text-left cursor-pointer"
             aria-expanded={expanded === item.key}
           >
-            <span className="text-[15px] font-semibold text-tx">
+            <span className="text-[16.5px] font-semibold text-tx">
               {item.label}
             </span>
             <svg
@@ -720,7 +720,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             openMessageBox();
             onClose();
           }}
-          className="flex-1 bg-gold text-navy px-5 py-[11px] rounded-none text-[13px] font-semibold hover:bg-gold-l transition-all cursor-pointer"
+          className="flex-1 bg-gold text-navy px-5 py-[11px] rounded-none text-[14.5px] font-semibold hover:bg-gold-l transition-all cursor-pointer"
         >
           聊聊你的產品 →
         </button>
@@ -741,7 +741,7 @@ function MobileSubLink({
   return (
     <Link
       href={href}
-      className="block py-2 text-[13.5px] text-tx2 hover:text-gold transition-colors"
+      className="block py-2 text-[15px] text-tx2 hover:text-gold transition-colors"
       onClick={onClose}
     >
       {title}
@@ -864,7 +864,7 @@ function MessageBoxTrigger({ className = "" }: { className?: string }) {
   const { open } = useMessageBox();
   return (
     <button
-      className={`bg-gold text-navy px-5 py-[9px] rounded-none text-[13px] font-semibold hover:bg-gold-l transition-all cursor-pointer ${className}`}
+      className={`bg-gold text-navy px-5 py-[9px] rounded-none text-[14.5px] font-semibold hover:bg-gold-l transition-all cursor-pointer ${className}`}
       onClick={open}
     >
       聊聊你的產品 →

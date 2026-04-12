@@ -64,10 +64,10 @@ body {
 
 /* Section description */
 .section-desc {
-  font-size: 17px;
+  font-size: 18px;
   color: var(--color-tx2);
   max-width: 600px;
-  line-height: 1.7;
+  line-height: 1.8;
   margin-bottom: 56px;
   font-weight: 400;
 }

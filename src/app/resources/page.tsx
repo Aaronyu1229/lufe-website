@@ -44,7 +44,7 @@ export default function ResourcesPage() {
             <span className="text-gold/90">和我們現場去的地方。</span>
           </h1>
 
-          <p className="text-[16px] md:text-[17px] text-white/70 font-normal leading-[1.75] max-w-[680px]">
+          <p className="text-[17px] md:text-[18px] text-white/70 font-normal leading-[1.8] max-w-[680px]">
             兩種資源、一個入口：{" "}
             <span className="text-white font-medium">政府出海補助</span>{" "}
             幫你降低成本，{" "}
@@ -74,7 +74,7 @@ export default function ResourcesPage() {
             <h2 className="font-sans text-[26px] md:text-[30px] font-light leading-[1.2] tracking-[-0.5px] text-navy mb-3">
               2026 政府出海補助
             </h2>
-            <p className="text-[14px] text-tx2 leading-[1.75] mb-7">
+            <p className="text-[15.5px] text-tx2 leading-[1.8] mb-7">
               貿易署、經濟部、中企署——4 個正在開放的計畫，單筆最高補助
               NT$1,000 萬。 我們替你整理好誰適合申請、可以包含哪些服務、和鹿飛三支柱怎麼對齊。
             </p>
@@ -100,7 +100,7 @@ export default function ResourcesPage() {
               </div>
             </div>
 
-            <span className="mt-auto inline-flex items-center gap-2 text-[14px] font-medium text-navy group-hover:text-gold-d transition-colors">
+            <span className="mt-auto inline-flex items-center gap-2 text-[15.5px] font-medium text-navy group-hover:text-gold-d transition-colors">
               看補助整理
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
@@ -123,7 +123,7 @@ export default function ResourcesPage() {
             <h2 className="font-sans text-[26px] md:text-[30px] font-light leading-[1.2] tracking-[-0.5px] text-navy mb-3">
               活動 · 現場紀錄
             </h2>
-            <p className="text-[14px] text-tx2 leading-[1.75] mb-7">
+            <p className="text-[15.5px] text-tx2 leading-[1.8] mb-7">
               我們這個月在哪裡：北美和東南亞兩個主戰場的第一手紀錄。 加盟展、論壇、商會、客戶現場、媒體露出，全部攤開給你看。
             </p>
 
@@ -148,7 +148,7 @@ export default function ResourcesPage() {
               </div>
             </div>
 
-            <span className="mt-auto inline-flex items-center gap-2 text-[14px] font-medium text-navy group-hover:text-sky transition-colors">
+            <span className="mt-auto inline-flex items-center gap-2 text-[15.5px] font-medium text-navy group-hover:text-sky transition-colors">
               看現場紀錄
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
@@ -157,7 +157,7 @@ export default function ResourcesPage() {
 
         {/* Cross-discovery footnote */}
         <div className="max-w-[1200px] mx-auto mt-14 md:mt-16 pt-8 border-t border-bd/60">
-          <p className="text-[13px] text-tx3 leading-[1.8] text-center">
+          <p className="text-[14.5px] text-tx3 leading-[1.8] text-center">
             想看實際做過的案子？前往{" "}
             <Link
               href="/cases"

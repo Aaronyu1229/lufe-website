@@ -212,7 +212,7 @@ function FilterPills({
             key={opt.value}
             type="button"
             onClick={() => onChange(opt.value)}
-            className={`text-[12px] px-3 py-1.5 rounded-none border transition-all duration-200 cursor-pointer ${
+            className={`text-[13px] px-3 py-1.5 rounded-none border transition-all duration-200 cursor-pointer ${
               isActive
                 ? "bg-navy text-white border-navy"
                 : "bg-white text-tx2 border-bd hover:border-navy hover:text-navy"
@@ -272,7 +272,7 @@ export function CasesSection() {
         </h2>
         <div className="hidden md:block flex-1 h-px bg-bd" />
       </div>
-      <p className="text-[15px] text-tx2 max-w-[560px] leading-[1.7] mb-8 font-normal">
+      <p className="text-[16.5px] text-tx2 max-w-[560px] leading-[1.8] mb-8 font-normal">
         4 個案例，從食品到電子、從北美到東南亞——
         <span className="text-tx">每一個都是真的決策、真的數字、真的結果</span>。
       </p>
@@ -307,14 +307,14 @@ export function CasesSection() {
       {/* ─── Empty state ─── */}
       {filtered.length === 0 && (
         <div className="text-center py-16 border border-dashed border-bd">
-          <p className="text-[14px] text-tx3 mb-3">這個產業 × 市場組合還沒有公開案例。</p>
+          <p className="text-[15.5px] text-tx3 mb-3">這個產業 × 市場組合還沒有公開案例。</p>
           <button
             type="button"
             onClick={() => {
               setIndustry("all");
               setMarket("all");
             }}
-            className="text-[13px] font-medium text-navy underline underline-offset-4 hover:text-gold-d transition-colors cursor-pointer"
+            className="text-[14.5px] font-medium text-navy underline underline-offset-4 hover:text-gold-d transition-colors cursor-pointer"
           >
             重設篩選
           </button>
@@ -357,17 +357,17 @@ export function CasesSection() {
                     {c.scalePrefix}
                   </div>
 
-                  <h3 className="font-sans text-[20px] md:text-[24px] leading-[1.35] mb-3 font-bold text-tx">
+                  <h3 className="font-sans text-[21px] md:text-[24px] leading-[1.35] mb-3 font-bold text-tx">
                     {c.title}
                   </h3>
 
                   {/* 痛 → 解 */}
                   <div className="space-y-2 mb-4">
-                    <p className="text-[13px] text-tx2 leading-[1.7]">
+                    <p className="text-[14.5px] text-tx2 leading-[1.8]">
                       <span className="text-tx3 font-medium">卡點 · </span>
                       {c.painLine}
                     </p>
-                    <p className="text-[13px] text-tx leading-[1.7]">
+                    <p className="text-[14.5px] text-tx leading-[1.8]">
                       <span className="text-gold-d font-medium">怎麼解 · </span>
                       {c.solutionLine}
                     </p>
@@ -379,7 +379,7 @@ export function CasesSection() {
                       <FromToRoute from={c.route.from} to={c.route.to} />
                       <TrustSignal text={c.trustSignal} />
                     </div>
-                    <span className="text-[12.5px] font-semibold text-navy group-hover:text-gold-d transition-colors">
+                    <span className="text-[13.5px] font-semibold text-navy group-hover:text-gold-d transition-colors">
                       看完整故事 →
                     </span>
                   </div>
@@ -428,17 +428,17 @@ export function CasesSection() {
                     {c.scalePrefix}
                   </div>
 
-                  <h3 className="font-sans text-[17px] leading-[1.4] mb-3 font-bold text-tx">
+                  <h3 className="font-sans text-[18px] leading-[1.4] mb-3 font-bold text-tx">
                     {c.title}
                   </h3>
 
                   {/* 痛 → 解 */}
                   <div className="space-y-2 mb-5">
-                    <p className="text-[12.5px] text-tx2 leading-[1.7]">
+                    <p className="text-[13.5px] text-tx2 leading-[1.8]">
                       <span className="text-tx3 font-medium">卡點 · </span>
                       {c.painLine}
                     </p>
-                    <p className="text-[12.5px] text-tx leading-[1.7]">
+                    <p className="text-[13.5px] text-tx leading-[1.8]">
                       <span className="text-gold-d font-medium">怎麼解 · </span>
                       {c.solutionLine}
                     </p>
@@ -448,7 +448,7 @@ export function CasesSection() {
                   <div className="mt-auto pt-4 border-t border-bd/60">
                     <div className="flex items-center justify-between gap-3 flex-wrap mb-2.5">
                       <FromToRoute from={c.route.from} to={c.route.to} />
-                      <span className="text-[12px] font-medium text-tx3 group-hover:text-gold transition-colors">
+                      <span className="text-[13px] font-medium text-tx3 group-hover:text-gold transition-colors">
                         閱讀案例 →
                       </span>
                     </div>
@@ -472,14 +472,14 @@ export function CasesSection() {
               <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d mb-1.5">
                 看所有案例
               </div>
-              <div className="text-[15px] font-semibold text-tx group-hover:text-navy transition-colors">
+              <div className="text-[16.5px] font-semibold text-tx group-hover:text-navy transition-colors">
                 4 個完整故事 · 食品 / 電子 / 服飾 / 飲品
               </div>
-              <div className="text-[12px] text-tx3 mt-1">
+              <div className="text-[13px] text-tx3 mt-1">
                 每個案例都附 3 個關鍵決策時刻 · 涵蓋北美與東南亞兩個主戰場
               </div>
             </div>
-            <span className="text-[20px] text-navy group-hover:translate-x-1 transition-transform duration-300">
+            <span className="text-[21px] text-navy group-hover:translate-x-1 transition-transform duration-300">
               →
             </span>
           </div>

@@ -113,7 +113,7 @@ function InsightsPageInner() {
               <br />
               <span className="font-normal text-gold">知識就是捷徑</span>
             </h1>
-            <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[540px] font-light leading-[1.75] mb-10">
+            <p className="text-[17px] md:text-[18px] text-white/65 max-w-[540px] font-light leading-[1.8] mb-10">
               菲律賓、印尼、北美市場趨勢，出海實戰與企業體質——幫你用最少的時間搞懂跨境這件事。
             </p>
 
@@ -164,10 +164,10 @@ function InsightsPageInner() {
                 </div>
               </div>
               <div className="p-5">
-                <h2 className="text-[16px] md:text-[17px] font-semibold leading-[1.45] text-white group-hover:text-gold transition-colors mb-2 line-clamp-2">
+                <h2 className="text-[17px] md:text-[18px] font-semibold leading-[1.45] text-white group-hover:text-gold transition-colors mb-2 line-clamp-2">
                   {featured.title}
                 </h2>
-                <p className="text-[12.5px] text-white/55 leading-[1.75] line-clamp-2 mb-3">
+                <p className="text-[13.5px] text-white/55 leading-[1.8] line-clamp-2 mb-3">
                   {featured.summary}
                 </p>
                 <div className="flex items-center justify-between text-[11px] text-white/45">
@@ -189,7 +189,7 @@ function InsightsPageInner() {
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-4 py-2.5 rounded-none text-[13px] font-medium cursor-pointer transition-all ${
+              className={`px-4 py-2.5 rounded-none text-[14.5px] font-medium cursor-pointer transition-all ${
                 active === cat
                   ? "bg-navy text-white"
                   : "bg-white text-tx2 border border-bd hover:border-tx"
@@ -228,15 +228,15 @@ function InsightsPageInner() {
                   </span>
                   <span className="text-[11px] text-tx3">{article.readTime}</span>
                 </div>
-                <h2 className="text-[16px] font-semibold leading-[1.5] mb-2 group-hover:text-gold transition-colors">
+                <h2 className="text-[17px] font-semibold leading-[1.5] mb-2 group-hover:text-gold transition-colors">
                   {article.title}
                 </h2>
-                <p className="text-[13px] text-tx2 leading-[1.7] font-normal line-clamp-3">
+                <p className="text-[14.5px] text-tx2 leading-[1.8] font-normal line-clamp-3">
                   {article.summary}
                 </p>
                 <div className="mt-4 flex items-center justify-between">
-                  <span className="text-[12px] text-tx3">{article.date}</span>
-                  <span className="text-[13px] font-medium text-gold opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[13px] text-tx3">{article.date}</span>
+                  <span className="text-[14.5px] font-medium text-gold opacity-0 group-hover:opacity-100 transition-opacity">
                     閱讀更多 →
                   </span>
                 </div>
@@ -247,29 +247,29 @@ function InsightsPageInner() {
 
         {/* Empty state */}
         {filtered.length === 0 && (
-          <div className="text-center py-16 text-tx3 text-[14px]">
+          <div className="text-center py-16 text-tx3 text-[15.5px]">
             這個分類暫時還沒有文章，敬請期待！
           </div>
         )}
 
         {/* Bottom CTA */}
         <div className="mt-14 p-8 bg-cream rounded-none text-center">
-          <h2 className="text-[18px] font-medium mb-2">
+          <h2 className="text-[19px] font-medium mb-2">
             看完文章，想聊聊你的狀況？
           </h2>
-          <p className="text-[14px] text-tx2 font-normal mb-6 max-w-[440px] mx-auto">
+          <p className="text-[15.5px] text-tx2 font-normal mb-6 max-w-[440px] mx-auto">
             聊聊，不收費、不承諾。我們會老實告訴你值不值得一試。
           </p>
           <div className="flex justify-center items-center gap-6 flex-wrap">
             <button
               onClick={open}
-              className="inline-block bg-gold text-navy px-8 py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-gold-l cursor-pointer"
+              className="inline-block bg-gold text-navy px-8 py-3.5 rounded-none text-[16.5px] font-semibold transition-colors hover:bg-gold-l cursor-pointer"
             >
               聊聊你的產品 →
             </button>
             <Link
               href="/assess"
-              className="group inline-flex items-center gap-2 text-tx2 text-[14px] font-medium transition-colors hover:text-navy"
+              className="group inline-flex items-center gap-2 text-tx2 text-[15.5px] font-medium transition-colors hover:text-navy"
             >
               <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
                 先做 2 分鐘評估

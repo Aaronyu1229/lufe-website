@@ -107,7 +107,7 @@ export function WhySection() {
             <br />
             你面對的<span className="text-gold font-normal">只有我們</span>
           </h2>
-          <p className="text-[16px] text-white/55 max-w-[640px] leading-[1.75] mx-auto mt-6 font-normal">
+          <p className="text-[17px] text-white/55 max-w-[640px] leading-[1.8] mx-auto mt-6 font-normal">
             產品適配、通路銷售、躍馬 42 年國際物流 ——
             <br className="hidden md:block" />
             不是三家拼起來的拼盤，是一個團隊從頭跑到尾。一個專案經理、一份合約、一條進度線。
@@ -149,7 +149,7 @@ export function WhySection() {
                   }`}
                 >
                   <div
-                    className={`text-[12px] md:text-[14px] ${
+                    className={`text-[13px] md:text-[15.5px] ${
                       isLufe ? "font-semibold" : "font-medium"
                     }`}
                   >
@@ -175,7 +175,7 @@ export function WhySection() {
                           ? `${row.label}涵蓋${PILLARS[idx]}`
                           : `${row.label}不涵蓋${PILLARS[idx]}`
                       }
-                      className={`h-8 md:h-10 flex items-center justify-center text-[11px] md:text-[13px] transition-all ${
+                      className={`h-8 md:h-10 flex items-center justify-center text-[11px] md:text-[14.5px] transition-all ${
                         covered
                           ? isLufe
                             ? "bg-gradient-to-b from-gold/35 to-gold/25 border border-gold/40 text-gold"
@@ -191,9 +191,9 @@ export function WhySection() {
                 {/* Status icon */}
                 <div className="flex-shrink-0 w-5 md:w-6 text-center">
                   {isLufe ? (
-                    <span className="text-gold text-[16px] md:text-[18px]">✓</span>
+                    <span className="text-gold text-[17px] md:text-[19px]">✓</span>
                   ) : (
-                    <span className="text-white/20 text-[14px] md:text-[15px]">—</span>
+                    <span className="text-white/20 text-[15.5px] md:text-[16.5px]">—</span>
                   )}
                 </div>
               </div>
@@ -201,7 +201,7 @@ export function WhySection() {
           })}
 
           {/* Footnote: the promise, in plain words */}
-          <p className="mt-6 text-center text-[11.5px] md:text-[12.5px] text-white/40 font-normal leading-[1.7]">
+          <p className="mt-6 text-center text-[11.5px] md:text-[13.5px] text-white/40 font-normal leading-[1.8]">
             對手做完一件事交給下一家，鹿飛三件事<span className="text-gold/80">全程自營</span>——
             <br className="hidden md:block" />
             沒有責任轉交，沒有窗口切換，沒有進度真空。
@@ -219,7 +219,7 @@ export function WhySection() {
                 {values[i]}
                 <span className="text-gold">{stat.suffix}</span>
               </div>
-              <div className="text-[12px] md:text-[13px] text-white/50 font-normal mt-2 tracking-wide">
+              <div className="text-[13px] md:text-[14.5px] text-white/50 font-normal mt-2 tracking-wide">
                 {stat.label}
               </div>
             </div>
@@ -228,12 +228,12 @@ export function WhySection() {
 
         {/* Testimonial — now aligned with the end-to-end story */}
         <div className="max-w-[680px] mx-auto border-l-2 border-gold pl-6 md:pl-8">
-          <q className="block text-[17px] md:text-[19px] text-white/85 italic leading-[1.7] font-light mb-4 font-[var(--font-playfair)]">
+          <q className="block text-[18px] md:text-[20px] text-white/85 italic leading-[1.8] font-light mb-4 font-[var(--font-playfair)]">
             以前要同時盯三家——顧問催進度、貿易商催付款、貨代催艙位。換成鹿飛之後，
             我只開一次會，每週一份進度信。本來要三週的事情，七天就跑完。
           </q>
-          <div className="flex items-center gap-3 text-[12.5px] text-white/50 font-normal">
-            <div className="w-9 h-9 rounded-none bg-gold/15 flex items-center justify-center text-gold text-[13px] font-semibold">
+          <div className="flex items-center gap-3 text-[13.5px] text-white/50 font-normal">
+            <div className="w-9 h-9 rounded-none bg-gold/15 flex items-center justify-center text-gold text-[14.5px] font-semibold">
               陳
             </div>
             <div>

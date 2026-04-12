@@ -22,7 +22,7 @@ export function ArticleDetail({ article, image }: Props) {
     <article className="bg-white min-h-screen pt-[96px] pb-[80px] px-5 md:px-10">
       <div className="max-w-[720px] mx-auto">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-[12px] text-tx3 mb-8">
+        <nav className="flex items-center gap-2 text-[13px] text-tx3 mb-8">
           <Link href="/insights" className="hover:text-navy transition-colors">
             洞察與資源
           </Link>
@@ -37,8 +37,8 @@ export function ArticleDetail({ article, image }: Props) {
           >
             {article.category}
           </span>
-          <span className="text-[12px] text-tx3">{article.date}</span>
-          <span className="text-[12px] text-tx3">{article.readTime}</span>
+          <span className="text-[13px] text-tx3">{article.date}</span>
+          <span className="text-[13px] text-tx3">{article.readTime}</span>
         </div>
 
         {/* Title */}
@@ -47,7 +47,7 @@ export function ArticleDetail({ article, image }: Props) {
         </h1>
 
         {/* Summary */}
-        <p className="text-[16px] text-tx2 leading-[1.8] font-normal mb-8 border-l-2 border-gold pl-4">
+        <p className="text-[17px] text-tx2 leading-[1.8] font-normal mb-8 border-l-2 border-gold pl-4">
           {article.summary}
         </p>
 
@@ -77,7 +77,7 @@ export function ArticleDetail({ article, image }: Props) {
             return (
               <p
                 key={i}
-                className="text-[15px] text-tx leading-[1.85] font-normal"
+                className="text-[16.5px] text-tx leading-[1.85] font-normal"
               >
                 {paragraph}
               </p>
@@ -90,22 +90,22 @@ export function ArticleDetail({ article, image }: Props) {
 
         {/* Bottom CTA */}
         <div className="p-8 bg-cream/50 text-center">
-          <h3 className="text-[18px] font-medium mb-2">
+          <h3 className="text-[19px] font-medium mb-2">
             看完文章，想聊聊你的狀況？
           </h3>
-          <p className="text-[14px] text-tx2 font-normal mb-6 max-w-[440px] mx-auto">
+          <p className="text-[15.5px] text-tx2 font-normal mb-6 max-w-[440px] mx-auto">
             聊聊，不收費、不承諾。我們會老實告訴你值不值得一試。
           </p>
           <div className="flex justify-center items-center gap-6 flex-wrap">
             <button
               onClick={open}
-              className="inline-block bg-gold text-navy px-8 py-3.5 rounded-none text-[15px] font-semibold transition-colors hover:bg-gold-l cursor-pointer"
+              className="inline-block bg-gold text-navy px-8 py-3.5 rounded-none text-[16.5px] font-semibold transition-colors hover:bg-gold-l cursor-pointer"
             >
               聊聊你的產品 →
             </button>
             <Link
               href="/assess"
-              className="group inline-flex items-center gap-2 text-tx2 text-[14px] font-medium transition-colors hover:text-navy"
+              className="group inline-flex items-center gap-2 text-tx2 text-[15.5px] font-medium transition-colors hover:text-navy"
             >
               <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
                 先做 2 分鐘評估
@@ -119,7 +119,7 @@ export function ArticleDetail({ article, image }: Props) {
         <div className="mt-8 text-center">
           <Link
             href="/insights"
-            className="text-[13px] text-tx3 font-medium hover:text-navy transition-colors"
+            className="text-[14.5px] text-tx3 font-medium hover:text-navy transition-colors"
           >
             ← 回到所有文章
           </Link>

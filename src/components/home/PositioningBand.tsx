@@ -74,7 +74,7 @@ export function PositioningBand() {
             <br className="md:hidden" />
             <span className="text-gold-d font-normal">才懂出海的眉角</span>
           </h2>
-          <p className="text-[15px] md:text-[17px] text-tx2 max-w-[720px] mx-auto leading-[1.8] font-normal">
+          <p className="text-[16.5px] md:text-[18px] text-tx2 max-w-[720px] mx-auto leading-[1.8] font-normal">
             出海不是 PowerPoint 顧問畫得出來的。鹿飛站在躍馬國際{" "}
             <span className="text-tx font-medium">42 年</span>{" "}
             的國際物流實戰上,幫你把
@@ -120,7 +120,7 @@ export function PositioningBand() {
                   <br />
                   <span className="text-gold font-normal">是真的跑過船的人</span>
                 </h3>
-                <p className="text-[14px] md:text-[15px] text-white/75 leading-[1.85] font-normal">
+                <p className="text-[15.5px] md:text-[16.5px] text-white/75 leading-[1.85] font-normal">
                   從報關、倉儲到最後一哩——這套東西不是教科書讀來的,是 42 年在港口、海關、貨櫃場跑出來的。
                   你的貨不會因為顧問不懂現場而卡在海上。
                 </p>
@@ -200,7 +200,7 @@ export function PositioningBand() {
                   {p.title}
                 </h3>
                 <p
-                  className={`text-[14.5px] md:text-[15.5px] font-medium leading-[1.6] ${c.text} mb-6`}
+                  className={`text-[16px] md:text-[17px] font-medium leading-[1.6] ${c.text} mb-6`}
                 >
                   {p.tagline}
                 </p>
@@ -210,7 +210,7 @@ export function PositioningBand() {
                   {p.services.map((s) => (
                     <li
                       key={s.title}
-                      className="flex items-start gap-2 text-[13px] md:text-[13.5px] text-tx2 leading-[1.65]"
+                      className="flex items-start gap-2 text-[14.5px] md:text-[15px] text-tx2 leading-[1.65]"
                     >
                       <span
                         aria-hidden="true"
@@ -224,7 +224,7 @@ export function PositioningBand() {
 
                 {/* Read more link */}
                 <div
-                  className={`text-[12.5px] font-semibold inline-flex items-center gap-1 ${c.text} group-hover:gap-2 transition-all`}
+                  className={`text-[13.5px] font-semibold inline-flex items-center gap-1 ${c.text} group-hover:gap-2 transition-all`}
                 >
                   看這個支柱的做法 →
                 </div>
@@ -237,7 +237,7 @@ export function PositioningBand() {
         <div className="mt-10 md:mt-12 max-w-[1000px] mx-auto text-center">
           <Link
             href="/services#pillar-team"
-            className="group inline-flex items-center gap-2.5 text-[12.5px] md:text-[13px] text-tx3 hover:text-navy transition-colors"
+            className="group inline-flex items-center gap-2.5 text-[13.5px] md:text-[14.5px] text-tx3 hover:text-navy transition-colors"
           >
             <span className="text-tx3/70 tracking-[1.5px] uppercase">進階</span>
             <span aria-hidden="true" className="w-px h-3 bg-tx3/30" />
@@ -252,7 +252,7 @@ export function PositioningBand() {
 
         {/* ─── 完整服務 CTA ─── */}
         <div className="mt-14 md:mt-16 pt-10 border-t border-bd/50 text-center max-w-[1000px] mx-auto">
-          <p className="text-[14.5px] md:text-[16px] text-tx2 leading-[1.85] font-normal mb-6">
+          <p className="text-[16px] md:text-[17px] text-tx2 leading-[1.85] font-normal mb-6">
             主要戰場是
             <strong className="text-navy font-semibold">北美</strong>跟
             <strong className="text-navy font-semibold">東南亞</strong>——這套方法在{" "}
@@ -261,7 +261,7 @@ export function PositioningBand() {
           </p>
           <Link
             href="/services"
-            className="group inline-flex items-center gap-2 text-[13px] font-semibold text-tx2 hover:text-navy transition-colors"
+            className="group inline-flex items-center gap-2 text-[14.5px] font-semibold text-tx2 hover:text-navy transition-colors"
           >
             <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
               看完整服務內容

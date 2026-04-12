@@ -143,7 +143,7 @@ export function OptimizePage() {
         </div>
 
         <div className="relative max-w-[1000px] mx-auto">
-          <nav className="flex items-center gap-2 text-[12px] text-white/50 mb-6">
+          <nav className="flex items-center gap-2 text-[13px] text-white/50 mb-6">
             <Link href="/services" className="hover:text-white transition-colors">
               服務
             </Link>
@@ -159,7 +159,7 @@ export function OptimizePage() {
             <br />
             該讓每公里<span className="text-ember font-normal">更省</span>
           </h1>
-          <p className="text-[17px] md:text-[19px] text-white/75 max-w-[680px] leading-[1.6] font-light">
+          <p className="text-[18px] md:text-[20px] text-white/75 max-w-[680px] leading-[1.6] font-light">
             產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。
             這個階段不需要從零開始——我們幫你把既有的營運診斷、優化、重整。
           </p>
@@ -186,12 +186,12 @@ export function OptimizePage() {
                 <div className="w-12 h-12 rounded-none bg-white border border-ember/30 flex items-center justify-center text-ember mb-4">
                   {p.icon}
                 </div>
-                <h3 className="text-[17px] font-semibold mb-4">{p.title}</h3>
+                <h3 className="text-[18px] font-semibold mb-4">{p.title}</h3>
                 <ul className="space-y-2 mb-5">
                   {p.signs.map((s) => (
                     <li
                       key={s}
-                      className="flex items-start gap-2 text-[13px] text-tx2 leading-[1.65]"
+                      className="flex items-start gap-2 text-[14.5px] text-tx2 leading-[1.65]"
                     >
                       <span className="w-1 h-1 rounded-full bg-ember/60 mt-[8px] shrink-0" />
                       {s}
@@ -202,7 +202,7 @@ export function OptimizePage() {
                   <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-ember mb-1.5">
                     怎麼解
                   </div>
-                  <p className="text-[12.5px] text-tx2 leading-[1.7]">{p.fix}</p>
+                  <p className="text-[13.5px] text-tx2 leading-[1.8]">{p.fix}</p>
                 </div>
               </div>
             ))}
@@ -232,10 +232,10 @@ export function OptimizePage() {
                     {svc.icon}
                   </div>
                   <div>
-                    <span className="font-sans text-[13px] font-semibold uppercase tracking-[1.5px] text-ember tabular-nums">
+                    <span className="font-sans text-[14.5px] font-semibold uppercase tracking-[1.5px] text-ember tabular-nums">
                       STEP 0{i + 1}
                     </span>
-                    <h3 className="text-[19px] font-semibold leading-tight mt-1">{svc.title}</h3>
+                    <h3 className="text-[20px] font-semibold leading-tight mt-1">{svc.title}</h3>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 mb-4 text-[11px] font-medium tracking-wider uppercase">
@@ -244,12 +244,12 @@ export function OptimizePage() {
                   </span>
                   <span className="text-tx3">{svc.price}</span>
                 </div>
-                <p className="text-[14px] text-tx2 leading-[1.75] mb-5">{svc.desc}</p>
+                <p className="text-[15.5px] text-tx2 leading-[1.8] mb-5">{svc.desc}</p>
                 <ul className="space-y-2.5 mb-6">
                   {svc.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-3 text-[13.5px] text-tx2 leading-[1.7]"
+                      className="flex items-start gap-3 text-[15px] text-tx2 leading-[1.8]"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-ember mt-[7px] shrink-0" />
                       {item}
@@ -260,7 +260,7 @@ export function OptimizePage() {
                   <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-tx3 mb-1.5">
                     交付成果
                   </div>
-                  <p className="text-[13px] text-ember font-medium">{svc.deliverable}</p>
+                  <p className="text-[14.5px] text-ember font-medium">{svc.deliverable}</p>
                 </div>
               </div>
             ))}
@@ -274,20 +274,20 @@ export function OptimizePage() {
           <h2 className="font-sans text-[clamp(26px,3.2vw,38px)] text-white leading-[1.2] font-light tracking-[-0.4px] mb-4">
             不確定你的問題屬於哪一類？
           </h2>
-          <p className="text-[15px] text-white/60 leading-[1.75] mb-10 max-w-[520px] mx-auto">
+          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-10 max-w-[520px] mx-auto">
             先聊聊。我們會花 30 分鐘聽你現在的狀況，
             告訴你是該做診斷還是可以直接進執行，不需要你先決定。
           </p>
           <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
             <button
               onClick={open}
-              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
             >
               聊聊你的產品 →
             </button>
             <Link
               href="/services"
-              className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-white"
+              className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-white"
             >
               <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
                 回服務總覽

@@ -111,7 +111,7 @@ export function SubsidyMatcher() {
           <h2 className="font-sans text-[clamp(28px,4vw,46px)] leading-[1.1] font-extralight tracking-[-0.8px] text-white mb-5">
             算算你能拿<span className="text-gold font-normal">多少補助</span>
           </h2>
-          <p className="text-[15px] md:text-[16px] text-white/65 max-w-[560px] mx-auto leading-[1.7]">
+          <p className="text-[16.5px] md:text-[17px] text-white/65 max-w-[560px] mx-auto leading-[1.8]">
             回答 4 個問題，我們告訴你哪個補助最適合你的公司、
             <br className="hidden md:block" />
             以及為什麼。資料不會上傳——純客戶端運算。
@@ -152,7 +152,7 @@ export function SubsidyMatcher() {
                   <h3 className="font-sans text-[22px] md:text-[28px] font-light leading-[1.2] text-white mb-2">
                     {currentQuestion.label}
                   </h3>
-                  <p className="text-[13px] md:text-[14px] text-white/55">
+                  <p className="text-[14.5px] md:text-[15.5px] text-white/55">
                     {currentQuestion.sublabel}
                   </p>
                 </div>
@@ -185,7 +185,7 @@ export function SubsidyMatcher() {
                           />
                           <div className="min-w-0">
                             <div
-                              className={`text-[15px] md:text-[16px] font-semibold leading-tight mb-1 transition-colors ${
+                              className={`text-[16.5px] md:text-[17px] font-semibold leading-tight mb-1 transition-colors ${
                                 isSelected
                                   ? "text-white"
                                   : "text-white/90 group-hover:text-white"
@@ -193,7 +193,7 @@ export function SubsidyMatcher() {
                             >
                               {opt.label}
                             </div>
-                            <div className="text-[12px] text-white/50">
+                            <div className="text-[13px] text-white/50">
                               {opt.hint}
                             </div>
                           </div>
@@ -208,7 +208,7 @@ export function SubsidyMatcher() {
                   <div className="mt-6 pt-6 border-t border-white/10">
                     <button
                       onClick={() => setStep(step - 1)}
-                      className="text-[12.5px] text-white/55 hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                      className="text-[13.5px] text-white/55 hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer"
                     >
                       <span>←</span>
                       <span>上一題</span>
@@ -285,19 +285,19 @@ function ResultView({
                 {primary.agency}
               </span>
             </div>
-            <h4 className="text-[19px] md:text-[21px] font-semibold text-white leading-tight mb-2">
+            <h4 className="text-[20px] md:text-[21px] font-semibold text-white leading-tight mb-2">
               {primary.shortTitle}
             </h4>
-            <div className={`text-[15px] font-light ${primaryAccent} mb-4`}>
+            <div className={`text-[16.5px] font-light ${primaryAccent} mb-4`}>
               {primary.amount}
             </div>
-            <p className="text-[13.5px] text-white/70 leading-[1.8] mb-4">
+            <p className="text-[15px] text-white/70 leading-[1.8] mb-4">
               <span className="font-semibold text-white">為什麼推薦：</span>
               {result.primary.reason}
             </p>
             <Link
               href={`/resources/subsidies#${primary.slug}`}
-              className={`inline-flex items-center gap-2 text-[13px] font-semibold ${primaryAccent} hover:text-gold transition-colors`}
+              className={`inline-flex items-center gap-2 text-[14.5px] font-semibold ${primaryAccent} hover:text-gold transition-colors`}
             >
               <span className="border-b border-current/40 pb-0.5">
                 看這個補助的完整細節
@@ -330,14 +330,14 @@ function ResultView({
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-baseline justify-between gap-3 flex-wrap mb-1">
-                        <h5 className="text-[15px] font-semibold text-white leading-tight">
+                        <h5 className="text-[16.5px] font-semibold text-white leading-tight">
                           {s.subsidy.shortTitle}
                         </h5>
-                        <span className={`text-[12px] font-medium ${accent}`}>
+                        <span className={`text-[13px] font-medium ${accent}`}>
                           {s.subsidy.amount}
                         </span>
                       </div>
-                      <p className="text-[12.5px] text-white/60 leading-[1.7]">
+                      <p className="text-[13.5px] text-white/60 leading-[1.8]">
                         {s.reason}
                       </p>
                       <Link
@@ -359,7 +359,7 @@ function ResultView({
       <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
         <button
           onClick={onRestart}
-          className="text-[12.5px] text-white/55 hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+          className="text-[13.5px] text-white/55 hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer"
         >
           <span>↺</span>
           <span>重新測試</span>
@@ -367,13 +367,13 @@ function ResultView({
         <div className="flex items-center gap-5 flex-wrap justify-center">
           <button
             onClick={open}
-            className="bg-gold text-navy px-7 py-3 text-[13.5px] font-semibold tracking-[0.5px] hover:bg-gold-l transition-colors cursor-pointer"
+            className="bg-gold text-navy px-7 py-3 text-[15px] font-semibold tracking-[0.5px] hover:bg-gold-l transition-colors cursor-pointer"
           >
             聊聊這個結果 →
           </button>
           <Link
             href="/assess"
-            className="group inline-flex items-center gap-1.5 text-[13px] text-white/70 font-medium hover:text-white transition-colors"
+            className="group inline-flex items-center gap-1.5 text-[14.5px] text-white/70 font-medium hover:text-white transition-colors"
           >
             <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
               做完整產品評估

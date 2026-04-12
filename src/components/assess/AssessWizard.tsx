@@ -269,7 +269,7 @@ export function AssessWizard() {
 function AssessFallback() {
   return (
     <section className="min-h-screen bg-navy pt-[140px] pb-20 px-5 md:px-10">
-      <div className="max-w-[720px] mx-auto text-center text-white/50 text-[14px]">
+      <div className="max-w-[720px] mx-auto text-center text-white/50 text-[15.5px]">
         載入中…
       </div>
     </section>
@@ -454,7 +454,7 @@ function EntryScreen({
               <div className="text-[10.5px] tracking-[1.5px] uppercase text-gold/80 font-semibold mb-1">
                 正在比對
               </div>
-              <div className="text-[13.5px] text-white/85 font-medium truncate">
+              <div className="text-[15px] text-white/85 font-medium truncate">
                 {focusCase.title}
               </div>
             </div>
@@ -468,7 +468,7 @@ function EntryScreen({
           <span className="font-normal text-gold">跟誰最像</span>
         </h1>
 
-        <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[600px] font-light leading-[1.8] mb-10">
+        <p className="text-[17px] md:text-[18px] text-white/65 max-w-[600px] font-light leading-[1.8] mb-10">
           三題問答，直接告訴你：你現在遇到的事、跟我們做過的四個案例，哪一個最接近 —
           <br className="hidden md:block" />
           以及那個案例的判斷方法，多少能放在你身上。
@@ -480,13 +480,13 @@ function EntryScreen({
             AY
           </div>
           <div className="flex-1 min-w-0 pt-1">
-            <div className="text-[15px] md:text-[16px] font-semibold text-white leading-tight">
+            <div className="text-[16.5px] md:text-[17px] font-semibold text-white leading-tight">
               Aaron Yu · 鹿飛創辦人
             </div>
-            <div className="text-[11.5px] md:text-[12px] text-gold-l/90 font-medium mt-1.5 tracking-[0.3px]">
+            <div className="text-[11.5px] md:text-[13px] text-gold-l/90 font-medium mt-1.5 tracking-[0.3px]">
               42+ 年國際物流實戰 · 500+ 出口案件 · 30+ 國家
             </div>
-            <p className="text-[12.5px] md:text-[13px] text-white/60 font-normal mt-3 leading-[1.8]">
+            <p className="text-[13.5px] md:text-[14.5px] text-white/60 font-normal mt-3 leading-[1.8]">
               最近三個月我親自看過 47 家台灣公司的出海卡點。這三題是我每次開第一次會議前必問的問題
               — 兩分鐘後你會拿到的不是評分，而是「跟你最像的人當時的真實決策」。
             </p>
@@ -498,13 +498,13 @@ function EntryScreen({
           <button
             type="button"
             onClick={onStart}
-            className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+            className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
           >
             開始比對 →
           </button>
           <Link
             href="/cases"
-            className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-gold"
+            className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-gold"
           >
             <span className="border-b border-white/20 pb-0.5 group-hover:border-gold transition-colors">
               先看案例再決定
@@ -516,7 +516,7 @@ function EntryScreen({
         </div>
 
         {/* Positive honesty — soft framing, no gatekeeping */}
-        <p className="text-[12px] md:text-[12.5px] text-white/40 leading-[1.9] font-normal max-w-[600px] italic">
+        <p className="text-[13px] md:text-[13.5px] text-white/40 leading-[1.9] font-normal max-w-[600px] italic">
           我們不做 AI 評分、不給紅綠燈、不要你的 email。只要你願意給這三題 2
           分鐘的專注，我們就給你一份誠實的比對 —
           即使結論是「我們不是你需要的」，我們也會直說。
@@ -537,10 +537,10 @@ function EntryScreen({
                 <div className="text-[10px] tracking-[1px] uppercase text-white/40 mb-1.5">
                   {c.tags.map((t) => t.label).join(" · ")}
                 </div>
-                <div className="text-[12.5px] font-semibold text-white leading-tight line-clamp-2 group-hover:text-gold transition-colors mb-1.5 min-h-[2.8em]">
+                <div className="text-[13.5px] font-semibold text-white leading-tight line-clamp-2 group-hover:text-gold transition-colors mb-1.5 min-h-[2.8em]">
                   {c.title}
                 </div>
-                <div className="font-heading text-[14px] text-gold/80 font-normal tabular-nums">
+                <div className="font-heading text-[15.5px] text-gold/80 font-normal tabular-nums">
                   {c.num}
                 </div>
               </Link>
@@ -609,7 +609,7 @@ function QuestionScreen({
             <div className="font-heading text-[48px] md:text-[64px] leading-[0.85] text-gold font-light tabular-nums">
               {numStr}
             </div>
-            <div className="text-[14px] text-white/40 font-light pb-1.5 tabular-nums">
+            <div className="text-[15.5px] text-white/40 font-light pb-1.5 tabular-nums">
               / {totalStr}
             </div>
           </div>
@@ -707,21 +707,21 @@ function QuestionBody<T extends string>({
                 </span>
                 <div className="flex-1 min-w-0">
                   <div
-                    className={`text-[15px] md:text-[16.5px] font-medium leading-[1.5] transition-colors ${
+                    className={`text-[16.5px] md:text-[17.5px] font-medium leading-[1.5] transition-colors ${
                       isSelected ? "text-white" : "text-white/90"
                     }`}
                   >
                     {opt.label}
                   </div>
                   {opt.hint && (
-                    <div className="mt-1.5 text-[12px] md:text-[12.5px] text-white/50 font-normal leading-[1.75]">
+                    <div className="mt-1.5 text-[13px] md:text-[13.5px] text-white/50 font-normal leading-[1.8]">
                       {opt.hint}
                     </div>
                   )}
                 </div>
                 <span
                   aria-hidden="true"
-                  className={`shrink-0 mt-1 text-[15px] transition-all duration-300 ${
+                  className={`shrink-0 mt-1 text-[16.5px] transition-all duration-300 ${
                     isSelected
                       ? "text-gold translate-x-1"
                       : "text-white/30 group-hover:text-gold group-hover:translate-x-0.5"
@@ -802,7 +802,7 @@ function ResultScreen({
             <button
               type="button"
               onClick={onReset}
-              className="text-[12.5px] text-white/50 font-medium hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
+              className="text-[13.5px] text-white/50 font-medium hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
             >
               <span>↺</span>
               <span>重新比對</span>
@@ -828,7 +828,7 @@ function ResultScreen({
                 >
                   {p.matched ? "✓" : "×"}
                 </span>
-                <p className="text-[15px] md:text-[17px] text-white/80 leading-[1.75] font-normal">
+                <p className="text-[16.5px] md:text-[18px] text-white/80 leading-[1.8] font-normal">
                   <span className="text-[10.5px] uppercase tracking-[2px] text-white/40 font-semibold mr-2.5 inline-block min-w-[32px]">
                     {p.label}
                   </span>
@@ -839,7 +839,7 @@ function ResultScreen({
           </div>
 
           {/* Closing paragraph */}
-          <p className="text-[14px] md:text-[15.5px] text-white/70 leading-[1.9] font-normal italic max-w-[700px] border-l-2 border-gold/50 pl-5">
+          <p className="text-[15.5px] md:text-[17px] text-white/70 leading-[1.9] font-normal italic max-w-[700px] border-l-2 border-gold/50 pl-5">
             {narrative.closing}
           </p>
         </div>
@@ -873,7 +873,7 @@ function ResultScreen({
                 <div className="font-heading text-[42px] md:text-[60px] text-gold font-light leading-[0.95] tabular-nums mb-2">
                   {primaryCase.num}
                 </div>
-                <div className="text-[14px] md:text-[16px] text-white/85 font-normal leading-snug">
+                <div className="text-[15.5px] md:text-[17px] text-white/85 font-normal leading-snug">
                   {meta?.headline ?? primaryCase.title}
                 </div>
               </div>
@@ -896,7 +896,7 @@ function ResultScreen({
                 </blockquote>
                 <Link
                   href={`/cases/${primaryCase.slug}`}
-                  className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-none text-[13px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
+                  className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-none text-[14.5px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
                 >
                   讀完整案例 →
                 </Link>
@@ -926,12 +926,12 @@ function ResultScreen({
                       吻合 {alternative.score}/3
                     </span>
                   </div>
-                  <h2 className="text-[15px] md:text-[16px] text-tx font-semibold leading-[1.5] mb-2">
+                  <h2 className="text-[16.5px] md:text-[17px] text-tx font-semibold leading-[1.5] mb-2">
                     {altCase.title}
                   </h2>
                   <Link
                     href={`/cases/${altCase.slug}`}
-                    className="text-[12.5px] text-tx2 font-medium hover:text-gold transition-colors inline-flex items-center gap-1"
+                    className="text-[13.5px] text-tx2 font-medium hover:text-gold transition-colors inline-flex items-center gap-1"
                   >
                     看另一條路 →
                   </Link>
@@ -943,10 +943,10 @@ function ResultScreen({
           {/* CTA row — primary (聊聊) + secondary (複製連結) */}
           <div className="border-t border-bd pt-8 md:pt-10 flex items-start justify-between flex-wrap gap-6">
             <div className="max-w-[420px]">
-              <div className="text-[15px] md:text-[16px] text-tx font-medium mb-1.5">
+              <div className="text-[16.5px] md:text-[17px] text-tx font-medium mb-1.5">
                 想知道這個方法放在你身上會長什麼樣？
               </div>
-              <div className="text-[13px] text-tx3 font-normal leading-[1.7]">
+              <div className="text-[14.5px] text-tx3 font-normal leading-[1.8]">
                 直接聊。不收費、不賣課、不承諾一定接。
               </div>
             </div>
@@ -954,7 +954,7 @@ function ResultScreen({
               <button
                 type="button"
                 onClick={copyShareLink}
-                className="inline-flex items-center gap-2 text-[13px] text-tx2 font-medium hover:text-gold transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 text-[14.5px] text-tx2 font-medium hover:text-gold transition-colors cursor-pointer"
                 aria-live="polite"
               >
                 <span className="border-b border-tx3/40 pb-0.5 group-hover:border-gold transition-colors">
@@ -965,7 +965,7 @@ function ResultScreen({
               <button
                 type="button"
                 onClick={open}
-                className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[14px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors cursor-pointer"
+                className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[15.5px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors cursor-pointer"
               >
                 聊聊你的狀況 →
               </button>

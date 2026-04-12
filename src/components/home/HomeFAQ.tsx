@@ -165,7 +165,7 @@ export function HomeFAQ() {
           <h2 className="font-sans text-[clamp(28px,3.8vw,44px)] leading-[1.15] font-light tracking-[-0.6px] text-navy mb-4">
             三個最常被問到的<span className="text-gold-d font-normal">問題</span>
           </h2>
-          <p className="text-[14.5px] md:text-[15.5px] text-tx2 max-w-[560px] mx-auto leading-[1.75]">
+          <p className="text-[16px] md:text-[17px] text-tx2 max-w-[560px] mx-auto leading-[1.8]">
             在你決定聊聊之前，先回答你心裡可能已經冒出來的那幾個疑問。
           </p>
         </div>
@@ -201,12 +201,12 @@ export function HomeFAQ() {
                 </div>
 
                 {/* Question */}
-                <h3 className="text-[18px] md:text-[20px] font-semibold leading-[1.4] text-tx mb-4">
+                <h3 className="text-[19px] md:text-[21px] font-semibold leading-[1.4] text-tx mb-4">
                   {item.question}
                 </h3>
 
                 {/* Answer */}
-                <p className="text-[13.5px] text-tx2 leading-[1.85] font-normal mb-6 flex-1">
+                <p className="text-[15px] text-tx2 leading-[1.85] font-normal mb-6 flex-1">
                   {item.answer}
                 </p>
 
@@ -218,7 +218,7 @@ export function HomeFAQ() {
                     要點
                   </div>
                   <p
-                    className={`text-[13px] font-medium leading-snug ${c.takeawayText}`}
+                    className={`text-[14.5px] font-medium leading-snug ${c.takeawayText}`}
                   >
                     {item.takeaway}
                   </p>
@@ -232,7 +232,7 @@ export function HomeFAQ() {
         <div className="mt-12 text-center">
           <Link
             href="/services#faq"
-            className="group inline-flex items-center gap-2 text-[13.5px] font-semibold text-tx2 hover:text-navy transition-colors"
+            className="group inline-flex items-center gap-2 text-[15px] font-semibold text-tx2 hover:text-navy transition-colors"
           >
             <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
               還有其他問題？看完整 FAQ

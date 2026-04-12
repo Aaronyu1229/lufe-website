@@ -91,7 +91,7 @@ export default function SubsidiesPage() {
             <span className="text-gold/90">你知道怎麼拿嗎？</span>
           </h1>
 
-          <p className="text-[17px] md:text-[18px] text-white/70 font-normal leading-[1.75] max-w-[700px] mb-12">
+          <p className="text-[18px] md:text-[19px] text-white/70 font-normal leading-[1.8] max-w-[700px] mb-12">
             貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入
             <span className="text-white font-medium">北美</span>和
             <span className="text-white font-medium">東南亞</span>兩個主戰場。
@@ -209,7 +209,7 @@ export default function SubsidiesPage() {
               4 個計畫，對應你出海的
               <span className="text-gold font-normal">不同階段</span>
             </h2>
-            <div className="text-[13px] text-tx3 md:text-right">
+            <div className="text-[14.5px] text-tx3 md:text-right">
               最後更新 2026.04
               <br />
               名額有限，建議盡早申請
@@ -253,10 +253,10 @@ export default function SubsidiesPage() {
                             {s.agency}
                           </span>
                         </div>
-                        <h3 className="text-[19px] md:text-[21px] font-semibold leading-[1.3] text-tx mb-1">
+                        <h3 className="text-[20px] md:text-[21px] font-semibold leading-[1.3] text-tx mb-1">
                           {s.shortTitle}
                         </h3>
-                        <div className="text-[12.5px] text-tx3 leading-snug">
+                        <div className="text-[13.5px] text-tx3 leading-snug">
                           {s.program}
                         </div>
                       </div>
@@ -287,7 +287,7 @@ export default function SubsidiesPage() {
                       <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
                         申請時程
                       </div>
-                      <div className="text-[14px] font-medium text-tx">
+                      <div className="text-[15.5px] font-medium text-tx">
                         {s.deadline}
                       </div>
                       <div className="text-[11.5px] text-tx3 mt-1">
@@ -297,7 +297,7 @@ export default function SubsidiesPage() {
                   </div>
 
                   {/* One-liner */}
-                  <p className="text-[14px] text-tx2 leading-[1.75] mb-5">
+                  <p className="text-[15.5px] text-tx2 leading-[1.8] mb-5">
                     {s.oneLiner}
                   </p>
 
@@ -310,7 +310,7 @@ export default function SubsidiesPage() {
                       {s.whoFor.map((w) => (
                         <li
                           key={w}
-                          className="text-[13px] text-tx2 leading-relaxed flex items-start gap-2"
+                          className="text-[14.5px] text-tx2 leading-relaxed flex items-start gap-2"
                         >
                           <span className={`shrink-0 mt-[7px] w-1 h-1 ${c.bar}`} />
                           {w}
@@ -341,14 +341,14 @@ export default function SubsidiesPage() {
                     <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gold mb-2">
                       鹿飛怎麼幫上忙
                     </div>
-                    <p className="text-[13px] leading-[1.7]">{s.lufeAngle}</p>
+                    <p className="text-[14.5px] leading-[1.8]">{s.lufeAngle}</p>
                   </div>
 
                   {/* Footer */}
                   <div className="flex items-center justify-between gap-4">
                     <Link
                       href="/assess"
-                      className="inline-flex items-center gap-2 text-[13px] font-semibold text-navy hover:text-gold transition-colors group/cta"
+                      className="inline-flex items-center gap-2 text-[14.5px] font-semibold text-navy hover:text-gold transition-colors group/cta"
                     >
                       <span className="border-b border-navy/30 group-hover/cta:border-gold pb-0.5 transition-colors">
                         查我是否符合
@@ -398,7 +398,7 @@ export default function SubsidiesPage() {
                   <div className="text-[10.5px] font-semibold tracking-[1.5px] uppercase text-gold mb-3">
                     {stageInfo.label}
                   </div>
-                  <div className="text-[15px] font-semibold text-tx leading-snug mb-4">
+                  <div className="text-[16.5px] font-semibold text-tx leading-snug mb-4">
                     {stageInfo.desc}
                   </div>
                   <div className="pt-4 border-t border-bd/60">
@@ -407,12 +407,12 @@ export default function SubsidiesPage() {
                     </div>
                     <ul className="space-y-2">
                       {relevant.length === 0 ? (
-                        <li className="text-[12.5px] text-tx3">—</li>
+                        <li className="text-[13.5px] text-tx3">—</li>
                       ) : (
                         relevant.map((s) => (
                           <li
                             key={s.slug}
-                            className="text-[13px] text-tx2 leading-snug"
+                            className="text-[14.5px] text-tx2 leading-snug"
                           >
                             <Link
                               href={`#${s.slug}`}
@@ -492,7 +492,7 @@ function Stat({ num, label }: { num: string; label: string }) {
 function AgencyBadge({ name, sub }: { name: string; sub: string }) {
   return (
     <div className="flex items-baseline gap-2.5">
-      <span className="text-[14px] md:text-[15px] font-semibold text-tx tracking-[-0.2px]">
+      <span className="text-[15.5px] md:text-[16.5px] font-semibold text-tx tracking-[-0.2px]">
         {name}
       </span>
       <span className="text-[10.5px] text-tx3 font-medium tracking-wider uppercase">
@@ -523,8 +523,8 @@ function Pillar({
           {num}
         </div>
       </div>
-      <h3 className="text-[17px] font-semibold mb-2 leading-tight">{title}</h3>
-      <p className="text-[13.5px] text-tx2 leading-[1.75]">{desc}</p>
+      <h3 className="text-[18px] font-semibold mb-2 leading-tight">{title}</h3>
+      <p className="text-[15px] text-tx2 leading-[1.8]">{desc}</p>
     </div>
   );
 }
@@ -533,14 +533,14 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   return (
     <details className="group border-b border-bd py-6">
       <summary className="flex items-start justify-between gap-6 cursor-pointer list-none">
-        <h3 className="text-[16px] md:text-[17px] font-semibold text-tx leading-snug group-hover:text-gold transition-colors">
+        <h3 className="text-[17px] md:text-[18px] font-semibold text-tx leading-snug group-hover:text-gold transition-colors">
           {q}
         </h3>
-        <span className="shrink-0 w-6 h-6 rounded-full border border-bd flex items-center justify-center text-tx3 text-[14px] transition-transform group-open:rotate-45">
+        <span className="shrink-0 w-6 h-6 rounded-full border border-bd flex items-center justify-center text-tx3 text-[15.5px] transition-transform group-open:rotate-45">
           +
         </span>
       </summary>
-      <p className="mt-4 text-[14px] text-tx2 leading-[1.85] max-w-[720px]">
+      <p className="mt-4 text-[15.5px] text-tx2 leading-[1.85] max-w-[720px]">
         {a}
       </p>
     </details>

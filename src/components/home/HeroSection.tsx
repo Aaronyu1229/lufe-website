@@ -235,20 +235,20 @@ export function HeroSection() {
             {active.titleLines[1]}
           </h1>
 
-          <p className="text-[17px] text-white/60 font-normal mb-10 leading-relaxed max-w-[480px]">
+          <p className="text-[18px] text-white/60 font-normal mb-10 leading-relaxed max-w-[480px]">
             {active.subtitle}
           </p>
 
           <div className="flex items-center gap-8 flex-wrap">
             <Link
               href={active.primary.href}
-              className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[13px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l"
+              className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[14.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l"
             >
               {active.primary.label} →
             </Link>
             <Link
               href={active.secondary.href}
-              className="group inline-flex items-center gap-2.5 text-white text-[14px] font-semibold tracking-[0.3px] transition-colors hover:text-gold"
+              className="group inline-flex items-center gap-2.5 text-white text-[15.5px] font-semibold tracking-[0.3px] transition-colors hover:text-gold"
             >
               <span className="border-b border-white/30 pb-0.5 group-hover:border-gold transition-colors">
                 {active.secondary.label}
@@ -270,7 +270,7 @@ export function HeroSection() {
                 onMouseEnter={() => goTo(i)}
                 onFocus={() => goTo(i)}
                 aria-current={isActive ? "true" : undefined}
-                className={`relative flex-1 min-w-0 flex items-center justify-center text-center px-2 text-[12px] md:text-[13px] tracking-[0.3px] transition-colors duration-300 cursor-pointer ${
+                className={`relative flex-1 min-w-0 flex items-center justify-center text-center px-2 text-[13px] md:text-[14.5px] tracking-[0.3px] transition-colors duration-300 cursor-pointer ${
                   isActive
                     ? "text-white font-semibold"
                     : "text-white/55 hover:text-white/85 font-medium"

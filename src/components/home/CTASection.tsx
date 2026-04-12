@@ -46,7 +46,7 @@ export function CTASection() {
 
           {/* Before */}
           <div className="p-8 md:p-10 rounded-none text-center bg-white/[0.04] border border-white/10">
-            <div className="text-[13px] font-semibold mb-4 tracking-[0.5px] text-white/40">
+            <div className="text-[14.5px] font-semibold mb-4 tracking-[0.5px] text-white/40">
               沒有鹿飛
             </div>
             <div className="h-[120px] flex items-center justify-center">
@@ -68,7 +68,7 @@ export function CTASection() {
                 <text x="150" y="70" fill="#8A8F9E" fontSize="14" opacity="0.5">?</text>
               </svg>
             </div>
-            <p className="text-[12.5px] text-white/40 font-normal mt-2">
+            <p className="text-[13.5px] text-white/40 font-normal mt-2">
               找了三家公司、走了三條路
               <br />
               中間全靠自己串
@@ -77,7 +77,7 @@ export function CTASection() {
 
           {/* After */}
           <div className="p-8 md:p-10 rounded-none text-center bg-[rgba(212,168,92,0.08)] border border-gold/20">
-            <div className="text-[13px] font-semibold mb-4 tracking-[0.5px] text-gold">
+            <div className="text-[14.5px] font-semibold mb-4 tracking-[0.5px] text-gold">
               有鹿飛
             </div>
             <div className="h-[120px] flex items-center justify-center">
@@ -95,7 +95,7 @@ export function CTASection() {
                 <text x="170" y="52" textAnchor="middle" fill="#D4A85C" fontSize="9" opacity="0.7">海外</text>
               </svg>
             </div>
-            <p className="text-[12.5px] text-gold font-medium mt-2">
+            <p className="text-[13.5px] text-gold font-medium mt-2">
               一個窗口、一條線
               <br />
               從評估到落地全程搞定
@@ -108,20 +108,20 @@ export function CTASection() {
           <br />
           都值得試試看
         </h2>
-        <p className="text-[15px] text-white/55 max-w-[460px] mx-auto leading-[1.7] mb-10 font-normal">
+        <p className="text-[16.5px] text-white/55 max-w-[460px] mx-auto leading-[1.8] mb-10 font-normal">
           不確定從哪開始？先聊聊，不收費、不承諾、不賣課。
           我們會老實告訴你值不值得出去。
         </p>
         <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
           <button
             onClick={open}
-            className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+            className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
           >
             聊聊你的產品 →
           </button>
           <Link
             href="/assess"
-            className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium tracking-[0.3px] transition-colors duration-300 hover:text-white"
+            className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium tracking-[0.3px] transition-colors duration-300 hover:text-white"
           >
             <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
               先做 2 分鐘評估

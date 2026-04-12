@@ -62,7 +62,7 @@ export function FieldNotesPage() {
             <br />
             <span className="font-normal text-gold">在哪裡</span>
           </h1>
-          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[620px] font-light leading-[1.8] mb-12">
+          <p className="text-[17px] md:text-[18px] text-white/65 max-w-[620px] font-light leading-[1.8] mb-12">
             活動、演講、客戶現場、媒體露出——北美和東南亞兩個主戰場的第一手紀錄。
             這些是正式文章裡不會寫、但對你來說可能最有用的細節。
           </p>
@@ -172,10 +172,10 @@ export function FieldNotesPage() {
                     <span className="text-tx3/40">·</span>
                     <span>{a.date}</span>
                   </div>
-                  <h3 className="text-[15px] md:text-[16px] font-semibold leading-tight text-tx mb-2">
+                  <h3 className="text-[16.5px] md:text-[17px] font-semibold leading-tight text-tx mb-2">
                     {a.title}
                   </h3>
-                  <p className="text-[13px] text-tx2 leading-[1.75] font-normal">
+                  <p className="text-[14.5px] text-tx2 leading-[1.8] font-normal">
                     {a.summary}
                   </p>
                 </div>
@@ -248,10 +248,10 @@ export function FieldNotesPage() {
                     <span className="text-tx3/40">·</span>
                     <span className="text-[11px] text-tx3 font-medium">{note.date}</span>
                   </div>
-                  <h3 className="text-[19px] md:text-[22px] font-semibold leading-tight text-tx mb-3">
+                  <h3 className="text-[20px] md:text-[22px] font-semibold leading-tight text-tx mb-3">
                     {note.title}
                   </h3>
-                  <p className="text-[13.5px] md:text-[14px] text-tx2 leading-[1.85] font-normal">
+                  <p className="text-[15px] md:text-[15.5px] text-tx2 leading-[1.85] font-normal">
                     {note.body}
                   </p>
                 </div>
@@ -294,7 +294,7 @@ export function FieldNotesPage() {
                     <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1">
                       {m.outlet}
                     </div>
-                    <div className="text-[14px] md:text-[15px] font-semibold text-tx leading-tight mb-1 truncate">
+                    <div className="text-[15.5px] md:text-[16.5px] font-semibold text-tx leading-tight mb-1 truncate">
                       {m.title}
                     </div>
                     <div className="text-[11.5px] text-tx3">{m.date}</div>
@@ -309,7 +309,7 @@ export function FieldNotesPage() {
                     href={m.href ?? "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[13px] font-semibold text-gold-d hover:text-gold transition-colors shrink-0"
+                    className="text-[14.5px] font-semibold text-gold-d hover:text-gold transition-colors shrink-0"
                   >
                     看報導 →
                   </a>
@@ -367,19 +367,19 @@ export function FieldNotesPage() {
           <h2 className="font-sans text-[clamp(24px,3.2vw,36px)] text-white leading-[1.25] font-light tracking-[-0.4px] mb-4">
             想知道我們下個月在哪？
           </h2>
-          <p className="text-[14.5px] text-white/60 leading-[1.75] mb-10 max-w-[520px] mx-auto">
+          <p className="text-[16px] text-white/60 leading-[1.8] mb-10 max-w-[520px] mx-auto">
             如果你在考慮北美或東南亞、剛好碰上我們的行程，可以約一杯咖啡。
           </p>
           <div className="flex justify-center items-center gap-6 flex-wrap">
             <button
               onClick={open}
-              className="bg-gold text-navy px-8 py-[14px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+              className="bg-gold text-navy px-8 py-[14px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
             >
               聊聊你的狀況 →
             </button>
             <Link
               href="/contact#partners"
-              className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-white"
+              className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-white"
             >
               <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
                 我是合作夥伴

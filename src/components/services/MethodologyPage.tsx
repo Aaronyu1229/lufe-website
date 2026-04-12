@@ -240,7 +240,7 @@ export function MethodologyPage() {
         />
 
         <div className="relative max-w-[1000px] mx-auto">
-          <nav className="flex items-center gap-2 text-[12px] text-white/50 mb-6">
+          <nav className="flex items-center gap-2 text-[13px] text-white/50 mb-6">
             <Link href="/services" className="hover:text-white transition-colors">
               服務
             </Link>
@@ -256,7 +256,7 @@ export function MethodologyPage() {
             <br />
             <span className="text-gold font-normal">值不值得去</span>
           </h1>
-          <p className="text-[17px] md:text-[19px] text-white/75 max-w-[720px] leading-[1.6] font-light">
+          <p className="text-[18px] md:text-[20px] text-white/75 max-w-[720px] leading-[1.6] font-light">
             這頁不是行銷文案，是我們實際用來替每個客戶做 Go / No-Go 決策的框架。
             如果你想了解顧問公司背後的判斷邏輯，而不是只看結論，這頁就是為你寫的。
           </p>
@@ -282,11 +282,11 @@ export function MethodologyPage() {
                 <div key={d.code} className="text-center">
                   <div className="relative w-14 h-14 md:w-20 md:h-20 mx-auto bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d mb-2">
                     {Icon && <Icon />}
-                    <span className="absolute -top-2 -right-2 w-5 h-5 md:w-6 md:h-6 bg-navy text-gold font-heading text-[10px] md:text-[12px] font-semibold flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 w-5 h-5 md:w-6 md:h-6 bg-navy text-gold font-heading text-[10px] md:text-[13px] font-semibold flex items-center justify-center">
                       {d.code}
                     </span>
                   </div>
-                  <div className="text-[11px] md:text-[13px] font-semibold text-tx">
+                  <div className="text-[11px] md:text-[14.5px] font-semibold text-tx">
                     {d.name}
                   </div>
                   <div className="text-[10px] md:text-[11px] text-gold-d font-medium mt-0.5">
@@ -327,14 +327,14 @@ export function MethodologyPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-3 mb-1 flex-wrap">
-                      <h3 className="text-[19px] md:text-[21px] font-semibold">
+                      <h3 className="text-[20px] md:text-[21px] font-semibold">
                         {d.name}
                       </h3>
                       <span className="text-[11px] font-semibold tracking-wider uppercase text-gold-d bg-gold/10 px-2 py-0.5">
                         權重 {d.weight}
                       </span>
                     </div>
-                    <p className="text-[15px] text-tx2 italic mb-4">
+                    <p className="text-[16.5px] text-tx2 italic mb-4">
                       「{d.question}」
                     </p>
                     <div className="mb-4">
@@ -345,7 +345,7 @@ export function MethodologyPage() {
                         {d.criteria.map((cr) => (
                           <li
                             key={cr}
-                            className="flex items-start gap-2.5 text-[13.5px] text-tx2 leading-[1.65]"
+                            className="flex items-start gap-2.5 text-[15px] text-tx2 leading-[1.65]"
                           >
                             <span className="w-1 h-1 rounded-full bg-gold/60 mt-[9px] shrink-0" />
                             {cr}
@@ -357,7 +357,7 @@ export function MethodologyPage() {
                       <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-red-600/80 mb-1 mt-3">
                         紅線
                       </div>
-                      <p className="text-[13px] text-red-700/90 leading-[1.65] pb-4">
+                      <p className="text-[14.5px] text-red-700/90 leading-[1.65] pb-4">
                         {d.redAt}
                       </p>
                     </div>
@@ -405,10 +405,10 @@ export function MethodologyPage() {
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-[17px] font-semibold mb-1.5">
+                      <h3 className="text-[18px] font-semibold mb-1.5">
                         {d.verdict}
                       </h3>
-                      <p className="text-[13.5px] leading-[1.7] opacity-90">
+                      <p className="text-[15px] leading-[1.8] opacity-90">
                         {d.advice}
                       </p>
                     </div>
@@ -429,7 +429,7 @@ export function MethodologyPage() {
           <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] text-white leading-[1.2] font-light tracking-[-0.5px] mb-3">
             這套框架跑一次<span className="text-gold font-normal">長什麼樣</span>
           </h2>
-          <p className="text-[15px] text-white/60 leading-[1.7] mb-10 max-w-[620px]">
+          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-10 max-w-[620px]">
             下面是我們跑「{workedExample.caseName}」時的實際評分表。
           </p>
 
@@ -440,7 +440,7 @@ export function MethodologyPage() {
                   key={s.dim}
                   className="grid grid-cols-[80px_1fr_60px] gap-4 items-center"
                 >
-                  <div className="text-[12px] font-semibold text-gold tracking-wider uppercase">
+                  <div className="text-[13px] font-semibold text-gold tracking-wider uppercase">
                     {s.dim}
                   </div>
                   <div>
@@ -454,7 +454,7 @@ export function MethodologyPage() {
                       {s.note}
                     </div>
                   </div>
-                  <div className="font-sans text-[20px] text-white font-light tabular-nums text-right">
+                  <div className="font-sans text-[21px] text-white font-light tabular-nums text-right">
                     {s.score}
                   </div>
                 </div>
@@ -475,16 +475,16 @@ export function MethodologyPage() {
                   <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-white/50 mb-0.5">
                     結論
                   </div>
-                  <div className="text-[20px] text-amber-400 font-semibold">
+                  <div className="text-[21px] text-amber-400 font-semibold">
                     {workedExample.verdict}
                   </div>
                 </div>
               </div>
-              <p className="text-[14px] text-white/70 leading-[1.7] mt-4">
+              <p className="text-[15.5px] text-white/70 leading-[1.8] mt-4">
                 <span className="text-gold font-semibold">條件：</span>
                 {workedExample.condition}
               </p>
-              <p className="text-[14px] text-white/70 leading-[1.7] mt-2">
+              <p className="text-[15.5px] text-white/70 leading-[1.8] mt-2">
                 <span className="text-gold font-semibold">實際結果：</span>
                 {workedExample.outcome}
               </p>
@@ -493,7 +493,7 @@ export function MethodologyPage() {
 
           <Link
             href="/cases/costco-health"
-            className="group inline-flex items-center gap-2 text-gold text-[14px] font-semibold transition-colors hover:text-white"
+            className="group inline-flex items-center gap-2 text-gold text-[15.5px] font-semibold transition-colors hover:text-white"
           >
             <span className="border-b border-gold/40 pb-0.5 group-hover:border-white transition-colors">
               看這個案例的完整故事
@@ -510,7 +510,7 @@ export function MethodologyPage() {
           <h2 className="section-heading">
             我們不靠直覺做決策
           </h2>
-          <div className="space-y-5 text-[15px] text-tx2 leading-[1.85] mt-6">
+          <div className="space-y-5 text-[16.5px] text-tx2 leading-[1.85] mt-6">
             <p>
               多數顧問公司的「建議」是建立在老闆的個人經驗上。有經驗當然是好事，
               但經驗會老化、會帶偏見、而且最重要的是——
@@ -536,20 +536,20 @@ export function MethodologyPage() {
           <h2 className="font-sans text-[clamp(26px,3.2vw,38px)] text-white leading-[1.2] font-light tracking-[-0.4px] mb-4">
             想用這套框架<span className="text-gold font-normal">評估你的產品</span>？
           </h2>
-          <p className="text-[15px] text-white/60 leading-[1.75] mb-10 max-w-[520px] mx-auto">
+          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-10 max-w-[520px] mx-auto">
             聊聊你的狀況，我們會用 30 分鐘粗跑一次這五個維度，
             告訴你目前的大致落點，不收費。
           </p>
           <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
             <button
               onClick={open}
-              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
             >
               聊聊你的產品 →
             </button>
             <Link
               href="/services/market-assessment"
-              className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-white"
+              className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-white"
             >
               <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
                 看完整市場評估服務

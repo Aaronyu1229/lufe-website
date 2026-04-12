@@ -83,13 +83,13 @@ export function StagesSection() {
           </h2>
           <Link
             href="/services"
-            className="group text-[13.5px] font-semibold text-tx2 hover:text-navy transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+            className="group text-[15px] font-semibold text-tx2 hover:text-navy transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
           >
             看每個階段做什麼
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </Link>
         </div>
-        <p className="text-[15px] text-tx2 max-w-[540px] leading-[1.7] mb-12 font-normal">
+        <p className="text-[16.5px] text-tx2 max-w-[540px] leading-[1.8] mb-12 font-normal">
           每個階段都有明確的目標與交付成果。你不用猜下一步——我們陪你走。
         </p>
 
@@ -128,21 +128,21 @@ export function StagesSection() {
                         {stage.timeline}
                       </span>
                     </div>
-                    <h3 className="text-[17px] font-semibold mb-2 leading-tight">
+                    <h3 className="text-[18px] font-semibold mb-2 leading-tight">
                       {stage.title}
                     </h3>
-                    <p className="text-[13px] text-tx2 leading-[1.7] font-normal mb-4">
+                    <p className="text-[14.5px] text-tx2 leading-[1.8] font-normal mb-4">
                       {stage.desc}
                     </p>
                     <div className="pt-3 border-t border-bd/60">
                       <span className="text-[10.5px] font-semibold tracking-wider uppercase text-tx3">
                         交付
                       </span>
-                      <p className={`text-[12.5px] mt-1 font-medium ${c.num}`}>
+                      <p className={`text-[13.5px] mt-1 font-medium ${c.num}`}>
                         {stage.deliverable}
                       </p>
                     </div>
-                    <div className="mt-4 text-[12px] font-semibold text-tx3 group-hover:text-gold transition-colors inline-flex items-center gap-1 group-hover:gap-2">
+                    <div className="mt-4 text-[13px] font-semibold text-tx3 group-hover:text-gold transition-colors inline-flex items-center gap-1 group-hover:gap-2">
                       看這個階段 →
                     </div>
                   </div>
@@ -174,17 +174,17 @@ export function StagesSection() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-2 mb-1">
-                      <span className={`font-sans text-[20px] font-light tabular-nums ${c.num}`}>
+                      <span className={`font-sans text-[21px] font-light tabular-nums ${c.num}`}>
                         {stage.num}
                       </span>
-                      <h3 className="text-[15px] font-semibold leading-tight">
+                      <h3 className="text-[16.5px] font-semibold leading-tight">
                         {stage.title}
                       </h3>
                       <span className="text-[10px] text-tx3 tracking-wider uppercase ml-auto">
                         {stage.timeline}
                       </span>
                     </div>
-                    <p className="text-[12.5px] text-tx2 leading-[1.6]">
+                    <p className="text-[13.5px] text-tx2 leading-[1.6]">
                       {stage.desc}
                     </p>
                   </div>

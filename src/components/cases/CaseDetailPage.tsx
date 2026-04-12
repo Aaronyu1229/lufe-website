@@ -43,7 +43,7 @@ export function CaseDetailPage({ caseItem }: Props) {
         </div>
 
         <div className="relative max-w-[1000px] mx-auto">
-          <nav className="flex items-center gap-2 text-[12px] text-white/50 mb-6">
+          <nav className="flex items-center gap-2 text-[13px] text-white/50 mb-6">
             <Link href="/cases" className="hover:text-white transition-colors">
               案例
             </Link>
@@ -65,7 +65,7 @@ export function CaseDetailPage({ caseItem }: Props) {
           <h1 className="font-heading text-[clamp(28px,4.2vw,48px)] text-white leading-[1.15] font-light tracking-[-0.6px] mb-6 max-w-[840px]">
             {caseItem.title}
           </h1>
-          <p className="text-[16px] md:text-[18px] text-white/70 max-w-[720px] leading-[1.7] font-light">
+          <p className="text-[17px] md:text-[19px] text-white/70 max-w-[720px] leading-[1.8] font-light">
             {caseItem.summary}
           </p>
 
@@ -76,7 +76,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                 <div className="font-heading text-[36px] md:text-[44px] text-gold leading-none font-semibold tabular-nums">
                   {s.value}
                 </div>
-                <div className="text-[11px] md:text-[12px] text-white/55 mt-2 tracking-wide">
+                <div className="text-[11px] md:text-[13px] text-white/55 mt-2 tracking-wide">
                   {s.label}
                 </div>
               </div>
@@ -96,7 +96,7 @@ export function CaseDetailPage({ caseItem }: Props) {
               <h2 className="text-[22px] md:text-[26px] font-light leading-tight mb-4">
                 起點：客戶遇到什麼問題？
               </h2>
-              <p className="text-[15.5px] text-tx2 leading-[1.9] font-normal">
+              <p className="text-[17px] text-tx2 leading-[1.9] font-normal">
                 {caseItem.challenge}
               </p>
             </div>
@@ -108,7 +108,7 @@ export function CaseDetailPage({ caseItem }: Props) {
               <h2 className="text-[22px] md:text-[26px] font-light leading-tight mb-4">
                 怎麼切入這個問題？
               </h2>
-              <p className="text-[15.5px] text-tx2 leading-[1.9] font-normal">
+              <p className="text-[17px] text-tx2 leading-[1.9] font-normal">
                 {caseItem.approach}
               </p>
 
@@ -125,7 +125,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                         <Link
                           key={stageSlug}
                           href={`/services/${stageSlug}`}
-                          className="group inline-flex items-center gap-2 px-3 py-2 border border-bd hover:border-gold transition-colors text-[12.5px]"
+                          className="group inline-flex items-center gap-2 px-3 py-2 border border-bd hover:border-gold transition-colors text-[13.5px]"
                         >
                           <span className="font-sans font-semibold text-gold-d tabular-nums">
                             {stage.num}
@@ -151,7 +151,7 @@ export function CaseDetailPage({ caseItem }: Props) {
               <h2 className="text-[22px] md:text-[26px] font-light leading-tight mb-4">
                 最後發生了什麼？
               </h2>
-              <p className="text-[15.5px] text-tx2 leading-[1.9] font-normal">
+              <p className="text-[17px] text-tx2 leading-[1.9] font-normal">
                 {caseItem.result}
               </p>
             </div>
@@ -180,7 +180,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                   <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-3">
                     決策 {i + 1}
                   </div>
-                  <h3 className="text-[18px] md:text-[20px] font-semibold mb-5 leading-tight">
+                  <h3 className="text-[19px] md:text-[21px] font-semibold mb-5 leading-tight">
                     {d.moment}
                   </h3>
 
@@ -194,7 +194,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                         return (
                           <li
                             key={j}
-                            className={`flex items-start gap-2.5 text-[13.5px] leading-[1.7] ${
+                            className={`flex items-start gap-2.5 text-[15px] leading-[1.8] ${
                               isChoice ? "text-tx font-medium" : "text-tx3"
                             }`}
                           >
@@ -216,7 +216,7 @@ export function CaseDetailPage({ caseItem }: Props) {
                     <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-gold-d mb-2">
                       我們選了：{d.choice}
                     </div>
-                    <p className="text-[13.5px] text-tx2 leading-[1.8]">
+                    <p className="text-[15px] text-tx2 leading-[1.8]">
                       <span className="text-tx font-medium">理由：</span>
                       {d.reasoning}
                     </p>
@@ -244,17 +244,17 @@ export function CaseDetailPage({ caseItem }: Props) {
               <div className="space-y-8">
                 {caseItem.timeline.map((t, i) => (
                   <div key={i} className="flex items-start gap-6">
-                    <div className="relative z-10 w-11 h-11 rounded-full bg-gold border-4 border-white flex items-center justify-center text-navy font-heading text-[13px] font-semibold shrink-0 shadow-md">
+                    <div className="relative z-10 w-11 h-11 rounded-full bg-gold border-4 border-white flex items-center justify-center text-navy font-heading text-[14.5px] font-semibold shrink-0 shadow-md">
                       {i + 1}
                     </div>
                     <div className="pt-1">
                       <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1">
                         {t.when}
                       </div>
-                      <h3 className="text-[16px] md:text-[17px] font-semibold mb-1 leading-tight">
+                      <h3 className="text-[17px] md:text-[18px] font-semibold mb-1 leading-tight">
                         {t.title}
                       </h3>
-                      <p className="text-[13.5px] text-tx2 leading-[1.7]">
+                      <p className="text-[15px] text-tx2 leading-[1.8]">
                         {t.desc}
                       </p>
                     </div>
@@ -271,10 +271,10 @@ export function CaseDetailPage({ caseItem }: Props) {
         <section className="bg-navy py-[72px] md:py-[96px] px-5 md:px-10">
           <div className="max-w-[760px] mx-auto">
             <div className="border-l-2 border-gold pl-6 md:pl-8">
-              <q className="block text-[18px] md:text-[22px] text-white/90 italic leading-[1.7] font-light mb-5 font-[var(--font-playfair)]">
+              <q className="block text-[19px] md:text-[22px] text-white/90 italic leading-[1.8] font-light mb-5 font-[var(--font-playfair)]">
                 {caseItem.quote.text}
               </q>
-              <cite className="text-[13px] text-gold not-italic font-medium">
+              <cite className="text-[14.5px] text-gold not-italic font-medium">
                 — {caseItem.quote.attribution}
               </cite>
             </div>
@@ -288,19 +288,19 @@ export function CaseDetailPage({ caseItem }: Props) {
           <h2 className="font-sans text-[clamp(24px,3vw,36px)] leading-[1.2] font-light tracking-[-0.4px] mb-4">
             你的產品也有<span className="text-gold-d font-normal">類似的機會</span>嗎？
           </h2>
-          <p className="text-[15px] text-tx2 leading-[1.75] mb-10 max-w-[520px] mx-auto">
+          <p className="text-[16.5px] text-tx2 leading-[1.8] mb-10 max-w-[520px] mx-auto">
             每個案子的起點都是一場對話。聊聊你的狀況，我們會告訴你這個故事裡哪一段跟你最相關。
           </p>
           <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
             <button
               onClick={open}
-              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
             >
               聊聊你的產品 →
             </button>
             <Link
               href="/assess"
-              className="group inline-flex items-center gap-2 text-tx2 text-[14px] font-medium transition-colors hover:text-navy"
+              className="group inline-flex items-center gap-2 text-tx2 text-[15.5px] font-medium transition-colors hover:text-navy"
             >
               <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
                 先做 2 分鐘評估
@@ -348,13 +348,13 @@ export function CaseDetailPage({ caseItem }: Props) {
                     <div className="font-heading text-[36px] text-gold-d leading-none font-semibold mb-2.5">
                       {rc.num}
                     </div>
-                    <h3 className="font-heading text-[17px] leading-[1.4] mb-2 font-bold">
+                    <h3 className="font-heading text-[18px] leading-[1.4] mb-2 font-bold">
                       {rc.title}
                     </h3>
-                    <p className="text-[13px] text-tx2 leading-[1.65] font-normal mb-3">
+                    <p className="text-[14.5px] text-tx2 leading-[1.65] font-normal mb-3">
                       {rc.summary}
                     </p>
-                    <span className="text-[13px] font-semibold text-gold-d group-hover:translate-x-0.5 inline-block transition-transform">
+                    <span className="text-[14.5px] font-semibold text-gold-d group-hover:translate-x-0.5 inline-block transition-transform">
                       看完整案例 →
                     </span>
                   </div>
@@ -370,7 +370,7 @@ export function CaseDetailPage({ caseItem }: Props) {
         <div className="max-w-[1100px] mx-auto text-center">
           <Link
             href="/cases"
-            className="group inline-flex items-center gap-2 text-[13px] text-tx2 font-medium hover:text-navy transition-colors"
+            className="group inline-flex items-center gap-2 text-[14.5px] text-tx2 font-medium hover:text-navy transition-colors"
           >
             <span className="transition-transform duration-300 group-hover:-translate-x-0.5">←</span>
             <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">

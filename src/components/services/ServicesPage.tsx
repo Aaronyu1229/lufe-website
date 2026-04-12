@@ -107,7 +107,7 @@ export function ServicesPage() {
             <br />
             <span className="font-normal text-gold">兩個主戰場</span>
           </h1>
-          <p className="text-[15.5px] md:text-[17px] text-white/65 max-w-[640px] font-light leading-[1.75] mb-12 md:mb-14">
+          <p className="text-[17px] md:text-[18px] text-white/65 max-w-[640px] font-light leading-[1.8] mb-12 md:mb-14">
             產品適配性、通路銷售力、團隊體質——一個方法論，幫台灣企業在
             <span className="text-white font-medium">北美</span>與
             <span className="text-white font-medium">東南亞</span>落地。
@@ -133,13 +133,13 @@ export function ServicesPage() {
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <span
-                        className={`relative z-10 w-[40px] h-[40px] flex items-center justify-center border bg-navy ${c.border} ${c.text} text-[13px] font-semibold tabular-nums transition-all group-hover:scale-110`}
+                        className={`relative z-10 w-[40px] h-[40px] flex items-center justify-center border bg-navy ${c.border} ${c.text} text-[14.5px] font-semibold tabular-nums transition-all group-hover:scale-110`}
                       >
                         {p.num}
                       </span>
                     </div>
                     <div className="pl-[2px]">
-                      <div className="text-[14px] font-semibold text-white leading-tight mb-0.5">
+                      <div className="text-[15.5px] font-semibold text-white leading-tight mb-0.5">
                         {p.title}
                       </div>
                       <div className={`text-[11px] ${c.text} mt-0.5`}>
@@ -210,7 +210,7 @@ export function ServicesPage() {
                     {p.num}
                   </span>
                   <span
-                    className={`text-[11px] md:text-[12px] font-semibold tracking-[2.5px] uppercase text-white/90 mb-2`}
+                    className={`text-[11px] md:text-[13px] font-semibold tracking-[2.5px] uppercase text-white/90 mb-2`}
                   >
                     {p.subtitle}
                   </span>
@@ -224,11 +224,11 @@ export function ServicesPage() {
                     {p.title}
                   </h2>
                   <p
-                    className={`text-[15.5px] md:text-[17px] font-medium leading-[1.6] ${c.text} mb-5`}
+                    className={`text-[17px] md:text-[18px] font-medium leading-[1.6] ${c.text} mb-5`}
                   >
                     「{p.tagline}」
                   </p>
-                  <p className="text-[14px] md:text-[15px] text-tx2 leading-[1.85] font-normal">
+                  <p className="text-[15.5px] md:text-[16.5px] text-tx2 leading-[1.85] font-normal">
                     {p.description}
                   </p>
                 </div>
@@ -269,20 +269,20 @@ export function ServicesPage() {
                           <div className="flex items-start justify-between gap-4">
                             <div className="flex-1 min-w-0">
                               <h3
-                                className={`text-[16px] md:text-[17px] font-semibold leading-tight text-tx mb-2 ${
+                                className={`text-[17px] md:text-[18px] font-semibold leading-tight text-tx mb-2 ${
                                   s.href ? "group-hover:text-navy transition-colors" : ""
                                 }`}
                               >
                                 {s.title}
                               </h3>
-                              <p className="text-[13px] md:text-[13.5px] text-tx2 leading-[1.75] font-normal">
+                              <p className="text-[14.5px] md:text-[15px] text-tx2 leading-[1.8] font-normal">
                                 {s.desc}
                               </p>
                             </div>
                             {s.href && (
                               <span
                                 aria-hidden="true"
-                                className={`shrink-0 text-[15px] mt-1 transition-transform ${c.text} group-hover:translate-x-0.5`}
+                                className={`shrink-0 text-[16.5px] mt-1 transition-transform ${c.text} group-hover:translate-x-0.5`}
                               >
                                 →
                               </span>
@@ -311,11 +311,11 @@ export function ServicesPage() {
           <h2 className="font-sans text-[clamp(26px,3.6vw,40px)] leading-[1.2] font-light tracking-[-0.5px] text-white mb-5">
             三個支柱底下，是真正跑了 <span className="font-normal text-gold">42 年</span>的國際物流
           </h2>
-          <p className="text-[15px] md:text-[16.5px] text-white/65 leading-[1.85] font-normal max-w-[720px] mb-6">
+          <p className="text-[16.5px] md:text-[17.5px] text-white/65 leading-[1.85] font-normal max-w-[720px] mb-6">
             鹿飛不是新手上路的跨境顧問。我們底下有躍馬國際 42 年的國際貨運承攬實戰——報關、倉儲、海空運、最後一哩，每一段都是真正在做的事。
             顧問講策略的時候，我們知道現場會長什麼樣。這就是為什麼我們的「團隊體質」支柱永遠不會空談。
           </p>
-          <div className="flex items-center gap-6 text-[13px] text-white/50 font-normal">
+          <div className="flex items-center gap-6 text-[14.5px] text-white/50 font-normal">
             <span>
               <strong className="text-white font-semibold tabular-nums">42+</strong> 年
             </span>
@@ -346,11 +346,11 @@ export function ServicesPage() {
                 <h2 className="text-[22px] md:text-[26px] font-semibold leading-tight text-navy mb-3 group-hover:text-gold-d transition-colors">
                   想看我們怎麼判斷 Go / No-Go？
                 </h2>
-                <p className="text-[14px] md:text-[15px] text-tx2 leading-[1.8] font-normal">
+                <p className="text-[15.5px] md:text-[16.5px] text-tx2 leading-[1.8] font-normal">
                   MBCPR 五維評分矩陣、紅燈判準、一個真實案例的完整評分過程——顧問報告背後的決策邏輯全部攤開。
                 </p>
               </div>
-              <span className="text-[14px] font-semibold text-gold-d mt-2 group-hover:translate-x-1 transition-transform inline-block">
+              <span className="text-[15.5px] font-semibold text-gold-d mt-2 group-hover:translate-x-1 transition-transform inline-block">
                 看方法論 →
               </span>
             </div>
@@ -377,7 +377,7 @@ export function ServicesPage() {
                     className="w-full flex items-center justify-between py-5 md:py-6 text-left cursor-pointer group"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-[15.5px] md:text-[16.5px] font-medium pr-4 group-hover:text-navy transition-colors">
+                    <span className="text-[17px] md:text-[17.5px] font-medium pr-4 group-hover:text-navy transition-colors">
                       {f.q}
                     </span>
                     <svg
@@ -407,7 +407,7 @@ export function ServicesPage() {
                         transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-6 text-[14.5px] text-tx2 leading-[1.85] font-normal">
+                        <p className="pb-6 text-[16px] text-tx2 leading-[1.85] font-normal">
                           {f.a}
                         </p>
                       </motion.div>
@@ -426,19 +426,19 @@ export function ServicesPage() {
           <h2 className="font-sans text-[clamp(26px,3.2vw,38px)] text-white leading-[1.2] font-light tracking-[-0.4px] mb-4">
             想知道你最該從<span className="text-gold font-normal">哪個支柱</span>開始？
           </h2>
-          <p className="text-[15px] text-white/60 leading-[1.75] mb-10 max-w-[540px] mx-auto">
+          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-10 max-w-[540px] mx-auto">
             聊聊你的狀況，我們幫你判斷哪個支柱最該先動——不收費、不承諾、不賣課。
           </p>
           <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
             <button
               onClick={open}
-              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
             >
               聊聊你的狀況 →
             </button>
             <Link
               href="/assess"
-              className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-white"
+              className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-white"
             >
               <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
                 先比對案例

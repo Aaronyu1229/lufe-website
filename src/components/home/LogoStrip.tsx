@@ -24,7 +24,7 @@ export function LogoStrip() {
             {doubled.map((p, i) => (
               <span
                 key={`${p.name}-${i}`}
-                className="text-[14px] md:text-[16px] font-bold tracking-[3px] text-tx3/50 hover:text-tx3/80 transition-colors duration-300 uppercase select-none flex-shrink-0"
+                className="text-[15.5px] md:text-[17px] font-bold tracking-[3px] text-tx3/50 hover:text-tx3/80 transition-colors duration-300 uppercase select-none flex-shrink-0"
               >
                 {p.abbr}
               </span>

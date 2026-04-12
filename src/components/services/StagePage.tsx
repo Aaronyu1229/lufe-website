@@ -38,7 +38,7 @@ export function StagePage({ stage }: Props) {
 
         <div className="relative max-w-[1100px] mx-auto">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[12px] text-white/50 mb-6">
+          <nav className="flex items-center gap-2 text-[13px] text-white/50 mb-6">
             <Link href="/services" className="hover:text-white transition-colors">
               服務
             </Link>
@@ -52,10 +52,10 @@ export function StagePage({ stage }: Props) {
           <h1 className="font-heading text-[clamp(32px,5vw,56px)] text-white leading-[1.1] font-light tracking-[-0.8px] mb-5">
             {stage.title}
           </h1>
-          <p className="text-[18px] md:text-[20px] text-white/75 max-w-[720px] leading-[1.55] font-light mb-8">
+          <p className="text-[19px] md:text-[21px] text-white/75 max-w-[720px] leading-[1.55] font-light mb-8">
             {stage.subtitle}
           </p>
-          <p className={`text-[16px] md:text-[17px] max-w-[700px] leading-[1.8] font-normal ${c.text} italic`}>
+          <p className={`text-[17px] md:text-[18px] max-w-[700px] leading-[1.8] font-normal ${c.text} italic`}>
             {stage.heroLine}
           </p>
         </div>
@@ -88,7 +88,7 @@ export function StagePage({ stage }: Props) {
                 style={{ backgroundColor: "currentColor", opacity: 0.4 }}
               />
             </div>
-            <p className="text-[16px] text-tx2 leading-[1.9] font-normal max-w-[720px]">
+            <p className="text-[17px] text-tx2 leading-[1.9] font-normal max-w-[720px]">
               {stage.purpose}
             </p>
           </div>
@@ -127,7 +127,7 @@ export function StagePage({ stage }: Props) {
                   >
                     Outcome {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[15px] text-tx leading-[1.7] font-normal">
+                  <span className="text-[16.5px] text-tx leading-[1.8] font-normal">
                     {outcome}
                   </span>
                 </div>
@@ -178,10 +178,10 @@ export function StagePage({ stage }: Props) {
                     <span className={`block text-[10.5px] font-semibold tracking-[1.5px] uppercase ${c.text} tabular-nums mb-1`}>
                       Deliverable 0{i + 1}
                     </span>
-                    <h3 className="text-[16px] font-semibold leading-tight">{d.title}</h3>
+                    <h3 className="text-[17px] font-semibold leading-tight">{d.title}</h3>
                   </div>
                 </div>
-                <p className="text-[13.5px] text-tx2 leading-[1.75] font-normal">
+                <p className="text-[15px] text-tx2 leading-[1.8] font-normal">
                   {d.desc}
                 </p>
               </div>
@@ -199,7 +199,7 @@ export function StagePage({ stage }: Props) {
           <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] text-white leading-[1.2] font-light tracking-[-0.5px] mb-3">
             <span className="text-gold font-normal">{stage.timeline}</span> 的實際節奏
           </h2>
-          <p className="text-[15px] text-white/60 leading-[1.7] mb-12 max-w-[520px]">
+          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-12 max-w-[520px]">
             每個階段我們都有明確的週進度，不會讓你不知道現在在做什麼。
           </p>
 
@@ -215,14 +215,14 @@ export function StagePage({ stage }: Props) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-[17px] md:text-[19px] text-white font-medium mb-3">
+                  <h3 className="text-[18px] md:text-[20px] text-white font-medium mb-3">
                     {p.title}
                   </h3>
                   <ul className="space-y-2">
                     {p.items.map((item, j) => (
                       <li
                         key={j}
-                        className="flex items-start gap-3 text-[14px] text-white/70 leading-[1.7]"
+                        className="flex items-start gap-3 text-[15.5px] text-white/70 leading-[1.8]"
                       >
                         <span className="w-1 h-1 rounded-full bg-gold/60 mt-[10px] shrink-0" />
                         {item}
@@ -262,7 +262,7 @@ export function StagePage({ stage }: Props) {
                 >
                   {r.positive ? "✓" : "✗"}
                 </span>
-                <span className="text-[13.5px] text-tx leading-[1.65]">{r.text}</span>
+                <span className="text-[15px] text-tx leading-[1.65]">{r.text}</span>
               </div>
             ))}
           </div>
@@ -286,10 +286,10 @@ export function StagePage({ stage }: Props) {
                 key={i}
                 className="p-5 md:p-6 bg-red-50/50 border-l-4 border-red-400/70"
               >
-                <h3 className="text-[16px] font-semibold mb-2 text-red-700/90">
+                <h3 className="text-[17px] font-semibold mb-2 text-red-700/90">
                   {rf.title}
                 </h3>
-                <p className="text-[13.5px] text-tx2 leading-[1.75]">{rf.desc}</p>
+                <p className="text-[15px] text-tx2 leading-[1.8]">{rf.desc}</p>
               </div>
             ))}
           </div>
@@ -337,13 +337,13 @@ export function StagePage({ stage }: Props) {
                   <div className="font-heading text-[40px] md:text-[48px] text-gold-d leading-none font-semibold mb-3">
                     {relatedCase.num}
                   </div>
-                  <h3 className="font-heading text-[20px] md:text-[22px] leading-[1.35] font-bold mb-3">
+                  <h3 className="font-heading text-[21px] md:text-[22px] leading-[1.35] font-bold mb-3">
                     {relatedCase.title}
                   </h3>
-                  <p className="text-[13.5px] text-tx2 leading-[1.7] mb-4">
+                  <p className="text-[15px] text-tx2 leading-[1.8] mb-4">
                     {relatedCase.summary}
                   </p>
-                  <span className="text-[13px] font-semibold text-gold-d group-hover:translate-x-1 transition-transform inline-block">
+                  <span className="text-[14.5px] font-semibold text-gold-d group-hover:translate-x-1 transition-transform inline-block">
                     看完整案例 →
                   </span>
                 </div>
@@ -369,7 +369,7 @@ export function StagePage({ stage }: Props) {
                     className="w-full flex items-center justify-between py-5 md:py-6 text-left cursor-pointer group"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-[15.5px] md:text-[16.5px] font-medium pr-4 group-hover:text-navy transition-colors">
+                    <span className="text-[17px] md:text-[17.5px] font-medium pr-4 group-hover:text-navy transition-colors">
                       {f.q}
                     </span>
                     <svg
@@ -399,7 +399,7 @@ export function StagePage({ stage }: Props) {
                         transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-6 text-[14.5px] text-tx2 leading-[1.85] font-normal max-w-[700px]">
+                        <p className="pb-6 text-[16px] text-tx2 leading-[1.85] font-normal max-w-[700px]">
                           {f.a}
                         </p>
                       </motion.div>
@@ -418,19 +418,19 @@ export function StagePage({ stage }: Props) {
           <h2 className="font-sans text-[clamp(26px,3.2vw,38px)] text-white leading-[1.2] font-light tracking-[-0.4px] mb-4">
             準備好進入<span className="text-gold font-normal">{stage.title}</span>了嗎？
           </h2>
-          <p className="text-[15px] text-white/60 leading-[1.75] mb-10 max-w-[520px] mx-auto">
+          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-10 max-w-[520px] mx-auto">
             聊聊你的狀況，我們會告訴你這個階段對你是不是現在最該做的事。
           </p>
           <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
             <button
               onClick={open}
-              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[14px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
             >
               聊聊你的產品 →
             </button>
             <Link
               href="/assess"
-              className="group inline-flex items-center gap-2 text-white/75 text-[14px] font-medium transition-colors hover:text-white"
+              className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-white"
             >
               <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
                 先做 2 分鐘評估
@@ -452,10 +452,10 @@ export function StagePage({ stage }: Props) {
               <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1.5">
                 ← 上一階段
               </div>
-              <div className="text-[15px] font-semibold group-hover:text-navy transition-colors">
+              <div className="text-[16.5px] font-semibold group-hover:text-navy transition-colors">
                 {prevStage.num} {prevStage.title}
               </div>
-              <div className="text-[12px] text-tx3 mt-1">{prevStage.timeline}</div>
+              <div className="text-[13px] text-tx3 mt-1">{prevStage.timeline}</div>
             </Link>
           ) : (
             <Link
@@ -465,7 +465,7 @@ export function StagePage({ stage }: Props) {
               <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1.5">
                 ← 服務總覽
               </div>
-              <div className="text-[15px] font-semibold group-hover:text-navy transition-colors">
+              <div className="text-[16.5px] font-semibold group-hover:text-navy transition-colors">
                 看完整四階段路徑
               </div>
             </Link>
@@ -478,10 +478,10 @@ export function StagePage({ stage }: Props) {
               <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1.5">
                 下一階段 →
               </div>
-              <div className="text-[15px] font-semibold group-hover:text-navy transition-colors">
+              <div className="text-[16.5px] font-semibold group-hover:text-navy transition-colors">
                 {nextStage.num} {nextStage.title}
               </div>
-              <div className="text-[12px] text-tx3 mt-1">{nextStage.timeline}</div>
+              <div className="text-[13px] text-tx3 mt-1">{nextStage.timeline}</div>
             </Link>
           ) : (
             <Link
@@ -491,10 +491,10 @@ export function StagePage({ stage }: Props) {
               <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1.5">
                 進階方案 →
               </div>
-              <div className="text-[15px] font-semibold group-hover:text-navy transition-colors">
+              <div className="text-[16.5px] font-semibold group-hover:text-navy transition-colors">
                 運營優化方案
               </div>
-              <div className="text-[12px] text-tx3 mt-1">已經在海外，想做更好</div>
+              <div className="text-[13px] text-tx3 mt-1">已經在海外，想做更好</div>
             </Link>
           )}
         </div>
