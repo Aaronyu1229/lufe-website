@@ -116,7 +116,7 @@ export function PositioningBand() {
                   Yueh Ma International · 躍馬國際
                 </div>
                 <h3 className="font-sans text-[26px] md:text-[34px] leading-[1.2] font-light tracking-[-0.5px] mb-5">
-                  我們不是 PowerPoint 顧問,
+                  出海不是報告寫得出來的,
                   <br />
                   <span className="text-gold font-normal">是真的跑過船的人</span>
                 </h3>

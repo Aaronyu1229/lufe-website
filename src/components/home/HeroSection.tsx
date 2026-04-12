@@ -63,7 +63,7 @@ const slides: Slide[] = [
     chipHref: "/about",
     eyebrow: "真正的基石 · 躍馬 42 年",
     titleLines: ["真的跑過船的人，", "才懂出海的眉角"],
-    subtitle: "從報關、倉儲到最後一哩 — 不是教科書讀來的，是 42 年港口、海關、貨櫃場跑出來的。",
+    subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬國際 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通。",
     primary: { label: "認識躍馬國際", href: "/about" },
     secondary: { label: "看完整服務內容", href: "/services" },
     media: {
