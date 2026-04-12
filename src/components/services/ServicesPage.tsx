@@ -5,7 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMessageBox } from "../MessageBox";
-import { PILLARS, PILLAR_ORDER, ACCENT_CLASSES } from "@/data/services";
+import { PILLARS, PILLAR_ORDER, ACCENT_CLASSES, type PillarSlug } from "@/data/services";
+
+const PILLAR_IMAGES: Record<PillarSlug, { src: string; alt: string }> = {
+  fit: {
+    src: "/images/services/pillar-fit-analysis.jpg",
+    alt: "專業團隊分析市場數據圖表 — 產品適配性的核心",
+  },
+  channel: {
+    src: "/images/services/pillar-channel-aisle.jpg",
+    alt: "超市貨架上琳琅滿目的商品 — 通路銷售力的現場",
+  },
+  team: {
+    src: "/images/services/pillar-team-collab.jpg",
+    alt: "亞洲青年專業團隊在現代辦公室協作 — 團隊體質的樣貌",
+  },
+};
 
 /**
  * ServicesPage (hub) — 3 pillars framing.
@@ -39,7 +54,7 @@ export function ServicesPage() {
     <>
       {/* ─── Hero ─── */}
       <section className="relative bg-navy pt-[130px] md:pt-[170px] pb-[70px] md:pb-[90px] px-5 md:px-10 overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/images/services/services-hero-dhl.jpg"
             alt=""
@@ -49,12 +64,21 @@ export function ServicesPage() {
             className="object-cover opacity-[0.3] animate-hero-kenburns"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/75 via-navy/55 to-navy" />
+          {/* Light sweep — diagonal sheen travelling every 9s */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 -left-1/3 w-1/3 pointer-events-none animate-hero-light-sweep"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.04) 40%, rgba(212,168,92,0.08) 50%, rgba(255,255,255,0.04) 60%, transparent 100%)",
+            }}
+          />
         </div>
 
-        {/* Soft gold glow top-right */}
+        {/* Soft gold glow top-right — with pulse */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none animate-hero-glow-pulse"
           style={{
             background:
               "radial-gradient(ellipse 55% 40% at 80% 0%, rgba(212,168,92,0.14) 0%, transparent 70%)",
@@ -154,6 +178,7 @@ export function ServicesPage() {
         const p = PILLARS[slug];
         const c = ACCENT_CLASSES[p.accent];
         const isEven = idx % 2 === 0;
+        const img = PILLAR_IMAGES[slug];
         return (
           <section
             key={slug}
@@ -162,22 +187,39 @@ export function ServicesPage() {
               isEven ? "bg-white" : "bg-cream"
             }`}
           >
-            <div className="max-w-[1100px] mx-auto">
+            <div className="max-w-[1200px] mx-auto">
+              {/* Wide banner image — editorial break between text walls */}
+              <div className="relative w-full aspect-[21/9] md:aspect-[24/9] overflow-hidden mb-10 md:mb-14">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  className="object-cover"
+                />
+                {/* Subtle navy vignette at bottom for depth */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-navy/20 via-transparent to-transparent"
+                />
+                {/* Pillar num badge — bottom-left overlay */}
+                <div className="absolute left-6 md:left-10 bottom-6 md:bottom-8 flex items-baseline gap-3">
+                  <span
+                    className={`font-heading text-[56px] md:text-[88px] font-light tabular-nums leading-none text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]`}
+                  >
+                    {p.num}
+                  </span>
+                  <span
+                    className={`text-[11px] md:text-[12px] font-semibold tracking-[2.5px] uppercase text-white/90 mb-2`}
+                  >
+                    {p.subtitle}
+                  </span>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-[1fr_1.3fr] gap-10 md:gap-14">
                 {/* Left — pillar title block */}
                 <div>
-                  <div className="flex items-baseline gap-3 mb-4">
-                    <span
-                      className={`font-heading text-[56px] md:text-[72px] font-light tabular-nums leading-none ${c.text}`}
-                    >
-                      {p.num}
-                    </span>
-                    <span
-                      className={`text-[11px] font-semibold tracking-[2px] uppercase ${c.text}`}
-                    >
-                      {p.subtitle}
-                    </span>
-                  </div>
                   <h2 className="font-sans text-[clamp(28px,3.6vw,44px)] leading-[1.12] font-light tracking-[-0.5px] text-navy mb-4">
                     {p.title}
                   </h2>

@@ -286,9 +286,31 @@ export function ContactPage() {
       {/* ─── Partners entry ─── */}
       <section
         id="partners"
-        className="bg-navy py-[72px] md:py-[88px] px-5 md:px-10 scroll-mt-[100px] border-t border-b border-white/5"
+        className="relative bg-navy py-[72px] md:py-[88px] px-5 md:px-10 scroll-mt-[100px] border-t border-b border-white/5 overflow-hidden"
       >
-        <div className="max-w-[900px] mx-auto">
+        {/* Handshake bg — subtle, conveys partnership */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/images/contact/partners-handshake.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-[70%_center] opacity-[0.14]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/60" />
+        </div>
+
+        {/* Gold glow */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 55% 45% at 15% 25%, rgba(212,168,92,0.12) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative max-w-[900px] mx-auto">
           <div className="flex items-center gap-3 mb-5">
             <span className="block w-8 h-px bg-gold" />
             <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">

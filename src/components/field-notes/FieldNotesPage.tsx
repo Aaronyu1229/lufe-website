@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
 import {
@@ -104,36 +105,54 @@ export function FieldNotesPage() {
                 key={a.id}
                 className="group bg-white border border-bd hover:border-gold/40 hover:shadow-[0_8px_28px_rgba(18,38,63,0.08)] transition-all overflow-hidden"
               >
-                {/* Placeholder image area */}
+                {/* Image area — real photo or gradient placeholder */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-navy via-navy-l to-navy">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse 60% 50% at 50% 40%, rgba(212,168,92,0.18) 0%, transparent 65%)",
-                    }}
-                  />
-                  {/* Centered placeholder icon */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg
-                      width="44"
-                      height="44"
-                      viewBox="0 0 44 44"
-                      fill="none"
-                      className="text-gold/40"
-                      aria-hidden="true"
-                    >
-                      <rect x="6" y="10" width="32" height="24" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-                      <circle cx="22" cy="22" r="5" stroke="currentColor" strokeWidth="1.5" />
-                      <circle cx="22" cy="22" r="2" fill="currentColor" opacity="0.5" />
-                      <path d="M14 10L16 6H28L30 10" stroke="currentColor" strokeWidth="1.5" />
-                    </svg>
-                  </div>
+                  {a.image && !a.tbd ? (
+                    <>
+                      <Image
+                        src={a.image}
+                        alt={a.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            "radial-gradient(ellipse 60% 50% at 50% 40%, rgba(212,168,92,0.18) 0%, transparent 65%)",
+                        }}
+                      />
+                      {/* Centered placeholder icon */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg
+                          width="44"
+                          height="44"
+                          viewBox="0 0 44 44"
+                          fill="none"
+                          className="text-gold/40"
+                          aria-hidden="true"
+                        >
+                          <rect x="6" y="10" width="32" height="24" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+                          <circle cx="22" cy="22" r="5" stroke="currentColor" strokeWidth="1.5" />
+                          <circle cx="22" cy="22" r="2" fill="currentColor" opacity="0.5" />
+                          <path d="M14 10L16 6H28L30 10" stroke="currentColor" strokeWidth="1.5" />
+                        </svg>
+                      </div>
+                    </>
+                  )}
                   {/* Tag badge */}
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-3 left-3 z-10">
                     <span
-                      className={`text-[10px] px-2 py-0.5 bg-white/90 font-semibold tracking-[1.5px] uppercase ${tagColor[a.tag] ?? "text-tx3"}`}
+                      className={`text-[10px] px-2 py-0.5 bg-white/95 font-semibold tracking-[1.5px] uppercase ${tagColor[a.tag] ?? "text-tx3"}`}
                     >
                       {a.tag}
                     </span>

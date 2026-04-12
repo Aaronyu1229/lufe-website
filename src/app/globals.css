@@ -165,6 +165,40 @@ body {
   }
 }
 
+/* Tier-1 hero light sweep — a slow diagonal sheen that travels across
+   the hero image every 9 seconds. Layered on top of the bg image but
+   under the content, mimicking a real-world light reflection. Gives the
+   static-image heroes a second motion layer that makes them feel as
+   alive as the home page's video carousel, without actually being video. */
+@keyframes hero-light-sweep {
+  0%   { transform: translateX(-120%) skewX(-18deg); opacity: 0; }
+  20%  { opacity: 0.5; }
+  50%  { opacity: 0.5; }
+  80%  { opacity: 0; }
+  100% { transform: translateX(120%) skewX(-18deg); opacity: 0; }
+}
+.animate-hero-light-sweep {
+  animation: hero-light-sweep 9s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-light-sweep { animation: none; opacity: 0; }
+}
+
+/* Gold glow pulse — the radial gold accent in hero overlays slowly
+   breathes in opacity (6s cycle). Works with existing radial gradients. */
+@keyframes hero-glow-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.04); }
+}
+.animate-hero-glow-pulse {
+  animation: hero-glow-pulse 6s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-glow-pulse { animation: none; opacity: 0.9; }
+}
+
 /* Gold glow drift — for hero sections without a bg image (methodology).
    Subtly drifts and breathes the radial gradient so the hero doesn't
    feel static next to Ken Burns image heroes. Longer 22s cycle. */

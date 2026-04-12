@@ -9,6 +9,100 @@ import { useMessageBox } from "../MessageBox";
  * Purpose: shift perception from "experienced consultancy" to "consultancy with IP."
  */
 
+/* ─── MBCPR dimension icons (inline SVG, no asset cost) ─── */
+
+const iconProps = {
+  width: 36,
+  height: 36,
+  viewBox: "0 0 36 36",
+  fill: "none",
+  "aria-hidden": true as const,
+};
+
+function MarketIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="18" cy="18" r="13" stroke="currentColor" strokeWidth="1.5" />
+      <ellipse cx="18" cy="18" rx="6" ry="13" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M5 18H31" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M18 5L18 31" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+    </svg>
+  );
+}
+
+function BarrierIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="5" y="9" width="26" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="5" y="23" width="26" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M9 13V23" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M15 13V23" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M21 13V23" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M27 13V23" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  );
+}
+
+function CompetitionIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="11" cy="14" r="4" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="25" cy="14" r="4" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M5 28C5 24 7.5 21 11 21C14.5 21 17 24 17 28"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M19 28C19 24 21.5 21 25 21C28.5 21 31 24 31 28"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ProfitabilityIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="5" y="11" width="26" height="16" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="18" cy="19" r="4" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M16.5 19H19.5" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M18 17.5V20.5" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M8 14V24" stroke="currentColor" strokeWidth="1" opacity="0.55" />
+      <path d="M28 14V24" stroke="currentColor" strokeWidth="1" opacity="0.55" />
+    </svg>
+  );
+}
+
+function RegulatoryIcon() {
+  return (
+    <svg {...iconProps}>
+      <path
+        d="M9 5H22L27 10V31H9V5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path d="M22 5V10H27" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M13 17H23" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M13 21H23" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M13 25H19" stroke="currentColor" strokeWidth="1.2" />
+      <circle cx="23" cy="26" r="3" stroke="currentColor" strokeWidth="1.3" />
+    </svg>
+  );
+}
+
+const DIMENSION_ICON: Record<string, () => React.ReactElement> = {
+  M: MarketIcon,
+  B: BarrierIcon,
+  C: CompetitionIcon,
+  P: ProfitabilityIcon,
+  R: RegulatoryIcon,
+};
+
 const dimensions = [
   {
     code: "M",
@@ -182,19 +276,25 @@ export function MethodologyPage() {
           </p>
 
           <div className="grid grid-cols-5 gap-2 md:gap-4 mt-10 mb-3">
-            {dimensions.map((d) => (
-              <div key={d.code} className="text-center">
-                <div className="w-14 h-14 md:w-20 md:h-20 mx-auto bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d font-heading text-[22px] md:text-[32px] font-semibold mb-2">
-                  {d.code}
+            {dimensions.map((d) => {
+              const Icon = DIMENSION_ICON[d.code];
+              return (
+                <div key={d.code} className="text-center">
+                  <div className="relative w-14 h-14 md:w-20 md:h-20 mx-auto bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d mb-2">
+                    {Icon && <Icon />}
+                    <span className="absolute -top-2 -right-2 w-5 h-5 md:w-6 md:h-6 bg-navy text-gold font-heading text-[10px] md:text-[12px] font-semibold flex items-center justify-center">
+                      {d.code}
+                    </span>
+                  </div>
+                  <div className="text-[11px] md:text-[13px] font-semibold text-tx">
+                    {d.name}
+                  </div>
+                  <div className="text-[10px] md:text-[11px] text-gold-d font-medium mt-0.5">
+                    {d.weight}
+                  </div>
                 </div>
-                <div className="text-[11px] md:text-[13px] font-semibold text-tx">
-                  {d.name}
-                </div>
-                <div className="text-[10px] md:text-[11px] text-gold-d font-medium mt-0.5">
-                  {d.weight}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className="text-[11px] text-tx3 text-center tracking-wider">
             MARKET · BARRIER · COMPETITION · PROFITABILITY · REGULATORY
@@ -211,14 +311,19 @@ export function MethodologyPage() {
           </h2>
 
           <div className="space-y-5 mt-10">
-            {dimensions.map((d) => (
+            {dimensions.map((d) => {
+              const Icon = DIMENSION_ICON[d.code];
+              return (
               <div
                 key={d.code}
                 className="bg-white p-6 md:p-8 border-l-4 border-gold/40"
               >
                 <div className="flex items-start gap-5">
-                  <div className="w-14 h-14 bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d font-heading text-[22px] font-semibold shrink-0">
-                    {d.code}
+                  <div className="relative w-14 h-14 bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d shrink-0">
+                    {Icon && <Icon />}
+                    <span className="absolute -top-2 -right-2 w-5 h-5 bg-navy text-gold font-heading text-[10px] font-semibold flex items-center justify-center">
+                      {d.code}
+                    </span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-3 mb-1 flex-wrap">
@@ -259,7 +364,8 @@ export function MethodologyPage() {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

@@ -60,7 +60,7 @@ function InsightsPageInner() {
     <>
       {/* ─── Hero ─── */}
       <section className="relative bg-navy pt-[130px] md:pt-[170px] pb-[70px] md:pb-[90px] px-5 md:px-10 overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/images/insights/insights-hero-analysis.jpg"
             alt=""
@@ -71,12 +71,21 @@ function InsightsPageInner() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-navy/40" />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-transparent to-navy" />
+          {/* Light sweep */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 -left-1/3 w-1/3 pointer-events-none animate-hero-light-sweep"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.04) 40%, rgba(212,168,92,0.08) 50%, rgba(255,255,255,0.04) 60%, transparent 100%)",
+            }}
+          />
         </div>
 
-        {/* Soft gold glow */}
+        {/* Soft gold glow — with pulse */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none animate-hero-glow-pulse"
           style={{
             background:
               "radial-gradient(ellipse 50% 40% at 20% 0%, rgba(212,168,92,0.15) 0%, transparent 70%)",

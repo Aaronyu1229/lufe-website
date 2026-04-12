@@ -157,7 +157,7 @@ export function AboutPage() {
         className="relative bg-navy text-white pt-[130px] md:pt-[170px] pb-[80px] md:pb-[100px] px-5 md:px-10 overflow-hidden scroll-mt-[80px]"
       >
         {/* Executive window photo — conveys senior, reflective experience */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/images/about/about-hero-executive.jpg"
             alt=""
@@ -168,12 +168,21 @@ export function AboutPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/35" />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy" />
+          {/* Light sweep */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 -left-1/3 w-1/3 pointer-events-none animate-hero-light-sweep"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.04) 40%, rgba(212,168,92,0.08) 50%, rgba(255,255,255,0.04) 60%, transparent 100%)",
+            }}
+          />
         </div>
 
-        {/* Soft gold glow */}
+        {/* Soft gold glow — with pulse */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none animate-hero-glow-pulse"
           style={{
             background:
               "radial-gradient(ellipse 50% 40% at 15% 10%, rgba(212,168,92,0.15) 0%, transparent 70%)",
@@ -245,53 +254,115 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ─── Story: 3 parts ─── */}
-      <section className="bg-navy text-white py-[70px] md:py-[90px] px-5 md:px-10 border-t border-white/5">
-        <div className="max-w-[900px] mx-auto">
-          <div className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold mb-6">
+      {/* ─── Story: 3 parts · 圖文交錯 ─── */}
+      <section className="bg-navy text-white py-[80px] md:py-[110px] px-5 md:px-10 border-t border-white/5 overflow-hidden">
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold mb-10 md:mb-14">
             創辦人的話
           </div>
 
-          {/* Story: 3 parts */}
-          <div className="space-y-8">
-            {/* 看到問題 */}
-            <div>
-              <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
-                看到的問題
-              </h2>
-              <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
-                在國際物流業做了十多年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。
-                找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸、找代操公司只買工具。每一段都有人做，但沒有人幫你串起來。
-                企業自己得當專案經理，在三四家公司之間來回溝通，效率極低，成本極高。
-              </p>
+          <div className="space-y-14 md:space-y-20">
+            {/* 看到問題 — 圖左文右 */}
+            <div className="grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-8 md:gap-12 items-center">
+              <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden">
+                <Image
+                  src="/images/about/story-problem-warehouse.jpg"
+                  alt="大型物流倉儲的卸貨月台 — 跨境現場的真實樣貌"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50"
+                />
+                <div className="absolute left-5 top-5 flex items-center gap-2">
+                  <span className="block w-5 h-px bg-gold" />
+                  <span className="text-[10px] font-semibold tracking-[2px] uppercase text-gold/90">
+                    01
+                  </span>
+                </div>
+              </div>
+              <div>
+                <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-4">
+                  看到的問題
+                </h2>
+                <p className="text-[15px] md:text-[16px] text-white/75 leading-[1.9] font-normal">
+                  在國際物流業做了十多年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。
+                  找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸、找代操公司只買工具。每一段都有人做，但沒有人幫你串起來。
+                  企業自己得當專案經理，在三四家公司之間來回溝通，效率極低，成本極高。
+                </p>
+              </div>
             </div>
 
-            {/* 相信什麼 */}
-            <div>
-              <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
-                相信的事
-              </h2>
-              <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
-                我相信每一家有好產品的台灣公司，都值得試試走向海外。不是每個產品都適合，但至少應該有人幫你搞清楚。
-                跨境不應該是一場冒險，而應該是一次有計畫的探索——用三個維度判斷：這個市場的
-                <span className="text-white/90 font-medium">勝率</span>（產品適配）、
-                <span className="text-white/90 font-medium">潛力</span>（通路銷售）、
-                <span className="text-white/90 font-medium">成功率</span>（團隊體質）。有人帶路、有框架可用，風險就小了一半。
-              </p>
+            {/* 相信什麼 — 圖右文左 */}
+            <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-8 md:gap-12 items-center">
+              <div className="md:order-1">
+                <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-4">
+                  相信的事
+                </h2>
+                <p className="text-[15px] md:text-[16px] text-white/75 leading-[1.9] font-normal">
+                  我相信每一家有好產品的台灣公司，都值得試試走向海外。不是每個產品都適合，但至少應該有人幫你搞清楚。
+                  跨境不應該是一場冒險，而應該是一次有計畫的探索——用三個維度判斷：這個市場的
+                  <span className="text-white/90 font-medium">勝率</span>（產品適配）、
+                  <span className="text-white/90 font-medium">潛力</span>（通路銷售）、
+                  <span className="text-white/90 font-medium">成功率</span>（團隊體質）。有人帶路、有框架可用，風險就小了一半。
+                </p>
+              </div>
+              <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden md:order-2">
+                <Image
+                  src="/images/about/story-belief-compass.jpg"
+                  alt="羅盤放在世界地圖上 — 有計畫的探索"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 35vw"
+                  className="object-cover"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50"
+                />
+                <div className="absolute left-5 top-5 flex items-center gap-2">
+                  <span className="block w-5 h-px bg-gold" />
+                  <span className="text-[10px] font-semibold tracking-[2px] uppercase text-gold/90">
+                    02
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* 做了什麼 */}
-            <div>
-              <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-3">
-                做了什麼
-              </h2>
-              <p className="text-[15px] text-white/70 leading-[1.9] font-normal">
-                所以我創立了鹿飛——一個用三支柱方法論幫台灣企業落地的跨境團隊。
-                從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有躍馬國際 42 年的國際物流實戰當基礎。
-                主要戰場是<span className="text-white/90 font-medium">北美</span>和
-                <span className="text-white/90 font-medium">東南亞</span>——兩個地方我們每個月都真的有人在現場。
-                別人幫你開車，我們幫你找路。
-              </p>
+            {/* 做了什麼 — 圖左文右 */}
+            <div className="grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-8 md:gap-12 items-center">
+              <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden">
+                <Image
+                  src="/images/about/story-action-conversation.jpg"
+                  alt="兩位亞洲專業人士在辦公室討論 — 我們在做的事"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50"
+                />
+                <div className="absolute left-5 top-5 flex items-center gap-2">
+                  <span className="block w-5 h-px bg-gold" />
+                  <span className="text-[10px] font-semibold tracking-[2px] uppercase text-gold/90">
+                    03
+                  </span>
+                </div>
+              </div>
+              <div>
+                <h2 className="text-[13px] font-semibold tracking-wider text-gold uppercase mb-4">
+                  做了什麼
+                </h2>
+                <p className="text-[15px] md:text-[16px] text-white/75 leading-[1.9] font-normal">
+                  所以我創立了鹿飛——一個用三支柱方法論幫台灣企業落地的跨境團隊。
+                  從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有躍馬國際 42 年的國際物流實戰當基礎。
+                  主要戰場是<span className="text-white/90 font-medium">北美</span>和
+                  <span className="text-white/90 font-medium">東南亞</span>——兩個地方我們每個月都真的有人在現場。
+                  別人幫你開車，我們幫你找路。
+                </p>
+              </div>
             </div>
           </div>
         </div>

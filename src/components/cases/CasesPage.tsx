@@ -38,7 +38,7 @@ export function CasesPage() {
     <>
       {/* ─── Hero ─── */}
       <section className="relative bg-navy pt-[130px] md:pt-[170px] pb-[80px] md:pb-[110px] px-5 md:px-10 overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/images/cases/cases-hero-collab.jpg"
             alt=""
@@ -48,12 +48,21 @@ export function CasesPage() {
             className="object-cover opacity-[0.28] animate-hero-kenburns"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
+          {/* Light sweep */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 -left-1/3 w-1/3 pointer-events-none animate-hero-light-sweep"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.04) 40%, rgba(212,168,92,0.08) 50%, rgba(255,255,255,0.04) 60%, transparent 100%)",
+            }}
+          />
         </div>
 
-        {/* Soft gold glow */}
+        {/* Soft gold glow — with pulse */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none animate-hero-glow-pulse"
           style={{
             background:
               "radial-gradient(ellipse 55% 45% at 20% 15%, rgba(212,168,92,0.14) 0%, transparent 70%)",
