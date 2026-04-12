@@ -234,27 +234,6 @@ export function PositioningBand() {
           </Link>
         </div>
 
-        {/* ─── 完整服務 CTA ─── */}
-        <div className="mt-14 md:mt-16 pt-10 border-t border-bd/50 text-center max-w-[1000px] mx-auto">
-          <p className="text-[16px] md:text-[17px] text-tx2 leading-[1.85] font-normal mb-6">
-            主要戰場是
-            <strong className="text-navy font-semibold">北美</strong>跟
-            <strong className="text-navy font-semibold">東南亞</strong>——這套方法在{" "}
-            <strong className="text-navy font-semibold tabular-nums">500+</strong>{" "}
-            次出口實戰裡跑過。
-          </p>
-          <Link
-            href="/services"
-            className="group inline-flex items-center gap-2 text-[14.5px] font-semibold text-tx2 hover:text-navy transition-colors"
-          >
-            <span className="border-b border-tx3/40 pb-0.5 group-hover:border-navy transition-colors">
-              看完整服務內容
-            </span>
-            <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-              →
-            </span>
-          </Link>
-        </div>
       </div>
     </section>
   );
