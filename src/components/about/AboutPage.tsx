@@ -276,15 +276,7 @@ export function AboutPage() {
             <span className="text-white/75">關於我們</span>
           </nav>
 
-          {/* Eyebrow — bilingual */}
-          <div className="flex items-center gap-3 mb-5">
-            <span className="block w-8 h-px bg-gold" />
-            <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-              關於我們 · ABOUT LUFÉ
-            </span>
-          </div>
-
-          {/* Headline — 3 pillars · 2 战場 framing */}
+          {/* Headline */}
           <h1 className="font-heading text-[clamp(34px,5vw,58px)] leading-[1.1] font-light tracking-[-0.8px] mb-7 max-w-[920px]">
             協助台灣企業
             <br />
@@ -336,9 +328,7 @@ export function AboutPage() {
       {/* ─── Story: 3 parts · 圖文交錯 ─── */}
       <section className="bg-navy text-white py-[80px] md:py-[110px] px-5 md:px-10 border-t border-white/5 overflow-hidden">
         <div className="max-w-[1100px] mx-auto">
-          <div className="text-[11px] font-semibold tracking-[2.5px] uppercase text-gold mb-10 md:mb-14">
-            創辦人的話
-          </div>
+          <div className="w-12 h-px bg-gold/60 mb-10 md:mb-14" />
 
           <div className="space-y-14 md:space-y-20">
             {/* 看到問題 — 圖左文右 */}
@@ -453,7 +443,6 @@ export function AboutPage() {
         className="bg-cream py-[72px] px-5 md:px-10 border-t border-b border-bd/40 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <div className="section-label">團隊組成</div>
           <h2 className="section-heading">
             不是 Aaron 一個人，
             <br />
@@ -498,7 +487,6 @@ export function AboutPage() {
         className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <div className="section-label">我們怎麼合作</div>
           <h2 className="section-heading">
             從第一次對話到交付，<span className="text-gold-d font-normal">四個階段</span>
           </h2>
@@ -560,7 +548,6 @@ export function AboutPage() {
               </div>
             </div>
           </div>
-          <div className="section-label">資源網絡</div>
           <h2 className="section-heading">
             你不只是找到一家公司
             <br />
@@ -600,7 +587,6 @@ export function AboutPage() {
         className="bg-cream py-[80px] px-5 md:px-10 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <div className="section-label">我們的邊界</div>
           <h2 className="section-heading">
             我們<span className="text-red-500/80 font-normal">不做</span>什麼
           </h2>
