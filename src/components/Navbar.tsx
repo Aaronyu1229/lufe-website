@@ -46,7 +46,7 @@ function pathnameHasDarkHero(pathname: string): boolean {
   ) {
     return true;
   }
-  if (pathname === "/resources/subsidies") return true;
+  if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
   if (pathname.startsWith("/services")) return true;
   if (pathname.startsWith("/cases")) return true;
   return false;
@@ -436,9 +436,9 @@ function ServicesMenu() {
             desc="一頁看完整方法論"
           />
           <MenuLink
-            href="/resources/subsidies"
-            title="政府補助整理"
-            desc="2026 年開放計畫"
+            href="/resources"
+            title="補助與活動"
+            desc="政府補助 + 現場紀錄"
           />
           <MenuLink
             href="https://tradepiloter.com"
@@ -601,6 +601,11 @@ function InsightsMenu() {
       </div>
       <div className="col-span-3">
         <MenuColumn label="其他內容">
+          <MenuLink
+            href="/resources"
+            title="補助與活動"
+            desc="政府補助 + 現場紀錄"
+          />
           <MenuLink
             href="/field-notes"
             title="現場紀錄"
@@ -848,6 +853,7 @@ function MobileMenuContent({
           onClose={onClose}
         />
         <MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} />
+        <MobileSubLink href="/resources" title="補助與活動" onClose={onClose} />
       </>
     );
   }
