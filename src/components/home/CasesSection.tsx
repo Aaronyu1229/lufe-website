@@ -335,15 +335,14 @@ export function CasesSection() {
                 href={`/cases/${c.slug}`}
                 className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch p-5 md:p-10 bg-white rounded-none transition-all duration-300 cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg relative"
               >
-                {/* 「最常被問到」badge */}
-                <div className="absolute top-4 right-4 md:top-5 md:right-5 z-10">
-                  <span className="inline-flex items-center gap-1.5 bg-gold/15 text-gold-d text-[10.5px] font-semibold px-2.5 py-1 tracking-[0.5px]">
-                    <span className="w-1 h-1 rounded-full bg-gold-d animate-pulse" />
-                    最常被問到
-                  </span>
-                </div>
-
                 <div className="flex flex-col">
+                  {/* 「最常被問到」badge — 放在文字區頂部，避開圖片 */}
+                  <div className="mb-3">
+                    <span className="inline-flex items-center gap-1.5 bg-gold/15 text-gold-d text-[10.5px] font-semibold px-2.5 py-1 tracking-[0.5px]">
+                      <span className="w-1 h-1 rounded-full bg-gold-d animate-pulse" />
+                      最常被問到
+                    </span>
+                  </div>
                   <CaseTags tags={c.tags} />
 
                   {/* 大數字 + micro label */}
