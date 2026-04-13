@@ -64,7 +64,6 @@ export function StagePage({ stage }: Props) {
       {/* ─── Purpose ─── */}
       <section className="bg-white py-[64px] md:py-[84px] px-5 md:px-10">
         <div className="max-w-[960px] mx-auto">
-          <div className="section-label">這個階段在做什麼</div>
           <h2 className="section-heading">
             為什麼要有<span className={`font-normal ${c.text}`}>這個階段</span>
           </h2>
@@ -95,97 +94,85 @@ export function StagePage({ stage }: Props) {
         </div>
       </section>
 
-      {/* ─── Outcomes ─── */}
-      <section className={`py-[64px] md:py-[84px] px-5 md:px-10 ${c.softBg}`}>
-        <div className="max-w-[840px] mx-auto">
-          <div className="section-label">你會知道什麼</div>
-          <h2 className="section-heading">
-            這階段結束時，你手上會有
-          </h2>
-          <ul className="space-y-4 mt-8">
-            {stage.outcomes.map((outcome, i) => (
-              <li
-                key={i}
-                className="flex items-start gap-4 bg-white p-5 border border-bd/60 hover:border-bd transition-colors"
-              >
-                <div
-                  className={`shrink-0 w-9 h-9 rounded-none ${c.softBg} border ${c.border} flex items-center justify-center ${c.text}`}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M5 12L10 17L19 7"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-1 pt-1">
-                  <span
-                    className={`block text-[10.5px] font-semibold tracking-[1.5px] uppercase ${c.text} mb-1 tabular-nums`}
-                  >
-                    Outcome {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[16.5px] text-tx leading-[1.8] font-normal">
-                    {outcome}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ─── Deliverables ─── */}
-      <section className="bg-white py-[64px] md:py-[84px] px-5 md:px-10">
+      {/* ─── What You Get (merged Outcomes + Deliverables) ─── */}
+      <section className={`py-[72px] md:py-[96px] px-5 md:px-10 ${c.softBg}`}>
         <div className="max-w-[1100px] mx-auto">
-          <div className="section-label">具體交付</div>
           <h2 className="section-heading">
-            你會實際拿到的東西
+            這階段結束時，<span className={`font-normal ${c.text}`}>你會拿到什麼</span>
           </h2>
           <p className="section-desc">
-            不是抽象承諾，是可以寫進合約的交付物。
+            不是抽象承諾，分成兩層：你會「知道」什麼，以及你會實際「拿到」什麼。
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
-            {stage.deliverables.map((d, i) => (
-              <div
-                key={i}
-                className="group p-6 md:p-7 bg-cream rounded-none border-l-4 border-gold/40 transition-all hover:border-gold hover:shadow-[0_6px_24px_rgba(16,27,48,0.06)]"
-              >
-                <div className="flex items-start gap-4 mb-3">
-                  <div
-                    className={`shrink-0 w-11 h-11 rounded-none bg-white border ${c.border} flex items-center justify-center ${c.text} group-hover:scale-[1.04] transition-transform`}
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinejoin="round"
-                      />
-                      <path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                      <path
-                        d="M10 13H16M10 16H16M10 19H13"
-                        stroke="currentColor"
-                        strokeWidth="1.3"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <span className={`block text-[10.5px] font-semibold tracking-[1.5px] uppercase ${c.text} tabular-nums mb-1`}>
-                      Deliverable 0{i + 1}
-                    </span>
-                    <h3 className="text-[17px] font-semibold leading-tight">{d.title}</h3>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-10">
+            {/* Left — Outcomes (理解層) */}
+            <div>
+              <div className="flex items-center gap-3 mb-5">
+                <div className={`w-8 h-8 rounded-full ${c.softBg} border ${c.border} flex items-center justify-center ${c.text}`}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M12 7V13L16 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
                 </div>
-                <p className="text-[15px] text-tx2 leading-[1.8] font-normal">
-                  {d.desc}
-                </p>
+                <h3 className={`text-[18px] font-semibold ${c.text}`}>你會知道什麼</h3>
               </div>
-            ))}
+              <ul className="space-y-3">
+                {stage.outcomes.map((outcome, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 bg-white p-4 border border-bd/60"
+                  >
+                    <div
+                      className={`shrink-0 w-6 h-6 rounded-full ${c.softBg} flex items-center justify-center ${c.text} mt-[2px]`}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M5 12L10 17L19 7"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-[15.5px] text-tx leading-[1.7] font-normal">
+                      {outcome}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right — Deliverables (實體層) */}
+            <div>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-8 h-8 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center text-gold-d">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                    />
+                    <path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <h3 className="text-[18px] font-semibold text-gold-d">你會實際拿到</h3>
+              </div>
+              <ul className="space-y-3">
+                {stage.deliverables.map((d, i) => (
+                  <li
+                    key={i}
+                    className="bg-white p-4 border-l-4 border-gold/60 border border-bd/60 hover:border-l-gold transition-colors"
+                  >
+                    <h4 className="text-[15.5px] font-semibold mb-1.5 text-tx">{d.title}</h4>
+                    <p className="text-[13.5px] text-tx2 leading-[1.7] font-normal">
+                      {d.desc}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -193,9 +180,7 @@ export function StagePage({ stage }: Props) {
       {/* ─── Process Timeline ─── */}
       <section className="bg-navy py-[80px] md:py-[100px] px-5 md:px-10">
         <div className="max-w-[960px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            執行流程
-          </div>
+          <div className="w-12 h-px bg-gold/60 mb-5" />
           <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] text-white leading-[1.2] font-light tracking-[-0.5px] mb-3">
             <span className="text-gold font-normal">{stage.timeline}</span> 的實際節奏
           </h2>
@@ -210,7 +195,7 @@ export function StagePage({ stage }: Props) {
                 className="grid grid-cols-[auto_1fr] gap-5 md:gap-8 py-6 border-t border-white/10"
               >
                 <div className="min-w-[80px] md:min-w-[120px]">
-                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold">
+                  <div className="text-[13px] font-semibold text-gold">
                     {p.week}
                   </div>
                 </div>
@@ -236,127 +221,83 @@ export function StagePage({ stage }: Props) {
         </div>
       </section>
 
-      {/* ─── Readiness Self-Diagnostic ─── */}
-      <section className="bg-cream py-[64px] md:py-[84px] px-5 md:px-10">
-        <div className="max-w-[840px] mx-auto">
-          <div className="section-label">自我診斷</div>
+      {/* ─── Readiness + Red Flags (merged self-check) ─── */}
+      <section className="bg-cream py-[72px] md:py-[96px] px-5 md:px-10">
+        <div className="max-w-[960px] mx-auto">
           <h2 className="section-heading">
-            你現在<span className={`font-normal ${c.text}`}>準備好</span>進這個階段了嗎？
+            你<span className={`font-normal ${c.text}`}>是不是該</span>進這個階段
           </h2>
           <p className="section-desc">
-            這不是門檻，是誠實的自我檢視。如果你多數項目是綠燈，這階段對你就是有效的。
+            兩個自我檢視：第一個看你準備好了沒，第二個看有沒有該先喊停的訊號。
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-8">
-            {stage.readiness.map((r, i) => (
-              <div
-                key={i}
-                className={`flex items-start gap-3 p-4 bg-white border ${
-                  r.positive ? "border-l-4 border-l-emerald-500 border-bd" : "border-l-4 border-l-red-400/70 border-bd"
-                }`}
-              >
-                <span
-                  className={`shrink-0 w-5 h-5 rounded-none flex items-center justify-center text-[11px] font-bold ${
-                    r.positive ? "bg-emerald-500 text-white" : "bg-red-400/70 text-white"
+          {/* Readiness checks */}
+          <div className="mt-10 mb-10">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-500/40 flex items-center justify-center text-emerald-600">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12L10 17L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <h3 className="text-[17px] font-semibold text-emerald-700">準備好的訊號</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {stage.readiness.map((r, i) => (
+                <div
+                  key={i}
+                  className={`flex items-start gap-3 p-4 bg-white border ${
+                    r.positive
+                      ? "border-l-4 border-l-emerald-500 border-bd"
+                      : "border-l-4 border-l-amber-400 border-bd"
                   }`}
                 >
-                  {r.positive ? "✓" : "✗"}
-                </span>
-                <span className="text-[15px] text-tx leading-[1.65]">{r.text}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Red Flags ─── */}
-      <section className="bg-white py-[64px] md:py-[84px] px-5 md:px-10">
-        <div className="max-w-[840px] mx-auto">
-          <div className="section-label text-red-500/80">紅燈警示</div>
-          <h2 className="section-heading">
-            如果遇到這些情況，<span className="font-normal text-red-500/80">我們會喊停</span>
-          </h2>
-          <p className="section-desc">
-            我們不是為了接案而做事。如果某些狀況會讓這階段白做，我們會在第一時間告訴你。
-          </p>
-
-          <div className="space-y-4 mt-8">
-            {stage.redFlags.map((rf, i) => (
-              <div
-                key={i}
-                className="p-5 md:p-6 bg-red-50/50 border-l-4 border-red-400/70"
-              >
-                <h3 className="text-[17px] font-semibold mb-2 text-red-700/90">
-                  {rf.title}
-                </h3>
-                <p className="text-[15px] text-tx2 leading-[1.8]">{rf.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Related Case ─── */}
-      {relatedCase && (
-        <section className="bg-cream py-[64px] md:py-[84px] px-5 md:px-10">
-          <div className="max-w-[960px] mx-auto">
-            <div className="section-label">實戰案例</div>
-            <h2 className="section-heading">
-              這階段在真實案子裡長什麼樣
-            </h2>
-
-            <Link
-              href={`/cases/${relatedCase.slug}`}
-              className="group block mt-8 bg-white rounded-none overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr]">
-                <div className="relative h-[240px] md:h-auto md:min-h-[280px] overflow-hidden">
-                  <Image
-                    src={relatedCase.heroImage}
-                    alt={relatedCase.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-7 md:p-9 flex flex-col justify-center">
-                  <div className="flex gap-1.5 mb-3">
-                    {relatedCase.tags.map((t) => (
-                      <span
-                        key={t.label}
-                        className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${
-                          t.variant === "sky"
-                            ? "bg-[rgba(91,143,168,0.08)] text-sky"
-                            : "bg-[rgba(212,168,92,0.12)] text-gold-d"
-                        }`}
-                      >
-                        {t.label}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="font-heading text-[40px] md:text-[48px] text-gold-d leading-none font-semibold mb-3">
-                    {relatedCase.num}
-                  </div>
-                  <h3 className="font-heading text-[21px] md:text-[22px] leading-[1.35] font-bold mb-3">
-                    {relatedCase.title}
-                  </h3>
-                  <p className="text-[15px] text-tx2 leading-[1.8] mb-4">
-                    {relatedCase.summary}
-                  </p>
-                  <span className="text-[14.5px] font-semibold text-gold-d group-hover:translate-x-1 transition-transform inline-block">
-                    看完整案例 →
+                  <span
+                    className={`shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold ${
+                      r.positive ? "bg-emerald-500 text-white" : "bg-amber-400 text-white"
+                    }`}
+                  >
+                    {r.positive ? "✓" : "!"}
                   </span>
+                  <span className="text-[15px] text-tx leading-[1.65]">{r.text}</span>
                 </div>
-              </div>
-            </Link>
+              ))}
+            </div>
           </div>
-        </section>
-      )}
 
-      {/* ─── FAQ ─── */}
+          {/* Divider */}
+          <div className="w-full h-px bg-bd/70 my-10" />
+
+          {/* Red flags */}
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-8 h-8 rounded-full bg-red-50 border border-red-400/40 flex items-center justify-center text-red-500">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 8V13M12 17V17.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+              </div>
+              <h3 className="text-[17px] font-semibold text-red-600/90">如果遇到這些，我們會喊停</h3>
+            </div>
+            <div className="space-y-3">
+              {stage.redFlags.map((rf, i) => (
+                <div
+                  key={i}
+                  className="p-5 bg-white border-l-4 border-red-400/70 border border-bd/60"
+                >
+                  <h4 className="text-[16px] font-semibold mb-1.5 text-red-700/90">
+                    {rf.title}
+                  </h4>
+                  <p className="text-[14.5px] text-tx2 leading-[1.8]">{rf.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ (moved before related case) ─── */}
       <section className="bg-white py-[64px] md:py-[84px] px-5 md:px-10">
         <div className="max-w-[760px] mx-auto">
-          <div className="section-label">階段 FAQ</div>
           <h2 className="section-heading">這階段最常被問到的問題</h2>
 
           <div className="border-t border-bd mt-8">
@@ -412,6 +353,62 @@ export function StagePage({ stage }: Props) {
         </div>
       </section>
 
+      {/* ─── Related Case (moved after FAQ) ─── */}
+      {relatedCase && (
+        <section className="bg-cream py-[64px] md:py-[84px] px-5 md:px-10">
+          <div className="max-w-[960px] mx-auto">
+            <h2 className="section-heading">
+              這階段在真實案子裡<span className={`font-normal ${c.text}`}>長什麼樣</span>
+            </h2>
+
+            <Link
+              href={`/cases/${relatedCase.slug}`}
+              className="group block mt-8 bg-white rounded-none overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr]">
+                <div className="relative h-[240px] md:h-auto md:min-h-[280px] overflow-hidden">
+                  <Image
+                    src={relatedCase.heroImage}
+                    alt={relatedCase.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-7 md:p-9 flex flex-col justify-center">
+                  <div className="flex gap-1.5 mb-3">
+                    {relatedCase.tags.map((t) => (
+                      <span
+                        key={t.label}
+                        className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${
+                          t.variant === "sky"
+                            ? "bg-[rgba(91,143,168,0.08)] text-sky"
+                            : "bg-[rgba(212,168,92,0.12)] text-gold-d"
+                        }`}
+                      >
+                        {t.label}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="font-heading text-[40px] md:text-[48px] text-gold-d leading-none font-semibold mb-3">
+                    {relatedCase.num}
+                  </div>
+                  <h3 className="font-heading text-[21px] md:text-[22px] leading-[1.35] font-bold mb-3">
+                    {relatedCase.title}
+                  </h3>
+                  <p className="text-[15px] text-tx2 leading-[1.8] mb-4">
+                    {relatedCase.summary}
+                  </p>
+                  <span className="text-[14.5px] font-semibold text-gold-d group-hover:translate-x-1 transition-transform inline-block">
+                    看完整案例 →
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
       {/* ─── CTA ─── */}
       <section className="bg-navy py-[72px] md:py-[96px] px-5 md:px-10">
         <div className="max-w-[720px] mx-auto text-center">
@@ -441,7 +438,7 @@ export function StagePage({ stage }: Props) {
         </div>
       </section>
 
-      {/* ─── Stage Navigator ─── */}
+      {/* ─── Stage Navigator (cleaned up) ─── */}
       <section className="bg-white py-[48px] px-5 md:px-10 border-t border-bd">
         <div className="max-w-[1100px] mx-auto grid grid-cols-2 gap-4 md:gap-8">
           {prevStage ? (
@@ -449,9 +446,7 @@ export function StagePage({ stage }: Props) {
               href={`/services/${prevStage.slug}`}
               className="group block p-5 md:p-6 border border-bd rounded-none hover:border-gold transition-colors"
             >
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1.5">
-                ← 上一階段
-              </div>
+              <div className="text-[13px] text-tx3 mb-1.5">← 上一階段</div>
               <div className="text-[16.5px] font-semibold group-hover:text-navy transition-colors">
                 {prevStage.num} {prevStage.title}
               </div>
@@ -462,9 +457,7 @@ export function StagePage({ stage }: Props) {
               href="/services"
               className="group block p-5 md:p-6 border border-bd rounded-none hover:border-gold transition-colors"
             >
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1.5">
-                ← 服務總覽
-              </div>
+              <div className="text-[13px] text-tx3 mb-1.5">← 回服務總覽</div>
               <div className="text-[16.5px] font-semibold group-hover:text-navy transition-colors">
                 看完整四階段路徑
               </div>
@@ -475,9 +468,7 @@ export function StagePage({ stage }: Props) {
               href={`/services/${nextStage.slug}`}
               className="group block p-5 md:p-6 border border-bd rounded-none hover:border-gold transition-colors text-right"
             >
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1.5">
-                下一階段 →
-              </div>
+              <div className="text-[13px] text-tx3 mb-1.5">下一階段 →</div>
               <div className="text-[16.5px] font-semibold group-hover:text-navy transition-colors">
                 {nextStage.num} {nextStage.title}
               </div>
@@ -488,9 +479,7 @@ export function StagePage({ stage }: Props) {
               href="/services/optimize"
               className="group block p-5 md:p-6 border border-bd rounded-none hover:border-gold transition-colors text-right"
             >
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1.5">
-                進階方案 →
-              </div>
+              <div className="text-[13px] text-tx3 mb-1.5">進階方案 →</div>
               <div className="text-[16.5px] font-semibold group-hover:text-navy transition-colors">
                 運營優化方案
               </div>
