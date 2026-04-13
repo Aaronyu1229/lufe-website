@@ -21,8 +21,8 @@ interface NavItem {
 const navItems: readonly NavItem[] = [
   { key: "services", label: "服務", href: "/services" },
   { key: "cases", label: "案例", href: "/cases" },
-  { key: "about", label: "關於我們", href: "/about" },
   { key: "insights", label: "洞察", href: "/insights" },
+  { key: "about", label: "關於我們", href: "/about" },
 ];
 
 /**
