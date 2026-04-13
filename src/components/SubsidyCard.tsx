@@ -28,7 +28,7 @@ import {
   getTodayFormatted,
 } from "@/data/subsidies";
 
-const DELAY_MS = 12_000;
+const DELAY_MS = 5_000;
 const SESSION_KEY = "lufe.subsidyCard.dismissed";
 
 // 不顯示卡片的頁面
@@ -100,7 +100,7 @@ export function SubsidyCard() {
         }
       `}
     >
-      <div className="relative bg-navy text-white shadow-[0_20px_60px_-12px_rgba(16,27,48,0.6)] overflow-hidden">
+      <div className="relative bg-navy text-white shadow-[0_20px_60px_-12px_rgba(16,27,48,0.6)] overflow-hidden motion-safe:animate-subsidy-card-glow">
         {/* Compact image strip */}
         <div className="relative h-[64px] overflow-hidden">
           <Image
@@ -146,13 +146,17 @@ export function SubsidyCard() {
           }}
         >
           {/* Live status — single line with count animation */}
-          <div className="flex items-center gap-2 mb-4 motion-safe:animate-subsidy-count">
+          <div className="flex items-center gap-2 mb-4">
             <span
-              className="w-1.5 h-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse shrink-0"
+              className="w-2 h-2 rounded-full bg-emerald-400 motion-safe:animate-pulse shrink-0 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
               aria-hidden="true"
             />
-            <span className="text-[12px] text-white/50 font-medium">
-              {todayStr} 更新 · <span className="text-emerald-400 font-semibold">{activeCount}</span> 個補助開放中
+            <span className="text-[12px] text-white/60 font-medium">
+              {todayStr} 更新 ·{" "}
+              <span className="text-emerald-400 font-bold text-[14px] motion-safe:animate-subsidy-count">
+                {activeCount}
+              </span>{" "}
+              個補助開放中
               {nearestDeadline && nearestDeadline.daysLeft <= 60 && (
                 <span className="text-amber-400"> · 剩 {nearestDeadline.daysLeft} 天</span>
               )}
