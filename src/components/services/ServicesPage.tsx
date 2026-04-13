@@ -42,7 +42,7 @@ const topFaqs = [
   },
   {
     q: "鹿飛跟傳統貿易商或顧問公司有什麼不同？",
-    a: "傳統顧問只出報告、貿易商只做買賣、代操公司只賣工具。鹿飛做的是三個支柱全程自營：從勝率評估、通路進入到團隊體質，陪你走完全程。底層還有躍馬國際 42 年物流實戰，不會因為顧問不懂現場而卡在海上。",
+    a: "傳統顧問只出報告、貿易商只做買賣、代操公司只賣工具。鹿飛做的是三個支柱全程自營：從勝率評估、通路進入到團隊體質，陪你走完全程。底層還有躍馬企業 42 年物流實戰，不會因為顧問不懂現場而卡在海上。",
   },
 ];
 
@@ -103,7 +103,7 @@ export function ServicesPage() {
             產品適配性、通路銷售力、團隊體質——一個方法論，幫台灣企業在
             <span className="text-white font-medium">北美</span>與
             <span className="text-white font-medium">東南亞</span>落地。
-            底下是躍馬國際 42 年的物流實戰當基礎。
+            底下是躍馬企業 42 年的物流實戰當基礎。
           </p>
 
           {/* 3-pillar mini preview */}
@@ -426,7 +426,7 @@ export function ServicesPage() {
             三個支柱底下，是真正跑了 <span className="font-normal text-gold">42 年</span>的國際物流
           </h2>
           <p className="text-[16.5px] md:text-[17.5px] text-white/65 leading-[1.85] font-normal max-w-[720px] mb-6">
-            鹿飛不是新手上路的跨境顧問。我們底下有躍馬國際 42 年的國際貨運承攬實戰——報關、倉儲、海空運、最後一哩，每一段都是真正在做的事。
+            鹿飛不是新手上路的跨境顧問。我們底下有躍馬企業 42 年的國際貨運承攬實戰——報關、倉儲、海空運、最後一哩，每一段都是真正在做的事。
             顧問講策略的時候，我們知道現場會長什麼樣。這就是為什麼我們的「團隊體質」支柱永遠不會空談。
           </p>
           <div className="flex items-center gap-6 text-[14.5px] text-white/50 font-normal">

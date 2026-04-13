@@ -426,7 +426,7 @@ export function AboutPage() {
                 </h2>
                 <p className="text-[16.5px] md:text-[17px] text-white/75 leading-[1.9] font-normal">
                   所以我創立了鹿飛——一個用三支柱方法論幫台灣企業落地的跨境團隊。
-                  從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有躍馬國際 42 年的國際物流實戰當基礎。
+                  從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有<a href="https://jumping.group" target="_blank" rel="noopener noreferrer" className="text-gold underline underline-offset-4 decoration-gold/40 hover:decoration-gold transition-colors">躍馬企業</a> 42 年的國際物流實戰當基礎。
                   主要戰場是<span className="text-white/90 font-medium">北美</span>和
                   <span className="text-white/90 font-medium">東南亞</span>——兩個地方我們每個月都真的有人在現場。
                   別人幫你開車，我們幫你找路。

@@ -15,6 +15,7 @@ const resourceLinks = [
   { label: "2 分鐘處境比對", href: "/assess" },
   { label: "政府補助整理", href: "/resources/subsidies" },
   { label: "TradePilot 工具", href: "https://tradepiloter.com", external: true },
+  { label: "躍馬企業官網", href: "https://jumping.group", external: true },
   { label: "關於我們", href: "/about" },
 ];
 

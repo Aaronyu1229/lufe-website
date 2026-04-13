@@ -18,7 +18,7 @@ type Slide = {
   eyebrow: string;
   titleLines: [string, string];
   subtitle: string;
-  primary: { label: string; href: string };
+  primary: { label: string; href: string; external?: boolean };
   secondary: { label: string; href: string };
   media: SlideMedia;
 };
@@ -61,10 +61,10 @@ const slides: Slide[] = [
     id: "logistics-moat",
     chipLabel: "基石 · 42 年國際物流",
     chipHref: "/about",
-    eyebrow: "躍馬國際 · 42 年實戰",
+    eyebrow: "躍馬企業 · 42 年實戰",
     titleLines: ["真的跑過船的人，", "才懂出海的眉角"],
-    subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬國際 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通。",
-    primary: { label: "認識躍馬國際", href: "/about" },
+    subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬企業 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通。",
+    primary: { label: "認識躍馬企業", href: "https://jumping.group", external: true },
     secondary: { label: "看完整服務內容", href: "/services" },
     media: {
       type: "video",
@@ -240,12 +240,23 @@ export function HeroSection() {
           </p>
 
           <div className="flex items-center gap-8 flex-wrap">
-            <Link
-              href={active.primary.href}
-              className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[14.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l"
-            >
-              {active.primary.label} →
-            </Link>
+            {active.primary.external ? (
+              <a
+                href={active.primary.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[14.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l"
+              >
+                {active.primary.label} ↗
+              </a>
+            ) : (
+              <Link
+                href={active.primary.href}
+                className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[14.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l"
+              >
+                {active.primary.label} →
+              </Link>
+            )}
             <Link
               href={active.secondary.href}
               className="group inline-flex items-center gap-2.5 text-white text-[15.5px] font-semibold tracking-[0.3px] transition-colors hover:text-gold"

@@ -72,7 +72,7 @@ export function PositioningBand() {
             <span className="text-gold-d font-normal">才懂出海的眉角</span>
           </h2>
           <p className="text-[16.5px] md:text-[18px] text-tx2 max-w-[720px] mx-auto leading-[1.8] font-normal">
-            出海不是報告寫得出來的。鹿飛站在躍馬國際{" "}
+            出海不是報告寫得出來的。鹿飛站在躍馬企業{" "}
             <span className="text-tx font-medium">42 年</span>{" "}
             的國際物流實戰上,幫你把
             <span className="text-tx font-medium">產品適配</span>跟
@@ -110,10 +110,21 @@ export function PositioningBand() {
                   <br />
                   <span className="text-gold font-normal">是真的跑過船的人</span>
                 </h3>
-                <p className="text-[15.5px] md:text-[16.5px] text-white/75 leading-[1.85] font-normal">
+                <p className="text-[15.5px] md:text-[16.5px] text-white/75 leading-[1.85] font-normal mb-5">
                   從報關、倉儲到最後一哩——這套東西不是教科書讀來的,是 42 年在港口、海關、貨櫃場跑出來的。
                   你的貨不會因為顧問不懂現場而卡在海上。
                 </p>
+                <a
+                  href="https://jumping.group"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 text-[14px] font-semibold text-gold hover:text-gold-l transition-colors"
+                >
+                  <span className="border-b border-gold/40 pb-0.5 group-hover:border-gold-l transition-colors">
+                    前往躍馬企業官網
+                  </span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
+                </a>
               </div>
 
               {/* Right — 3 stats */}

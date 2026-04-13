@@ -158,7 +158,7 @@ export const PARTNER_LOGOS: readonly PartnerLogo[] = [
   { id: "p2", name: "待補 · 台印商會", type: "商會", tbd: true },
   { id: "p3", name: "待補 · 東南亞連鎖", type: "通路", tbd: true },
   { id: "p4", name: "待補 · 北美代理", type: "通路", tbd: true },
-  { id: "p5", name: "待補 · 躍馬國際", type: "物流", tbd: true },
+  { id: "p5", name: "待補 · 躍馬企業", type: "物流", tbd: true },
   { id: "p6", name: "待補 · 顧問夥伴", type: "顧問", tbd: true },
   { id: "p7", name: "待補 · 中小企業協會", type: "協會", tbd: true },
   { id: "p8", name: "待補 · 政府單位", type: "政府", tbd: true },
