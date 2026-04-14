@@ -128,7 +128,7 @@ export function Navbar() {
       {/* Utility bar — only on home, only when not scrolled */}
       <div
         className={`text-white/60 text-[11px] hidden md:block transition-all duration-300 ${
-          useDark
+          scrolled || activeMenu !== null
             ? "opacity-0 h-0 overflow-hidden bg-transparent"
             : "opacity-100 h-[32px] bg-transparent border-b border-white/10"
         }`}

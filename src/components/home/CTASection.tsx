@@ -36,9 +36,7 @@ export function CTASection() {
           還沒想清楚，也可以聊聊
         </h2>
         <p className="text-[16.5px] text-white/55 max-w-[480px] mx-auto leading-[1.8] mb-10 font-normal">
-          30 分鐘，不收費、不推銷。
-          <br />
-          聊完你會知道下一步該做什麼——或者該先不做什麼。
+          想聊就聊，沒有壓力。
         </p>
         <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
           <button
