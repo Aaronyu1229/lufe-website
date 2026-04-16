@@ -291,8 +291,15 @@ export function AboutPage() {
 
           {/* Founder block — larger, with stats row */}
           <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 mb-10 border-l-[3px] border-gold pl-6 md:pl-8 py-3 max-w-[780px]">
-            <div className="w-[108px] h-[108px] md:w-[120px] md:h-[120px] rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[32px] md:text-[36px] font-heading font-semibold shrink-0 shadow-lg shadow-gold/20">
-              AY
+            <div className="relative w-[128px] h-[128px] md:w-[148px] md:h-[148px] rounded-none overflow-hidden shrink-0 shadow-lg shadow-gold/20 ring-1 ring-gold/40">
+              <Image
+                src="/images/about/aaron-portrait.jpg"
+                alt="Aaron Yu — 鹿飛 LUFÉ 創辦人"
+                fill
+                sizes="148px"
+                className="object-cover object-[center_22%]"
+                priority
+              />
             </div>
             <div className="flex-1">
               <div className="text-[22px] md:text-[24px] font-semibold leading-tight">Aaron Yu</div>
@@ -335,11 +342,11 @@ export function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-8 md:gap-12 items-center">
               <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden">
                 <Image
-                  src="/images/about/story-problem-warehouse.jpg"
-                  alt="大型物流倉儲的卸貨月台 — 跨境現場的真實樣貌"
+                  src="/images/about/aaron-workshop.jpg"
+                  alt="Aaron 在工作坊上分享跨境實戰觀察"
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover"
+                  className="object-cover object-[center_30%]"
                 />
                 <div
                   aria-hidden="true"
@@ -403,11 +410,11 @@ export function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-8 md:gap-12 items-center">
               <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden">
                 <Image
-                  src="/images/about/story-action-conversation.jpg"
-                  alt="兩位亞洲專業人士在辦公室討論 — 我們在做的事"
+                  src="/images/about/aaron-news-interview.jpg"
+                  alt="台視新聞訪問躍馬企業市場經理 — 真實業界背書"
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover"
+                  className="object-cover object-[30%_center]"
                 />
                 <div
                   aria-hidden="true"
@@ -673,11 +680,11 @@ export function AboutPage() {
           <div className="mt-14 text-center">
             <div className="relative w-full max-w-[680px] h-[180px] mx-auto mb-8 overflow-hidden">
               <Image
-                src="/images/about/cta-team.jpg"
-                alt="年輕團隊協作"
+                src="/images/about/aaron-teaching.jpg"
+                alt="Aaron 在工作坊現場陪學員操作 — 陪跑的日常"
                 fill
                 sizes="(max-width: 680px) 100vw, 680px"
-                className="object-cover"
+                className="object-cover object-[center_35%]"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/20 to-navy/75" />
             </div>
