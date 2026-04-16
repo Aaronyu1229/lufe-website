@@ -291,13 +291,13 @@ export function AboutPage() {
 
           {/* Founder block — larger, with stats row */}
           <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 mb-10 border-l-[3px] border-gold pl-6 md:pl-8 py-3 max-w-[780px]">
-            <div className="relative w-[128px] h-[128px] md:w-[148px] md:h-[148px] rounded-none overflow-hidden shrink-0 shadow-lg shadow-gold/20 ring-1 ring-gold/40">
+            <div className="relative w-[128px] h-[128px] md:w-[148px] md:h-[148px] rounded-full overflow-hidden shrink-0 shadow-xl shadow-gold/25 ring-[1.5px] ring-gold/60">
               <Image
                 src="/images/about/aaron-portrait.jpg"
                 alt="Aaron Yu — 鹿飛 LUFÉ 創辦人"
                 fill
                 sizes="148px"
-                className="object-cover object-[center_22%]"
+                className="object-cover object-[center_18%]"
                 priority
               />
             </div>
@@ -414,7 +414,7 @@ export function AboutPage() {
                   alt="台視新聞訪問躍馬企業市場經理 — 真實業界背書"
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover object-[30%_center]"
+                  className="object-cover object-[42%_center]"
                 />
                 <div
                   aria-hidden="true"
