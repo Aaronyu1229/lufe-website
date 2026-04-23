@@ -210,9 +210,9 @@ export default function SubsidiesPage() {
               <span className="text-gold font-normal">不同階段</span>
             </h2>
             <div className="text-[14.5px] text-tx3 md:text-right">
-              最後更新 2026.04
+              資料最後確認 <span className="text-tx font-medium">2026.04.23</span>
               <br />
-              名額有限，建議盡早申請
+              名額有限 · 部分計畫經費用罄即止
             </div>
           </div>
 
@@ -231,6 +231,21 @@ export default function SubsidiesPage() {
                     className={`absolute left-0 top-0 bottom-0 w-[3px] ${c.bar}`}
                     aria-hidden="true"
                   />
+
+                  {/* Highlight banner (for time-limited / 加碼 programs) */}
+                  {s.highlight && (
+                    <div className="-mt-1 mb-5 flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center gap-1.5 bg-ember text-white text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1">
+                        <span className="w-1 h-1 bg-white rounded-full animate-pulse" />
+                        {s.highlight}
+                      </span>
+                      {s.highlightNote && (
+                        <span className="text-[12px] text-ember font-medium">
+                          {s.highlightNote}
+                        </span>
+                      )}
+                    </div>
+                  )}
 
                   {/* Header row */}
                   <div className="flex items-start justify-between gap-4 mb-5">
@@ -343,6 +358,109 @@ export default function SubsidiesPage() {
                     </div>
                     <p className="text-[14.5px] leading-[1.8]">{s.lufeAngle}</p>
                   </div>
+
+                  {/* Expansion: covers detail + process steps + important notes */}
+                  {(s.coversDetail || s.processSteps || s.importantNotes) && (
+                    <details className="group/det mb-5 border border-bd">
+                      <summary className="list-none cursor-pointer flex items-center justify-between gap-3 px-4 py-3 hover:bg-cream transition-colors">
+                        <span className="text-[13px] font-semibold text-tx tracking-wide">
+                          看申請細節（可補助項目 · 流程 · 注意事項）
+                        </span>
+                        <span className="text-tx3 text-[14px] transition-transform duration-300 group-open/det:rotate-180">
+                          ▾
+                        </span>
+                      </summary>
+                      <div className="px-5 py-5 border-t border-bd/60 space-y-6">
+                        {s.coversDetail && (
+                          <div>
+                            <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-3">
+                              可補助費用明細
+                            </div>
+                            <ul className="space-y-3">
+                              {s.coversDetail.map((item, i) => (
+                                <li
+                                  key={item.title}
+                                  className="grid grid-cols-[auto_1fr] gap-3 pb-3 last:pb-0 border-b last:border-0 border-bd/40"
+                                >
+                                  <span className={`shrink-0 text-[12px] font-sans font-light tabular-nums ${c.num} pt-0.5`}>
+                                    {String(i + 1).padStart(2, "0")}
+                                  </span>
+                                  <div className="min-w-0">
+                                    <div className="flex flex-wrap items-baseline gap-2 mb-1">
+                                      <span className="text-[14px] font-semibold text-tx">
+                                        {item.title}
+                                      </span>
+                                      {item.limit && (
+                                        <span className={`text-[10.5px] font-medium px-1.5 py-0.5 ${c.badge}`}>
+                                          {item.limit}
+                                        </span>
+                                      )}
+                                    </div>
+                                    <p className="text-[13px] text-tx2 leading-[1.7]">
+                                      {item.note}
+                                    </p>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {s.processSteps && (
+                          <div>
+                            <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-3">
+                              申請與核銷流程
+                            </div>
+                            <ol className="space-y-2">
+                              {s.processSteps.map((step, i) => (
+                                <li
+                                  key={step.title}
+                                  className="grid grid-cols-[28px_1fr] gap-3 items-start"
+                                >
+                                  <span className={`shrink-0 w-7 h-7 flex items-center justify-center text-[12px] font-semibold ${c.iconBg}`}>
+                                    {i + 1}
+                                  </span>
+                                  <div className="min-w-0 pt-1">
+                                    <span className="text-[14px] font-semibold text-tx">
+                                      {step.title}
+                                    </span>
+                                    <span className="text-[13px] text-tx2 leading-[1.7]">
+                                      {" — "}{step.note}
+                                    </span>
+                                  </div>
+                                </li>
+                              ))}
+                            </ol>
+                          </div>
+                        )}
+
+                        {s.importantNotes && (
+                          <div className="bg-ember/5 border-l-2 border-ember p-4">
+                            <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-ember mb-2">
+                              容易踩雷的點
+                            </div>
+                            <ul className="space-y-1.5">
+                              {s.importantNotes.map((note) => (
+                                <li
+                                  key={note}
+                                  className="text-[13px] text-tx2 leading-[1.7] flex items-start gap-2"
+                                >
+                                  <span className="shrink-0 mt-[8px] w-1 h-1 bg-ember" />
+                                  {note}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {s.verifiedOn && (
+                          <div className="text-[11px] text-tx3 pt-1 border-t border-bd/40">
+                            資料最後確認：{s.verifiedOn}（經濟部、國際貿易署公告）
+                          </div>
+                        )}
+                      </div>
+                    </details>
+                  )}
 
                   {/* Footer */}
                   <div className="flex items-center justify-between gap-4">
@@ -466,6 +584,37 @@ export default function SubsidiesPage() {
               q="如果我還沒開始出海，現在申請會不會太早？"
               a="第 4 項跨境電商輔導就是為你這種情況設計的——先用免費資源學，不用先投錢。等你有方向了再申請金額較大的計畫。"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ───── Subscribe: 補助快訊 ───── */}
+      <section className="py-[60px] md:py-[80px] px-5 md:px-10 lg:px-16 bg-cream border-t border-bd">
+        <div className="max-w-[860px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="max-w-[520px]">
+              <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-2">
+                補助雷達
+              </div>
+              <h3 className="text-[22px] md:text-[24px] font-semibold text-tx leading-snug mb-2">
+                補助一有更新，我們通知你
+              </h3>
+              <p className="text-[14.5px] text-tx2 leading-[1.8]">
+                每次有新計畫公告、金額加碼、截止日變動，鹿飛整理成一封信寄給你。不是每週轟炸，只在真的有事時才發。
+              </p>
+            </div>
+            <div className="shrink-0">
+              <a
+                href="mailto:hello@lufe.co?subject=%E8%A8%82%E9%96%B1%E8%A3%9C%E5%8A%A9%E5%BF%AB%E8%A8%8A&body=%E5%B8%8C%E6%9C%9B%E6%94%B6%E5%88%B0%E9%B9%BF%E9%A3%9B%E7%9A%84%E6%94%BF%E5%BA%9C%E5%87%BA%E6%B5%B7%E8%A3%9C%E5%8A%A9%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5%EF%BC%9A%0A%0A%E5%85%AC%E5%8F%B8%EF%BC%9A%0A%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E4%B8%BB%E8%A6%81%E5%B8%82%E5%A0%B4%EF%BC%88%E5%8C%97%E7%BE%8E%2F%E6%9D%B1%E5%8D%97%E4%BA%9E%EF%BC%89%EF%BC%9A%0A"
+                className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3.5 text-[14.5px] font-semibold hover:bg-navy/90 transition-colors group"
+              >
+                <span>訂閱補助快訊</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+              </a>
+              <div className="text-[11px] text-tx3 mt-2 text-center md:text-right">
+                寄信到 hello@lufe.co · 隨時退訂
+              </div>
+            </div>
           </div>
         </div>
       </section>

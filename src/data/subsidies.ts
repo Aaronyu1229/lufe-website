@@ -30,6 +30,25 @@ export type Subsidy = {
   readonly applicationNote: string;
   readonly iconKey: "globe" | "booth" | "factory" | "cart";
   readonly sourceUrl?: string;
+  /** 例如「115 年度加碼版」；非空時卡片會顯示醒目標記 */
+  readonly highlight?: string;
+  /** 強化 highlight 的一句話脈絡，例如「歷年最優 · 用罄即止」 */
+  readonly highlightNote?: string;
+  /** 可補助費用項目的明細（給展開區塊用，不干擾 covers 的簡列） */
+  readonly coversDetail?: readonly {
+    readonly title: string;
+    readonly note: string;
+    readonly limit?: string;
+  }[];
+  /** 申請與核銷流程步驟 */
+  readonly processSteps?: readonly {
+    readonly title: string;
+    readonly note: string;
+  }[];
+  /** 容易被忽略的關鍵注意事項 */
+  readonly importantNotes?: readonly string[];
+  /** 官方公告的最後確認日（ISO）— 讓使用者知道資料新鮮度 */
+  readonly verifiedOn?: string;
 };
 
 export const SUBSIDIES: readonly Subsidy[] = [
@@ -68,33 +87,82 @@ export const SUBSIDIES: readonly Subsidy[] = [
   {
     slug: "overseas-exhibition",
     num: "02",
-    agency: "國際貿易署",
+    agency: "經濟部 · 國際貿易署",
     program: "補助公司或商號參加海外國際展覽",
     shortTitle: "海外展覽參展補助",
-    amount: "新創年度最高 NT$40 萬",
-    amountNote: "一般企業另有補助級距",
+    amount: "每展最高 NT$16 萬",
+    amountNote:
+      "1 攤補助 12 萬，每增一攤 +1 萬，封頂 16 萬 · 補助比例最高 90%，企業自籌 10%",
     oneLiner:
-      "參加北美、東南亞等大型展覽是接觸買手的最快路徑。場地、佈置、運費、口譯全可補。",
+      "因應國際關稅情勢，經濟部依特別條例加碼補助赴海外參展。往年每展 4-5 萬，115 年度加碼至 16 萬，歷年最優。",
     whoFor: [
-      "要參加食品展、電子展等海外 B2B 展覽",
-      "想透過展覽直接接觸通路買手",
-      "新創或中小企業，預算有限",
+      "要參加北美、東南亞 B2B 展覽的企業",
+      "新創事業與新南向農業業者享特殊優先待遇",
+      "想透過展覽直接接觸通路買手與海外代理商",
     ],
     covers: [
-      "展位租金與佈置",
-      "樣品運輸費",
-      "現場口譯服務",
-      "宣傳物料與文宣",
-      "部分差旅費用",
+      "場地租金（必要項目）",
+      "場地佈置費",
+      "口譯費（每日上限 NT$14,000）",
+      "展品運費（限至國外）",
+      "型錄 / DM / 名片等印刷費",
+      "展前展中文宣廣告費",
+    ],
+    coversDetail: [
+      {
+        title: "場地租金",
+        note: "攤位租賃費用，所有申請案的必備項目。核實報銷。",
+        limit: "必要項目",
+      },
+      {
+        title: "場地佈置費",
+        note: "攤位設計與裝潢費用。核實報銷，單據須齊全。",
+        limit: "核實報銷",
+      },
+      {
+        title: "口譯費",
+        note: "口譯人員須為非參展廠商並出具切結書。不含午休時間。",
+        limit: "每日上限 NT$14,000",
+      },
+      {
+        title: "展品運費",
+        note: "限「至國外」的展品來回運費。國內運費不得申請。",
+        limit: "限國外段",
+      },
+      {
+        title: "印刷費",
+        note: "型錄、DM、名片等印刷品。須提供實品或照片樣本（不可為設計檔）。",
+        limit: "核實報銷",
+      },
+      {
+        title: "文宣廣告費",
+        note: "展前展中之宣傳廣告投放費用。須附實品照片樣本。",
+        limit: "核實報銷",
+      },
+    ],
+    processSteps: [
+      { title: "展前申請", note: "線上填寫公司資料、展覽資訊、預算表。" },
+      { title: "審查核配", note: "貿易署審查資格、保留補助額度（尚未撥款）。" },
+      { title: "赴海外參展", note: "攤位明顯處張貼臺灣一等一標誌（A3 以上）。" },
+      { title: "展後核銷", note: "展後 1 個月內檢附單據、發票、攤位照片。" },
+      { title: "撥款入帳", note: "審查通過後匯入公司帳戶。" },
+    ],
+    importantNotes: [
+      "款項非核定後即撥付，而是展後核銷審查通過才撥款",
+      "攤位明顯處須張貼臺灣一等一標誌（A3 以上），忘了貼會影響核銷",
+      "一年分 2 次公告，115 年度第 2 次預計 4-5 月開放，經費用罄即止",
     ],
     lufeAngle:
-      "我們幫客戶規劃展覽策略、媒合買手、設計展位話術。補助解決錢的問題，鹿飛解決要和誰談、怎麼談的問題。",
+      "我們幫客戶規劃展覽策略、媒合買手、設計展位話術，也協助準備申請資料與展後核銷。補助解決錢的問題，鹿飛解決要和誰談、怎麼談、怎麼不卡核銷的問題。",
     stage: "enter",
     accent: "sky",
-    deadline: "依各展覽檔期",
-    applicationNote: "展前 60 天申請",
+    highlight: "115 年度加碼版",
+    highlightNote: "歷年最優 · 經費用罄即止",
+    deadline: "預計 4-5 月開放（第 2 次公告）",
+    applicationNote: "第 2 次公告 · 展覽執行期 115/7/1–115/12/31",
     iconKey: "booth",
     sourceUrl: "https://www.trade.gov.tw/Pages/List.aspx?nodeID=3054",
+    verifiedOn: "2026-04-23",
   },
   {
     slug: "supply-chain-support",

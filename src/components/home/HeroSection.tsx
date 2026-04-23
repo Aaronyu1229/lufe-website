@@ -215,6 +215,11 @@ export function HeroSection() {
       {/* Directional overlay — stays above all slides */}
       <div className="bg-video-overlay" />
 
+      {/* SEO: single stable H1 for the homepage. Visible H2 rotates per slide. */}
+      <h1 className="sr-only">
+        協助台灣企業在北美與東南亞落地 — 鹿飛 LUFÉ
+      </h1>
+
       {/* Content — keyed to remount on slide change for fade-in animation */}
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 relative z-10 w-full">
         <div key={active.id} className="max-w-[640px] animate-fade-in-up">
@@ -226,14 +231,14 @@ export function HeroSection() {
             </span>
           </div>
 
-          <h1
+          <h2
             className="font-sans text-white leading-[1.05] mb-7 font-extralight tracking-[-2px]"
             style={{ fontSize: "clamp(38px, 5.5vw, 68px)" }}
           >
             {active.titleLines[0]}
             <br />
             {active.titleLines[1]}
-          </h1>
+          </h2>
 
           <p className="text-[18px] text-white/60 font-normal mb-10 leading-relaxed max-w-[480px]">
             {active.subtitle}

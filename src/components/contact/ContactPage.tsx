@@ -157,7 +157,7 @@ export function ContactPage() {
         window.open("https://calendly.com/lufe-co/30min", "_blank");
         break;
       case "line":
-        window.open("https://line.me", "_blank");
+        window.open("https://line.me/D", "_blank");
         break;
       case "email":
         window.location.href = "mailto:hello@lufe.co";
@@ -395,18 +395,19 @@ export function ContactPage() {
               </div>
               <h3 className="text-[21px] font-semibold mb-2">收到了！</h3>
               <p className="text-[15.5px] text-tx2 font-normal leading-[1.8]">
-                我們會在一個工作天內回覆你。
+                我們會在 <span className="text-tx font-semibold">24 小時內</span>
+                用你提供的 Email 回覆你。
                 <br />
                 如果比較急，可以直接加我們的{" "}
                 <a
-                  href="https://line.me"
+                  href="https://line.me/D"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#06C755] font-medium"
                 >
                   LINE
                 </a>{" "}
-                聊。
+                聊，平均 2 小時內回。
               </p>
             </div>
           ) : (
@@ -420,6 +421,8 @@ export function ContactPage() {
                   <input
                     type="text"
                     name="name"
+                    required
+                    aria-required="true"
                     value={formState.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -437,6 +440,8 @@ export function ContactPage() {
                   <input
                     type="email"
                     name="email"
+                    required
+                    aria-required="true"
                     value={formState.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -522,6 +527,8 @@ export function ContactPage() {
                 <textarea
                   name="message"
                   rows={4}
+                  required
+                  aria-required="true"
                   value={formState.message}
                   onChange={handleChange}
                   onBlur={handleBlur}

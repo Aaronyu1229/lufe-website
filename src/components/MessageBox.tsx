@@ -35,8 +35,18 @@ export function MessageBox() {
   const { isOpen, close } = useMessageBox();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", contact: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = () => {
+    const errs: Record<string, string> = {};
+    if (!form.name.trim()) errs.name = "請填姓名";
+    if (!form.contact.trim()) errs.contact = "請留 Email 或電話";
+    if (!form.message.trim()) errs.message = "請簡單說明一下";
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
+    setErrors({});
     setSubmitted(true);
   };
 
@@ -74,40 +84,54 @@ export function MessageBox() {
             <div className="p-5">
               <div className="mb-3">
                 <label className="block text-[11.5px] font-semibold text-tx mb-[5px]">
-                  你的姓名
+                  你的姓名 *
                 </label>
                 <input
-                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[15px] focus:outline-none focus:border-gold"
+                  required
+                  aria-required="true"
+                  className={`w-full px-[13px] py-2.5 border rounded-[9px] text-[15px] focus:outline-none focus:border-gold ${errors.name ? "border-red-400" : "border-bd"}`}
                   placeholder="怎麼稱呼你？"
                   value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  onChange={(e) => {
+                    setForm({ ...form, name: e.target.value });
+                    if (errors.name) setErrors({ ...errors, name: "" });
+                  }}
                 />
+                {errors.name && <p className="text-[12px] text-red-500 mt-1">{errors.name}</p>}
               </div>
               <div className="mb-3">
                 <label className="block text-[11.5px] font-semibold text-tx mb-[5px]">
-                  聯絡方式（Email 或電話）
+                  聯絡方式（Email 或電話）*
                 </label>
                 <input
-                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[15px] focus:outline-none focus:border-gold"
+                  required
+                  aria-required="true"
+                  className={`w-full px-[13px] py-2.5 border rounded-[9px] text-[15px] focus:outline-none focus:border-gold ${errors.contact ? "border-red-400" : "border-bd"}`}
                   placeholder="方便我們回覆你"
                   value={form.contact}
-                  onChange={(e) =>
-                    setForm({ ...form, contact: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setForm({ ...form, contact: e.target.value });
+                    if (errors.contact) setErrors({ ...errors, contact: "" });
+                  }}
                 />
+                {errors.contact && <p className="text-[12px] text-red-500 mt-1">{errors.contact}</p>}
               </div>
               <div className="mb-3">
                 <label className="block text-[11.5px] font-semibold text-tx mb-[5px]">
-                  簡單說說你的產品跟想法
+                  簡單說說你的產品跟想法 *
                 </label>
                 <textarea
-                  className="w-full px-[13px] py-2.5 border border-bd rounded-[9px] text-[15px] focus:outline-none focus:border-gold resize-y min-h-[68px]"
+                  required
+                  aria-required="true"
+                  className={`w-full px-[13px] py-2.5 border rounded-[9px] text-[15px] focus:outline-none focus:border-gold resize-y min-h-[68px] ${errors.message ? "border-red-400" : "border-bd"}`}
                   placeholder="例如：我們做鳳梨酥，想看看美國有沒有機會⋯⋯"
                   value={form.message}
-                  onChange={(e) =>
-                    setForm({ ...form, message: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setForm({ ...form, message: e.target.value });
+                    if (errors.message) setErrors({ ...errors, message: "" });
+                  }}
                 />
+                {errors.message && <p className="text-[12px] text-red-500 mt-1">{errors.message}</p>}
               </div>
               <button
                 onClick={handleSubmit}
@@ -125,7 +149,7 @@ export function MessageBox() {
                 想更快得到回覆？
               </p>
               <a
-                href="https://line.me"
+                href="https://line.me/D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-[18px] py-[9px] bg-[#06C755] text-white rounded-full text-[14.5px] font-medium"
