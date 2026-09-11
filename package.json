@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-font-subset.mjs src",
     "build": "next build",
+    "postbuild": "node scripts/check-font-subset.mjs .next/server/app",
+    "font:rebuild": "python3 scripts/build-font-subset.py",
     "start": "next start",
     "lint": "eslint"
   },
