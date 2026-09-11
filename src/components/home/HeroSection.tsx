@@ -216,7 +216,11 @@ export function HeroSection() {
           >
             {/* Poster underneath the video — always visible until video fades in.
                 An <img srcSet> instead of a CSS background: a background-image is
-                one fixed URL, so phones were being served the 4096px original. */}
+                one fixed URL, so phones were being served the 4096px original.
+                Not next/image: this is one of three absolutely-positioned layers
+                that cross-fade, and the WebP tiers are already committed, so the
+                optimizer would only add billed transforms. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={slide.media.posterFallback}
               srcSet={slide.media.posterSrcSet}
