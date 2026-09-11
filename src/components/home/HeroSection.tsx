@@ -7,6 +7,8 @@ type SlideMedia = {
   type: "video";
   src: string;
   portraitSrc?: string;
+  /** Landscape cut re-encoded at 720p, for narrow viewports. */
+  mobileSrc?: string;
   /** Widest tier the srcSet offers; also the src browsers fall back to. */
   posterFallback: string;
   posterSrcSet: string;
@@ -63,6 +65,7 @@ const slides: Slide[] = [
     media: {
       type: "video",
       src: "/videos/hero/hero-map-planning-1080.mp4",
+      mobileSrc: "/videos/hero/hero-map-planning-720.mp4",
       posterFallback: "/images/hero/hero-slide-2-poster-1600.webp",
       posterSrcSet:
         "/images/hero/hero-slide-2-poster-828.webp 828w, " +
@@ -84,6 +87,7 @@ const slides: Slide[] = [
     media: {
       type: "video",
       src: "/videos/hero/hero-highway-aerial-1080.mp4",
+      mobileSrc: "/videos/hero/hero-highway-aerial-720.mp4",
       posterFallback: "/images/hero/hero-slide-3-poster-1600.webp",
       posterSrcSet:
         "/images/hero/hero-slide-3-poster-828.webp 828w, " +
@@ -249,7 +253,10 @@ export function HeroSection() {
                 {/* Landscape comes first so browsers without media support retain the
                     existing desktop behavior instead of showing portrait video. */}
                 <source media="(min-aspect-ratio: 1/1)" src={slide.media.src} type="video/mp4" />
-                <source src={slide.media.portraitSrc ?? slide.media.src} type="video/mp4" />
+                <source
+                  src={slide.media.portraitSrc ?? slide.media.mobileSrc ?? slide.media.src}
+                  type="video/mp4"
+                />
               </video>
             )}
           </div>
