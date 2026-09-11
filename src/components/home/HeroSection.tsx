@@ -135,21 +135,25 @@ export function HeroSection() {
   useEffect(() => {
     videoRefs.current.forEach((video, i) => {
       if (!video) return;
-      if (i === activeIndex) {
-        // playbackRate is tuned for the landscape footage. The portrait cuts are
-        // close-ups of people, where speed changes read as unnatural, so they
-        // always play at 1x.
-        const usingPortrait = isPortrait && !!slides[i].media.portraitSrc;
-        const rate = usingPortrait ? 1.0 : slides[i].media.playbackRate ?? 1.0;
-        video.playbackRate = rate;
-        video.currentTime = 0;
-        const playPromise = video.play();
-        if (playPromise) playPromise.catch(() => {});
-      } else {
+      if (i !== activeIndex) {
         video.pause();
+        return;
       }
+      // playbackRate is tuned for the landscape footage. The portrait cuts are
+      // close-ups of people, where speed changes read as unnatural, so they
+      // always play at 1x.
+      const usingPortrait = isPortrait && !!slides[i].media.portraitSrc;
+      video.playbackRate = usingPortrait ? 1.0 : slides[i].media.playbackRate ?? 1.0;
+      // Already playing (or already asked to): don't restart it. play()/pause()
+      // flip `paused` synchronously, so it is a reliable "did we ask" flag.
+      if (!video.paused) return;
+      video.currentTime = 0;
+      const playPromise = video.play();
+      if (playPromise) playPromise.catch(() => {});
     });
-  }, [activeIndex, isPortrait]);
+    // mountedMap matters: a slide jumped to directly is mounted one render
+    // later than this effect first runs, and without it nothing ever plays it.
+  }, [activeIndex, isPortrait, mountedMap]);
 
   // Bump progress key on every slide change so the fill bar animation restarts
   progressKey.current += 1;
