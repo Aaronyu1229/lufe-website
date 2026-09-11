@@ -18,6 +18,9 @@ interface NavItem {
   readonly href: string;
 }
 
+/** Height of the main bar, in px. Mirrors the `h-[64px]` row in the markup. */
+const NAV_HEIGHT = 64;
+
 const navItems: readonly NavItem[] = [
   { key: "services", label: "服務", href: "/services" },
   { key: "cases", label: "案例", href: "/cases" },
@@ -28,8 +31,8 @@ const navItems: readonly NavItem[] = [
 /**
  * Does this pathname render a navy first-screen hero?
  *
- * When true: navbar starts transparent over the hero, turns white on
- * scroll (50px+), mouse-enter, or mega-menu open.
+ * When true: navbar starts transparent over the hero and goes solid once the
+ * hero has scrolled behind it, or on mouse-enter / mega-menu open.
  *
  * Prefix matching on /services and /cases covers every nested page
  * (stage, optimize, methodology, case detail — all have bg-navy heroes).
@@ -63,11 +66,37 @@ export function Navbar() {
 
   const useDark = !isDarkHero || scrolled || hovered || activeMenu !== null;
 
+  // The bar goes solid when the dark hero has scrolled behind it — not at a
+  // fixed offset. 50px used to flip it while the hero was still filling the
+  // screen, so the white bar sat on top of the video. Measuring the hero's own
+  // box also keeps every page correct: the home hero is h-screen, the inner
+  // pages' heroes are a few hundred pixels.
+  //
+  // Deliberately re-measured on every scroll rather than via an
+  // IntersectionObserver: an observer that fires once against a half-laid-out
+  // hero latches on that answer, which left /insights permanently solid.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    if (!isDarkHero) return;
+
+    const onScroll = () => {
+      const hero = document.querySelector("#main-content > section");
+      // No hero to measure — fall back to the old fixed offset rather than
+      // leaving the bar transparent over unknown content.
+      if (!hero) {
+        setScrolled(window.scrollY > 50);
+        return;
+      }
+      setScrolled(hero.getBoundingClientRect().bottom <= NAV_HEIGHT);
+    };
+
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [isDarkHero, pathname]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -167,7 +196,9 @@ export function Navbar() {
       <nav
         className={`transition-all duration-300 ${
           useDark
-            ? "bg-white/98 backdrop-blur-md shadow-sm"
+            ? // Cream, not white — it reads as the same surface as the page
+              // body below it instead of a separate white strip.
+              "bg-cream/98 backdrop-blur-md shadow-sm"
             : "bg-transparent"
         }`}
         aria-label="主要導航"
