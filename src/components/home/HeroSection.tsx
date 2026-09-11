@@ -215,7 +215,7 @@ export function HeroSection() {
             aria-hidden="true"
           >
             {/* Poster underneath the video — always visible until video fades in.
-                An <img srcSet> instead of a CSS background: it is
+                An <img srcSet> instead of a CSS background: a background-image is
                 one fixed URL, so phones were being served the 4096px original. */}
             <img
               src={slide.media.posterFallback}
