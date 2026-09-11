@@ -155,13 +155,13 @@ body {
   .bg-video { display: none; }
 }
 
-/* Hero carousel progress fill — 7s sync with AUTOPLAY_MS */
+/* Hero carousel progress fill — 10s sync with AUTOPLAY_MS */
 @keyframes hero-progress {
   from { width: 0%; }
   to { width: 100%; }
 }
 .animate-hero-progress {
-  animation: hero-progress 7000ms linear forwards;
+  animation: hero-progress 10000ms linear forwards;
 }
 .scrollbar-none::-webkit-scrollbar { display: none; }
 .scrollbar-none { scrollbar-width: none; }
