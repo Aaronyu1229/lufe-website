@@ -13,6 +13,7 @@ type SlideMedia = {
 
 type Slide = {
   id: string;
+  heavyOverlay?: boolean;
   chipLabel: string;
   chipHref: string;
   eyebrow: string;
@@ -26,6 +27,7 @@ type Slide = {
 const slides: Slide[] = [
   {
     id: "pillar-fit",
+    heavyOverlay: true,
     chipLabel: "產品適配性",
     chipHref: "/services#pillar-fit",
     eyebrow: "產品適配性",
@@ -59,6 +61,7 @@ const slides: Slide[] = [
   },
   {
     id: "logistics-moat",
+    heavyOverlay: true,
     chipLabel: "基石 · 42 年國際物流",
     chipHref: "/about",
     eyebrow: "躍馬企業 · 42 年實戰",
@@ -178,7 +181,10 @@ export function HeroSection() {
           <div
             key={slide.id}
             className="absolute inset-0 transition-opacity duration-[900ms] ease-out"
-            style={{ opacity: isActive ? 1 : 0 }}
+            style={{
+              opacity: isActive ? 1 : 0,
+              filter: slide.heavyOverlay ? "brightness(0.74)" : undefined,
+            }}
             aria-hidden="true"
           >
             {/* Poster underneath the video — always visible until video fades in */}
@@ -213,7 +219,9 @@ export function HeroSection() {
       })}
 
       {/* Directional overlay — stays above all slides */}
-      <div className="bg-video-overlay" />
+      <div
+        className={`bg-video-overlay${active.heavyOverlay ? " bg-video-overlay-heavy" : ""}`}
+      />
 
       {/* SEO: single stable H1 for the homepage. Visible H2 rotates per slide. */}
       <h1 className="sr-only">
@@ -225,22 +233,28 @@ export function HeroSection() {
         <div key={active.id} className="max-w-[640px] animate-fade-in-up">
           {/* Eyebrow */}
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-5 h-px bg-gold/70" />
-            <span className="text-gold/70 text-[11px] font-medium tracking-[2.5px] uppercase">
+            <div className="w-5 h-px bg-gold/92" />
+            <span className="text-gold/92 text-[11px] font-medium tracking-[2.5px] uppercase">
               {active.eyebrow}
             </span>
           </div>
 
           <h2
-            className="font-sans text-white leading-[1.05] mb-7 font-extralight tracking-[-2px]"
-            style={{ fontSize: "clamp(38px, 5.5vw, 68px)" }}
+            className="hero-title font-sans text-white leading-[1.05] mb-7 tracking-[-2px]"
+            style={{
+              fontSize: "clamp(38px, 5.5vw, 68px)",
+              textShadow: "0 1px 2px rgba(10,20,40,0.35)",
+            }}
           >
             {active.titleLines[0]}
             <br />
             {active.titleLines[1]}
           </h2>
 
-          <p className="text-[18px] text-white/60 font-normal mb-10 leading-relaxed max-w-[480px]">
+          <p
+            className="text-[18px] text-white/88 font-normal mb-10 leading-relaxed max-w-[480px]"
+            style={{ textShadow: "0 1px 2px rgba(10,20,40,0.3)" }}
+          >
             {active.subtitle}
           </p>
 
