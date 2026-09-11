@@ -40,7 +40,9 @@ const slides: Slide[] = [
       src: "/videos/hero/hero-cai-mep-1080.mp4",
       portraitSrc: "/videos/hero/hero-portrait-720.mp4",
       poster: "/images/hero/hero-poster.jpg",
-      playbackRate: 1.0,
+      // Aerial container-ship footage reads slower than the other two slides
+      // because the subject fills the frame. Nudged up to match their pace.
+      playbackRate: 1.25,
     },
   },
   {
