@@ -6,7 +6,7 @@
  * 行為：
  *  - 進站 12 秒後從右下角滑入
  *  - 按 X 關閉 → 當次 session 不再出現
- *  - 手機：底部 sheet
+ *  - 手機：右下角浮動卡片的緊湊版
  *  - 尊重 prefers-reduced-motion
  *  - 點卡片 → /resources/subsidies#match（直接到 quiz 區段）
  *
@@ -88,7 +88,7 @@ export function SubsidyCard() {
       aria-label="政府補助資訊"
       className={`
         fixed z-[90]
-        bottom-5 right-5
+        bottom-5 max-[375px]:bottom-0 right-5
         md:bottom-7 md:right-7
         w-[calc(100vw-40px)] max-w-[360px]
         transition-all duration-[420ms] ease-out
@@ -102,7 +102,7 @@ export function SubsidyCard() {
     >
       <div className="relative bg-navy text-white shadow-[0_20px_60px_-12px_rgba(16,27,48,0.6)] overflow-hidden motion-safe:animate-subsidy-card-glow">
         {/* Compact image strip */}
-        <div className="relative h-[64px] overflow-hidden">
+        <div className="relative h-[64px] overflow-hidden hidden md:block">
           <Image
             src={SUBSIDY_CARD_COPY.image}
             alt=""
@@ -127,7 +127,7 @@ export function SubsidyCard() {
         <button
           onClick={dismiss}
           aria-label={SUBSIDY_CARD_COPY.dismissAria}
-          className="absolute top-3 right-3 z-10 w-7 h-7 flex items-center justify-center text-white/50 hover:text-white transition-colors cursor-pointer"
+          className="absolute top-2 right-2 z-10 w-6 h-6 flex items-center justify-center text-white/50 hover:text-white transition-colors cursor-pointer max-[375px]:top-1.5 max-[375px]:right-1.5 md:top-3 md:right-3 md:w-7 md:h-7"
         >
           <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
             <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -136,7 +136,7 @@ export function SubsidyCard() {
 
         <Link
           href={SUBSIDY_CARD_COPY.href}
-          className="block px-6 pt-5 pb-6 group"
+          className="block px-4 pr-10 pt-3 pb-3 group max-[375px]:px-3 max-[375px]:pr-9 max-[375px]:pt-2 max-[375px]:pb-2 md:px-6 md:pr-6 md:pt-5 md:pb-6"
           onClick={() => {
             try {
               sessionStorage.setItem(SESSION_KEY, "1");
@@ -146,14 +146,14 @@ export function SubsidyCard() {
           }}
         >
           {/* Live status — single line with count animation */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-1.5 mb-2 max-[375px]:mb-1 md:gap-2 md:mb-4">
             <span
-              className="w-2 h-2 rounded-full bg-emerald-400 motion-safe:animate-pulse shrink-0 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
+              className="w-1.5 h-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse shrink-0 shadow-[0_0_8px_rgba(52,211,153,0.6)] md:w-2 md:h-2"
               aria-hidden="true"
             />
-            <span className="text-[12px] text-white/60 font-medium">
+            <span className="text-[11px] leading-4 text-white/60 font-medium max-[375px]:text-[10px] max-[375px]:leading-[14px] md:text-[12px] md:leading-normal">
               {todayStr} 更新 ·{" "}
-              <span className="text-emerald-400 font-bold text-[14px] motion-safe:animate-subsidy-count">
+              <span className="text-emerald-400 font-bold text-[12px] motion-safe:animate-subsidy-count max-[375px]:text-[11px] md:text-[14px]">
                 {activeCount}
               </span>{" "}
               個補助開放中
@@ -164,17 +164,17 @@ export function SubsidyCard() {
           </div>
 
           {/* Headline */}
-          <h3 className="font-sans text-[24px] font-light leading-[1.2] tracking-[-0.5px] text-white mb-2">
+          <h3 className="font-sans text-[19px] font-light leading-[1.25] tracking-[-0.3px] text-white mb-1 max-[375px]:text-[18px] max-[375px]:leading-[1.15] max-[375px]:mb-0 md:text-[24px] md:leading-[1.2] md:tracking-[-0.5px] md:mb-2">
             {copy.headline}
           </h3>
 
           {/* One-liner */}
-          <p className="text-[14px] text-white/55 leading-[1.7] mb-5">
+          <p className="text-[12px] text-white/55 leading-[1.5] mb-2.5 max-[375px]:text-[11px] max-[375px]:leading-[1.35] max-[375px]:mb-1 md:text-[14px] md:leading-[1.7] md:mb-5">
             {copy.oneLiner}
           </p>
 
           {/* CTA with breathe animation */}
-          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-3 text-[14.5px] font-semibold transition-colors group-hover:bg-gold-l motion-safe:animate-subsidy-cta">
+          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-2.5 text-[13px] font-semibold transition-colors group-hover:bg-gold-l motion-safe:animate-subsidy-cta max-[375px]:py-2 max-[375px]:text-[12px] md:py-3 md:text-[14.5px]">
             {copy.cta}
             <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
           </span>
