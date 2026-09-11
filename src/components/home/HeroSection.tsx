@@ -111,7 +111,6 @@ export function HeroSection() {
   // Slide 0 mounts immediately (LCP); others mount when they become the active index.
   const [mountedMap, setMountedMap] = useState<Record<number, boolean>>({ 0: true });
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const progressKey = useRef(0);
 
   // Detect portrait orientation
   useEffect(() => {
@@ -179,9 +178,6 @@ export function HeroSection() {
     // mountedMap matters: a slide jumped to directly is mounted one render
     // later than this effect first runs, and without it nothing ever plays it.
   }, [activeIndex, isPortrait, mountedMap]);
-
-  // Bump progress key on every slide change so the fill bar animation restarts
-  progressKey.current += 1;
 
   const goTo = useCallback((index: number) => {
     setActiveIndex(index);
@@ -356,7 +352,11 @@ export function HeroSection() {
                 <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-white/10" />
                 {/* Progress fill — spans full slot width */}
                 <span
-                  key={isActive ? `fill-${progressKey.current}` : `idle-${slide.id}`}
+                  // activeIndex changes on every slide change, which is exactly
+                  // when the fill animation should restart. A ref bumped in the
+                  // render body restarted it on every unrelated re-render too.
+                  key={isActive ? `fill-${activeIndex}` : `idle-${slide.id}`}
+                  style={{ animationDuration: `${AUTOPLAY_MS}ms` }}
                   className={`absolute left-0 bottom-0 h-[2px] bg-gold origin-left ${
                     isActive && !paused && !prefersReducedMotion
                       ? "animate-hero-progress"
