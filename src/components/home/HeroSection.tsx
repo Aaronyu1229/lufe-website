@@ -7,7 +7,9 @@ type SlideMedia = {
   type: "video";
   src: string;
   portraitSrc?: string;
-  poster: string;
+  /** Widest tier the srcSet offers; also the src browsers fall back to. */
+  posterFallback: string;
+  posterSrcSet: string;
   playbackRate?: number;
 };
 
@@ -39,7 +41,11 @@ const slides: Slide[] = [
       type: "video",
       src: "/videos/hero/hero-cai-mep-1080.mp4",
       portraitSrc: "/videos/hero/hero-portrait-720.mp4",
-      poster: "/images/hero/hero-poster.jpg",
+      posterFallback: "/images/hero/hero-poster-1600.webp",
+      posterSrcSet:
+        "/images/hero/hero-poster-828.webp 828w, " +
+        "/images/hero/hero-poster-1600.webp 1600w, " +
+        "/images/hero/hero-poster-1920.webp 1920w",
       // Aerial container-ship footage reads slower than the other two slides
       // because the subject fills the frame. Nudged up to match their pace.
       playbackRate: 1.25,
@@ -57,7 +63,11 @@ const slides: Slide[] = [
     media: {
       type: "video",
       src: "/videos/hero/hero-map-planning-1080.mp4",
-      poster: "/images/hero/hero-slide-2-poster.jpg",
+      posterFallback: "/images/hero/hero-slide-2-poster-1600.webp",
+      posterSrcSet:
+        "/images/hero/hero-slide-2-poster-828.webp 828w, " +
+        "/images/hero/hero-slide-2-poster-1600.webp 1600w, " +
+        "/images/hero/hero-slide-2-poster-2400.webp 2400w",
       playbackRate: 1.0,
     },
   },
@@ -74,7 +84,11 @@ const slides: Slide[] = [
     media: {
       type: "video",
       src: "/videos/hero/hero-highway-aerial-1080.mp4",
-      poster: "/images/hero/hero-slide-3-poster.jpg",
+      posterFallback: "/images/hero/hero-slide-3-poster-1600.webp",
+      posterSrcSet:
+        "/images/hero/hero-slide-3-poster-828.webp 828w, " +
+        "/images/hero/hero-slide-3-poster-1600.webp 1600w, " +
+        "/images/hero/hero-slide-3-poster-2400.webp 2400w",
       playbackRate: 1.0,
     },
   },
@@ -200,10 +214,19 @@ export function HeroSection() {
             }}
             aria-hidden="true"
           >
-            {/* Poster underneath the video — always visible until video fades in */}
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url('${slide.media.poster}')` }}
+            {/* Poster underneath the video — always visible until video fades in.
+                An <img srcSet> instead of a CSS background: a background-image is
+                one fixed URL, so phones were being served the 4096px original.
+                Not next/image: this is one of three absolutely-positioned layers
+                that cross-fade, and the WebP tiers are already committed, so the
+                optimizer would only add billed transforms. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={slide.media.posterFallback}
+              srcSet={slide.media.posterSrcSet}
+              sizes="100vw"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
             />
             {mounted && (
               <video
@@ -221,7 +244,6 @@ export function HeroSection() {
                 muted
                 playsInline
                 preload={i === 0 ? "auto" : "metadata"}
-                poster={slide.media.poster}
                 onCanPlay={() => handleCanPlay(i)}
               >
                 {/* Landscape comes first so browsers without media support retain the
