@@ -23,8 +23,15 @@
   --color-tx3: #6A6F80;
   --color-bd: rgba(26,26,46,0.07);
 
-  --font-heading: var(--font-playfair);
-  --font-sans: var(--font-inter);
+  /* Chinese fallback belongs in the stack itself, not only on `body`.
+     Tailwind emits `.font-heading { font-family: var(--font-heading) }`, so
+     without it every element carrying `font-sans` / `font-heading` dropped its
+     Chinese to whatever the OS provides — PingFang TC on macOS, Microsoft
+     JhengHei on Windows — and the same heading looked different per device.
+     Latin and digits still resolve to Playfair / Inter: font fallback is
+     per-character, and those faces come first. */
+  --font-heading: var(--font-playfair), var(--font-noto-sans-tc), sans-serif;
+  --font-sans: var(--font-inter), var(--font-noto-sans-tc), sans-serif;
   --font-zh: var(--font-noto-sans-tc);
   --font-accent: var(--font-playfair);
 }
