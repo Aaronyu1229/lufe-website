@@ -136,7 +136,11 @@ export function HeroSection() {
     videoRefs.current.forEach((video, i) => {
       if (!video) return;
       if (i === activeIndex) {
-        const rate = slides[i].media.playbackRate ?? 1.0;
+        // playbackRate is tuned for the landscape footage. The portrait cuts are
+        // close-ups of people, where speed changes read as unnatural, so they
+        // always play at 1x.
+        const usingPortrait = isPortrait && !!slides[i].media.portraitSrc;
+        const rate = usingPortrait ? 1.0 : slides[i].media.playbackRate ?? 1.0;
         video.playbackRate = rate;
         video.currentTime = 0;
         const playPromise = video.play();
