@@ -84,6 +84,7 @@ const AUTOPLAY_MS = 10000;
 
 export function HeroSection() {
   const [isPortrait, setIsPortrait] = useState(false);
+  const [rotationKey, setRotationKey] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -97,10 +98,16 @@ export function HeroSection() {
   // Detect portrait orientation
   useEffect(() => {
     const mql = window.matchMedia("(max-aspect-ratio: 1/1)");
-    const update = () => setIsPortrait(mql.matches);
-    update();
-    mql.addEventListener("change", update);
-    return () => mql.removeEventListener("change", update);
+    setIsPortrait(mql.matches);
+    // Only a real rotation bumps the key. The first reading must not, or the
+    // <video> would remount right after hydration and re-fetch what the
+    // browser already picked from the <source media> list.
+    const onChange = () => {
+      setIsPortrait(mql.matches);
+      setRotationKey((k) => k + 1);
+    };
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
   }, []);
 
   // Respect reduced motion
@@ -181,10 +188,6 @@ export function HeroSection() {
       {/* Layered backgrounds — cross-fade between slides */}
       {slides.map((slide, i) => {
         const isActive = i === activeIndex;
-        const useSrc =
-          isPortrait && slide.media.portraitSrc
-            ? slide.media.portraitSrc
-            : slide.media.src;
         const ready = readyMap[i] ?? false;
         const mounted = mountedMap[i] ?? false;
         return (
@@ -207,7 +210,7 @@ export function HeroSection() {
                 ref={(el) => {
                   videoRefs.current[i] = el;
                 }}
-                key={useSrc}
+                key={`${slide.id}-${rotationKey}`}
                 className="bg-video"
                 style={{
                   opacity: ready ? 1 : 0,
@@ -221,7 +224,10 @@ export function HeroSection() {
                 poster={slide.media.poster}
                 onCanPlay={() => handleCanPlay(i)}
               >
-                <source src={useSrc} type="video/mp4" />
+                {/* Landscape comes first so browsers without media support retain the
+                    existing desktop behavior instead of showing portrait video. */}
+                <source media="(min-aspect-ratio: 1/1)" src={slide.media.src} type="video/mp4" />
+                <source src={slide.media.portraitSrc ?? slide.media.src} type="video/mp4" />
               </video>
             )}
           </div>
