@@ -9,6 +9,7 @@ type SlideMedia = {
   portraitSrc?: string;
   /** Landscape cut re-encoded at 720p, for narrow viewports. */
   mobileSrc?: string;
+  /** Widest tier the srcSet offers; also the src browsers fall back to. */
   posterFallback: string;
   posterSrcSet: string;
   playbackRate?: number;
