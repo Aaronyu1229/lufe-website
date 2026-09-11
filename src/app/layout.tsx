@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter, Noto_Sans_TC } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -19,10 +20,22 @@ const inter = Inter({
   display: "swap",
 });
 
-const notoSansTC = Noto_Sans_TC({
+// Self-hosted subset: the Google-hosted variable font is split into 116
+// unicode-range chunks, and Chinese text scatters across them, so the page
+// pulled 22 chunks / 1,331 KB to draw ~1,300 glyphs. One subset file is 429 KB.
+const notoSansTC = localFont({
+  src: "./fonts/NotoSansTC-subset.woff2",
   variable: "--font-noto-sans-tc",
-  subsets: ["latin"],
+  // 保留完整軸。實測限縮到 200–700 只省 8 KB，卻會讓日後用 font-black 直接壞掉。
+  weight: "100 900",
+  style: "normal",
   display: "swap",
+  // The subset covers every character on the site today. Anything added later
+  // falls through to a real system Chinese face, never to a Latin default.
+  fallback: ["PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", "sans-serif"],
+  // Important: Defaults to 'Arial' for next/font/local, which would apply Latin
+  // metrics to Chinese text. Must be off.
+  adjustFontFallback: false,
 });
 
 const DEFAULT_TITLE = `${SITE_NAME} — 協助台灣企業落地北美與東南亞`;
