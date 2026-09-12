@@ -4,7 +4,7 @@
  */
 export const SITE_URL: string =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://lufe-website.vercel.app";
+  "https://lufe.world";
 
 export const SITE_NAME = "鹿飛 LUFÉ" as const;
 
