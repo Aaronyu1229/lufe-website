@@ -64,13 +64,9 @@ export const metadata: Metadata = {
     "鹿飛",
     "LUFÉ",
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: SITE_LOCALE,
-    url: SITE_URL,
     siteName: SITE_NAME,
     title: DEFAULT_TITLE,
     description: SITE_DESCRIPTION,
