@@ -7,10 +7,6 @@ import {
   MATCHER_QUESTIONS,
   matchSubsidies,
   type MatcherAnswers,
-  type SizeAnswer,
-  type StageAnswer,
-  type IndustryAnswer,
-  type ProblemAnswer,
   type Subsidy,
 } from "@/data/subsidies";
 import { SubsidyIcon } from "./SubsidyIcons";
