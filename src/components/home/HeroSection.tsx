@@ -115,6 +115,10 @@ export function HeroSection() {
   // Detect portrait orientation
   useEffect(() => {
     const mql = window.matchMedia("(max-aspect-ratio: 1/1)");
+    // matchMedia only exists on the client, so this first reading cannot be
+    // derived during render. It is a single hydration-time read, not a cascade.
+    // Deliberately does NOT bump rotationKey (see the comment below, PR #4/#5).
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only read
     setIsPortrait(mql.matches);
     // Only a real rotation bumps the key. The first reading must not, or the
     // <video> would remount right after hydration and re-fetch what the
@@ -149,6 +153,13 @@ export function HeroSection() {
   // the cross-fade. Never un-mounts to avoid re-downloading once seen.
   useEffect(() => {
     const nextIndex = (activeIndex + 1) % slides.length;
+    // mountedMap is cumulative memory ("mounted once, never unmount"), so it
+    // cannot be derived from activeIndex during render. Moving it into the event
+    // handlers would leave no trigger for the initial warm-up, forcing an initial
+    // value of {0:true, 1:true} — which would put slide 1's <video
+    // preload="metadata"> into the SSR HTML and start a fetch before hydration.
+    // See PR #5 (mount race).
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- cumulative memory
     setMountedMap((prev) => {
       if (prev[activeIndex] && prev[nextIndex]) return prev;
       return { ...prev, [activeIndex]: true, [nextIndex]: true };
