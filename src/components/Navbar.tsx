@@ -115,6 +115,10 @@ export function Navbar() {
   // crossed). Without this reset, a dark-hero page would stay stuck on
   // the white navbar until the cursor leaves and re-enters the header.
   useEffect(() => {
+    // Resetting UI state on navigation. There is no render-time source to derive
+    // from: the reason this exists is that onMouseEnter does NOT re-fire after a
+    // client-side route change (see the comment above). Runs once per navigation.
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset on nav
     setActiveMenu(null);
     setMobileOpen(false);
     setHovered(false);
