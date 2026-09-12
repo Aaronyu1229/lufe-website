@@ -257,10 +257,15 @@ export function HeroSection() {
                 preload={i === 0 ? "auto" : "metadata"}
                 onCanPlay={() => handleCanPlay(i)}
               >
-                {/* Landscape comes first so browsers without media support retain the
-                    existing desktop behavior instead of showing portrait video. */}
-                <source media="(min-aspect-ratio: 1/1)" src={slide.media.src} type="video/mp4" />
+                {/* Landscape comes first; both sources require motion preference so
+                    reduced-motion users retain the poster without downloading video. */}
                 <source
+                  media="(prefers-reduced-motion: no-preference) and (min-aspect-ratio: 1/1)"
+                  src={slide.media.src}
+                  type="video/mp4"
+                />
+                <source
+                  media="(prefers-reduced-motion: no-preference)"
                   src={slide.media.portraitSrc ?? slide.media.mobileSrc ?? slide.media.src}
                   type="video/mp4"
                 />
