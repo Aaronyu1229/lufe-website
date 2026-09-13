@@ -40,6 +40,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   reactStrictMode: true,
+  skipTrailingSlashRedirect: true,
 
   // Modern image formats — Next/Image will serve AVIF → WebP → JPEG fallback.
   images: {
@@ -64,6 +65,16 @@ const nextConfig: NextConfig = {
             value: "public, max-age=31536000, immutable",
           },
         ],
+      },
+    ];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/:path((?!ghost/).+)/",
+        destination: "/:path",
+        permanent: true,
       },
     ];
   },

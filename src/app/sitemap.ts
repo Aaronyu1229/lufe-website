@@ -2,7 +2,10 @@ import type { MetadataRoute } from "next";
 import { CASES } from "@/data/cases";
 import { articles } from "@/data/articles";
 import { STAGE_ORDER } from "@/data/services";
+import { listPublishedArticles } from "@/lib/articles/repository";
 import { SITE_URL } from "@/lib/site";
+
+export const revalidate = 300;
 
 type ChangeFreq = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
 
@@ -25,7 +28,7 @@ const STATIC_ROUTES: readonly RouteSpec[] = [
   { path: "/resources/subsidies", priority: 0.7, changeFrequency: "monthly" },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((r) => ({
@@ -56,10 +59,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
+  let databaseEntries: MetadataRoute.Sitemap = [];
+  try {
+    const databaseArticles = await listPublishedArticles();
+    databaseEntries = databaseArticles.map((article) => ({
+      url: `${SITE_URL}/insights/${article.slug}`,
+      lastModified: article.updatedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
+    }));
+  } catch {
+    databaseEntries = [];
+  }
+
   return [
     ...staticEntries,
     ...stageEntries,
     ...caseEntries,
     ...articleEntries,
+    ...databaseEntries,
   ];
 }
