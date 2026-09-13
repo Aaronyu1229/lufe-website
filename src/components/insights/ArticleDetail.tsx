@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Article } from "@/data/articles";
+import type { DatabaseInsight } from "@/lib/articles/presentation";
 import { useMessageBox } from "../MessageBox";
 
 const colorMap: Record<string, string> = {
@@ -12,12 +13,24 @@ const colorMap: Record<string, string> = {
 };
 
 interface Props {
-  readonly article: Article;
+  readonly article: Article | DatabaseInsight;
   readonly image: string;
+}
+
+function isDatabaseArticle(article: Article | DatabaseInsight): article is DatabaseInsight {
+  return !Array.isArray(article.content);
 }
 
 export function ArticleDetail({ article, image }: Props) {
   const { open } = useMessageBox();
+  const databaseContent = isDatabaseArticle(article) ? article.content : null;
+  const staticContent: readonly string[] = databaseContent ? [] : article.content as readonly string[];
+  const dynamicFont = databaseContent
+    ? { fontFamily: '"PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif' }
+    : undefined;
+  const hasInlineImage = Boolean(databaseContent && /<img\b/i.test(databaseContent.html));
+  const externalImage = /^https?:\/\//.test(image);
+
   return (
     <article className="bg-white min-h-screen pt-[96px] pb-[80px] px-5 md:px-10">
       <div className="max-w-[720px] mx-auto">
@@ -42,48 +55,63 @@ export function ArticleDetail({ article, image }: Props) {
         </div>
 
         {/* Title */}
-        <h1 className="font-sans text-[clamp(28px,4vw,40px)] leading-[1.25] font-light tracking-[-0.5px] mb-6">
+        <h1
+          className="font-sans text-[clamp(28px,4vw,40px)] leading-[1.25] font-light tracking-[-0.5px] mb-6"
+          style={dynamicFont}
+        >
           {article.title}
         </h1>
 
         {/* Summary */}
-        <p className="text-[17px] text-tx2 leading-[1.8] font-normal mb-8 border-l-2 border-gold pl-4">
+        <p
+          className="text-[17px] text-tx2 leading-[1.8] font-normal mb-8 border-l-2 border-gold pl-4"
+          style={dynamicFont}
+        >
           {article.summary}
         </p>
 
         {/* Cover image */}
-        <div className="relative w-full h-[240px] md:h-[360px] mb-10 overflow-hidden">
-          <Image
-            src={image}
-            alt={article.title}
-            fill
-            className="object-cover"
-          />
-        </div>
+        {!hasInlineImage && (
+          <div className="relative w-full h-[240px] md:h-[360px] mb-10 overflow-hidden">
+            {externalImage ? (
+              <img src={image} alt={article.title} className="h-full w-full object-cover" />
+            ) : (
+              <Image src={image} alt={article.title} fill className="object-cover" />
+            )}
+          </div>
+        )}
 
         {/* Content */}
-        <div className="space-y-5">
-          {article.content.map((paragraph, i) => {
-            if (paragraph.startsWith("## ")) {
+        {databaseContent ? (
+          <div
+            className="space-y-5 text-[16.5px] text-tx leading-[1.85] font-normal [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:text-[22px] [&_h2]:font-medium [&_img]:h-auto [&_img]:max-w-full"
+            style={dynamicFont}
+            dangerouslySetInnerHTML={{ __html: databaseContent.html }}
+          />
+        ) : (
+          <div className="space-y-5">
+            {staticContent.map((paragraph, i) => {
+              if (paragraph.startsWith("## ")) {
+                return (
+                  <h2
+                    key={i}
+                    className="font-sans text-[22px] font-medium leading-[1.4] mt-10 mb-3 tracking-[-0.3px]"
+                  >
+                    {paragraph.slice(3)}
+                  </h2>
+                );
+              }
               return (
-                <h2
+                <p
                   key={i}
-                  className="font-sans text-[22px] font-medium leading-[1.4] mt-10 mb-3 tracking-[-0.3px]"
+                  className="text-[16.5px] text-tx leading-[1.85] font-normal"
                 >
-                  {paragraph.slice(3)}
-                </h2>
+                  {paragraph}
+                </p>
               );
-            }
-            return (
-              <p
-                key={i}
-                className="text-[16.5px] text-tx leading-[1.85] font-normal"
-              >
-                {paragraph}
-              </p>
-            );
-          })}
-        </div>
+            })}
+          </div>
+        )}
 
         {/* Divider */}
         <div className="w-full h-px bg-bd mt-14 mb-10" />

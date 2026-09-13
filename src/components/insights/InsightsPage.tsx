@@ -4,8 +4,9 @@ import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { articles, categories, getArticleImage } from "@/data/articles";
+import { categories } from "@/data/articles";
 import type { Category } from "@/data/articles";
+import type { InsightCard } from "@/lib/articles/presentation";
 import { useMessageBox } from "../MessageBox";
 
 /* ───────── style maps ───────── */
@@ -16,9 +17,17 @@ const colorMap: Record<string, string> = {
   ember: "bg-[rgba(217,139,74,0.08)] text-ember",
 };
 
+const articleTextFont = {
+  fontFamily: '"PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+};
+
 /* ───────── component ───────── */
 
 type FilterCategory = Category | "全部";
+
+interface Props {
+  readonly articles: readonly InsightCard[];
+}
 
 const VALID_CATEGORIES: readonly FilterCategory[] = [
   "全部",
@@ -34,7 +43,29 @@ function isValidCategory(value: string | null): value is FilterCategory {
   return value !== null && VALID_CATEGORIES.includes(value as FilterCategory);
 }
 
-function InsightsPageInner() {
+function isExternalImage(image: string): boolean {
+  return /^https?:\/\//.test(image);
+}
+
+function CoverImage({ article, sizes }: { article: InsightCard; sizes?: string }) {
+  return isExternalImage(article.image) ? (
+    <img
+      src={article.image}
+      alt={article.title}
+      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+    />
+  ) : (
+    <Image
+      src={article.image}
+      alt={article.title}
+      fill
+      sizes={sizes}
+      className="object-cover transition-transform duration-700 group-hover:scale-105"
+    />
+  );
+}
+
+function InsightsPageInner({ articles }: Props) {
   const searchParams = useSearchParams();
   const catParam = searchParams.get("cat");
   const initial: FilterCategory = isValidCategory(catParam) ? catParam : "全部";
@@ -139,13 +170,7 @@ function InsightsPageInner() {
               className="group block bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-gold/50 transition-all overflow-hidden"
             >
               <div className="relative h-[170px] overflow-hidden">
-                <Image
-                  src={getArticleImage(featured)}
-                  alt={featured.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <CoverImage article={featured} sizes="(max-width: 1024px) 100vw, 40vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
                 <div className="absolute bottom-3 left-4 flex items-center gap-2">
                   <span className="text-[10px] px-2 py-0.5 bg-gold text-navy font-semibold tracking-[1px] uppercase">
@@ -157,10 +182,16 @@ function InsightsPageInner() {
                 </div>
               </div>
               <div className="p-5">
-                <h2 className="text-[17px] md:text-[18px] font-semibold leading-[1.45] text-white group-hover:text-gold transition-colors mb-2 line-clamp-2">
+                <h2
+                  className="text-[17px] md:text-[18px] font-semibold leading-[1.45] text-white group-hover:text-gold transition-colors mb-2 line-clamp-2"
+                  style={articleTextFont}
+                >
                   {featured.title}
                 </h2>
-                <p className="text-[13.5px] text-white/55 leading-[1.8] line-clamp-2 mb-3">
+                <p
+                  className="text-[13.5px] text-white/55 leading-[1.8] line-clamp-2 mb-3"
+                  style={articleTextFont}
+                >
                   {featured.summary}
                 </p>
                 <div className="flex items-center justify-between text-[11px] text-white/45">
@@ -203,12 +234,7 @@ function InsightsPageInner() {
             >
               {/* Cover image */}
               <div className="h-[160px] overflow-hidden relative">
-                <Image
-                  src={getArticleImage(article)}
-                  alt={article.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <CoverImage article={article} />
               </div>
 
               {/* Content */}
@@ -221,10 +247,16 @@ function InsightsPageInner() {
                   </span>
                   <span className="text-[11px] text-tx3">{article.readTime}</span>
                 </div>
-                <h2 className="text-[17px] font-semibold leading-[1.5] mb-2 group-hover:text-gold transition-colors">
+                <h2
+                  className="text-[17px] font-semibold leading-[1.5] mb-2 group-hover:text-gold transition-colors"
+                  style={articleTextFont}
+                >
                   {article.title}
                 </h2>
-                <p className="text-[14.5px] text-tx2 leading-[1.8] font-normal line-clamp-3">
+                <p
+                  className="text-[14.5px] text-tx2 leading-[1.8] font-normal line-clamp-3"
+                  style={articleTextFont}
+                >
                   {article.summary}
                 </p>
                 <div className="mt-4 flex items-center justify-between">
@@ -277,7 +309,7 @@ function InsightsPageInner() {
   );
 }
 
-export function InsightsPage() {
+export function InsightsPage({ articles }: Props) {
   return (
     <Suspense
       fallback={
@@ -286,7 +318,7 @@ export function InsightsPage() {
         </section>
       }
     >
-      <InsightsPageInner />
+      <InsightsPageInner articles={articles} />
     </Suspense>
   );
 }
