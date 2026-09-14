@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>首頁 FAQ 區塊改版提案 · 三個方向｜LUFÉ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #101B30;
+        --gold: #D4A85C;
+        --gold-dark: #7A5A1A;
+        --cream: #F5F2EC;
+        --cream-d: #E8E3DA;
+        --text: #1A1A2E;
+        --text2: #5A6070;
+        --rule: rgba(26, 26, 46, 0.12);
+        --rule-light: rgba(245, 242, 236, 0.28);
+        --sans: Inter, "Noto Sans TC", sans-serif;
+        --accent: "Playfair Display", "Noto Sans TC", serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        min-width: 0;
+        overflow-x: hidden;
+        background: var(--cream-d);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      a { color: inherit; }
+
+      a:focus-visible,
+      summary:focus-visible {
+        outline: 2px solid var(--gold-dark);
+        outline-offset: 4px;
+      }
+
+      .content-width {
+        width: min(1200px, calc(100% - 80px));
+        margin-inline: auto;
+      }
+
+      .proposal-header {
+        background: var(--navy);
+        color: var(--cream);
+        padding: 72px 0 52px;
+      }
+
+      .proposal-header h1 {
+        max-width: 830px;
+        margin: 0;
+        font-family: var(--accent);
+        font-size: clamp(34px, 4.2vw, 58px);
+        font-weight: 400;
+        letter-spacing: -0.045em;
+        line-height: 1.2;
+      }
+
+      .proposal-date {
+        margin: 18px 0 0;
+        color: var(--cream);
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .jump-nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-top: 1px solid var(--rule-light);
+        border-bottom: 1px solid var(--rule-light);
+        background: var(--navy);
+        color: var(--cream);
+      }
+
+      .jump-nav-inner {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 24px;
+        min-height: 52px;
+        align-items: center;
+      }
+
+      .jump-nav a {
+        padding: 12px 0;
+        color: var(--cream);
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .jump-nav a:hover { color: var(--gold); }
+
+      .diagnosis {
+        padding: 72px 0 80px;
+        background: var(--cream-d);
+      }
+
+      .section-kicker,
+      .proposal-note-label,
+      .a-eyebrow,
+      .c-eyebrow,
+      .fact-topic {
+        margin: 0;
+        color: var(--gold-dark);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.09em;
+      }
+
+      .diagnosis h2,
+      .comparison h2 {
+        margin: 9px 0 0;
+        font-family: var(--accent);
+        font-size: clamp(30px, 3vw, 42px);
+        font-weight: 400;
+        letter-spacing: -0.035em;
+        line-height: 1.25;
+      }
+
+      .diagnosis-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 64px;
+        max-width: 990px;
+        margin: 32px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .diagnosis-list li {
+        border-top: 1px solid var(--rule);
+        padding: 18px 0 19px 28px;
+        color: var(--text2);
+        font-size: 15.5px;
+        line-height: 1.75;
+        position: relative;
+      }
+
+      .diagnosis-list li::before {
+        position: absolute;
+        top: 19px;
+        left: 0;
+        color: var(--gold-dark);
+        content: "—";
+      }
+
+      .proposal-option {
+        padding-top: 88px;
+      }
+
+      .option-brief {
+        border-top: 2px solid var(--navy);
+        padding: 21px 0 28px;
+      }
+
+      .option-brief-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 20px 48px;
+        align-items: start;
+      }
+
+      .option-brief h2 {
+        margin: 0;
+        font-family: var(--accent);
+        font-size: clamp(27px, 2.4vw, 36px);
+        font-weight: 400;
+        letter-spacing: -0.035em;
+        line-height: 1.25;
+      }
+
+      .option-concept {
+        max-width: 720px;
+        margin: 9px 0 0;
+        color: var(--text2);
+        font-size: 15px;
+        line-height: 1.75;
+      }
+
+      .reference {
+        margin: 4px 0 0;
+        color: var(--gold-dark);
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.6;
+        text-align: right;
+      }
+
+      .brief-points {
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(230px, 1fr);
+        gap: 48px;
+        margin-top: 22px;
+      }
+
+      .brief-points h3 {
+        margin: 0 0 7px;
+        color: var(--gold-dark);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.09em;
+      }
+
+      .brief-points ul {
+        display: grid;
+        gap: 6px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--text2);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .brief-points li::marker { color: var(--gold-dark); }
+
+      .preview {
+        overflow: hidden;
+        background: var(--cream);
+      }
+
+      .navy-strip {
+        height: 48px;
+        background: var(--navy);
+      }
+
+      .site-section {
+        background: var(--cream);
+      }
+
+      .site-inner {
+        width: min(1200px, calc(100% - 80px));
+        margin-inline: auto;
+      }
+
+      .faq-link {
+        display: inline-block;
+        color: var(--text);
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.5;
+        text-decoration: none;
+      }
+
+      .faq-link span {
+        border-bottom: 1px solid var(--gold-dark);
+        padding-bottom: 3px;
+      }
+
+      .faq-link:hover { color: var(--gold-dark); }
+
+      /* Option A: editorial two-column layout */
+      .a-section { padding: 96px 0 100px; }
+
+      .a-layout {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        column-gap: 32px;
+      }
+
+      .a-intro {
+        grid-column: span 4;
+        align-self: start;
+        position: sticky;
+        top: 84px;
+      }
+
+      .a-eyebrow { margin-bottom: 17px; }
+
+      .a-intro h3 {
+        max-width: 360px;
+        margin: 0;
+        font-family: var(--sans);
+        font-size: clamp(31px, 3.4vw, 44px);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+        line-height: 1.18;
+      }
+
+      .a-subcopy {
+        max-width: 340px;
+        margin: 20px 0 33px;
+        color: var(--text2);
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .a-entries { grid-column: span 8; }
+
+      .a-entry {
+        border-top: 1px solid var(--rule);
+        padding: 29px 0 31px;
+      }
+
+      .a-entry:last-child { border-bottom: 1px solid var(--rule); }
+
+      .a-entry-heading {
+        display: grid;
+        grid-template-columns: 50px minmax(0, 1fr);
+        gap: 10px;
+        align-items: baseline;
+      }
+
+      .a-number {
+        color: var(--gold-dark);
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.05em;
+      }
+
+      .a-entry h4 {
+        margin: 0;
+        color: var(--text);
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.5;
+      }
+
+      .a-lead,
+      .a-answer {
+        margin-left: 60px;
+        max-width: 650px;
+      }
+
+      .a-lead {
+        margin-top: 17px;
+        margin-bottom: 8px;
+        color: var(--text);
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 1.65;
+      }
+
+      .a-answer {
+        margin-top: 0;
+        margin-bottom: 0;
+        color: var(--text2);
+        font-size: 15.5px;
+        font-weight: 400;
+        line-height: 1.85;
+      }
+
+      /* Option B: decision facts in three aligned columns */
+      .b-section { padding: 94px 0 88px; }
+
+      .b-heading {
+        max-width: 620px;
+        margin: 0 auto 57px;
+        text-align: center;
+      }
+
+      .b-heading h3 {
+        margin: 0;
+        font-family: var(--sans);
+        font-size: clamp(30px, 3.5vw, 44px);
+        font-weight: 300;
+        letter-spacing: -0.055em;
+        line-height: 1.18;
+      }
+
+      .b-heading p {
+        max-width: 560px;
+        margin: 16px auto 0;
+        color: var(--text2);
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .b-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .fact-column {
+        display: grid;
+        grid-template-rows: 24px 128px auto 1fr;
+        min-width: 0;
+        padding: 0 20px;
+      }
+
+      .fact-column + .fact-column { border-left: 1px solid var(--rule); }
+
+      .fact-topic {
+        align-self: start;
+        font-size: 11px;
+      }
+
+      .fact-main { min-width: 0; }
+
+      .fact-value {
+        margin: 3px 0 0;
+        color: var(--navy);
+        font-family: var(--accent);
+        font-size: clamp(32px, 3vw, 40px);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+
+      .fact-caption {
+        margin: 12px 0 0;
+        color: var(--text2);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .fact-question {
+        margin: 0;
+        color: var(--text);
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.55;
+      }
+
+      .fact-answer {
+        margin: 14px 0 0;
+        color: var(--text2);
+        font-size: 15px;
+        line-height: 1.85;
+      }
+
+      .b-footer { margin-top: 44px; text-align: center; }
+
+      /* Option C: an assistive conversation with native disclosure controls */
+      .c-section { padding: 0; }
+
+      .c-layout {
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+        min-width: 0;
+      }
+
+      .c-panel {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 68px 56px;
+        background: var(--navy);
+        color: var(--cream);
+      }
+
+      .c-panel .c-eyebrow {
+        color: var(--gold);
+        margin-bottom: 17px;
+      }
+
+      .c-panel h3 {
+        margin: 0;
+        color: var(--cream);
+        font-family: var(--sans);
+        font-size: clamp(31px, 3.4vw, 43px);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+        line-height: 1.18;
+      }
+
+      .c-panel p {
+        max-width: 360px;
+        margin: 21px 0 34px;
+        color: var(--cream);
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .c-button {
+        display: inline-block;
+        margin-bottom: 30px;
+        padding: 13px 18px;
+        background: var(--gold);
+        color: var(--navy);
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: box-shadow 180ms ease;
+      }
+
+      .c-button:hover { box-shadow: 0 12px 24px rgba(16, 27, 48, 0.26); }
+
+      .c-button:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 4px;
+      }
+
+      .c-panel .faq-link { color: var(--cream); }
+
+      .c-panel .faq-link span { border-bottom-color: var(--gold); }
+
+      .c-panel .faq-link:hover { color: var(--gold); }
+
+      .c-accordion {
+        min-width: 0;
+        padding: 38px 56px 30px;
+        background: var(--cream);
+      }
+
+      .c-accordion details {
+        border-top: 1px solid var(--rule);
+      }
+
+      .c-accordion details:last-child { border-bottom: 1px solid var(--rule); }
+
+      .c-accordion summary {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr) 22px;
+        gap: 10px;
+        align-items: center;
+        min-width: 0;
+        padding: 25px 0;
+        color: var(--text);
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .c-accordion summary::-webkit-details-marker { display: none; }
+
+      .accordion-number {
+        color: var(--gold-dark);
+        font-size: 13px;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.05em;
+      }
+
+      .accordion-question {
+        min-width: 0;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.45;
+      }
+
+      .accordion-marker {
+        position: relative;
+        display: block;
+        width: 18px;
+        height: 18px;
+      }
+
+      .accordion-marker::before,
+      .accordion-marker::after {
+        position: absolute;
+        top: 8px;
+        left: 1px;
+        width: 16px;
+        height: 1px;
+        background: var(--gold-dark);
+        content: "";
+      }
+
+      .accordion-marker::after { transform: rotate(90deg); }
+
+      details[open] .accordion-marker::after { transform: rotate(0deg); }
+
+      .accordion-content {
+        padding: 0 32px 28px 52px;
+      }
+
+      .accordion-lead {
+        max-width: 530px;
+        margin: 0 0 8px;
+        color: var(--text);
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.65;
+      }
+
+      .accordion-answer {
+        max-width: 560px;
+        margin: 0;
+        color: var(--text2);
+        font-size: 15px;
+        line-height: 1.85;
+      }
+
+      .comparison {
+        padding: 88px 0 96px;
+      }
+
+      .comparison-intro {
+        max-width: 690px;
+        margin: 12px 0 30px;
+        color: var(--text2);
+        font-size: 15.5px;
+        line-height: 1.75;
+      }
+
+      .comparison-table-wrap { overflow: hidden; }
+
+      .comparison table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      .comparison th,
+      .comparison td {
+        border-top: 1px solid var(--rule);
+        padding: 17px 18px;
+        overflow-wrap: anywhere;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .comparison thead th {
+        color: var(--gold-dark);
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .comparison thead th:first-child { width: 20%; }
+
+      .comparison tbody th {
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.55;
+      }
+
+      .comparison tbody td {
+        color: var(--text2);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .comparison tbody tr:last-child th,
+      .comparison tbody tr:last-child td {
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .recommendation-row th,
+      .recommendation-row td { background: var(--cream); }
+
+      .recommendation-row td:first-of-type {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      @media (max-width: 900px) {
+        .a-layout { column-gap: 24px; }
+        .c-panel { padding: 56px 34px; }
+        .c-accordion { padding: 32px 34px 24px; }
+        .brief-points { gap: 30px; }
+      }
+
+      @media (max-width: 767px) {
+        .content-width,
+        .site-inner { width: min(100% - 40px, 1200px); }
+
+        .proposal-header { padding: 52px 0 36px; }
+        .proposal-header h1 { font-size: 35px; }
+        .proposal-date { font-size: 13px; }
+        .jump-nav-inner { gap: 0 17px; }
+        .jump-nav a { font-size: 12px; }
+
+        .diagnosis { padding: 54px 0 58px; }
+        .diagnosis-list { grid-template-columns: 1fr; gap: 0; }
+
+        .proposal-option { padding-top: 64px; }
+        .option-brief { padding-top: 18px; }
+        .option-brief-top,
+        .brief-points { grid-template-columns: 1fr; gap: 17px; }
+        .reference { margin: 0; text-align: left; }
+        .brief-points { margin-top: 19px; }
+
+        .a-section { padding: 62px 0 68px; }
+        .a-layout { grid-template-columns: 1fr; row-gap: 43px; }
+        .a-intro,
+        .a-entries { grid-column: 1; }
+        .a-intro { position: static; }
+        .a-intro h3 { font-size: 33px; }
+        .a-subcopy { margin-bottom: 0; }
+        .a-entry { padding: 25px 0 27px; }
+        .a-entry-heading { grid-template-columns: 38px minmax(0, 1fr); gap: 7px; }
+        .a-entry h4 { font-size: 18px; }
+        .a-lead,
+        .a-answer { margin-left: 45px; }
+        .a-lead { font-size: 16px; }
+
+        .b-section { padding: 61px 0 64px; }
+        .b-heading { margin-bottom: 40px; }
+        .b-heading h3 { font-size: 32px; }
+        .b-grid { grid-template-columns: 1fr; }
+        .fact-column {
+          grid-template-rows: auto auto auto auto;
+          padding: 25px 0 28px;
+        }
+        .fact-column + .fact-column {
+          border-top: 1px solid var(--rule);
+          border-left: 0;
+        }
+        .fact-main { margin-top: 9px; }
+        .fact-value { font-size: 37px; }
+        .fact-question { margin-top: 25px; }
+        .fact-answer { margin-top: 10px; }
+        .b-footer { margin-top: 31px; }
+
+        .c-layout { grid-template-columns: 1fr; }
+        .c-panel { padding: 58px 20px; }
+        .c-panel h3 { font-size: 33px; }
+        .c-panel p { margin-bottom: 30px; }
+        .c-accordion { padding: 17px 20px 21px; }
+        .c-accordion summary {
+          grid-template-columns: 34px minmax(0, 1fr) 18px;
+          gap: 6px;
+          padding: 21px 0;
+        }
+        .accordion-question { font-size: 16.5px; }
+        .accordion-content { padding: 0 0 24px 40px; }
+        .accordion-lead { font-size: 15.5px; }
+
+        .comparison { padding: 64px 0 72px; }
+        .comparison th,
+        .comparison td { padding: 12px 8px; }
+        .comparison thead th,
+        .comparison tbody td,
+        .comparison tbody th { font-size: 12px; }
+        .comparison thead th:first-child { width: 23%; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .c-button { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="proposal-header">
+      <div class="content-width">
+        <h1>首頁 FAQ 區塊改版提案 · 三個方向</h1>
+        <p class="proposal-date">2026-09-14 · 內容皆為網站現行文案</p>
+      </div>
+    </header>
+
+    <nav class="jump-nav" aria-label="提案頁面導覽">
+      <div class="content-width jump-nav-inner">
+        <a href="#diagnosis">現況問題</a>
+        <a href="#option-a">方案 A</a>
+        <a href="#option-b">方案 B</a>
+        <a href="#option-c">方案 C</a>
+        <a href="#comparison">比較</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="diagnosis" id="diagnosis" aria-labelledby="diagnosis-title">
+        <div class="content-width">
+          <p class="section-kicker">現況問題</p>
+          <h2 id="diagnosis-title">讓答案更快被看見，而非增加更多視覺訊號。</h2>
+          <ul class="diagnosis-list">
+            <li>天藍、金色、橘褐三種強調色同時競爭，讀者難以判斷真正的優先順序。</li>
+            <li>每張卡同時有編號、圖示、標籤、上框線與要點框，裝飾多於必要資訊。</li>
+            <li>要點框重複了回答內容，且和正文的閱讀軸線沒有對齊。</li>
+            <li>費用模式與 3–4／6–12 個月等決策資訊藏在段落中，掃讀時容易錯過。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="proposal-option" id="option-a" aria-labelledby="option-a-title">
+        <div class="content-width">
+          <div class="option-brief">
+            <div class="option-brief-top">
+              <div>
+                <h2 id="option-a-title">方案 A — 編輯式雙欄</h2>
+                <p class="option-concept">把標題留在左側作為閱讀錨點，右側用清楚的提問、結論與全文回答，建立一條不被卡片打斷的決策閱讀路徑。</p>
+              </div>
+              <p class="reference">參考：Stripe、Linear、Vercel 的 FAQ</p>
+            </div>
+            <div class="brief-points">
+              <div>
+                <h3>優點</h3>
+                <ul>
+                  <li>關鍵結論緊接提問出現，完整回答仍常駐可讀。</li>
+                  <li>左欄固定保留標題與連結，長內容閱讀時仍有明確上下文。</li>
+                  <li>以分隔線取代卡片框，資訊更集中，視覺噪音最低。</li>
+                </ul>
+              </div>
+              <div>
+                <h3>取捨</h3>
+                <ul>
+                  <li>整體較沉穩，第一眼的視覺衝擊比方案 B 小。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview" aria-label="方案 A 首頁 FAQ 區塊示意">
+            <div class="navy-strip" aria-hidden="true"></div>
+            <section class="site-section a-section" aria-labelledby="a-render-title">
+              <div class="site-inner a-layout">
+                <div class="a-intro">
+                  <p class="a-eyebrow">FAQ</p>
+                  <h3 id="a-render-title">三個最常被問到的問題</h3>
+                  <p class="a-subcopy">在你決定聊聊之前，先回答你心裡可能已經冒出來的那幾個疑問。</p>
+                  <a class="faq-link" href="#comparison"><span>還有其他問題？看完整 FAQ →</span></a>
+                </div>
+                <div class="a-entries">
+                  <article class="a-entry">
+                    <div class="a-entry-heading">
+                      <span class="a-number">01</span>
+                      <h4>這要花多少錢？</h4>
+                    </div>
+                    <p class="a-lead">探路固定費，落地抽成制。第一次對話就給數字。</p>
+                    <p class="a-answer">看你走哪條路。如果是先去東南亞測試市場，我們按階段收固定費用，每一步花多少錢事前講清楚。如果是要打進北美通路，前期只收低服務費，主要靠成交抽成——我們幫你賣出去才真的賺錢。不管哪條路，第一次聊天就會給你明確的數字。</p>
+                  </article>
+                  <article class="a-entry">
+                    <div class="a-entry-heading">
+                      <span class="a-number">02</span>
+                      <h4>從開始到看到結果要多久？</h4>
+                    </div>
+                    <p class="a-lead">探路 3–4 個月有回饋 · 落地 6–12 個月進通路。</p>
+                    <p class="a-answer">東南亞探路通常 3–4 個月就能拿到第一批市場回饋。北美通路落地平均 6–9 個月，食品保健品會再長一些（9–12 個月），因為認證要求較高。我們會在第一次對話後給你明確的時間表。</p>
+                  </article>
+                  <article class="a-entry">
+                    <div class="a-entry-heading">
+                      <span class="a-number">03</span>
+                      <h4>如果發現我的產品不適合怎麼辦？</h4>
+                    </div>
+                    <p class="a-lead">探路就是為了在砸大錢之前先搞清楚。</p>
+                    <p class="a-answer">那反而是最好的結果之一——你省下了幾百萬的冤枉錢。探路的設計就是用最小成本先驗證，不適合就停，不會讓你砸大錢才發現。我們會老實告訴你為什麼，也會告訴你什麼條件改變後可以再試。</p>
+                  </article>
+                </div>
+              </div>
+            </section>
+            <div class="navy-strip" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="proposal-option" id="option-b" aria-labelledby="option-b-title">
+        <div class="content-width">
+          <div class="option-brief">
+            <div class="option-brief-top">
+              <div>
+                <h2 id="option-b-title">方案 B — 數字先行</h2>
+                <p class="option-concept">先把客戶真正會拿來判斷的預算、時程與風險放到最大，再把問題與完整解釋放在同一條垂直閱讀軸上。</p>
+              </div>
+              <p class="reference">參考：Mercury、Ramp、Bain</p>
+            </div>
+            <div class="brief-points">
+              <div>
+                <h3>優點</h3>
+                <ul>
+                  <li>第一次掃過就能掌握價格溝通、驗證時程與停損原則。</li>
+                  <li>三欄的節奏更有張力，適合想讓首頁多一個強記憶點的情境。</li>
+                  <li>同一列對齊結論、問題與回答，橫向比較很直覺。</li>
+                </ul>
+              </div>
+              <div>
+                <h3>取捨</h3>
+                <ul>
+                  <li>大字數字感較強，長文閱讀的安靜感不如方案 A。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview" aria-label="方案 B 首頁 FAQ 區塊示意">
+            <div class="navy-strip" aria-hidden="true"></div>
+            <section class="site-section b-section" aria-labelledby="b-render-title">
+              <div class="site-inner">
+                <div class="b-heading">
+                  <h3 id="b-render-title">三個最常被問到的問題</h3>
+                  <p>在你決定聊聊之前，先回答你心裡可能已經冒出來的那幾個疑問。</p>
+                </div>
+                <div class="b-grid">
+                  <article class="fact-column">
+                    <p class="fact-topic">預算</p>
+                    <div class="fact-main">
+                      <p class="fact-value">探路固定費</p>
+                      <p class="fact-caption">落地抽成制 · 第一次對話就給數字</p>
+                    </div>
+                    <h4 class="fact-question">這要花多少錢？</h4>
+                    <p class="fact-answer">看你走哪條路。如果是先去東南亞測試市場，我們按階段收固定費用，每一步花多少錢事前講清楚。如果是要打進北美通路，前期只收低服務費，主要靠成交抽成——我們幫你賣出去才真的賺錢。不管哪條路，第一次聊天就會給你明確的數字。</p>
+                  </article>
+                  <article class="fact-column">
+                    <p class="fact-topic">時程</p>
+                    <div class="fact-main">
+                      <p class="fact-value">3–4 個月</p>
+                      <p class="fact-caption">探路有回饋 · 落地 6–12 個月</p>
+                    </div>
+                    <h4 class="fact-question">從開始到看到結果要多久？</h4>
+                    <p class="fact-answer">東南亞探路通常 3–4 個月就能拿到第一批市場回饋。北美通路落地平均 6–9 個月，食品保健品會再長一些（9–12 個月），因為認證要求較高。我們會在第一次對話後給你明確的時間表。</p>
+                  </article>
+                  <article class="fact-column">
+                    <p class="fact-topic">風險</p>
+                    <div class="fact-main">
+                      <p class="fact-value">不適合就停</p>
+                      <p class="fact-caption">探路就是為了在砸大錢之前先搞清楚。</p>
+                    </div>
+                    <h4 class="fact-question">如果發現我的產品不適合怎麼辦？</h4>
+                    <p class="fact-answer">那反而是最好的結果之一——你省下了幾百萬的冤枉錢。探路的設計就是用最小成本先驗證，不適合就停，不會讓你砸大錢才發現。我們會老實告訴你為什麼，也會告訴你什麼條件改變後可以再試。</p>
+                  </article>
+                </div>
+                <div class="b-footer">
+                  <a class="faq-link" href="#comparison"><span>還有其他問題？看完整 FAQ →</span></a>
+                </div>
+              </div>
+            </section>
+            <div class="navy-strip" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="proposal-option" id="option-c" aria-labelledby="option-c-title">
+        <div class="content-width">
+          <div class="option-brief">
+            <div class="option-brief-top">
+              <div>
+                <h2 id="option-c-title">方案 C — 深色對話式手風琴</h2>
+                <p class="option-concept">用左側的諮詢邀請建立接觸感，右側保留原生、可鍵盤操作的展開式問答，讓內容以一題一題的對話節奏出現。</p>
+              </div>
+              <p class="reference">參考：Apple、Airbnb、Monzo 的說明中心</p>
+            </div>
+            <div class="brief-points">
+              <div>
+                <h3>優點</h3>
+                <ul>
+                  <li>最接近「先聊聊」的服務場景，諮詢行動被自然地放進內容脈絡。</li>
+                  <li>收合後能降低長段文字的初始密度，手機上也容易逐題閱讀。</li>
+                  <li>原生手風琴提供清楚的開闔狀態與鍵盤操作。</li>
+                </ul>
+              </div>
+              <div>
+                <h3>取捨</h3>
+                <ul>
+                  <li>這會改變原本「所有回答都可見」的意圖。</li>
+                  <li>會在視覺上與下方深色區塊相連，所以示意只讓左側保留 NAVY 面板、右側維持奶油色來切開層次。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview" aria-label="方案 C 首頁 FAQ 區塊示意">
+            <div class="navy-strip" aria-hidden="true"></div>
+            <section class="site-section c-section" aria-labelledby="c-render-title">
+              <div class="c-layout">
+                <div class="c-panel">
+                  <p class="c-eyebrow">FAQ</p>
+                  <h3 id="c-render-title">三個最常被問到的問題</h3>
+                  <p>在你決定聊聊之前，先回答你心裡可能已經冒出來的那幾個疑問。</p>
+                  <a class="c-button" href="#comparison">聊聊你的產品 →</a>
+                  <a class="faq-link" href="#comparison"><span>還有其他問題？看完整 FAQ →</span></a>
+                </div>
+                <div class="c-accordion">
+                  <details open>
+                    <summary>
+                      <span class="accordion-number">01</span>
+                      <span class="accordion-question">這要花多少錢？</span>
+                      <span class="accordion-marker" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion-content">
+                      <p class="accordion-lead">探路固定費，落地抽成制。第一次對話就給數字。</p>
+                      <p class="accordion-answer">看你走哪條路。如果是先去東南亞測試市場，我們按階段收固定費用，每一步花多少錢事前講清楚。如果是要打進北美通路，前期只收低服務費，主要靠成交抽成——我們幫你賣出去才真的賺錢。不管哪條路，第一次聊天就會給你明確的數字。</p>
+                    </div>
+                  </details>
+                  <details>
+                    <summary>
+                      <span class="accordion-number">02</span>
+                      <span class="accordion-question">從開始到看到結果要多久？</span>
+                      <span class="accordion-marker" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion-content">
+                      <p class="accordion-lead">探路 3–4 個月有回饋 · 落地 6–12 個月進通路。</p>
+                      <p class="accordion-answer">東南亞探路通常 3–4 個月就能拿到第一批市場回饋。北美通路落地平均 6–9 個月，食品保健品會再長一些（9–12 個月），因為認證要求較高。我們會在第一次對話後給你明確的時間表。</p>
+                    </div>
+                  </details>
+                  <details>
+                    <summary>
+                      <span class="accordion-number">03</span>
+                      <span class="accordion-question">如果發現我的產品不適合怎麼辦？</span>
+                      <span class="accordion-marker" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion-content">
+                      <p class="accordion-lead">探路就是為了在砸大錢之前先搞清楚。</p>
+                      <p class="accordion-answer">那反而是最好的結果之一——你省下了幾百萬的冤枉錢。探路的設計就是用最小成本先驗證，不適合就停，不會讓你砸大錢才發現。我們會老實告訴你為什麼，也會告訴你什麼條件改變後可以再試。</p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+            </section>
+            <div class="navy-strip" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="comparison" id="comparison" aria-labelledby="comparison-title">
+        <div class="content-width">
+          <p class="section-kicker">比較</p>
+          <h2 id="comparison-title">三種方向，各自把重點放在不同的閱讀瞬間。</h2>
+          <p class="comparison-intro">若首頁的首要任務是讓潛在客戶在不被干擾的情況下理解合作方式，方案 A 最貼近現有內容的強項；若要在第一眼創造更強的決策訊號，方案 B 是次選。</p>
+          <div class="comparison-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">比較面向</th>
+                  <th scope="col">方案 A<br />編輯式雙欄</th>
+                  <th scope="col">方案 B<br />數字先行</th>
+                  <th scope="col">方案 C<br />深色對話式手風琴</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">掃讀速度</th>
+                  <td>高：提問下方立刻看見結論。</td>
+                  <td>最高：三個決策事實先被看見。</td>
+                  <td>中：需展開題目後閱讀全文。</td>
+                </tr>
+                <tr>
+                  <th scope="row">視覺風格</th>
+                  <td>成熟、安靜、內容導向。</td>
+                  <td>明確、有張力、偏商業簡報感。</td>
+                  <td>對話感強、服務導向。</td>
+                </tr>
+                <tr>
+                  <th scope="row">跟前後深色區塊的搭配</th>
+                  <td>奶油色完整斷開，最有呼吸感。</td>
+                  <td>奶油色完整斷開，節奏最鮮明。</td>
+                  <td>左側深色面板延續語氣，右側奶油色維持分界。</td>
+                </tr>
+                <tr>
+                  <th scope="row">手機版表現</th>
+                  <td>標題在上、三題依序閱讀，穩定。</td>
+                  <td>三欄直向堆疊，數字仍有辨識度。</td>
+                  <td>面板在上、逐題展開，互動最直接。</td>
+                </tr>
+                <tr>
+                  <th scope="row">實作工作量</th>
+                  <td>小</td>
+                  <td>小</td>
+                  <td>中</td>
+                </tr>
+                <tr class="recommendation-row">
+                  <th scope="row">我的推薦</th>
+                  <td>首選。最符合西方 B2B 顧問／SaaS 的常見做法，雜訊最低，保留所有回答可見，開發改動也最小。</td>
+                  <td>若希望首頁更有第一眼的力度，這是最好的次選。</td>
+                  <td>適合想把 FAQ 變成一段互動式諮詢邀請時採用。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
