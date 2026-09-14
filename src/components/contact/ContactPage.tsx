@@ -160,7 +160,7 @@ export function ContactPage() {
         window.open("https://line.me/D", "_blank");
         break;
       case "email":
-        window.location.href = "mailto:hello@lufe.co";
+        window.location.href = "mailto:aaron.yu@reborn.in";
         break;
     }
   };
@@ -350,7 +350,7 @@ export function ContactPage() {
           </div>
 
           <a
-            href="mailto:hello@lufe.co?subject=%E5%90%88%E4%BD%9C%E5%A4%A5%E4%BC%B4%E6%B4%BD%E8%AB%87"
+            href="mailto:aaron.yu@reborn.in?subject=%E5%90%88%E4%BD%9C%E5%A4%A5%E4%BC%B4%E6%B4%BD%E8%AB%87"
             className="inline-flex items-center gap-2 bg-gold text-navy px-7 py-[14px] rounded-none text-[15.5px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors"
           >
             <span>寄信洽談合作</span>
