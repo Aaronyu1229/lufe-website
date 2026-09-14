@@ -285,7 +285,7 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="hidden md:block absolute top-full left-0 right-0 bg-white border-t border-bd shadow-xl"
+              className="hidden md:block absolute top-full left-0 right-0 bg-cream shadow-xl"
               onMouseEnter={() => {
                 if (closeTimer.current) window.clearTimeout(closeTimer.current);
               }}
@@ -318,7 +318,7 @@ export function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="md:hidden bg-white border-t border-bd px-5 pb-5 relative z-50 overflow-y-auto max-h-[calc(100vh-64px)]"
+                className="md:hidden bg-cream px-5 pb-5 relative z-50 overflow-y-auto max-h-[calc(100vh-64px)]"
               >
                 <MobileMenu onClose={() => setMobileOpen(false)} />
               </motion.div>
@@ -341,7 +341,7 @@ function MenuColumn({
 }) {
   return (
     <div>
-      <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
+      <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
         {label}
       </div>
       <div className="space-y-3">{children}</div>
@@ -366,7 +366,7 @@ function MenuLink({
         {title}
       </div>
       {desc && (
-        <div className="text-[13px] text-tx3 font-normal mt-0.5 leading-[1.5]">
+        <div className="text-[13px] text-tx2 font-normal mt-0.5 leading-[1.5]">
           {desc}
         </div>
       )}
@@ -499,7 +499,7 @@ function CasesMenu() {
   return (
     <div className="grid grid-cols-12 gap-8">
       <div className="col-span-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
           精選案例
         </div>
         <div className="grid grid-cols-2 gap-x-8 gap-y-3">
@@ -509,14 +509,14 @@ function CasesMenu() {
               href={`/cases/${c.slug}`}
               className="group flex items-start gap-3 py-2"
             >
-              <div className="font-heading text-[21px] text-gold-d leading-none font-semibold shrink-0 min-w-[60px] tabular-nums">
+              <div className="font-heading text-[21px] text-[#7A5A1A] leading-none font-semibold shrink-0 min-w-[60px] tabular-nums">
                 {c.num}
               </div>
               <div className="min-w-0">
                 <div className="text-[15px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-0.5">
                   {c.title}
                 </div>
-                <div className="text-[11px] text-tx3">
+                <div className="text-[11px] text-tx2">
                   {c.tags.map((t) => t.label).join(" · ")}
                 </div>
               </div>
@@ -525,22 +525,22 @@ function CasesMenu() {
         </div>
       </div>
       <div className="col-span-4 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
           分類瀏覽
         </div>
         <div className="space-y-2 mb-5">
-          <div className="text-[13px] text-tx3">按產業</div>
+          <div className="text-[13px] text-tx2">按產業</div>
           <div className="text-[14.5px] text-tx2">
             食品 · 電子 · 服飾 · 餐飲
           </div>
         </div>
         <div className="space-y-2 mb-6">
-          <div className="text-[13px] text-tx3">按市場</div>
+          <div className="text-[13px] text-tx2">按市場</div>
           <div className="text-[14.5px] text-tx2">北美 · 東南亞</div>
         </div>
         <Link
           href="/cases"
-          className="group inline-flex items-center gap-2 text-[14.5px] font-semibold text-gold-d"
+          className="group inline-flex items-center gap-2 text-[14.5px] font-semibold text-[#7A5A1A]"
         >
           <span className="border-b border-gold-d/40 pb-0.5 group-hover:border-gold-d transition-colors">
             看所有案例
@@ -596,7 +596,7 @@ function AboutMenu() {
         </MenuColumn>
       </div>
       <div className="col-span-4 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
           創辦人
         </div>
         <div className="flex items-start gap-4">
@@ -605,8 +605,8 @@ function AboutMenu() {
           </div>
           <div>
             <div className="text-[15.5px] font-semibold">Aaron Yu</div>
-            <div className="text-[13px] text-gold-d font-medium">鹿飛 LUFÉ 創辦人</div>
-            <div className="text-[11px] text-tx3 mt-1 leading-[1.5]">
+            <div className="text-[13px] text-[#7A5A1A] font-medium">鹿飛 LUFÉ 創辦人</div>
+            <div className="text-[11px] text-tx2 mt-1 leading-[1.5]">
               42+ 年國際物流實戰
               <br />
               500+ 出口案件 · 30+ 國家
@@ -664,7 +664,7 @@ function InsightsMenu() {
         </MenuColumn>
       </div>
       <div className="col-span-5 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d/80 mb-4">
+        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
           最新文章
         </div>
         {latestArticle && (
@@ -682,13 +682,13 @@ function InsightsMenu() {
               />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-[10.5px] font-semibold tracking-wider uppercase text-gold-d mb-1">
+              <div className="text-[10.5px] font-semibold tracking-wider uppercase text-[#7A5A1A] mb-1">
                 {latestArticle.category}
               </div>
               <div className="text-[15px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-1">
                 {latestArticle.title}
               </div>
-              <div className="text-[11px] text-tx3">
+              <div className="text-[11px] text-tx2">
                 {latestArticle.date} · {latestArticle.readTime}
               </div>
             </div>
@@ -726,7 +726,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
               height="16"
               viewBox="0 0 16 16"
               fill="none"
-              className={`transition-transform duration-300 text-tx3 ${
+              className={`transition-transform duration-300 text-tx2 ${
                 expanded === item.key ? "rotate-180" : ""
               }`}
             >
@@ -802,7 +802,7 @@ function MobileMenuContent({
   if (itemKey === "services") {
     return (
       <>
-        <div className="text-[10px] font-semibold tracking-wider uppercase text-tx3 mt-1 mb-1">
+        <div className="text-[10px] font-semibold tracking-wider uppercase text-tx2 mt-1 mb-1">
           完整路徑
         </div>
         {STAGE_ORDER.map((slug) => {
@@ -816,7 +816,7 @@ function MobileMenuContent({
             />
           );
         })}
-        <div className="text-[10px] font-semibold tracking-wider uppercase text-tx3 mt-3 mb-1">
+        <div className="text-[10px] font-semibold tracking-wider uppercase text-tx2 mt-3 mb-1">
           進階方案
         </div>
         <MobileSubLink
