@@ -20,7 +20,7 @@ const resourceLinks = [
 ];
 
 const contactLinks = [
-  { label: "hello@lufe.co", href: "mailto:hello@lufe.co" },
+  { label: "aaron.yu@reborn.in", href: "mailto:aaron.yu@reborn.in" },
   { label: "LINE 官方帳號", href: "https://line.me/D", external: true },
   { label: "合作夥伴聯繫", href: "/contact#partners" },
   { label: "台北市", href: "" },

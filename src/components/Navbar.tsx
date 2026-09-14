@@ -178,10 +178,10 @@ export function Navbar() {
           </div>
           <div className="flex items-center gap-5">
             <a
-              href="mailto:hello@lufe.co"
+              href="mailto:aaron.yu@reborn.in"
               className="hover:text-white transition-colors"
             >
-              hello@lufe.co
+              aaron.yu@reborn.in
             </a>
             <span className="text-white/20">|</span>
             <a
