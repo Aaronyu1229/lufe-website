@@ -65,25 +65,25 @@ export function StagePage({ stage }: Props) {
       <section className="bg-white py-[64px] md:py-[84px] px-5 md:px-10">
         <div className="max-w-[960px] mx-auto">
           <h2 className="section-heading">
-            為什麼要有<span className={`font-normal ${c.text}`}>這個階段</span>
+            為什麼要有<span className={`font-normal ${c.textOnLight}`}>這個階段</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-start mt-4">
             <div
               className={`relative w-[120px] h-[120px] md:w-[148px] md:h-[148px] ${c.softBg} border ${c.border} flex items-center justify-center shrink-0`}
             >
               <span
-                className={`font-heading text-[56px] md:text-[72px] font-light tabular-nums ${c.text} leading-none`}
+                className={`font-heading text-[56px] md:text-[72px] font-light tabular-nums ${c.textOnLight} leading-none`}
               >
                 {stage.num}
               </span>
               <span
                 aria-hidden="true"
-                className={`absolute -top-px left-4 right-4 h-px ${c.text}`}
+                className={`absolute -top-px left-4 right-4 h-px ${c.textOnLight}`}
                 style={{ backgroundColor: "currentColor", opacity: 0.4 }}
               />
               <span
                 aria-hidden="true"
-                className={`absolute -bottom-px left-4 right-4 h-px ${c.text}`}
+                className={`absolute -bottom-px left-4 right-4 h-px ${c.textOnLight}`}
                 style={{ backgroundColor: "currentColor", opacity: 0.4 }}
               />
             </div>
@@ -98,7 +98,7 @@ export function StagePage({ stage }: Props) {
       <section className={`py-[72px] md:py-[96px] px-5 md:px-10 ${c.softBg}`}>
         <div className="max-w-[1100px] mx-auto">
           <h2 className="section-heading">
-            這階段結束時，<span className={`font-normal ${c.text}`}>你會拿到什麼</span>
+            這階段結束時，<span className={`font-normal ${c.textOnLight}`}>你會拿到什麼</span>
           </h2>
           <p className="section-desc">
             不是抽象承諾，分成兩層：你會「知道」什麼，以及你會實際「拿到」什麼。
@@ -108,13 +108,13 @@ export function StagePage({ stage }: Props) {
             {/* Left — Outcomes (理解層) */}
             <div>
               <div className="flex items-center gap-3 mb-5">
-                <div className={`w-8 h-8 rounded-full ${c.softBg} border ${c.border} flex items-center justify-center ${c.text}`}>
+                <div className={`w-8 h-8 rounded-full ${c.softBg} border ${c.border} flex items-center justify-center ${c.textOnLight}`}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                     <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
                     <path d="M12 7V13L16 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </div>
-                <h3 className={`text-[18px] font-semibold ${c.text}`}>你會知道什麼</h3>
+                <h3 className={`text-[18px] font-semibold ${c.textOnLight}`}>你會知道什麼</h3>
               </div>
               <ul className="space-y-3">
                 {stage.outcomes.map((outcome, i) => (
@@ -123,7 +123,7 @@ export function StagePage({ stage }: Props) {
                     className="flex items-start gap-3 bg-white p-4 border border-bd/60"
                   >
                     <div
-                      className={`shrink-0 w-6 h-6 rounded-full ${c.softBg} flex items-center justify-center ${c.text} mt-[2px]`}
+                      className={`shrink-0 w-6 h-6 rounded-full ${c.softBg} flex items-center justify-center ${c.textOnLight} mt-[2px]`}
                     >
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
                         <path
@@ -225,7 +225,7 @@ export function StagePage({ stage }: Props) {
       <section className="bg-cream py-[72px] md:py-[96px] px-5 md:px-10">
         <div className="max-w-[960px] mx-auto">
           <h2 className="section-heading">
-            你<span className={`font-normal ${c.text}`}>是不是該</span>進這個階段
+            你<span className={`font-normal ${c.textOnLight}`}>是不是該</span>進這個階段
           </h2>
           <p className="section-desc">
             兩個自我檢視：第一個看你準備好了沒，第二個看有沒有該先喊停的訊號。
@@ -358,7 +358,7 @@ export function StagePage({ stage }: Props) {
         <section className="bg-cream py-[64px] md:py-[84px] px-5 md:px-10">
           <div className="max-w-[960px] mx-auto">
             <h2 className="section-heading">
-              這階段在真實案子裡<span className={`font-normal ${c.text}`}>長什麼樣</span>
+              這階段在真實案子裡<span className={`font-normal ${c.textOnLight}`}>長什麼樣</span>
             </h2>
 
             <Link
