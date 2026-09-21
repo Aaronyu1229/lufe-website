@@ -291,13 +291,13 @@ export function HeroSection() {
           {/* Eyebrow */}
           <div className="flex items-center gap-3 mb-8">
             <div className="w-5 h-px bg-gold/92" />
-            <span className="text-gold/92 text-[11px] font-medium tracking-[2.5px] uppercase">
+            <span className="text-gold/92 text-[11px] font-medium tracking-[0.05em] uppercase">
               {active.eyebrow}
             </span>
           </div>
 
           <h2
-            className="hero-title font-sans text-white leading-[1.05] mb-7 tracking-[-2px]"
+            className="hero-title font-sans text-white leading-[1.2] mb-7 tracking-normal"
             style={{
               fontSize: "clamp(38px, 5.5vw, 68px)",
               textShadow: "0 1px 2px rgba(10,20,40,0.35)",
