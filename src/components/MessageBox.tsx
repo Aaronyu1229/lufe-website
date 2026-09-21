@@ -145,17 +145,7 @@ export function MessageBox() {
               <h3 className="text-[17px] font-semibold mb-1.5">收到了！</h3>
               <p className="text-[14.5px] text-tx2 font-light mb-4">
                 我們會在 24 小時內回覆你。
-                <br />
-                想更快得到回覆？
               </p>
-              <a
-                href="https://line.me/D"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-[18px] py-[9px] bg-[#06C755] text-white rounded-full text-[14.5px] font-medium"
-              >
-                加我們 LINE 聊聊
-              </a>
             </div>
           )}
         </motion.div>

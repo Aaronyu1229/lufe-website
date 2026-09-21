@@ -39,18 +39,6 @@ const channels = [
   {
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 4C8.48 4 4 8.04 4 13C4 15.87 5.67 18.37 8.2 19.85L7.5 24L12.1 21.7C12.72 21.8 13.35 21.86 14 21.86C19.52 21.86 24 17.82 24 12.86C24 8.04 19.52 4 14 4Z" stroke="#06C755" strokeWidth="1.5" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: "LINE 聊天",
-    desc: "加入我們的 LINE 官方帳號，隨時對話。",
-    action: "line" as const,
-    actionLabel: "加好友",
-    color: "line",
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M6 8L14 14L22 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <rect x="4" y="6" width="20" height="16" rx="3" stroke="currentColor" strokeWidth="1.5" />
       </svg>
@@ -66,7 +54,6 @@ const channels = [
 const cardColorMap: Record<string, { border: string; iconBg: string; iconText: string }> = {
   gold: { border: "hover:border-gold", iconBg: "bg-[rgba(212,168,92,0.08)]", iconText: "text-gold-d" },
   sky: { border: "hover:border-sky", iconBg: "bg-[rgba(91,143,168,0.08)]", iconText: "text-sky" },
-  line: { border: "hover:border-[#06C755]", iconBg: "bg-[rgba(6,199,85,0.08)]", iconText: "text-[#06C755]" },
   ember: { border: "hover:border-ember", iconBg: "bg-[rgba(217,139,74,0.08)]", iconText: "text-ember" },
 };
 
@@ -156,9 +143,6 @@ export function ContactPage() {
       case "calendly":
         window.open("https://calendly.com/lufe-co/30min", "_blank");
         break;
-      case "line":
-        window.open("https://line.me/D", "_blank");
-        break;
       case "email":
         window.location.href = "mailto:aaron.yu@reborn.in";
         break;
@@ -183,7 +167,7 @@ export function ContactPage() {
             選一個你最方便的方式
           </h1>
           <p className="section-desc">
-            四個管道都會收到。訊息我們通常一個工作天內回覆。
+            三個管道都會收到。訊息我們通常一個工作天內回覆。
           </p>
 
           {/* Business info strip — gives contact page a functional anchor */}
@@ -214,7 +198,7 @@ export function ContactPage() {
                 一般回覆
               </div>
               <div className="font-medium text-tx">1 個工作天內</div>
-              <div className="text-tx3 text-[13px] mt-0.5">LINE 更快</div>
+              <div className="text-tx3 text-[13px] mt-0.5">快速留言最快</div>
             </div>
           </div>
 
@@ -250,11 +234,11 @@ export function ContactPage() {
             );
           })()}
 
-          {/* Secondary channels — 3 columns */}
+          {/* Secondary channels — two columns */}
           <p className="text-[13px] text-tx3 font-normal mb-3">
             或者選擇其他方式聯繫我們：
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {channels.slice(1).map((ch) => {
               const c = cardColorMap[ch.color];
               return (
@@ -397,17 +381,6 @@ export function ContactPage() {
               <p className="text-[15.5px] text-tx2 font-normal leading-[1.8]">
                 我們會在 <span className="text-tx font-semibold">24 小時內</span>
                 用你提供的 Email 回覆你。
-                <br />
-                如果比較急，可以直接加我們的{" "}
-                <a
-                  href="https://line.me/D"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#06C755] font-medium"
-                >
-                  LINE
-                </a>{" "}
-                聊，平均 2 小時內回。
               </p>
             </div>
           ) : (
