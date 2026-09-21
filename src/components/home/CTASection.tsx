@@ -30,7 +30,7 @@ export function CTASection() {
         className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40"
       />
       <div className="relative z-10 max-w-[1400px] mx-auto text-center">
-        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] mb-4 font-light tracking-[-0.5px] text-white">
+        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.2] mb-4 font-light tracking-normal text-white">
           想清楚了，就聊聊
           <br />
           還沒想清楚，也可以聊聊

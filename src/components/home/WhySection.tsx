@@ -50,7 +50,7 @@ export function WhySection() {
       <div className="relative max-w-[1200px] mx-auto">
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="font-sans text-[clamp(32px,4.8vw,56px)] leading-[1.1] font-light tracking-[-0.8px] text-white max-w-[880px] mx-auto">
+          <h2 className="font-sans text-[clamp(32px,4.8vw,56px)] leading-[1.2] font-light tracking-normal text-white max-w-[880px] mx-auto">
             從評估市場到貨上架，
             <br />
             你面對的<span className="text-gold font-normal">只有我們</span>
@@ -70,7 +70,7 @@ export function WhySection() {
               {PILLARS.map((pillar) => (
                 <div
                   key={pillar}
-                  className="text-center text-[10px] md:text-[11px] font-medium tracking-[1.5px] text-white/50 uppercase"
+                  className="text-center text-[11px] font-medium tracking-[0.05em] text-white/70 uppercase"
                 >
                   {pillar}
                 </div>
@@ -93,7 +93,7 @@ export function WhySection() {
                 {/* Label column */}
                 <div
                   className={`w-[80px] md:w-[132px] flex-shrink-0 text-right ${
-                    isLufe ? "text-gold" : "text-white/45"
+                    isLufe ? "text-gold" : "text-white/65"
                   }`}
                 >
                   <div
@@ -104,8 +104,8 @@ export function WhySection() {
                     {row.label}
                   </div>
                   <div
-                    className={`text-[9.5px] md:text-[10.5px] mt-0.5 leading-tight ${
-                      isLufe ? "text-gold/70" : "text-white/30"
+                    className={`text-[11px] mt-0.5 leading-tight ${
+                      isLufe ? "text-gold/85" : "text-white/60"
                     }`}
                   >
                     {row.note}
@@ -149,7 +149,7 @@ export function WhySection() {
           })}
 
           {/* Footnote: the promise, in plain words */}
-          <p className="mt-6 text-center text-[11.5px] md:text-[13.5px] text-white/40 font-normal leading-[1.8]">
+          <p className="mt-6 text-center text-[11.5px] md:text-[13.5px] text-white/65 font-normal leading-[1.8]">
             對手做完一件事交給下一家，鹿飛三件事<span className="text-gold/80">全程自營</span>——
             <br className="hidden md:block" />
             沒有責任轉交，沒有窗口切換，沒有進度真空。
@@ -158,7 +158,7 @@ export function WhySection() {
 
         {/* Testimonial — now aligned with the end-to-end story */}
         <div className="max-w-[680px] mx-auto border-l-2 border-gold pl-6 md:pl-8">
-          <q className="block text-[18px] md:text-[20px] text-white/85 italic leading-[1.8] font-light mb-4 font-[var(--font-playfair)]">
+          <q className="block text-[18px] md:text-[20px] text-white/85 leading-[1.8] font-light mb-4">
             以前要同時盯三家——顧問催進度、貿易商催付款、貨代催艙位。換成鹿飛之後，
             我只開一次會，每週一份進度信。本來要三週的事情，七天就跑完。
           </q>

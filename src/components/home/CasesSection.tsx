@@ -168,7 +168,7 @@ function FromToRoute({ from, to }: { from: string; to: string }) {
 
 function TrustSignal({ text }: { text: string }) {
   return (
-    <div className="flex items-center gap-1.5 text-[10.5px] text-tx3 font-medium">
+    <div className="flex items-center gap-1.5 text-[11px] text-tx3 font-medium">
       <svg
         width="11"
         height="11"
@@ -264,7 +264,7 @@ export function CasesSection() {
     <section className="py-[60px] md:py-[80px] px-5 md:px-10 max-w-[1400px] mx-auto">
       {/* ─── Heading ─── */}
       <div className="flex items-center gap-6 mb-4">
-        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] md:whitespace-nowrap">
+        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.2] font-light tracking-normal md:whitespace-nowrap">
           這些企業都找到了自己的路
         </h2>
         <div className="hidden md:block flex-1 h-px bg-bd" />
@@ -284,7 +284,7 @@ export function CasesSection() {
       {/* ─── Filter pills ─── */}
       <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6 mb-8 pb-7 border-b border-bd/70">
         <div className="flex items-center gap-3">
-          <span className="text-[10.5px] font-semibold tracking-[1.5px] uppercase text-tx3 shrink-0">
+          <span className="text-[11px] font-semibold tracking-[0.05em] uppercase text-tx3 shrink-0">
             產業
           </span>
           <FilterPills
@@ -296,7 +296,7 @@ export function CasesSection() {
         </div>
         <div className="hidden md:block w-px h-5 bg-bd/70" />
         <div className="flex items-center gap-3">
-          <span className="text-[10.5px] font-semibold tracking-[1.5px] uppercase text-tx3 shrink-0">
+          <span className="text-[11px] font-semibold tracking-[0.05em] uppercase text-tx3 shrink-0">
             市場
           </span>
           <FilterPills
@@ -338,7 +338,7 @@ export function CasesSection() {
                 <div className="flex flex-col">
                   {/* 「最常被問到」badge — 放在文字區頂部，避開圖片 */}
                   <div className="mb-3">
-                    <span className="inline-flex items-center gap-1.5 bg-gold/15 text-gold-d text-[10.5px] font-semibold px-2.5 py-1 tracking-[0.5px]">
+                    <span className="inline-flex items-center gap-1.5 bg-gold/15 text-gold-d text-[11px] font-semibold px-2.5 py-1 tracking-[0.5px]">
                       <span className="w-1 h-1 rounded-full bg-gold-d animate-pulse" />
                       最常被問到
                     </span>
@@ -421,7 +421,7 @@ export function CasesSection() {
                     <div className="font-sans text-[40px] font-semibold text-gold-d leading-none">
                       {c.num}
                     </div>
-                    <div className="text-[10.5px] text-tx3 tracking-[0.5px] mt-1.5 font-medium">
+                    <div className="text-[11px] text-tx3 tracking-[0.5px] mt-1.5 font-medium">
                       {c.numLabel}
                     </div>
                   </div>
