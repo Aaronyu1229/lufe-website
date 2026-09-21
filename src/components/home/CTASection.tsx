@@ -7,7 +7,7 @@ import { useMessageBox } from "../MessageBox";
 /**
  * CTASection — final conversion block.
  * CTA rule (site-wide): primary "聊聊你的產品" → MessageBox,
- * secondary "先做 2 分鐘評估" → /assess. No other labels.
+ * secondary "先做 2 分鐘處境比對" → /assess. No other labels.
  */
 
 export function CTASection() {
@@ -50,7 +50,7 @@ export function CTASection() {
             className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium tracking-[0.3px] transition-colors duration-300 hover:text-white"
           >
             <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
-              先做 2 分鐘評估
+              先做 2 分鐘處境比對
             </span>
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </Link>

@@ -399,7 +399,7 @@ export interface ContextualCopy {
 const DEFAULT_COPY: ContextualCopy = {
   eyebrow: "2026 政府出海補助",
   headline: "政府正在幫你出海",
-  oneLiner: "4 個正在開放的計畫 · 最高 NT$1,000 萬",
+  oneLiner: "最高 NT$1,000 萬 · 2 分鐘找出你能申請的",
   cta: "算算我能拿多少",
 };
 

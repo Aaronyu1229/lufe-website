@@ -38,7 +38,7 @@ const slides: Slide[] = [
     titleLines: ["協助台灣企業", "在北美與東南亞落地"],
     subtitle: "這個市場真的要你嗎？市場評估、產品測試、決策框架 — 先把勝率搞清楚。",
     primary: { label: "看真實案例", href: "/cases" },
-    secondary: { label: "你跟哪個案例最像？", href: "/assess" },
+    secondary: { label: "先做 2 分鐘處境比對", href: "/assess" },
     media: {
       type: "video",
       src: "/videos/hero/hero-cai-mep-1080.mp4",
@@ -61,7 +61,7 @@ const slides: Slide[] = [
     titleLines: ["上得了架", "還要賣得動"],
     subtitle: "通路進入、展會佈局、數位集客 — 把產品放進對的通路，讓消費者找得到。",
     primary: { label: "看完整服務內容", href: "/services" },
-    secondary: { label: "你跟哪個案例最像？", href: "/assess" },
+    secondary: { label: "先做 2 分鐘處境比對", href: "/assess" },
     media: {
       type: "video",
       src: "/videos/hero/hero-map-planning-1080.mp4",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getSubsidyBySlug } from "@/data/subsidies";
 
 /**
  * SubsidyAlertBand — 限期政府加碼 news flash
@@ -12,11 +13,14 @@ import Link from "next/link";
  *   - 不做動畫輪播、不做彈跳 CTA
  *   - 視覺上像一則編輯精選的快訊
  *   - 主 CTA 導向 /resources/subsidies#overseas-exhibition 讓使用者直接看細節
- *   - 次要 CTA 導向 /assess 讓還在猶豫的人先做 2 分鐘評估
+ *   - Secondary CTA links to /assess for a 2-minute situation comparison.
  *
- * 過期後：補助第 2 次公告結束後，把整個組件從 page.tsx 拿掉即可（單檔可拔除）。
+ * The band never claims a live application window; it shows the data's verifiedOn date instead.
+ * Update src/data/subsidies.ts when the programme changes.
  */
 export function SubsidyAlertBand() {
+  const { verifiedOn } = getSubsidyBySlug("overseas-exhibition")!;
+
   return (
     <section
       aria-label="限期政府補助加碼"
@@ -37,8 +41,7 @@ export function SubsidyAlertBand() {
           {/* Left — status chip */}
           <div className="flex items-center gap-3 shrink-0">
             <span className="inline-flex items-center gap-2 bg-ember text-white text-[11px] font-semibold tracking-[1.5px] uppercase px-3 py-1.5">
-              <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-              政府加碼中
+              115 年度加碼
             </span>
             <span className="hidden md:inline-block w-8 h-px bg-white/20" />
           </div>
@@ -55,9 +58,11 @@ export function SubsidyAlertBand() {
               歷年最優，經費用罄即止。
             </h2>
             <p className="text-[14.5px] text-white/70 leading-[1.75] max-w-[620px]">
-              因應國際關稅情勢，經濟部依特別條例加碼補助國內廠商赴海外參展。115
-              年度第 2 次公告預計 4-5 月開放，執行期至 12 月底。一年只有兩次機會。
+              執行期至 12 月底。下一次公告時程以國際貿易署最新公告為準。
             </p>
+            <div className="text-[10.5px] font-semibold tracking-[2px] text-gold/80 mt-2">
+              資料確認：{verifiedOn}
+            </div>
           </div>
 
           {/* Right — CTA */}
@@ -76,7 +81,7 @@ export function SubsidyAlertBand() {
               className="text-[13px] text-white/60 hover:text-gold transition-colors inline-flex items-center gap-1.5 md:self-end"
             >
               <span className="border-b border-white/20 group-hover:border-gold pb-0.5">
-                或先做 2 分鐘評估
+                或先做 2 分鐘處境比對
               </span>
               <span>→</span>
             </Link>

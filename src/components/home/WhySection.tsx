@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-
 const PILLARS = ["產品適配", "通路銷售", "國際物流"] as const;
 
 type CoverageRow = {
@@ -38,52 +34,7 @@ const coverage: readonly CoverageRow[] = [
   },
 ];
 
-type Stat = {
-  target: number;
-  suffix: string;
-  label: string;
-};
-
-const stats: readonly Stat[] = [
-  { target: 42, suffix: "+", label: "年國際物流底層" },
-  { target: 30, suffix: "+", label: "國家與地區覆蓋" },
-  { target: 500, suffix: "+", label: "出海案件經驗" },
-  { target: 3, suffix: "", label: "支柱全程自營" },
-];
-
 export function WhySection() {
-  const [counted, setCounted] = useState(false);
-  const [values, setValues] = useState<number[]>(stats.map(() => 0));
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !counted) {
-          setCounted(true);
-          const duration = 1500;
-          const start = performance.now();
-
-          function tick(now: number) {
-            const progress = Math.min((now - start) / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 3);
-            setValues(stats.map((s) => Math.round(ease * s.target)));
-            if (progress < 1) requestAnimationFrame(tick);
-          }
-
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    const el = statsRef.current;
-    if (el) observer.observe(el);
-    return () => {
-      if (el) observer.unobserve(el);
-    };
-  }, [counted]);
-
   return (
     <section className="relative bg-navy py-[96px] md:py-[128px] px-5 md:px-10 overflow-hidden">
       {/* Subtle gold radial accent — visual climax marker */}
@@ -203,24 +154,6 @@ export function WhySection() {
             <br className="hidden md:block" />
             沒有責任轉交，沒有窗口切換，沒有進度真空。
           </p>
-        </div>
-
-        {/* Stats — aligned to the promise */}
-        <div
-          ref={statsRef}
-          className="flex justify-center gap-10 md:gap-20 flex-wrap mb-20"
-        >
-          {stats.map((stat, i) => (
-            <div key={stat.label} className="text-center">
-              <div className="font-sans text-[44px] md:text-[56px] text-white font-extralight tabular-nums leading-none">
-                {values[i]}
-                <span className="text-gold">{stat.suffix}</span>
-              </div>
-              <div className="text-[13px] md:text-[14.5px] text-white/50 font-normal mt-2 tracking-wide">
-                {stat.label}
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* Testimonial — now aligned with the end-to-end story */}
