@@ -341,7 +341,7 @@ function MenuColumn({
 }) {
   return (
     <div>
-      <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
+      <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
         {label}
       </div>
       <div className="space-y-3">{children}</div>
@@ -499,7 +499,7 @@ function CasesMenu() {
   return (
     <div className="grid grid-cols-12 gap-8">
       <div className="col-span-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
+        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
           精選案例
         </div>
         <div className="grid grid-cols-2 gap-x-8 gap-y-3">
@@ -525,7 +525,7 @@ function CasesMenu() {
         </div>
       </div>
       <div className="col-span-4 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
+        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
           分類瀏覽
         </div>
         <div className="space-y-2 mb-5">
@@ -596,7 +596,7 @@ function AboutMenu() {
         </MenuColumn>
       </div>
       <div className="col-span-4 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
+        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
           創辦人
         </div>
         <div className="flex items-start gap-4">
@@ -664,7 +664,7 @@ function InsightsMenu() {
         </MenuColumn>
       </div>
       <div className="col-span-5 border-l border-bd pl-8">
-        <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-[#7A5A1A] mb-4">
+        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
           最新文章
         </div>
         {latestArticle && (
@@ -682,7 +682,7 @@ function InsightsMenu() {
               />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-[10.5px] font-semibold tracking-wider uppercase text-[#7A5A1A] mb-1">
+              <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-1">
                 {latestArticle.category}
               </div>
               <div className="text-[15px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-1">
@@ -802,7 +802,7 @@ function MobileMenuContent({
   if (itemKey === "services") {
     return (
       <>
-        <div className="text-[10px] font-semibold tracking-wider uppercase text-tx2 mt-1 mb-1">
+        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-tx2 mt-1 mb-1">
           完整路徑
         </div>
         {STAGE_ORDER.map((slug) => {
@@ -816,7 +816,7 @@ function MobileMenuContent({
             />
           );
         })}
-        <div className="text-[10px] font-semibold tracking-wider uppercase text-tx2 mt-3 mb-1">
+        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-tx2 mt-3 mb-1">
           進階方案
         </div>
         <MobileSubLink

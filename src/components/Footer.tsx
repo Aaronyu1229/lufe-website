@@ -123,7 +123,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto mt-7 pt-[18px] border-t border-white/5 text-[11.5px] text-center font-light text-white/40">
+      <div className="max-w-[1400px] mx-auto mt-7 pt-[18px] border-t border-white/5 text-[11.5px] text-center font-light text-white/60">
         © 2026 鹿飛 LUFÉ — 版權所有
       </div>
     </footer>

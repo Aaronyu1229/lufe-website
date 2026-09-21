@@ -47,7 +47,7 @@ export function HomeFAQ() {
           <p className="mb-[17px] text-[12px] font-semibold tracking-[0.09em] text-[#7A5A1A]">
             FAQ
           </p>
-          <h2 className="max-w-[360px] text-[33px] font-light leading-[1.18] tracking-[-0.02em] text-navy [text-wrap:balance] md:text-[clamp(31px,3.4vw,44px)]">
+          <h2 className="max-w-[360px] text-[33px] font-light leading-[1.2] tracking-normal text-navy [text-wrap:balance] md:text-[clamp(31px,3.4vw,44px)]">
             三個最常被問到的問題
           </h2>
           <p className="mt-5 max-w-[340px] text-[16px] leading-[1.8] text-tx2">
@@ -76,7 +76,7 @@ export function HomeFAQ() {
                 <span className="text-[13px] font-medium tracking-[0.05em] text-[#7A5A1A] tabular-nums">
                   {item.num}
                 </span>
-                <h3 className="text-[18px] font-semibold leading-[1.5] tracking-[-0.025em] text-tx md:text-[20px]">
+                <h3 className="text-[18px] font-semibold leading-[1.5] tracking-normal text-tx md:text-[20px]">
                   {item.question}
                 </h3>
               </div>

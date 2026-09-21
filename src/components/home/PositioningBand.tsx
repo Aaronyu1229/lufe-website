@@ -66,15 +66,15 @@ export function PositioningBand() {
       <div className="relative max-w-[1200px] mx-auto">
         {/* ─── Identity header ─── */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="font-sans text-[clamp(32px,5vw,58px)] leading-[1.08] font-light tracking-[-0.8px] text-navy mb-6">
-            真的跑過船的人,
+          <h2 className="font-sans text-[clamp(32px,5vw,58px)] leading-[1.2] font-light tracking-normal text-navy mb-6">
+            真的跑過船的人，
             <br className="md:hidden" />
             <span className="text-gold-d font-normal">才懂出海的眉角</span>
           </h2>
           <p className="text-[16.5px] md:text-[18px] text-tx2 max-w-[720px] mx-auto leading-[1.8] font-normal">
             出海不是報告寫得出來的。鹿飛站在躍馬企業{" "}
             <span className="text-tx font-medium">42 年</span>{" "}
-            的國際物流實戰上,幫你把
+            的國際物流實戰上，幫你把
             <span className="text-tx font-medium">產品適配</span>跟
             <span className="text-tx font-medium">通路銷售</span>兩件事跑通。
           </p>
@@ -105,13 +105,11 @@ export function PositioningBand() {
             <div className="relative p-8 md:p-12 grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center">
               {/* Left — narrative */}
               <div>
-                <h3 className="font-sans text-[26px] md:text-[34px] leading-[1.2] font-light tracking-[-0.5px] mb-5">
-                  出海不是報告寫得出來的,
-                  <br />
-                  <span className="text-gold font-normal">是真的跑過船的人</span>
+                <h3 className="font-sans text-[26px] md:text-[34px] leading-[1.2] font-light tracking-normal [text-wrap:balance] mb-5">
+                  出海不是報告寫得出來的，<span className="text-gold font-normal">是真的跑過船的人</span>
                 </h3>
                 <p className="text-[15.5px] md:text-[16.5px] text-white/75 leading-[1.85] font-normal mb-5">
-                  從報關、倉儲到最後一哩——這套東西不是教科書讀來的,是 42 年在港口、海關、貨櫃場跑出來的。
+                  從報關、倉儲到最後一哩——這套東西不是教科書讀來的，是 42 年在港口、海關、貨櫃場跑出來的。
                   你的貨不會因為顧問不懂現場而卡在海上。
                 </p>
                 <a
@@ -133,7 +131,7 @@ export function PositioningBand() {
                   <div className="font-sans text-[36px] md:text-[44px] font-extralight text-white tabular-nums leading-none mb-2">
                     42<span className="text-gold text-[24px] md:text-[28px]">+</span>
                   </div>
-                  <div className="text-[10.5px] md:text-[11px] text-white/55 tracking-[0.5px] leading-[1.4]">
+                  <div className="text-[11px] text-white/70 tracking-[0.5px] leading-[1.4]">
                     年國際物流實戰
                   </div>
                 </div>
@@ -141,7 +139,7 @@ export function PositioningBand() {
                   <div className="font-sans text-[36px] md:text-[44px] font-extralight text-white tabular-nums leading-none mb-2">
                     500<span className="text-gold text-[24px] md:text-[28px]">+</span>
                   </div>
-                  <div className="text-[10.5px] md:text-[11px] text-white/55 tracking-[0.5px] leading-[1.4]">
+                  <div className="text-[11px] text-white/70 tracking-[0.5px] leading-[1.4]">
                     出口實戰案件
                   </div>
                 </div>
@@ -149,7 +147,7 @@ export function PositioningBand() {
                   <div className="font-sans text-[36px] md:text-[44px] font-extralight text-white tabular-nums leading-none mb-2">
                     30<span className="text-gold text-[24px] md:text-[28px]">+</span>
                   </div>
-                  <div className="text-[10.5px] md:text-[11px] text-white/55 tracking-[0.5px] leading-[1.4]">
+                  <div className="text-[11px] text-white/70 tracking-[0.5px] leading-[1.4]">
                     國家與地區覆蓋
                   </div>
                 </div>
