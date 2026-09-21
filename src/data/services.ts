@@ -524,6 +524,7 @@ export const ACCENT_CLASSES: Record<
     readonly border: string;
     readonly bg: string;
     readonly text: string;
+    readonly textOnLight: string;
     readonly dot: string;
     readonly softBg: string;
   }
@@ -532,6 +533,7 @@ export const ACCENT_CLASSES: Record<
     border: "border-sky",
     bg: "bg-[rgba(91,143,168,0.08)]",
     text: "text-sky",
+    textOnLight: "text-[#2F5A70]",
     dot: "bg-sky",
     softBg: "bg-[rgba(91,143,168,0.04)]",
   },
@@ -539,6 +541,7 @@ export const ACCENT_CLASSES: Record<
     border: "border-gold",
     bg: "bg-[rgba(212,168,92,0.08)]",
     text: "text-gold",
+    textOnLight: "text-[#7A5A1A]",
     dot: "bg-gold",
     softBg: "bg-[rgba(212,168,92,0.04)]",
   },
@@ -546,6 +549,7 @@ export const ACCENT_CLASSES: Record<
     border: "border-ember",
     bg: "bg-[rgba(217,139,74,0.08)]",
     text: "text-ember",
+    textOnLight: "text-[#9A4F1A]",
     dot: "bg-ember",
     softBg: "bg-[rgba(217,139,74,0.04)]",
   },

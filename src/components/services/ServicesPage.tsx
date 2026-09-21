@@ -216,7 +216,7 @@ export function ServicesPage() {
                     {p.title}
                   </h2>
                   <p
-                    className={`text-[17px] md:text-[18px] font-medium leading-[1.6] ${c.text} mb-5`}
+                    className={`text-[17px] md:text-[18px] font-medium leading-[1.6] ${c.textOnLight} mb-5`}
                   >
                     「{p.tagline}」
                   </p>
@@ -274,7 +274,7 @@ export function ServicesPage() {
                             {s.href && (
                               <span
                                 aria-hidden="true"
-                                className={`shrink-0 text-[16.5px] mt-1 transition-transform ${c.text} group-hover:translate-x-0.5`}
+                                className={`shrink-0 text-[16.5px] mt-1 transition-transform ${c.textOnLight} group-hover:translate-x-0.5`}
                               >
                                 →
                               </span>

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
 
@@ -14,29 +13,15 @@ export function CTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="relative bg-navy py-[60px] md:py-[80px] px-5 md:px-10 overflow-hidden">
-      {/* Background executive image */}
-      <Image
-        src="/images/cta/cta-executive.jpg"
-        alt=""
-        fill
-        sizes="100vw"
-        aria-hidden="true"
-        className="object-cover object-[70%_center] img-navy-unify opacity-50"
-      />
-      {/* Navy gradient from left so text stays readable */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40"
-      />
-      <div className="relative z-10 max-w-[1400px] mx-auto text-center">
+    <section className="bg-navy py-[60px] md:py-[80px] px-5 md:px-10">
+      <div className="max-w-[1400px] mx-auto text-center">
         <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.2] mb-4 font-light tracking-normal text-white">
           想清楚了，就聊聊
           <br />
           還沒想清楚，也可以聊聊
         </h2>
         <p className="text-[16.5px] text-white/55 max-w-[480px] mx-auto leading-[1.8] mb-10 font-normal">
-          想聊就聊，沒有壓力。
+          送出後 24 小時內由 Aaron 本人回覆。第一次對話就把費用結構和時間表講清楚。
         </p>
         <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
           <button
