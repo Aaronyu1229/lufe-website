@@ -1,19 +1,9 @@
 "use client";
 
 /**
- * SubsidyCard — 單一目的的 floating wedge
- *
- * 行為：
- *  - 進站 12 秒後從右下角滑入
- *  - 按 X 關閉 → 當次 session 不再出現
- *  - 手機：右下角浮動卡片的緊湊版
- *  - 尊重 prefers-reduced-motion
- *  - 點卡片 → /resources/subsidies#match（直接到 quiz 區段）
- *
- * 內容：
- *  - 根據當前 pathname 從 CONTEXTUAL_COPY 取出對應的文案
- *  - 彈窗只講一句話 + 一個 CTA，其他深度全部放在 landing page
- *  - 避免 dual variant 和決策爆炸
+ * SubsidyCard is a focused floating prompt that never shows on the homepage.
+ * It enters once from the bottom-right, respects reduced motion, and stays
+ * dismissed for the current session after the user closes it.
  */
 
 import { useEffect, useMemo, useState } from "react";
@@ -31,7 +21,7 @@ import {
 const DELAY_MS = 5_000;
 const SESSION_KEY = "lufe.subsidyCard.dismissed";
 
-// 不顯示卡片的頁面
+// Paths where the card is not shown.
 const HIDDEN_PATHS = ["/assess", "/contact", "/resources/subsidies"];
 
 export function SubsidyCard() {
@@ -43,7 +33,8 @@ export function SubsidyCard() {
   const nearestDeadline = useMemo(() => getNearestDeadline(), []);
   const todayStr = useMemo(() => getTodayFormatted(), []);
 
-  const isHidden = HIDDEN_PATHS.some((p) => pathname?.startsWith(p));
+  // The homepage already carries the SubsidyAlertBand, so the card stays off `/`.
+  const isHidden = pathname === "/" || HIDDEN_PATHS.some((p) => pathname?.startsWith(p));
 
   // If all concrete-deadline subsidies have expired, hide the card
   const isExpired = activeCount === 0;
@@ -100,7 +91,7 @@ export function SubsidyCard() {
         }
       `}
     >
-      <div className="relative bg-navy text-white shadow-[0_20px_60px_-12px_rgba(16,27,48,0.6)] overflow-hidden motion-safe:animate-subsidy-card-glow">
+      <div className="relative bg-navy text-white shadow-[0_20px_60px_-12px_rgba(16,27,48,0.6)] overflow-hidden">
         {/* Compact image strip */}
         <div className="relative h-[64px] overflow-hidden hidden md:block">
           <Image
@@ -113,14 +104,7 @@ export function SubsidyCard() {
           />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-navy/20 to-navy/80" />
         </div>
-        <div className="relative h-[2px] bg-gradient-to-r from-gold/40 via-gold to-gold/40 overflow-hidden">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 motion-safe:animate-subsidy-gold-sweep"
-            style={{
-              background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%)",
-            }}
-          />
+        <div className="h-[2px] bg-gradient-to-r from-gold/40 via-gold to-gold/40">
         </div>
 
         {/* Dismiss button */}
@@ -145,15 +129,15 @@ export function SubsidyCard() {
             }
           }}
         >
-          {/* Live status — single line with count animation */}
+          {/* Live status */}
           <div className="flex items-center gap-1.5 mb-2 max-[375px]:mb-1 md:gap-2 md:mb-4">
             <span
-              className="w-1.5 h-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse shrink-0 shadow-[0_0_8px_rgba(52,211,153,0.6)] md:w-2 md:h-2"
+              className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 md:w-2 md:h-2"
               aria-hidden="true"
             />
             <span className="text-[11px] leading-4 text-white/60 font-medium max-[375px]:text-[10px] max-[375px]:leading-[14px] md:text-[12px] md:leading-normal">
               {todayStr} 更新 ·{" "}
-              <span className="text-emerald-400 font-bold text-[12px] motion-safe:animate-subsidy-count max-[375px]:text-[11px] md:text-[14px]">
+              <span className="text-emerald-400 font-bold text-[12px] max-[375px]:text-[11px] md:text-[14px]">
                 {activeCount}
               </span>{" "}
               個補助開放中
@@ -173,8 +157,8 @@ export function SubsidyCard() {
             {copy.oneLiner}
           </p>
 
-          {/* CTA with breathe animation */}
-          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-2.5 text-[13px] font-semibold transition-colors group-hover:bg-gold-l motion-safe:animate-subsidy-cta max-[375px]:py-2 max-[375px]:text-[12px] md:py-3 md:text-[14.5px]">
+          {/* CTA */}
+          <span className="flex items-center justify-center gap-2 w-full bg-gold text-navy py-2.5 text-[13px] font-semibold transition-colors group-hover:bg-gold-l max-[375px]:py-2 max-[375px]:text-[12px] md:py-3 md:text-[14.5px]">
             {copy.cta}
             <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
           </span>
