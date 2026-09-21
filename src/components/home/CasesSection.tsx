@@ -1,6 +1,3 @@
-"use client";
-
-import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,20 +11,19 @@ import Link from "next/link";
  * 4. 副標用「痛 → 解」的對比結構（從 CASE_CARD_META.beats 取 [1] 與 [2]）
  * 5. 卡片底部有 NDA / 客戶授權公開的信任訊號
  * 6. featured 卡片有「最常被問到」徽章
- * 7. 上方有產業 / 市場兩條 filter pills
- * 8. 底部「看更多案例」CTA 強化成有 micro 描述的卡片式按鈕
+ * 7. 底部「看更多案例」CTA 強化成有 micro 描述的卡片式按鈕
  *
  * 全部 4 張卡片都是可點擊的——這很關鍵，原本只有 featured 有 route。
  * ──────────────────────────────────────────────────────────────────────── */
 
-type IndustryFilter = "all" | "food" | "electronics" | "apparel" | "fnb";
-type MarketFilter = "all" | "north-america" | "sea";
+type Industry = "food" | "electronics" | "apparel" | "fnb";
+type Market = "north-america" | "sea";
 
 interface CaseCardData {
   readonly slug: string;
   readonly featured: boolean;
-  readonly industry: Exclude<IndustryFilter, "all">;
-  readonly market: Exclude<MarketFilter, "all">;
+  readonly industry: Industry;
+  readonly market: Market;
   readonly tags: readonly { label: string; variant: "sky" | "gold" }[];
   readonly num: string;
   readonly numLabel: string; // ← micro label under big number
@@ -132,20 +128,6 @@ const tagStyles: Record<"sky" | "gold", string> = {
   gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
 };
 
-const INDUSTRY_FILTERS: readonly { value: IndustryFilter; label: string }[] = [
-  { value: "all", label: "全部產業" },
-  { value: "food", label: "食品保健" },
-  { value: "electronics", label: "電子" },
-  { value: "apparel", label: "服飾" },
-  { value: "fnb", label: "餐飲" },
-];
-
-const MARKET_FILTERS: readonly { value: MarketFilter; label: string }[] = [
-  { value: "all", label: "全部市場" },
-  { value: "north-america", label: "北美" },
-  { value: "sea", label: "東南亞" },
-];
-
 /* ────────── Sub-components ────────── */
 
 function FromToRoute({ from, to }: { from: string; to: string }) {
@@ -188,45 +170,6 @@ function TrustSignal({ text }: { text: string }) {
   );
 }
 
-function FilterPills({
-  options,
-  active,
-  onChange,
-  ariaLabel,
-}: {
-  options: readonly { value: string; label: string }[];
-  active: string;
-  onChange: (v: string) => void;
-  ariaLabel: string;
-}) {
-  return (
-    <div
-      className="flex items-center gap-1.5 flex-wrap"
-      role="group"
-      aria-label={ariaLabel}
-    >
-      {options.map((opt) => {
-        const isActive = active === opt.value;
-        return (
-          <button
-            key={opt.value}
-            type="button"
-            onClick={() => onChange(opt.value)}
-            className={`text-[13px] px-3 py-1.5 rounded-none border transition-all duration-200 cursor-pointer ${
-              isActive
-                ? "bg-navy text-white border-navy"
-                : "bg-white text-tx2 border-bd hover:border-navy hover:text-navy"
-            }`}
-            aria-pressed={isActive}
-          >
-            {opt.label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
 function CaseTags({
   tags,
 }: {
@@ -249,17 +192,6 @@ function CaseTags({
 /* ────────── Main section ────────── */
 
 export function CasesSection() {
-  const [industry, setIndustry] = useState<IndustryFilter>("all");
-  const [market, setMarket] = useState<MarketFilter>("all");
-
-  const filtered = useMemo(() => {
-    return CASE_CARDS.filter((c) => {
-      if (industry !== "all" && c.industry !== industry) return false;
-      if (market !== "all" && c.market !== market) return false;
-      return true;
-    });
-  }, [industry, market]);
-
   return (
     <section className="py-[60px] md:py-[80px] px-5 md:px-10 max-w-[1400px] mx-auto">
       {/* ─── Heading ─── */}
@@ -281,65 +213,20 @@ export function CasesSection() {
         <span className="text-tx">每一個都是真的決策、真的數字、真的結果</span>。
       </p>
 
-      {/* ─── Filter pills ─── */}
-      <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6 mb-8 pb-7 border-b border-bd/70">
-        <div className="flex items-center gap-3">
-          <span className="text-[11px] font-semibold tracking-[0.05em] uppercase text-tx3 shrink-0">
-            產業
-          </span>
-          <FilterPills
-            options={INDUSTRY_FILTERS}
-            active={industry}
-            onChange={(v) => setIndustry(v as IndustryFilter)}
-            ariaLabel="依產業篩選案例"
-          />
-        </div>
-        <div className="hidden md:block w-px h-5 bg-bd/70" />
-        <div className="flex items-center gap-3">
-          <span className="text-[11px] font-semibold tracking-[0.05em] uppercase text-tx3 shrink-0">
-            市場
-          </span>
-          <FilterPills
-            options={MARKET_FILTERS}
-            active={market}
-            onChange={(v) => setMarket(v as MarketFilter)}
-            ariaLabel="依市場篩選案例"
-          />
-        </div>
-      </div>
-
-      {/* ─── Empty state ─── */}
-      {filtered.length === 0 && (
-        <div className="text-center py-16 border border-dashed border-bd">
-          <p className="text-[15.5px] text-tx3 mb-3">這個產業 × 市場組合還沒有公開案例。</p>
-          <button
-            type="button"
-            onClick={() => {
-              setIndustry("all");
-              setMarket("all");
-            }}
-            className="text-[14.5px] font-medium text-navy underline underline-offset-4 hover:text-gold-d transition-colors cursor-pointer"
-          >
-            重設篩選
-          </button>
-        </div>
-      )}
-
       {/* ─── Grid ─── */}
-      {filtered.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filtered.map((c) =>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {CASE_CARDS.map((c) =>
             c.featured ? (
               <Link
                 key={c.slug}
                 href={`/cases/${c.slug}`}
-                className="group md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch p-5 md:p-10 bg-white rounded-none transition-all duration-300 cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg relative"
+                className="group md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch p-5 md:p-10 bg-white rounded-none transition-all duration-300 cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg relative"
               >
                 <div className="flex flex-col">
                   {/* 「最常被問到」badge — 放在文字區頂部，避開圖片 */}
                   <div className="mb-3">
                     <span className="inline-flex items-center gap-1.5 bg-gold/15 text-gold-d text-[11px] font-semibold px-2.5 py-1 tracking-[0.5px]">
-                      <span className="w-1 h-1 rounded-full bg-gold-d animate-pulse" />
+                      <span className="w-1 h-1 rounded-full bg-gold-d" />
                       最常被問到
                     </span>
                   </div>
@@ -461,8 +348,7 @@ export function CasesSection() {
               </Link>
             )
           )}
-        </div>
-      )}
+      </div>
 
       {/* Mobile: 全部案例 link (desktop version is in the heading row) */}
       <div className="mt-8 text-center md:hidden">
