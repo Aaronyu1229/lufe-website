@@ -2,11 +2,7 @@
 
 import Link from "next/link";
 
-/**
- * HomeFAQ
- * An editorial two-column FAQ: a sticky introduction anchors the section
- * while rule-separated questions, takeaways, and answers form the reading flow.
- */
+import { Disclosure } from "@/components/ui";
 
 interface FaqItem {
   readonly num: string;
@@ -15,7 +11,7 @@ interface FaqItem {
   readonly takeaway: string;
 }
 
-const items: readonly FaqItem[] = [
+export const HOME_FAQ_ITEMS: readonly FaqItem[] = [
   {
     num: "01",
     question: "這要花多少錢？",
@@ -41,52 +37,43 @@ const items: readonly FaqItem[] = [
 
 export function HomeFAQ() {
   return (
-    <section className="relative bg-cream py-[62px] px-5 md:py-[96px] md:pb-[100px] md:px-10">
-      <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-y-[43px] md:grid-cols-12 md:gap-x-8 md:gap-y-0">
+    <section className="bg-cream px-5 py-[62px] md:px-10 md:py-[96px] md:pb-[100px]">
+      <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-y-[43px] md:grid-cols-12 md:gap-x-16 md:gap-y-0">
         <div className="self-start md:col-span-4 md:sticky md:top-[96px]">
-          <p className="mb-[17px] text-[12px] font-semibold tracking-[0.09em] text-[#7A5A1A]">
-            FAQ
-          </p>
-          <h2 className="max-w-[360px] text-[33px] font-light leading-[1.2] tracking-normal text-navy [text-wrap:balance] md:text-[clamp(31px,3.4vw,44px)]">
+          <p className="mb-[14px] text-[13px] font-semibold tracking-[0.06em] text-[#7A5A1A]">FAQ</p>
+          <h2 className="max-w-[360px] font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
             三個最常被問到的問題
           </h2>
-          <p className="mt-5 max-w-[340px] text-[16px] leading-[1.8] text-tx2">
+          <p className="mt-4 max-w-[340px] text-[17px] leading-[1.7] text-tx2">
             在你決定聊聊之前，先回答你心裡可能已經冒出來的那幾個疑問。
           </p>
-          <Link
-            href="/services#faq"
-            className="group mt-6 flex w-fit items-center gap-2 text-[15px] font-semibold text-navy md:mt-8"
-          >
-            <span className="border-b border-[#7A5A1A] pb-[3px]">
-              還有其他問題？看完整 FAQ
-            </span>
-            <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-              →
-            </span>
+          <Link href="/services#faq" className="mt-6 inline-flex items-center gap-2 text-[16px] font-semibold text-sky md:mt-8">
+            還有其他問題？看完整 FAQ <span aria-hidden="true">→</span>
           </Link>
         </div>
 
-        <div className="md:col-span-8">
-          {items.map((item) => (
-            <article
+        <div className="min-w-0 md:col-span-8">
+          {HOME_FAQ_ITEMS.map((item, index) => (
+            <Disclosure
               key={item.num}
-              className="border-t border-[rgba(26,26,46,0.12)] py-[25px] last:border-b md:pt-[29px] md:pb-[31px]"
-            >
-              <div className="grid grid-cols-[38px_minmax(0,1fr)] items-baseline gap-[7px] md:grid-cols-[50px_minmax(0,1fr)] md:gap-[10px]">
-                <span className="text-[13px] font-medium tracking-[0.05em] text-[#7A5A1A] tabular-nums">
-                  {item.num}
+              id={`home-faq-${item.num}`}
+              defaultOpen={index === 0}
+              summary={
+                <span className="grid min-w-0 grid-cols-[38px_minmax(0,1fr)] items-baseline gap-[7px] md:grid-cols-[50px_minmax(0,1fr)] md:gap-[10px]">
+                  <span className="text-[13px] font-medium tracking-[0.05em] text-[#7A5A1A] tabular-nums">{item.num}</span>
+                  <span className="text-[18px] font-semibold leading-[1.5] tracking-normal text-tx md:text-[20px]">
+                    {item.question}
+                  </span>
                 </span>
-                <h3 className="text-[18px] font-semibold leading-[1.5] tracking-normal text-tx md:text-[20px]">
-                  {item.question}
-                </h3>
-              </div>
-              <p className="mt-[17px] mb-2 ml-[45px] max-w-[650px] text-[16px] font-medium leading-[1.65] text-tx md:ml-[60px] md:text-[17px]">
+              }
+            >
+              <p className="mb-2 ml-[45px] max-w-[650px] text-[16px] font-medium leading-[1.65] text-tx md:ml-[60px] md:text-[17px]">
                 {item.takeaway}
               </p>
               <p className="ml-[45px] max-w-[650px] text-[15.5px] leading-[1.85] text-tx2 md:ml-[60px]">
                 {item.answer}
               </p>
-            </article>
+            </Disclosure>
           ))}
         </div>
       </div>

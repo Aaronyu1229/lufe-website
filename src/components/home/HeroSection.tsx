@@ -28,7 +28,7 @@ type Slide = {
   media: SlideMedia;
 };
 
-const slides: Slide[] = [
+export const HOME_HERO_SLIDES: Slide[] = [
   {
     id: "pillar-fit",
     heavyOverlay: true,
@@ -144,7 +144,7 @@ export function HeroSection() {
   useEffect(() => {
     if (paused || prefersReducedMotion) return;
     const timer = window.setTimeout(() => {
-      setActiveIndex((i) => (i + 1) % slides.length);
+      setActiveIndex((i) => (i + 1) % HOME_HERO_SLIDES.length);
     }, AUTOPLAY_MS);
     return () => window.clearTimeout(timer);
   }, [activeIndex, paused, prefersReducedMotion]);
@@ -152,7 +152,7 @@ export function HeroSection() {
   // Mount the active slide and warm up the next one so its video is ready before
   // the cross-fade. Never un-mounts to avoid re-downloading once seen.
   useEffect(() => {
-    const nextIndex = (activeIndex + 1) % slides.length;
+    const nextIndex = (activeIndex + 1) % HOME_HERO_SLIDES.length;
     // mountedMap is cumulative memory ("mounted once, never unmount"), so it
     // cannot be derived from activeIndex during render. Moving it into the event
     // handlers would leave no trigger for the initial warm-up, forcing an initial
@@ -177,8 +177,8 @@ export function HeroSection() {
       // playbackRate is tuned for the landscape footage. The portrait cuts are
       // close-ups of people, where speed changes read as unnatural, so they
       // always play at 1x.
-      const usingPortrait = isPortrait && !!slides[i].media.portraitSrc;
-      video.playbackRate = usingPortrait ? 1.0 : slides[i].media.playbackRate ?? 1.0;
+      const usingPortrait = isPortrait && !!HOME_HERO_SLIDES[i].media.portraitSrc;
+      video.playbackRate = usingPortrait ? 1.0 : HOME_HERO_SLIDES[i].media.playbackRate ?? 1.0;
       // Already playing (or already asked to): don't restart it. play()/pause()
       // flip `paused` synchronously, so it is a reliable "did we ask" flag.
       if (!video.paused) return;
@@ -198,7 +198,7 @@ export function HeroSection() {
     setReadyMap((prev) => (prev[index] ? prev : { ...prev, [index]: true }));
   };
 
-  const active = slides[activeIndex];
+  const active = HOME_HERO_SLIDES[activeIndex];
 
   return (
     <section
@@ -211,7 +211,7 @@ export function HeroSection() {
       onBlur={() => setPaused(false)}
     >
       {/* Layered backgrounds — cross-fade between slides */}
-      {slides.map((slide, i) => {
+      {HOME_HERO_SLIDES.map((slide, i) => {
         const isActive = i === activeIndex;
         const ready = readyMap[i] ?? false;
         const mounted = mountedMap[i] ?? false;
@@ -285,70 +285,78 @@ export function HeroSection() {
         協助台灣企業在北美與東南亞落地 — 鹿飛 LUFÉ
       </h1>
 
-      {/* Content — keyed to remount on slide change for fade-in animation */}
+      {/* All slide copy stays in the server HTML; only the active layer is visible. */}
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 relative z-10 w-full">
-        <div key={active.id} className="max-w-[640px] animate-fade-in-up">
-          {/* Eyebrow */}
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-5 h-px bg-gold/92" />
-            <span className="text-gold/92 text-[11px] font-medium tracking-[0.05em] uppercase">
-              {active.eyebrow}
-            </span>
-          </div>
+        {HOME_HERO_SLIDES.map((slide, i) => {
+          const isActive = i === activeIndex;
 
-          <h2
-            className="hero-title font-sans text-white leading-[1.2] mb-7 tracking-normal"
-            style={{
-              fontSize: "clamp(38px, 5.5vw, 68px)",
-              textShadow: "0 1px 2px rgba(10,20,40,0.35)",
-            }}
-          >
-            {active.titleLines[0]}
-            <br />
-            {active.titleLines[1]}
-          </h2>
-
-          <p
-            className="text-[18px] text-white/88 font-normal mb-10 leading-relaxed max-w-[480px]"
-            style={{ textShadow: "0 1px 2px rgba(10,20,40,0.3)" }}
-          >
-            {active.subtitle}
-          </p>
-
-          <div className="flex items-center gap-8 flex-wrap">
-            {active.primary.external ? (
-              <a
-                href={active.primary.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[14.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l"
-              >
-                {active.primary.label} ↗
-              </a>
-            ) : (
-              <Link
-                href={active.primary.href}
-                className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[14.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l"
-              >
-                {active.primary.label} →
-              </Link>
-            )}
-            <Link
-              href={active.secondary.href}
-              className="group inline-flex items-center gap-2.5 text-white text-[15.5px] font-semibold tracking-[0.3px] transition-colors hover:text-gold"
+          return (
+            <div
+              key={slide.id}
+              aria-hidden={!isActive}
+              className={`max-w-[800px] transition-opacity duration-[900ms] ease-out ${
+                isActive ? "relative opacity-100" : "pointer-events-none absolute opacity-0"
+              }`}
             >
-              <span className="border-b border-white/30 pb-0.5 group-hover:border-gold transition-colors">
-                {active.secondary.label}
-              </span>
-            </Link>
-          </div>
-        </div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-5 h-px bg-gold/92" />
+                <span className="text-gold/92 text-[11px] font-semibold tracking-[0.05em]">
+                  {slide.eyebrow}
+                </span>
+              </div>
+
+              <h2
+                className="display mb-6 text-white"
+                style={{
+                  textShadow: "0 1px 2px rgba(10,20,40,0.35)",
+                }}
+              >
+                {slide.titleLines[0]}
+                <br />
+                {slide.titleLines[1]}
+              </h2>
+
+              <p
+                className="text-[17px] md:text-[19px] text-white/88 font-normal mb-9 leading-[1.7] max-w-[500px]"
+                style={{ textShadow: "0 1px 2px rgba(10,20,40,0.3)" }}
+              >
+                {slide.subtitle}
+              </p>
+
+              <div className="flex items-center gap-3 flex-wrap">
+                {slide.primary.external ? (
+                  <a
+                    href={slide.primary.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center bg-gold text-navy px-[26px] py-[14px] text-[16px] font-semibold"
+                  >
+                    {slide.primary.label} ↗
+                  </a>
+                ) : (
+                  <Link
+                    href={slide.primary.href}
+                    className="inline-flex items-center bg-gold text-navy px-[26px] py-[14px] text-[16px] font-semibold"
+                  >
+                    {slide.primary.label} →
+                  </Link>
+                )}
+                <Link
+                  href={slide.secondary.href}
+                  className="inline-flex items-center border border-white/30 bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white backdrop-blur-[16px]"
+                >
+                  {slide.secondary.label}
+                </Link>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Bottom slide navigator — Bain-style distributed bar */}
       <div className="absolute left-0 right-0 bottom-0 z-10 border-t border-white/10 bg-gradient-to-t from-black/30 to-transparent backdrop-blur-[2px]">
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 h-[60px] md:h-[76px] flex items-stretch">
-          {slides.map((slide, i) => {
+          {HOME_HERO_SLIDES.map((slide, i) => {
             const isActive = i === activeIndex;
             return (
               <Link
