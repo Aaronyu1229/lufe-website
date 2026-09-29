@@ -44,8 +44,10 @@ export function MessageBox() {
   const [present, setPresent] = useState(false);
   const [closedPosition, setClosedPosition] = useState(1);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState({ ...emptyForm, website: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const grabRef = useRef<HTMLDivElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
@@ -166,9 +168,10 @@ export function MessageBox() {
   const updateField = (field: keyof typeof emptyForm, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
     if (value.trim()) setErrors((current) => current[field] ? { ...current, [field]: "" } : current);
+    setSubmitError(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const nextErrors: Record<string, string> = {};
     if (!form.name.trim()) nextErrors.name = "請填姓名";
     if (!form.contact.trim()) nextErrors.contact = "請留 Email 或電話";
@@ -178,17 +181,50 @@ export function MessageBox() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
+    setSubmitError(false);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form: "quick",
+          ...form,
+          page: window.location.pathname,
+        }),
+      });
+      const result = await response.json().catch(() => null) as {
+        ok?: boolean;
+        errors?: Record<string, string>;
+      } | null;
+
+      if (response.ok && result?.ok) {
+        setSubmitted(true);
+      } else {
+        setErrors(result?.errors ?? {});
+        setSubmitError(true);
+      }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
     dismiss();
     window.setTimeout(() => {
       setSubmitted(false);
-      setForm(emptyForm);
+      setForm({ ...emptyForm, website: "" });
       setErrors({});
+      setSubmitError(false);
     }, 300);
   };
+
+  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent("LUFÉ 快速留言")}&body=${encodeURIComponent(
+    `姓名：${form.name}\n聯絡方式：${form.contact}\n\n訊息：\n${form.message}`,
+  )}`;
 
   const viewportHeight = typeof window === "undefined" ? 1 : window.innerHeight;
   const progress = clamp(1 - sheetY.value / Math.min(Math.max(closedPosition, 1), viewportHeight * 0.6), 0, 1);
@@ -201,11 +237,13 @@ export function MessageBox() {
         <div className="flex items-center justify-between gap-3"><h3 id="message-box-title" className="text-[21px] font-semibold">聊聊你的產品</h3><button type="button" aria-label="關閉" onClick={handleClose} className="grid h-11 w-11 cursor-pointer place-items-center bg-black/[.06] text-[22px] text-tx2 hover:bg-black/[.1]">×</button></div>
       </div>
       <div className="flex-1 overflow-auto overscroll-contain px-6 pb-8 pt-1">
-        {!submitted ? <form noValidate onSubmit={(event) => { event.preventDefault(); handleSubmit(); }}>
+        {!submitted ? <form noValidate onSubmit={(event) => { event.preventDefault(); void handleSubmit(); }}>
           <Field label="你的姓名 *" error={errors.name}><input required aria-required="true" className={`w-full border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.name ? "border-red-400" : "border-bd"}`} placeholder="怎麼稱呼你？" value={form.name} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("name")} onChange={(event) => updateField("name", event.target.value)} /></Field>
           <Field label="聯絡方式（Email 或電話）*" error={errors.contact}><input required aria-required="true" className={`w-full border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.contact ? "border-red-400" : "border-bd"}`} placeholder="方便我們回覆你" value={form.contact} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("contact")} onChange={(event) => updateField("contact", event.target.value)} /></Field>
           <Field label="簡單說說你的產品跟想法 *" error={errors.message}><textarea required aria-required="true" className={`min-h-[68px] w-full resize-y border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.message ? "border-red-400" : "border-bd"}`} placeholder="例如：我們做鳳梨酥，想看看美國有沒有機會⋯⋯" value={form.message} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("message")} onChange={(event) => updateField("message", event.target.value)} /></Field>
-          <button type="submit" className="w-full cursor-pointer bg-navy py-3 text-[15px] font-semibold text-white hover:bg-navy-l">送出，我們 24 小時內回覆</button>
+          <input type="text" name="website" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />
+          {submitError && <p className="mb-3 text-[12px] text-red-500">送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
+          <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-navy py-3 text-[15px] font-semibold text-white hover:bg-navy-l disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? "送出中…" : "送出，我們 24 小時內回覆"}</button>
         </form> : <div className="px-5 py-8 text-center"><h3 className="mb-1.5 text-[17px] font-semibold">收到了！</h3><p className="text-[14.5px] font-light text-tx2">我們會在 24 小時內回覆你。</p></div>}
       </div>
     </div>

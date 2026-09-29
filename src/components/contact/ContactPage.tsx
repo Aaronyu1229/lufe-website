@@ -82,10 +82,13 @@ export function ContactPage() {
     product: "",
     stage: "",
     message: "",
+    website: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const validate = (fields = formState) => {
     const errs: Record<string, string> = {};
@@ -101,6 +104,7 @@ export function ContactPage() {
   ) => {
     const next = { ...formState, [e.target.name]: e.target.value };
     setFormState(next);
+    setSubmitError(false);
     // Clear error on change if field was touched
     if (touched[e.target.name]) {
       const errs = validate(next);
@@ -125,13 +129,45 @@ export function ContactPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     setErrors(errs);
     setTouched({ name: true, email: true, message: true });
-    if (Object.keys(errs).length === 0) {
-      setSubmitted(true);
+    if (Object.keys(errs).length > 0) return;
+
+    setSubmitError(false);
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form: "contact",
+          ...formState,
+          page: window.location.pathname,
+        }),
+      });
+      const result = await response.json().catch(() => null) as {
+        ok?: boolean;
+        errors?: Record<string, string>;
+      } | null;
+
+      if (response.ok && result?.ok) {
+        setSubmitted(true);
+      } else {
+        const serverErrors = result?.errors ?? {};
+        setErrors(serverErrors);
+        setTouched((previous) => ({
+          ...previous,
+          ...Object.fromEntries(Object.keys(serverErrors).map((name) => [name, true])),
+        }));
+        setSubmitError(true);
+      }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -151,6 +187,9 @@ export function ContactPage() {
   };
 
   const isFormValid = !formState.name.trim() || !formState.email.trim() || !isValidEmail(formState.email) || !formState.message.trim();
+  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent("LUFÉ 聯絡頁完整表單")}&body=${encodeURIComponent(
+    `姓名：${formState.name}\nEmail：${formState.email}\n公司名稱：${formState.company}\n電話：${formState.phone}\n產品：${formState.product}\n出海階段：${formState.stage}\n\n訊息：\n${formState.message}`,
+  )}`;
 
   const inputClass = (name: string) =>
     `w-full px-4 py-3 border rounded-none text-[15.5px] outline-none transition-colors ${
@@ -515,13 +554,28 @@ export function ContactPage() {
               </div>
 
               {/* Submit */}
+              <input
+                type="text"
+                name="website"
+                value={formState.website}
+                onChange={handleChange}
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                className="absolute h-px w-px overflow-hidden opacity-0 pointer-events-none"
+              />
               <button
                 type="submit"
-                disabled={isFormValid}
+                disabled={isFormValid || isSubmitting}
                 className="w-full bg-gold text-navy py-3.5 rounded-none text-[16.5px] font-semibold cursor-pointer transition-colors hover:bg-gold-l disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                送出表單
+                {isSubmitting ? "送出中…" : "送出表單"}
               </button>
+              {submitError && (
+                <p className="text-[13px] text-red-500 text-center font-normal">
+                  送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a>
+                </p>
+              )}
               <p className="text-[13px] text-tx3 text-center font-normal">
                 我們不會把你的資料分享給任何第三方。
               </p>
