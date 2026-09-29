@@ -18,12 +18,13 @@
  *   - Entry 加入「看過的人也讀這些」4 案例 chips（P2）
  */
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useMessageBox } from "../MessageBox";
 import { CASES, CASE_CARD_META, getCase, type CaseStudy } from "@/data/cases";
+import { MatcherFlow, type MatcherFlowQuestion } from "./MatcherFlow";
 
 /* ────────── Types ────────── */
 
@@ -53,7 +54,6 @@ interface MatchResult {
   readonly missed: readonly Dim[];
 }
 
-type Step = 0 | 1 | 2 | 3 | 4;
 
 /* ────────── Case signatures ──────────
  * 每個案例當初客戶找上門時的真實處境，用來跟用戶答案做 dim-by-dim 比對。
@@ -282,113 +282,50 @@ function AssessWizardInner() {
   const searchParams = useSearchParams();
   const focusSlug = searchParams.get("case");
   const focusCase = focusSlug ? getCase(focusSlug) : undefined;
+  const [started, setStarted] = useState(false);
 
-  const [step, setStep] = useState<Step>(0);
-  const [answers, setAnswers] = useState<Answers>({
-    stage: null,
-    blocker: null,
-    market: null,
-  });
+  return started ? (
+    <AssessQuestionFlow focusCase={focusCase} onExit={() => setStarted(false)} />
+  ) : (
+    <EntryScreen focusCase={focusCase} onStart={() => setStarted(true)} />
+  );
+}
 
-  const ranked = useMemo(() => {
-    if (answers.stage && answers.blocker && answers.market) {
-      return rankMatches(answers);
-    }
-    return [];
-  }, [answers]);
+export const assessQuestions: readonly MatcherFlowQuestion[] = [
+  { id: "stage", eyebrow: "階段", label: "你目前在出海這條路上的哪個位置？", options: STAGE_OPTIONS },
+  { id: "blocker", eyebrow: "卡點", label: "最讓你睡不著的是哪一件事？", options: BLOCKER_OPTIONS },
+  { id: "market", eyebrow: "市場", label: "你主要在看哪個市場？", options: MARKET_OPTIONS },
+];
 
-  // 如果從 /cases?case=x 進來，結果頁優先拿那個案例當主比對
-  const primaryResult = useMemo(() => {
-    if (ranked.length === 0) return null;
-    if (focusCase) {
-      const focused = ranked.find((r) => r.slug === focusCase.slug);
-      if (focused && focused.score >= 1) return focused;
-    }
-    return ranked[0];
-  }, [ranked, focusCase]);
-
-  const alternativeResult = useMemo(() => {
-    if (!primaryResult || ranked.length < 2) return null;
-    const alt = ranked.find((r) => r.slug !== primaryResult.slug && r.score >= 1);
-    return alt ?? ranked.find((r) => r.slug !== primaryResult.slug) ?? null;
-  }, [ranked, primaryResult]);
-
-  const setStage = (stage: Stage) => {
-    setAnswers((prev) => ({ ...prev, stage }));
-    setStep(2);
-  };
-  const setBlocker = (blocker: Blocker) => {
-    setAnswers((prev) => ({ ...prev, blocker }));
-    setStep(3);
-  };
-  const setMarket = (market: AssessMarket) => {
-    setAnswers((prev) => ({ ...prev, market }));
-    setStep(4);
-  };
-
-  const reset = () => {
-    setStep(0);
-    setAnswers({ stage: null, blocker: null, market: null });
-  };
-
-  if (step === 0) {
-    return <EntryScreen focusCase={focusCase} onStart={() => setStep(1)} />;
-  }
-
-  if (step >= 1 && step <= 3) {
-    return (
-      <QuestionScreen
-        step={step}
-        total={3}
-        onBack={() => setStep((s) => (s > 1 ? ((s - 1) as Step) : 0))}
-        onReset={reset}
-      >
-        {step === 1 && (
-          <QuestionBody
-            eyebrow="階段"
-            question="你目前在出海這條路上的哪個位置？"
-            options={STAGE_OPTIONS}
-            onPick={setStage}
-          />
-        )}
-        {step === 2 && (
-          <QuestionBody
-            eyebrow="卡點"
-            question="最讓你睡不著的是哪一件事？"
-            options={BLOCKER_OPTIONS}
-            onPick={setBlocker}
-          />
-        )}
-        {step === 3 && (
-          <QuestionBody
-            eyebrow="市場"
-            question="你主要在看哪個市場？"
-            options={MARKET_OPTIONS}
-            onPick={setMarket}
-          />
-        )}
-      </QuestionScreen>
-    );
-  }
-
-  // step === 4 — always render, even if score 0
-  if (!primaryResult) {
-    return <EntryScreen focusCase={focusCase} onStart={() => setStep(1)} />;
-  }
-
+/** Exported for SSR-copy tests; all questions remain mounted in MatcherFlow. */
+export function AssessQuestionFlow({ focusCase, onExit }: { readonly focusCase?: CaseStudy; readonly onExit?: () => void }) {
   return (
-    <ResultScreen
-      primary={primaryResult}
-      alternative={alternativeResult}
-      answers={answers}
-      onReset={reset}
-    />
+    <section className="min-h-screen overflow-hidden bg-navy px-5 pb-20 pt-[130px] text-white md:px-10 md:pb-24 md:pt-[160px]">
+      <div className="mx-auto max-w-[860px]">
+        <MatcherFlow
+          questions={assessQuestions}
+          onRestartLabel="重新開始"
+          onComplete={(values) => {
+            const answers: Answers = {
+              stage: values.stage as Stage,
+              blocker: values.blocker as Blocker,
+              market: values.market as AssessMarket,
+            };
+            const ranked = rankMatches(answers);
+            const focused = focusCase ? ranked.find((result) => result.slug === focusCase.slug) : undefined;
+            const primary = focused && focused.score >= 1 ? focused : ranked[0];
+            const alternative = ranked.find((result) => result.slug !== primary.slug && result.score >= 1) ?? ranked.find((result) => result.slug !== primary.slug) ?? null;
+            return <ResultScreen primary={primary} alternative={alternative} answers={answers} onReset={onExit ?? (() => undefined)} />;
+          }}
+        />
+      </div>
+    </section>
   );
 }
 
 /* ────────── Entry screen ────────── */
 
-function EntryScreen({
+export function EntryScreen({
   focusCase,
   onStart,
 }: {
@@ -400,7 +337,7 @@ function EntryScreen({
       {/* Animated gold glow */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none animate-hero-glow-drift"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
             "radial-gradient(ellipse 60% 50% at 25% 15%, rgba(212,168,92,0.12) 0%, transparent 70%)",
@@ -440,7 +377,7 @@ function EntryScreen({
 
         {/* Focus case strip (if arrived from a case page) */}
         {focusCase && (
-          <div className="mb-6 flex items-center gap-4 px-5 py-4 bg-white/[0.04] border border-gold/20 rounded-none">
+          <div className="mb-6 flex items-center gap-4 border border-gold/20 bg-white/[0.04] px-5 py-4">
             <div className="relative w-[68px] h-[50px] flex-shrink-0 overflow-hidden">
               <Image
                 src={focusCase.heroImage}
@@ -462,13 +399,13 @@ function EntryScreen({
         )}
 
         {/* Headline — softer, less confrontational */}
-        <h1 className="font-heading text-[clamp(32px,4.8vw,52px)] text-white leading-[1.12] font-light tracking-[-0.6px] mb-6">
+        <h1 className="h1 text-white mb-6">
           看看你的處境
           <br />
           <span className="font-normal text-gold">跟誰最像</span>
         </h1>
 
-        <p className="text-[17px] md:text-[18px] text-white/65 max-w-[600px] font-light leading-[1.8] mb-10">
+        <p className="lead max-w-[600px] !text-white/70 mb-10">
           三題問答，直接告訴你：你現在遇到的事、跟我們做過的四個案例，哪一個最接近 —
           <br className="hidden md:block" />
           以及那個案例的判斷方法，多少能放在你身上。
@@ -476,7 +413,7 @@ function EntryScreen({
 
         {/* Aaron authority signal block — P0 credibility */}
         <div className="mb-10 flex items-start gap-5 md:gap-6 px-5 py-5 md:px-6 md:py-6 bg-white/[0.03] border-l-2 border-gold">
-          <div className="w-[72px] h-[72px] md:w-[88px] md:h-[88px] rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[24px] md:text-[30px] font-heading font-semibold shrink-0 shadow-lg shadow-gold/15">
+          <div className="w-[72px] h-[72px] md:w-[88px] md:h-[88px] bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[24px] md:text-[30px] font-semibold shrink-0 shadow-lg shadow-gold/15">
             AY
           </div>
           <div className="flex-1 min-w-0 pt-1">
@@ -486,7 +423,7 @@ function EntryScreen({
             <div className="text-[11.5px] md:text-[13px] text-gold-l/90 font-medium mt-1.5 tracking-[0.3px]">
               42+ 年國際物流實戰 · 500+ 出口案件 · 30+ 國家
             </div>
-            <p className="text-[13.5px] md:text-[14.5px] text-white/60 font-normal mt-3 leading-[1.8]">
+            <p className="text-[13.5px] md:text-[14.5px] text-white/70 font-normal mt-3 leading-[1.8]">
               最近三個月我親自看過 47 家台灣公司的出海卡點。這三題是我每次開第一次會議前必問的問題
               — 兩分鐘後你會拿到的不是評分，而是「跟你最像的人當時的真實決策」。
             </p>
@@ -498,7 +435,7 @@ function EntryScreen({
           <button
             type="button"
             onClick={onStart}
-            className="inline-block bg-gold text-navy px-8 py-[13px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+            className="inline-block bg-gold text-navy px-8 py-[13px] text-[15.5px] font-semibold tracking-[0.5px] transition-colors hover:bg-gold-l cursor-pointer"
           >
             開始比對 →
           </button>
@@ -516,7 +453,7 @@ function EntryScreen({
         </div>
 
         {/* Positive honesty — soft framing, no gatekeeping */}
-        <p className="text-[13px] md:text-[13.5px] text-white/40 leading-[1.9] font-normal max-w-[600px] italic">
+        <p className="text-[13px] md:text-[13.5px] text-white/70 leading-[1.9] font-normal max-w-[600px] italic">
           我們不做 AI 評分、不給紅綠燈、不要你的 email。只要你願意給這三題 2
           分鐘的專注，我們就給你一份誠實的比對 —
           即使結論是「我們不是你需要的」，我們也會直說。
@@ -527,7 +464,7 @@ function EntryScreen({
           <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-white/40 mb-5">
             看過的人也讀這些
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {CASES.map((c) => (
               <Link
                 key={c.slug}
@@ -540,205 +477,32 @@ function EntryScreen({
                 <div className="text-[13.5px] font-semibold text-white leading-tight line-clamp-2 group-hover:text-gold transition-colors mb-1.5 min-h-[2.8em]">
                   {c.title}
                 </div>
-                <div className="font-heading text-[15.5px] text-gold/80 font-normal tabular-nums">
+                <div className="num text-[15.5px] text-gold/80">
                   {c.num}
                 </div>
               </Link>
             ))}
           </div>
         </div>
+
+        <AssessQuestionStaticCopy />
       </div>
     </section>
   );
 }
 
-/* ────────── Question screen wrapper ────────── */
-
-function QuestionScreen({
-  step,
-  total,
-  onBack,
-  onReset,
-  children,
-}: {
-  step: Step;
-  total: number;
-  onBack: () => void;
-  onReset: () => void;
-  children: React.ReactNode;
-}) {
-  const progressPct = Math.max(0, Math.min(1, step / total)) * 100;
-  const numStr = step.toString().padStart(2, "0");
-  const totalStr = total.toString().padStart(2, "0");
-
+export function AssessQuestionStaticCopy() {
   return (
-    <section className="relative min-h-screen bg-navy pt-[130px] md:pt-[160px] pb-20 md:pb-24 px-5 md:px-10 overflow-hidden">
-      {/* Animated gold glow */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none animate-hero-glow-drift"
-        style={{
-          background:
-            "radial-gradient(ellipse 55% 45% at 20% 5%, rgba(212,168,92,0.10) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative max-w-[760px] mx-auto">
-        {/* Top bar — back / reset */}
-        <div className="flex items-center justify-between text-[11.5px] text-white/50 font-medium tracking-[0.5px] mb-8">
-          <button
-            type="button"
-            onClick={onBack}
-            className="hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
-          >
-            <span>←</span>
-            <span>上一步</span>
-          </button>
-          <button
-            type="button"
-            onClick={onReset}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            重新開始
-          </button>
-        </div>
-
-        {/* Big progress — number + bar */}
-        <div className="mb-10 md:mb-14">
-          <div className="flex items-end gap-3 mb-4">
-            <div className="font-heading text-[48px] md:text-[64px] leading-[0.85] text-gold font-light tabular-nums">
-              {numStr}
-            </div>
-            <div className="text-[15.5px] text-white/40 font-light pb-1.5 tabular-nums">
-              / {totalStr}
-            </div>
-          </div>
-          <div className="h-[4px] bg-white/10 overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-gold/60 to-gold transition-all duration-500 ease-out"
-              style={{ width: `${progressPct}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="animate-fade-in-up">{children}</div>
-      </div>
-    </section>
-  );
-}
-
-/* ────────── Question body (options list) ────────── */
-
-function QuestionBody<T extends string>({
-  eyebrow,
-  question,
-  options,
-  onPick,
-}: {
-  eyebrow: string;
-  question: string;
-  options: readonly Option<T>[];
-  onPick: (value: T) => void;
-}) {
-  const [selected, setSelected] = useState<T | null>(null);
-
-  const pick = (value: T) => {
-    if (selected !== null) return;
-    setSelected(value);
-    window.setTimeout(() => onPick(value), 240);
-  };
-
-  // Number-key shortcuts (1..N)
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (selected !== null) return;
-      // Ignore if user is typing in an input
-      const target = e.target as HTMLElement | null;
-      if (target?.tagName === "INPUT" || target?.tagName === "TEXTAREA") return;
-
-      const num = parseInt(e.key, 10);
-      if (!isNaN(num) && num >= 1 && num <= options.length) {
-        pick(options[num - 1].value);
-      }
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options, selected]);
-
-  return (
-    <div>
-      <div className="text-[10.5px] md:text-[11px] font-semibold tracking-[2.5px] uppercase text-gold mb-4">
-        {eyebrow}
-      </div>
-      <h2 className="font-heading text-[clamp(26px,3.6vw,40px)] leading-[1.22] text-white font-light tracking-[-0.4px] mb-10 md:mb-12">
-        {question}
-      </h2>
-
-      <div className="space-y-3 md:space-y-4">
-        {options.map((opt, i) => {
-          const isSelected = selected === opt.value;
-          const isDimmed = selected !== null && !isSelected;
-          return (
-            <button
-              key={opt.value}
-              type="button"
-              onClick={() => pick(opt.value)}
-              disabled={selected !== null && !isSelected}
-              aria-pressed={isSelected}
-              className={`group w-full text-left px-5 py-5 md:px-6 md:py-6 border transition-all duration-200 cursor-pointer disabled:cursor-default focus:outline-none focus:ring-2 focus:ring-gold/60 ${
-                isSelected
-                  ? "bg-[rgba(212,168,92,0.12)] border-gold scale-[1.01] shadow-[0_8px_28px_rgba(212,168,92,0.15)]"
-                  : isDimmed
-                    ? "bg-white/[0.02] border-white/10 opacity-40"
-                    : "bg-white/[0.03] border-white/10 hover:border-gold/50 hover:bg-white/[0.06]"
-              }`}
-            >
-              <div className="flex items-start gap-4">
-                {/* Number badge — doubles as keyboard shortcut hint */}
-                <span
-                  className={`shrink-0 w-8 h-8 flex items-center justify-center border text-[11px] font-semibold tabular-nums transition-colors ${
-                    isSelected
-                      ? "border-gold text-navy bg-gold"
-                      : "border-white/20 text-white/50 group-hover:border-gold/60 group-hover:text-gold"
-                  }`}
-                >
-                  {i + 1}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <div
-                    className={`text-[16.5px] md:text-[17.5px] font-medium leading-[1.5] transition-colors ${
-                      isSelected ? "text-white" : "text-white/90"
-                    }`}
-                  >
-                    {opt.label}
-                  </div>
-                  {opt.hint && (
-                    <div className="mt-1.5 text-[13px] md:text-[13.5px] text-white/50 font-normal leading-[1.8]">
-                      {opt.hint}
-                    </div>
-                  )}
-                </div>
-                <span
-                  aria-hidden="true"
-                  className={`shrink-0 mt-1 text-[16.5px] transition-all duration-300 ${
-                    isSelected
-                      ? "text-gold translate-x-1"
-                      : "text-white/30 group-hover:text-gold group-hover:translate-x-0.5"
-                  }`}
-                >
-                  →
-                </span>
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Keyboard hint */}
-      <div className="mt-6 text-[11px] text-white/30 font-normal tracking-[0.3px]">
-        也可以按數字鍵 {Array.from({ length: options.length }, (_, i) => i + 1).join(" / ")} 快速選擇
-      </div>
+    <div className="sr-only">
+      {assessQuestions.map((question) => (
+        <section key={question.id}>
+          {question.eyebrow && <p>{question.eyebrow}</p>}
+          <h2>{question.label}</h2>
+          <ul>
+            {question.options.map((option) => <li key={option.value}>{option.label}{option.hint ? ` ${option.hint}` : ""}</li>)}
+          </ul>
+        </section>
+      ))}
     </div>
   );
 }
@@ -783,7 +547,7 @@ function ResultScreen({
       <section className="relative bg-navy pt-[130px] md:pt-[160px] pb-[70px] md:pb-[90px] px-5 md:px-10 overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 pointer-events-none animate-hero-glow-drift"
+          className="absolute inset-0 pointer-events-none"
           style={{
             background:
               "radial-gradient(ellipse 60% 50% at 25% 15%, rgba(212,168,92,0.12) 0%, transparent 70%)",
@@ -810,7 +574,7 @@ function ResultScreen({
           </div>
 
           {/* Verdict headline */}
-          <h1 className="font-heading text-[clamp(28px,4.2vw,48px)] text-white leading-[1.15] font-light tracking-[-0.6px] mb-8 max-w-[820px]">
+          <h1 className="h1 text-white mb-8 max-w-[820px]">
             {narrative.headline}
           </h1>
 
@@ -846,7 +610,7 @@ function ResultScreen({
       </section>
 
       {/* ─── Case card + quote (cream bg for reading comfort) ─── */}
-      <section className="bg-cream pt-[60px] md:pt-[80px] pb-[60px] md:pb-[80px] px-5 md:px-10">
+      <section className="bg-navy pt-[60px] md:pt-[80px] pb-[60px] md:pb-[80px] px-5 md:px-10">
         <div className="max-w-[860px] mx-auto">
           {/* Primary case card */}
           <article className="bg-white border border-gold/30 shadow-[0_12px_40px_rgba(18,38,63,0.08)] mb-8">
@@ -870,7 +634,7 @@ function ResultScreen({
 
               {/* Big outcome */}
               <div className="absolute left-6 md:left-10 right-6 md:right-10 bottom-6 md:bottom-9">
-                <div className="font-heading text-[42px] md:text-[60px] text-gold font-light leading-[0.95] tabular-nums mb-2">
+                <div className="num text-[42px] md:text-[60px] text-gold leading-[0.95] mb-2">
                   {primaryCase.num}
                 </div>
                 <div className="text-[15.5px] md:text-[17px] text-white/85 font-normal leading-snug">
@@ -885,10 +649,10 @@ function ResultScreen({
                 <div className="text-[11px] font-semibold tracking-[1.8px] uppercase text-tx3 mb-6">
                   客戶當時的原話
                 </div>
-                <blockquote className="relative font-heading text-[clamp(22px,3.2vw,34px)] text-tx font-normal leading-[1.45] tracking-[-0.3px] mb-8">
+                <blockquote className="h3 relative text-tx leading-[1.45] mb-8">
                   <span
                     aria-hidden="true"
-                    className="absolute -left-3 md:-left-6 -top-8 md:-top-12 text-[80px] md:text-[120px] text-gold/20 font-heading leading-none select-none"
+                    className="absolute -left-3 md:-left-6 -top-8 md:-top-12 text-[80px] md:text-[120px] text-gold/20 leading-none select-none"
                   >
                     &ldquo;
                   </span>
@@ -896,7 +660,7 @@ function ResultScreen({
                 </blockquote>
                 <Link
                   href={`/cases/${primaryCase.slug}`}
-                  className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-none text-[14.5px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
+                  className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 text-[14.5px] font-semibold tracking-[0.3px] hover:bg-gold hover:text-navy transition-colors"
                 >
                   讀完整案例 →
                 </Link>
@@ -965,7 +729,7 @@ function ResultScreen({
               <button
                 type="button"
                 onClick={open}
-                className="inline-block bg-gold text-navy px-7 py-3.5 rounded-none text-[15.5px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors cursor-pointer"
+                className="inline-block bg-gold text-navy px-7 py-3.5 text-[15.5px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors cursor-pointer"
               >
                 聊聊你的狀況 →
               </button>

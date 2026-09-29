@@ -35,10 +35,7 @@ export default function ResourcesPage() {
             </span>
           </div>
 
-          <h1
-            className="font-sans text-white leading-[1.08] mb-7 font-extralight tracking-[-1.5px] max-w-[820px]"
-            style={{ fontSize: "clamp(34px, 4.6vw, 56px)" }}
-          >
+          <h1 className="h1 mb-7 max-w-[820px] text-white">
             正在開放的補助，
             <br />
             <span className="text-gold/90">和我們現場去的地方。</span>
@@ -71,7 +68,7 @@ export default function ResourcesPage() {
                 01 · Subsidies
               </span>
             </div>
-            <h2 className="font-sans text-[26px] md:text-[30px] font-light leading-[1.2] tracking-[-0.5px] text-navy mb-3">
+            <h2 className="h2 mb-3 text-navy">
               2026 政府出海補助
             </h2>
             <p className="text-[15.5px] text-tx2 leading-[1.8] mb-7">
@@ -81,19 +78,19 @@ export default function ResourcesPage() {
 
             <div className="grid grid-cols-3 gap-4 py-5 border-y border-bd/70 mb-7">
               <div>
-                <div className="font-sans text-[26px] font-semibold text-gold-d leading-none mb-1.5">
+                <div className="num text-[26px] text-gold-d leading-none mb-1.5">
                   {subsidyCount}
                 </div>
                 <div className="text-[10.5px] text-tx3 tracking-[0.5px]">當期計畫</div>
               </div>
               <div>
-                <div className="font-sans text-[26px] font-semibold text-gold-d leading-none mb-1.5">
+                <div className="num text-[26px] text-gold-d leading-none mb-1.5">
                   3
                 </div>
                 <div className="text-[10.5px] text-tx3 tracking-[0.5px]">主管機關</div>
               </div>
               <div>
-                <div className="font-sans text-[26px] font-semibold text-gold-d leading-none mb-1.5">
+                <div className="num text-[26px] text-gold-d leading-none mb-1.5">
                   1,000萬
                 </div>
                 <div className="text-[10.5px] text-tx3 tracking-[0.5px]">單筆最高</div>
@@ -120,7 +117,7 @@ export default function ResourcesPage() {
                 02 · Field Notes
               </span>
             </div>
-            <h2 className="font-sans text-[26px] md:text-[30px] font-light leading-[1.2] tracking-[-0.5px] text-navy mb-3">
+            <h2 className="h2 mb-3 text-navy">
               活動 · 現場紀錄
             </h2>
             <p className="text-[15.5px] text-tx2 leading-[1.8] mb-7">
@@ -129,19 +126,19 @@ export default function ResourcesPage() {
 
             <div className="grid grid-cols-3 gap-4 py-5 border-y border-bd/70 mb-7">
               <div>
-                <div className="font-sans text-[26px] font-semibold text-sky leading-none mb-1.5">
+                <div className="num text-[26px] text-sky leading-none mb-1.5">
                   {activityCount}
                 </div>
                 <div className="text-[10.5px] text-tx3 tracking-[0.5px]">活動紀錄</div>
               </div>
               <div>
-                <div className="font-sans text-[26px] font-semibold text-sky leading-none mb-1.5">
+                <div className="num text-[26px] text-sky leading-none mb-1.5">
                   2
                 </div>
                 <div className="text-[10.5px] text-tx3 tracking-[0.5px]">主戰場</div>
               </div>
               <div>
-                <div className="font-sans text-[26px] font-semibold text-sky leading-none mb-1.5">
+                <div className="num text-[26px] text-sky leading-none mb-1.5">
                   月更
                 </div>
                 <div className="text-[10.5px] text-tx3 tracking-[0.5px]">更新節奏</div>

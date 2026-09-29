@@ -23,8 +23,7 @@ export function SubsidiesCTASection() {
       />
       <div className="max-w-[900px] mx-auto text-center relative">
         <h2
-          className="font-sans text-white leading-[1.1] mb-6 font-extralight tracking-[-1.5px]"
-          style={{ fontSize: "clamp(30px, 4vw, 50px)" }}
+          className="h2 mb-6 text-white"
         >
           不確定哪個適合你？
           <br />
@@ -37,7 +36,7 @@ export function SubsidiesCTASection() {
         <div className="flex items-center justify-center gap-6 md:gap-8 flex-wrap">
           <button
             onClick={open}
-            className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+            className="bg-gold text-navy px-9 py-[15px] text-[15.5px] font-semibold tracking-[0.5px] transition-colors hover:bg-gold-l cursor-pointer"
           >
             聊聊你的產品 →
           </button>
