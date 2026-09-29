@@ -1,10 +1,14 @@
 # 鹿飛 LUFÉ 方正版改版：交接文件（換視窗先讀這份）
 
-> 最後更新：2026-09-29（改版完成，等 Aaron 走預覽站）。這份文件是權威來源，以它為準，不以任何人的記憶為準。
+> 最後更新：2026-09-29（已上線）。這份文件是權威來源，以它為準，不以任何人的記憶為準。
 > 看完這份之後，接著讀同資料夾的 `PLAN.md`（硬規則）和 `DECISIONS.md`（Aaron 逐頁的決定）。
 
 ## 0. 一句話現況
-**改版全部做完、已審完，都合進 `redesign/square` 了（2026-09-29，`4ba6227`）。現在只等 Aaron 在預覽站從頭走一遍（§6 第 3 步）。** Aaron 說 OK 之後，才由 `redesign/square` 開 PR 合進 main（§6 第 4 步）。
+**方正版改版已上線（2026-09-29）**：PR #55 合進 main（`2717cf9`），正式部署是 `dpl_H6P6t2tTXtNmUgc4DJ7PCvew5Bzh`。Aaron 走過預覽站並同意上線。
+- 上線後驗證：lufe.world 23 個網址全部 200；在正式站用實際畫面送了快速留言和完整表單，`lufe.leads` 兩筆都 `notified=true`。
+- 驗證完，Aaron 同意後已刪除全部 6 筆「系統測試（Claude）」留言，表裡是 0 筆。
+- 要退回舊版：Vercel 把正式站 promote 回 `dpl_37b9bkMUMBuSm7VsobZDEbTMyhSn`（main `34dd27b`）。
+- 本文件以下各節是改版過程的紀錄。
 
 ---
 
@@ -162,12 +166,10 @@ Codex 已完成兩個 commit：`6c87b7c` 動畫引擎 `src/lib/motion/`（spring
      - 無障礙 96、SEO 100、最佳實務 100 不變。
      - 案例列表效能 77、無障礙 100。
    - 🔑 這一步抓到首頁一打開就下載 7.8 MB 案例原圖（藏在還沒點開的面板裡），已由 #53 修掉。
-3. ⏳ Aaron 走預覽站。
+3. ✅ Aaron 走預覽站（2026-09-29 同意）。
    - 分支網址 `https://lufe-website-git-redesign-square-aaronyu1229s-projects.vercel.app`，後面加 `?x-vercel-protection-bypass=<key>&x-vercel-set-bypass-cookie=true`。
    - key 用 Vercel API 查 project `protectionBypass`，⛔ 不要寫進 git。
    - 預覽環境沒有設表單密鑰，在預覽站送表單會顯示寄信連結，這是正常的。真正的送出已在本機接正式環境驗證過。
 
 ## 7. 等 Aaron 回覆或處理的事
-- 手機有沒有收到那兩則測試通知（2026-09-29 又多一則，改版本機驗證送的）。
-- 要不要刪掉那 4 筆測試留言（name=「系統測試（Claude）」；2026-09-29 聯絡頁完整表單驗證又多一筆）。
-- （跟改版無關）開通 Google Search Console；補寫現場紀錄三則筆記的內容。
+- （跟改版無關）開通 Google Search Console；補寫現場紀錄三則筆記的內容。內容寫好之前，單則獨立頁不上線。
