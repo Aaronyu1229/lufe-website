@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { ChoiceGroup } from "@/components/ui/ChoiceGroup";
 import { useMessageBox } from "../MessageBox";
 
 /* ───────── channel cards ───────── */
@@ -10,7 +11,7 @@ const channels = [
   {
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="3" y="5" width="22" height="16" rx="3" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="3" y="5" width="22" height="16" rx="0" stroke="currentColor" strokeWidth="1.5" />
         <path d="M3 8L14 15L25 8" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       </svg>
     ),
@@ -24,7 +25,7 @@ const channels = [
   {
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="4" y="4" width="20" height="20" rx="4" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="4" y="4" width="20" height="20" rx="0" stroke="currentColor" strokeWidth="1.5" />
         <path d="M4 10H24" stroke="currentColor" strokeWidth="1.5" />
         <circle cx="10" cy="16" r="2" stroke="currentColor" strokeWidth="1" />
         <circle cx="18" cy="16" r="2" stroke="currentColor" strokeWidth="1" />
@@ -40,7 +41,7 @@ const channels = [
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M6 8L14 14L22 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="4" y="6" width="20" height="16" rx="3" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="4" y="6" width="20" height="16" rx="0" stroke="currentColor" strokeWidth="1.5" />
       </svg>
     ),
     title: "Email",
@@ -57,12 +58,31 @@ const cardColorMap: Record<string, { border: string; iconBg: string; iconText: s
   ember: { border: "hover:border-ember", iconBg: "bg-[rgba(217,139,74,0.08)]", iconText: "text-ember" },
 };
 
-const stageOptions = [
+export const stageOptions = [
   "還在觀望，想了解出海",
   "準備出海，需要方向",
   "已經在出海，想做更好",
   "其他",
 ];
+
+export type ContactFormFields = {
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  product: string;
+  stage: string;
+  message: string;
+  website: string;
+};
+
+export function buildContactLeadPayload(fields: ContactFormFields, page: string) {
+  return {
+    form: "contact",
+    ...fields,
+    page,
+  };
+}
 
 /* ───────── validation helpers ───────── */
 
@@ -74,7 +94,7 @@ function isValidEmail(email: string) {
 
 export function ContactPage() {
   const { open } = useMessageBox();
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<ContactFormFields>({
     name: "",
     email: "",
     company: "",
@@ -100,7 +120,7 @@ export function ContactPage() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const next = { ...formState, [e.target.name]: e.target.value };
     setFormState(next);
@@ -117,6 +137,11 @@ export function ContactPage() {
     }
   };
 
+  const handleStageChange = (stage: string) => {
+    setFormState((previous) => ({ ...previous, stage }));
+    setSubmitError(false);
+  };
+
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = e.target.name;
     setTouched((prev) => ({ ...prev, [name]: true }));
@@ -131,6 +156,8 @@ export function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     const errs = validate();
     setErrors(errs);
     setTouched({ name: true, email: true, message: true });
@@ -142,11 +169,7 @@ export function ContactPage() {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          form: "contact",
-          ...formState,
-          page: window.location.pathname,
-        }),
+        body: JSON.stringify(buildContactLeadPayload(formState, window.location.pathname)),
       });
       const result = await response.json().catch(() => null) as {
         ok?: boolean;
@@ -186,13 +209,12 @@ export function ContactPage() {
     }
   };
 
-  const isFormValid = !formState.name.trim() || !formState.email.trim() || !isValidEmail(formState.email) || !formState.message.trim();
   const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent("LUFÉ 聯絡頁完整表單")}&body=${encodeURIComponent(
     `姓名：${formState.name}\nEmail：${formState.email}\n公司名稱：${formState.company}\n電話：${formState.phone}\n產品：${formState.product}\n出海階段：${formState.stage}\n\n訊息：\n${formState.message}`,
   )}`;
 
   const inputClass = (name: string) =>
-    `w-full px-4 py-3 border rounded-none text-[15.5px] outline-none transition-colors ${
+    `w-full px-4 py-3 border text-[15.5px] outline-none ${
       errors[name] && touched[name]
         ? "border-red-400 focus:border-red-500"
         : "border-bd focus:border-gold"
@@ -249,17 +271,17 @@ export function ContactPage() {
             return (
               <button
                 onClick={() => handleChannelClick(primary.action)}
-                className={`relative w-full p-6 md:p-8 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer transition-all hover:shadow-lg border-2 border-gold/20 hover:border-gold mb-4 flex items-center gap-6`}
+                className={`relative w-full p-6 md:p-8 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer hover:shadow-lg border-2 border-gold/20 hover:border-gold mb-4 flex items-start gap-6`}
               >
                 <div
-                  className={`w-14 h-14 rounded-none ${c.iconBg} ${c.iconText} flex items-center justify-center flex-shrink-0`}
+                  className={`w-14 h-14 ${c.iconBg} ${c.iconText} flex items-center justify-center flex-shrink-0`}
                 >
                   {primary.icon}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h2 className="text-[18px] font-semibold">{primary.title}</h2>
-                    <span className="text-[10px] font-semibold bg-gold text-navy px-2 py-0.5 rounded-sm">
+                    <span className="text-[10px] font-semibold bg-gold text-navy px-2 py-0.5">
                       最快回覆
                     </span>
                   </div>
@@ -285,20 +307,18 @@ export function ContactPage() {
                 <button
                   key={ch.title}
                   onClick={() => handleChannelClick(ch.action)}
-                  className={`relative p-5 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer transition-all hover:shadow-lg ${c.border}`}
+                  className={`relative p-5 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer hover:shadow-lg ${c.border} flex items-start gap-4`}
                 >
                   <div
-                    className={`w-12 h-12 rounded-none ${c.iconBg} ${c.iconText} flex items-center justify-center mb-3`}
+                    className={`w-12 h-12 ${c.iconBg} ${c.iconText} flex items-center justify-center shrink-0`}
                   >
                     {ch.icon}
                   </div>
-                  <h3 className="text-[16.5px] font-semibold mb-1">{ch.title}</h3>
-                  <p className="text-[13px] text-tx2 font-normal leading-[1.5] mb-3">
-                    {ch.desc}
-                  </p>
-                  <span className="text-[13px] font-semibold text-gold-d">
-                    {ch.actionLabel} →
-                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-[16.5px] font-semibold mb-1">{ch.title}</h3>
+                    <p className="text-[13px] text-tx2 font-normal leading-[1.5]">{ch.desc}</p>
+                  </div>
+                  <span className="hidden md:block text-[13px] font-semibold text-gold-d shrink-0">{ch.actionLabel} →</span>
                 </button>
               );
             })}
@@ -375,7 +395,7 @@ export function ContactPage() {
 
           <a
             href="mailto:aaron.yu@reborn.in?subject=%E5%90%88%E4%BD%9C%E5%A4%A5%E4%BC%B4%E6%B4%BD%E8%AB%87"
-            className="inline-flex items-center gap-2 bg-gold text-navy px-7 py-[14px] rounded-none text-[15.5px] font-semibold tracking-[0.3px] hover:bg-gold-l transition-colors"
+            className="inline-flex items-center gap-2 bg-gold text-navy px-7 py-[14px] text-[15.5px] font-semibold tracking-[0.3px] hover:bg-gold-l"
           >
             <span>寄信洽談合作</span>
             <span aria-hidden="true">→</span>
@@ -406,7 +426,7 @@ export function ContactPage() {
 
           {submitted ? (
             <div className="text-center py-12">
-              <div className="w-16 h-16 rounded-full bg-[rgba(91,143,168,0.1)] flex items-center justify-center mx-auto mb-5">
+              <div className="w-16 h-16 bg-[rgba(91,143,168,0.1)] flex items-center justify-center mx-auto mb-5">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                   <path
                     d="M7 14L12 19L21 10"
@@ -478,7 +498,7 @@ export function ContactPage() {
                     name="company"
                     value={formState.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-none text-[15.5px] outline-none focus:border-gold transition-colors"
+                    className="w-full px-4 py-3 border border-bd text-[15.5px] outline-none focus:border-gold"
                     placeholder="公司名稱"
                   />
                 </div>
@@ -491,7 +511,7 @@ export function ContactPage() {
                     name="phone"
                     value={formState.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd rounded-none text-[15.5px] outline-none focus:border-gold transition-colors"
+                    className="w-full px-4 py-3 border border-bd text-[15.5px] outline-none focus:border-gold"
                     placeholder="09xx-xxx-xxx"
                   />
                 </div>
@@ -507,7 +527,7 @@ export function ContactPage() {
                   name="product"
                   value={formState.product}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd rounded-none text-[15.5px] outline-none focus:border-gold transition-colors"
+                  className="w-full px-4 py-3 border border-bd text-[15.5px] outline-none focus:border-gold"
                   placeholder="簡單描述你的產品或品牌"
                 />
               </div>
@@ -517,19 +537,13 @@ export function ContactPage() {
                 <label className="block text-[13px] font-medium tracking-[1px] mb-1.5">
                   目前出海階段
                 </label>
-                <select
-                  name="stage"
+                <ChoiceGroup
+                  label="目前出海階段"
+                  options={stageOptions.map((option) => ({ value: option, label: option }))}
                   value={formState.stage}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd rounded-none text-[15.5px] outline-none focus:border-gold transition-colors bg-white appearance-none"
-                >
-                  <option value="">請選擇</option>
-                  {stageOptions.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
+                  onChange={handleStageChange}
+                  className="grid grid-cols-1 min-[520px]:grid-cols-2"
+                />
               </div>
 
               {/* Message */}
@@ -566,8 +580,7 @@ export function ContactPage() {
               />
               <button
                 type="submit"
-                disabled={isFormValid || isSubmitting}
-                className="w-full bg-gold text-navy py-3.5 rounded-none text-[16.5px] font-semibold cursor-pointer transition-colors hover:bg-gold-l disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full bg-gold text-navy py-3.5 text-[16.5px] font-semibold cursor-pointer hover:bg-gold-l"
               >
                 {isSubmitting ? "送出中…" : "送出表單"}
               </button>

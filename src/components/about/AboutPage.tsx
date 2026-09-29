@@ -2,7 +2,35 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Carousel } from "@/components/ui/Carousel";
 import { useMessageBox } from "../MessageBox";
+
+export const storyCards = [
+  {
+    num: "01",
+    title: "看到的問題",
+    image: "/images/about/aaron-workshop.jpg",
+    alt: "Aaron 在工作坊上分享跨境實戰觀察",
+    imageClassName: "object-cover object-[center_30%]",
+    copy: <>在國際物流業做了十多年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸、找代操公司只買工具。每一段都有人做，但沒有人幫你串起來。企業自己得當專案經理，在三四家公司之間來回溝通，效率極低，成本極高。</>,
+  },
+  {
+    num: "02",
+    title: "相信的事",
+    image: "/images/about/story-belief-compass.jpg",
+    alt: "羅盤放在世界地圖上 — 有計畫的探索",
+    imageClassName: "object-cover",
+    copy: <>我相信每一家有好產品的台灣公司，都值得試試走向海外。不是每個產品都適合，但至少應該有人幫你搞清楚。跨境不應該是一場冒險，而應該是一次有計畫的探索——用三個維度判斷：這個市場的<span className="text-white/90 font-medium">勝率</span>（產品適配）、<span className="text-white/90 font-medium">潛力</span>（通路銷售）、<span className="text-white/90 font-medium">成功率</span>（團隊體質）。有人帶路、有框架可用，風險就小了一半。</>,
+  },
+  {
+    num: "03",
+    title: "做了什麼",
+    image: "/images/about/aaron-news-interview.jpg",
+    alt: "台視新聞訪問躍馬企業市場經理 — 真實業界背書",
+    imageClassName: "object-cover object-[42%_center]",
+    copy: <>所以我創立了鹿飛——一個用三支柱方法論幫台灣企業落地的跨境團隊。從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有<a href="https://jumping.group" target="_blank" rel="noopener noreferrer" className="text-gold underline underline-offset-4 decoration-gold/40 hover:decoration-gold">躍馬企業</a> 42 年的國際物流實戰當基礎。主要戰場是<span className="text-white/90 font-medium">北美</span>和<span className="text-white/90 font-medium">東南亞</span>——兩個地方我們每個月都真的有人在現場。別人幫你開車，我們幫你找路。</>,
+  },
+];
 
 /* ───────── data ───────── */
 
@@ -121,7 +149,7 @@ const teamRoles = [
   },
 ];
 
-const howWeWorkSteps = [
+export const howWeWorkSteps = [
   {
     num: "01",
     title: "第一次對話（免費）",
@@ -165,7 +193,7 @@ const howWeWorkSteps = [
   },
 ];
 
-const thingsWeDontDo = [
+export const thingsWeDontDo = [
   {
     title: "不做純貿易買賣",
     desc: "我們不賺中間價差，也不替你採購。我們的收入來自服務費，而不是產品加價。這讓我們的建議可以完全站在你的角度。",
@@ -243,14 +271,14 @@ export function AboutPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[65%_center] opacity-[0.35] animate-hero-kenburns"
+            className="object-cover object-[65%_center] opacity-[0.35]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/35" />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy" />
           {/* Light sweep */}
           <div
             aria-hidden="true"
-            className="absolute inset-y-0 -left-1/3 w-1/3 pointer-events-none animate-hero-light-sweep"
+            className="absolute inset-y-0 -left-1/3 w-1/3 pointer-events-none"
             style={{
               background:
                 "linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.04) 40%, rgba(212,168,92,0.08) 50%, rgba(255,255,255,0.04) 60%, transparent 100%)",
@@ -261,7 +289,7 @@ export function AboutPage() {
         {/* Soft gold glow — with pulse */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 pointer-events-none animate-hero-glow-pulse"
+          className="absolute inset-0 pointer-events-none"
           style={{
             background:
               "radial-gradient(ellipse 50% 40% at 15% 10%, rgba(212,168,92,0.15) 0%, transparent 70%)",
@@ -271,7 +299,7 @@ export function AboutPage() {
         <div className="relative max-w-[1200px] mx-auto">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
-            <Link href="/" className="hover:text-gold transition-colors">首頁</Link>
+            <Link href="/" className="hover:text-gold">首頁</Link>
             <span className="mx-2 text-white/30">/</span>
             <span className="text-white/75">關於我們</span>
           </nav>
@@ -291,7 +319,7 @@ export function AboutPage() {
 
           {/* Founder block — larger, with stats row */}
           <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 mb-10 border-l-[3px] border-gold pl-6 md:pl-8 py-3 max-w-[780px]">
-            <div className="relative w-[128px] h-[128px] md:w-[148px] md:h-[148px] rounded-full overflow-hidden shrink-0 shadow-xl shadow-gold/25 ring-[1.5px] ring-gold/60">
+            <div className="relative w-[128px] h-[128px] md:w-[148px] md:h-[148px] overflow-hidden shrink-0 shadow-xl shadow-gold/25 ring-[1.5px] ring-gold/60">
               <Image
                 src="/images/about/aaron-portrait.jpg"
                 alt="Aaron Yu — 鹿飛 LUFÉ 創辦人"
@@ -332,115 +360,35 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ─── Story: 3 parts · 圖文交錯 ─── */}
+      {/* ─── Story: 3 flickable cards ─── */}
       <section className="bg-navy text-white py-[80px] md:py-[110px] px-5 md:px-10 border-t border-white/5 overflow-hidden">
         <div className="max-w-[1100px] mx-auto">
           <div className="w-12 h-px bg-gold/60 mb-10 md:mb-14" />
-
-          <div className="space-y-14 md:space-y-20">
-            {/* 看到問題 — 圖左文右 */}
-            <div className="grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-8 md:gap-12 items-center">
-              <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden">
-                <Image
-                  src="/images/about/aaron-workshop.jpg"
-                  alt="Aaron 在工作坊上分享跨境實戰觀察"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover object-[center_30%]"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50"
-                />
-                <div className="absolute left-5 top-5 flex items-center gap-2">
-                  <span className="block w-5 h-px bg-gold" />
-                  <span className="text-[10px] font-semibold tracking-[2px] uppercase text-gold/90">
-                    01
-                  </span>
+          <Carousel
+            label="鹿飛的故事"
+            className="-mx-5 md:-mx-10"
+            itemClassName="basis-[min(82vw,380px)] md:basis-[calc((100%-2rem)/2)]"
+          >
+            {storyCards.map((card) => (
+              <article key={card.num} className="overflow-hidden border border-white/15 bg-white/[0.04]">
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Image
+                    src={card.image}
+                    alt={card.alt}
+                    fill
+                    sizes="(max-width: 768px) 82vw, 48vw"
+                    className={card.imageClassName}
+                  />
+                  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50" />
                 </div>
-              </div>
-              <div>
-                <h2 className="text-[14.5px] font-semibold tracking-wider text-gold uppercase mb-4">
-                  看到的問題
-                </h2>
-                <p className="text-[16.5px] md:text-[17px] text-white/75 leading-[1.9] font-normal">
-                  在國際物流業做了十多年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。
-                  找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸、找代操公司只買工具。每一段都有人做，但沒有人幫你串起來。
-                  企業自己得當專案經理，在三四家公司之間來回溝通，效率極低，成本極高。
-                </p>
-              </div>
-            </div>
-
-            {/* 相信什麼 — 圖右文左 */}
-            <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-8 md:gap-12 items-center">
-              <div className="md:order-1">
-                <h2 className="text-[14.5px] font-semibold tracking-wider text-gold uppercase mb-4">
-                  相信的事
-                </h2>
-                <p className="text-[16.5px] md:text-[17px] text-white/75 leading-[1.9] font-normal">
-                  我相信每一家有好產品的台灣公司，都值得試試走向海外。不是每個產品都適合，但至少應該有人幫你搞清楚。
-                  跨境不應該是一場冒險，而應該是一次有計畫的探索——用三個維度判斷：這個市場的
-                  <span className="text-white/90 font-medium">勝率</span>（產品適配）、
-                  <span className="text-white/90 font-medium">潛力</span>（通路銷售）、
-                  <span className="text-white/90 font-medium">成功率</span>（團隊體質）。有人帶路、有框架可用，風險就小了一半。
-                </p>
-              </div>
-              <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden md:order-2">
-                <Image
-                  src="/images/about/story-belief-compass.jpg"
-                  alt="羅盤放在世界地圖上 — 有計畫的探索"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 35vw"
-                  className="object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50"
-                />
-                <div className="absolute left-5 top-5 flex items-center gap-2">
-                  <span className="block w-5 h-px bg-gold" />
-                  <span className="text-[10px] font-semibold tracking-[2px] uppercase text-gold/90">
-                    02
-                  </span>
+                <div className="p-6 md:p-7">
+                  <p className="text-[10px] font-semibold tracking-[2px] text-gold/90 mb-4">{card.num}</p>
+                  <h2 className="text-[20px] font-semibold text-gold mb-4">{card.title}</h2>
+                  <p className="text-[15px] text-white/75 leading-[1.9] font-normal">{card.copy}</p>
                 </div>
-              </div>
-            </div>
-
-            {/* 做了什麼 — 圖左文右 */}
-            <div className="grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-8 md:gap-12 items-center">
-              <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden">
-                <Image
-                  src="/images/about/aaron-news-interview.jpg"
-                  alt="台視新聞訪問躍馬企業市場經理 — 真實業界背書"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover object-[42%_center]"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50"
-                />
-                <div className="absolute left-5 top-5 flex items-center gap-2">
-                  <span className="block w-5 h-px bg-gold" />
-                  <span className="text-[10px] font-semibold tracking-[2px] uppercase text-gold/90">
-                    03
-                  </span>
-                </div>
-              </div>
-              <div>
-                <h2 className="text-[14.5px] font-semibold tracking-wider text-gold uppercase mb-4">
-                  做了什麼
-                </h2>
-                <p className="text-[16.5px] md:text-[17px] text-white/75 leading-[1.9] font-normal">
-                  所以我創立了鹿飛——一個用三支柱方法論幫台灣企業落地的跨境團隊。
-                  從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有<a href="https://jumping.group" target="_blank" rel="noopener noreferrer" className="text-gold underline underline-offset-4 decoration-gold/40 hover:decoration-gold transition-colors">躍馬企業</a> 42 年的國際物流實戰當基礎。
-                  主要戰場是<span className="text-white/90 font-medium">北美</span>和
-                  <span className="text-white/90 font-medium">東南亞</span>——兩個地方我們每個月都真的有人在現場。
-                  別人幫你開車，我們幫你找路。
-                </p>
-              </div>
-            </div>
-          </div>
+              </article>
+            ))}
+          </Carousel>
         </div>
       </section>
 
@@ -464,9 +412,9 @@ export function AboutPage() {
             {teamRoles.map((role) => (
               <div
                 key={role.title}
-                className="group bg-white border border-bd p-6 rounded-none transition-all hover:border-gold hover:shadow-[0_8px_28px_rgba(16,27,48,0.07)]"
+                className="group bg-white border border-bd p-6 hover:border-gold hover:shadow-[0_8px_28px_rgba(16,27,48,0.07)]"
               >
-                <div className="w-12 h-12 rounded-none bg-[rgba(212,168,92,0.08)] border border-gold-d/25 flex items-center justify-center text-gold-d mb-4 group-hover:bg-[rgba(212,168,92,0.14)] transition-colors">
+                <div className="w-12 h-12 bg-[rgba(212,168,92,0.08)] border border-gold-d/25 flex items-center justify-center text-gold-d mb-4 group-hover:bg-[rgba(212,168,92,0.14)]">
                   {role.icon}
                 </div>
                 <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-2">
@@ -501,31 +449,25 @@ export function AboutPage() {
             我們的流程很清楚——每一步你都知道接下來會發生什麼、要做什麼、需要多久。
           </p>
 
-          <div className="space-y-5 mt-10">
+          <Carousel
+            label="合作流程"
+            className="mt-8 -mx-5 md:-mx-10"
+            itemClassName="basis-[min(82vw,330px)] md:basis-[calc((100%-3rem)/3)]"
+          >
             {howWeWorkSteps.map((step) => (
-              <div
-                key={step.num}
-                className="group flex items-start gap-5 md:gap-7 p-5 md:p-7 bg-cream rounded-none border-l-4 border-gold/40 hover:border-gold-d transition-colors"
-              >
-                <div className="flex flex-col items-center gap-2 shrink-0">
-                  <span className="font-sans text-[28px] md:text-[32px] font-light text-gold-d tabular-nums leading-none">
-                    {step.num}
-                  </span>
-                  <div className="w-10 h-10 rounded-full border border-gold-d/30 flex items-center justify-center text-gold-d bg-white/60 group-hover:bg-white transition-colors">
-                    {step.icon}
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[20px] font-semibold mb-2 leading-tight">
-                    {step.title}
-                  </h3>
-                  <p className="text-[15px] md:text-[16px] text-tx2 leading-[1.8] font-normal">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
+              <article key={step.num} className="min-h-full border border-bd bg-cream p-6 md:p-7">
+                <p className="font-sans text-[28px] md:text-[32px] font-light text-gold-d tabular-nums leading-none mb-7">
+                  {step.num}
+                </p>
+                <h3 className="text-[18px] md:text-[20px] font-semibold mb-2 leading-tight">
+                  {step.title}
+                </h3>
+                <p className="text-[15px] md:text-[16px] text-tx2 leading-[1.8] font-normal">
+                  {step.desc}
+                </p>
+              </article>
             ))}
-          </div>
+          </Carousel>
         </div>
       </section>
 
@@ -570,10 +512,10 @@ export function AboutPage() {
               return (
                 <div
                   key={card.title}
-                  className={`p-7 bg-white rounded-none shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-all hover:shadow-lg ${c.border}`}
+                  className={`p-7 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg ${c.border}`}
                 >
                   <div
-                    className={`w-14 h-14 rounded-none ${c.iconBg} flex items-center justify-center mb-4`}
+                    className={`w-14 h-14 ${c.iconBg} flex items-center justify-center mb-4`}
                   >
                     {card.icon}
                   </div>
@@ -601,30 +543,17 @@ export function AboutPage() {
             專業分工比萬能重要。我們誠實告訴你哪些事不該找我們——這樣你才知道什麼時候該找我們。
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+          <div className="mt-10 border-y border-bd">
             {thingsWeDontDo.map((item) => (
-              <div
+              <article
                 key={item.title}
-                className="p-6 bg-white border-l-4 border-red-300/60 rounded-none hover:border-red-400 transition-colors"
+                className="border-b border-bd p-6 last:border-b-0"
               >
-                <div className="flex items-start gap-3 mb-2">
-                  <div className="relative w-10 h-10 rounded-none bg-red-50 border border-red-200/60 flex items-center justify-center text-red-400/80 shrink-0">
-                    {item.icon}
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      <span className="block w-[130%] h-px bg-red-400/70 rotate-[-18deg]" />
-                    </span>
-                  </div>
-                  <h3 className="text-[17px] font-semibold leading-tight pt-1.5">
-                    {item.title}
-                  </h3>
-                </div>
-                <p className="text-[14.5px] text-tx2 leading-[1.8] font-normal pl-[52px]">
+                <h3 className="text-[17px] font-semibold leading-tight mb-2 text-red-500/80">{item.title}</h3>
+                <p className="text-[14.5px] text-tx2 leading-[1.8] font-normal">
                   {item.desc}
                 </p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -659,9 +588,9 @@ export function AboutPage() {
             {beliefs.map((item, i) => (
               <div
                 key={item.title}
-                className="flex gap-5 items-start p-6 rounded-none bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]"
+                className="flex gap-5 items-start p-6 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]"
               >
-                <div className="w-8 h-8 rounded-none bg-gold flex items-center justify-center text-navy text-[15.5px] font-heading font-semibold shrink-0 mt-0.5">
+                <div className="w-8 h-8 bg-gold flex items-center justify-center text-navy text-[15.5px] font-heading font-semibold shrink-0 mt-0.5">
                   {i + 1}
                 </div>
                 <div>
@@ -696,7 +625,7 @@ export function AboutPage() {
             </p>
             <button
               onClick={open}
-              className="bg-gold text-navy px-8 py-3.5 rounded-none text-[16.5px] font-semibold cursor-pointer transition-colors hover:bg-gold-l"
+              className="bg-gold text-navy px-8 py-3.5 text-[16.5px] font-semibold cursor-pointer hover:bg-gold-l"
             >
               聊聊你的產品 →
             </button>
