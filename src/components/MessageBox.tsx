@@ -34,10 +34,12 @@ export function MessageBoxProvider({ children }: { children: ReactNode }) {
 export function MessageBox() {
   const { isOpen, close } = useMessageBox();
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", contact: "", message: "" });
+  const [form, setForm] = useState({ name: "", contact: "", message: "", website: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const errs: Record<string, string> = {};
     if (!form.name.trim()) errs.name = "請填姓名";
     if (!form.contact.trim()) errs.contact = "請留 Email 或電話";
@@ -47,16 +49,49 @@ export function MessageBox() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
+    setSubmitError(false);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form: "quick",
+          ...form,
+          page: window.location.pathname,
+        }),
+      });
+      const result = await response.json().catch(() => null) as {
+        ok?: boolean;
+        errors?: Record<string, string>;
+      } | null;
+
+      if (response.ok && result?.ok) {
+        setSubmitted(true);
+      } else {
+        setErrors(result?.errors ?? {});
+        setSubmitError(true);
+      }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
     close();
     setTimeout(() => {
       setSubmitted(false);
-      setForm({ name: "", contact: "", message: "" });
+      setForm({ name: "", contact: "", message: "", website: "" });
+      setSubmitError(false);
     }, 300);
   };
+
+  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent("LUFÉ 快速留言")}&body=${encodeURIComponent(
+    `姓名：${form.name}\n聯絡方式：${form.contact}\n\n訊息：\n${form.message}`,
+  )}`;
 
   return (
     <AnimatePresence>
@@ -95,6 +130,7 @@ export function MessageBox() {
                   onChange={(e) => {
                     setForm({ ...form, name: e.target.value });
                     if (errors.name) setErrors({ ...errors, name: "" });
+                    setSubmitError(false);
                   }}
                 />
                 {errors.name && <p className="text-[12px] text-red-500 mt-1">{errors.name}</p>}
@@ -112,6 +148,7 @@ export function MessageBox() {
                   onChange={(e) => {
                     setForm({ ...form, contact: e.target.value });
                     if (errors.contact) setErrors({ ...errors, contact: "" });
+                    setSubmitError(false);
                   }}
                 />
                 {errors.contact && <p className="text-[12px] text-red-500 mt-1">{errors.contact}</p>}
@@ -129,15 +166,33 @@ export function MessageBox() {
                   onChange={(e) => {
                     setForm({ ...form, message: e.target.value });
                     if (errors.message) setErrors({ ...errors, message: "" });
+                    setSubmitError(false);
                   }}
                 />
                 {errors.message && <p className="text-[12px] text-red-500 mt-1">{errors.message}</p>}
               </div>
+              <input
+                type="text"
+                name="website"
+                value={form.website}
+                onChange={(e) => setForm({ ...form, website: e.target.value })}
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                className="absolute h-px w-px overflow-hidden opacity-0 pointer-events-none"
+              />
+              {submitError && (
+                <p className="text-[12px] text-red-500 mb-3">
+                  送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a>
+                </p>
+              )}
               <button
-                onClick={handleSubmit}
-                className="w-full py-3 bg-navy text-white rounded-[9px] text-[15px] font-semibold cursor-pointer hover:bg-navy-l transition-colors"
+                type="button"
+                onClick={() => void handleSubmit()}
+                disabled={isSubmitting}
+                className="w-full py-3 bg-navy text-white rounded-[9px] text-[15px] font-semibold cursor-pointer hover:bg-navy-l transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                送出，我們 24 小時內回覆
+                {isSubmitting ? "送出中…" : "送出，我們 24 小時內回覆"}
               </button>
             </div>
           ) : (
