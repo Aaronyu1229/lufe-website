@@ -1,7 +1,17 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+
+import { clamp, draggable, nearest, project, rubberband, useSpring } from "@/lib/motion";
 
 interface MessageBoxContextValue {
   isOpen: boolean;
@@ -24,28 +34,150 @@ export function MessageBoxProvider({ children }: { children: ReactNode }) {
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
 
-  return (
-    <MessageBoxContext.Provider value={{ isOpen, open, close }}>
-      {children}
-    </MessageBoxContext.Provider>
-  );
+  return <MessageBoxContext.Provider value={{ isOpen, open, close }}>{children}</MessageBoxContext.Provider>;
 }
+
+const emptyForm = { name: "", contact: "", message: "" };
 
 export function MessageBox() {
   const { isOpen, close } = useMessageBox();
+  const [present, setPresent] = useState(false);
+  const [closedPosition, setClosedPosition] = useState(1);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", contact: "", message: "", website: "" });
+  const [form, setForm] = useState({ ...emptyForm, website: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const grabRef = useRef<HTMLDivElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const presentRef = useRef(false);
+  const closedY = useRef(0);
+  const dragFrom = useRef(0);
+  const sheetY = useSpring(0);
+
+  const measure = useCallback(() => {
+    closedY.current = (sheetRef.current?.offsetHeight ?? window.innerHeight) + 30;
+    setClosedPosition(closedY.current);
+    return closedY.current;
+  }, []);
+
+  const stops = useCallback(() => {
+    const closed = measure();
+    const sheetHeight = sheetRef.current?.offsetHeight ?? window.innerHeight;
+    return [Math.max(0, sheetHeight - window.innerHeight * 0.56), 0, closed];
+  }, [measure]);
+
+  const dismiss = useCallback((velocity?: number) => {
+    close();
+    sheetY.to(measure(), { response: 0.4, velocity, onRest: () => {
+      presentRef.current = false;
+      setPresent(false);
+    } });
+    returnFocusRef.current?.focus({ preventScroll: true });
+  }, [close, measure, sheetY]);
+
+  useLayoutEffect(() => {
+    sheetY.jump(measure());
+    const onResize = () => {
+      const wasClosed = sheetY.target >= closedY.current - 1;
+      const closed = measure();
+      if (wasClosed) sheetY.jump(closed);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [measure, sheetY]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      if (presentRef.current) sheetY.to(measure(), { response: 0.4, onRest: () => {
+        presentRef.current = false;
+        setPresent(false);
+      } });
+      return;
+    }
+
+    returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    presentRef.current = true;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- presence keeps the exit spring mounted.
+    setPresent(true);
+    const detents = stops();
+    sheetY.to(window.innerWidth < 700 ? detents[0] : detents[1], { response: 0.45 });
+    const timer = window.setTimeout(() => {
+      const firstField = sheetRef.current?.querySelector<HTMLElement>("input, textarea, select");
+      (firstField ?? sheetRef.current?.querySelector<HTMLElement>("button"))?.focus({ preventScroll: true });
+    }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 220);
+    return () => window.clearTimeout(timer);
+  }, [isOpen, measure, sheetY, stops]);
+
+  useEffect(() => {
+    const main = document.querySelector<HTMLElement>("main");
+    if (!main) return;
+    const progress = clamp(1 - sheetY.value / Math.min(Math.max(closedY.current, 1), window.innerHeight * 0.6), 0, 1);
+    main.style.transformOrigin = `50% ${window.scrollY + window.innerHeight / 2}px`;
+    main.style.transform = progress > 0.001 ? `scale(${1 - 0.05 * progress})` : "";
+    return () => {
+      main.style.transform = "";
+      main.style.transformOrigin = "";
+    };
+  }, [sheetY.value]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") dismiss();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  });
+
+  useEffect(() => {
+    const grab = grabRef.current;
+    if (!grab) return;
+    return draggable(grab, "y", {
+      start() {
+        if (!isOpen) return;
+        sheetY.stop();
+        dragFrom.current = sheetY.value;
+      },
+      move(delta) {
+        if (!isOpen) return;
+        const top = Math.min(...stops());
+        const next = dragFrom.current + delta;
+        sheetY.jump(next < top ? top + rubberband(next - top, window.innerHeight) : next);
+      },
+      end(velocity) {
+        if (!isOpen) return;
+        const target = nearest(stops(), sheetY.value + project(velocity));
+        if (target === closedY.current) {
+          dismiss(velocity);
+          return;
+        }
+        sheetY.to(target, { velocity, damping: Math.abs(velocity) > 500 ? 0.8 : 1, response: 0.3 });
+      },
+    });
+  }, [dismiss, isOpen, sheetY, stops]);
+
+  const validate = (field: keyof typeof emptyForm) => {
+    const messages = { name: "請填姓名", contact: "請留 Email 或電話", message: "請簡單說明一下" };
+    const valid = Boolean(form[field].trim());
+    setErrors((current) => ({ ...current, [field]: valid ? "" : messages[field] }));
+    return valid;
+  };
+
+  const updateField = (field: keyof typeof emptyForm, value: string) => {
+    setForm((current) => ({ ...current, [field]: value }));
+    if (value.trim()) setErrors((current) => current[field] ? { ...current, [field]: "" } : current);
+    setSubmitError(false);
+  };
 
   const handleSubmit = async () => {
-    const errs: Record<string, string> = {};
-    if (!form.name.trim()) errs.name = "請填姓名";
-    if (!form.contact.trim()) errs.contact = "請留 Email 或電話";
-    if (!form.message.trim()) errs.message = "請簡單說明一下";
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
+    const nextErrors: Record<string, string> = {};
+    if (!form.name.trim()) nextErrors.name = "請填姓名";
+    if (!form.contact.trim()) nextErrors.contact = "請留 Email 或電話";
+    if (!form.message.trim()) nextErrors.message = "請簡單說明一下";
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
       return;
     }
     setErrors({});
@@ -81,10 +213,11 @@ export function MessageBox() {
   };
 
   const handleClose = () => {
-    close();
-    setTimeout(() => {
+    dismiss();
+    window.setTimeout(() => {
       setSubmitted(false);
-      setForm({ name: "", contact: "", message: "", website: "" });
+      setForm({ ...emptyForm, website: "" });
+      setErrors({});
       setSubmitError(false);
     }, 300);
   };
@@ -93,118 +226,30 @@ export function MessageBox() {
     `姓名：${form.name}\n聯絡方式：${form.contact}\n\n訊息：\n${form.message}`,
   )}`;
 
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 14 }}
-          transition={{ duration: 0.3 }}
-          className="fixed bottom-[18px] right-[18px] z-200 w-[360px] max-w-[calc(100%-28px)] bg-white rounded-2xl shadow-[0_14px_50px_rgba(0,0,0,0.14)] overflow-hidden"
-        >
-          {/* Header */}
-          <div className="px-5 py-4 bg-navy text-white flex justify-between items-center">
-            <h3 className="text-[16px] font-medium">聊聊你的產品</h3>
-            <button
-              onClick={handleClose}
-              className="text-white/50 text-[18px] cursor-pointer hover:text-white/80 transition-colors"
-            >
-              ×
-            </button>
-          </div>
+  const viewportHeight = typeof window === "undefined" ? 1 : window.innerHeight;
+  const progress = clamp(1 - sheetY.value / Math.min(Math.max(closedPosition, 1), viewportHeight * 0.6), 0, 1);
 
-          {/* Form */}
-          {!submitted ? (
-            <div className="p-5">
-              <div className="mb-3">
-                <label className="block text-[11.5px] font-semibold text-tx mb-[5px]">
-                  你的姓名 *
-                </label>
-                <input
-                  required
-                  aria-required="true"
-                  className={`w-full px-[13px] py-2.5 border rounded-[9px] text-[15px] focus:outline-none focus:border-gold ${errors.name ? "border-red-400" : "border-bd"}`}
-                  placeholder="怎麼稱呼你？"
-                  value={form.name}
-                  onChange={(e) => {
-                    setForm({ ...form, name: e.target.value });
-                    if (errors.name) setErrors({ ...errors, name: "" });
-                    setSubmitError(false);
-                  }}
-                />
-                {errors.name && <p className="text-[12px] text-red-500 mt-1">{errors.name}</p>}
-              </div>
-              <div className="mb-3">
-                <label className="block text-[11.5px] font-semibold text-tx mb-[5px]">
-                  聯絡方式（Email 或電話）*
-                </label>
-                <input
-                  required
-                  aria-required="true"
-                  className={`w-full px-[13px] py-2.5 border rounded-[9px] text-[15px] focus:outline-none focus:border-gold ${errors.contact ? "border-red-400" : "border-bd"}`}
-                  placeholder="方便我們回覆你"
-                  value={form.contact}
-                  onChange={(e) => {
-                    setForm({ ...form, contact: e.target.value });
-                    if (errors.contact) setErrors({ ...errors, contact: "" });
-                    setSubmitError(false);
-                  }}
-                />
-                {errors.contact && <p className="text-[12px] text-red-500 mt-1">{errors.contact}</p>}
-              </div>
-              <div className="mb-3">
-                <label className="block text-[11.5px] font-semibold text-tx mb-[5px]">
-                  簡單說說你的產品跟想法 *
-                </label>
-                <textarea
-                  required
-                  aria-required="true"
-                  className={`w-full px-[13px] py-2.5 border rounded-[9px] text-[15px] focus:outline-none focus:border-gold resize-y min-h-[68px] ${errors.message ? "border-red-400" : "border-bd"}`}
-                  placeholder="例如：我們做鳳梨酥，想看看美國有沒有機會⋯⋯"
-                  value={form.message}
-                  onChange={(e) => {
-                    setForm({ ...form, message: e.target.value });
-                    if (errors.message) setErrors({ ...errors, message: "" });
-                    setSubmitError(false);
-                  }}
-                />
-                {errors.message && <p className="text-[12px] text-red-500 mt-1">{errors.message}</p>}
-              </div>
-              <input
-                type="text"
-                name="website"
-                value={form.website}
-                onChange={(e) => setForm({ ...form, website: e.target.value })}
-                autoComplete="off"
-                tabIndex={-1}
-                aria-hidden="true"
-                className="absolute h-px w-px overflow-hidden opacity-0 pointer-events-none"
-              />
-              {submitError && (
-                <p className="text-[12px] text-red-500 mb-3">
-                  送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a>
-                </p>
-              )}
-              <button
-                type="button"
-                onClick={() => void handleSubmit()}
-                disabled={isSubmitting}
-                className="w-full py-3 bg-navy text-white rounded-[9px] text-[15px] font-semibold cursor-pointer hover:bg-navy-l transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? "送出中…" : "送出，我們 24 小時內回覆"}
-              </button>
-            </div>
-          ) : (
-            <div className="px-5 py-8 text-center">
-              <h3 className="text-[17px] font-semibold mb-1.5">收到了！</h3>
-              <p className="text-[14.5px] text-tx2 font-light mb-4">
-                我們會在 24 小時內回覆你。
-              </p>
-            </div>
-          )}
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
+  return <>
+    <div aria-hidden={!present} className="fixed inset-0 z-[190] bg-[#0A1222]/[.42]" style={{ opacity: progress, pointerEvents: isOpen ? "auto" : "none", visibility: present ? "visible" : "hidden" }} onClick={() => dismiss()} />
+    <div ref={sheetRef} role="dialog" aria-modal="true" aria-labelledby="message-box-title" aria-hidden={!present} className="lufe-glass-panel fixed bottom-0 left-1/2 z-[200] flex h-[calc(100svh-40px)] w-[min(640px,100%)] flex-col text-tx" style={{ transform: `translate3d(-50%, ${sheetY.value}px, 0)`, visibility: present ? "visible" : "hidden" }}>
+      <div ref={grabRef} className="touch-none select-none px-6 pb-[6px] pt-[10px] cursor-grab active:cursor-grabbing">
+        <i className="mx-auto mb-[10px] block h-[5px] w-10 bg-black/20" />
+        <div className="flex items-center justify-between gap-3"><h3 id="message-box-title" className="text-[21px] font-semibold">聊聊你的產品</h3><button type="button" aria-label="關閉" onClick={handleClose} className="grid h-11 w-11 cursor-pointer place-items-center bg-black/[.06] text-[22px] text-tx2 hover:bg-black/[.1]">×</button></div>
+      </div>
+      <div className="flex-1 overflow-auto overscroll-contain px-6 pb-8 pt-1">
+        {!submitted ? <form noValidate onSubmit={(event) => { event.preventDefault(); void handleSubmit(); }}>
+          <Field label="你的姓名 *" error={errors.name}><input required aria-required="true" className={`w-full border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.name ? "border-red-400" : "border-bd"}`} placeholder="怎麼稱呼你？" value={form.name} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("name")} onChange={(event) => updateField("name", event.target.value)} /></Field>
+          <Field label="聯絡方式（Email 或電話）*" error={errors.contact}><input required aria-required="true" className={`w-full border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.contact ? "border-red-400" : "border-bd"}`} placeholder="方便我們回覆你" value={form.contact} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("contact")} onChange={(event) => updateField("contact", event.target.value)} /></Field>
+          <Field label="簡單說說你的產品跟想法 *" error={errors.message}><textarea required aria-required="true" className={`min-h-[68px] w-full resize-y border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.message ? "border-red-400" : "border-bd"}`} placeholder="例如：我們做鳳梨酥，想看看美國有沒有機會⋯⋯" value={form.message} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("message")} onChange={(event) => updateField("message", event.target.value)} /></Field>
+          <input type="text" name="website" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />
+          {submitError && <p className="mb-3 text-[12px] text-red-500">送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
+          <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-navy py-3 text-[15px] font-semibold text-white hover:bg-navy-l disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? "送出中…" : "送出，我們 24 小時內回覆"}</button>
+        </form> : <div className="px-5 py-8 text-center"><h3 className="mb-1.5 text-[17px] font-semibold">收到了！</h3><p className="text-[14.5px] font-light text-tx2">我們會在 24 小時內回覆你。</p></div>}
+      </div>
+    </div>
+  </>;
+}
+
+function Field({ label, error, children }: { label: string; error?: string; children: ReactNode }) {
+  return <div className="mb-3"><label className="mb-[5px] block text-[11.5px] font-semibold text-tx">{label}</label>{children}{error && <p className="mt-1 text-[12px] text-red-500">{error}</p>}</div>;
 }
