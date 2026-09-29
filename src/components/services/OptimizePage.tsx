@@ -1,25 +1,22 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { Disclosure } from "@/components/ui";
 import { useMessageBox } from "../MessageBox";
 
-/**
- * OptimizePage — dedicated page for clients who are already overseas
- * and want to improve performance. Previously a section inside /services.
- * Now a standalone /services/optimize route with deeper content.
- */
-
-const painPoints = [
+export const OPTIMIZE_PAIN_POINTS: ReadonlyArray<{
+  icon: ReactNode;
+  title: string;
+  signs: readonly string[];
+  fix: string;
+}> = [
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M3 8L12 3L21 8V16L12 21L3 16V8Z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 8L12 3L21 8V16L12 21L3 16V8Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
         <path d="M3 8L12 13L21 8M12 13V21" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       </svg>
     ),
@@ -33,14 +30,8 @@ const painPoints = [
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M3 6L9 12L13 8L21 16"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 6L9 12L13 8L21 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M15 16H21V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M3 21H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
@@ -55,14 +46,9 @@ const painPoints = [
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
-        <path
-          d="M12 2V5M12 19V22M4.22 4.22L6.34 6.34M17.66 17.66L19.78 19.78M2 12H5M19 12H22M4.22 19.78L6.34 17.66M17.66 6.34L19.78 4.22"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        <path d="M12 2V5M12 19V22M4.22 4.22L6.34 6.34M17.66 17.66L19.78 19.78M2 12H5M19 12H22M4.22 19.78L6.34 17.66M17.66 6.34L19.78 4.22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
     title: "營運流程卡卡",
@@ -75,19 +61,12 @@ const painPoints = [
   },
 ];
 
-const services = [
+export const OPTIMIZE_SERVICES = [
   {
     title: "運營效率診斷",
     timeline: "2–3 週",
     price: "定額診斷費",
     desc: "全面檢視你的海外運營，找出效率瓶頸與成本黑洞。",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-        <circle cx="11" cy="11" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M16 16L21 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M8 11H14M11 8V14" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-      </svg>
-    ),
     items: [
       "供應鏈與物流效率分析（從工廠到終端）",
       "通路績效評估（Amazon、實體通路、自營站）",
@@ -102,16 +81,6 @@ const services = [
     timeline: "1–3 個月",
     price: "月費 + 績效獎金",
     desc: "針對診斷結果，陪你執行具體的改善計畫。",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M12 2L14 8L20 8L15 12L17 19L12 15L7 19L9 12L4 8L10 8L12 2Z"
-          stroke="currentColor"
-          strokeWidth="1.4"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
     items: [
       "物流路線重新規劃與簽約",
       "倉儲方案優化（整合、遷移、委外）",
@@ -121,15 +90,14 @@ const services = [
     ],
     deliverable: "一套可持續運作的優化後營運體系，並留下文件與 SOP。",
   },
-];
+] as const;
 
 export function OptimizePage() {
   const { open } = useMessageBox();
 
   return (
     <>
-      {/* ─── Hero ─── */}
-      <section className="relative bg-navy pt-[140px] md:pt-[180px] pb-[80px] md:pb-[100px] px-5 md:px-10 overflow-hidden">
+      <section className="relative overflow-hidden bg-navy px-5 pb-[72px] pt-[128px] text-white md:px-10 md:pb-[104px] md:pt-[160px]">
         <div className="absolute inset-0">
           <Image
             src="/images/services/services-optimize-whiteboard.jpg"
@@ -137,162 +105,143 @@ export function OptimizePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.18] animate-hero-kenburns"
+            className="object-cover opacity-[0.18]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/60 to-navy" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/70 to-navy/95" />
         </div>
-
-        <div className="relative max-w-[1000px] mx-auto">
-          <nav className="flex items-center gap-2 text-[13px] text-white/50 mb-6">
-            <Link href="/services" className="hover:text-white transition-colors">
+        <div className="relative mx-auto max-w-[1000px]">
+          <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
+            <Link href="/services" className="hover:text-gold">
               服務
             </Link>
-            <span>/</span>
-            <span className="text-white/80">進階優化</span>
+            <span className="mx-2 text-white/30">/</span>
+            <span className="text-white/75">進階優化</span>
           </nav>
-
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-ember mb-3">
-            進階方案 · 已經在海外
-          </div>
-          <h1 className="font-heading text-[clamp(32px,5vw,56px)] text-white leading-[1.1] font-light tracking-[-0.8px] mb-5">
+          <p className="mb-2 text-[13px] font-semibold tracking-[0.06em] text-ember">進階方案 · 已經在海外</p>
+          <h1 className="font-sans text-[clamp(34px,5vw,60px)] font-[650] leading-[1.12] tracking-normal [text-wrap:balance]">
             已經跑起來了，
             <br />
-            該讓每公里<span className="text-ember font-normal">更省</span>
+            該讓每公里<span className="text-ember">更省</span>
           </h1>
-          <p className="text-[18px] md:text-[20px] text-white/75 max-w-[680px] leading-[1.6] font-light">
+          <p className="mt-5 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/75">
             產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。
             這個階段不需要從零開始——我們幫你把既有的營運診斷、優化、重整。
           </p>
         </div>
       </section>
 
-      {/* ─── Pain points ─── */}
-      <section className="bg-white py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="section-label">常見的狀況</div>
-          <h2 className="section-heading">
-            你是不是也遇到<span className="text-ember font-normal">這些問題</span>？
+      <section className="bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
+        <div className="mx-auto max-w-[1200px]">
+          <p className="text-[13px] font-semibold tracking-[0.06em] text-ember">常見的狀況</p>
+          <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+            你是不是也遇到<span className="text-ember">這些問題</span>？
           </h2>
-          <p className="section-desc">
+          <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
             如果你對下列任何一個場景點頭，這頁就是為你寫的。
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
-            {painPoints.map((p) => (
-              <div
-                key={p.title}
-                className="p-6 md:p-7 bg-cream rounded-none border-l-4 border-ember/40 hover:border-ember transition-colors"
-              >
-                <div className="w-12 h-12 rounded-none bg-white border border-ember/30 flex items-center justify-center text-ember mb-4">
-                  {p.icon}
+          <div className="mt-[38px] grid min-w-0 grid-cols-1 gap-4 md:grid-cols-3">
+            {OPTIMIZE_PAIN_POINTS.map((point) => (
+              <article key={point.title} className="min-w-0 border border-bd bg-white">
+                <div className="p-[26px]">
+                  <div className="mb-[18px] grid size-12 place-items-center bg-ember/10 text-ember">{point.icon}</div>
+                  <h3 className="mb-4 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">
+                    {point.title}
+                  </h3>
+                  <ul className="grid gap-2 text-[15px] leading-[1.65] text-tx2">
+                    {point.signs.map((sign) => (
+                      <li key={sign} className="flex items-start gap-2.5">
+                        <span aria-hidden="true" className="mt-[0.66em] size-[5px] shrink-0 bg-ember/65" />
+                        {sign}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="text-[18px] font-semibold mb-4">{p.title}</h3>
-                <ul className="space-y-2 mb-5">
-                  {p.signs.map((s) => (
-                    <li
-                      key={s}
-                      className="flex items-start gap-2 text-[14.5px] text-tx2 leading-[1.65]"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-ember/60 mt-[8px] shrink-0" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-                <div className="pt-4 border-t border-bd/60">
-                  <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-ember mb-1.5">
-                    怎麼解
-                  </div>
-                  <p className="text-[13.5px] text-tx2 leading-[1.8]">{p.fix}</p>
-                </div>
-              </div>
+                <Disclosure
+                  id={`optimize-${point.title}`}
+                  summary={
+                    <span className="flex items-center justify-between gap-3 px-[26px] text-[14px] font-semibold text-ember">
+                      怎麼解 <span aria-hidden="true" className="text-[20px] leading-none">＋</span>
+                    </span>
+                  }
+                >
+                  <p className="px-[26px] text-[15px] leading-[1.8] text-tx2">{point.fix}</p>
+                </Disclosure>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Services ─── */}
-      <section className="bg-cream py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="section-label">兩種切入方式</div>
-          <h2 className="section-heading">
-            診斷為先，<span className="text-ember font-normal">執行為後</span>
+      <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
+        <div className="mx-auto max-w-[1200px]">
+          <p className="text-[13px] font-semibold tracking-[0.06em] text-ember">兩種切入方式</p>
+          <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+            診斷為先，<span className="text-ember">執行為後</span>
           </h2>
-          <p className="section-desc">
+          <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
             你可以只做診斷，了解問題在哪；也可以直接進入執行。兩者都可以，順序不能顛倒。
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-            {services.map((svc, i) => (
-              <div
-                key={svc.title}
-                className="group p-7 md:p-9 bg-white rounded-none border-l-4 border-ember hover:shadow-[0_12px_36px_rgba(16,27,48,0.08)] transition-shadow"
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-none bg-[rgba(217,139,74,0.08)] border border-ember/30 flex items-center justify-center text-ember shrink-0 group-hover:bg-[rgba(217,139,74,0.14)] transition-colors">
-                    {svc.icon}
+          <div className="mt-[38px] grid min-w-0 grid-cols-1 gap-[18px] md:grid-cols-2">
+            {OPTIMIZE_SERVICES.map((service, index) => (
+              <article key={service.title} className="min-w-0 border border-bd border-l-4 border-l-ember bg-white">
+                <div className="p-[30px]">
+                  <p className="font-sans text-[14px] font-semibold tracking-[0.08em] text-ember">
+                    STEP 0{index + 1}
+                  </p>
+                  <h3 className="mt-2 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">
+                    {service.title}
+                  </h3>
+                  <div className="my-4 flex flex-wrap gap-2.5 text-[13px]">
+                    <span className="bg-ember/10 px-2 py-[3px] text-ember">{service.timeline}</span>
+                    <span className="py-[3px] text-tx3">{service.price}</span>
                   </div>
-                  <div>
-                    <span className="font-sans text-[14.5px] font-semibold uppercase tracking-[1.5px] text-ember tabular-nums">
-                      STEP 0{i + 1}
+                  <p className="text-[16px] leading-[1.85] text-tx2">{service.desc}</p>
+                </div>
+                <Disclosure
+                  id={`optimize-service-${index + 1}`}
+                  summary={
+                    <span className="flex items-center justify-between gap-3 px-[30px] text-[14px] font-semibold text-ember">
+                      交付成果 <span aria-hidden="true" className="text-[20px] leading-none">＋</span>
                     </span>
-                    <h3 className="text-[20px] font-semibold leading-tight mt-1">{svc.title}</h3>
+                  }
+                >
+                  <div className="px-[30px]">
+                    <ul className="my-[22px] grid gap-[11px]">
+                      {service.items.map((item) => (
+                        <li key={item} className="flex items-start gap-3 text-[15px] leading-[1.75] text-tx2">
+                          <span aria-hidden="true" className="mt-[0.7em] size-1.5 shrink-0 bg-ember" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="border-t border-bd2 pt-5">
+                      <p className="mb-2 text-[13px] font-semibold tracking-[0.06em] text-ember">交付成果</p>
+                      <p className="bg-ember/10 p-[18px] text-[15px] font-semibold leading-[1.75] text-ember">
+                        {service.deliverable}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-4 mb-4 text-[11px] font-medium tracking-wider uppercase">
-                  <span className="text-ember bg-[rgba(217,139,74,0.08)] px-2.5 py-1">
-                    {svc.timeline}
-                  </span>
-                  <span className="text-tx3">{svc.price}</span>
-                </div>
-                <p className="text-[15.5px] text-tx2 leading-[1.8] mb-5">{svc.desc}</p>
-                <ul className="space-y-2.5 mb-6">
-                  {svc.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 text-[15px] text-tx2 leading-[1.8]"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-ember mt-[7px] shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="pt-5 border-t border-bd/60">
-                  <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-tx3 mb-1.5">
-                    交付成果
-                  </div>
-                  <p className="text-[14.5px] text-ember font-medium">{svc.deliverable}</p>
-                </div>
-              </div>
+                </Disclosure>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── CTA ─── */}
-      <section className="bg-navy py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[720px] mx-auto text-center">
-          <h2 className="font-sans text-[clamp(26px,3.2vw,38px)] text-white leading-[1.2] font-light tracking-[-0.4px] mb-4">
+      <section className="bg-navy px-5 py-[80px] text-white md:px-10 md:py-[110px]">
+        <div className="mx-auto max-w-[720px] text-center">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
             不確定你的問題屬於哪一類？
           </h2>
-          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-10 max-w-[520px] mx-auto">
-            先聊聊。我們會花 30 分鐘聽你現在的狀況，
-            告訴你是該做診斷還是可以直接進執行，不需要你先決定。
+          <p className="mx-auto mt-[18px] max-w-[520px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/70">
+            先聊聊。我們會花 30 分鐘聽你現在的狀況，告訴你是該做診斷還是可以直接進執行，不需要你先決定。
           </p>
-          <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
-            <button
-              onClick={open}
-              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
-            >
+          <div className="mt-[34px] flex flex-wrap items-center justify-center gap-3">
+            <button onClick={open} className="cursor-pointer bg-gold px-[26px] py-[14px] text-[16px] font-semibold text-navy hover:bg-gold-l">
               聊聊你的產品 →
             </button>
-            <Link
-              href="/services"
-              className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-white"
-            >
-              <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
-                回服務總覽
-              </span>
-              <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            <Link href="/services" className="bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white hover:bg-white/25">
+              回服務總覽 →
             </Link>
           </div>
         </div>
