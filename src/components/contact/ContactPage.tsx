@@ -31,9 +31,9 @@ const channels = [
       </svg>
     ),
     title: "預約諮詢",
-    desc: "選一個你方便的時間，30 分鐘免費聊聊。",
-    action: "calendly" as const,
-    actionLabel: "選時間",
+    desc: "寫信告訴我們你方便的時間，30 分鐘免費聊聊。",
+    action: "booking-email" as const,
+    actionLabel: "寄信預約",
     color: "sky",
   },
   {
@@ -140,8 +140,9 @@ export function ContactPage() {
       case "open-message":
         open();
         break;
-      case "calendly":
-        window.open("https://calendly.com/lufe-co/30min", "_blank");
+      case "booking-email":
+        window.location.href =
+          "mailto:aaron.yu@reborn.in?subject=%E9%A0%90%E7%B4%84%2030%20%E5%88%86%E9%90%98%E5%85%8D%E8%B2%BB%E8%AB%AE%E8%A9%A2&body=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%2030%20%E5%88%86%E9%90%98%E5%85%8D%E8%B2%BB%E8%AB%AE%E8%A9%A2%E3%80%82%0A%0A%E6%96%B9%E4%BE%BF%E7%9A%84%E6%99%82%E9%96%93%EF%BC%9A%0A%E5%85%AC%E5%8F%B8%20%2F%20%E7%94%A2%E5%93%81%EF%BC%9A%0A%E6%83%B3%E8%81%8A%E7%9A%84%E5%95%8F%E9%A1%8C%EF%BC%9A%0A";
         break;
       case "email":
         window.location.href = "mailto:aaron.yu@reborn.in";
