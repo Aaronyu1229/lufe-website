@@ -214,10 +214,10 @@ export function ContactPage() {
   )}`;
 
   const inputClass = (name: string) =>
-    `w-full px-4 py-3 border text-[15.5px] outline-none ${
+    `w-full bg-white px-4 py-3 border text-[15.5px] outline-none ${
       errors[name] && touched[name]
         ? "border-red-400 focus:border-red-500"
-        : "border-bd focus:border-gold"
+        : "border-[rgba(26,26,46,0.14)] focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]"
     }`;
 
   return (
@@ -225,7 +225,7 @@ export function ContactPage() {
       {/* ─── Hero + Channel Cards ─── */}
       <section className="bg-white pt-[120px] pb-[60px] px-5 md:px-10">
         <div className="max-w-[1000px] mx-auto">
-          <h1 className="section-heading">
+          <h1 className="section-heading font-sans text-[clamp(34px,5vw,60px)] leading-[1.12] font-[650] [text-wrap:balance]">
             選一個你最方便的方式
           </h1>
           <p className="section-desc">
@@ -280,7 +280,7 @@ export function ContactPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h2 className="text-[18px] font-semibold">{primary.title}</h2>
+                    <h2 className="font-sans text-[18px] leading-[1.3] font-semibold">{primary.title}</h2>
                     <span className="text-[10px] font-semibold bg-gold text-navy px-2 py-0.5">
                       最快回覆
                     </span>
@@ -315,7 +315,7 @@ export function ContactPage() {
                     {ch.icon}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-[16.5px] font-semibold mb-1">{ch.title}</h3>
+                    <h3 className="font-sans text-[18px] leading-[1.3] font-semibold mb-1">{ch.title}</h3>
                     <p className="text-[13px] text-tx2 font-normal leading-[1.5]">{ch.desc}</p>
                   </div>
                   <span className="hidden md:block text-[13px] font-semibold text-gold-d shrink-0">{ch.actionLabel} →</span>
@@ -354,10 +354,10 @@ export function ContactPage() {
         />
 
         <div className="relative max-w-[900px] mx-auto">
-          <h2 className="font-sans text-[clamp(24px,3.4vw,38px)] leading-[1.22] font-light tracking-[-0.4px] text-white mb-5">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] tracking-[-0.4px] [text-wrap:balance] text-white mb-5">
             商會、顧問、服務商，
             <br />
-            <span className="font-normal text-gold">歡迎來談合作</span>
+            <span className="font-[650] text-gold">歡迎來談合作</span>
           </h2>
           <p className="text-[16px] md:text-[17px] text-white/65 leading-[1.85] font-normal max-w-[640px] mb-10">
             如果你是商會、同業顧問公司、在地服務商或物流夥伴，想跟鹿飛一起幫台灣企業把海外這條路走得更順——我們有專門的合作入口。
@@ -383,9 +383,9 @@ export function ContactPage() {
                 key={item.label}
                 className="bg-white/[0.03] border border-white/10 p-5 md:p-6"
               >
-                <div className="text-[15px] md:text-[16px] font-semibold text-white leading-tight mb-2">
+                <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold text-white mb-2">
                   {item.label}
-                </div>
+                </h3>
                 <div className="text-[13px] md:text-[13.5px] text-white/55 leading-[1.8]">
                   {item.desc}
                 </div>
@@ -417,7 +417,7 @@ export function ContactPage() {
         </div>
         <div className="relative max-w-[640px] mx-auto">
           <div className="section-label text-center">完整表單</div>
-          <h2 className="section-heading text-center">
+          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance] text-center">
             想一次講完所有細節？
           </h2>
           <p className="text-[15.5px] text-tx2 text-center font-normal mb-10 max-w-[480px] mx-auto">
@@ -437,7 +437,7 @@ export function ContactPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-[21px] font-semibold mb-2">收到了！</h3>
+              <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold mb-2">收到了！</h3>
               <p className="text-[15.5px] text-tx2 font-normal leading-[1.8]">
                 我們會在 <span className="text-tx font-semibold">24 小時內</span>
                 用你提供的 Email 回覆你。
@@ -498,7 +498,7 @@ export function ContactPage() {
                     name="company"
                     value={formState.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd text-[15.5px] outline-none focus:border-gold"
+                    className="w-full bg-white px-4 py-3 border border-[rgba(26,26,46,0.14)] text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]"
                     placeholder="公司名稱"
                   />
                 </div>
@@ -511,7 +511,7 @@ export function ContactPage() {
                     name="phone"
                     value={formState.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-bd text-[15.5px] outline-none focus:border-gold"
+                    className="w-full bg-white px-4 py-3 border border-[rgba(26,26,46,0.14)] text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]"
                     placeholder="09xx-xxx-xxx"
                   />
                 </div>
@@ -527,7 +527,7 @@ export function ContactPage() {
                   name="product"
                   value={formState.product}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-bd text-[15.5px] outline-none focus:border-gold"
+                  className="w-full bg-white px-4 py-3 border border-[rgba(26,26,46,0.14)] text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]"
                   placeholder="簡單描述你的產品或品牌"
                 />
               </div>
@@ -542,7 +542,7 @@ export function ContactPage() {
                   options={stageOptions.map((option) => ({ value: option, label: option }))}
                   value={formState.stage}
                   onChange={handleStageChange}
-                  className="grid grid-cols-1 min-[520px]:grid-cols-2"
+                  className="w-auto"
                 />
               </div>
 

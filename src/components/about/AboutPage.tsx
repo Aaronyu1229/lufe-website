@@ -305,11 +305,11 @@ export function AboutPage() {
           </nav>
 
           {/* Headline */}
-          <h1 className="font-heading text-[clamp(34px,5vw,58px)] leading-[1.1] font-light tracking-[-0.8px] mb-7 max-w-[920px]">
+          <h1 className="font-sans text-[clamp(36px,6vw,72px)] leading-[1.1] font-[650] tracking-[-0.8px] [text-wrap:balance] mb-7 max-w-[920px]">
             協助台灣企業
             <br />
-            在<span className="font-normal text-gold">北美</span>與
-            <span className="font-normal text-gold">東南亞</span>落地
+            在<span className="font-[650] text-gold">北美</span>與
+            <span className="font-[650] text-gold">東南亞</span>落地
           </h1>
 
           {/* Signature quote */}
@@ -330,7 +330,7 @@ export function AboutPage() {
               />
             </div>
             <div className="flex-1">
-              <div className="text-[22px] md:text-[24px] font-semibold leading-tight">Aaron Yu</div>
+              <div className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold">Aaron Yu</div>
               <div className="text-[15.5px] md:text-[16.5px] text-gold font-medium mt-1">
                 鹿飛 LUFÉ 創辦人
               </div>
@@ -348,7 +348,7 @@ export function AboutPage() {
               { n: "30+", l: "國家覆蓋" },
             ].map((s) => (
               <div key={s.l}>
-                <div className="font-heading text-[26px] md:text-[30px] font-light text-gold leading-none tabular-nums">
+                <div className="font-sans text-[26px] md:text-[30px] font-semibold tracking-[-0.035em] text-gold leading-none tabular-nums">
                   {s.n}
                 </div>
                 <div className="text-[11px] md:text-[11.5px] text-white/50 mt-1.5 tracking-[0.5px]">
@@ -363,7 +363,6 @@ export function AboutPage() {
       {/* ─── Story: 3 flickable cards ─── */}
       <section className="bg-navy text-white py-[80px] md:py-[110px] px-5 md:px-10 border-t border-white/5 overflow-hidden">
         <div className="max-w-[1100px] mx-auto">
-          <div className="w-12 h-px bg-gold/60 mb-10 md:mb-14" />
           <Carousel
             label="鹿飛的故事"
             className="-mx-5 md:-mx-10"
@@ -383,7 +382,7 @@ export function AboutPage() {
                 </div>
                 <div className="p-6 md:p-7">
                   <p className="text-[10px] font-semibold tracking-[2px] text-gold/90 mb-4">{card.num}</p>
-                  <h2 className="text-[20px] font-semibold text-gold mb-4">{card.title}</h2>
+                  <h2 className="font-sans text-[clamp(28px,3vw,40px)] leading-[1.14] font-[650] [text-wrap:balance] text-gold mb-4">{card.title}</h2>
                   <p className="text-[15px] text-white/75 leading-[1.9] font-normal">{card.copy}</p>
                 </div>
               </article>
@@ -398,10 +397,10 @@ export function AboutPage() {
         className="bg-cream py-[72px] px-5 md:px-10 border-t border-b border-bd/40 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <h2 className="section-heading">
+          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance]">
             不是 Aaron 一個人，
             <br />
-            是一個<span className="text-gold-d font-normal">小而精</span>的團隊 + 全球節點
+            是一個<span className="text-gold-d font-[650]">小而精</span>的團隊 + 全球節點
           </h2>
           <p className="section-desc">
             我們刻意不做大型顧問公司。規模保持在能讓創辦人親自過目每一個案子，
@@ -420,7 +419,7 @@ export function AboutPage() {
                 <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-2">
                   {role.scale}
                 </div>
-                <h3 className="text-[17px] font-semibold mb-2 leading-tight">
+                <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold mb-2">
                   {role.title}
                 </h3>
                 <p className="text-[14.5px] text-tx2 font-normal leading-[1.8]">
@@ -442,8 +441,8 @@ export function AboutPage() {
         className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <h2 className="section-heading">
-            從第一次對話到交付，<span className="text-gold-d font-normal">四個階段</span>
+          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance]">
+            從第一次對話到交付，<span className="text-gold-d font-[650]">四個階段</span>
           </h2>
           <p className="section-desc">
             我們的流程很清楚——每一步你都知道接下來會發生什麼、要做什麼、需要多久。
@@ -456,10 +455,10 @@ export function AboutPage() {
           >
             {howWeWorkSteps.map((step) => (
               <article key={step.num} className="min-h-full border border-bd bg-cream p-6 md:p-7">
-                <p className="font-sans text-[28px] md:text-[32px] font-light text-gold-d tabular-nums leading-none mb-7">
+                <p className="font-sans text-[28px] md:text-[32px] font-semibold tracking-[-0.035em] text-gold-d tabular-nums leading-none mb-7">
                   {step.num}
                 </p>
-                <h3 className="text-[18px] md:text-[20px] font-semibold mb-2 leading-tight">
+                <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold mb-2">
                   {step.title}
                 </h3>
                 <p className="text-[15px] md:text-[16px] text-tx2 leading-[1.8] font-normal">
@@ -497,7 +496,7 @@ export function AboutPage() {
               </div>
             </div>
           </div>
-          <h2 className="section-heading">
+          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance]">
             你不只是找到一家公司
             <br />
             而是接上一整個網絡
@@ -519,7 +518,7 @@ export function AboutPage() {
                   >
                     {card.icon}
                   </div>
-                  <h3 className="text-[18px] font-semibold mb-2">{card.title}</h3>
+                  <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold mb-2">{card.title}</h3>
                   <p className="text-[15.5px] text-tx2 font-normal leading-[1.8]">
                     {card.desc}
                   </p>
@@ -536,20 +535,20 @@ export function AboutPage() {
         className="bg-cream py-[80px] px-5 md:px-10 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <h2 className="section-heading">
-            我們<span className="text-red-500/80 font-normal">不做</span>什麼
+          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance]">
+            我們<span className="text-red-500/80 font-[650]">不做</span>什麼
           </h2>
           <p className="section-desc">
             專業分工比萬能重要。我們誠實告訴你哪些事不該找我們——這樣你才知道什麼時候該找我們。
           </p>
 
-          <div className="mt-10 border-y border-bd">
+          <div className="mt-10">
             {thingsWeDontDo.map((item) => (
               <article
                 key={item.title}
-                className="border-b border-bd p-6 last:border-b-0"
+                className="border-t border-bd border-l-4 border-red-500/45 py-[26px] pl-[18px] pr-6 last:border-b"
               >
-                <h3 className="text-[17px] font-semibold leading-tight mb-2 text-red-500/80">{item.title}</h3>
+                <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold mb-2 text-tx">{item.title}</h3>
                 <p className="text-[14.5px] text-tx2 leading-[1.8] font-normal">
                   {item.desc}
                 </p>
@@ -580,7 +579,7 @@ export function AboutPage() {
           <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
             品牌理念
           </div>
-          <h2 className="font-heading text-[clamp(26px,3.2vw,38px)] leading-[1.2] font-light tracking-[-0.4px] mb-10">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] tracking-[-0.4px] [text-wrap:balance] mb-10">
             我們相信的事
           </h2>
 
@@ -590,11 +589,11 @@ export function AboutPage() {
                 key={item.title}
                 className="flex gap-5 items-start p-6 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]"
               >
-                <div className="w-8 h-8 bg-gold flex items-center justify-center text-navy text-[15.5px] font-heading font-semibold shrink-0 mt-0.5">
+                <div className="w-8 h-8 bg-gold flex items-center justify-center text-navy text-[15.5px] font-sans font-semibold tracking-[-0.035em] tabular-nums shrink-0 mt-0.5">
                   {i + 1}
                 </div>
                 <div>
-                  <h3 className="text-[17px] font-semibold text-white mb-1.5">
+                  <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold text-white mb-1.5">
                     {item.title}
                   </h3>
                   <p className="text-[15.5px] text-white/65 font-normal leading-[1.8]">
@@ -617,7 +616,7 @@ export function AboutPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/20 to-navy/75" />
             </div>
-            <h3 className="text-[19px] text-white font-medium mb-2">
+            <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] text-white font-semibold mb-2">
               想認識我們？聊聊你的跨境計畫
             </h3>
             <p className="text-[15.5px] text-white/60 font-normal mb-6">
