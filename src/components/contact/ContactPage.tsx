@@ -225,7 +225,7 @@ export function ContactPage() {
       {/* ─── Hero + Channel Cards ─── */}
       <section className="bg-white pt-[120px] pb-[60px] px-5 md:px-10">
         <div className="max-w-[1000px] mx-auto">
-          <h1 className="section-heading font-sans text-[clamp(34px,5vw,60px)] leading-[1.12] font-[650] [text-wrap:balance]">
+          <h1 className="h1">
             選一個你最方便的方式
           </h1>
           <p className="section-desc">
@@ -417,7 +417,7 @@ export function ContactPage() {
         </div>
         <div className="relative max-w-[640px] mx-auto">
           <div className="section-label text-center">完整表單</div>
-          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance] text-center">
+          <h2 className="h2 text-center">
             想一次講完所有細節？
           </h2>
           <p className="text-[15.5px] text-tx2 text-center font-normal mb-10 max-w-[480px] mx-auto">

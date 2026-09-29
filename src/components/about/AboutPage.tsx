@@ -397,7 +397,7 @@ export function AboutPage() {
         className="bg-cream py-[72px] px-5 md:px-10 border-t border-b border-bd/40 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance]">
+          <h2 className="h2">
             不是 Aaron 一個人，
             <br />
             是一個<span className="text-gold-d font-[650]">小而精</span>的團隊 + 全球節點
@@ -441,7 +441,7 @@ export function AboutPage() {
         className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance]">
+          <h2 className="h2">
             從第一次對話到交付，<span className="text-gold-d font-[650]">四個階段</span>
           </h2>
           <p className="section-desc">
@@ -496,7 +496,7 @@ export function AboutPage() {
               </div>
             </div>
           </div>
-          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance]">
+          <h2 className="h2">
             你不只是找到一家公司
             <br />
             而是接上一整個網絡
@@ -535,7 +535,7 @@ export function AboutPage() {
         className="bg-cream py-[80px] px-5 md:px-10 scroll-mt-[80px]"
       >
         <div className="max-w-[900px] mx-auto">
-          <h2 className="section-heading font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] [text-wrap:balance]">
+          <h2 className="h2">
             我們<span className="text-red-500/80 font-[650]">不做</span>什麼
           </h2>
           <p className="section-desc">

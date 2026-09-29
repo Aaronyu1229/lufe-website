@@ -31,6 +31,8 @@ describe("AboutPage", () => {
       expect(markup).toContain(item.desc);
     }
 
+    expect(markup).not.toContain("section-heading");
+    expect(markup).not.toContain("hero-title");
     expect(markup).not.toContain("rounded-");
   });
 });

@@ -17,6 +17,8 @@ describe("ContactPage", () => {
       expect(markup).toContain(option);
     }
 
+    expect(markup).not.toContain("section-heading");
+    expect(markup).not.toContain("hero-title");
     expect(markup).not.toContain("rounded-");
   });
 
