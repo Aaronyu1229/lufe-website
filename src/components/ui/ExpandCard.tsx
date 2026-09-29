@@ -10,6 +10,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
+import Image from "next/image";
 import { createPortal } from "react-dom";
 
 import { clamp, draggable, project, rubberband, useSpring } from "@/lib/motion";
@@ -57,6 +58,8 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
   const dialogId = useId();
   const [present, setPresent] = useState(false);
   const [open, setOpen] = useState(false);
+  // The panel image is decorative (text stays in SSR), so fetch it only once the card is first opened.
+  const [imageRequested, setImageRequested] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [from, setFrom] = useState<PanelRect | null>(null);
   const [to, setTo] = useState<PanelRect | null>(null);
@@ -125,6 +128,7 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
 
     clearCloseTimer();
     clearFocusTimer();
+    setImageRequested(true);
     phase.current = "opening";
     setOpen(true);
 
@@ -262,9 +266,8 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
             } : undefined}
           >
             <div ref={mediaRef} className={`relative shrink-0 touch-none cursor-grab overflow-hidden bg-black/[.06] active:cursor-grabbing ${image ? "aspect-[16/10] max-h-[44vh]" : "h-14"}`}>
-              {image && (
-                // eslint-disable-next-line @next/next/no-img-element -- callers supply arbitrary image sources.
-                <img src={image.src} alt={image.alt} className="h-full w-full object-cover" draggable={false} />
+              {image && imageRequested && (
+                <Image src={image.src} alt={image.alt} fill sizes="(max-width: 700px) 100vw, 760px" className="object-cover" draggable={false} />
               )}
               <span aria-hidden="true" className="absolute left-1/2 top-2 block h-[5px] w-10 -translate-x-1/2 bg-white/75 shadow-[0_1px_4px_rgba(0,0,0,.3)]" />
             </div>
