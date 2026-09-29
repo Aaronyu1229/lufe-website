@@ -1,4 +1,4 @@
-const PILLARS = ["產品適配", "通路銷售", "國際物流"] as const;
+export const HOME_COVERAGE_PILLARS = ["產品適配", "通路銷售", "國際物流"] as const;
 
 type CoverageRow = {
   label: string;
@@ -7,7 +7,7 @@ type CoverageRow = {
   variant: "default" | "lufe";
 };
 
-const coverage: readonly CoverageRow[] = [
+export const HOME_COVERAGE_ROWS: readonly CoverageRow[] = [
   {
     label: "傳統顧問",
     note: "只出策略報告",
@@ -36,140 +36,78 @@ const coverage: readonly CoverageRow[] = [
 
 export function WhySection() {
   return (
-    <section className="relative bg-navy py-[96px] md:py-[128px] px-5 md:px-10 overflow-hidden">
-      {/* Subtle gold radial accent — visual climax marker */}
-      <div
-        aria-hidden="true"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at center top, rgba(212,168,92,0.10) 0%, rgba(212,168,92,0.03) 40%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative max-w-[1200px] mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <h2 className="font-sans text-[clamp(32px,4.8vw,56px)] leading-[1.2] font-light tracking-normal text-white max-w-[880px] mx-auto">
+    <section className="bg-navy px-5 py-[96px] text-white md:px-10 md:py-[128px]">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="mx-auto mb-14 max-w-[860px] text-center md:mb-16">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-semibold leading-[1.14] tracking-normal">
             從評估市場到貨上架，
             <br />
-            你面對的<span className="text-gold font-normal">只有我們</span>
+            你面對的<span className="text-gold">只有我們</span>
           </h2>
-          <p className="text-[17px] text-white/55 max-w-[640px] leading-[1.8] mx-auto mt-6 font-normal">
+          <p className="mx-auto mt-5 max-w-[640px] text-[17px] font-normal leading-[1.8] text-white/65">
             產品適配、通路銷售、躍馬 42 年國際物流 ——
             <br className="hidden md:block" />
             不是三家拼起來的拼盤，是一個團隊從頭跑到尾。一個專案經理、一份合約、一條進度線。
           </p>
         </div>
 
-        {/* Coverage matrix — 3-pillar grid per row */}
-        <div className="mb-20 md:mb-24 max-w-[900px] mx-auto">
-          {/* Pillar header row */}
-          <div className="flex items-end gap-3 md:gap-4 mb-4 pl-[92px] md:pl-[148px] pr-[36px] md:pr-[44px]">
-            <div className="flex-1 grid grid-cols-3 gap-3 md:gap-4">
-              {PILLARS.map((pillar) => (
-                <div
-                  key={pillar}
-                  className="text-center text-[11px] font-medium tracking-[0.05em] text-white/70 uppercase"
-                >
-                  {pillar}
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="mx-auto max-w-[860px] overflow-hidden border border-white/[0.08] bg-white/[0.04]">
+          <table className="w-full table-fixed border-collapse">
+            <thead>
+              <tr className="border-b border-white/[0.08]">
+                <th scope="col" className="w-[36%] px-3 py-4 text-left text-[13px] font-medium text-white/60 md:w-[40%] md:px-5">
+                  <span className="sr-only">類型</span>
+                </th>
+                {HOME_COVERAGE_PILLARS.map((pillar) => (
+                  <th key={pillar} scope="col" className="px-1 py-4 text-center text-[12px] font-medium text-white/60 md:px-2 md:text-[13px]">
+                    {pillar}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {HOME_COVERAGE_ROWS.map((row) => {
+                const isLufe = row.variant === "lufe";
 
-          {/* Rows */}
-          {coverage.map((row) => {
-            const isLufe = row.variant === "lufe";
-            return (
-              <div
-                key={row.label}
-                className={`flex items-center gap-3 md:gap-4 mb-2.5 py-3 md:py-4 px-3 md:px-4 transition-colors ${
-                  isLufe
-                    ? "bg-gold/[0.08] border border-gold/20"
-                    : "bg-white/[0.02] border border-white/[0.04]"
-                }`}
-              >
-                {/* Label column */}
-                <div
-                  className={`w-[80px] md:w-[132px] flex-shrink-0 text-right ${
-                    isLufe ? "text-gold" : "text-white/65"
-                  }`}
-                >
-                  <div
-                    className={`text-[13px] md:text-[15.5px] ${
-                      isLufe ? "font-semibold" : "font-medium"
-                    }`}
-                  >
-                    {row.label}
-                  </div>
-                  <div
-                    className={`text-[11px] mt-0.5 leading-tight ${
-                      isLufe ? "text-gold/85" : "text-white/60"
-                    }`}
-                  >
-                    {row.note}
-                  </div>
-                </div>
-
-                {/* 3-pillar cells */}
-                <div className="flex-1 grid grid-cols-3 gap-3 md:gap-4">
-                  {row.pillars.map((covered, idx) => (
-                    <div
-                      key={idx}
-                      role="img"
-                      aria-label={
-                        covered
-                          ? `${row.label}涵蓋${PILLARS[idx]}`
-                          : `${row.label}不涵蓋${PILLARS[idx]}`
-                      }
-                      className={`h-8 md:h-10 flex items-center justify-center text-[11px] md:text-[14.5px] transition-all ${
-                        covered
-                          ? isLufe
-                            ? "bg-gradient-to-b from-gold/35 to-gold/25 border border-gold/40 text-gold"
-                            : "bg-white/[0.07] border border-white/10 text-white/55"
-                          : "border border-dashed border-white/[0.06]"
-                      }`}
-                    >
-                      <span aria-hidden="true">{covered ? "●" : ""}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Status icon */}
-                <div className="flex-shrink-0 w-5 md:w-6 text-center">
-                  {isLufe ? (
-                    <span className="text-gold text-[17px] md:text-[19px]">✓</span>
-                  ) : (
-                    <span className="text-white/20 text-[15.5px] md:text-[16.5px]">—</span>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-
-          {/* Footnote: the promise, in plain words */}
-          <p className="mt-6 text-center text-[11.5px] md:text-[13.5px] text-white/65 font-normal leading-[1.8]">
-            對手做完一件事交給下一家，鹿飛三件事<span className="text-gold/80">全程自營</span>——
-            <br className="hidden md:block" />
-            沒有責任轉交，沒有窗口切換，沒有進度真空。
-          </p>
+                return (
+                  <tr key={row.label} className={`border-t border-white/[0.06] ${isLufe ? "bg-gold/10" : ""}`}>
+                    <th scope="row" className={`px-3 py-4 text-left text-[14px] font-medium md:px-5 ${isLufe ? "text-gold" : "text-white/80"}`}>
+                      {row.label}
+                      <small className={`mt-0.5 block text-[12px] font-normal ${isLufe ? "text-gold/85" : "text-white/55"}`}>
+                        {row.note}
+                      </small>
+                    </th>
+                    {row.pillars.map((covered, index) => (
+                      <td
+                        key={HOME_COVERAGE_PILLARS[index]}
+                        role="img"
+                        aria-label={covered ? `${row.label}涵蓋${HOME_COVERAGE_PILLARS[index]}` : `${row.label}不涵蓋${HOME_COVERAGE_PILLARS[index]}`}
+                        className={`px-1 py-4 text-center text-[14px] md:px-2 ${covered ? (isLufe ? "text-gold" : "text-white/45") : "text-white/20"}`}
+                      >
+                        <span aria-hidden="true">{covered ? "●" : "—"}</span>
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
 
-        {/* Testimonial — now aligned with the end-to-end story */}
-        <div className="max-w-[680px] mx-auto border-l-2 border-gold pl-6 md:pl-8">
-          <q className="block text-[18px] md:text-[20px] text-white/85 leading-[1.8] font-light mb-4">
+        <p className="mx-auto mt-6 max-w-[720px] text-center text-[12px] font-normal leading-[1.8] text-white/65 md:text-[13.5px]">
+          對手做完一件事交給下一家，鹿飛三件事<span className="text-gold/80">全程自營</span>——
+          <br className="hidden md:block" />
+          沒有責任轉交，沒有窗口切換，沒有進度真空。
+        </p>
+
+        <div className="mx-auto mt-16 max-w-[680px] text-center md:mt-[72px]">
+          <q className="block text-[18px] font-normal leading-[1.8] text-white/85 md:text-[20px]">
             以前要同時盯三家——顧問催進度、貿易商催付款、貨代催艙位。換成鹿飛之後，
             我只開一次會，每週一份進度信。本來要三週的事情，七天就跑完。
           </q>
-          <div className="flex items-center gap-3 text-[13.5px] text-white/50 font-normal">
-            <div className="w-9 h-9 rounded-none bg-gold/15 flex items-center justify-center text-gold text-[14.5px] font-semibold">
-              陳
-            </div>
-            <div>
-              <div className="text-white/75 font-medium">陳執行長</div>
-              <div className="text-white/45">台灣食品品牌・東南亞市場</div>
-            </div>
+          <div className="mt-5 text-[13.5px] font-normal text-white/50">
+            <span className="font-medium text-white/75">陳執行長</span>
+            <span>台灣食品品牌・東南亞市場</span>
           </div>
         </div>
       </div>

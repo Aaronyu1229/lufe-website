@@ -1,248 +1,120 @@
-"use client";
-
 import Link from "next/link";
+
 import { PILLARS, type PillarSlug } from "@/data/services";
-
-/**
- * PositioningBand — 物流為基石 · 兩件事為核心
- *
- * v3 的故事順序：
- *   1. 真正的基石 (The Moat)：躍馬 42 年國際物流——這是別人偷不走的護城河
- *   2. 在這個基石上,我們做兩件事：產品適配 + 通路銷售
- *   3. 進階模組 (團隊體質)：折成一行小 link,避免「什麼都做」的稀釋
- *
- * 為什麼這樣排：
- *   - 物流是三種 TA 都會立刻信任的數字（傳產老闆、品牌主理人、D2C 創辦人）
- *   - AI 是 2026 年的雜訊,從首頁完全拿掉
- *   - 團隊體質維持存在但不佔視覺位置
- */
-
-type Accent = "sky" | "gold" | "ember";
-
-const accentMap: Record<
-  Accent,
-  {
-    border: string;
-    text: string;
-    bg: string;
-    glow: string;
-  }
-> = {
-  sky: {
-    border: "border-sky",
-    text: "text-sky",
-    bg: "bg-[rgba(58,107,132,0.06)]",
-    glow: "group-hover:shadow-[0_0_0_6px_rgba(58,107,132,0.10)]",
-  },
-  gold: {
-    border: "border-gold-d",
-    text: "text-gold-d",
-    bg: "bg-[rgba(212,168,92,0.08)]",
-    glow: "group-hover:shadow-[0_0_0_6px_rgba(212,168,92,0.14)]",
-  },
-  ember: {
-    border: "border-ember",
-    text: "text-ember",
-    bg: "bg-[rgba(164,90,32,0.06)]",
-    glow: "group-hover:shadow-[0_0_0_6px_rgba(164,90,32,0.12)]",
-  },
-};
 
 const CORE_PILLARS: readonly PillarSlug[] = ["fit", "channel"];
 
 export function PositioningBand() {
   return (
-    <section className="relative bg-cream py-[80px] md:py-[104px] px-5 md:px-10 overflow-hidden">
-      {/* Soft gold radial glow */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 55% at 50% 35%, rgba(212,168,92,0.075) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative max-w-[1200px] mx-auto">
-        {/* ─── Identity header ─── */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="font-sans text-[clamp(32px,5vw,58px)] leading-[1.2] font-light tracking-normal text-navy mb-6">
+    <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[104px]">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="mx-auto mb-12 max-w-[820px] text-center md:mb-16">
+          <p className="mb-[14px] text-[13px] font-semibold tracking-[0.06em] text-[#7A5A1A]">
+            躍馬企業 · 42 年實戰
+          </p>
+          <h2 className="mb-5 font-sans text-[clamp(32px,5vw,58px)] font-semibold leading-[1.14] tracking-normal text-navy md:mb-6">
             真的跑過船的人，
             <br className="md:hidden" />
-            <span className="text-gold-d font-normal">才懂出海的眉角</span>
+            <span className="text-gold-d">才懂出海的眉角</span>
           </h2>
-          <p className="text-[16.5px] md:text-[18px] text-tx2 max-w-[720px] mx-auto leading-[1.8] font-normal">
+          <p className="mx-auto max-w-[720px] text-[17px] font-normal leading-[1.8] text-tx2 md:text-[18px]">
             出海不是報告寫得出來的。鹿飛站在躍馬企業{" "}
-            <span className="text-tx font-medium">42 年</span>{" "}
+            <span className="font-semibold text-tx">42 年</span>{" "}
             的國際物流實戰上，幫你把
-            <span className="text-tx font-medium">產品適配</span>跟
-            <span className="text-tx font-medium">通路銷售</span>兩件事跑通。
+            <span className="font-semibold text-tx">產品適配</span>跟
+            <span className="font-semibold text-tx">通路銷售</span>兩件事跑通。
           </p>
         </div>
 
-        {/* ─── 真正的基石 · 物流 hero card ─── */}
-        <div className="mb-12 md:mb-16 max-w-[1000px] mx-auto">
-          <div className="flex items-center gap-3 mb-5 md:mb-6">
-            <div className="flex-1 h-px bg-bd/70" />
+        <div className="mx-auto max-w-[1000px] bg-navy p-7 text-white shadow-[0_30px_60px_-20px_rgba(16,27,48,0.35)] md:grid md:grid-cols-[1.2fr_1fr] md:items-center md:gap-12 md:p-14">
+          <div className="min-w-0">
+            <h3 className="mb-4 font-sans text-[26px] font-semibold leading-[1.2] tracking-normal md:text-[34px]">
+              出海不是報告寫得出來的，<span className="text-gold">是真的跑過船的人</span>
+            </h3>
+            <p className="mb-5 text-[15.5px] font-normal leading-[1.85] text-white/75 md:text-[16.5px]">
+              從報關、倉儲到最後一哩——這套東西不是教科書讀來的，是 42 年在港口、海關、貨櫃場跑出來的。
+              你的貨不會因為顧問不懂現場而卡在海上。
+            </p>
+            <a
+              href="https://jumping.group"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[14px] font-semibold text-gold"
+            >
+              前往躍馬企業官網 <span aria-hidden="true">↗</span>
+            </a>
           </div>
 
-          <div className="relative bg-navy text-white overflow-hidden">
-            {/* gold accent bar */}
-            <div
-              aria-hidden="true"
-              className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-gold via-gold-d to-gold/40"
-            />
-            {/* subtle radial */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 opacity-30 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse 60% 80% at 80% 50%, rgba(212,168,92,0.18) 0%, transparent 60%)",
-              }}
-            />
-
-            <div className="relative p-8 md:p-12 grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center">
-              {/* Left — narrative */}
-              <div>
-                <h3 className="font-sans text-[26px] md:text-[34px] leading-[1.2] font-light tracking-normal [text-wrap:balance] mb-5">
-                  出海不是報告寫得出來的，<span className="text-gold font-normal">是真的跑過船的人</span>
-                </h3>
-                <p className="text-[15.5px] md:text-[16.5px] text-white/75 leading-[1.85] font-normal mb-5">
-                  從報關、倉儲到最後一哩——這套東西不是教科書讀來的，是 42 年在港口、海關、貨櫃場跑出來的。
-                  你的貨不會因為顧問不懂現場而卡在海上。
-                </p>
-                <a
-                  href="https://jumping.group"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-[14px] font-semibold text-gold hover:text-gold-l transition-colors"
-                >
-                  <span className="border-b border-gold/40 pb-0.5 group-hover:border-gold-l transition-colors">
-                    前往躍馬企業官網
-                  </span>
-                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
-                </a>
+          <div className="mt-8 grid min-w-0 grid-cols-3 gap-4 md:mt-0 md:gap-6">
+            <div>
+              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums text-white md:text-[44px]">
+                42<span className="text-[24px] text-gold md:text-[28px]">+</span>
               </div>
-
-              {/* Right — 3 stats */}
-              <div className="grid grid-cols-3 gap-4 md:gap-6 md:border-l md:border-white/15 md:pl-12">
-                <div>
-                  <div className="font-sans text-[36px] md:text-[44px] font-extralight text-white tabular-nums leading-none mb-2">
-                    42<span className="text-gold text-[24px] md:text-[28px]">+</span>
-                  </div>
-                  <div className="text-[11px] text-white/70 tracking-[0.5px] leading-[1.4]">
-                    年國際物流實戰
-                  </div>
-                </div>
-                <div>
-                  <div className="font-sans text-[36px] md:text-[44px] font-extralight text-white tabular-nums leading-none mb-2">
-                    500<span className="text-gold text-[24px] md:text-[28px]">+</span>
-                  </div>
-                  <div className="text-[11px] text-white/70 tracking-[0.5px] leading-[1.4]">
-                    出口實戰案件
-                  </div>
-                </div>
-                <div>
-                  <div className="font-sans text-[36px] md:text-[44px] font-extralight text-white tabular-nums leading-none mb-2">
-                    30<span className="text-gold text-[24px] md:text-[28px]">+</span>
-                  </div>
-                  <div className="text-[11px] text-white/70 tracking-[0.5px] leading-[1.4]">
-                    國家與地區覆蓋
-                  </div>
-                </div>
+              <div className="text-[11px] leading-[1.4] text-white/70">年國際物流實戰</div>
+            </div>
+            <div>
+              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums text-white md:text-[44px]">
+                500<span className="text-[24px] text-gold md:text-[28px]">+</span>
               </div>
+              <div className="text-[11px] leading-[1.4] text-white/70">出口實戰案件</div>
+            </div>
+            <div>
+              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums text-white md:text-[44px]">
+                30<span className="text-[24px] text-gold md:text-[28px]">+</span>
+              </div>
+              <div className="text-[11px] leading-[1.4] text-white/70">國家與地區覆蓋</div>
             </div>
           </div>
         </div>
 
-        {/* ─── 在這個基石上 · 兩件核心服務 section label ─── */}
-        <div className="flex items-center gap-3 mb-6 md:mb-8 max-w-[1000px] mx-auto">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gold-d/30 to-transparent" />
-        </div>
-
-        {/* ─── 2 Core Pillar cards ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-[1000px] mx-auto">
+        <div className="mx-auto mt-4 grid max-w-[1000px] grid-cols-1 gap-4 md:grid-cols-2">
           {CORE_PILLARS.map((slug) => {
-            const p = PILLARS[slug];
-            const c = accentMap[p.accent as Accent];
+            const pillar = PILLARS[slug];
+            const accent = pillar.accent === "gold" ? "text-gold-d" : "text-sky";
+            const dot = pillar.accent === "gold" ? "bg-gold-d" : "bg-sky";
+
             return (
               <Link
                 key={slug}
                 href={`/services#pillar-${slug}`}
-                className="group relative bg-white border border-bd hover:border-transparent hover:shadow-[0_12px_40px_rgba(16,27,48,0.10)] transition-all duration-300 p-7 md:p-9 flex flex-col"
+                className="flex min-w-0 flex-col border border-bd bg-white p-7 md:p-9"
               >
-                {/* Top row — num + subtitle badge */}
-                <div className="flex items-start justify-between mb-6">
-                  <div
-                    className={`relative z-10 w-[62px] h-[62px] md:w-[72px] md:h-[72px] rounded-full border-2 ${c.border} ${c.bg} ${c.glow} flex items-center justify-center transition-all group-hover:-translate-y-0.5`}
-                  >
-                    <span
-                      className={`font-sans text-[22px] md:text-[26px] font-semibold tabular-nums ${c.text}`}
-                    >
-                      {p.num}
-                    </span>
-                  </div>
-                  <span
-                    className={`text-[13px] font-medium ${c.text} pt-3`}
-                  >
-                    {p.subtitle}
+                <div className="mb-5 flex items-baseline justify-between gap-4">
+                  <span className={`font-sans text-[44px] font-semibold leading-none tabular-nums ${accent}`}>
+                    {pillar.num}
                   </span>
+                  <span className={`text-[14px] font-semibold ${accent}`}>{pillar.subtitle}</span>
                 </div>
-
-                {/* Title + tagline */}
-                <h3 className="text-[23px] md:text-[26px] font-semibold leading-tight text-tx mb-2">
-                  {p.title}
+                <h3 className="mb-2 text-[23px] font-semibold leading-tight text-tx md:text-[26px]">
+                  {pillar.title}
                 </h3>
-                <p
-                  className={`text-[16px] md:text-[17px] font-medium leading-[1.6] ${c.text} mb-6`}
-                >
-                  {p.tagline}
+                <p className={`mb-5 text-[17px] font-medium leading-[1.6] ${accent}`}>
+                  {pillar.tagline}
                 </p>
-
-                {/* Services list */}
-                <ul className="space-y-2.5 mb-6 flex-1">
-                  {p.services.map((s) => (
+                <ul className="mb-6 flex-1 space-y-2.5">
+                  {pillar.services.map((service) => (
                     <li
-                      key={s.title}
-                      className="flex items-start gap-2 text-[14.5px] md:text-[15px] text-tx2 leading-[1.65]"
+                      key={service.title}
+                      className="flex min-w-0 items-start gap-2 text-[15px] leading-[1.65] text-tx2"
                     >
-                      <span
-                        aria-hidden="true"
-                        className={`mt-[7px] shrink-0 w-1 h-1 rounded-full ${c.text}`}
-                        style={{ backgroundColor: "currentColor" }}
-                      />
-                      <span>{s.title}</span>
+                      <span aria-hidden="true" className={`mt-[9px] block h-[5px] w-[5px] shrink-0 ${dot}`} />
+                      <span>{service.title}</span>
                     </li>
                   ))}
                 </ul>
-
-                {/* Read more link */}
-                <div
-                  className={`text-[13.5px] font-semibold inline-flex items-center gap-1 ${c.text} group-hover:gap-2 transition-all`}
-                >
+                <span className={`inline-flex items-center gap-1 text-[14px] font-semibold ${accent}`}>
                   看這個支柱的做法 →
-                </div>
+                </span>
               </Link>
             );
           })}
         </div>
 
-        {/* ─── 進階模組 · 一行小 link (團隊體質) ─── */}
-        <div className="mt-10 md:mt-12 max-w-[1000px] mx-auto text-center">
-          <Link
-            href="/services#pillar-team"
-            className="group inline-flex items-center gap-2.5 text-[13.5px] md:text-[14.5px] text-tx3 hover:text-navy transition-colors"
-          >
-            <span className="border-b border-tx3/30 pb-0.5 group-hover:border-navy transition-colors">
-              想把海外團隊長大？看進階模組
-            </span>
-            <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-              →
-            </span>
+        <div className="mx-auto mt-9 max-w-[1000px] text-center">
+          <Link href="/services#pillar-team" className="inline-flex items-center gap-2 text-[14px] font-semibold text-sky">
+            想把海外團隊長大？看進階模組 <span aria-hidden="true">→</span>
           </Link>
         </div>
-
       </div>
     </section>
   );

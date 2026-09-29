@@ -1,20 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
-/* ────────────────────────────────────────────────────────────────────────
- * 首頁案例切片
- *
- * 設計重點（以客戶視角設計，不只是「秀作品」）：
- * 1. 大數字下面有 micro label，讓「6 個月」「-15%」立刻有商業意義
- * 2. 4 張卡都有 from→to 路線（台灣→Costco / 大陸→越南 / 台灣→Amazon / 台灣→Manila）
- * 3. 標題前面加「規模 + 產業」前綴，讓客戶第一秒判斷「這是不是和我同等級的案子」
- * 4. 副標用「痛 → 解」的對比結構（從 CASE_CARD_META.beats 取 [1] 與 [2]）
- * 5. 卡片底部有 NDA / 客戶授權公開的信任訊號
- * 6. featured 卡片有「最常被問到」徽章
- * 7. 底部「看更多案例」CTA 強化成有 micro 描述的卡片式按鈕
- *
- * 全部 4 張卡片都是可點擊的——這很關鍵，原本只有 featured 有 route。
- * ──────────────────────────────────────────────────────────────────────── */
+import { Carousel, ExpandCard } from "@/components/ui";
 
 type Industry = "food" | "electronics" | "apparel" | "fnb";
 type Market = "north-america" | "sea";
@@ -26,17 +15,17 @@ interface CaseCardData {
   readonly market: Market;
   readonly tags: readonly { label: string; variant: "sky" | "gold" }[];
   readonly num: string;
-  readonly numLabel: string; // ← micro label under big number
-  readonly scalePrefix: string; // ← 「年營收 8,000 萬的台灣保健品廠」
+  readonly numLabel: string;
+  readonly scalePrefix: string;
   readonly title: string;
-  readonly painLine: string; // ← 痛點（從 beats[1] 改寫）
-  readonly solutionLine: string; // ← 解法 + 結果（從 beats[3] 改寫）
+  readonly painLine: string;
+  readonly solutionLine: string;
   readonly route: { from: string; to: string };
-  readonly trustSignal: string; // ← NDA / 授權公開
+  readonly trustSignal: string;
   readonly image: string;
 }
 
-const CASE_CARDS: readonly CaseCardData[] = [
+export const HOME_CASE_CARDS: readonly CaseCardData[] = [
   {
     slug: "costco-health",
     featured: true,
@@ -128,20 +117,12 @@ const tagStyles: Record<"sky" | "gold", string> = {
   gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
 };
 
-/* ────────── Sub-components ────────── */
-
 function FromToRoute({ from, to }: { from: string; to: string }) {
   return (
-    <div className="flex items-center gap-2 text-[11px] text-tx3 font-medium">
+    <div className="flex min-w-0 items-center gap-2 text-[11px] font-medium text-tx3">
       <span>{from}</span>
-      <svg width="36" height="10" viewBox="0 0 36 10" aria-hidden="true">
-        <path
-          d="M0,5 Q18,-1 36,5"
-          stroke="#D4A85C"
-          strokeWidth="1.5"
-          fill="none"
-          opacity="0.55"
-        />
+      <svg width="36" height="10" viewBox="0 0 36 10" aria-hidden="true" className="shrink-0">
+        <path d="M0,5 Q18,-1 36,5" stroke="#D4A85C" strokeWidth="1.5" fill="none" opacity="0.55" />
       </svg>
       <span className="text-tx2">{to}</span>
     </div>
@@ -149,213 +130,115 @@ function FromToRoute({ from, to }: { from: string; to: string }) {
 }
 
 function TrustSignal({ text }: { text: string }) {
-  return (
-    <div className="flex items-center gap-1.5 text-[11px] text-tx3 font-medium">
-      <svg
-        width="11"
-        height="11"
-        viewBox="0 0 12 12"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M6 1L2 3v3.5C2 8.7 3.7 10.5 6 11c2.3-.5 4-2.3 4-4.5V3L6 1z"
-          stroke="#9A8456"
-          strokeWidth="1.2"
-          fill="none"
-        />
-      </svg>
-      <span>{text}</span>
-    </div>
-  );
+  return <span className="text-[11px] font-medium text-tx3">{text}</span>;
 }
 
-function CaseTags({
-  tags,
-}: {
-  tags: readonly { label: string; variant: "sky" | "gold" }[];
-}) {
+function CaseTags({ tags }: { tags: CaseCardData["tags"] }) {
   return (
-    <div className="flex gap-1.5 mb-2.5">
-      {tags.map((t) => (
-        <span
-          key={t.label}
-          className={`text-[11px] px-2.5 py-[3px] rounded-sm font-medium ${tagStyles[t.variant]}`}
-        >
-          {t.label}
+    <div className="mb-3 flex flex-wrap gap-1.5">
+      {tags.map((tag) => (
+        <span key={tag.label} className={`px-2.5 py-[3px] text-[11px] font-medium ${tagStyles[tag.variant]}`}>
+          {tag.label}
         </span>
       ))}
     </div>
   );
 }
 
-/* ────────── Main section ────────── */
+function CaseCard({ item }: { item: CaseCardData }) {
+  const storyLabel = item.featured ? "看完整故事 →" : "閱讀案例 →";
+
+  return (
+    <ExpandCard
+      title={item.title}
+      image={{ src: item.image, alt: item.title }}
+      className="h-full"
+      card={
+        <article className="flex h-full min-w-0 flex-col overflow-hidden border border-bd bg-white shadow-[0_12px_32px_rgba(16,27,48,0.08)]">
+          <div className="relative h-[180px] overflow-hidden">
+            <Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) 82vw, 380px" className="object-cover" />
+          </div>
+          <div className="flex min-w-0 flex-1 flex-col p-6">
+            {item.featured && (
+              <span className="mb-4 inline-flex w-fit bg-gold/15 px-2.5 py-1 text-[11px] font-semibold tracking-[0.5px] text-gold-d">
+                最常被問到
+              </span>
+            )}
+            <div className="font-sans text-[40px] font-semibold leading-none text-gold-d">{item.num}</div>
+            <div className="mb-4 mt-2 text-[13px] font-medium text-tx3">{item.numLabel}</div>
+            <div className="mb-2 text-[13px] font-medium text-tx2">{item.scalePrefix}</div>
+            <h3 className="text-[19px] font-semibold leading-[1.4] text-tx">{item.title}</h3>
+            <div className="mt-auto flex items-center justify-between gap-3 border-t border-bd pt-5">
+              <FromToRoute from={item.route.from} to={item.route.to} />
+              <span aria-hidden="true" className="grid h-[30px] w-[30px] shrink-0 place-items-center bg-navy text-white">
+                <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none">
+                  <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </article>
+      }
+      panel={
+        <div>
+          <CaseTags tags={item.tags} />
+          {item.featured && (
+            <span className="mb-4 inline-flex bg-gold/15 px-2.5 py-1 text-[11px] font-semibold tracking-[0.5px] text-gold-d">
+              最常被問到
+            </span>
+          )}
+          <div className="font-sans text-[56px] font-semibold leading-none text-gold-d">{item.num}</div>
+          <p className="mb-5 mt-2 text-[14px] font-medium text-tx3">{item.numLabel}</p>
+          <p className="mb-6 text-[13px] font-medium text-tx2">{item.scalePrefix}</p>
+          <div className="border-t border-bd py-4">
+            <h3 className="mb-2 text-[14px] font-semibold text-tx3">卡點</h3>
+            <p className="leading-[1.85] text-tx2">{item.painLine}</p>
+          </div>
+          <div className="border-t border-bd py-4">
+            <h3 className="mb-2 text-[14px] font-semibold text-gold-d">怎麼解</h3>
+            <p className="leading-[1.85] text-tx">{item.solutionLine}</p>
+          </div>
+          <div className="flex flex-wrap justify-between gap-3 border-t border-bd py-4 text-[13px] text-tx3">
+            <FromToRoute from={item.route.from} to={item.route.to} />
+            <TrustSignal text={item.trustSignal} />
+          </div>
+          <Link href={`/cases/${item.slug}`} className="inline-flex bg-navy px-5 py-3 text-[14px] font-semibold text-white">
+            {storyLabel}
+          </Link>
+        </div>
+      }
+    />
+  );
+}
 
 export function CasesSection() {
   return (
-    <section className="py-[60px] md:py-[80px] px-5 md:px-10 max-w-[1400px] mx-auto">
-      {/* ─── Heading ─── */}
-      <div className="flex items-center gap-6 mb-4">
-        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.2] font-light tracking-normal md:whitespace-nowrap">
-          這些企業都找到了自己的路
-        </h2>
-        <div className="hidden md:block flex-1 h-px bg-bd" />
-        <Link
-          href="/cases"
-          className="hidden md:flex items-center gap-1.5 text-[13.5px] font-medium text-tx3 hover:text-gold-d transition-colors shrink-0"
-        >
-          全部案例
-          <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+    <section className="overflow-hidden py-[80px]">
+      <div className="mx-auto flex max-w-[1200px] items-end justify-between gap-6 px-5 md:px-10">
+        <div className="min-w-0">
+          <h2 className="text-[clamp(30px,4.4vw,52px)] font-semibold leading-[1.14] tracking-normal text-tx">
+            這些企業都找到了自己的路
+          </h2>
+          <p className="mt-4 max-w-[560px] text-[17px] leading-[1.7] text-tx2 md:text-[20px]">
+            4 個案例，從食品到電子、從北美到東南亞——
+            <span className="text-tx">每一個都是真的決策、真的數字、真的結果</span>。
+          </p>
+        </div>
+        <Link href="/cases" className="hidden shrink-0 text-[16px] font-semibold text-sky md:inline-flex">
+          全部案例 →
         </Link>
       </div>
-      <p className="text-[16.5px] text-tx2 max-w-[560px] leading-[1.8] mb-8 font-normal">
-        4 個案例，從食品到電子、從北美到東南亞——
-        <span className="text-tx">每一個都是真的決策、真的數字、真的結果</span>。
-      </p>
 
-      {/* ─── Grid ─── */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {CASE_CARDS.map((c) =>
-            c.featured ? (
-              <Link
-                key={c.slug}
-                href={`/cases/${c.slug}`}
-                className="group md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch p-5 md:p-10 bg-white rounded-none transition-all duration-300 cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg relative"
-              >
-                <div className="flex flex-col">
-                  {/* 「最常被問到」badge — 放在文字區頂部，避開圖片 */}
-                  <div className="mb-3">
-                    <span className="inline-flex items-center gap-1.5 bg-gold/15 text-gold-d text-[11px] font-semibold px-2.5 py-1 tracking-[0.5px]">
-                      <span className="w-1 h-1 rounded-full bg-gold-d" />
-                      最常被問到
-                    </span>
-                  </div>
-                  <CaseTags tags={c.tags} />
+      <Carousel
+        label="案例"
+        className="mx-auto mt-8 max-w-[1400px] overflow-hidden"
+        itemClassName="basis-[82vw] max-w-[520px] md:basis-[380px]"
+      >
+        {HOME_CASE_CARDS.map((item) => <CaseCard key={item.slug} item={item} />)}
+      </Carousel>
 
-                  {/* 大數字 + micro label */}
-                  <div className="mb-3">
-                    <div className="font-sans text-[48px] md:text-[56px] font-semibold text-gold-d leading-none">
-                      {c.num}
-                    </div>
-                    <div className="text-[11px] text-tx3 tracking-[0.5px] mt-2 font-medium">
-                      {c.numLabel}
-                    </div>
-                  </div>
-
-                  {/* 規模前綴 */}
-                  <div className="text-[11.5px] text-tx2 font-medium tracking-[0.3px] mb-2">
-                    {c.scalePrefix}
-                  </div>
-
-                  <h3 className="font-sans text-[21px] md:text-[24px] leading-[1.35] mb-3 font-bold text-tx">
-                    {c.title}
-                  </h3>
-
-                  {/* 痛 → 解 */}
-                  <div className="space-y-2 mb-4">
-                    <p className="text-[14.5px] text-tx2 leading-[1.8]">
-                      <span className="text-tx3 font-medium">卡點 · </span>
-                      {c.painLine}
-                    </p>
-                    <p className="text-[14.5px] text-tx leading-[1.8]">
-                      <span className="text-gold-d font-medium">怎麼解 · </span>
-                      {c.solutionLine}
-                    </p>
-                  </div>
-
-                  {/* Footer: route + trust signal + CTA */}
-                  <div className="mt-auto pt-4 border-t border-bd/60 flex items-center justify-between gap-4 flex-wrap">
-                    <div className="flex items-center gap-4 flex-wrap">
-                      <FromToRoute from={c.route.from} to={c.route.to} />
-                      <TrustSignal text={c.trustSignal} />
-                    </div>
-                    <span className="text-[13.5px] font-semibold text-navy group-hover:text-gold-d transition-colors">
-                      看完整故事 →
-                    </span>
-                  </div>
-                </div>
-
-                <div className="rounded-none h-full min-h-[220px] overflow-hidden relative">
-                  <Image
-                    src={c.image}
-                    alt={c.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-              </Link>
-            ) : (
-              <Link
-                key={c.slug}
-                href={`/cases/${c.slug}`}
-                className="group bg-white rounded-none transition-all duration-300 cursor-pointer relative overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg flex flex-col"
-              >
-                <div className="h-[180px] overflow-hidden relative">
-                  <Image
-                    src={c.image}
-                    alt={c.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-7 md:p-8 flex flex-col flex-1">
-                  <CaseTags tags={c.tags} />
-
-                  {/* 大數字 + micro label */}
-                  <div className="mb-3">
-                    <div className="font-sans text-[40px] font-semibold text-gold-d leading-none">
-                      {c.num}
-                    </div>
-                    <div className="text-[11px] text-tx3 tracking-[0.5px] mt-1.5 font-medium">
-                      {c.numLabel}
-                    </div>
-                  </div>
-
-                  {/* 規模前綴 */}
-                  <div className="text-[11px] text-tx2 font-medium tracking-[0.3px] mb-2">
-                    {c.scalePrefix}
-                  </div>
-
-                  <h3 className="font-sans text-[18px] leading-[1.4] mb-3 font-bold text-tx">
-                    {c.title}
-                  </h3>
-
-                  {/* 痛 → 解 */}
-                  <div className="space-y-2 mb-5">
-                    <p className="text-[13.5px] text-tx2 leading-[1.8]">
-                      <span className="text-tx3 font-medium">卡點 · </span>
-                      {c.painLine}
-                    </p>
-                    <p className="text-[13.5px] text-tx leading-[1.8]">
-                      <span className="text-gold-d font-medium">怎麼解 · </span>
-                      {c.solutionLine}
-                    </p>
-                  </div>
-
-                  {/* Footer: route + trust signal + CTA */}
-                  <div className="mt-auto pt-4 border-t border-bd/60">
-                    <div className="flex items-center justify-between gap-3 flex-wrap mb-2.5">
-                      <FromToRoute from={c.route.from} to={c.route.to} />
-                      <span className="text-[13px] font-medium text-tx3 group-hover:text-gold transition-colors">
-                        閱讀案例 →
-                      </span>
-                    </div>
-                    <TrustSignal text={c.trustSignal} />
-                  </div>
-                </div>
-              </Link>
-            )
-          )}
-      </div>
-
-      {/* Mobile: 全部案例 link (desktop version is in the heading row) */}
-      <div className="mt-8 text-center md:hidden">
-        <Link
-          href="/cases"
-          className="text-[14px] font-medium text-tx3 hover:text-gold-d transition-colors"
-        >
+      <div className="mx-auto mt-4 max-w-[1200px] px-5 md:px-10 md:hidden">
+        <Link href="/cases" className="inline-flex text-[16px] font-semibold text-sky">
           全部案例 →
         </Link>
       </div>
