@@ -141,7 +141,7 @@ export function OptimizePage() {
           </p>
           <div className="mt-[38px] grid min-w-0 grid-cols-1 gap-4 md:grid-cols-3">
             {OPTIMIZE_PAIN_POINTS.map((point) => (
-              <article key={point.title} className="min-w-0 border border-bd bg-white">
+              <article key={point.title} className="min-w-0 border border-bd bg-white [&>div:last-child]:!border-b-0 [&>div:last-child]:!border-bd">
                 <div className="p-[26px]">
                   <div className="mb-[18px] grid size-12 place-items-center bg-ember/10 text-ember">{point.icon}</div>
                   <h3 className="mb-4 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">
@@ -160,7 +160,7 @@ export function OptimizePage() {
                   id={`optimize-${point.title}`}
                   summary={
                     <span className="flex items-center justify-between gap-3 px-[26px] text-[14px] font-semibold text-ember">
-                      怎麼解 <span aria-hidden="true" className="text-[20px] leading-none">＋</span>
+                      怎麼解
                     </span>
                   }
                 >
@@ -183,7 +183,7 @@ export function OptimizePage() {
           </p>
           <div className="mt-[38px] grid min-w-0 grid-cols-1 gap-[18px] md:grid-cols-2">
             {OPTIMIZE_SERVICES.map((service, index) => (
-              <article key={service.title} className="min-w-0 border border-bd border-l-4 border-l-ember bg-white">
+              <article key={service.title} className="min-w-0 border border-bd border-l-4 border-l-ember bg-white [&>div:last-child]:!border-b-0 [&>div:last-child]:!border-bd">
                 <div className="p-[30px]">
                   <p className="font-sans text-[14px] font-semibold tracking-[0.08em] text-ember">
                     STEP 0{index + 1}
@@ -201,7 +201,7 @@ export function OptimizePage() {
                   id={`optimize-service-${index + 1}`}
                   summary={
                     <span className="flex items-center justify-between gap-3 px-[30px] text-[14px] font-semibold text-ember">
-                      交付成果 <span aria-hidden="true" className="text-[20px] leading-none">＋</span>
+                      交付成果
                     </span>
                   }
                 >

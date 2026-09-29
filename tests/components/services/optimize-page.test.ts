@@ -33,4 +33,8 @@ describe("OptimizePage", () => {
   it("does not render rounded utility classes", () => {
     expect(renderPage()).not.toMatch(/\brounded-/);
   });
+
+  it("uses the Disclosure chevron as the only expand affordance", () => {
+    expect(renderPage()).not.toContain("＋");
+  });
 });
