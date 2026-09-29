@@ -39,7 +39,7 @@ export function WhySection() {
     <section className="bg-navy px-5 py-[96px] text-white md:px-10 md:py-[128px]">
       <div className="mx-auto max-w-[1200px]">
         <div className="mx-auto mb-14 max-w-[860px] text-center md:mb-16">
-          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-semibold leading-[1.14] tracking-normal">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
             從評估市場到貨上架，
             <br />
             你面對的<span className="text-gold">只有我們</span>

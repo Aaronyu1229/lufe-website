@@ -12,9 +12,9 @@ export function PositioningBand() {
           <p className="mb-[14px] text-[13px] font-semibold tracking-[0.06em] text-[#7A5A1A]">
             躍馬企業 · 42 年實戰
           </p>
-          <h2 className="mb-5 font-sans text-[clamp(32px,5vw,58px)] font-semibold leading-[1.14] tracking-normal text-navy md:mb-6">
+          <h2 className="mb-5 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance] md:mb-6">
             真的跑過船的人，
-            <br className="md:hidden" />
+            <br />
             <span className="text-gold-d">才懂出海的眉角</span>
           </h2>
           <p className="mx-auto max-w-[720px] text-[17px] font-normal leading-[1.8] text-tx2 md:text-[18px]">
@@ -28,7 +28,7 @@ export function PositioningBand() {
 
         <div className="mx-auto max-w-[1000px] bg-navy p-7 text-white shadow-[0_30px_60px_-20px_rgba(16,27,48,0.35)] md:grid md:grid-cols-[1.2fr_1fr] md:items-center md:gap-12 md:p-14">
           <div className="min-w-0">
-            <h3 className="mb-4 font-sans text-[26px] font-semibold leading-[1.2] tracking-normal md:text-[34px]">
+            <h3 className="mb-4 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] tracking-normal">
               出海不是報告寫得出來的，<span className="text-gold">是真的跑過船的人</span>
             </h3>
             <p className="mb-5 text-[15.5px] font-normal leading-[1.85] text-white/75 md:text-[16.5px]">
@@ -47,19 +47,19 @@ export function PositioningBand() {
 
           <div className="mt-8 grid min-w-0 grid-cols-3 gap-4 md:mt-0 md:gap-6">
             <div>
-              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums text-white md:text-[44px]">
+              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums tracking-[-0.035em] text-white md:text-[44px]">
                 42<span className="text-[24px] text-gold md:text-[28px]">+</span>
               </div>
               <div className="text-[11px] leading-[1.4] text-white/70">年國際物流實戰</div>
             </div>
             <div>
-              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums text-white md:text-[44px]">
+              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums tracking-[-0.035em] text-white md:text-[44px]">
                 500<span className="text-[24px] text-gold md:text-[28px]">+</span>
               </div>
               <div className="text-[11px] leading-[1.4] text-white/70">出口實戰案件</div>
             </div>
             <div>
-              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums text-white md:text-[44px]">
+              <div className="mb-2 font-sans text-[36px] font-semibold leading-none tabular-nums tracking-[-0.035em] text-white md:text-[44px]">
                 30<span className="text-[24px] text-gold md:text-[28px]">+</span>
               </div>
               <div className="text-[11px] leading-[1.4] text-white/70">國家與地區覆蓋</div>
@@ -80,12 +80,12 @@ export function PositioningBand() {
                 className="flex min-w-0 flex-col border border-bd bg-white p-7 md:p-9"
               >
                 <div className="mb-5 flex items-baseline justify-between gap-4">
-                  <span className={`font-sans text-[44px] font-semibold leading-none tabular-nums ${accent}`}>
+                  <span className={`font-sans text-[44px] font-semibold leading-none tabular-nums tracking-[-0.035em] ${accent}`}>
                     {pillar.num}
                   </span>
                   <span className={`text-[14px] font-semibold ${accent}`}>{pillar.subtitle}</span>
                 </div>
-                <h3 className="mb-2 text-[23px] font-semibold leading-tight text-tx md:text-[26px]">
+                <h3 className="mb-2 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">
                   {pillar.title}
                 </h3>
                 <p className={`mb-5 text-[17px] font-medium leading-[1.6] ${accent}`}>

@@ -15,7 +15,7 @@ export function CTASection() {
   return (
     <section className="bg-navy px-5 py-[80px] md:px-10">
       <div className="max-w-[1400px] mx-auto text-center">
-        <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] mb-[18px] font-semibold tracking-normal text-white">
+        <h2 className="mb-[18px] font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-white [text-wrap:balance]">
           想清楚了，就聊聊
           <br />
           還沒想清楚，也可以聊聊

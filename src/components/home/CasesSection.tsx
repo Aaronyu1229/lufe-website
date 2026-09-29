@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import { Carousel, ExpandCard } from "@/components/ui";
@@ -155,19 +154,19 @@ function CaseCard({ item }: { item: CaseCardData }) {
       className="h-full"
       card={
         <article className="flex h-full min-w-0 flex-col overflow-hidden border border-bd bg-white shadow-[0_12px_32px_rgba(16,27,48,0.08)]">
-          <div className="relative h-[180px] overflow-hidden">
-            <Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) 82vw, 380px" className="object-cover" />
-          </div>
           <div className="flex min-w-0 flex-1 flex-col p-6">
+            <CaseTags tags={item.tags} />
             {item.featured && (
               <span className="mb-4 inline-flex w-fit bg-gold/15 px-2.5 py-1 text-[11px] font-semibold tracking-[0.5px] text-gold-d">
                 最常被問到
               </span>
             )}
-            <div className="font-sans text-[40px] font-semibold leading-none text-gold-d">{item.num}</div>
+            <div className={`font-sans font-semibold leading-none tabular-nums tracking-[-0.035em] text-gold-d ${item.featured ? "text-[52px]" : "text-[40px]"}`}>
+              {item.num}
+            </div>
             <div className="mb-4 mt-2 text-[13px] font-medium text-tx3">{item.numLabel}</div>
             <div className="mb-2 text-[13px] font-medium text-tx2">{item.scalePrefix}</div>
-            <h3 className="text-[19px] font-semibold leading-[1.4] text-tx">{item.title}</h3>
+            <h3 className="font-sans text-[19px] font-semibold leading-[1.4] text-tx">{item.title}</h3>
             <div className="mt-auto flex items-center justify-between gap-3 border-t border-bd pt-5">
               <FromToRoute from={item.route.from} to={item.route.to} />
               <span aria-hidden="true" className="grid h-[30px] w-[30px] shrink-0 place-items-center bg-navy text-white">
@@ -187,7 +186,7 @@ function CaseCard({ item }: { item: CaseCardData }) {
               最常被問到
             </span>
           )}
-          <div className="font-sans text-[56px] font-semibold leading-none text-gold-d">{item.num}</div>
+          <div className="font-sans text-[56px] font-semibold leading-none tabular-nums tracking-[-0.035em] text-gold-d">{item.num}</div>
           <p className="mb-5 mt-2 text-[14px] font-medium text-tx3">{item.numLabel}</p>
           <p className="mb-6 text-[13px] font-medium text-tx2">{item.scalePrefix}</p>
           <div className="border-t border-bd py-4">
@@ -216,7 +215,7 @@ export function CasesSection() {
     <section className="overflow-hidden py-[80px]">
       <div className="mx-auto flex max-w-[1200px] items-end justify-between gap-6 px-5 md:px-10">
         <div className="min-w-0">
-          <h2 className="text-[clamp(30px,4.4vw,52px)] font-semibold leading-[1.14] tracking-normal text-tx">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
             這些企業都找到了自己的路
           </h2>
           <p className="mt-4 max-w-[560px] text-[17px] leading-[1.7] text-tx2 md:text-[20px]">
@@ -224,9 +223,6 @@ export function CasesSection() {
             <span className="text-tx">每一個都是真的決策、真的數字、真的結果</span>。
           </p>
         </div>
-        <Link href="/cases" className="hidden shrink-0 text-[16px] font-semibold text-sky md:inline-flex">
-          全部案例 →
-        </Link>
       </div>
 
       <Carousel
@@ -237,7 +233,7 @@ export function CasesSection() {
         {HOME_CASE_CARDS.map((item) => <CaseCard key={item.slug} item={item} />)}
       </Carousel>
 
-      <div className="mx-auto mt-4 max-w-[1200px] px-5 md:px-10 md:hidden">
+      <div className="mx-auto mt-4 max-w-[1200px] px-5 md:px-10">
         <Link href="/cases" className="inline-flex text-[16px] font-semibold text-sky">
           全部案例 →
         </Link>

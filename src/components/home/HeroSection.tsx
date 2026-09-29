@@ -294,7 +294,7 @@ export function HeroSection() {
             <div
               key={slide.id}
               aria-hidden={!isActive}
-              className={`max-w-[640px] transition-opacity duration-[900ms] ease-out ${
+              className={`max-w-[800px] transition-opacity duration-[900ms] ease-out ${
                 isActive ? "relative opacity-100" : "pointer-events-none absolute opacity-0"
               }`}
             >
@@ -306,9 +306,9 @@ export function HeroSection() {
               </div>
 
               <h2
-                className="hero-title font-sans text-white leading-[1.1] mb-6 font-semibold tracking-normal"
+                className="hero-title mb-6 font-sans font-[650] leading-[1.1] tracking-normal text-white [text-wrap:balance]"
                 style={{
-                  fontSize: "clamp(38px, 5.5vw, 72px)",
+                  fontSize: "clamp(36px, 6vw, 72px)",
                   textShadow: "0 1px 2px rgba(10,20,40,0.35)",
                 }}
               >
