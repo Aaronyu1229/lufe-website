@@ -44,7 +44,7 @@ function stateFor(element: HTMLElement) {
     state,
     x: spring(0, (value) => { state.x = value; apply(); }),
     y: spring(0, (value) => { state.y = value; apply(); }),
-    opacity: spring(1, (value) => { state.opacity = value; apply(); }),
+    opacity: spring(1, (value) => { state.opacity = value; apply(); }, { precision: 0.002 }),
   };
   flipSprings.set(element, next);
   return next;

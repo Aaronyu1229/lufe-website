@@ -51,18 +51,36 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
   const mediaRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const dragFrom = useRef(0);
+  const phase = useRef<"closed" | "opening" | "open" | "closing">("closed");
+  const closeTimer = useRef<number | undefined>(undefined);
+  const focusTimer = useRef<number | undefined>(undefined);
   const dialogId = useId();
   const [present, setPresent] = useState(false);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [from, setFrom] = useState<PanelRect | null>(null);
   const [to, setTo] = useState<PanelRect | null>(null);
-  const morph = useSpring(0);
+  const morph = useSpring(0, { precision: 0.001 });
   const pull = useSpring(0);
+
+  const clearCloseTimer = () => {
+    window.clearTimeout(closeTimer.current);
+    closeTimer.current = undefined;
+  };
+
+  const clearFocusTimer = () => {
+    window.clearTimeout(focusTimer.current);
+    focusTimer.current = undefined;
+  };
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- moves the SSR-inline dialog to document.body after hydration.
     setMounted(true);
+  }, []);
+
+  useEffect(() => () => {
+    clearCloseTimer();
+    clearFocusTimer();
   }, []);
 
   const finalRect = useCallback((): PanelRect => {
@@ -75,33 +93,59 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
     return { left: (viewportWidth - width) / 2, top: (viewportHeight - height) / 2, width, height };
   }, []);
 
+  const finishClose = useCallback((source: HTMLDivElement) => {
+    if (phase.current !== "closing") return;
+
+    phase.current = "closed";
+    clearCloseTimer();
+    setPresent(false);
+    focusTimer.current = window.setTimeout(() => {
+      if (phase.current === "closed") source.focus({ preventScroll: true });
+    });
+  }, []);
+
   const close = useCallback((velocity = 0) => {
     const source = cardRef.current;
-    if (!source || !present) return;
+    if (!source || phase.current === "closed" || phase.current === "closing") return;
 
+    phase.current = "closing";
     setFrom(rectOf(source));
     setOpen(false);
     pull.to(0, { response: 0.45, velocity });
     morph.to(0, {
       response: 0.45,
-      onRest: () => {
-        setPresent(false);
-        window.requestAnimationFrame(() => source.focus({ preventScroll: true }));
-      },
+      onRest: () => finishClose(source),
     });
-  }, [morph, present, pull]);
+    closeTimer.current = window.setTimeout(() => finishClose(source), 1200);
+  }, [finishClose, morph, pull]);
 
   const openPanel = () => {
     const source = cardRef.current;
-    if (!source || present) return;
+    if (!source || phase.current === "open" || phase.current === "opening") return;
+
+    clearCloseTimer();
+    clearFocusTimer();
+    phase.current = "opening";
+    setOpen(true);
+
+    if (present) {
+      pull.to(0, { response: 0.45 });
+      morph.to(1, {
+        response: 0.5,
+        onRest: () => { phase.current = "open"; },
+      });
+      return;
+    }
 
     setFrom(rectOf(source));
     setTo(finalRect());
     morph.jump(0);
     pull.jump(0);
     setPresent(true);
-    setOpen(true);
-    morph.to(1, { response: 0.5 });
+    morph.to(1, {
+      response: 0.5,
+      onRest: () => { phase.current = "open"; },
+    });
   };
 
   useEffect(() => {
@@ -182,7 +226,7 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
       role="button"
       tabIndex={0}
       className={`cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky ${className ?? ""}`}
-      style={{ visibility: present ? "hidden" : undefined }}
+      style={{ visibility: present && open ? "hidden" : undefined }}
       onClick={openPanel}
       onKeyDown={onCardKeyDown}
     >

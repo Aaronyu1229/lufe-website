@@ -32,7 +32,7 @@ export function Segmented({ options, value, onChange, label, className }: Segmen
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const selectedIndex = Math.max(0, options.findIndex((option) => option.value === value));
   const [segments, setSegments] = useState<SegmentGeometry[]>([]);
-  const pill = useSpring(selectedIndex);
+  const pill = useSpring(selectedIndex, { precision: 0.002 });
 
   const measure = useCallback(() => {
     const nextSegments = buttonRefs.current.map((button) => ({
