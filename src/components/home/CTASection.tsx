@@ -13,31 +13,28 @@ export function CTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="bg-navy py-[60px] md:py-[80px] px-5 md:px-10">
+    <section className="bg-navy px-5 py-[80px] md:px-10">
       <div className="max-w-[1400px] mx-auto text-center">
-        <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.2] mb-4 font-light tracking-normal text-white">
+        <h2 className="mb-[18px] font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-white [text-wrap:balance]">
           想清楚了，就聊聊
           <br />
           還沒想清楚，也可以聊聊
         </h2>
-        <p className="text-[16.5px] text-white/55 max-w-[480px] mx-auto leading-[1.8] mb-10 font-normal">
+        <p className="text-[17px] text-white/55 max-w-[520px] mx-auto leading-[1.7] mb-9 font-normal">
           送出後 24 小時內由 Aaron 本人回覆。第一次對話就把費用結構和時間表講清楚。
         </p>
-        <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
+        <div className="flex justify-center items-center gap-3 flex-wrap">
           <button
             onClick={open}
-            className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
+            className="bg-gold text-navy px-[26px] py-[14px] text-[16px] font-semibold cursor-pointer"
           >
             聊聊你的產品 →
           </button>
           <Link
             href="/assess"
-            className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium tracking-[0.3px] transition-colors duration-300 hover:text-white"
+            className="inline-flex items-center gap-2 border border-white/30 bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white backdrop-blur-[16px]"
           >
-            <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
-              先做 2 分鐘處境比對
-            </span>
-            <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            先做 2 分鐘處境比對 <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

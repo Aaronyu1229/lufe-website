@@ -40,11 +40,71 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --ease-spring: cubic-bezier(.22, 1, .36, 1);
+  --press: 100ms;
+}
+
 body {
   font-family: var(--font-sans), var(--font-zh), sans-serif;
   color: var(--color-tx);
   background: #fff;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sky);
+  outline-offset: 3px;
+}
+
+button:not(:disabled):active,
+[role="button"]:not([aria-disabled="true"]):active {
+  transform: scale(.96);
+  transition: transform var(--press) ease-out;
+}
+
+/* Layered so page-level Tailwind utilities (e.g. text-white/70 on dark sections) can override the token defaults. */
+@layer components {
+  /* Shared type scale. CJK inherits normal tracking; `.num` opts into tighter numeral tracking. */
+  .display,
+  .h1,
+  .h2,
+  .h3,
+  .lead,
+  .body,
+  .eyebrow {
+    font-family: var(--font-sans), var(--font-zh), sans-serif;
+    letter-spacing: 0;
+  }
+
+  .display { font-size: clamp(36px, 6vw, 72px); line-height: 1.1; font-weight: 650; text-wrap: balance; }
+  .h1 { font-size: clamp(34px, 5vw, 60px); line-height: 1.12; font-weight: 650; text-wrap: balance; }
+  .h2 { font-size: clamp(30px, 4.4vw, 52px); line-height: 1.14; font-weight: 650; text-wrap: balance; }
+  .h3 { font-size: clamp(21px, 2.2vw, 26px); line-height: 1.3; font-weight: 600; }
+  .lead { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.7; color: var(--color-tx2); }
+  .body { font-size: 16px; line-height: 1.85; color: var(--color-tx2); }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .06em; color: var(--color-gold-d); }
+  .num { font-family: var(--font-inter), var(--font-sans), sans-serif; font-feature-settings: "tnum"; letter-spacing: -.035em; font-weight: 600; }
+}
+
+.lufe-glass-dark {
+  background: rgba(16, 27, 48, .3);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+.lufe-glass-light {
+  background: rgba(255, 255, 255, .74);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+.lufe-glass-panel {
+  background: rgba(255, 255, 255, .86);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: 0 30px 60px -20px rgba(10, 18, 34, .45), inset 0 1px 0 rgba(255, 255, 255, .7);
 }
 
 /* Section label style
@@ -235,20 +295,20 @@ body {
   }
 }
 
-/* SubsidyCard slide-in from bottom-right */
-@keyframes subsidy-slide-in {
-  0% {
-    opacity: 0;
-    transform: translateY(24px) translateX(12px);
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) translateX(0);
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 150ms !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
   }
 }
-.animate-subsidy-slide-in {
-  animation: subsidy-slide-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+
+@media (prefers-reduced-transparency: reduce) {
+  .lufe-glass-dark { background: var(--color-navy); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .lufe-glass-light, .lufe-glass-panel { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+@media (prefers-contrast: more) {
+  .lufe-glass-light, .lufe-glass-panel { background: #fff; box-shadow: 0 0 0 1.5px var(--color-tx); }
+  .small, .body, .lead { color: var(--color-tx); }
 }

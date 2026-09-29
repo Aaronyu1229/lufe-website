@@ -24,68 +24,48 @@ export function SubsidyAlertBand() {
   return (
     <section
       aria-label="限期政府補助加碼"
-      className="relative bg-navy text-white overflow-hidden"
+      className="bg-cream px-5 pb-[80px] md:px-10 md:pb-[104px]"
     >
-      {/* Subtle ambient accent */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.12] pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 15% 20%, #D4A85C 0%, transparent 45%), radial-gradient(circle at 85% 80%, #D98B4A 0%, transparent 40%)",
-        }}
-      />
-
-      <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 py-[56px] md:py-[72px] relative">
-        <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-center">
-          {/* Left — status chip */}
-          <div className="flex items-center gap-3 shrink-0">
-            <span className="inline-flex items-center gap-2 bg-ember text-white text-[11px] font-semibold tracking-[0.05em] uppercase px-3 py-1.5">
-              115 年度加碼
-            </span>
-            <span className="hidden md:inline-block w-8 h-px bg-white/20" />
+      <div className="mx-auto max-w-[1200px] bg-navy px-7 py-9 text-white shadow-[0_30px_60px_-20px_rgba(16,27,48,0.35)] md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:px-14 md:py-11">
+        <div className="min-w-0">
+          <span className="inline-flex bg-gold/15 px-3 py-[5px] text-[12px] font-semibold tracking-[0.04em] text-gold">
+            115 年度加碼
+          </span>
+          <div className="mt-3 text-[11px] font-semibold tracking-[0.05em] text-gold/80">
+            Ministry of Economic Affairs · 115 年度
           </div>
-
-          {/* Middle — headline + subtext */}
-          <div className="min-w-0">
-            <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-gold/80 mb-2">
-              Ministry of Economic Affairs · 115 年度
-            </div>
-            <h2 className="font-sans text-[clamp(22px,2.6vw,32px)] leading-[1.25] font-light tracking-normal mb-3">
-              海外參展補助從 4 萬跳到{" "}
-              <span className="text-gold font-normal">16 萬</span>——
-              <br className="hidden md:block" />
-              歷年最優，經費用罄即止。
-            </h2>
-            <p className="text-[14.5px] text-white/70 leading-[1.75] max-w-[620px]">
-              執行期至 12 月底。下一次公告時程以國際貿易署最新公告為準。
-            </p>
-            <div className="text-[11px] font-semibold tracking-[0.05em] text-gold/80 mt-2">
-              資料確認：{verifiedOn}
-            </div>
+          <h2 className="mt-3 font-sans text-[clamp(22px,2.6vw,30px)] font-semibold leading-[1.35] tracking-normal [text-wrap:balance]">
+            海外參展補助從 4 萬跳到{" "}
+            <span className="text-gold">16 萬</span>——
+            <br className="hidden md:block" />
+            歷年最優，經費用罄即止。
+          </h2>
+          <p className="mt-2 max-w-[620px] text-[15px] leading-[1.75] text-white/70">
+            執行期至 12 月底。下一次公告時程以國際貿易署最新公告為準。
+          </p>
+          <div className="mt-2 text-[12px] font-semibold tracking-[0.05em] text-gold/80">
+            資料確認：{verifiedOn}
           </div>
+        </div>
 
-          {/* Right — CTA */}
-          <div className="flex flex-col gap-2 shrink-0 md:items-end">
+        <div className="mt-6 flex shrink-0 flex-col gap-3 md:mt-0 md:items-end">
             <Link
               href="/resources/subsidies#overseas-exhibition"
-              className="inline-flex items-center gap-2 bg-gold text-navy px-5 py-3 text-[14.5px] font-semibold hover:bg-gold/90 transition-colors group"
+              className="inline-flex items-center gap-2 bg-gold px-[26px] py-[14px] text-[16px] font-semibold text-navy"
             >
               <span>看申請細節</span>
-              <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                →
-              </span>
+              <span aria-hidden="true">→</span>
             </Link>
             <Link
               href="/assess"
-              className="text-[13px] text-white/70 hover:text-gold transition-colors inline-flex items-center gap-1.5 md:self-end"
+              className="inline-flex items-center gap-1.5 text-[16px] font-semibold text-gold"
             >
-              <span className="border-b border-white/20 group-hover:border-gold pb-0.5">
-                或先做 2 分鐘處境比對
-              </span>
-              <span>→</span>
+              或先做 2 分鐘處境比對
+              <span
+                aria-hidden="true"
+                className="h-[7px] w-[7px] shrink-0 rotate-[-45deg] border-b border-r border-current"
+              />
             </Link>
-          </div>
         </div>
       </div>
     </section>

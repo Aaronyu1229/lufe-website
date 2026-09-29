@@ -1,916 +1,340 @@
 "use client";
 
-import { useState, useEffect, useRef, type ReactNode } from "react";
-import Link from "next/link";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+
 import { useMessageBox } from "./MessageBox";
-import { STAGE_ORDER, STAGES } from "@/data/services";
-import { CASES } from "@/data/cases";
+import { useSpring } from "@/lib/motion";
 import { articles, getArticleImage } from "@/data/articles";
+import { CASES } from "@/data/cases";
+import { STAGES, STAGE_ORDER } from "@/data/services";
 
-type MenuKey = "services" | "cases" | "about" | "insights" | null;
+type MenuKey = "services" | "cases" | "insights" | "about";
 
-interface NavItem {
-  readonly key: Exclude<MenuKey, null>;
-  readonly label: string;
-  readonly href: string;
-}
-
-/** Height of the main bar, in px. Mirrors the `h-[64px]` row in the markup. */
 const NAV_HEIGHT = 64;
 
-const navItems: readonly NavItem[] = [
-  { key: "services", label: "服務", href: "/services" },
-  { key: "cases", label: "案例", href: "/cases" },
-  { key: "insights", label: "洞察", href: "/insights" },
-  { key: "about", label: "關於我們", href: "/about" },
+const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
+  { key: "services", label: "服務" },
+  { key: "cases", label: "案例" },
+  { key: "insights", label: "洞察" },
+  { key: "about", label: "關於我們" },
 ];
 
-/**
- * Does this pathname render a navy first-screen hero?
- *
- * When true: navbar starts transparent over the hero and goes solid once the
- * hero has scrolled behind it, or on mouse-enter / mega-menu open.
- *
- * Prefix matching on /services and /cases covers every nested page
- * (stage, optimize, methodology, case detail — all have bg-navy heroes).
- * Insights is exact-match: /insights list is dark, but /insights/[slug]
- * article detail uses a light hero.
- */
 function pathnameHasDarkHero(pathname: string): boolean {
-  if (
-    pathname === "/" ||
-    pathname === "/about" ||
-    pathname === "/insights" ||
-    pathname === "/field-notes" ||
-    pathname === "/assess"
-  ) {
-    return true;
-  }
+  if (["/", "/about", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
   if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
-  if (pathname.startsWith("/services")) return true;
-  if (pathname.startsWith("/cases")) return true;
-  return false;
+  return pathname.startsWith("/services") || pathname.startsWith("/cases");
 }
 
 export function Navbar() {
-  const pathname = usePathname();
-  const isDarkHero = pathnameHasDarkHero(pathname ?? "");
-  const [scrolled, setScrolled] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<MenuKey>(null);
+  const pathname = usePathname() ?? "";
+  const darkHero = pathnameHasDarkHero(pathname);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
+  const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const closeTimer = useRef<number | null>(null);
+  const [mobileGroup, setMobileGroup] = useState<MenuKey | null>(null);
+  const [megaOrigin, setMegaOrigin] = useState(0);
+  const headerRef = useRef<HTMLElement>(null);
+  const panelRefs = useRef<Partial<Record<MenuKey, HTMLDivElement>>>({});
+  const closeTimer = useRef<number | undefined>(undefined);
+  const megaReveal = useSpring(0, { precision: 0.002 });
+  const megaHeight = useSpring(0);
+  const mobileReveal = useSpring(0, { precision: 0.002 });
 
-  const useDark = !isDarkHero || scrolled || hovered || activeMenu !== null;
+  const lightGlass = !darkHero || scrolledPastHero;
 
-  // The bar goes solid when the dark hero has scrolled behind it — not at a
-  // fixed offset. 50px used to flip it while the hero was still filling the
-  // screen, so the white bar sat on top of the video. Measuring the hero's own
-  // box also keeps every page correct: the home hero is h-screen, the inner
-  // pages' heroes are a few hundred pixels.
-  //
-  // Deliberately re-measured on every scroll rather than via an
-  // IntersectionObserver: an observer that fires once against a half-laid-out
-  // hero latches on that answer, which left /insights permanently solid.
-  useEffect(() => {
-    if (!isDarkHero) return;
+  function clearClose() {
+    if (closeTimer.current !== undefined) window.clearTimeout(closeTimer.current);
+    closeTimer.current = undefined;
+  }
 
-    const onScroll = () => {
-      const hero = document.querySelector("#main-content > section");
-      // No hero to measure — fall back to the old fixed offset rather than
-      // leaving the bar transparent over unknown content.
-      if (!hero) {
-        setScrolled(window.scrollY > 50);
-        return;
-      }
-      setScrolled(hero.getBoundingClientRect().bottom <= NAV_HEIGHT);
-    };
+  function closeMega(delay = 180) {
+    clearClose();
+    if (!megaOpen) return;
+    closeTimer.current = window.setTimeout(() => {
+      setMegaOpen(false);
+      megaReveal.to(0, { response: 0.3, onRest: () => setActiveMenu(null) });
+    }, delay);
+  }
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [isDarkHero, pathname]);
+  function closeMobile() {
+    if (!mobileOpen) return;
+    setMobileOpen(false);
+    setMobileGroup(null);
+    mobileReveal.to(0, { response: 0.3 });
+  }
 
-  useEffect(() => {
+  function openMega(key: MenuKey, trigger: HTMLButtonElement) {
+    clearClose();
+    const rect = trigger.getBoundingClientRect();
+    const panelWidth = Math.min(1120, window.innerWidth - 24);
+    setMegaOrigin(rect.left + rect.width / 2 - (window.innerWidth - panelWidth) / 2);
+    setActiveMenu(key);
+    setMegaOpen(true);
+    megaReveal.to(1, { response: 0.35 });
+  }
+
+  function toggleMobile() {
     if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+      closeMobile();
+      return;
     }
+    setMobileOpen(true);
+    mobileReveal.to(1, { response: 0.35 });
+  }
+
+  useEffect(() => {
+    if (!darkHero) return;
+
+    const update = () => {
+      const hero = document.querySelector("#main-content > section");
+      setScrolledPastHero(hero ? hero.getBoundingClientRect().bottom <= NAV_HEIGHT : window.scrollY > 50);
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [darkHero, pathname]);
+
+  useEffect(() => {
+    const reset = window.setTimeout(() => {
+      setActiveMenu(null);
+      setMegaOpen(false);
+      setMobileOpen(false);
+      setMobileGroup(null);
+      megaReveal.jump(0);
+      mobileReveal.jump(0);
+    }, 0);
+    return () => window.clearTimeout(reset);
+  }, [mobileReveal, megaReveal, pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
 
-  // Close mega menu on route change. Also reset `hovered` — when the user
-  // clicks a nav link, their cursor is still physically over the navbar
-  // on the new page, but React's onMouseEnter won't re-fire (no boundary
-  // crossed). Without this reset, a dark-hero page would stay stuck on
-  // the white navbar until the cursor leaves and re-enters the header.
   useEffect(() => {
-    // Resetting UI state on navigation. There is no render-time source to derive
-    // from: the reason this exists is that onMouseEnter does NOT re-fire after a
-    // client-side route change (see the comment above). Runs once per navigation.
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset on nav
-    setActiveMenu(null);
-    setMobileOpen(false);
-    setHovered(false);
-  }, [pathname]);
+    const closeOnScroll = () => closeMega(0);
+    const closeOnPointerDown = (event: PointerEvent) => {
+      if (headerRef.current?.contains(event.target as Node)) return;
+      closeMega(0);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      closeMega(0);
+      closeMobile();
+    };
 
-  const openMenu = (key: Exclude<MenuKey, null>) => {
-    if (closeTimer.current) {
-      window.clearTimeout(closeTimer.current);
-      closeTimer.current = null;
-    }
-    setActiveMenu(key);
-  };
+    window.addEventListener("scroll", closeOnScroll, { passive: true });
+    document.addEventListener("pointerdown", closeOnPointerDown);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.removeEventListener("scroll", closeOnScroll);
+      document.removeEventListener("pointerdown", closeOnPointerDown);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  });
 
-  const scheduleClose = () => {
-    if (closeTimer.current) window.clearTimeout(closeTimer.current);
-    closeTimer.current = window.setTimeout(() => {
-      setActiveMenu(null);
-    }, 180);
-  };
+  useLayoutEffect(() => {
+    if (!activeMenu || !megaOpen) return;
+    const panel = panelRefs.current[activeMenu];
+    if (!panel) return;
+    megaHeight.to(panel.scrollHeight, { response: 0.35 });
+  }, [activeMenu, megaOpen, megaHeight]);
+
+  const menuOpacity = megaReveal.value;
+  const menuScale = 0.92 + menuOpacity * 0.08;
+  const mobileOpacity = mobileReveal.value;
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-100"
-      onMouseEnter={() => {
-        if (isDarkHero) setHovered(true);
-      }}
-      onMouseLeave={() => {
-        if (isDarkHero) setHovered(false);
-        scheduleClose();
-      }}
-    >
-      {/* Skip to content */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:bg-gold focus:text-navy focus:px-4 focus:py-2 focus:text-[14.5px] focus:font-semibold"
-      >
+    <header ref={headerRef} className="fixed inset-x-0 top-0 z-[100]" onMouseLeave={() => closeMega()}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-gold focus:px-4 focus:py-2 focus:text-[14.5px] focus:font-semibold focus:text-navy">
         跳到主要內容
       </a>
 
-      {/* Utility bar — only on home, only when not scrolled */}
-      <div
-        className={`text-white/60 text-[11px] hidden md:block transition-all duration-300 ${
-          scrolled || activeMenu !== null
-            ? "opacity-0 h-0 overflow-hidden bg-transparent"
-            : "opacity-100 h-[32px] bg-transparent border-b border-white/10"
-        }`}
-      >
-        <div className="max-w-[1400px] mx-auto px-5 md:px-10 flex items-center justify-between h-[32px]">
-          <div className="flex items-center gap-5">
-            <span className="hover:text-white transition-colors cursor-pointer">
-              繁體中文
-            </span>
-            <span className="text-white/20">|</span>
-            <span className="hover:text-white transition-colors cursor-pointer">
-              English
-            </span>
-          </div>
-          <div className="flex items-center gap-5">
-            <a
-              href="mailto:aaron.yu@reborn.in"
-              className="hover:text-white transition-colors"
-            >
-              aaron.yu@reborn.in
-            </a>
-            <span className="text-white/20">|</span>
-            <a
-              href="https://tradepiloter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
-            >
-              TradePilot 工具
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main nav */}
-      <nav
-        className={`transition-all duration-300 ${
-          useDark
-            ? // Cream, not white — it reads as the same surface as the page
-              // body below it instead of a separate white strip.
-              "bg-cream/98 backdrop-blur-md shadow-sm"
-            : "bg-transparent"
-        }`}
-        aria-label="主要導航"
-      >
-        <div className="max-w-[1400px] mx-auto px-5 md:px-10 flex items-center justify-between h-[64px]">
-          <Link
-            href="/"
-            className={`flex items-center gap-2.5 font-sans font-bold text-[22px] tracking-[-0.5px] transition-colors duration-300 py-1.5 ${
-              useDark ? "text-navy" : "text-white"
-            }`}
-          >
-            <Image
-              src={useDark ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"}
-              alt="鹿飛 LUFÉ"
-              width={36}
-              height={41}
-              className="transition-opacity duration-300"
-              priority
-            />
-            <span>鹿飛 LUF<span className={useDark ? "text-gold-d" : "text-gold"}>É</span></span>
+      <nav className={`relative transition-colors duration-300 ${lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark text-white"}`} aria-label="主要導航">
+        <div className="relative mx-auto flex h-[64px] max-w-[1200px] items-center justify-between gap-4 px-5 md:px-10">
+          <Link href="/" className="flex items-center gap-2.5 text-[17px] font-semibold">
+            <Image src={lightGlass ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"} alt="鹿飛 LUFÉ" width={26} height={26} priority />
+            <span>鹿飛 LUF<span className={lightGlass ? "text-gold-d" : "text-gold"}>É</span></span>
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-[28px]">
+          <div className="hidden min-[900px]:flex items-center gap-[6px] text-[14px]">
             {navItems.map((item) => (
-              <div
+              <button
                 key={item.key}
-                onMouseEnter={() => openMenu(item.key)}
-                onMouseLeave={scheduleClose}
-                className="relative h-[64px] flex items-center"
+                type="button"
+                data-menu-trigger={item.key}
+                aria-controls="desktop-mega-menu"
+                aria-expanded={megaOpen && activeMenu === item.key}
+                onMouseEnter={(event) => openMega(item.key, event.currentTarget)}
+                onFocus={(event) => openMega(item.key, event.currentTarget)}
+                onClick={(event) => openMega(item.key, event.currentTarget)}
+                className={`cursor-pointer px-3 py-2 transition-colors hover:bg-black/10 ${activeMenu === item.key && megaOpen ? "bg-black/10 font-semibold" : "opacity-85"}`}
               >
-                <Link
-                  href={item.href}
-                  className={`text-[14.5px] font-medium transition-colors duration-300 py-2 ${
-                    useDark
-                      ? "text-tx hover:text-navy"
-                      : "text-white/85 hover:text-white"
-                  } ${activeMenu === item.key ? (useDark ? "text-gold-d" : "text-gold") : ""}`}
-                >
-                  {item.label}
-                </Link>
-              </div>
+                {item.label}
+              </button>
             ))}
           </div>
 
-          <div className="hidden md:flex gap-2.5">
-            <MessageBoxTrigger />
+          <div className="flex items-center gap-2">
+            <MessageBoxTrigger className="hidden min-[900px]:inline-flex" />
+            <button type="button" onClick={toggleMobile} aria-label={mobileOpen ? "關閉選單" : "開啟選單"} aria-controls="mobile-navigation" aria-expanded={mobileOpen} className="flex h-10 w-10 cursor-pointer items-center justify-center min-[900px]:hidden">
+              <span className="sr-only">{mobileOpen ? "關閉選單" : "開啟選單"}</span>
+              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+                <path d="M1 1H19M1 7H19M1 13H19" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </button>
           </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-11 h-11 -mr-2 cursor-pointer"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "關閉選單" : "開啟選單"}
-            aria-expanded={mobileOpen}
-          >
-            <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${
-                useDark ? "bg-navy" : "bg-white"
-              } ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
-            />
-            <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${
-                useDark ? "bg-navy" : "bg-white"
-              } ${mobileOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block w-5 h-0.5 transition-all duration-300 ${
-                useDark ? "bg-navy" : "bg-white"
-              } ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
-            />
-          </button>
         </div>
-
-        {/* Desktop mega-menu panel */}
-        <AnimatePresence>
-          {activeMenu && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="hidden md:block absolute top-full left-0 right-0 bg-cream shadow-xl"
-              onMouseEnter={() => {
-                if (closeTimer.current) window.clearTimeout(closeTimer.current);
-              }}
-              onMouseLeave={scheduleClose}
-            >
-              <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-10">
-                {activeMenu === "services" && <ServicesMenu />}
-                {activeMenu === "cases" && <CasesMenu />}
-                {activeMenu === "about" && <AboutMenu />}
-                {activeMenu === "insights" && <InsightsMenu />}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="md:hidden fixed inset-0 top-[64px] bg-black/50 z-40"
-                onClick={() => setMobileOpen(false)}
-              />
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-                className="md:hidden bg-cream px-5 pb-5 relative z-50 overflow-y-auto max-h-[calc(100vh-64px)]"
-              >
-                <MobileMenu onClose={() => setMobileOpen(false)} />
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
       </nav>
+
+      <div
+        id="desktop-mega-menu"
+        className="lufe-glass-panel absolute left-1/2 top-[64px] hidden w-[min(1120px,calc(100vw-24px))] overflow-hidden text-tx min-[900px]:block"
+        style={{
+          height: megaHeight.value,
+          opacity: menuOpacity,
+          pointerEvents: megaOpen ? "auto" : "none",
+          transform: `translateX(-50%) scaleY(${menuScale})`,
+          transformOrigin: `${megaOrigin}px top`,
+          visibility: menuOpacity > 0.01 ? "visible" : "hidden",
+        }}
+        onMouseEnter={clearClose}
+        onMouseLeave={() => closeMega()}
+      >
+        {navItems.map((item) => (
+          <MegaPane
+            key={item.key}
+            itemKey={item.key}
+            active={activeMenu === item.key && megaOpen}
+            setRef={(node) => {
+              if (node) panelRefs.current[item.key] = node;
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="fixed inset-0 top-[64px] z-[-1] bg-[#0B1322]/42 min-[900px]:hidden" style={{ opacity: mobileOpacity, pointerEvents: mobileOpen ? "auto" : "none", visibility: mobileOpacity > 0.01 ? "visible" : "hidden" }} onClick={closeMobile} />
+      <div
+        id="mobile-navigation"
+        className="lufe-glass-panel fixed right-3 top-[60px] z-[101] w-[min(340px,calc(100vw-24px))] max-h-[calc(100svh-80px)] overflow-auto text-tx min-[900px]:hidden"
+        style={{
+          opacity: mobileOpacity,
+          pointerEvents: mobileOpen ? "auto" : "none",
+          transform: `scale(${0.6 + mobileOpacity * 0.4})`,
+          transformOrigin: "calc(100% - 20px) -10px",
+          visibility: mobileOpacity > 0.01 ? "visible" : "hidden",
+        }}
+      >
+        {navItems.map((item) => (
+          <MobileGroup key={item.key} item={item} open={mobileGroup === item.key} onToggle={() => setMobileGroup((current) => current === item.key ? null : item.key)} onClose={closeMobile} />
+        ))}
+        <MessageBoxTrigger className="m-3 flex w-[calc(100%-24px)] justify-center" onOpen={closeMobile} />
+      </div>
     </header>
   );
 }
 
-/* ───────── Mega menu contents ───────── */
-
-function MenuColumn({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
+function MegaPane({ itemKey, active, setRef }: { itemKey: MenuKey; active: boolean; setRef: (node: HTMLDivElement | null) => void }) {
   return (
-    <div>
-      <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
-        {label}
-      </div>
-      <div className="space-y-3">{children}</div>
+    <div ref={setRef} aria-hidden={!active} className={`absolute inset-x-0 top-0 grid gap-6 px-7 pb-6 pt-[26px] transition-opacity duration-150 ${active ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
+      {itemKey === "services" && <ServicesMenu />}
+      {itemKey === "cases" && <CasesMenu />}
+      {itemKey === "insights" && <InsightsMenu />}
+      {itemKey === "about" && <AboutMenu />}
     </div>
   );
 }
 
-function MenuLink({
-  href,
-  title,
-  desc,
-  external = false,
-}: {
-  href: string;
-  title: string;
-  desc?: string;
-  external?: boolean;
-}) {
-  const content = (
-    <>
-      <div className="text-[15.5px] font-semibold text-tx group-hover:text-gold transition-colors">
-        {title}
-      </div>
-      {desc && (
-        <div className="text-[13px] text-tx2 font-normal mt-0.5 leading-[1.5]">
-          {desc}
-        </div>
-      )}
-    </>
-  );
-  if (external) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group block py-1"
-      >
-        {content}
-      </a>
-    );
-  }
-  return (
-    <Link href={href} className="group block py-1">
-      {content}
-    </Link>
-  );
+function MenuColumn({ label, children }: { label: string; children: ReactNode }) {
+  return <div><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">{label}</p>{children}</div>;
+}
+
+function MenuLink({ href, title, desc, external = false }: { href: string; title: string; desc?: string; external?: boolean }) {
+  const content = <><b className="block text-[14.5px] font-semibold transition-colors group-hover:text-sky">{title}</b>{desc && <span className="text-[12.5px] text-tx3">{desc}</span>}</>;
+  return external ? <a href={href} target="_blank" rel="noopener noreferrer" className="group block py-[6px]">{content}</a> : <Link href={href} className="group block py-[6px]">{content}</Link>;
 }
 
 function ServicesMenu() {
-  return (
-    <div className="grid grid-cols-12 gap-8">
-      <div className="col-span-3">
-        <MenuColumn label="01 · 產品適配性 · 勝率">
-          <MenuLink
-            href="/services#pillar-fit"
-            title="支柱總覽"
-            desc="這個市場真的要你嗎？"
-          />
-          <MenuLink
-            href="/services/market-assessment"
-            title="市場機會評估"
-            desc="2–4 週搞清楚值不值得去"
-          />
-          <MenuLink
-            href="/services/product-testing"
-            title="小批量產品測試"
-            desc="真實消費者用錢投票"
-          />
-          <MenuLink
-            href="/services/methodology"
-            title="MBCPR 決策框架"
-            desc="Go / No-Go 五維矩陣"
-          />
-        </MenuColumn>
-      </div>
-      <div className="col-span-3">
-        <MenuColumn label="02 · 通路銷售力 · 潛力">
-          <MenuLink
-            href="/services#pillar-channel"
-            title="支柱總覽"
-            desc="上得了架，還要賣得動"
-          />
-          <MenuLink
-            href="/services/channel-entry"
-            title="通路進入與媒合"
-            desc="北美連鎖 + 東南亞通路"
-          />
-          <MenuLink
-            href="/services#pillar-channel"
-            title="展會與加盟佈局"
-            desc="食品 / 電子 / 加盟展"
-          />
-          <MenuLink
-            href="/services#pillar-channel"
-            title="AI 集客引擎"
-            desc="SEO + AI 搜尋佈局"
-          />
-        </MenuColumn>
-      </div>
-      <div className="col-span-3">
-        <MenuColumn label="03 · 團隊體質 · 成功率">
-          <MenuLink
-            href="/services#pillar-team"
-            title="支柱總覽"
-            desc="進得去，還要留得下"
-          />
-          <MenuLink
-            href="/services/localization"
-            title="海外團隊建置"
-            desc="當地人才、落地合規"
-          />
-          <MenuLink
-            href="/services/optimize"
-            title="運營優化方案"
-            desc="已在海外的進階方案"
-          />
-          <MenuLink
-            href="/services#pillar-team"
-            title="海外營運系統五階"
-            desc="Notion + AI 數位員工"
-          />
-        </MenuColumn>
-      </div>
-      <div className="col-span-3">
-        <MenuColumn label="工具與入口">
-          <MenuLink
-            href="/assess"
-            title="2 分鐘處境比對"
-            desc="跟哪個案例最像"
-          />
-          <MenuLink
-            href="/services"
-            title="三支柱總覽"
-            desc="一頁看完整方法論"
-          />
-          <MenuLink
-            href="/resources"
-            title="補助與活動"
-            desc="政府補助 + 現場紀錄"
-          />
-          <MenuLink
-            href="https://tradepiloter.com"
-            title="TradePilot 關稅工具"
-            desc="免費 HS code 查詢"
-            external
-          />
-        </MenuColumn>
-      </div>
-    </div>
-  );
+  return <div className="grid grid-cols-4 gap-6">
+    <MenuColumn label="01 · 產品適配性 · 勝率"><MenuLink href="/services#pillar-fit" title="支柱總覽" desc="這個市場真的要你嗎？" /><MenuLink href="/services/market-assessment" title="市場機會評估" desc="2–4 週搞清楚值不值得去" /><MenuLink href="/services/product-testing" title="小批量產品測試" desc="真實消費者用錢投票" /><MenuLink href="/services/methodology" title="MBCPR 決策框架" desc="Go / No-Go 五維矩陣" /></MenuColumn>
+    <MenuColumn label="02 · 通路銷售力 · 潛力"><MenuLink href="/services#pillar-channel" title="支柱總覽" desc="上得了架，還要賣得動" /><MenuLink href="/services/channel-entry" title="通路進入與媒合" desc="北美連鎖 + 東南亞通路" /><MenuLink href="/services#pillar-channel" title="展會與加盟佈局" desc="食品 / 電子 / 加盟展" /><MenuLink href="/services#pillar-channel" title="AI 集客引擎" desc="SEO + AI 搜尋佈局" /></MenuColumn>
+    <MenuColumn label="03 · 團隊體質 · 成功率"><MenuLink href="/services#pillar-team" title="支柱總覽" desc="進得去，還要留得下" /><MenuLink href="/services/localization" title="海外團隊建置" desc="當地人才、落地合規" /><MenuLink href="/services/optimize" title="運營優化方案" desc="已在海外的進階方案" /><MenuLink href="/services#pillar-team" title="海外營運系統五階" desc="Notion + AI 數位員工" /></MenuColumn>
+    <MenuColumn label="工具與入口"><MenuLink href="/assess" title="2 分鐘處境比對" desc="跟哪個案例最像" /><MenuLink href="/services" title="三支柱總覽" desc="一頁看完整方法論" /><MenuLink href="/resources" title="補助與活動" desc="政府補助 + 現場紀錄" /><MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具" desc="免費 HS code 查詢" external /></MenuColumn>
+  </div>;
 }
 
 function CasesMenu() {
-  return (
-    <div className="grid grid-cols-12 gap-8">
-      <div className="col-span-8">
-        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
-          精選案例
-        </div>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-3">
-          {CASES.map((c) => (
-            <Link
-              key={c.slug}
-              href={`/cases/${c.slug}`}
-              className="group flex items-start gap-3 py-2"
-            >
-              <div className="font-heading text-[21px] text-[#7A5A1A] leading-none font-semibold shrink-0 min-w-[60px] tabular-nums">
-                {c.num}
-              </div>
-              <div className="min-w-0">
-                <div className="text-[15px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-0.5">
-                  {c.title}
-                </div>
-                <div className="text-[11px] text-tx2">
-                  {c.tags.map((t) => t.label).join(" · ")}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-      <div className="col-span-4 border-l border-bd pl-8">
-        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
-          分類瀏覽
-        </div>
-        <div className="space-y-2 mb-5">
-          <div className="text-[13px] text-tx2">按產業</div>
-          <div className="text-[14.5px] text-tx2">
-            食品 · 電子 · 服飾 · 餐飲
-          </div>
-        </div>
-        <div className="space-y-2 mb-6">
-          <div className="text-[13px] text-tx2">按市場</div>
-          <div className="text-[14.5px] text-tx2">北美 · 東南亞</div>
-        </div>
-        <Link
-          href="/cases"
-          className="group inline-flex items-center gap-2 text-[14.5px] font-semibold text-[#7A5A1A]"
-        >
-          <span className="border-b border-gold-d/40 pb-0.5 group-hover:border-gold-d transition-colors">
-            看所有案例
-          </span>
-          <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-            →
-          </span>
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-function AboutMenu() {
-  return (
-    <div className="grid grid-cols-12 gap-8">
-      <div className="col-span-4">
-        <MenuColumn label="認識鹿飛">
-          <MenuLink
-            href="/about#story"
-            title="創辦故事"
-            desc="我們為什麼做這件事"
-          />
-          <MenuLink
-            href="/about#team"
-            title="團隊組成"
-            desc="台灣核心團隊 + 全球節點"
-          />
-          <MenuLink
-            href="/about#how-we-work"
-            title="我們怎麼合作"
-            desc="你會得到什麼樣的陪跑"
-          />
-        </MenuColumn>
-      </div>
-      <div className="col-span-4">
-        <MenuColumn label="立場與網絡">
-          <MenuLink
-            href="/about#network"
-            title="合作夥伴網絡"
-            desc="北美 / 東南亞 / 全球物流"
-          />
-          <MenuLink
-            href="/about#philosophy"
-            title="品牌理念"
-            desc="我們相信的事"
-          />
-          <MenuLink
-            href="/about#what-we-dont-do"
-            title="我們不做什麼"
-            desc="誠實的邊界"
-          />
-        </MenuColumn>
-      </div>
-      <div className="col-span-4 border-l border-bd pl-8">
-        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
-          創辦人
-        </div>
-        <div className="flex items-start gap-4">
-          <div className="w-14 h-14 rounded-none bg-gradient-to-br from-gold to-[#C49545] flex items-center justify-center text-navy text-[19px] font-heading font-semibold shrink-0">
-            AY
-          </div>
-          <div>
-            <div className="text-[15.5px] font-semibold">Aaron Yu</div>
-            <div className="text-[13px] text-[#7A5A1A] font-medium">鹿飛 LUFÉ 創辦人</div>
-            <div className="text-[11px] text-tx2 mt-1 leading-[1.5]">
-              42+ 年國際物流實戰
-              <br />
-              500+ 出口案件 · 30+ 國家
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <div className="grid grid-cols-[2fr_1fr] gap-6">
+    <div><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">精選案例</p><div className="grid grid-cols-2 gap-x-6 gap-y-1">
+      {CASES.map((caseItem) => <Link key={caseItem.slug} href={`/cases/${caseItem.slug}`} className="group grid grid-cols-[70px_1fr] items-baseline gap-2 py-2"><span className="num text-[20px] text-gold-d">{caseItem.num}</span><span><b className="block text-[14px] font-semibold group-hover:text-sky">{caseItem.title}</b><span className="text-[12px] text-tx3">{caseItem.tags.map((tag) => tag.label).join(" · ")}</span></span></Link>)}
+    </div></div>
+    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">分類瀏覽</p><p className="text-[13px] text-tx2">按產業</p><p className="mb-[10px] text-[14px] text-tx2">食品 · 電子 · 服飾 · 餐飲</p><p className="text-[13px] text-tx2">按市場</p><p className="mb-2 text-[14px] text-tx2">北美 · 東南亞</p><Link href="/cases" className="text-[13.5px] font-semibold text-sky">看所有案例 →</Link></div>
+  </div>;
 }
 
 function InsightsMenu() {
   const latestArticle = articles[0];
-  const categoryGroups = [
-    { label: "🇵🇭 菲律賓", cat: "菲律賓" },
-    { label: "🇮🇩 印尼", cat: "印尼" },
-    { label: "🌏 東南亞趨勢", cat: "東南亞趨勢" },
-    { label: "🌎 北美市場", cat: "北美市場" },
-    { label: "🎯 出海實戰", cat: "出海實戰" },
-    { label: "🧠 企業體質", cat: "企業體質" },
-  ] as const;
-
-  return (
-    <div className="grid grid-cols-12 gap-8">
-      <div className="col-span-4">
-        <MenuColumn label="主題分類">
-          {categoryGroups.map((g) => (
-            <MenuLink
-              key={g.cat}
-              href={`/insights?cat=${encodeURIComponent(g.cat)}`}
-              title={g.label}
-            />
-          ))}
-        </MenuColumn>
-      </div>
-      <div className="col-span-3">
-        <MenuColumn label="其他內容">
-          <MenuLink
-            href="/resources"
-            title="補助與活動"
-            desc="政府補助 + 現場紀錄"
-          />
-          <MenuLink
-            href="/field-notes"
-            title="現場紀錄"
-            desc="活動、演講、媒體露出"
-          />
-          <MenuLink
-            href="https://tradepiloter.com"
-            title="TradePilot 關稅工具"
-            external
-          />
-          <MenuLink href="/services/methodology" title="鹿飛方法論" />
-          <MenuLink href="/insights" title="看所有文章" />
-        </MenuColumn>
-      </div>
-      <div className="col-span-5 border-l border-bd pl-8">
-        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-4">
-          最新文章
-        </div>
-        {latestArticle && (
-          <Link
-            href={`/insights/${latestArticle.slug}`}
-            className="group flex gap-4"
-          >
-            <div className="relative w-[120px] h-[80px] shrink-0 overflow-hidden">
-              <Image
-                src={getArticleImage(latestArticle)}
-                alt={latestArticle.title}
-                fill
-                sizes="120px"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#7A5A1A] mb-1">
-                {latestArticle.category}
-              </div>
-              <div className="text-[15px] font-semibold text-tx group-hover:text-gold transition-colors leading-tight mb-1">
-                {latestArticle.title}
-              </div>
-              <div className="text-[11px] text-tx2">
-                {latestArticle.date} · {latestArticle.readTime}
-              </div>
-            </div>
-          </Link>
-        )}
-      </div>
-    </div>
-  );
+  const categories = [["🇵🇭 菲律賓", "菲律賓"], ["🇮🇩 印尼", "印尼"], ["🌏 東南亞趨勢", "東南亞趨勢"], ["🌎 北美市場", "北美市場"], ["🎯 出海實戰", "出海實戰"], ["🧠 企業體質", "企業體質"]] as const;
+  return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
+    <MenuColumn label="主題分類">{categories.map(([label, category]) => <MenuLink key={category} href={`/insights?cat=${encodeURIComponent(category)}`} title={label} />)}</MenuColumn>
+    <MenuColumn label="其他內容"><MenuLink href="/resources" title="補助與活動" desc="政府補助 + 現場紀錄" /><MenuLink href="/field-notes" title="現場紀錄" desc="活動、演講、媒體露出" /><MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具" external /><MenuLink href="/services/methodology" title="鹿飛方法論" /><MenuLink href="/insights" title="看所有文章" /></MenuColumn>
+    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">最新文章</p>{latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group"><div className="relative mb-2 aspect-video overflow-hidden"><Image src={getArticleImage(latestArticle)} alt={latestArticle.title} fill sizes="360px" className="object-cover" /></div><b className="block text-[14px] font-semibold leading-[1.5] group-hover:text-sky">{latestArticle.title}</b><span className="text-[12px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}</div>
+  </div>;
 }
 
-/* ───────── Mobile menu ───────── */
-
-function MobileMenu({ onClose }: { onClose: () => void }) {
-  const [expanded, setExpanded] = useState<MenuKey>(null);
-  const { open: openMessageBox } = useMessageBox();
-
-  const toggle = (key: Exclude<MenuKey, null>) => {
-    setExpanded((cur) => (cur === key ? null : key));
-  };
-
-  return (
-    <div className="py-2">
-      {navItems.map((item) => (
-        <div key={item.key} className="border-b border-bd last:border-b-0">
-          <button
-            onClick={() => toggle(item.key)}
-            className="w-full flex items-center justify-between py-4 text-left cursor-pointer"
-            aria-expanded={expanded === item.key}
-          >
-            <span className="text-[16.5px] font-semibold text-tx">
-              {item.label}
-            </span>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              className={`transition-transform duration-300 text-tx2 ${
-                expanded === item.key ? "rotate-180" : ""
-              }`}
-            >
-              <path
-                d="M4 6L8 10L12 6"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <AnimatePresence initial={false}>
-            {expanded === item.key && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="overflow-hidden"
-              >
-                <div className="pb-4 pl-3 space-y-2">
-                  <MobileMenuContent itemKey={item.key} onClose={onClose} />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      ))}
-
-      <div className="mt-5 flex gap-2.5">
-        <button
-          onClick={() => {
-            openMessageBox();
-            onClose();
-          }}
-          className="flex-1 bg-gold text-navy px-5 py-[11px] rounded-none text-[14.5px] font-semibold hover:bg-gold-l transition-all cursor-pointer"
-        >
-          聊聊你的產品 →
-        </button>
-      </div>
-    </div>
-  );
+function AboutMenu() {
+  return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
+    <MenuColumn label="認識鹿飛"><MenuLink href="/about#story" title="創辦故事" desc="我們為什麼做這件事" /><MenuLink href="/about#team" title="團隊組成" desc="台灣核心團隊 + 全球節點" /><MenuLink href="/about#how-we-work" title="我們怎麼合作" desc="你會得到什麼樣的陪跑" /></MenuColumn>
+    <MenuColumn label="立場與網絡"><MenuLink href="/about#network" title="合作夥伴網絡" desc="北美 / 東南亞 / 全球物流" /><MenuLink href="/about#philosophy" title="品牌理念" desc="我們相信的事" /><MenuLink href="/about#what-we-dont-do" title="我們不做什麼" desc="誠實的邊界" /></MenuColumn>
+    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">創辦人</p><Link href="/about" className="group grid grid-cols-[52px_1fr] items-center gap-3"><span className="grid h-[52px] w-[52px] place-items-center bg-gold font-bold text-navy">AY</span><span><b className="block text-[14px] font-semibold group-hover:text-sky">Aaron Yu</b><small className="block text-[12px] text-gold-d">鹿飛 LUFÉ 創辦人</small><small className="block text-[12px] text-tx3">42+ 年國際物流實戰<br />500+ 出口案件 · 30+ 國家</small></span></Link></div>
+  </div>;
 }
 
-function MobileSubLink({
-  href,
-  title,
-  onClose,
-}: {
-  href: string;
-  title: string;
-  onClose: () => void;
-}) {
-  return (
-    <Link
-      href={href}
-      className="block py-2 text-[15px] text-tx2 hover:text-gold transition-colors"
-      onClick={onClose}
-    >
-      {title}
-    </Link>
-  );
-}
+function MobileGroup({ item, open, onToggle, onClose }: { item: { key: MenuKey; label: string }; open: boolean; onToggle: () => void; onClose: () => void }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const height = useSpring(0);
 
-function MobileMenuContent({
-  itemKey,
-  onClose,
-}: {
-  itemKey: Exclude<MenuKey, null>;
-  onClose: () => void;
-}) {
-  if (itemKey === "services") {
-    return (
-      <>
-        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-tx2 mt-1 mb-1">
-          完整路徑
-        </div>
-        {STAGE_ORDER.map((slug) => {
-          const stage = STAGES[slug];
-          return (
-            <MobileSubLink
-              key={slug}
-              href={`/services/${slug}`}
-              title={stage.title}
-              onClose={onClose}
-            />
-          );
-        })}
-        <div className="text-[11px] font-semibold tracking-[0.05em] uppercase text-tx2 mt-3 mb-1">
-          進階方案
-        </div>
-        <MobileSubLink
-          href="/services/optimize"
-          title="運營優化方案"
-          onClose={onClose}
-        />
-        <MobileSubLink
-          href="/services/methodology"
-          title="鹿飛方法論"
-          onClose={onClose}
-        />
-        <MobileSubLink href="/services" title="服務總覽" onClose={onClose} />
-      </>
-    );
-  }
-  if (itemKey === "cases") {
-    return (
-      <>
-        {CASES.map((c) => (
-          <MobileSubLink
-            key={c.slug}
-            href={`/cases/${c.slug}`}
-            title={`${c.num} ${c.title}`}
-            onClose={onClose}
-          />
-        ))}
-        <MobileSubLink href="/cases" title="看所有案例" onClose={onClose} />
-      </>
-    );
-  }
-  if (itemKey === "about") {
-    return (
-      <>
-        <MobileSubLink href="/about#story" title="創辦故事" onClose={onClose} />
-        <MobileSubLink href="/about#team" title="團隊組成" onClose={onClose} />
-        <MobileSubLink
-          href="/about#how-we-work"
-          title="我們怎麼合作"
-          onClose={onClose}
-        />
-        <MobileSubLink
-          href="/about#network"
-          title="合作夥伴網絡"
-          onClose={onClose}
-        />
-        <MobileSubLink
-          href="/about#what-we-dont-do"
-          title="我們不做什麼"
-          onClose={onClose}
-        />
-      </>
-    );
-  }
-  if (itemKey === "insights") {
-    return (
-      <>
-        <MobileSubLink href="/insights" title="所有文章" onClose={onClose} />
-        <MobileSubLink
-          href="/insights?cat=東南亞趨勢"
-          title="🌏 東南亞趨勢"
-          onClose={onClose}
-        />
-        <MobileSubLink
-          href="/insights?cat=北美市場"
-          title="🌎 北美市場"
-          onClose={onClose}
-        />
-        <MobileSubLink
-          href="/insights?cat=出海實戰"
-          title="🎯 出海實戰"
-          onClose={onClose}
-        />
-        <MobileSubLink
-          href="/insights?cat=企業體質"
-          title="🧠 企業體質"
-          onClose={onClose}
-        />
-        <MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} />
-        <MobileSubLink href="/resources" title="補助與活動" onClose={onClose} />
-      </>
-    );
-  }
-  return null;
-}
+  useLayoutEffect(() => {
+    height.to(open ? contentRef.current?.scrollHeight ?? 0 : 0, { response: 0.4 });
+  }, [height, open]);
 
-function MessageBoxTrigger({ className = "" }: { className?: string }) {
-  const { open } = useMessageBox();
-  return (
-    <button
-      className={`bg-gold text-navy px-5 py-[9px] rounded-none text-[14.5px] font-semibold hover:bg-gold-l transition-all cursor-pointer ${className}`}
-      onClick={open}
-    >
-      聊聊你的產品 →
+  return <div className="border-b border-bd">
+    <button type="button" onClick={onToggle} aria-expanded={open} aria-controls={`mobile-${item.key}`} className="flex w-full cursor-pointer items-center justify-between px-4 py-[14px] text-left text-[16px] font-semibold">
+      {item.label}<svg className={`transition-transform duration-150 ${open ? "rotate-180" : ""}`} width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" /></svg>
     </button>
-  );
+    <div id={`mobile-${item.key}`} style={{ height: height.value }} className="overflow-hidden"><div ref={contentRef}><MobileMenuContent itemKey={item.key} onClose={onClose} /></div></div>
+  </div>;
+}
+
+function MobileSubLink({ href, title, onClose }: { href: string; title: string; onClose: () => void }) {
+  return <Link href={href} onClick={onClose} className="block border-b border-bd px-7 py-[10px] text-[14.5px] text-tx2 active:bg-black/[.07]">{title}</Link>;
+}
+
+function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: () => void }) {
+  if (itemKey === "services") return <><p className="mb-1 mt-1 px-7 text-[11px] font-semibold tracking-[.05em] text-tx2">完整路徑</p>{STAGE_ORDER.map((slug) => <MobileSubLink key={slug} href={`/services/${slug}`} title={STAGES[slug].title} onClose={onClose} />)}<p className="mb-1 mt-3 px-7 text-[11px] font-semibold tracking-[.05em] text-tx2">進階方案</p><MobileSubLink href="/services/optimize" title="運營優化方案" onClose={onClose} /><MobileSubLink href="/services/methodology" title="鹿飛方法論" onClose={onClose} /><MobileSubLink href="/services" title="服務總覽" onClose={onClose} /></>;
+  if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={`${caseItem.num} ${caseItem.title}`} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例" onClose={onClose} /></>;
+  if (itemKey === "about") return <><MobileSubLink href="/about#story" title="創辦故事" onClose={onClose} /><MobileSubLink href="/about#team" title="團隊組成" onClose={onClose} /><MobileSubLink href="/about#how-we-work" title="我們怎麼合作" onClose={onClose} /><MobileSubLink href="/about#network" title="合作夥伴網絡" onClose={onClose} /><MobileSubLink href="/about#what-we-dont-do" title="我們不做什麼" onClose={onClose} /></>;
+  return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} /><MobileSubLink href="/insights?cat=東南亞趨勢" title="🌏 東南亞趨勢" onClose={onClose} /><MobileSubLink href="/insights?cat=北美市場" title="🌎 北美市場" onClose={onClose} /><MobileSubLink href="/insights?cat=出海實戰" title="🎯 出海實戰" onClose={onClose} /><MobileSubLink href="/insights?cat=企業體質" title="🧠 企業體質" onClose={onClose} /><MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;
+}
+
+function MessageBoxTrigger({ className = "", onOpen }: { className?: string; onOpen?: () => void }) {
+  const { open } = useMessageBox();
+  return <button type="button" className={`bg-gold px-4 py-[9px] text-[14px] font-semibold text-navy hover:bg-gold-l ${className}`} onClick={() => { open(); onOpen?.(); }}>聊聊你的產品 →</button>;
 }

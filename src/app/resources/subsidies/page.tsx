@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { SUBSIDIES, STAGE_LABELS, SUBSIDY_CARD_COPY, type Subsidy } from "@/data/subsidies";
-import { SubsidyIcon } from "@/components/subsidy/SubsidyIcons";
-import { SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
+
+import { Disclosure } from "@/components/ui";
 import { SubsidiesCTASection } from "@/components/subsidy/SubsidiesCTASection";
+import { SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
+import { SubsidyComparison, SubsidyPlanCard } from "@/components/subsidy/SubsidyPlanCard";
+import { STAGE_LABELS, SUBSIDIES, SUBSIDY_CARD_COPY } from "@/data/subsidies";
 
 export const metadata: Metadata = {
   title: "2026 政府出海補助 — 鹿飛 LUFÉ",
@@ -13,685 +15,94 @@ export const metadata: Metadata = {
     "貿易署、經濟部、中企署——四個正在開放的計畫，幫台灣企業降低出海成本。鹿飛整理的實戰版本，直接告訴你哪個適合你。",
 };
 
-const accentMap: Record<
-  Subsidy["accent"],
-  {
-    badge: string;
-    num: string;
-    border: string;
-    bar: string;
-    iconBg: string;
-  }
-> = {
-  sky: {
-    badge: "bg-sky/10 text-sky",
-    num: "text-sky",
-    border: "hover:border-sky",
-    bar: "bg-sky",
-    iconBg: "bg-[rgba(91,143,168,0.08)] text-sky",
-  },
-  gold: {
-    badge: "bg-gold/15 text-[#8A6A2C]",
-    num: "text-gold",
-    border: "hover:border-gold",
-    bar: "bg-gold",
-    iconBg: "bg-[rgba(212,168,92,0.1)] text-gold",
-  },
-  ember: {
-    badge: "bg-ember/10 text-ember",
-    num: "text-ember",
-    border: "hover:border-ember",
-    bar: "bg-ember",
-    iconBg: "bg-[rgba(217,139,74,0.08)] text-ember",
-  },
-};
-
 export default function SubsidiesPage() {
   return (
-    <div className="bg-white">
-      {/* ───── Hero ───── */}
-      <section className="relative bg-navy text-white overflow-hidden">
-        {/* Background image */}
+    <div className="overflow-hidden bg-white">
+      <section className="relative overflow-hidden bg-navy text-white">
         <div className="absolute inset-0">
-          <Image
-            src={SUBSIDY_CARD_COPY.hero}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-[0.22] animate-hero-kenburns"
-          />
+          <Image src={SUBSIDY_CARD_COPY.hero} alt="" fill priority sizes="100vw" className="object-cover opacity-[0.22]" />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/75 via-navy/65 to-navy" />
         </div>
-
-        {/* Ambient accents */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 30%, #D4A85C 0%, transparent 40%), radial-gradient(circle at 80% 70%, #5B8FA8 0%, transparent 45%)",
-          }}
-        />
-
-        <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 pt-[130px] md:pt-[170px] pb-[72px] md:pb-[100px] relative">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-5 h-px bg-gold/70" />
-            <span className="text-gold/80 text-[11px] font-medium tracking-[2.5px] uppercase">
-              2026 · 北美與東南亞落地加速器
-            </span>
-          </div>
-
-          <h1
-            className="font-sans text-white leading-[1.05] mb-8 font-extralight tracking-[-2px] max-w-[900px]"
-            style={{ fontSize: "clamp(36px, 5vw, 64px)" }}
-          >
-            政府在幫你出海，
-            <br />
-            <span className="text-gold/90">你知道怎麼拿嗎？</span>
-          </h1>
-
-          <p className="text-[18px] md:text-[19px] text-white/70 font-normal leading-[1.8] max-w-[700px] mb-12">
-            貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入
-            <span className="text-white font-medium">北美</span>和
-            <span className="text-white font-medium">東南亞</span>兩個主戰場。
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle at 20% 30%, #D4A85C 0%, transparent 40%), radial-gradient(circle at 80% 70%, #5B8FA8 0%, transparent 45%)" }} />
+        <div className="relative mx-auto max-w-[1400px] px-5 pb-[72px] pt-[130px] md:px-10 md:pb-[100px] md:pt-[170px] lg:px-16">
+          <p className="eyebrow mb-8 text-gold/80">2026 · 北美與東南亞落地加速器</p>
+          <h1 className="h1 mb-8 max-w-[900px] text-white">政府在幫你出海，<br /><span className="text-gold/90">你知道怎麼拿嗎？</span></h1>
+          <p className="lead mb-12 max-w-[700px] !text-white/[.72]">
+            貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入<span className="font-medium text-white">北美</span>和<span className="font-medium text-white">東南亞</span>兩個主戰場。
             但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫。
-            我們替你整理了{" "}
-            <span className="text-white font-medium">
-              4 個正在開放、而且和鹿飛三支柱方法論對齊
-            </span>{" "}
-            的計畫。
+            我們替你整理了 <span className="font-medium text-white">4 個正在開放、而且和鹿飛三支柱方法論對齊</span> 的計畫。
           </p>
-
-          {/* Stat strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 pt-10 border-t border-white/10">
-            <Stat num="4" label="當期開放計畫" />
-            <Stat num="1,000萬" label="單筆最高補助額" />
-            <Stat num="3" label="主管機關" />
-            <Stat num="100%" label="和鹿飛服務對齊" />
+          <div className="grid grid-cols-2 gap-6 border-t border-white/10 pt-10 md:grid-cols-4 md:gap-10">
+            <Stat num="4" label="當期開放計畫" /><Stat num="1,000萬" label="單筆最高補助額" /><Stat num="3" label="主管機關" /><Stat num="100%" label="和鹿飛服務對齊" />
           </div>
         </div>
       </section>
 
-      {/* ───── Agency strip ───── */}
-      <section className="bg-cream/60 border-y border-bd/60 py-7 px-5 md:px-10 lg:px-16">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-            <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold shrink-0">
-              主管機關
-            </div>
-            <div className="flex-1 flex flex-wrap items-center gap-x-8 gap-y-2">
-              <AgencyBadge name="國際貿易署" sub="TITA · 貿易署" />
-              <span className="hidden md:block w-px h-5 bg-bd" aria-hidden="true" />
-              <AgencyBadge name="經濟部" sub="MOEA" />
-              <span className="hidden md:block w-px h-5 bg-bd" aria-hidden="true" />
-              <AgencyBadge name="中小及新創企業署" sub="SMEA · 中企署" />
-            </div>
-            <div className="text-[11.5px] text-tx3 md:text-right shrink-0">
-              最後更新 2026.04
-            </div>
+      <section className="border-y border-bd/60 bg-cream/60 px-5 py-7 md:px-10 lg:px-16">
+        <div className="mx-auto flex max-w-[1100px] flex-col gap-4 md:flex-row md:items-center md:gap-8">
+          <p className="eyebrow shrink-0 text-gold">主管機關</p>
+          <div className="flex flex-1 flex-wrap items-center gap-x-8 gap-y-2"><AgencyBadge name="國際貿易署" sub="TITA · 貿易署" /><span className="hidden h-5 w-px bg-bd md:block" /><AgencyBadge name="經濟部" sub="MOEA" /><span className="hidden h-5 w-px bg-bd md:block" /><AgencyBadge name="中小及新創企業署" sub="SMEA · 中企署" /></div>
+          <p className="shrink-0 text-[11.5px] text-tx3 md:text-right">最後更新 2026.04</p>
+        </div>
+      </section>
+
+      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[96px] lg:px-16">
+        <div className="mx-auto max-w-[1100px]">
+          <p className="eyebrow mb-3 text-gold">為什麼這件事值得花十分鐘了解</p>
+          <h2 className="h2 mb-10 max-w-[780px] text-tx">補助不是額外收入，是<span className="text-gold">降低你出海的實際成本</span></h2>
+          <div className="grid gap-6 md:grid-cols-3 md:gap-8">
+            <Pillar num="01" title="錢是真的" desc="每年數億元的預算由貿易署、經濟部執行，不是畫大餅。重點是知道怎麼申請、寫對計畫書。" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" /><path d="M9 9C9 9 9.5 8 12 8C14.5 8 15 9.5 15 10.2C15 11.1 14 11.6 12 12.2C10 12.8 9 13.5 9 14.5C9 15.5 10 16 12 16C14 16 15 15 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M12 6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
+            <Pillar num="02" title="不只是申請表" desc="計畫書要和你的商業目標對齊，執行過程要有產出與報告。鹿飛的服務本身就符合大多數結案標準。" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M10 13L12 15L16 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
+            <Pillar num="03" title="可以疊加使用" desc="同一家公司可以同時申請不同計畫——例如用展覽補助去美國展，用市場布建補助建立當地通路。" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="9" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="8" y="6" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="13" y="3" width="8" height="8" stroke="currentColor" strokeWidth="1.5" /></svg>} />
           </div>
         </div>
       </section>
 
-      {/* ───── Why this matters ───── */}
-      <section className="py-[72px] md:py-[96px] px-5 md:px-10 lg:px-16 bg-cream">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            為什麼這件事值得花十分鐘了解
-          </div>
-          <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] leading-[1.2] font-light tracking-[-0.5px] max-w-[780px] mb-10">
-            補助不是額外收入，是
-            <span className="text-gold font-normal">降低你出海的實際成本</span>
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            <Pillar
-              num="01"
-              title="錢是真的"
-              desc="每年數億元的預算由貿易署、經濟部執行，不是畫大餅。重點是知道怎麼申請、寫對計畫書。"
-              icon={
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" />
-                  <path
-                    d="M9 9C9 9 9.5 8 12 8C14.5 8 15 9.5 15 10.2C15 11.1 14 11.6 12 12.2C10 12.8 9 13.5 9 14.5C9 15.5 10 16 12 16C14 16 15 15 15 15"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                  <path d="M12 6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-              }
-            />
-            <Pillar
-              num="02"
-              title="不只是申請表"
-              desc="計畫書要和你的商業目標對齊，執行過程要有產出與報告。鹿飛的服務本身就符合大多數結案標準。"
-              icon={
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                  />
-                  <path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                  <path d="M10 13L12 15L16 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              }
-            />
-            <Pillar
-              num="03"
-              title="可以疊加使用"
-              desc="同一家公司可以同時申請不同計畫——例如用展覽補助去美國展，用市場布建補助建立當地通路。"
-              icon={
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <rect x="3" y="9" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="1.5" />
-                  <rect x="8" y="6" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="1.5" />
-                  <rect x="13" y="3" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="1.5" />
-                </svg>
-              }
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ───── Interactive matcher quiz ───── */}
       <SubsidyMatcher />
 
-      {/* ───── The 4 subsidies ───── */}
-      <section className="py-[72px] md:py-[96px] px-5 md:px-10 lg:px-16 bg-white">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            當期開放計畫
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[96px] lg:px-16">
+        <div className="mx-auto max-w-[1400px]">
+          <p className="eyebrow mb-3 text-gold">當期開放計畫</p>
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <h2 className="h2 max-w-[780px] text-tx">4 個計畫，對應你出海的<span className="text-gold">不同階段</span></h2>
+            <p className="text-[14.5px] text-tx3 md:text-right">資料最後確認 <span className="font-medium text-tx">2026.04.23</span><br />名額有限 · 部分計畫經費用罄即止</p>
           </div>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
-            <h2 className="font-sans text-[clamp(28px,3.5vw,44px)] leading-[1.15] font-light tracking-[-0.5px] max-w-[780px]">
-              4 個計畫，對應你出海的
-              <span className="text-gold font-normal">不同階段</span>
-            </h2>
-            <div className="text-[14.5px] text-tx3 md:text-right">
-              資料最後確認 <span className="text-tx font-medium">2026.04.23</span>
-              <br />
-              名額有限 · 部分計畫經費用罄即止
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-5 md:gap-6">
-            {SUBSIDIES.map((s) => {
-              const c = accentMap[s.accent];
-              const stage = STAGE_LABELS[s.stage];
-              return (
-                <article
-                  key={s.slug}
-                  id={s.slug}
-                  className={`group relative bg-white border border-bd p-7 md:p-9 transition-all duration-400 ${c.border} hover:shadow-lg hover:-translate-y-0.5 scroll-mt-[100px]`}
-                >
-                  {/* Accent bar */}
-                  <div
-                    className={`absolute left-0 top-0 bottom-0 w-[3px] ${c.bar}`}
-                    aria-hidden="true"
-                  />
-
-                  {/* Highlight banner (for time-limited / 加碼 programs) */}
-                  {s.highlight && (
-                    <div className="-mt-1 mb-5 flex flex-wrap items-center gap-2">
-                      <span className="inline-flex items-center gap-1.5 bg-ember text-white text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1">
-                        <span className="w-1 h-1 bg-white rounded-full animate-pulse" />
-                        {s.highlight}
-                      </span>
-                      {s.highlightNote && (
-                        <span className="text-[12px] text-ember font-medium">
-                          {s.highlightNote}
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Header row */}
-                  <div className="flex items-start justify-between gap-4 mb-5">
-                    <div className="flex items-start gap-4 min-w-0">
-                      {/* Icon */}
-                      <div
-                        className={`shrink-0 w-14 h-14 ${c.iconBg} flex items-center justify-center rounded-none`}
-                      >
-                        <SubsidyIcon iconKey={s.iconKey} size={26} />
-                      </div>
-
-                      <div className="min-w-0">
-                        <div className="flex items-baseline gap-2.5 mb-1">
-                          <span
-                            className={`font-sans text-[24px] font-light tabular-nums leading-none ${c.num}`}
-                          >
-                            {s.num}
-                          </span>
-                          <span className="text-[10.5px] font-semibold tracking-[1.5px] uppercase text-tx3">
-                            {s.agency}
-                          </span>
-                        </div>
-                        <h3 className="text-[20px] md:text-[21px] font-semibold leading-[1.3] text-tx mb-1">
-                          {s.shortTitle}
-                        </h3>
-                        <div className="text-[13.5px] text-tx3 leading-snug">
-                          {s.program}
-                        </div>
-                      </div>
-                    </div>
-                    <span
-                      className={`shrink-0 text-[10.5px] font-semibold tracking-wider uppercase px-2.5 py-1 ${c.badge}`}
-                    >
-                      {stage.label}
-                    </span>
-                  </div>
-
-                  {/* Amount + Deadline row */}
-                  <div className="grid grid-cols-[1fr_auto] gap-5 mb-5 pb-5 border-b border-bd/60">
-                    <div>
-                      <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
-                        補助額度
-                      </div>
-                      <div className={`text-[22px] font-sans font-light ${c.num}`}>
-                        {s.amount}
-                      </div>
-                      {s.amountNote && (
-                        <div className="text-[11.5px] text-tx3 mt-1">
-                          {s.amountNote}
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-right">
-                      <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-1">
-                        申請時程
-                      </div>
-                      <div className="text-[15.5px] font-medium text-tx">
-                        {s.deadline}
-                      </div>
-                      <div className="text-[11.5px] text-tx3 mt-1">
-                        {s.applicationNote}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* One-liner */}
-                  <p className="text-[15.5px] text-tx2 leading-[1.8] mb-5">
-                    {s.oneLiner}
-                  </p>
-
-                  {/* Who for */}
-                  <div className="mb-5">
-                    <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-2">
-                      適合
-                    </div>
-                    <ul className="space-y-1.5">
-                      {s.whoFor.map((w) => (
-                        <li
-                          key={w}
-                          className="text-[14.5px] text-tx2 leading-relaxed flex items-start gap-2"
-                        >
-                          <span className={`shrink-0 mt-[7px] w-1 h-1 ${c.bar}`} />
-                          {w}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Covers */}
-                  <div className="mb-6">
-                    <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-2">
-                      補助涵蓋
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {s.covers.map((cov) => (
-                        <span
-                          key={cov}
-                          className="text-[11.5px] text-tx2 bg-cream px-2.5 py-1"
-                        >
-                          {cov}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* LUFÉ angle */}
-                  <div className="bg-navy text-white/90 p-5 mb-5">
-                    <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gold mb-2">
-                      鹿飛怎麼幫上忙
-                    </div>
-                    <p className="text-[14.5px] leading-[1.8]">{s.lufeAngle}</p>
-                  </div>
-
-                  {/* Expansion: covers detail + process steps + important notes */}
-                  {(s.coversDetail || s.processSteps || s.importantNotes) && (
-                    <details className="group/det mb-5 border border-bd">
-                      <summary className="list-none cursor-pointer flex items-center justify-between gap-3 px-4 py-3 hover:bg-cream transition-colors">
-                        <span className="text-[13px] font-semibold text-tx tracking-wide">
-                          看申請細節（可補助項目 · 流程 · 注意事項）
-                        </span>
-                        <span className="text-tx3 text-[14px] transition-transform duration-300 group-open/det:rotate-180">
-                          ▾
-                        </span>
-                      </summary>
-                      <div className="px-5 py-5 border-t border-bd/60 space-y-6">
-                        {s.coversDetail && (
-                          <div>
-                            <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-3">
-                              可補助費用明細
-                            </div>
-                            <ul className="space-y-3">
-                              {s.coversDetail.map((item, i) => (
-                                <li
-                                  key={item.title}
-                                  className="grid grid-cols-[auto_1fr] gap-3 pb-3 last:pb-0 border-b last:border-0 border-bd/40"
-                                >
-                                  <span className={`shrink-0 text-[12px] font-sans font-light tabular-nums ${c.num} pt-0.5`}>
-                                    {String(i + 1).padStart(2, "0")}
-                                  </span>
-                                  <div className="min-w-0">
-                                    <div className="flex flex-wrap items-baseline gap-2 mb-1">
-                                      <span className="text-[14px] font-semibold text-tx">
-                                        {item.title}
-                                      </span>
-                                      {item.limit && (
-                                        <span className={`text-[10.5px] font-medium px-1.5 py-0.5 ${c.badge}`}>
-                                          {item.limit}
-                                        </span>
-                                      )}
-                                    </div>
-                                    <p className="text-[13px] text-tx2 leading-[1.7]">
-                                      {item.note}
-                                    </p>
-                                  </div>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {s.processSteps && (
-                          <div>
-                            <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-3">
-                              申請與核銷流程
-                            </div>
-                            <ol className="space-y-2">
-                              {s.processSteps.map((step, i) => (
-                                <li
-                                  key={step.title}
-                                  className="grid grid-cols-[28px_1fr] gap-3 items-start"
-                                >
-                                  <span className={`shrink-0 w-7 h-7 flex items-center justify-center text-[12px] font-semibold ${c.iconBg}`}>
-                                    {i + 1}
-                                  </span>
-                                  <div className="min-w-0 pt-1">
-                                    <span className="text-[14px] font-semibold text-tx">
-                                      {step.title}
-                                    </span>
-                                    <span className="text-[13px] text-tx2 leading-[1.7]">
-                                      {" — "}{step.note}
-                                    </span>
-                                  </div>
-                                </li>
-                              ))}
-                            </ol>
-                          </div>
-                        )}
-
-                        {s.importantNotes && (
-                          <div className="bg-ember/5 border-l-2 border-ember p-4">
-                            <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-ember mb-2">
-                              容易踩雷的點
-                            </div>
-                            <ul className="space-y-1.5">
-                              {s.importantNotes.map((note) => (
-                                <li
-                                  key={note}
-                                  className="text-[13px] text-tx2 leading-[1.7] flex items-start gap-2"
-                                >
-                                  <span className="shrink-0 mt-[8px] w-1 h-1 bg-ember" />
-                                  {note}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {s.verifiedOn && (
-                          <div className="text-[11px] text-tx3 pt-1 border-t border-bd/40">
-                            資料最後確認：{s.verifiedOn}（經濟部、國際貿易署公告）
-                          </div>
-                        )}
-                      </div>
-                    </details>
-                  )}
-
-                  {/* Footer */}
-                  <div className="flex items-center justify-between gap-4">
-                    <Link
-                      href="/assess"
-                      className="inline-flex items-center gap-2 text-[14.5px] font-semibold text-navy hover:text-gold transition-colors group/cta"
-                    >
-                      <span className="border-b border-navy/30 group-hover/cta:border-gold pb-0.5 transition-colors">
-                        查我是否符合
-                      </span>
-                      <span className="transition-transform duration-300 group-hover/cta:translate-x-0.5">
-                        →
-                      </span>
-                    </Link>
-                    {s.sourceUrl && (
-                      <a
-                        href={s.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] text-tx3 hover:text-gold transition-colors"
-                      >
-                        官方公告 ↗
-                      </a>
-                    )}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+          <SubsidyComparison subsidies={SUBSIDIES} />
+          <div className="mx-auto grid max-w-[1120px] min-w-0 gap-5 md:gap-6">{SUBSIDIES.map((subsidy) => <SubsidyPlanCard key={subsidy.slug} subsidy={subsidy} />)}</div>
         </div>
       </section>
 
-      {/* ───── Stage mapping ───── */}
-      <section className="py-[72px] md:py-[96px] px-5 md:px-10 lg:px-16 bg-cream">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            對應你的出海階段
-          </div>
-          <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] leading-[1.2] font-light tracking-[-0.5px] max-w-[780px] mb-10">
-            不知道哪個適合？先看你
-            <span className="text-gold font-normal">現在在哪一步</span>
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-5 md:gap-6">
+      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[96px] lg:px-16">
+        <div className="mx-auto max-w-[1200px]">
+          <p className="eyebrow mb-3 text-gold">對應你的出海階段</p>
+          <h2 className="h2 mb-10 max-w-[780px] text-tx">不知道哪個適合？先看你<span className="text-gold">現在在哪一步</span></h2>
+          <div className="grid gap-5 md:grid-cols-3 md:gap-6">
             {(["assess", "enter", "optimize"] as const).map((stageKey) => {
-              const stageInfo = STAGE_LABELS[stageKey];
-              const relevant = SUBSIDIES.filter((s) => s.stage === stageKey);
-              return (
-                <div
-                  key={stageKey}
-                  className="bg-white border border-bd p-7 md:p-8"
-                >
-                  <div className="text-[10.5px] font-semibold tracking-[1.5px] uppercase text-gold mb-3">
-                    {stageInfo.label}
-                  </div>
-                  <div className="text-[16.5px] font-semibold text-tx leading-snug mb-4">
-                    {stageInfo.desc}
-                  </div>
-                  <div className="pt-4 border-t border-bd/60">
-                    <div className="text-[10px] font-semibold tracking-[1.5px] uppercase text-tx3 mb-2">
-                      適用計畫
-                    </div>
-                    <ul className="space-y-2">
-                      {relevant.length === 0 ? (
-                        <li className="text-[13.5px] text-tx3">—</li>
-                      ) : (
-                        relevant.map((s) => (
-                          <li
-                            key={s.slug}
-                            className="text-[14.5px] text-tx2 leading-snug"
-                          >
-                            <Link
-                              href={`#${s.slug}`}
-                              className="hover:text-gold transition-colors"
-                            >
-                              <span className="text-gold font-semibold">
-                                {s.num}
-                              </span>{" "}
-                              {s.shortTitle}
-                            </Link>
-                          </li>
-                        ))
-                      )}
-                    </ul>
-                  </div>
-                </div>
-              );
+              const stage = STAGE_LABELS[stageKey];
+              const relevant = SUBSIDIES.filter((subsidy) => subsidy.stage === stageKey);
+              return <div key={stageKey} className="min-w-0 border border-bd bg-white p-7 md:p-8"><p className="eyebrow mb-3 text-gold">{stage.label}</p><p className="mb-4 text-[16.5px] font-semibold leading-snug text-tx">{stage.desc}</p><div className="border-t border-bd/60 pt-4"><p className="eyebrow mb-2 text-tx3">適用計畫</p><ul className="grid gap-2">{relevant.length === 0 ? <li className="text-[13.5px] text-tx3">—</li> : relevant.map((subsidy) => <li key={subsidy.slug} className="text-[14.5px] leading-snug text-tx2"><Link href={`#${subsidy.slug}`} className="hover:text-gold"><span className="font-semibold text-gold">{subsidy.num}</span> {subsidy.shortTitle}</Link></li>)}</ul></div></div>;
             })}
           </div>
         </div>
       </section>
 
-      {/* ───── FAQ ───── */}
-      <section className="py-[72px] md:py-[96px] px-5 md:px-10 lg:px-16 bg-white">
-        <div className="max-w-[860px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            常見問題
-          </div>
-          <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] leading-[1.2] font-light tracking-[-0.5px] mb-12">
-            申請前你最可能想問的事
-          </h2>
-
-          <div className="space-y-0 border-t border-bd">
-            <FAQItem
-              q="鹿飛會幫我申請補助嗎？"
-              a="我們不是代辦公司。但我們能幫你把「為什麼要出海、要去哪、要怎麼做」講清楚——這剛好就是計畫書的核心。很多客戶是把我們的評估報告直接當成申請依據。"
-            />
-            <FAQItem
-              q="我要自己寫計畫書嗎？"
-              a="計畫書的主體要由你公司提出（這是規定）。但鹿飛會提供完整的市場分析、策略規劃與執行方案，讓你只要把內容整理成官方格式即可。"
-            />
-            <FAQItem
-              q="可以同時申請多個計畫嗎？"
-              a="可以。不同計畫針對不同用途，例如展覽補助不衝突海外通路布建補助。但同一筆費用不能重複請款，這是基本原則。"
-            />
-            <FAQItem
-              q="申請通過率高嗎？"
-              a="各計畫不同，但有策略、有數據、有明確商業目標的申請案明顯較容易過。鹿飛的產出剛好符合這三項——我們不會保證你一定拿到，但會把你的勝率拉到最高。"
-            />
-            <FAQItem
-              q="如果我還沒開始出海，現在申請會不會太早？"
-              a="第 4 項跨境電商輔導就是為你這種情況設計的——先用免費資源學，不用先投錢。等你有方向了再申請金額較大的計畫。"
-            />
-          </div>
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[96px] lg:px-16">
+        <div className="mx-auto max-w-[860px]">
+          <p className="eyebrow mb-3 text-gold">常見問題</p>
+          <h2 className="h2 mb-12 text-tx">申請前你最可能想問的事</h2>
+          <div className="border-b border-bd2"><FAQItem q="鹿飛會幫我申請補助嗎？" a="我們不是代辦公司。但我們能幫你把「為什麼要出海、要去哪、要怎麼做」講清楚——這剛好就是計畫書的核心。很多客戶是把我們的評估報告直接當成申請依據。" /><FAQItem q="我要自己寫計畫書嗎？" a="計畫書的主體要由你公司提出（這是規定）。但鹿飛會提供完整的市場分析、策略規劃與執行方案，讓你只要把內容整理成官方格式即可。" /><FAQItem q="可以同時申請多個計畫嗎？" a="可以。不同計畫針對不同用途，例如展覽補助不衝突海外通路布建補助。但同一筆費用不能重複請款，這是基本原則。" /><FAQItem q="申請通過率高嗎？" a="各計畫不同，但有策略、有數據、有明確商業目標的申請案明顯較容易過。鹿飛的產出剛好符合這三項——我們不會保證你一定拿到，但會把你的勝率拉到最高。" /><FAQItem q="如果我還沒開始出海，現在申請會不會太早？" a="第 4 項跨境電商輔導就是為你這種情況設計的——先用免費資源學，不用先投錢。等你有方向了再申請金額較大的計畫。" /></div>
         </div>
       </section>
 
-      {/* ───── Subscribe: 補助快訊 ───── */}
-      <section className="py-[60px] md:py-[80px] px-5 md:px-10 lg:px-16 bg-cream border-t border-bd">
-        <div className="max-w-[860px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div className="max-w-[520px]">
-              <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-2">
-                補助雷達
-              </div>
-              <h3 className="text-[22px] md:text-[24px] font-semibold text-tx leading-snug mb-2">
-                補助一有更新，我們通知你
-              </h3>
-              <p className="text-[14.5px] text-tx2 leading-[1.8]">
-                每次有新計畫公告、金額加碼、截止日變動，鹿飛整理成一封信寄給你。不是每週轟炸，只在真的有事時才發。
-              </p>
-            </div>
-            <div className="shrink-0">
-              <a
-                href="mailto:aaron.yu@reborn.in?subject=%E8%A8%82%E9%96%B1%E8%A3%9C%E5%8A%A9%E5%BF%AB%E8%A8%8A&body=%E5%B8%8C%E6%9C%9B%E6%94%B6%E5%88%B0%E9%B9%BF%E9%A3%9B%E7%9A%84%E6%94%BF%E5%BA%9C%E5%87%BA%E6%B5%B7%E8%A3%9C%E5%8A%A9%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5%EF%BC%9A%0A%0A%E5%85%AC%E5%8F%B8%EF%BC%9A%0A%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E4%B8%BB%E8%A6%81%E5%B8%82%E5%A0%B4%EF%BC%88%E5%8C%97%E7%BE%8E%2F%E6%9D%B1%E5%8D%97%E4%BA%9E%EF%BC%89%EF%BC%9A%0A"
-                className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3.5 text-[14.5px] font-semibold hover:bg-navy/90 transition-colors group"
-              >
-                <span>訂閱補助快訊</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-              </a>
-              <div className="text-[11px] text-tx3 mt-2 text-center md:text-right">
-                寄信到 aaron.yu@reborn.in · 隨時退訂
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="border-t border-bd bg-cream px-5 py-[60px] md:px-10 md:py-[80px] lg:px-16">
+        <div className="mx-auto flex max-w-[860px] flex-col gap-6 md:flex-row md:items-center md:justify-between"><div className="max-w-[520px]"><p className="eyebrow mb-2 text-gold">補助雷達</p><h3 className="h3 text-tx">補助一有更新，我們通知你</h3><p className="mt-2 text-[14.5px] leading-[1.8] text-tx2">每次有新計畫公告、金額加碼、截止日變動，鹿飛整理成一封信寄給你。不是每週轟炸，只在真的有事時才發。</p></div><div className="shrink-0"><a href="mailto:aaron.yu@reborn.in?subject=%E8%A8%82%E9%96%B1%E8%A3%9C%E5%8A%A9%E5%BF%AB%E8%A8%8A&body=%E5%B8%8C%E6%9C%9B%E6%94%B6%E5%88%B0%E9%B9%BF%E9%A3%9B%E7%9A%84%E6%94%BF%E5%BA%9C%E5%87%BA%E6%B5%B7%E8%A3%9C%E5%8A%A9%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5%EF%BC%9A%0A%0A%E5%85%AC%E5%8F%B8%EF%BC%9A%0A%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E4%B8%BB%E8%A6%81%E5%B8%82%E5%A0%B4%EF%BC%88%E5%8C%97%E7%BE%8E%2F%E6%9D%B1%E5%8D%97%E4%BA%9E%EF%BC%89%EF%BC%9A%0A" className="inline-flex items-center gap-2 bg-navy px-6 py-3.5 text-[14.5px] font-semibold text-white transition-colors hover:bg-navy/90">訂閱補助快訊 →</a><p className="mt-2 text-center text-[11px] text-tx3 md:text-right">寄信到 aaron.yu@reborn.in · 隨時退訂</p></div></div>
       </section>
-
-      {/* ───── CTA ───── */}
       <SubsidiesCTASection />
     </div>
   );
 }
 
-function Stat({ num, label }: { num: string; label: string }) {
-  return (
-    <div>
-      <div className="font-sans text-[32px] md:text-[40px] text-gold font-extralight tracking-[-1px] leading-none mb-2">
-        {num}
-      </div>
-      <div className="text-[11.5px] text-white/60 font-medium tracking-wider uppercase">
-        {label}
-      </div>
-    </div>
-  );
-}
-
-function AgencyBadge({ name, sub }: { name: string; sub: string }) {
-  return (
-    <div className="flex items-baseline gap-2.5">
-      <span className="text-[15.5px] md:text-[16.5px] font-semibold text-tx tracking-[-0.2px]">
-        {name}
-      </span>
-      <span className="text-[10.5px] text-tx3 font-medium tracking-wider uppercase">
-        {sub}
-      </span>
-    </div>
-  );
-}
-
-function Pillar({
-  num,
-  title,
-  desc,
-  icon,
-}: {
-  num: string;
-  title: string;
-  desc: string;
-  icon: ReactNode;
-}) {
-  return (
-    <div className="group bg-white p-7 border border-bd hover:border-gold transition-colors">
-      <div className="flex items-center justify-between mb-4">
-        <div className="w-12 h-12 rounded-none bg-[rgba(212,168,92,0.08)] border border-gold/30 flex items-center justify-center text-gold-d group-hover:bg-[rgba(212,168,92,0.16)] transition-colors">
-          {icon}
-        </div>
-        <div className="font-sans text-[24px] text-gold font-light tabular-nums">
-          {num}
-        </div>
-      </div>
-      <h3 className="text-[18px] font-semibold mb-2 leading-tight">{title}</h3>
-      <p className="text-[15px] text-tx2 leading-[1.8]">{desc}</p>
-    </div>
-  );
-}
-
-function FAQItem({ q, a }: { q: string; a: string }) {
-  return (
-    <details className="group border-b border-bd py-6">
-      <summary className="flex items-start justify-between gap-6 cursor-pointer list-none">
-        <h3 className="text-[17px] md:text-[18px] font-semibold text-tx leading-snug group-hover:text-gold transition-colors">
-          {q}
-        </h3>
-        <span className="shrink-0 w-6 h-6 rounded-full border border-bd flex items-center justify-center text-tx3 text-[15.5px] transition-transform group-open:rotate-45">
-          +
-        </span>
-      </summary>
-      <p className="mt-4 text-[15.5px] text-tx2 leading-[1.85] max-w-[720px]">
-        {a}
-      </p>
-    </details>
-  );
-}
+function Stat({ num, label }: { readonly num: string; readonly label: string }) { return <div><p className="num mb-2 text-[32px] leading-none text-gold md:text-[40px]">{num}</p><p className="text-[11.5px] font-medium tracking-wider text-white/60">{label}</p></div>; }
+function AgencyBadge({ name, sub }: { readonly name: string; readonly sub: string }) { return <div className="flex items-baseline gap-2.5"><span className="text-[15.5px] font-semibold tracking-[-0.2px] text-tx md:text-[16.5px]">{name}</span><span className="text-[10.5px] font-medium tracking-wider text-tx3">{sub}</span></div>; }
+function Pillar({ num, title, desc, icon }: { readonly num: string; readonly title: string; readonly desc: string; readonly icon: ReactNode }) { return <div className="border border-bd bg-white p-7"><div className="mb-4 flex items-center justify-between"><div className="grid h-12 w-12 place-items-center border border-gold/30 bg-gold/[.08] text-gold-d">{icon}</div><span className="num text-[24px] text-gold">{num}</span></div><h3 className="h3 text-tx">{title}</h3><p className="mt-2 text-[15px] leading-[1.8] text-tx2">{desc}</p></div>; }
+function FAQItem({ q, a }: { readonly q: string; readonly a: string }) { return <Disclosure summary={q}><p className="max-w-[720px] text-[15.5px] leading-[1.85]">{a}</p></Disclosure>; }

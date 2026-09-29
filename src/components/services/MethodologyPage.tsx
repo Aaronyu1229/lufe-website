@@ -1,109 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+
+import { Disclosure, Segmented } from "@/components/ui";
 import { useMessageBox } from "../MessageBox";
 
-/**
- * MethodologyPage — the intellectual-authority page.
- * Spells out LUFÉ's Go/No-Go framework, scoring matrix, and red-flag rules.
- * Purpose: shift perception from "experienced consultancy" to "consultancy with IP."
- */
-
-/* ─── MBCPR dimension icons (inline SVG, no asset cost) ─── */
-
-const iconProps = {
-  width: 36,
-  height: 36,
-  viewBox: "0 0 36 36",
-  fill: "none",
-  "aria-hidden": true as const,
-};
-
-function MarketIcon() {
-  return (
-    <svg {...iconProps}>
-      <circle cx="18" cy="18" r="13" stroke="currentColor" strokeWidth="1.5" />
-      <ellipse cx="18" cy="18" rx="6" ry="13" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M5 18H31" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M18 5L18 31" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-    </svg>
-  );
-}
-
-function BarrierIcon() {
-  return (
-    <svg {...iconProps}>
-      <rect x="5" y="9" width="26" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.5" />
-      <rect x="5" y="23" width="26" height="4" rx="0.5" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M9 13V23" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M15 13V23" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M21 13V23" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M27 13V23" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
-  );
-}
-
-function CompetitionIcon() {
-  return (
-    <svg {...iconProps}>
-      <circle cx="11" cy="14" r="4" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="25" cy="14" r="4" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M5 28C5 24 7.5 21 11 21C14.5 21 17 24 17 28"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M19 28C19 24 21.5 21 25 21C28.5 21 31 24 31 28"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function ProfitabilityIcon() {
-  return (
-    <svg {...iconProps}>
-      <rect x="5" y="11" width="26" height="16" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="18" cy="19" r="4" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M16.5 19H19.5" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M18 17.5V20.5" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M8 14V24" stroke="currentColor" strokeWidth="1" opacity="0.55" />
-      <path d="M28 14V24" stroke="currentColor" strokeWidth="1" opacity="0.55" />
-    </svg>
-  );
-}
-
-function RegulatoryIcon() {
-  return (
-    <svg {...iconProps}>
-      <path
-        d="M9 5H22L27 10V31H9V5Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M22 5V10H27" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M13 17H23" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M13 21H23" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M13 25H19" stroke="currentColor" strokeWidth="1.2" />
-      <circle cx="23" cy="26" r="3" stroke="currentColor" strokeWidth="1.3" />
-    </svg>
-  );
-}
-
-const DIMENSION_ICON: Record<string, () => React.ReactElement> = {
-  M: MarketIcon,
-  B: BarrierIcon,
-  C: CompetitionIcon,
-  P: ProfitabilityIcon,
-  R: RegulatoryIcon,
-};
-
-const dimensions = [
+export const METHODOLOGY_DIMENSIONS = [
   {
     code: "M",
     name: "Market",
@@ -169,36 +72,36 @@ const dimensions = [
     ],
     redAt: "若該產品類別在目標市場過去 3 年曾被禁或大幅加稅，風險加權。",
   },
-];
+] as const;
 
-const decisionTree = [
+export const METHODOLOGY_DECISIONS = [
   {
     score: "≥ 75",
     verdict: "Go",
-    color: "emerald",
+    color: "border-l-emerald-500 bg-emerald-50/50",
     advice: "可以進，建議正常執行四階段路徑。",
   },
   {
     score: "60–74",
     verdict: "Conditional Go",
-    color: "amber",
+    color: "border-l-amber-500 bg-amber-50/50",
     advice: "可以進，但需要先解決某 1–2 個弱項（通常是 Barrier 或 Profitability）。",
   },
   {
     score: "45–59",
     verdict: "Hold",
-    color: "orange",
+    color: "border-l-orange-500 bg-orange-50/50",
     advice: "建議暫緩 6–12 個月，等市場、法規或你的產品本身發生某個關鍵變化再重估。",
   },
   {
     score: "< 45",
     verdict: "No-Go",
-    color: "red",
+    color: "border-l-red-500 bg-red-50/50",
     advice: "直接不建議。我們會給出下次可以重新考慮的具體條件。",
   },
-];
+] as const;
 
-const workedExample = {
+export const WORKED_EXAMPLE = {
   caseName: "保健品 → 北美 Costco（真實案例）",
   scores: [
     { dim: "Market", score: 82, note: "北美保健品市場 $600B+，年增 5.2%" },
@@ -211,350 +114,307 @@ const workedExample = {
   verdict: "Conditional Go",
   condition: "前提是配方需微調符合北美口感偏好（Barrier 弱項需先解決）",
   outcome: "實際執行後 6 個月上架，首月銷量超標 40%。",
-};
+} as const;
+
+export const METHODOLOGY_INDEX = [
+  { value: "framework", label: "MBCPR 五維評分" },
+  { value: "dimensions", label: "具體評的是什麼" },
+  { value: "decision", label: "加權總分 → 決策" },
+  { value: "example", label: "這套框架跑一次長什麼樣" },
+  { value: "why", label: "我們不靠直覺做決策" },
+] as const;
 
 export function MethodologyPage() {
   const { open } = useMessageBox();
+  const [activeSection, setActiveSection] = useState<string>(METHODOLOGY_INDEX[0].value);
+
+  const goToSection = (value: string) => {
+    setActiveSection(value);
+    const target = document.getElementById(value);
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "start",
+    });
+  };
+
+  useEffect(() => {
+    const sections = METHODOLOGY_INDEX.map(({ value }) => document.getElementById(value)).filter(
+      (section): section is HTMLElement => section !== null,
+    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const active = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (active) setActiveSection(active.target.id);
+      },
+      { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
-      {/* ─── Hero ─── */}
-      <section className="relative bg-navy pt-[140px] md:pt-[180px] pb-[80px] md:pb-[100px] px-5 md:px-10 overflow-hidden">
+      <section className="relative overflow-hidden bg-navy px-5 pb-[72px] pt-[128px] md:px-10 md:pb-[104px] md:pt-[160px]">
         <div
           aria-hidden="true"
-          className="absolute inset-0 animate-hero-glow-drift"
+          className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at center top, rgba(212,168,92,0.12) 0%, rgba(212,168,92,0.02) 40%, transparent 70%)",
+              "radial-gradient(ellipse at 50% 0, rgba(212,168,92,0.14), transparent 53%)",
           }}
         />
-        {/* Secondary off-center glow for layered depth */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 animate-hero-glow-drift"
-          style={{
-            animationDelay: "-11s",
-            background:
-              "radial-gradient(ellipse 50% 40% at 75% 20%, rgba(91,143,168,0.10) 0%, transparent 60%)",
-          }}
-        />
-
-        <div className="relative max-w-[1000px] mx-auto">
-          <nav className="flex items-center gap-2 text-[13px] text-white/50 mb-6">
-            <Link href="/services" className="hover:text-white transition-colors">
+        <div className="relative mx-auto max-w-[1000px]">
+          <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
+            <Link href="/services" className="hover:text-gold">
               服務
             </Link>
-            <span>/</span>
-            <span className="text-white/80">方法論</span>
+            <span className="mx-2 text-white/30">/</span>
+            <span className="text-white/75">方法論</span>
           </nav>
-
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            鹿飛方法論
-          </div>
-          <h1 className="font-heading text-[clamp(32px,5vw,56px)] text-white leading-[1.1] font-light tracking-[-0.8px] mb-5">
+          <p className="mb-2 text-[13px] font-semibold tracking-[0.06em] text-gold">鹿飛方法論</p>
+          <h1 className="font-sans text-[clamp(34px,5vw,60px)] font-[650] leading-[1.12] tracking-normal text-white [text-wrap:balance]">
             我們怎麼判斷
             <br />
-            <span className="text-gold font-normal">值不值得去</span>
+            <span className="text-gold">值不值得去</span>
           </h1>
-          <p className="text-[18px] md:text-[20px] text-white/75 max-w-[720px] leading-[1.6] font-light">
+          <p className="mt-5 max-w-[720px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/75">
             這頁不是行銷文案，是我們實際用來替每個客戶做 Go / No-Go 決策的框架。
             如果你想了解顧問公司背後的判斷邏輯，而不是只看結論，這頁就是為你寫的。
           </p>
         </div>
       </section>
 
-      {/* ─── Framework intro ─── */}
-      <section className="bg-white py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[900px] mx-auto">
-          <div className="section-label">框架全貌</div>
-          <h2 className="section-heading">
-            MBCPR 五維評分
-          </h2>
-          <p className="section-desc">
-            每個案子我們都會從五個維度打分，每個維度有各自的權重與紅線。
-            加權後的總分直接決定 Go / No-Go。
-          </p>
-
-          <div className="grid grid-cols-5 gap-2 md:gap-4 mt-10 mb-3">
-            {dimensions.map((d) => {
-              const Icon = DIMENSION_ICON[d.code];
-              return (
-                <div key={d.code} className="text-center">
-                  <div className="relative w-14 h-14 md:w-20 md:h-20 mx-auto bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d mb-2">
-                    {Icon && <Icon />}
-                    <span className="absolute -top-2 -right-2 w-5 h-5 md:w-6 md:h-6 bg-navy text-gold font-heading text-[10px] md:text-[13px] font-semibold flex items-center justify-center">
-                      {d.code}
-                    </span>
-                  </div>
-                  <div className="text-[11px] md:text-[14.5px] font-semibold text-tx">
-                    {d.name}
-                  </div>
-                  <div className="text-[10px] md:text-[11px] text-gold-d font-medium mt-0.5">
-                    {d.weight}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="text-[11px] text-tx3 text-center tracking-wider">
-            MARKET · BARRIER · COMPETITION · PROFITABILITY · REGULATORY
+      <div>
+        <div className="sticky top-[74px] z-20 mx-auto w-full max-w-full overflow-hidden px-5 py-[14px] md:w-fit md:px-10">
+          <div className="max-w-full overflow-hidden border border-bd bg-[rgba(245,242,236,0.92)] px-1 py-1 text-center shadow-[0_10px_28px_rgba(16,27,48,0.13)] backdrop-blur-[18px]">
+            <Segmented
+              label="頁內導覽"
+              value={activeSection}
+              onChange={goToSection}
+              options={METHODOLOGY_INDEX.map((item) => ({ ...item }))}
+              className="max-w-full justify-center bg-transparent"
+            />
           </div>
         </div>
-      </section>
 
-      {/* ─── Dimension detail ─── */}
-      <section className="bg-cream py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[900px] mx-auto">
-          <div className="section-label">每個維度詳解</div>
-          <h2 className="section-heading">
-            具體評的是什麼
-          </h2>
-
-          <div className="space-y-5 mt-10">
-            {dimensions.map((d) => {
-              const Icon = DIMENSION_ICON[d.code];
-              return (
-              <div
-                key={d.code}
-                className="bg-white p-6 md:p-8 border-l-4 border-gold/40"
-              >
-                <div className="flex items-start gap-5">
-                  <div className="relative w-14 h-14 bg-gold/10 border-2 border-gold/40 rounded-none flex items-center justify-center text-gold-d shrink-0">
-                    {Icon && <Icon />}
-                    <span className="absolute -top-2 -right-2 w-5 h-5 bg-navy text-gold font-heading text-[10px] font-semibold flex items-center justify-center">
-                      {d.code}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-3 mb-1 flex-wrap">
-                      <h3 className="text-[20px] md:text-[21px] font-semibold">
-                        {d.name}
-                      </h3>
-                      <span className="text-[11px] font-semibold tracking-wider uppercase text-gold-d bg-gold/10 px-2 py-0.5">
-                        權重 {d.weight}
-                      </span>
-                    </div>
-                    <p className="text-[16.5px] text-tx2 italic mb-4">
-                      「{d.question}」
-                    </p>
-                    <div className="mb-4">
-                      <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-tx3 mb-2">
-                        評分依據
-                      </div>
-                      <ul className="space-y-1.5">
-                        {d.criteria.map((cr) => (
-                          <li
-                            key={cr}
-                            className="flex items-start gap-2.5 text-[15px] text-tx2 leading-[1.65]"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-gold/60 mt-[9px] shrink-0" />
-                            {cr}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="pt-4 border-t border-red-200/60 bg-red-50/40 -mx-6 md:-mx-8 px-6 md:px-8 pb-1 -mb-6 md:-mb-8 mt-4">
-                      <div className="text-[10.5px] font-semibold tracking-[1px] uppercase text-red-600/80 mb-1 mt-3">
-                        紅線
-                      </div>
-                      <p className="text-[14.5px] text-red-700/90 leading-[1.65] pb-4">
-                        {d.redAt}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Decision Tree ─── */}
-      <section className="bg-white py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[900px] mx-auto">
-          <div className="section-label">決策樹</div>
-          <h2 className="section-heading">
-            加權總分 → 決策
-          </h2>
-          <p className="section-desc">
-            五個維度的加權平均直接對應到四種結論。我們不玩「都有機會」的話術。
-          </p>
-
-          <div className="space-y-4 mt-10">
-            {decisionTree.map((d) => {
-              const colorMap: Record<string, string> = {
-                emerald:
-                  "border-l-emerald-500 bg-emerald-50/50 text-emerald-800",
-                amber: "border-l-amber-500 bg-amber-50/50 text-amber-800",
-                orange: "border-l-orange-500 bg-orange-50/50 text-orange-800",
-                red: "border-l-red-500 bg-red-50/50 text-red-800",
-              };
-              return (
-                <div
-                  key={d.verdict}
-                  className={`p-5 md:p-6 border-l-4 ${colorMap[d.color]}`}
+        <section id="framework" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
+          <div className="mx-auto max-w-[900px]">
+            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">框架全貌</p>
+            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+              MBCPR 五維評分
+            </h2>
+            <p className="mt-4 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
+              每個案子我們都會從五個維度打分，每個維度有各自的權重與紅線。
+              加權後的總分直接決定 Go / No-Go。
+            </p>
+            <div
+              aria-label="MARKET · BARRIER · COMPETITION · PROFITABILITY · REGULATORY"
+              className="mt-[38px] grid min-w-0 grid-cols-5 gap-1.5 md:gap-2"
+            >
+              {METHODOLOGY_DIMENSIONS.map((dimension) => (
+                <button
+                  key={dimension.code}
+                  type="button"
+                  onClick={() => goToSection("dimensions")}
+                  className="grid min-w-0 place-items-center bg-gold/10 px-1 py-4 text-center outline-none focus-visible:ring-2 focus-visible:ring-sky md:min-h-[94px] md:px-2"
                 >
-                  <div className="flex items-start gap-4 flex-wrap md:flex-nowrap">
-                    <div className="min-w-[100px]">
-                      <div className="text-[11px] font-semibold tracking-[1.5px] uppercase opacity-70 mb-0.5">
-                        總分
-                      </div>
-                      <div className="font-heading text-[22px] font-semibold tabular-nums">
-                        {d.score}
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-[18px] font-semibold mb-1.5">
-                        {d.verdict}
-                      </h3>
-                      <p className="text-[15px] leading-[1.8] opacity-90">
-                        {d.advice}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Worked Example ─── */}
-      <section className="bg-navy py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[900px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            實戰範例
-          </div>
-          <h2 className="font-sans text-[clamp(26px,3.2vw,40px)] text-white leading-[1.2] font-light tracking-[-0.5px] mb-3">
-            這套框架跑一次<span className="text-gold font-normal">長什麼樣</span>
-          </h2>
-          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-10 max-w-[620px]">
-            下面是我們跑「{workedExample.caseName}」時的實際評分表。
-          </p>
-
-          <div className="bg-white/[0.03] border border-white/10 rounded-none p-6 md:p-8 mb-8">
-            <div className="space-y-4 mb-6">
-              {workedExample.scores.map((s) => (
-                <div
-                  key={s.dim}
-                  className="grid grid-cols-[80px_1fr_60px] gap-4 items-center"
-                >
-                  <div className="text-[13px] font-semibold text-gold tracking-wider uppercase">
-                    {s.dim}
-                  </div>
-                  <div>
-                    <div className="h-2 bg-white/5 relative overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-gold/40 to-gold"
-                        style={{ width: `${s.score}%` }}
-                      />
-                    </div>
-                    <div className="text-[11px] text-white/50 mt-1.5">
-                      {s.note}
-                    </div>
-                  </div>
-                  <div className="font-sans text-[21px] text-white font-light tabular-nums text-right">
-                    {s.score}
-                  </div>
-                </div>
+                  <span className="font-sans text-[clamp(28px,5vw,46px)] font-semibold leading-none tracking-[-0.035em] text-gold-d">
+                    {dimension.code}
+                  </span>
+                  <span className="mt-2 break-words text-[10px] font-semibold leading-tight text-tx md:text-[13px]">
+                    {dimension.name}
+                  </span>
+                  <span className="mt-0.5 text-[10px] font-medium text-gold-d md:text-[12px]">
+                    {dimension.weight}
+                  </span>
+                </button>
               ))}
             </div>
+            <p className="mt-[14px] text-center text-[11px] tracking-wider text-tx3">
+              MARKET · BARRIER · COMPETITION · PROFITABILITY · REGULATORY
+            </p>
+          </div>
+        </section>
 
-            <div className="pt-6 border-t border-white/10">
-              <div className="flex items-baseline justify-between mb-3 gap-4 flex-wrap">
-                <div>
-                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-white/50 mb-0.5">
-                    加權總分
+        <section id="dimensions" className="scroll-mt-[126px] bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
+          <div className="mx-auto max-w-[900px]">
+            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">每個維度詳解</p>
+            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+              具體評的是什麼
+            </h2>
+            <div className="mt-9">
+              {METHODOLOGY_DIMENSIONS.map((dimension) => (
+                <Disclosure
+                  key={dimension.code}
+                  id={`methodology-${dimension.code}`}
+                  summary={
+                    <span className="grid min-w-0 grid-cols-[38px_minmax(0,1fr)_auto] items-center gap-2 md:grid-cols-[52px_minmax(0,1fr)_auto_28px] md:gap-3">
+                      <span className="font-sans text-[26px] font-semibold leading-none tracking-[-0.035em] text-gold-d">
+                        {dimension.code}
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block font-sans text-[18px] font-semibold leading-[1.3] text-tx md:text-[21px]">
+                          {dimension.name}
+                        </span>
+                        <span className="mt-1 block text-[14px] font-normal leading-[1.7] text-tx2 md:text-[16px]">
+                          「{dimension.question}」
+                        </span>
+                      </span>
+                      <span className="hidden whitespace-nowrap text-[13px] font-semibold text-gold-d md:block">
+                        權重 {dimension.weight}
+                      </span>
+                    </span>
+                  }
+                >
+                  <div className="pl-[46px] md:pl-[62px]">
+                    <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">評分依據</p>
+                    <ul className="my-5 space-y-2.5">
+                      {dimension.criteria.map((criterion) => (
+                        <li key={criterion} className="flex items-start gap-3 text-[15px] leading-[1.7] text-tx2">
+                          <span aria-hidden="true" className="mt-[0.7em] size-[5px] shrink-0 bg-gold" />
+                          {criterion}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-5 border-l-[3px] border-red-700/55 bg-red-50/50 p-[18px]">
+                      <p className="mb-1.5 text-[13px] font-semibold tracking-[0.06em] text-red-600">紅線</p>
+                      <p className="text-[14.5px] leading-[1.75] text-red-800">{dimension.redAt}</p>
+                    </div>
                   </div>
-                  <div className="font-heading text-[40px] text-gold font-semibold tabular-nums leading-none">
-                    {workedExample.weighted}
+                </Disclosure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="decision" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
+          <div className="mx-auto max-w-[900px]">
+            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">決策樹</p>
+            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+              加權總分 → 決策
+            </h2>
+            <p className="mt-4 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
+              五個維度的加權平均直接對應到四種結論。我們不玩「都有機會」的話術。
+            </p>
+            <div className="mt-[38px] grid gap-3">
+              {METHODOLOGY_DECISIONS.map((decision) => (
+                <article key={decision.verdict} className={`grid gap-2 border-l-4 p-[22px] md:grid-cols-[96px_minmax(0,1fr)] md:gap-5 ${decision.color}`}>
+                  <div>
+                    <p className="text-[14px] leading-[1.6] text-tx3">總分</p>
+                    <p className="font-sans text-[24px] font-semibold leading-none tracking-[-0.035em] tabular-nums text-tx">
+                      {decision.score}
+                    </p>
                   </div>
-                </div>
-                <div>
-                  <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-white/50 mb-0.5">
-                    結論
+                  <div className="min-w-0">
+                    <h3 className="mb-1.5 font-sans text-[18px] font-semibold leading-[1.4] text-tx">
+                      {decision.verdict}
+                    </h3>
+                    <p className="text-[15px] leading-[1.75] text-tx2">{decision.advice}</p>
                   </div>
-                  <div className="text-[21px] text-amber-400 font-semibold">
-                    {workedExample.verdict}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="example" className="scroll-mt-[126px] bg-navy px-5 py-[80px] text-white md:px-10 md:py-[110px]">
+          <div className="mx-auto max-w-[900px]">
+            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold">實戰範例</p>
+            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
+              這套框架跑一次<span className="text-gold">長什麼樣</span>
+            </h2>
+            <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/70">
+              下面是我們跑「{WORKED_EXAMPLE.caseName}」時的實際評分表。
+            </p>
+            <div className="mt-10 border border-white/10 bg-white/[0.045] p-5 md:p-7">
+              <div>
+                {WORKED_EXAMPLE.scores.map((score) => (
+                  <div key={score.dim} className="grid min-w-0 grid-cols-[72px_minmax(0,1fr)_36px] items-center gap-2 border-b border-white/10 py-3.5 md:grid-cols-[86px_minmax(0,1fr)_48px] md:gap-3.5">
+                    <span className="text-[12px] font-semibold text-gold md:text-[14px]">{score.dim}</span>
+                    <span className="min-w-0">
+                      <span className="block h-[7px] overflow-hidden bg-white/10">
+                        <span className="block h-full bg-gradient-to-r from-gold/45 to-gold" style={{ width: `${score.score}%` }} />
+                      </span>
+                      <span className="mt-1.5 block text-[11px] leading-[1.55] text-white/60">{score.note}</span>
+                    </span>
+                    <span className="font-sans text-right text-[22px] font-semibold leading-none tracking-[-0.035em] tabular-nums text-white">
+                      {score.score}
+                    </span>
                   </div>
-                </div>
+                ))}
               </div>
-              <p className="text-[15.5px] text-white/70 leading-[1.8] mt-4">
-                <span className="text-gold font-semibold">條件：</span>
-                {workedExample.condition}
+              <div className="mt-2 flex flex-wrap justify-between gap-x-6 gap-y-5 border-t border-white/15 pt-7">
+                <div>
+                  <p className="text-[14px] leading-[1.6] text-white/55">加權總分</p>
+                  <p className="font-sans text-[42px] font-semibold leading-none tracking-[-0.035em] tabular-nums text-gold">
+                    {WORKED_EXAMPLE.weighted}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[14px] leading-[1.6] text-white/55">結論</p>
+                  <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-amber-300">
+                    {WORKED_EXAMPLE.verdict}
+                  </h3>
+                </div>
+                <p className="w-full text-[15.5px] leading-[1.8] text-white/75">
+                  <span className="font-semibold text-gold">條件：</span>
+                  {WORKED_EXAMPLE.condition}
+                </p>
+                <p className="w-full text-[15.5px] leading-[1.8] text-white/75">
+                  <span className="font-semibold text-gold">實際結果：</span>
+                  {WORKED_EXAMPLE.outcome}
+                </p>
+              </div>
+            </div>
+            <Link href="/cases/costco-health" className="mt-[26px] inline-flex items-center gap-2 text-[16px] font-semibold text-gold hover:text-white">
+              看這個案例的完整故事 <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </section>
+
+        <section id="why" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
+          <div className="mx-auto max-w-[760px]">
+            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">為什麼要這樣做</p>
+            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+              我們不靠直覺做決策
+            </h2>
+            <div className="mt-6 space-y-[18px] text-[16px] leading-[1.85] text-tx2">
+              <p>
+                多數顧問公司的「建議」是建立在老闆的個人經驗上。有經驗當然是好事，但經驗會老化、會帶偏見、而且最重要的是——
+                <span className="font-medium text-tx">客戶無法檢驗</span>。
               </p>
-              <p className="text-[15.5px] text-white/70 leading-[1.8] mt-2">
-                <span className="text-gold font-semibold">實際結果：</span>
-                {workedExample.outcome}
+              <p>
+                我們寫出這套框架的目的，是讓客戶在跟我們合作時，能知道我們的每一個判斷「是怎麼得出來的」。如果你覺得我們某個維度打分不合理，你可以直接問，我們會拿出依據。
+              </p>
+              <p>
+                這套框架也是我們內部的自律工具——它強迫我們在接案前必須跑完整個流程。如果總分不到 60，我們不會接。不管客戶多想做，也不管我們短期內需不需要這筆營收。
               </p>
             </div>
           </div>
+        </section>
+      </div>
 
-          <Link
-            href="/cases/costco-health"
-            className="group inline-flex items-center gap-2 text-gold text-[15.5px] font-semibold transition-colors hover:text-white"
-          >
-            <span className="border-b border-gold/40 pb-0.5 group-hover:border-white transition-colors">
-              看這個案例的完整故事
-            </span>
-            <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-          </Link>
-        </div>
-      </section>
-
-      {/* ─── Why this matters ─── */}
-      <section className="bg-cream py-[72px] md:py-[96px] px-5 md:px-10">
-        <div className="max-w-[760px] mx-auto">
-          <div className="section-label">為什麼要這樣做</div>
-          <h2 className="section-heading">
-            我們不靠直覺做決策
+      <section className="bg-navy px-5 py-[80px] text-white md:px-10 md:py-[110px]">
+        <div className="mx-auto max-w-[720px] text-center">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
+            想用這套框架<span className="text-gold">評估你的產品</span>？
           </h2>
-          <div className="space-y-5 text-[16.5px] text-tx2 leading-[1.85] mt-6">
-            <p>
-              多數顧問公司的「建議」是建立在老闆的個人經驗上。有經驗當然是好事，
-              但經驗會老化、會帶偏見、而且最重要的是——
-              <span className="text-tx font-medium">客戶無法檢驗</span>。
-            </p>
-            <p>
-              我們寫出這套框架的目的，是讓客戶在跟我們合作時，
-              能知道我們的每一個判斷「是怎麼得出來的」。
-              如果你覺得我們某個維度打分不合理，你可以直接問，我們會拿出依據。
-            </p>
-            <p>
-              這套框架也是我們內部的自律工具——它強迫我們在接案前必須跑完整個流程。
-              如果總分不到 60，我們不會接。不管客戶多想做，
-              也不管我們短期內需不需要這筆營收。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── CTA ─── */}
-      <section className="bg-navy py-[80px] md:py-[100px] px-5 md:px-10">
-        <div className="max-w-[720px] mx-auto text-center">
-          <h2 className="font-sans text-[clamp(26px,3.2vw,38px)] text-white leading-[1.2] font-light tracking-[-0.4px] mb-4">
-            想用這套框架<span className="text-gold font-normal">評估你的產品</span>？
-          </h2>
-          <p className="text-[16.5px] text-white/60 leading-[1.8] mb-10 max-w-[520px] mx-auto">
-            聊聊你的狀況，我們會用 30 分鐘粗跑一次這五個維度，
-            告訴你目前的大致落點，不收費。
+          <p className="mx-auto mt-[18px] max-w-[520px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/70">
+            聊聊你的狀況，我們會用 30 分鐘粗跑一次這五個維度，告訴你目前的大致落點，不收費。
           </p>
-          <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
-            <button
-              onClick={open}
-              className="bg-gold text-navy px-9 py-[15px] rounded-none text-[15.5px] font-semibold tracking-[0.5px] transition-all hover:bg-gold-l cursor-pointer"
-            >
+          <div className="mt-[34px] flex flex-wrap items-center justify-center gap-3">
+            <button onClick={open} className="cursor-pointer bg-gold px-[26px] py-[14px] text-[16px] font-semibold text-navy hover:bg-gold-l">
               聊聊你的產品 →
             </button>
-            <Link
-              href="/services/market-assessment"
-              className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-white"
-            >
-              <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
-                看完整市場評估服務
-              </span>
-              <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            <Link href="/services/market-assessment" className="bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white hover:bg-white/25">
+              看完整市場評估服務 →
             </Link>
           </div>
         </div>
