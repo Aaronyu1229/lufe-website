@@ -44,7 +44,7 @@ export const createLead = async (values: LeadValues): Promise<string | null> => 
   if (!sql) return null;
 
   const rows = await sql<{ id: string }[]>`
-    INSERT INTO leads (
+    INSERT INTO lufe.leads (
       form, name, contact, email, phone, company, product, stage, message, page, user_agent
     ) VALUES (
       ${values.form}, ${values.name}, ${values.contact}, ${values.email}, ${values.phone},
@@ -66,7 +66,7 @@ export const updateLeadNotification = async (
   if (!sql) throw new Error("LUFE_DATABASE_URL is not configured");
 
   await sql`
-    UPDATE leads
+    UPDATE lufe.leads
     SET notified = ${notified}, notify_error = ${notifyError}
     WHERE id = ${id}
   `;
