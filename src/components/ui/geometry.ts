@@ -65,6 +65,10 @@ export function segmentedPill(segments: readonly SegmentGeometry[], fractionalIn
   };
 }
 
+export function disclosureHeight(open: boolean, currentHeight: number, moving: boolean): number | "auto" {
+  return open && !moving ? "auto" : currentHeight;
+}
+
 export function flipDelta(before: RectGeometry, after: RectGeometry) {
   return {
     x: before.left - after.left,

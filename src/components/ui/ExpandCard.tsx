@@ -10,6 +10,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
+import { createPortal } from "react-dom";
 
 import { clamp, draggable, project, rubberband, useSpring } from "@/lib/motion";
 
@@ -41,6 +42,10 @@ function CloseIcon() {
   </svg>;
 }
 
+function DialogPortal({ mounted, children }: { mounted: boolean; children: ReactNode }) {
+  return mounted ? createPortal(children, document.body) : children;
+}
+
 export function ExpandCard({ card, panel, title, image, className }: ExpandCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
@@ -49,10 +54,16 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
   const dialogId = useId();
   const [present, setPresent] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [from, setFrom] = useState<PanelRect | null>(null);
   const [to, setTo] = useState<PanelRect | null>(null);
   const morph = useSpring(0);
   const pull = useSpring(0);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- moves the SSR-inline dialog to document.body after hydration.
+    setMounted(true);
+  }, []);
 
   const finalRect = useCallback((): PanelRect => {
     const viewportWidth = window.innerWidth;
@@ -177,50 +188,52 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
     >
       {card}
     </div>
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={dialogId}
-      aria-hidden={!present}
-      inert={!open}
-      className="fixed inset-0 z-[90]"
-      style={{ visibility: present ? "visible" : "hidden", pointerEvents: open ? "auto" : "none" }}
-    >
-      <button type="button" tabIndex={-1} aria-label="關閉" className="absolute inset-0 h-full w-full cursor-default bg-[#0A1222]/50" style={{ opacity: progress * (1 - pullProgress) }} onClick={() => close()} />
+    <DialogPortal mounted={mounted}>
       <div
-        className="absolute inset-0 origin-top will-change-[clip-path,transform]"
-        style={{
-          clipPath: panelRect ? `inset(${panelRect.top}px ${viewportWidth - panelRect.left - panelRect.width}px ${viewportHeight - panelRect.top - panelRect.height}px ${panelRect.left}px)` : "inset(100%)",
-          transform: `translate3d(0, ${pull.value}px, 0) scale(${1 - pullProgress * 0.08})`,
-          transformOrigin: `50% ${to?.top ?? 0}px`,
-        }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={dialogId}
+        aria-hidden={!present}
+        inert={!open}
+        className="fixed inset-0 z-[90]"
+        style={{ visibility: present ? "visible" : "hidden", pointerEvents: open ? "auto" : "none" }}
       >
+        <button type="button" tabIndex={-1} aria-label="關閉" className="absolute inset-0 h-full w-full cursor-default bg-[#0A1222]/50" style={{ opacity: progress * (1 - pullProgress) }} onClick={() => close()} />
         <div
-          className="lufe-glass-panel absolute flex flex-col overflow-hidden bg-white will-change-transform"
-          style={to ? {
-            left: to.left,
-            top: to.top,
-            width: to.width,
-            height: to.height,
-            transform: `translate3d(${(panelRect?.left ?? to.left) - to.left}px, ${(panelRect?.top ?? to.top) - to.top}px, 0)`,
-          } : undefined}
+          className="absolute inset-0 origin-top will-change-[clip-path,transform]"
+          style={{
+            clipPath: panelRect ? `inset(${panelRect.top}px ${viewportWidth - panelRect.left - panelRect.width}px ${viewportHeight - panelRect.top - panelRect.height}px ${panelRect.left}px)` : "inset(100%)",
+            transform: `translate3d(0, ${pull.value}px, 0) scale(${1 - pullProgress * 0.08})`,
+            transformOrigin: `50% ${to?.top ?? 0}px`,
+          }}
         >
-          <div ref={mediaRef} className={`relative shrink-0 touch-none cursor-grab overflow-hidden bg-black/[.06] active:cursor-grabbing ${image ? "aspect-[16/10] max-h-[44vh]" : "h-14"}`}>
-            {image && (
-              // eslint-disable-next-line @next/next/no-img-element -- callers supply arbitrary image sources.
-              <img src={image.src} alt={image.alt} className="h-full w-full object-cover" draggable={false} />
-            )}
-            <span aria-hidden="true" className="absolute left-1/2 top-2 block h-[5px] w-10 -translate-x-1/2 bg-white/75 shadow-[0_1px_4px_rgba(0,0,0,.3)]" />
-          </div>
-          <button ref={closeRef} type="button" aria-label="關閉" onClick={() => close()} className="lufe-glass-dark absolute right-3 top-3 z-10 grid h-10 w-10 cursor-pointer place-items-center text-white outline-none focus-visible:ring-2 focus-visible:ring-white">
-            <CloseIcon />
-          </button>
-          <div className="min-h-0 flex-1 overflow-auto overscroll-contain px-7 pb-10 pt-7 md:px-12 md:pb-12 md:pt-10" style={{ opacity: clamp((progress - 0.35) / 0.65, 0, 1) }}>
-            <h2 id={dialogId} className="mb-4 text-xl font-semibold text-tx">{title}</h2>
-            {panel}
+          <div
+            className="lufe-glass-panel absolute flex flex-col overflow-hidden bg-white will-change-transform"
+            style={to ? {
+              left: to.left,
+              top: to.top,
+              width: to.width,
+              height: to.height,
+              transform: `translate3d(${(panelRect?.left ?? to.left) - to.left}px, ${(panelRect?.top ?? to.top) - to.top}px, 0)`,
+            } : undefined}
+          >
+            <div ref={mediaRef} className={`relative shrink-0 touch-none cursor-grab overflow-hidden bg-black/[.06] active:cursor-grabbing ${image ? "aspect-[16/10] max-h-[44vh]" : "h-14"}`}>
+              {image && (
+                // eslint-disable-next-line @next/next/no-img-element -- callers supply arbitrary image sources.
+                <img src={image.src} alt={image.alt} className="h-full w-full object-cover" draggable={false} />
+              )}
+              <span aria-hidden="true" className="absolute left-1/2 top-2 block h-[5px] w-10 -translate-x-1/2 bg-white/75 shadow-[0_1px_4px_rgba(0,0,0,.3)]" />
+            </div>
+            <button ref={closeRef} type="button" aria-label="關閉" onClick={() => close()} className="lufe-glass-dark absolute right-3 top-3 z-10 grid h-10 w-10 cursor-pointer place-items-center text-white outline-none focus-visible:ring-2 focus-visible:ring-white">
+              <CloseIcon />
+            </button>
+            <div className="min-h-0 flex-1 overflow-auto overscroll-contain px-7 pb-10 pt-7 md:px-12 md:pb-12 md:pt-10" style={{ opacity: clamp((progress - 0.35) / 0.65, 0, 1) }}>
+              <h2 id={dialogId} className="mb-4 text-xl font-semibold text-tx">{title}</h2>
+              {panel}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </DialogPortal>
   </>;
 }

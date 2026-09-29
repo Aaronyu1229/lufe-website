@@ -41,7 +41,7 @@ export function Segmented({ options, value, onChange, label, className }: Segmen
     }));
     const currentIndex = Math.max(0, buttonRefs.current.findIndex((button) => button?.getAttribute("aria-checked") === "true"));
     setSegments(nextSegments);
-    pill.jump(currentIndex);
+    if (!pill.moving) pill.jump(currentIndex);
   }, [pill]);
 
   useLayoutEffect(() => {
@@ -83,7 +83,7 @@ export function Segmented({ options, value, onChange, label, className }: Segmen
 
   const pillGeometry = segmentedPill(segments, pill.value);
   return <div ref={rootRef} role="radiogroup" aria-label={label} className={`relative inline-flex max-w-full gap-0.5 overflow-x-auto bg-black/[.06] p-1 ${className ?? ""}`}>
-    <span aria-hidden="true" className="absolute bottom-1 top-1 z-0 bg-white shadow-[0_1px_3px_rgba(16,27,48,.12),0_0_0_.5px_rgba(16,27,48,.06)] will-change-transform" style={{ transform: `translate3d(${pillGeometry.left}px, 0, 0)`, width: pillGeometry.width }} />
+    <span aria-hidden="true" className="absolute bottom-1 left-0 top-1 z-0 bg-white shadow-[0_1px_3px_rgba(16,27,48,.12),0_0_0_.5px_rgba(16,27,48,.06)] will-change-transform" style={{ transform: `translate3d(${pillGeometry.left}px, 0, 0)`, width: pillGeometry.width }} />
     {options.map((option, index) => <button
       key={option.value}
       ref={(element) => { buttonRefs.current[index] = element; }}

@@ -1,5 +1,7 @@
 "use client";
 
+import { flushSync } from "react-dom";
+
 import { spring } from "@/lib/motion";
 
 import { flipDelta, type RectGeometry } from "./geometry";
@@ -51,7 +53,7 @@ function stateFor(element: HTMLElement) {
 /** Animate keyed layout changes from each child’s current on-screen position. */
 export function flip(container: HTMLElement, mutate: () => void) {
   const before = new Map(keyedChildren(container).map((element) => [element.dataset.key!, rectOf(element)]));
-  mutate();
+  flushSync(mutate);
 
   keyedChildren(container).forEach((element) => {
     const previous = before.get(element.dataset.key!);

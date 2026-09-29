@@ -7,7 +7,7 @@ import { ChoiceGroup } from "@/components/ui/ChoiceGroup";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { ExpandCard } from "@/components/ui/ExpandCard";
 import { Segmented } from "@/components/ui/Segmented";
-import { carouselGeometry, flipDelta, nearestSnap, segmentedPill } from "@/components/ui/geometry";
+import { carouselGeometry, disclosureHeight, flipDelta, nearestSnap, segmentedPill } from "@/components/ui/geometry";
 
 describe("ui geometry", () => {
   it("calculates carousel bounds, card-edge snaps, and nearest releases", () => {
@@ -31,6 +31,13 @@ describe("ui geometry", () => {
       { left: 65, top: 12, width: 100, height: 50 },
     )).toEqual({ x: -45, y: 18 });
   });
+
+  it("uses a pixel height while disclosure is moving and auto after opening settles", () => {
+    expect(disclosureHeight(false, 0, false)).toBe(0);
+    expect(disclosureHeight(true, 36, true)).toBe(36);
+    expect(disclosureHeight(true, 96, false)).toBe("auto");
+    expect(disclosureHeight(false, 96, true)).toBe(96);
+  });
 });
 
 describe("ui SSR contracts", () => {
@@ -49,6 +56,7 @@ describe("ui SSR contracts", () => {
     }));
 
     expect(markup).toContain("Card content");
+    expect(markup).toContain("Panel title");
     expect(markup).toContain("Panel content");
   });
 

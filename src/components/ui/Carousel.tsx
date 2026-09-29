@@ -20,6 +20,7 @@ export interface CarouselProps {
   label: string;
   showControls?: boolean;
   className?: string;
+  itemClassName?: string;
 }
 
 const emptyGeometry: CarouselGeometry = { minX: 0, snaps: [0] };
@@ -32,7 +33,7 @@ function Arrow({ direction }: { direction: "left" | "right" }) {
   </svg>;
 }
 
-export function Carousel({ children, label, showControls = true, className }: CarouselProps) {
+export function Carousel({ children, label, showControls = true, className, itemClassName }: CarouselProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const geometryRef = useRef<CarouselGeometry>(emptyGeometry);
@@ -153,6 +154,7 @@ export function Carousel({ children, label, showControls = true, className }: Ca
   return <div className={className}>
     <div
       ref={viewportRef}
+      role="region"
       aria-roledescription="carousel"
       aria-label={label}
       tabIndex={0}
@@ -164,7 +166,7 @@ export function Carousel({ children, label, showControls = true, className }: Ca
         className="relative flex gap-4 px-5 will-change-transform md:px-8"
         style={{ transform: `translate3d(${trackX.value}px, 0, 0)` }}
       >
-        {Children.toArray(children).map((child, index) => <div key={index} className="basis-[clamp(280px,82vw,380px)] shrink-0">{child}</div>)}
+        {Children.toArray(children).map((child, index) => <div key={index} className={`${itemClassName ?? "basis-[clamp(280px,82vw,380px)]"} shrink-0`}>{child}</div>)}
       </div>
     </div>
     {showControls && <div className="flex gap-2">

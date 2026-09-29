@@ -11,6 +11,8 @@ import {
 
 import { useSpring } from "@/lib/motion";
 
+import { disclosureHeight } from "./geometry";
+
 export interface DisclosureProps {
   summary: ReactNode;
   children: ReactNode;
@@ -27,13 +29,13 @@ function Chevron({ open }: { open: boolean }) {
 export function Disclosure({ summary, children, defaultOpen = false, id }: DisclosureProps) {
   const generatedId = useId();
   const contentId = id ?? `disclosure-${generatedId}`;
+  const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const openRef = useRef(defaultOpen);
   const measuredRef = useRef(false);
   const [open, setOpen] = useState(defaultOpen);
-  const [interacted, setInteracted] = useState(false);
   const contentHeight = useRef(0);
-  const height = useSpring(defaultOpen ? 1 : 0);
+  const height = useSpring(0);
 
   const measure = useCallback(() => {
     const nextHeight = contentRef.current?.scrollHeight ?? 0;
@@ -43,7 +45,10 @@ export function Disclosure({ summary, children, defaultOpen = false, id }: Discl
       height.jump(openRef.current ? nextHeight : 0);
       return;
     }
-    if (openRef.current) height.jump(nextHeight);
+    if (openRef.current) {
+      if (height.moving) height.to(nextHeight, { response: 0.42 });
+      else height.jump(nextHeight);
+    }
   }, [height]);
 
   useLayoutEffect(() => {
@@ -57,11 +62,14 @@ export function Disclosure({ summary, children, defaultOpen = false, id }: Discl
   }, [measure]);
 
   const toggle = () => {
-    const next = !open;
+    const next = !openRef.current;
+    const currentHeight = containerRef.current?.getBoundingClientRect().height ?? height.value;
+    const targetHeight = contentRef.current?.scrollHeight ?? contentHeight.current;
+
     openRef.current = next;
-    setInteracted(true);
     setOpen(next);
-    height.to(next ? contentHeight.current : 0, { response: 0.42 });
+    height.jump(currentHeight);
+    height.to(next ? targetHeight : 0, { response: 0.42 });
   };
 
   return <div className="border-t border-bd2 last:border-b">
@@ -69,7 +77,7 @@ export function Disclosure({ summary, children, defaultOpen = false, id }: Discl
       <span className="text-lg font-semibold text-tx">{summary}</span>
       <span className="grid h-7 w-7 place-items-center bg-black/[.06] text-tx2"><Chevron open={open} /></span>
     </button>
-    <div id={contentId} aria-hidden={!open} inert={!open} className="overflow-hidden" style={{ height: open && !interacted ? "auto" : height.value }}>
+    <div ref={containerRef} id={contentId} aria-hidden={!open} inert={!open} className="overflow-hidden" style={{ height: disclosureHeight(open, height.value, height.moving) }}>
       <div ref={contentRef} className="pb-6 text-tx2">{children}</div>
     </div>
   </div>;
