@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import type { ReactNode } from "react";
 import type { Article } from "@/data/articles";
 import type { DatabaseInsight } from "@/lib/articles/presentation";
 import { useMessageBox } from "../MessageBox";
@@ -19,6 +20,46 @@ interface Props {
 
 function isDatabaseArticle(article: Article | DatabaseInsight): article is DatabaseInsight {
   return !Array.isArray(article.content);
+}
+
+export function renderStaticBoldMarkup(text: string): ReactNode {
+  if (!text.includes("**")) {
+    return text;
+  }
+
+  const nodes: ReactNode[] = [];
+  let currentIndex = 0;
+  let boldIndex = 0;
+
+  while (currentIndex < text.length) {
+    const openingIndex = text.indexOf("**", currentIndex);
+
+    if (openingIndex === -1) {
+      nodes.push(text.slice(currentIndex));
+      break;
+    }
+
+    const closingIndex = text.indexOf("**", openingIndex + 2);
+
+    if (closingIndex === -1) {
+      nodes.push(text.slice(currentIndex));
+      break;
+    }
+
+    if (openingIndex > currentIndex) {
+      nodes.push(text.slice(currentIndex, openingIndex));
+    }
+
+    nodes.push(
+      <strong key={boldIndex} className="text-tx font-semibold">
+        {text.slice(openingIndex + 2, closingIndex)}
+      </strong>,
+    );
+    boldIndex += 1;
+    currentIndex = closingIndex + 2;
+  }
+
+  return nodes;
 }
 
 export function ArticleDetail({ article, image }: Props) {
@@ -97,7 +138,7 @@ export function ArticleDetail({ article, image }: Props) {
                     key={i}
                     className="font-sans text-[22px] font-medium leading-[1.4] mt-10 mb-3 tracking-[-0.3px]"
                   >
-                    {paragraph.slice(3)}
+                    {renderStaticBoldMarkup(paragraph.slice(3))}
                   </h2>
                 );
               }
@@ -106,7 +147,7 @@ export function ArticleDetail({ article, image }: Props) {
                   key={i}
                   className="text-[16.5px] text-tx leading-[1.85] font-normal"
                 >
-                  {paragraph}
+                  {renderStaticBoldMarkup(paragraph)}
                 </p>
               );
             })}
