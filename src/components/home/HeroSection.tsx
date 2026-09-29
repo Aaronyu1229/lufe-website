@@ -306,9 +306,8 @@ export function HeroSection() {
               </div>
 
               <h2
-                className="hero-title mb-6 font-sans font-[650] leading-[1.1] tracking-normal text-white [text-wrap:balance]"
+                className="display mb-6 text-white"
                 style={{
-                  fontSize: "clamp(36px, 6vw, 72px)",
                   textShadow: "0 1px 2px rgba(10,20,40,0.35)",
                 }}
               >

@@ -56,4 +56,11 @@ describe("home page", () => {
   it("uses no rounded utility classes", () => {
     expect(markup()).not.toContain("rounded-");
   });
+
+  it("uses no legacy heading utility classes", () => {
+    const rendered = markup();
+
+    expect(rendered).not.toContain("hero-title");
+    expect(rendered).not.toContain("section-heading");
+  });
 });

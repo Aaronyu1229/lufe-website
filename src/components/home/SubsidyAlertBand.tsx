@@ -58,9 +58,13 @@ export function SubsidyAlertBand() {
             </Link>
             <Link
               href="/assess"
-              className="inline-flex items-center gap-1.5 border border-white/30 bg-white/15 px-[18px] py-[10px] text-[14px] font-semibold text-white backdrop-blur-[16px]"
+              className="inline-flex items-center gap-1.5 text-[16px] font-semibold text-gold"
             >
-              或先做 2 分鐘處境比對 <span aria-hidden="true">→</span>
+              或先做 2 分鐘處境比對
+              <span
+                aria-hidden="true"
+                className="h-[7px] w-[7px] shrink-0 rotate-[-45deg] border-b border-r border-current"
+              />
             </Link>
         </div>
       </div>
