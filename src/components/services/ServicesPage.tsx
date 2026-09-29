@@ -448,7 +448,7 @@ export function ServicesPage() {
             href="/services/methodology"
             className="block border-l-4 border-gold bg-white p-7 md:p-10 hover:shadow-[0_8px_28px_rgba(16,27,48,0.08)]"
           >
-            <div className="flex flex-col items-start gap-5 md:flex-row md:justify-between md:gap-6">
+            <div className="flex flex-col items-start gap-5">
               <div className="min-w-0 flex-1">
                 <div className="mb-3 text-[10.5px] font-semibold tracking-[2px] text-gold-d">
                   決策框架
@@ -461,7 +461,7 @@ export function ServicesPage() {
                   五維評分矩陣、紅燈判準、一個真實案例的完整評分過程——顧問報告背後的決策邏輯全部攤開。
                 </p>
               </div>
-              <span className="text-[15.5px] font-semibold text-gold-d md:mt-1 md:shrink-0">
+              <span className="text-[15.5px] font-semibold text-gold-d">
                 看方法論 →
               </span>
             </div>
