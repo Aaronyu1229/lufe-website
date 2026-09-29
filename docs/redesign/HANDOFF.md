@@ -1,10 +1,10 @@
 # 鹿飛 LUFÉ 方正版改版：交接文件（換視窗先讀這份）
 
-> 最後更新：2026-09-29。這份文件是權威來源，以它為準，不以任何人的記憶為準。
+> 最後更新：2026-09-29（第一波完成）。這份文件是權威來源，以它為準，不以任何人的記憶為準。
 > 看完這份之後，接著讀同資料夾的 `PLAN.md`（硬規則）和 `DECISIONS.md`（Aaron 逐頁的決定）。
 
 ## 0. 一句話現況
-設計已經全部定案。正式站先修掉的 3 個問題都已上線。改版目前停在第 1 階段：**Codex 做完了，但還沒審、還沒合併**。下一步是照 §4 的「並行計畫」開始第一波。
+設計已經全部定案。正式站先修掉的 3 個問題都已上線。**第一波（第 1 階段＋共用元件包）已審完、合進 `redesign/square`（`abd9483`，2026-09-29）**。下一步是照 §4 開第二波（3 條並行）。
 
 ---
 
@@ -39,15 +39,24 @@
 |---|---|---|---|
 | 設計提案存檔（不合併） | `proposal/apple-design-site` | `~/dev/lufe-website-apple` | #38（draft） |
 | **改版整合分支**（所有階段合進這裡，最後才合進 main） | `redesign/square` | `~/dev/lufe-redesign` | — |
-| 第 1 階段 | `redesign/p1-foundation` | `~/dev/lufe-p1` | **#41（OPEN，base = redesign/square）** |
+| 第 1 階段 | `redesign/p1-foundation` | `~/dev/lufe-p1` | #41（✅ 已合進 redesign/square，`9bca3fb`） |
+| 共用元件包 | `redesign/p1b-primitives` | `~/dev/lufe-p1b` | #43（✅ 已合進 redesign/square，`abd9483`） |
 | 正式站 | `main` | `~/dev/lufe-website` | — |
 
 - 設計的權威來源：`~/dev/lufe-website-apple/docs/proposals/lufe-square-site/`，入口是 `overview.html`。每頁都有 `compare-*.html`，是 Aaron 的 A/B 選擇紀錄。
-- 注意：`redesign/square` 目前在 `55b9aac`，**還沒併入 main 上的 #39／#40／#42**。
+- `redesign/square` 已併入 main 的 #39／#40／#42（`8e0628e`）。之後 main 若再有修正，開第二波前要先再合一次。
+- `~/dev/lufe-p1`、`~/dev/lufe-p1b` 兩個 worktree 已用完，可以 `git worktree remove`。
 
 ---
 
-## 3. 第 1 階段（PR #41）現況與待辦
+## 3. 第一波結果（2026-09-29 完成）
+- **A（#41）**：`MessageBox.tsx` 衝突已解，畫面用 P1 底部面板、送出邏輯用 main 的 `/api/lead`；`ContactPage.tsx` 沒衝突。主控驗過：tsc／lint／test／build 綠；導覽下拉與 `compare-global.html` C 並排一致；下拉連結在 SSR HTML；390 寬 8 頁無橫向捲動、console 無錯；本機實際送出快速留言 → `lufe.leads` 新增一筆 `notified=true`（第 3 筆「系統測試（Claude）」）。
+  - ⚠️ 本機測表單：`vercel env pull` 拉下來的三個密鑰是**空值**（敏感變數不會下載）；要用 Keychain `lufe-database-url`、`lufe-lead-secret-20260929`，`JP_LEAD_URL=https://jp-system.reborn-uidesigner.workers.dev/web/lufe-lead`。
+- **B（#43）**：`src/components/ui/` 有 `Carousel`（`itemClassName` 可改卡寬）、`Segmented`、`Disclosure`、`ExpandCard`（面板在 hydration 後 portal 到 body，SSR 時內容在 HTML 裡）、`ChoiceGroup`、`flip`（內部用 `flushSync`，可以直接包 setState），從 `@/components/ui` 匯入。
+  - 審查抓到 Codex 自報全綠但實際壞掉的 7 件（收合打不開、ExpandCard 放進 Carousel 被裁切、關閉後卡住、flip 在 React 無效、滑塊偏 4px、0–1 值的彈簧半路跳到終點、卡寬寫死），兩輪修正後都在瀏覽器驗過。
+  - 🔑 用 `src/lib/motion` 的彈簧跑 0–1 或索引這種無單位的值時，一定要傳 `precision`（0.001–0.002），預設 0.5 是給像素用的。
+
+### （以下為原第 1 階段待辦，已全部完成，保留備查）
 Codex 已完成兩個 commit：`6c87b7c` 動畫引擎 `src/lib/motion/`（spring／draggable／project／rubberband＋測試），`388ee3e` 導覽列、頁尾、底部面板 MessageBox，以及移除 SubsidyCard。
 
 **合併之前必須做完：**
@@ -93,6 +102,7 @@ Codex 已完成兩個 commit：`6c87b7c` 動畫引擎 `src/lib/motion/`（spring
    - 每頁需要的樣式，寫在該頁自己的元件裡（Tailwind class）。
 2. **不准提交字型檔**（`src/app/fonts/**`）。字型子集守門擋下建置時，在 PR 裡列出缺的字就好，等全部合併後由主控跑一次 `npm run font:rebuild`。
 3. **建置要排隊**：`npm run build` 之前要先拿鎖 `mkdir /tmp/lufe-build.lock`，建置完 `rmdir`。拿不到鎖就等 30 秒再試。vitest 一律加 `--maxWorkers=2`。
+   - ⛔ **工單要寫明「只准用 mkdir／rmdir，不准改用 `lockf`／`flock`」**：第一波 Codex 自己改用 `lockf -k`，留下一個普通檔案 `/tmp/lufe-build.lock`，之後所有 `mkdir` 鎖都拿不到、永遠在等。發現建置一直在等鎖時，先 `ls -ld /tmp/lufe-build.lock`：如果是檔案而不是資料夾，而且 `lsof` 沒有程式佔用，就刪掉。
 4. **內容一字不改**。收合、切換的內容文字**必須在伺服器 HTML 裡**。首頁 Hero 行為不變。方角。
 5. 每一條都開 PR 到 `redesign/square`，不准合進 main，不准自己合併。
 
@@ -117,6 +127,6 @@ Codex 已完成兩個 commit：`6c87b7c` 動畫引擎 `src/lib/motion/`（spring
 4. Aaron 說 OK 之後，由 `redesign/square` 開 PR 合進 main。上線後到正式站驗證，**包含實際送一筆表單**。
 
 ## 7. 等 Aaron 回覆或處理的事
-- 手機有沒有收到那兩則測試通知。
-- 要不要刪掉那 2 筆測試留言。
+- 手機有沒有收到那兩則測試通知（2026-09-29 又多一則，改版本機驗證送的）。
+- 要不要刪掉那 3 筆測試留言（name=「系統測試（Claude）」）。
 - （跟改版無關）開通 Google Search Console；補寫現場紀錄三則筆記的內容。
