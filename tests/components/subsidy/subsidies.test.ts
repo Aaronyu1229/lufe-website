@@ -37,6 +37,11 @@ describe("subsidy SSR content", () => {
       expectText(markup, subsidy.deadline);
       expectText(markup, subsidy.oneLiner);
       expectText(markup, subsidy.lufeAngle);
+      expectText(markup, `適合（${subsidy.whoFor.length} 項）`);
+      expectText(markup, `補助涵蓋（${subsidy.covers.length} 項）`);
+      expectText(markup, `可補助費用明細（${subsidy.coversDetail?.length ?? 0} 項）`);
+      expectText(markup, `申請與核銷流程（${subsidy.processSteps?.length ?? 0} 步）`);
+      expectText(markup, `容易踩雷的點（${subsidy.importantNotes?.length ?? 0} 點）`);
       for (const item of subsidy.whoFor) expectText(markup, item);
       for (const item of subsidy.covers) expectText(markup, item);
       for (const item of subsidy.coversDetail ?? []) {

@@ -57,23 +57,18 @@ export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
 
       <p className="mt-5 text-[15.5px] leading-[1.8] text-tx2">{subsidy.oneLiner}</p>
 
-      <div className="mt-6 bg-navy p-5 text-white/90">
-        <p className="eyebrow mb-2 text-gold">鹿飛怎麼幫上忙</p>
-        <p className="text-[14.5px] leading-[1.8]">{subsidy.lufeAngle}</p>
-      </div>
-
       <div className="mt-6 border-b border-bd2">
-        <Disclosure summary="適合" id={`${subsidy.slug}-fit`}>
+        <Disclosure summary={`適合（${subsidy.whoFor.length} 項）`} id={`${subsidy.slug}-fit`}>
           <ul className="grid gap-2">
             {subsidy.whoFor.map((item) => <li key={item} className="flex gap-2 text-[14px] leading-[1.7]"><span className={`mt-[.55em] h-1 w-1 shrink-0 ${accent.bar}`} />{item}</li>)}
           </ul>
         </Disclosure>
-        <Disclosure summary="補助涵蓋" id={`${subsidy.slug}-covers`}>
+        <Disclosure summary={`補助涵蓋（${subsidy.covers.length} 項）`} id={`${subsidy.slug}-covers`}>
           <div className="flex flex-wrap gap-2">
             {subsidy.covers.map((item) => <span key={item} className="bg-cream px-2.5 py-1 text-[12px] text-tx2">{item}</span>)}
           </div>
         </Disclosure>
-        <Disclosure summary="可補助費用明細" id={`${subsidy.slug}-costs`}>
+        <Disclosure summary={`可補助費用明細（${subsidy.coversDetail?.length ?? 0} 項）`} id={`${subsidy.slug}-costs`}>
           {subsidy.coversDetail && (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[440px] border-collapse text-left text-[13px]">
@@ -90,7 +85,7 @@ export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
             </div>
           )}
         </Disclosure>
-        <Disclosure summary="申請與核銷流程" id={`${subsidy.slug}-process`}>
+        <Disclosure summary={`申請與核銷流程（${subsidy.processSteps?.length ?? 0} 步）`} id={`${subsidy.slug}-process`}>
           {subsidy.processSteps && (
             <ol className="relative grid gap-4 border-l border-bd pl-5">
               {subsidy.processSteps.map((item, index) => (
@@ -103,11 +98,16 @@ export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
             </ol>
           )}
         </Disclosure>
-        <Disclosure summary={<span className="text-ember">容易踩雷的點</span>} id={`${subsidy.slug}-pitfalls`}>
+        <Disclosure summary={<span className="text-ember">容易踩雷的點（{subsidy.importantNotes?.length ?? 0} 點）</span>} id={`${subsidy.slug}-pitfalls`}>
           <ul className="grid gap-2 border-l-2 border-ember bg-ember/5 p-4">
             {subsidy.importantNotes?.map((item) => <li key={item} className="flex gap-2 text-[13px] leading-[1.7]"><span className="mt-[.6em] h-1 w-1 shrink-0 bg-ember" />{item}</li>)}
           </ul>
         </Disclosure>
+      </div>
+
+      <div className="mt-6 bg-navy p-5 text-white/90">
+        <p className="eyebrow mb-2 text-gold">鹿飛怎麼幫上忙</p>
+        <p className="text-[14.5px] leading-[1.8]">{subsidy.lufeAngle}</p>
       </div>
 
       <footer className="mt-6 flex flex-wrap items-end justify-between gap-4">

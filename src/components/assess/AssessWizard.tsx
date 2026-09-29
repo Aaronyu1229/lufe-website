@@ -405,7 +405,7 @@ export function EntryScreen({
           <span className="font-normal text-gold">跟誰最像</span>
         </h1>
 
-        <p className="lead max-w-[600px] text-white/65 mb-10">
+        <p className="lead max-w-[600px] !text-white/70 mb-10">
           三題問答，直接告訴你：你現在遇到的事、跟我們做過的四個案例，哪一個最接近 —
           <br className="hidden md:block" />
           以及那個案例的判斷方法，多少能放在你身上。
@@ -423,7 +423,7 @@ export function EntryScreen({
             <div className="text-[11.5px] md:text-[13px] text-gold-l/90 font-medium mt-1.5 tracking-[0.3px]">
               42+ 年國際物流實戰 · 500+ 出口案件 · 30+ 國家
             </div>
-            <p className="text-[13.5px] md:text-[14.5px] text-white/60 font-normal mt-3 leading-[1.8]">
+            <p className="text-[13.5px] md:text-[14.5px] text-white/70 font-normal mt-3 leading-[1.8]">
               最近三個月我親自看過 47 家台灣公司的出海卡點。這三題是我每次開第一次會議前必問的問題
               — 兩分鐘後你會拿到的不是評分，而是「跟你最像的人當時的真實決策」。
             </p>
@@ -453,7 +453,7 @@ export function EntryScreen({
         </div>
 
         {/* Positive honesty — soft framing, no gatekeeping */}
-        <p className="text-[13px] md:text-[13.5px] text-white/40 leading-[1.9] font-normal max-w-[600px] italic">
+        <p className="text-[13px] md:text-[13.5px] text-white/70 leading-[1.9] font-normal max-w-[600px] italic">
           我們不做 AI 評分、不給紅綠燈、不要你的 email。只要你願意給這三題 2
           分鐘的專注，我們就給你一份誠實的比對 —
           即使結論是「我們不是你需要的」，我們也會直說。

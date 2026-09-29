@@ -45,7 +45,7 @@ export function SubsidyMatcher() {
         <div className="mb-10 md:mb-12">
           <p className="eyebrow mb-4 text-gold">2 分鐘媒合器</p>
           <h2 className="h2 text-white">算算你能拿<span className="text-gold">多少補助</span></h2>
-          <p className="lead mt-5 max-w-[560px] text-white/65">
+          <p className="lead mt-5 max-w-[560px] !text-white/70">
             回答 4 個問題，我們告訴你哪個補助最適合你的公司、
             <br className="hidden md:block" />
             以及為什麼。資料不會上傳——純客戶端運算。
@@ -114,7 +114,7 @@ function ResultView({ result }: { readonly result: ReturnType<typeof matchSubsid
                         <h3 className="h4 text-white">{match.subsidy.shortTitle}</h3>
                         <span className={`num text-[13px] ${accent}`}>{match.subsidy.amount}</span>
                       </div>
-                      <p className="mt-2 text-[13.5px] leading-[1.8] text-white/60">{match.reason}</p>
+                      <p className="mt-2 text-[13.5px] leading-[1.8] text-white/70">{match.reason}</p>
                       <Link href={`/resources/subsidies#${match.subsidy.slug}`} className="mt-2 inline-flex text-[11.5px] text-white/60 hover:text-gold">看細節 →</Link>
                     </div>
                   </div>

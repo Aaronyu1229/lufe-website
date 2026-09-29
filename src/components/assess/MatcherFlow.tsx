@@ -151,7 +151,7 @@ export function MatcherFlow({
               <div className="max-w-[760px]">
                 {question.eyebrow && <p className="eyebrow mb-4 text-gold">{question.eyebrow}</p>}
                 <h2 className="h2 max-w-[680px] text-white">{question.label}</h2>
-                {question.sublabel && <p className="mt-3 text-[15px] leading-[1.8] text-white/55">{question.sublabel}</p>}
+                {question.sublabel && <p className="mt-3 text-[15px] leading-[1.8] text-white/70">{question.sublabel}</p>}
                 <div className="mt-8 grid gap-3">
                   {question.options.map((option, optionIndex) => {
                     const selected = answers[question.id] === option.value;
@@ -172,7 +172,7 @@ export function MatcherFlow({
                         </span>
                         <span className="min-w-0">
                           <span className="block text-[17px] font-medium leading-[1.5] text-white">{option.label}</span>
-                          {option.hint && <span className="mt-1 block text-[13px] leading-[1.8] text-white/52">{option.hint}</span>}
+                          {option.hint && <span className="mt-1 block text-[13px] leading-[1.8] text-white/70">{option.hint}</span>}
                         </span>
                         <span aria-hidden="true" className={`pt-1 text-[17px] ${selected ? "text-gold" : "text-white/35"}`}>{selected ? "✓" : "→"}</span>
                       </button>

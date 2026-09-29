@@ -27,7 +27,7 @@ export default function SubsidiesPage() {
         <div className="relative mx-auto max-w-[1400px] px-5 pb-[72px] pt-[130px] md:px-10 md:pb-[100px] md:pt-[170px] lg:px-16">
           <p className="eyebrow mb-8 text-gold/80">2026 · 北美與東南亞落地加速器</p>
           <h1 className="h1 mb-8 max-w-[900px] text-white">政府在幫你出海，<br /><span className="text-gold/90">你知道怎麼拿嗎？</span></h1>
-          <p className="lead mb-12 max-w-[700px] text-white/70">
+          <p className="lead mb-12 max-w-[700px] !text-white/[.72]">
             貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入<span className="font-medium text-white">北美</span>和<span className="font-medium text-white">東南亞</span>兩個主戰場。
             但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫。
             我們替你整理了 <span className="font-medium text-white">4 個正在開放、而且和鹿飛三支柱方法論對齊</span> 的計畫。
@@ -68,7 +68,7 @@ export default function SubsidiesPage() {
             <p className="text-[14.5px] text-tx3 md:text-right">資料最後確認 <span className="font-medium text-tx">2026.04.23</span><br />名額有限 · 部分計畫經費用罄即止</p>
           </div>
           <SubsidyComparison subsidies={SUBSIDIES} />
-          <div className="grid min-w-0 gap-5 md:grid-cols-2 md:gap-6">{SUBSIDIES.map((subsidy) => <SubsidyPlanCard key={subsidy.slug} subsidy={subsidy} />)}</div>
+          <div className="mx-auto grid max-w-[1120px] min-w-0 gap-5 md:gap-6">{SUBSIDIES.map((subsidy) => <SubsidyPlanCard key={subsidy.slug} subsidy={subsidy} />)}</div>
         </div>
       </section>
 
