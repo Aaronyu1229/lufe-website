@@ -5,7 +5,6 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
-import { SubsidyCard } from "@/components/SubsidyCard";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_LOCALE } from "@/lib/site";
 
 const playfair = Playfair_Display({
@@ -136,7 +135,6 @@ export default function RootLayout({
           <main id="main-content">{children}</main>
           <Footer />
           <MessageBox />
-          <SubsidyCard />
         </MessageBoxProvider>
       </body>
     </html>
