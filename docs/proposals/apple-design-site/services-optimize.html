@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>進階優化方案 · 鹿飛 LUFÉ（流體介面提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+.opt-hero .bgimg { opacity: .18; }.opt-hero .shade { background: linear-gradient(180deg, rgba(16,27,48,.72), rgba(16,27,48,.95)); }
+.module-grid { display: grid; gap: 16px; margin-top: 38px; }.opt-card { min-height: 100%; text-align: left; }.opt-card .cbody { padding: 26px; }.opt-card .icon { display: block; width: 48px; height: 48px; border-radius: 50%; margin-bottom: 18px; background: rgba(164,90,32,.1); }.opt-card .h3 { margin-bottom: 16px; }.opt-card .preview { list-style: none; display: grid; gap: 8px; color: var(--tx2); font-size: 15px; line-height: 1.65; }.opt-card .preview > span { position: relative; padding-left: 14px; }.opt-card .preview > span::before { content: ""; position: absolute; top: .66em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: rgba(164,90,32,.65); }.opt-card .more { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 18px; margin-top: 20px; border-top: 1px solid var(--bd2); color: var(--ember); font-size: 14px; font-weight: 600; }.opt-card .more i { font-size: 20px; font-style: normal; line-height: 1; }.approach-grid { display: grid; gap: 18px; margin-top: 38px; }.approach-card { border-left: 4px solid var(--ember); }.approach-card .cbody { padding: 30px; }.approach-card .step { color: var(--ember); font: 600 14px/1.2 Inter, sans-serif; letter-spacing: .08em; }.approach-card .meta { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }.approach-card .meta span { font-size: 13px; color: var(--tx3); }.approach-card .meta span:first-child { color: var(--ember); background: rgba(164,90,32,.1); padding: 3px 8px; border-radius: 999px; }.xp-body .service-items { list-style: none; display: grid; gap: 11px; margin: 22px 0; }.xp-body .service-items li { position: relative; padding-left: 18px; color: var(--tx2); line-height: 1.75; }.xp-body .service-items li::before { content: ""; position: absolute; left: 0; top: .7em; width: 6px; height: 6px; border-radius: 50%; background: var(--ember); }.xp-body .fix { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--bd2); }.xp-body .fix .eyebrow { color: var(--ember); margin-bottom: 8px; }.xp-body .fix p { color: var(--tx2); line-height: 1.8; }.xp-body .deliverable { margin-top: 22px; padding: 18px; border-radius: var(--radius-m); background: rgba(164,90,32,.08); color: var(--ember); font-weight: 600; line-height: 1.75; }
+@media (min-width: 760px) { .module-grid { grid-template-columns: repeat(3, 1fr); }.approach-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body data-page="services-optimize" data-hero="dark">
+<div data-lufe-nav></div>
+<main>
+  <section class="page-hero opt-hero"><img class="bgimg" src="https://lufe.world/images/services/services-optimize-whiteboard.jpg" alt=""><div class="shade"></div><div class="wrap" style="max-width:1000px"><div class="crumbs"><a href="services.html">服務</a><span aria-hidden="true">/</span><span>進階優化</span></div><p class="eyebrow" style="color:var(--ember)">進階方案 · 已經在海外</p><h1 class="h1" style="margin-top:10px">已經跑起來了，<br>該讓每公里<span style="color:var(--ember)">更省</span></h1><p class="lead">產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。這個階段不需要從零開始——我們幫你把既有的營運診斷、優化、重整。</p></div></section>
+
+  <section><div class="wrap"><p class="eyebrow">常見的狀況</p><h2 class="h2" style="margin-top:10px">你是不是也遇到<span style="color:var(--ember)">這些問題</span>？</h2><p class="lead" style="margin-top:16px">如果你對下列任何一個場景點頭，這頁就是為你寫的。</p><div class="module-grid">
+    <button class="card opt-card" type="button" data-expand="pain-logistics"><span class="cbody"><span class="icon" aria-hidden="true"></span><span class="h3">物流成本吃掉毛利</span><span class="preview"><span>海運報價每半年漲一次，你沒有議價籌碼</span><span>倉儲費用不透明，月結單看不懂</span><span>退貨物流成本比正品物流還高</span></span><span class="more">怎麼解 <i aria-hidden="true">+</i></span></span></button>
+    <button class="card opt-card" type="button" data-expand="pain-channel"><span class="cbody"><span class="icon" aria-hidden="true"></span><span class="h3">通路績效起伏大</span><span class="preview"><span>銷量看天吃飯，節慶暴增、平常低迷</span><span>廣告關了就沒單，自然流量難以累積</span><span>review 品質不穩定，退貨率偏高</span></span><span class="more">怎麼解 <i aria-hidden="true">+</i></span></span></button>
+    <button class="card opt-card" type="button" data-expand="pain-operations"><span class="cbody"><span class="icon" aria-hidden="true"></span><span class="h3">營運流程卡卡</span><span class="preview"><span>跨時區溝通成本高，一件事要來回好幾天</span><span>在地團隊與台灣總部經常對不上</span><span>SOP 散落在各處，新人接手要學一個月</span></span><span class="more">怎麼解 <i aria-hidden="true">+</i></span></span></button>
+  </div></div></section>
+
+  <section class="cream"><div class="wrap"><p class="eyebrow">兩種切入方式</p><h2 class="h2" style="margin-top:10px">診斷為先，<span style="color:var(--ember)">執行為後</span></h2><p class="lead" style="margin-top:16px">你可以只做診斷，了解問題在哪；也可以直接進入執行。兩者都可以，順序不能顛倒。</p><div class="approach-grid">
+    <button class="card opt-card approach-card" type="button" data-expand="service-diagnosis"><span class="cbody"><span class="step">STEP 01</span><span class="h3" style="margin-top:8px">運營效率診斷</span><span class="meta"><span>2–3 週</span><span>定額診斷費</span></span><span class="body">全面檢視你的海外運營，找出效率瓶頸與成本黑洞。</span><span class="more">交付成果 <i aria-hidden="true">+</i></span></span></button>
+    <button class="card opt-card approach-card" type="button" data-expand="service-optimization"><span class="cbody"><span class="step">STEP 02</span><span class="h3" style="margin-top:8px">運營優化方案</span><span class="meta"><span>1–3 個月</span><span>月費 + 績效獎金</span></span><span class="body">針對診斷結果，陪你執行具體的改善計畫。</span><span class="more">交付成果 <i aria-hidden="true">+</i></span></span></button>
+  </div></div></section>
+
+  <section class="dark center"><div class="wrap"><h2 class="h2">不確定你的問題屬於哪一類？</h2><p class="lead" style="max-width:520px;margin:18px auto 34px">先聊聊。我們會花 30 分鐘聽你現在的狀況，告訴你是該做診斷還是可以直接進執行，不需要你先決定。</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><button class="btn btn-gold" type="button" data-chat>聊聊你的產品</button><a class="btn btn-glass" href="assess.html">先做 2 分鐘處境比對</a></div></div></section>
+</main>
+<div data-lufe-footer></div>
+
+<template id="pain-logistics"><h2 id="xpTitle" class="h2">物流成本吃掉毛利</h2><ul class="service-items"><li>海運報價每半年漲一次，你沒有議價籌碼</li><li>倉儲費用不透明，月結單看不懂</li><li>退貨物流成本比正品物流還高</li></ul><div class="fix"><p class="eyebrow">怎麼解</p><p>我們會重新盤點你的物流結構，從運輸方式、倉儲位置、退貨處理三個層面優化。通常可省 12–25%。</p></div></template>
+<template id="pain-channel"><h2 id="xpTitle" class="h2">通路績效起伏大</h2><ul class="service-items"><li>銷量看天吃飯，節慶暴增、平常低迷</li><li>廣告關了就沒單，自然流量難以累積</li><li>review 品質不穩定，退貨率偏高</li></ul><div class="fix"><p class="eyebrow">怎麼解</p><p>我們會做通路健診，檢視 listing、定價、運營節奏、競品動態，給你一份可執行的改善計畫。</p></div></template>
+<template id="pain-operations"><h2 id="xpTitle" class="h2">營運流程卡卡</h2><ul class="service-items"><li>跨時區溝通成本高，一件事要來回好幾天</li><li>在地團隊與台灣總部經常對不上</li><li>SOP 散落在各處，新人接手要學一個月</li></ul><div class="fix"><p class="eyebrow">怎麼解</p><p>我們會重整你的溝通流程、會議節奏、文件結構，必要時幫你招募 country manager。</p></div></template>
+<template id="service-diagnosis"><p class="eyebrow">STEP 01</p><h2 id="xpTitle" class="h2" style="margin-top:8px">運營效率診斷</h2><p class="small" style="margin-top:10px">2–3 週　定額診斷費</p><p class="body" style="margin-top:18px">全面檢視你的海外運營，找出效率瓶頸與成本黑洞。</p><ul class="service-items"><li>供應鏈與物流效率分析（從工廠到終端）</li><li>通路績效評估（Amazon、實體通路、自營站）</li><li>成本結構拆解（隱性成本識別）</li><li>合規與風險盤點（避免未爆彈）</li><li>在地團隊運作檢視</li></ul><div class="fix"><p class="eyebrow">交付成果</p><p class="deliverable">一份 40–60 頁的診斷報告 + 一次 90 分鐘的結論會議</p></div></template>
+<template id="service-optimization"><p class="eyebrow">STEP 02</p><h2 id="xpTitle" class="h2" style="margin-top:8px">運營優化方案</h2><p class="small" style="margin-top:10px">1–3 個月　月費 + 績效獎金</p><p class="body" style="margin-top:18px">針對診斷結果，陪你執行具體的改善計畫。</p><ul class="service-items"><li>物流路線重新規劃與簽約</li><li>倉儲方案優化（整合、遷移、委外）</li><li>通路結構調整（進入新通路 / 退出劣質通路）</li><li>行銷策略升級（降低 CAC、提升 LTV）</li><li>SOP 建立與在地團隊訓練</li></ul><div class="fix"><p class="eyebrow">交付成果</p><p class="deliverable">一套可持續運作的優化後營運體系，並留下文件與 SOP。</p></div></template>
+
+<template id="lufe-notes">
+  <li><b>每個問題都是可以按開的卡片</b>：先快速比對你遇到的狀況，按下去才看完整的改善方向，不必先讀完一大段文字。</li>
+  <li><b>細節從原本的卡片位置展開</b>：打開後知道內容從哪裡來；關閉時也會回到同一張卡片。</li>
+  <li><b>展開後可以往下拉關掉</b>：在手機上像把看完的資料往下收起來，操作方向和結果一致。</li>
+  <li><b>診斷與優化的先後順序更清楚</b>：先確認問題，再執行改善，避免還沒弄清楚就開始花錢。</li>
+  <li><b>詢問按鈕固定用同一種方式</b>：按下去立即有回饋，聯絡內容在同一個面板完成。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { expand } = LUFE;
+  document.querySelectorAll('[data-expand]').forEach((card) => card.addEventListener('click', () => {
+    const template = document.getElementById(card.dataset.expand);
+    expand(card, { html: template.innerHTML });
+  }));
+})();
+</script>
+</body>
+</html>

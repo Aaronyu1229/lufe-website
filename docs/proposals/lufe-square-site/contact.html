@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>聯絡我們 · 鹿飛 LUFÉ（方正版提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+.contact-top { padding-top: calc(var(--nav-h) + 72px); }
+.contact-top .intro { max-width: 680px; }
+.contact-top .lead { margin-top: 16px; }
+.company-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 16px; margin: 42px 0; padding: 0 0 30px; border-bottom: 1px solid var(--bd); }
+@media (min-width: 700px) { .company-strip { grid-template-columns: repeat(4, 1fr); gap: 24px; } .secondary-channels { grid-template-columns: repeat(2, 1fr); } }
+.company-strip dt { color: var(--gold-d); font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.company-strip dd { margin: 0; font-size: 15px; font-weight: 600; }
+.company-strip dd + dd { color: var(--tx3); font-size: 13px; font-weight: 400; margin-top: 2px; }
+.channels { display: grid; gap: 12px; }
+.secondary-channels { display: grid; gap: 12px; }
+.channel-row { appearance: none; width: 100%; border: 1px solid var(--bd2); border-radius: var(--radius-l); background: #fff; padding: 22px; display: grid; grid-template-columns: 50px 1fr auto; gap: 16px; align-items: center; text-align: left; cursor: pointer; transition: transform var(--press) ease-out, box-shadow 300ms var(--ease-spring), border-color 200ms; }
+.channel-row:hover { border-color: var(--gold); box-shadow: 0 18px 36px -24px rgba(16,27,48,.35); }
+.channel-row:active { transform: scale(.985); }
+.channel-row:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+.channel-icon { width: 50px; height: 50px; border-radius:0; display: grid; place-items: center; background: rgba(212,168,92,.1); color: var(--gold-d); font-size: 22px; }
+.channel-row.sky .channel-icon { background: rgba(58,107,132,.1); color: var(--sky); }
+.channel-row.ember .channel-icon { background: rgba(164,90,32,.1); color: var(--ember); }
+.channel-row .h3 { font-size: 18px; }
+.channel-row .body { display: block; margin-top: 2px; font-size: 14px; line-height: 1.6; }
+.channel-action { color: var(--gold-d); font-size: 14px; font-weight: 600; white-space: nowrap; }
+.other-way { margin: 26px 0 10px; }
+.partner { position: relative; overflow: hidden; }
+.partner .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .14; }
+.partner .wash { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,27,48,.98), rgba(16,27,48,.86), rgba(16,27,48,.65)); }
+.partner .wrap { position: relative; }
+.partner .lead { color: rgba(255,255,255,.68); max-width: 640px; margin-top: 18px; }
+.partner-cards { margin: 38px 0; }
+.partner-cards .card { background: rgba(255,255,255,.055); color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
+.partner-cards .body { color: rgba(255,255,255,.62); margin-top: 8px; font-size: 14px; }
+.form-section { position: relative; overflow: hidden; }
+.form-section .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .06; }
+.form-section .wash { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--cream), rgba(245,242,236,.92), var(--cream)); }
+.form-section .wrap { position: relative; }
+.form-head { max-width: 520px; margin: 0 auto 38px; text-align: center; }
+.form-head .body { margin-top: 14px; }
+.contact-form { max-width: 640px; margin: 0 auto; }
+.form-grid { display: grid; gap: 18px; }
+@media (min-width: 700px) { .form-grid.two { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+.field .err { min-height: 1.25em; }
+.field.bad input, .field.bad textarea { border-color: var(--danger); }
+.stage-hint { margin: -2px 0 9px; }
+.form-note { margin-top: 14px; color: var(--tx3); font-size: 13px; text-align: center; }
+.form-success { display: none; max-width: 640px; margin: 0 auto; padding: 44px 20px; text-align: center; }
+.form-success.live { display: block; }
+.form-success .tick { display: grid; }
+.form-success .body { margin-top: 8px; }
+@media (max-width: 520px) { .channel-row { grid-template-columns: 46px 1fr; } .channel-action { grid-column: 2; } .channel-icon { width: 46px; height: 46px; } }
+</style>
+</head>
+<body data-page="contact" data-hero="light">
+<div data-lufe-nav></div>
+<main>
+  <section class="contact-top">
+    <div class="wrap wrap-narrow">
+      <div class="intro"><h1 class="h1">選一個你最方便的方式</h1><p class="lead">三個管道都會收到。訊息我們通常一個工作天內回覆。</p></div>
+      <dl class="company-strip">
+        <div><dt>公司</dt><dd>鹿飛 LUFÉ</dd><dd>Aaron Yu 創辦</dd></div>
+        <div><dt>地點</dt><dd>台北市</dd><dd>線上為主</dd></div>
+        <div><dt>回覆時間</dt><dd>週一 – 週五</dd><dd>09:00 – 18:00</dd></div>
+        <div><dt>一般回覆</dt><dd>1 個工作天內</dd><dd>快速留言最快</dd></div>
+      </dl>
+      <div class="channels" aria-label="聯絡方式">
+        <button class="channel-row" type="button" data-chat><span class="channel-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"> <rect x="3" y="5" width="22" height="16" rx="0" stroke="currentColor" stroke-width="1.5" /> <path d="M3 8L14 15L25 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /> </svg></span><span><span class="h3">快速留言</span> <span class="tag">最快回覆</span><span class="body">直接寫訊息給我們，通常一個工作天內回覆。</span></span><span class="channel-action">開啟訊息框 →</span></button>
+      </div>
+      <p class="small other-way">或者選擇其他方式聯繫我們：</p>
+      <div class="secondary-channels" aria-label="其他聯絡方式">
+        <button class="channel-row sky" type="button" id="calendly"><span class="channel-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"> <rect x="4" y="4" width="20" height="20" rx="0" stroke="currentColor" stroke-width="1.5" /> <path d="M4 10H24" stroke="currentColor" stroke-width="1.5" /> <circle cx="10" cy="16" r="2" stroke="currentColor" stroke-width="1" /> <circle cx="18" cy="16" r="2" stroke="currentColor" stroke-width="1" /> </svg></span><span><span class="h3">預約諮詢</span><span class="body">選一個你方便的時間，30 分鐘免費聊聊。</span></span><span class="channel-action">選時間 →</span></button>
+        <a class="channel-row ember" href="mailto:aaron.yu@reborn.in"><span class="channel-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"> <path d="M6 8L14 14L22 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> <rect x="4" y="6" width="20" height="16" rx="0" stroke="currentColor" stroke-width="1.5" /> </svg></span><span><span class="h3">Email</span><span class="body">寫封信給我們，詳細說明你的需求。</span></span><span class="channel-action">寄信 →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark partner" id="partners">
+    <img class="bg" src="https://lufe.world/images/contact/partners-handshake.jpg" alt=""><div class="wash"></div>
+    <div class="wrap wrap-narrow">
+      <h2 class="h2">商會、顧問、服務商，<br><span class="accent">歡迎來談合作</span></h2>
+      <p class="lead">如果你是商會、同業顧問公司、在地服務商或物流夥伴，想跟鹿飛一起幫台灣企業把海外這條路走得更順——我們有專門的合作入口。不收介紹費、不綁獨家，純粹看有沒有把事情做好的機會。</p>
+      <div class="grid-3 partner-cards">
+        <article class="card pad"><h3 class="h3">商會 / 公協會</h3><p class="body">台商會、工商協會、進出口公會</p></article>
+        <article class="card pad"><h3 class="h3">同業顧問 / 事務所</h3><p class="body">跨境顧問、品牌、律師、會計事務所</p></article>
+        <article class="card pad"><h3 class="h3">在地服務商 / 物流</h3><p class="body">北美、東南亞當地倉儲、通路、代理商</p></article>
+      </div>
+      <a class="btn btn-gold" href="mailto:aaron.yu@reborn.in?subject=%E5%90%88%E4%BD%9C%E5%A4%A5%E4%BC%B4%E6%B4%BD%E8%AB%87">寄信洽談合作 <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="cream form-section" id="contact-form">
+    <img class="bg" src="https://lufe.world/images/contact/form-bg-conversation.jpg" alt=""><div class="wash"></div>
+    <div class="wrap">
+      <div class="form-head"><p class="eyebrow">完整表單</p><h2 class="h2" style="margin-top:10px">想一次講完所有細節？</h2><p class="body">填這份表單，我們能在第一次回覆時就給你比較精準的建議，省下幾輪來回。</p></div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-grid two">
+          <div class="field" id="nameField"><label for="name">姓名 *</label><input id="name" type="text" autocomplete="name" placeholder="你的姓名"><div class="err">請填寫姓名</div></div>
+          <div class="field" id="emailField"><label for="email">Email *</label><input id="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com"><div class="err" id="emailErr">請填寫 Email</div></div>
+        </div>
+        <div class="form-grid two">
+          <div class="field"><label for="company">公司名稱</label><input id="company" type="text" autocomplete="organization" placeholder="公司名稱"></div>
+          <div class="field"><label for="phone">電話</label><input id="phone" type="tel" autocomplete="tel" placeholder="09xx-xxx-xxx"></div>
+        </div>
+        <div class="field"><label for="product">你的產品</label><input id="product" type="text" placeholder="簡單描述你的產品或品牌"></div>
+        <div class="field"><span class="lbl" id="stageLabel">目前出海階段</span><p class="small stage-hint" id="stageHint" hidden>請選擇</p><div class="choices" id="stageChoices" role="group" aria-labelledby="stageLabel"><button type="button" aria-pressed="false">還在觀望，想了解出海</button><button type="button" aria-pressed="false">準備出海，需要方向</button><button type="button" aria-pressed="false">已經在出海，想做更好</button><button type="button" aria-pressed="false">其他</button></div></div>
+        <div class="field" id="messageField"><label for="message">你想問什麼？ *</label><textarea id="message" rows="4" placeholder="任何問題都可以，不確定也沒關係。"></textarea><div class="err">請填寫你的問題</div></div>
+        <button class="btn btn-gold" type="submit" style="width:100%">送出表單</button>
+        <p class="form-note">我們不會把你的資料分享給任何第三方。</p>
+        <p class="form-note">提案稿，表單不會真的送出。</p>
+      </form>
+      <div class="form-success" id="formSuccess" role="status"><div class="tick">✓</div><h3 class="h3">收到了！</h3><p class="body">我們會在 <strong>24 小時內</strong> 用你提供的 Email 回覆你。</p><p class="form-note">提案稿，表單不會真的送出。</p></div>
+    </div>
+  </section>
+</main>
+<div data-lufe-footer></div>
+
+<template id="lufe-notes">
+  <li><b>聯絡方式變成整列可按</b>：手指一按就有回饋，點哪一列就做哪件事。</li>
+  <li><b>保留合作夥伴入口</b>：#partners 位置不變，商會、顧問與在地服務商可以直接找到合作方式。</li>
+  <li><b>完整表單留在頁面上</b>：不用跳出視窗，想一次講完細節時可以順著欄位填。</li>
+  <li><b>欄位離開時就提醒</b>：資料正確後馬上清除提醒，送出成功也會在原地確認。</li>
+  <li><b>這是提案用表單</b>：清楚標示不會真的送出，避免誤以為資料已經傳出。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { choices } = LUFE;
+  const $ = id => document.getElementById(id);
+  $('calendly').addEventListener('click', () => window.open('https://calendly.com/lufe-co/30min', '_blank'));
+
+  const isValidEmail = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  const fields = [
+    { field: $('nameField'), input: $('name'), error: $('nameField').querySelector('.err'), message: value => !value.trim() ? '請填寫姓名' : '' },
+    { field: $('emailField'), input: $('email'), error: $('emailErr'), message: value => !value.trim() ? '請填寫 Email' : !isValidEmail(value) ? 'Email 格式不正確' : '' },
+    { field: $('messageField'), input: $('message'), error: $('messageField').querySelector('.err'), message: value => !value.trim() ? '請填寫你的問題' : '' },
+  ].map(item => ({ ...item, touched: false }));
+  const check = item => {
+    const message = item.message(item.input.value);
+    item.error.textContent = message;
+    item.field.classList.toggle('bad', Boolean(message));
+    return !message;
+  };
+  fields.forEach(item => {
+    item.input.addEventListener('blur', () => { item.touched = true; check(item); });
+    item.input.addEventListener('input', () => { if (item.touched) check(item); });
+  });
+
+  choices($('stageChoices'), () => $('stageHint').hidden = true);
+  $('contactForm').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!fields.map(check).every(Boolean)) return;
+    $('contactForm').hidden = true;
+    $('formSuccess').classList.add('live');
+  });
+})();
+</script>
+</body>
+</html>

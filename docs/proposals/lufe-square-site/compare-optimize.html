@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>進階優化方案頁逐項對照</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+TC:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root { --navy: #101B30; --gold: #D4A85C; --gold-ink: #7A5A1A; --cream: #F5F2EC; --tx: #1A1A2E; --tx2: #5A6070; --bd: rgba(26,26,46,.12); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font: 16px/1.7 "Inter", "Noto Sans TC", -apple-system, "PingFang TC", sans-serif; color: var(--tx); background: #fff; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 20px; }
+header { background: var(--navy); color: #fff; padding: 48px 0 40px; }
+header h1 { font-size: clamp(26px, 3.4vw, 38px); font-weight: 650; }
+header p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 760px; }
+.how { margin-top: 20px; background: rgba(255,255,255,.08); padding: 16px 18px; font-size: 15px; }
+.how b { color: var(--gold); }
+.block { padding: 56px 0; border-bottom: 1px solid var(--bd); }
+.block h2 { font-size: 24px; font-weight: 650; margin-bottom: 20px; }
+.pair { display: grid; gap: 16px; }
+@media (min-width: 900px) { .pair { grid-template-columns: 1fr 1fr; } }
+figure { border: 1px solid var(--bd); }
+figcaption { font-size: 14px; font-weight: 700; padding: 10px 14px; background: var(--cream); }
+figcaption.b { background: var(--navy); color: #fff; }
+figure img { width: 100%; display: block; }
+.items { margin-top: 24px; display: grid; gap: 12px; }
+.item { border: 1px solid var(--bd); padding: 16px 18px; display: grid; gap: 8px; }
+.item .t { font-weight: 700; font-size: 17px; }
+.item .t span { display: inline-block; min-width: 34px; background: var(--navy); color: #fff; text-align: center; margin-right: 8px; font-size: 14px; padding: 1px 6px; }
+.opt { display: grid; grid-template-columns: 26px 1fr; gap: 8px; color: var(--tx2); }
+.opt b { color: var(--tx); }
+.opt i { font-style: normal; font-weight: 700; display: inline-grid; place-items: center; width: 26px; height: 26px; background: var(--cream); color: var(--gold-ink); }
+.done { background: #F3F7F9; border-color: rgba(58,107,132,.3); }
+.done .t span { background: #3A6B84; }
+.note { font-size: 14px; color: var(--tx2); }
+</style>
+</head>
+<body><header><div class="wrap"><h1>進階優化方案頁逐項對照：正式站 vs 方正版提案</h1>
+<p>左邊是 lufe.world/services/optimize，右邊是方正版提案（<a href="services-optimize.html" style="color:var(--gold)">打開提案頁</a>）。首頁與服務頁已定案的共用做法都已套用，這裡只列這一頁自己的差異。</p>
+<div class="how">回覆：<b>「編號＋A 或 B」</b>。<b>A＝跟正式站一樣</b>，<b>B＝用提案的做法</b>。</div></div></header><div class="block"><div class="wrap"><h2>①「你是不是也遇到這些問題？」</h2><div class="pair"><figure><figcaption>A　正式站</figcaption><img src="compare/optimize/live-pain.jpg" alt=""></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/optimize/new-pain.jpg" alt=""></figure></div><div class="items"><div class="item"><div class="t"><span>1</span>三張問題卡的「解法」</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：每張卡直接看得到最下面的「解法」那段文字（例如「通常可省 12–25%」）。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：卡片先只列症狀，「怎麼解 ＋」點了才展開解法；內容一樣。</div></div></div></div></div></div><div class="block"><div class="wrap"><h2>②「診斷為先，執行為後」</h2><div class="pair"><figure><figcaption>A　正式站</figcaption><img src="compare/optimize/live-svc.jpg" alt=""></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/optimize/new-svc.jpg" alt=""></figure></div><div class="items"><div class="item"><div class="t"><span>2</span>兩張方案卡的細節</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：直接列出 5 個服務項目和「交付成果」那一行。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：先只顯示週期、收費方式和一句說明，「交付成果 ＋」點了才展開服務項目與交付成果。</div></div></div><div class="item"><div class="t"><span>3</span>兩張方案卡的小圖示</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：卡片左上有小圖示（放大鏡、星星）。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：沒有圖示，只有「STEP 01／02」文字。</div></div></div></div></div></div></body></html>

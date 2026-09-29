@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>鹿飛 LUFÉ · 首頁（方正版提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+/* Hero: same behaviour as production — three stacked slides that cross-fade (no dragging) */
+.hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: var(--navy); color: #fff; padding: 0; }
+.hero-track { position: absolute; inset: 0; }
+.panel { position: absolute; inset: 0; overflow: hidden; display: flex; align-items: center; opacity: 0; visibility: hidden; transition: opacity 900ms ease-out, visibility 0s linear 900ms; }
+.panel.on { opacity: 1; visibility: visible; transition: opacity 900ms ease-out, visibility 0s; z-index: 1; }
+.panel .bg { position: absolute; inset: 0; }
+.panel .bg img, .panel .bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.panel.heavy .bg { filter: brightness(.74); }
+.panel .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,18,34,.74) 0%, rgba(10,18,34,.35) 55%, rgba(10,18,34,.12) 100%); }
+.panel .copy { position: relative; z-index: 2; width: 100%; padding-bottom: 60px; }
+.panel .inner { max-width: 680px; }
+.panel.on .inner { animation: rise 600ms var(--ease-spring) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.hero .eyebrow { color: var(--gold); display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.hero .eyebrow::before { content: ""; width: 20px; height: 1px; background: currentColor; }
+.hero .display { margin-bottom: 22px; }
+.hero p { font-size: clamp(17px, 1.4vw, 19px); line-height: 1.7; color: rgba(255,255,255,.86); max-width: 500px; margin-bottom: 34px; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+/* Bottom navigator — production's full-width distributed bar with a gold progress line */
+.hero-nav { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; border-top: 1px solid rgba(255,255,255,.1);
+  background: linear-gradient(to top, rgba(0,0,0,.3), transparent); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); }
+.hero-nav .wrap { display: flex; align-items: stretch; height: 60px; }
+@media (min-width: 768px) { .hero-nav .wrap { height: 76px; } }
+.hero-nav a { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; padding: 0 8px; font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,.55); white-space: nowrap; transition: color 300ms; }
+@media (min-width: 768px) { .hero-nav a { font-size: 14.5px; } }
+.hero-nav a span { overflow: hidden; text-overflow: ellipsis; }
+.hero-nav a:hover { color: rgba(255,255,255,.85); }
+.hero-nav a.on { color: #fff; font-weight: 600; }
+.hero-nav a::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.1); }
+.hero-nav a i { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--gold); transform-origin: left; transform: scaleX(0); }
+.hero-nav a.on i { transform: scaleX(1); }
+.hero-nav a.on i.run { animation: fill var(--dur, 10000ms) linear both; }
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.fab { bottom: 92px; } @media (max-width: 767px) { .fab { bottom: 76px; } }
+
+.pos-head { max-width: 820px; margin: 0 auto 64px; }
+.pos-head .lead { margin-top: 20px; } .pos-head b { color: var(--tx); font-weight: 600; }
+.moat { border-radius: var(--radius-l); background: var(--navy); color: #fff; padding: 40px 28px; display: grid; gap: 36px; box-shadow: 0 30px 60px -20px rgba(16,27,48,.35); }
+@media (min-width: 860px) { .moat { grid-template-columns: 1.2fr 1fr; padding: 56px; align-items: center; } }
+.moat p { color: rgba(255,255,255,.74); margin: 16px 0 22px; line-height: 1.85; }
+.moat .stats { grid-template-columns: repeat(3, 1fr); }
+.pillar .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+.pillar .top .num { font-size: 44px; color: var(--sky); line-height: 1; }
+.pillar.gold .top .num, .pillar.gold .tl { color: var(--gold-d); }
+.pillar .tl { font-size: 18px; font-weight: 500; color: var(--sky); margin: 6px 0 20px; }
+.pillar ul { list-style: none; display: grid; gap: 10px; margin-bottom: 26px; flex: 1; }
+.pillar li { color: var(--tx2); padding-left: 16px; position: relative; }
+.pillar li::before { content: ""; position: absolute; left: 0; top: .72em; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .5; }
+.subsidy .box { border-radius: var(--radius-l); padding: 36px 28px; background: linear-gradient(135deg, var(--navy), var(--navy-l)); color: #fff; display: grid; gap: 24px; align-items: center; }
+@media (min-width: 860px) { .subsidy .box { grid-template-columns: 1fr auto; padding: 44px 56px; } }
+.subsidy h2 { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.35; font-weight: 600; text-wrap: balance; margin-top: 14px; }
+.subsidy .acts { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+@media (min-width: 860px) { .subsidy .acts { align-items: flex-end; } }
+.case.featured { flex-basis: clamp(280px, 82vw, 520px); }
+.case .num { font-size: 40px; color: var(--gold-d); line-height: 1; } .case.featured .num { font-size: 52px; }
+.case .nl { font-size: 13px; color: var(--tx3); margin: 8px 0 16px; font-weight: 500; }
+.case .sc { font-size: 13px; color: var(--tx2); font-weight: 500; margin-bottom: 6px; }
+.case .h3 { font-size: 19px; }
+.case .more { margin-top: auto; padding-top: 18px; font-size: 14px; font-weight: 600; color: var(--sky); display: flex; justify-content: space-between; align-items: center; }
+.plus { width: 30px; height: 30px; border-radius: 0; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 18px; line-height: 1; }
+.xp-body .num { font-size: 56px; color: var(--gold-d); line-height: 1; }
+.beat { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 16px 0; border-top: 1px solid var(--bd); line-height: 1.85; }
+.beat b { font-size: 14px; color: var(--tx3); font-weight: 600; padding-top: 2px; } .beat.fix b { color: var(--gold-d); }
+.beat p { color: var(--tx2); } .beat.fix p { color: var(--tx); }
+.matrix { max-width: 860px; margin: 56px auto 0; border-radius: var(--radius-l); overflow: hidden; background: rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+.matrix table { width: 100%; border-collapse: collapse; }
+.matrix th, .matrix td { padding: 16px 10px; text-align: center; font-size: 14px; }
+.matrix thead th { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.62); border-bottom: 1px solid rgba(255,255,255,.08); }
+.matrix th[scope=row] { text-align: left; padding-left: 20px; font-weight: 500; color: rgba(255,255,255,.8); }
+.matrix th[scope=row] small { display: block; font-size: 12px; color: rgba(255,255,255,.55); font-weight: 400; margin-top: 2px; }
+.matrix tbody tr + tr > * { border-top: 1px solid rgba(255,255,255,.06); }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.35); }
+.no { color: rgba(255,255,255,.2); }
+tr.us { background: rgba(212,168,92,.1); } tr.us th[scope=row] { color: var(--gold); font-weight: 600; }
+tr.us .dot { background: var(--gold); box-shadow: 0 0 0 4px rgba(212,168,92,.18); }
+.faq { display: grid; gap: 48px; }
+@media (min-width: 860px) { .faq { grid-template-columns: 4fr 8fr; gap: 64px; } .faq-intro { position: sticky; top: 96px; align-self: start; } }
+.qa .take { font-size: 17px; font-weight: 500; margin-bottom: 8px; } .qa .full { color: var(--tx2); line-height: 1.85; max-width: 640px; }
+</style>
+</head>
+<body data-page="home" data-hero="dark">
+<div data-lufe-nav></div>
+<main>
+  <section class="hero" id="hero" aria-roledescription="carousel" aria-label="好產品值得一條順暢的出海路">
+    <h1 class="sr">協助台灣企業在北美與東南亞落地 — 鹿飛 LUFÉ</h1>
+    <div class="hero-track" id="heroTrack">
+      <div class="panel heavy on" aria-roledescription="slide" aria-label="1 / 3">
+        <div class="bg"><img src="https://lufe.world/images/hero/hero-poster-1600.webp" alt="">
+          <video muted loop playsinline autoplay preload="auto"><source media="(prefers-reduced-motion: no-preference)" src="https://lufe.world/videos/hero/hero-cai-mep-1080.mp4" type="video/mp4"></video></div>
+        <div class="shade"></div>
+        <div class="copy"><div class="wrap"><div class="inner">
+          <div class="eyebrow">產品適配性</div>
+          <h2 class="display">協助台灣企業<br>在北美與東南亞落地</h2>
+          <p>這個市場真的要你嗎？市場評估、產品測試、決策框架 — 先把勝率搞清楚。</p>
+          <div class="hero-cta"><a class="btn btn-gold" href="cases.html">看真實案例 <span aria-hidden="true">→</span></a><a class="btn btn-glass" href="assess.html">先做 2 分鐘處境比對</a></div>
+        </div></div></div>
+      </div>
+      <div class="panel" aria-roledescription="slide" aria-label="2 / 3">
+        <div class="bg"><img src="https://lufe.world/images/hero/hero-slide-2-poster-1600.webp" alt="">
+          <video muted loop playsinline preload="none"><source media="(prefers-reduced-motion: no-preference)" src="https://lufe.world/videos/hero/hero-map-planning-1080.mp4" type="video/mp4"></video></div>
+        <div class="shade"></div>
+        <div class="copy"><div class="wrap"><div class="inner">
+          <div class="eyebrow">通路銷售力</div>
+          <h2 class="display">上得了架<br>還要賣得動</h2>
+          <p>通路進入、展會佈局、數位集客 — 把產品放進對的通路，讓消費者找得到。</p>
+          <div class="hero-cta"><a class="btn btn-gold" href="services.html">看完整服務內容 <span aria-hidden="true">→</span></a><a class="btn btn-glass" href="assess.html">先做 2 分鐘處境比對</a></div>
+        </div></div></div>
+      </div>
+      <div class="panel heavy" aria-roledescription="slide" aria-label="3 / 3">
+        <div class="bg"><img src="https://lufe.world/images/hero/hero-slide-3-poster-1600.webp" alt="">
+          <video muted loop playsinline preload="none"><source media="(prefers-reduced-motion: no-preference)" src="https://lufe.world/videos/hero/hero-highway-aerial-1080.mp4" type="video/mp4"></video></div>
+        <div class="shade"></div>
+        <div class="copy"><div class="wrap"><div class="inner">
+          <div class="eyebrow">躍馬企業 · 42 年實戰</div>
+          <h2 class="display">真的跑過船的人，<br>才懂出海的眉角</h2>
+          <p>出海不是報告寫得出來的。鹿飛站在躍馬企業 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通。</p>
+          <div class="hero-cta"><a class="btn btn-gold" href="https://jumping.group" target="_blank" rel="noopener">認識躍馬企業 <span aria-hidden="true">↗</span></a><a class="btn btn-glass" href="services.html">看完整服務內容</a></div>
+        </div></div></div>
+      </div>
+    </div>
+    <div class="hero-nav" id="heroNav"><div class="wrap">
+      <a href="services.html#pillar-fit" class="on"><span>產品適配性</span><i></i></a>
+      <a href="services.html#pillar-channel"><span>通路銷售力</span><i></i></a>
+      <a href="about.html"><span>基石 · 42 年國際物流</span><i></i></a>
+    </div></div>
+  </section>
+
+  <section class="cream">
+    <div class="wrap">
+      <div class="pos-head center">
+        <p class="eyebrow" style="margin-bottom:14px">躍馬企業 · 42 年實戰</p>
+        <h2 class="h2">真的跑過船的人，<br><span class="accent">才懂出海的眉角</span></h2>
+        <p class="lead">出海不是報告寫得出來的。鹿飛站在躍馬企業 <b>42 年</b>的國際物流實戰上，幫你把<b>產品適配</b>跟<b>通路銷售</b>兩件事跑通。</p>
+      </div>
+      <div class="moat on-dark">
+        <div>
+          <h3 class="h3">出海不是報告寫得出來的，<span class="accent">是真的跑過船的人</span></h3>
+          <p>從報關、倉儲到最後一哩——這套東西不是教科書讀來的，是 42 年在港口、海關、貨櫃場跑出來的。你的貨不會因為顧問不懂現場而卡在海上。</p>
+          <a class="link" href="https://jumping.group" target="_blank" rel="noopener">前往躍馬企業官網 <span class="chev" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="stats">
+          <div><div class="num">42<sup>+</sup></div><small>年國際物流實戰</small></div>
+          <div><div class="num">500<sup>+</sup></div><small>出口實戰案件</small></div>
+          <div><div class="num">30<sup>+</sup></div><small>國家與地區覆蓋</small></div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <a class="card pad pillar" href="services.html#pillar-fit">
+          <div class="top"><span class="num">01</span><span class="small" style="font-weight:600">勝率</span></div>
+          <h3 class="h3">產品適配性</h3><p class="tl">這個市場真的要你嗎？</p>
+          <ul><li>市場機會評估</li><li>小批量產品測試</li><li>MBCPR 決策框架</li></ul>
+          <span class="link">看這個支柱的做法 <span class="chev" aria-hidden="true">›</span></span>
+        </a>
+        <a class="card pad pillar gold" href="services.html#pillar-channel">
+          <div class="top"><span class="num">02</span><span class="small" style="font-weight:600">潛力</span></div>
+          <h3 class="h3">通路銷售力</h3><p class="tl">上得了架，還要賣得動。</p>
+          <ul><li>通路進入與媒合</li><li>展會與加盟佈局</li><li>AI 集客引擎</li></ul>
+          <span class="link" style="color:var(--gold-d)">看這個支柱的做法 <span class="chev" aria-hidden="true">›</span></span>
+        </a>
+      </div>
+      <p class="center" style="margin-top:36px"><a class="link" href="services.html#pillar-team">想把海外團隊長大？看進階模組 <span class="chev" aria-hidden="true">›</span></a></p>
+    </div>
+  </section>
+
+  <section class="subsidy cream" style="padding-top:0">
+    <div class="wrap">
+      <div class="box on-dark">
+        <div>
+          <span class="chip">115 年度加碼 · 經濟部</span>
+          <h2>海外參展補助從 4 萬跳到 <span class="accent">16 萬</span>——歷年最優，經費用罄即止。</h2>
+          <p style="color:rgba(255,255,255,.7);margin-top:10px;font-size:15px">執行期至 12 月底。下一次公告時程以國際貿易署最新公告為準。</p>
+          <div style="font-size:12px;color:rgba(212,168,92,.85);margin-top:8px;font-weight:600">資料確認：2026-04-23</div>
+        </div>
+        <div class="acts">
+          <a class="btn btn-gold" href="subsidies.html#overseas-exhibition">看申請細節 <span aria-hidden="true">→</span></a>
+          <a class="link" href="assess.html">或先做 2 分鐘處境比對 <span class="chev" aria-hidden="true">›</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cases" style="padding-bottom:88px">
+    <div class="wrap sec-head">
+      <div>
+        <h2 class="h2">這些企業都找到了自己的路</h2>
+        <p class="lead">4 個案例，從食品到電子、從北美到東南亞——每一個都是真的決策、真的數字、真的結果。</p>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="round" type="button" id="cPrev" aria-label="上一個案例"></button>
+        <button class="round" type="button" id="cNext" aria-label="下一個案例"></button>
+      </div>
+    </div>
+    <div class="car-vp" id="casesVp" aria-roledescription="carousel" aria-label="案例"><div class="car-track" id="casesTrack"></div></div>
+    <div class="wrap"><a class="link" href="cases.html">看全部案例 <span class="chev" aria-hidden="true">›</span></a></div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap">
+      <div class="center" style="max-width:860px;margin:0 auto">
+        <h2 class="h2">從評估市場到貨上架，<br>你面對的<span class="accent">只有我們</span></h2>
+        <p class="lead" style="margin-top:20px">產品適配、通路銷售、躍馬 42 年國際物流——不是三家拼起來的拼盤，是一個團隊從頭跑到尾。一個專案經理、一份合約、一條進度線。</p>
+      </div>
+      <div class="matrix"><table>
+        <thead><tr><th><span class="sr">類型</span></th><th scope="col">產品適配</th><th scope="col">通路銷售</th><th scope="col">國際物流</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">傳統顧問<small>只出策略報告</small></th><td><span class="dot" role="img" aria-label="涵蓋"></span></td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><th scope="row">貿易商<small>只做中段通路</small></th><td class="no">—</td><td><span class="dot" role="img" aria-label="涵蓋"></span></td><td class="no">—</td></tr>
+          <tr><th scope="row">貨代 / 物流商<small>只跑後段運輸</small></th><td class="no">—</td><td class="no">—</td><td><span class="dot" role="img" aria-label="涵蓋"></span></td></tr>
+          <tr class="us"><th scope="row">鹿飛 LUFÉ<small style="color:rgba(212,168,92,.85)">三件事全程自營</small></th><td><span class="dot" role="img" aria-label="涵蓋"></span></td><td><span class="dot" role="img" aria-label="涵蓋"></span></td><td><span class="dot" role="img" aria-label="涵蓋"></span></td></tr>
+        </tbody></table></div>
+      <div class="quote" style="margin-top:72px">
+        <q>以前要同時盯三家——顧問催進度、貿易商催付款、貨代催艙位。換成鹿飛之後，我只開一次會，每週一份進度信。本來要三週的事情，七天就跑完。</q>
+        <div class="who"><b>陳執行長</b> · 台灣食品品牌・東南亞市場</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cream">
+    <div class="wrap faq">
+      <div class="faq-intro">
+        <p class="eyebrow" style="margin-bottom:14px">FAQ</p>
+        <h2 class="h2">三個最常被問到的問題</h2>
+        <p class="lead" style="margin:16px 0 24px">在你決定聊聊之前，先回答你心裡可能已經冒出來的那幾個疑問。</p>
+        <a class="link" href="services.html#faq">還有其他問題？看完整 FAQ <span class="chev" aria-hidden="true">›</span></a>
+      </div>
+      <div id="faq"></div>
+    </div>
+  </section>
+
+  <section class="dark center">
+    <div class="wrap">
+      <h2 class="h2" style="margin-bottom:18px">想清楚了，就聊聊<br>還沒想清楚，也可以聊聊</h2>
+      <p class="lead" style="max-width:520px;margin:0 auto 36px">送出後 24 小時內由 Aaron 本人回覆。第一次對話就把費用結構和時間表講清楚。</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-gold" type="button" data-chat>聊聊你的產品 <span aria-hidden="true">→</span></button>
+        <a class="btn btn-glass" href="assess.html">先做 2 分鐘處境比對</a>
+      </div>
+    </div>
+  </section>
+</main>
+<div data-lufe-footer></div>
+
+<template id="lufe-notes">
+  <li><b>全站改成方角</b>：保留新的間距、字體與排版，按鈕、卡片、面板一律直角，維持鹿飛原本的方正感。</li>
+  <li><b>Hero 跟正式站一樣</b>：不能拖，10 秒自動換頁、淡入淡出，滑過下方選單就切換；選單是原本的整排分佈條＋金色進度線。第二顆按鈕改半透明方框。</li>
+  <li><b>導覽列</b>：半透明毛玻璃，捲過 Hero 後轉淺色；下拉選單從按鈕位置展開。</li>
+  <li><b>定位區與補助</b>：拿掉光暈與分隔線，靠留白分層；數字改粗體；補助改成奶油底上的深藍卡片。</li>
+  <li><b>案例</b>：排成可以左右甩的一列，點卡片從原位置展開看「卡點／怎麼解」，關閉時縮回原位。</li>
+  <li><b>對照表、見證、FAQ</b>：表格簡化、見證置中；FAQ 可收合，點開時順順展開。</li>
+  <li><b>「聊聊你的產品」</b>：從底部拉上來的面板，可停半屏或全屏；欄位離開就檢查，送出後當場確認。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { reduce, carousel, expand, initQA, ICON } = LUFE;
+
+  /* Hero — production behaviour: 10s autoplay, cross-fade, hover/focus a tab to switch, pause while hovered */
+  const heroEl = document.getElementById('hero');
+  const panels = [...document.querySelectorAll('#heroTrack .panel')], tabs = [...document.querySelectorAll('#heroNav a')];
+  const AUTOPLAY_MS = 10000;
+  let index = 0, hovering = false, timer = 0;
+  function playActive() {
+    panels.forEach((p, i) => { const v = p.querySelector('video'); if (i === index) { if (v.preload === 'none') v.preload = 'auto'; v.play().catch(() => {}); } else v.pause(); });
+  }
+  function runFill() {
+    tabs.forEach((t, k) => {
+      const bar = t.querySelector('i'); bar.classList.remove('run'); void bar.offsetWidth;
+      if (k === index && !hovering && !reduce) { bar.style.setProperty('--dur', AUTOPLAY_MS + 'ms'); bar.classList.add('run'); }
+    });
+  }
+  function schedule() { clearTimeout(timer); if (!hovering && !reduce) timer = setTimeout(() => go((index + 1) % panels.length), AUTOPLAY_MS); runFill(); }
+  function go(i) {
+    if (i === index) return;
+    index = i;
+    panels.forEach((p, k) => p.classList.toggle('on', k === i));
+    tabs.forEach((t, k) => { t.classList.toggle('on', k === i); t.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    playActive(); schedule();
+  }
+  tabs.forEach((t, i) => { t.addEventListener('mouseenter', () => go(i)); t.addEventListener('focus', () => go(i)); });
+  heroEl.addEventListener('mouseenter', () => { hovering = true; clearTimeout(timer); runFill(); });
+  heroEl.addEventListener('mouseleave', () => { hovering = false; schedule(); });
+  playActive(); schedule();
+
+  /* Cases */
+  const CASES = [
+    { slug: 'costco-health', featured: true, img: 'case-1-costco', num: '6 個月', nl: '從 0 到 Costco 上架', scale: '年營收 8,000 萬的台灣保健品廠', title: '怎麼從零打進北美 Costco 120+ 門市？',
+      pain: '找過貿易商只管物流、找過顧問只丟 80 頁報告，沒人真的把品牌帶進通路。', fix: '從消費者口感倒推配方、合約付款期硬談進 45 天、首月銷量超標 40%，直接進入第二批訂單談判。', from: '台灣', to: 'Costco 北美', trust: '客戶授權公開' },
+    { slug: 'electronics-tariff', img: 'case-2-tariff', num: '-15%', nl: '關稅成本', scale: '年出口 3,000 萬美金的電子組裝廠', title: '中美關稅戰下，怎麼把毛利搶回來？',
+      pain: '工廠在大陸、客戶在美國，25% 額外關稅把毛利打到負數，客戶降價要求已經在信箱裡。', fix: '四地產地打分後選越南，雙線並行 6 個月當保險，物流時效反而縮短 3 天，一年省下 200 萬美金。', from: '大陸廣東', to: '越南胡志明', trust: '已簽 NDA · 經營層審閱' },
+    { slug: 'shoe-brand', img: 'case-3-pivot', num: '3x', nl: '新品類營收倍數', scale: '成立 30 年的台灣皮鞋品牌', title: '200 萬行銷砸下去，半年只回 50 萬，怎麼救？',
+      pain: '上亞馬遜前 20 名全是國際品牌、退貨率 30%，品牌方堅持「我們叫鞋業，不能賣襪子」。', fix: '兩小時把 CAC 與 LTV 攤上桌，用襪子當進場票，3 個月做到品類 3 倍、4.7 星，反推皮鞋銷量 +120%。', from: '台灣品牌', to: 'Amazon US', trust: '客戶授權公開' },
+    { slug: 'bubble-tea', img: 'case-4-manila', num: '10 家', nl: '一年內加盟 + 直營門市', scale: '在台灣有 80 家門市的珍奶連鎖', title: '兩次失敗後，第三次怎麼把馬尼拉做成功？',
+      pain: '市場已被日出茶太、COCO、Tiger Sugar 佔住，前兩次一次被拿走配方、一次選錯區。', fix: '鎖定 P150–200 中高端、第一家開在 BGC 當行銷投資、混合直營與加盟，單店月營收做到台灣母店 1.2 倍。', from: '台灣母店', to: '馬尼拉 BGC', trust: '已簽 NDA · 經營層審閱' },
+  ];
+  const img = c => `https://lufe.world/images/cases/${c.img}.jpg`;
+  const ctrack = document.getElementById('casesTrack');
+  ctrack.innerHTML = CASES.map((c, i) => `
+    <button class="card case${c.featured ? ' featured' : ''}" type="button" data-i="${i}">
+      <div class="media"><img src="${img(c)}" alt="" loading="lazy" draggable="false"></div>
+      <div class="cbody">${c.featured ? '<span class="chip" style="align-self:flex-start;margin-bottom:14px">最常被問到</span>' : ''}
+        <div class="num">${c.num}</div><div class="nl">${c.nl}</div><div class="sc">${c.scale}</div>
+        <h3 class="h3">${c.title}</h3>
+        <div class="more"><span>${c.from} → ${c.to}</span><span class="plus" aria-hidden="true">+</span></div></div>
+    </button>`).join('');
+  const prev = document.getElementById('cPrev'), next = document.getElementById('cNext');
+  prev.innerHTML = ICON.left; next.innerHTML = ICON.right;
+  carousel(document.getElementById('casesVp'), { prev, next });
+  ctrack.addEventListener('click', e => {
+    const card = e.target.closest('.case'); if (!card) return;
+    const c = CASES[card.dataset.i];
+    expand(card, { img: img(c), html: `
+      ${c.featured ? '<span class="chip" style="margin-bottom:14px">最常被問到</span>' : ''}
+      <div class="num">${c.num}</div><div class="small" style="margin:8px 0 22px;font-weight:500">${c.nl}</div>
+      <div class="small" style="color:var(--tx2);font-weight:500;margin-bottom:6px">${c.scale}</div>
+      <h2 class="h2" id="xpTitle" style="font-size:clamp(24px,3vw,32px);margin-bottom:24px">${c.title}</h2>
+      <div class="beat"><b>卡點</b><p>${c.pain}</p></div>
+      <div class="beat fix"><b>怎麼解</b><p>${c.fix}</p></div>
+      <div class="small" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 0 28px;border-top:1px solid var(--bd)"><span>${c.from} → ${c.to}</span><span>${c.trust}</span></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-navy" href="case.html?slug=${c.slug}">看完整案例 <span aria-hidden="true">→</span></a><button class="btn btn-tint" type="button" data-chat>聊聊類似的案子</button></div>` });
+  });
+
+  /* FAQ */
+  const FAQ = [
+    ['這要花多少錢？', '探路固定費，落地抽成制。第一次對話就給數字。', '看你走哪條路。如果是先去東南亞測試市場，我們按階段收固定費用，每一步花多少錢事前講清楚。如果是要打進北美通路，前期只收低服務費，主要靠成交抽成——我們幫你賣出去才真的賺錢。不管哪條路，第一次聊天就會給你明確的數字。'],
+    ['從開始到看到結果要多久？', '探路 3–4 個月有回饋 · 落地 6–12 個月進通路。', '東南亞探路通常 3–4 個月就能拿到第一批市場回饋。北美通路落地平均 6–9 個月，食品保健品會再長一些（9–12 個月），因為認證要求較高。我們會在第一次對話後給你明確的時間表。'],
+    ['如果發現我的產品不適合怎麼辦？', '探路就是為了在砸大錢之前先搞清楚。', '那反而是最好的結果之一——你省下了幾百萬的冤枉錢。探路的設計就是用最小成本先驗證，不適合就停，不會讓你砸大錢才發現。我們會老實告訴你為什麼，也會告訴你什麼條件改變後可以再試。'],
+  ];
+  document.getElementById('faq').innerHTML = FAQ.map(([q, t, a], i) => `
+    <div class="qa${i === 0 ? ' open' : ''}"><button type="button"><span class="n">0${i + 1}</span><span class="q">${q}</span><span class="chev" aria-hidden="true">${ICON.chevDown}</span></button>
+      <div class="ans"><div><p class="take">${t}</p><p class="full">${a}</p></div></div></div>`).join('');
+  initQA();
+})();
+</script>
+</body>
+</html>

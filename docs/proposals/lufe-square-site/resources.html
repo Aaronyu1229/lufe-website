@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>資源 · 補助與活動 · 鹿飛 LUFÉ（方正版提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+.resource-hero { min-height: min(610px, 76svh); display:flex; align-items:flex-end; }
+.resource-hero .wrap { padding-bottom:clamp(64px,9vw,104px); }
+.resource-hero .lead { max-width:690px; }
+.resource-grid { max-width:1200px; margin:auto; display:grid; gap:18px; }
+.resource-card { min-height:440px; padding:clamp(28px,4vw,48px); overflow:hidden; }
+.resource-card::before { content:""; position:absolute; inset:0 auto auto 0; width:100%; height:3px; background:var(--accent); }
+.resource-card.subsidies { --accent:var(--gold); }
+.resource-card.notes { --accent:var(--sky); }
+.resource-card .kicker { color:var(--accent-ink); font-size:13px; font-weight:600; margin-bottom:28px; }
+.resource-card.subsidies { --accent-ink:var(--gold-d); }
+.resource-card.notes { --accent-ink:var(--sky); }
+.resource-card .h2 { font-size:clamp(28px,3vw,38px); margin-bottom:14px; }
+.resource-card .body { max-width:530px; }
+.resource-stats { margin:34px 0; padding:22px 0; border-block:1px solid var(--bd); display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.resource-stats strong { color:var(--accent-ink); font-size:clamp(24px,3vw,32px); line-height:1; font-weight:600; letter-spacing:-.03em; }
+.resource-stats span { display:block; margin-top:7px; color:var(--tx3); font-size:12px; line-height:1.4; }
+.resource-card .link { margin-top:auto; color:var(--tx); }
+.resource-card.subsidies .link:hover { color:var(--gold-d); }
+.resource-card.notes .link:hover { color:var(--sky); }
+.resource-foot { max-width:1200px; margin:64px auto 0; padding-top:30px; border-top:1px solid var(--bd); text-align:center; color:var(--tx3); }
+@media (min-width:700px) { .resource-grid { grid-template-columns:1fr 1fr; gap:28px; } }
+</style>
+</head>
+<body data-page="resources" data-hero="dark">
+<div data-lufe-nav></div>
+<main>
+  <section class="page-hero resource-hero">
+    <div class="shade"></div><div class="wrap">
+      <p class="eyebrow">Resources · 補助與活動</p>
+      <h1 class="h1">正在開放的補助，<br><span class="accent">和我們現場去的地方。</span></h1>
+      <p class="lead">兩種資源、一個入口：<b style="color:#fff">政府出海補助</b>幫你降低成本，<b style="color:#fff">活動與現場紀錄</b>告訴你我們這個月在哪裡、和誰談、看到什麼。兩條路你都可以直接對接到鹿飛的服務。</p>
+    </div>
+  </section>
+  <section class="cream">
+    <div class="wrap resource-grid">
+      <a class="card resource-card subsidies" href="subsidies.html">
+        <p class="kicker">01 · Subsidies</p>
+        <h2 class="h2">2026 政府出海補助</h2>
+        <p class="body">貿易署、經濟部、中企署——4 個正在開放的計畫，單筆最高補助 NT$1,000 萬。我們替你整理好誰適合申請、可以包含哪些服務、和鹿飛三支柱怎麼對齊。</p>
+        <div class="resource-stats"><div><strong data-subsidy-count>4</strong><span>當期計畫</span></div><div><strong>3</strong><span>主管機關</span></div><div><strong>1,000萬</strong><span>單筆最高</span></div></div>
+        <span class="link">看補助整理 <span class="chev" aria-hidden="true">›</span></span>
+      </a>
+      <a class="card resource-card notes" href="field-notes.html">
+        <p class="kicker">02 · Field Notes</p>
+        <h2 class="h2">活動 · 現場紀錄</h2>
+        <p class="body">我們這個月在哪裡：北美和東南亞兩個主戰場的第一手紀錄。加盟展、論壇、商會、客戶現場、媒體露出，全部攤開給你看。</p>
+        <div class="resource-stats"><div><strong data-activity-count>6</strong><span>活動紀錄</span></div><div><strong>2</strong><span>主戰場</span></div><div><strong>月更</strong><span>更新節奏</span></div></div>
+        <span class="link">看現場紀錄 <span class="chev" aria-hidden="true">›</span></span>
+      </a>
+    </div>
+    <p class="wrap resource-foot">想看實際做過的案子？前往 <a class="link" href="cases.html">案例</a>。想搞懂市場趨勢？前往 <a class="link" href="insights.html">洞察</a>。</p>
+  </section>
+</main>
+<div data-lufe-footer></div>
+<template id="lufe-notes">
+  <li><b>把資源分成兩條清楚的路</b>：補助和現場紀錄各是一張大卡，先選你現在需要的資訊，不必在一頁裡找很久。</li>
+  <li><b>數字留在它說明的資源旁</b>：計畫數、主管機關和最高額度直接放在補助卡內，讀到哪裡就看到哪裡。</li>
+  <li><b>卡片按下立即有回饋</b>：點選時會立即縮放，讓人清楚知道自己正要進到哪一個資源。</li>
+  <li><b>保留兩個出口</b>：想看實戰案例或市場洞察，頁底都有直接入口。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const subsidies = ['market-expansion', 'overseas-exhibition', 'supply-chain-support', 'cross-border-ecommerce'];
+  const activities = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6'];
+  document.querySelector('[data-subsidy-count]').textContent = subsidies.length;
+  document.querySelector('[data-activity-count]').textContent = activities.length;
+})();
+</script>
+</body>
+</html>

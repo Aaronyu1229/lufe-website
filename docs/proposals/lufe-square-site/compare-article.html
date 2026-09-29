@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文章頁（全部文章共用）逐項對照</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+TC:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root { --navy: #101B30; --gold: #D4A85C; --gold-ink: #7A5A1A; --cream: #F5F2EC; --tx: #1A1A2E; --tx2: #5A6070; --bd: rgba(26,26,46,.12); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font: 16px/1.7 "Inter", "Noto Sans TC", -apple-system, "PingFang TC", sans-serif; color: var(--tx); background: #fff; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 20px; }
+header { background: var(--navy); color: #fff; padding: 48px 0 40px; }
+header h1 { font-size: clamp(26px, 3.4vw, 38px); font-weight: 650; }
+header p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 760px; }
+.how { margin-top: 20px; background: rgba(255,255,255,.08); padding: 16px 18px; font-size: 15px; }
+.how b { color: var(--gold); }
+.block { padding: 56px 0; border-bottom: 1px solid var(--bd); }
+.block h2 { font-size: 24px; font-weight: 650; margin-bottom: 20px; }
+.pair { display: grid; gap: 16px; }
+@media (min-width: 900px) { .pair { grid-template-columns: 1fr 1fr; } }
+figure { border: 1px solid var(--bd); }
+figcaption { font-size: 14px; font-weight: 700; padding: 10px 14px; background: var(--cream); }
+figcaption.b { background: var(--navy); color: #fff; }
+figure img { width: 100%; display: block; }
+.items { margin-top: 24px; display: grid; gap: 12px; }
+.item { border: 1px solid var(--bd); padding: 16px 18px; display: grid; gap: 8px; }
+.item .t { font-weight: 700; font-size: 17px; }
+.item .t span { display: inline-block; min-width: 34px; background: var(--navy); color: #fff; text-align: center; margin-right: 8px; font-size: 14px; padding: 1px 6px; }
+.opt { display: grid; grid-template-columns: 26px 1fr; gap: 8px; color: var(--tx2); }
+.opt b { color: var(--tx); }
+.opt i { font-style: normal; font-weight: 700; display: inline-grid; place-items: center; width: 26px; height: 26px; background: var(--cream); color: var(--gold-ink); }
+.done { background: #F3F7F9; border-color: rgba(58,107,132,.3); }
+.done .t span { background: #3A6B84; }
+.note { font-size: 14px; color: var(--tx2); }
+</style>
+</head>
+<body><header><div class="wrap"><h1>文章頁（全部文章共用）逐項對照：正式站 vs 方正版提案</h1>
+<p>左邊是 lufe.world/insights/overseas-exhibition-subsidy-115-upgrade（其他文章同版型），右邊是方正版提案（<a href="article.html?slug=overseas-exhibition-subsidy-115-upgrade" style="color:var(--gold)">打開提案頁</a>）。首頁與服務頁已定案的共用做法都已套用，這裡只列這一頁自己的差異。</p>
+<div class="how">回覆：<b>「編號＋A 或 B」</b>。<b>A＝跟正式站一樣</b>，<b>B＝用提案的做法</b>。</div></div></header><div class="block"><div class="wrap"><h2>閱讀中的畫面</h2><div class="pair"><figure><figcaption>A　正式站</figcaption><img src="compare/article/live-read.jpg" alt=""></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/article/new-read.jpg" alt=""></figure></div><div class="items"><div class="item"><div class="t"><span>1</span>閱讀進度條</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：沒有。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：導覽列正下方一條細金線，跟著你讀到哪裡慢慢變長，讀完就滿。</div></div></div><div class="item"><div class="t"><span>2</span>內文裡的「**」星號<br><span class="note">⚠️ 這是正式站現有的錯：文章原稿用「**粗體**」標記，但網站沒有轉成粗體，星號直接露出來（左圖「**90%**」「**經費用罄即止**」）。13 篇文章裡共有 26 行有這個問題。</span></div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：照正式站原樣，星號露出來。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：在提案裡轉成真正的粗體、不顯示星號。（正式站之後也建議一起修）</div></div></div></div></div></div><div class="block"><div class="wrap"><h2>已自動套用</h2><div class="items"><div class="item"><div class="t"><span>✓</span>標題字體</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：細字標題。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：跟全站一致改成粗標題（你在首頁已選）。</div></div></div></div></div></div></body></html>

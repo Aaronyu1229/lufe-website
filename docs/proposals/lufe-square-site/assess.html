@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>免費出海評估 · 鹿飛 LUFÉ（方正版提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+.assess { background:var(--navy); color:#fff; min-height:100svh; padding-top:var(--nav-h); overflow:hidden; }
+.entry, .wizard { width:min(760px,100%); margin:auto; padding:76px var(--gutter) 100px; }
+.entry .crumb { color:rgba(255,255,255,.5); font-size:13px; margin-bottom:34px; }.entry .crumb a:hover{color:var(--gold)}
+.entry .eyebrow,.question .eyebrow { margin-bottom:20px; }.entry .h1 { color:#fff; max-width:600px; }.entry .lead { color:rgba(255,255,255,.7); max-width:620px; margin:24px 0 36px; }
+.focus-case { display:none; align-items:center; gap:14px; margin:0 0 24px; padding:14px 16px; background:rgba(255,255,255,.04); border:1px solid rgba(212,168,92,.2); }
+.focus-case.show { display:flex; }.focus-case b { display:block; color:var(--gold); font-size:12px; margin-bottom:3px; }.focus-case span { color:rgba(255,255,255,.85); font-size:15px; }
+.authority { display:grid; grid-template-columns:72px 1fr; gap:18px; padding:20px; margin:0 0 34px; border-left:2px solid var(--gold); background:rgba(255,255,255,.03); }.authority .monogram { width:72px;height:72px;display:grid;place-items:center;background:var(--gold);color:var(--navy);font-size:24px;font-weight:650; }.authority h2{font-size:17px;}.authority .facts{font-size:13px;color:var(--gold-l);margin-top:4px;}.authority p{color:rgba(255,255,255,.62);font-size:14px;line-height:1.8;margin-top:10px;}
+.entry-actions { display:flex; gap:24px; align-items:center; flex-wrap:wrap; }.entry-actions .link{color:rgba(255,255,255,.75);}.entry .honesty { color:rgba(255,255,255,.42); font-size:13px; line-height:1.9; margin:28px 0 48px; font-style:italic; }
+.case-links { border-top:1px solid rgba(255,255,255,.1); padding-top:32px; }.case-links > p { font-size:12px; color:rgba(255,255,255,.45); margin-bottom:14px; }.case-links .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }.case-links a { min-height:104px;padding:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1); }.case-links a:hover{border-color:rgba(212,168,92,.45)}.case-links small{display:block;color:rgba(255,255,255,.45);font-size:11px;margin-bottom:5px}.case-links b{display:block;font-size:13px;line-height:1.45;color:#fff}.case-links strong{display:block;color:var(--gold);margin-top:7px;font-size:15px}
+.wizard { display:none; width:100%; max-width:none; padding:0; }.wizard.live { display:block; }.wizard-top { width:min(760px,100%); margin:auto; padding:54px var(--gutter) 0; display:flex; justify-content:space-between; font-size:13px; color:rgba(255,255,255,.55); }.wizard-top button { color:inherit; background:transparent;border:0;cursor:pointer; }.wizard-top button:hover { color:#fff; }
+.wizard-progress { width:min(760px,100%); margin:34px auto 0; padding:0 var(--gutter); }.progress-num { display:flex;align-items:flex-end;gap:10px;margin-bottom:16px; }.progress-num strong{font-family:Inter,sans-serif;color:var(--gold);font-size:clamp(48px,8vw,64px);font-weight:300;line-height:.82;letter-spacing:-.05em}.progress-num span{padding-bottom:3px;color:rgba(255,255,255,.4)}.prog-line{height:4px;background:rgba(255,255,255,.1);overflow:hidden}.prog-line i{display:block;height:100%;width:100%;background:linear-gradient(90deg,rgba(212,168,92,.6),var(--gold));transform-origin:left;transform:scaleX(0);transition:transform 450ms var(--ease-spring);}
+.answer-chips { width:min(760px,100%); min-height:36px; margin:18px auto 0; padding:0 var(--gutter); display:flex; flex-wrap:wrap; gap:8px; }.answer-chips:empty { display:none; }.answer-chips button { max-width:100%; border:1px solid rgba(212,168,92,.4); background:rgba(212,168,92,.1); color:var(--gold); cursor:pointer; font:500 13px/1.35 inherit; padding:5px 10px; text-align:left; transition:transform var(--press) ease-out,background-color 150ms; }.answer-chips button:hover{background:rgba(212,168,92,.18)}.answer-chips button:active{transform:scale(.95)}.answer-chips span{color:rgba(255,255,255,.5);margin-right:5px}
+.wiz-vp { overflow:hidden; width:100%; touch-action:pan-y; cursor:grab; user-select:none; }.wiz-vp.dragging{cursor:grabbing}.wiz-track{display:flex;will-change:transform}.question{flex:0 0 100%;padding:48px var(--gutter) 100px}.question-inner{width:min(760px,100%);margin:auto}.question .h2{color:#fff;max-width:680px;margin-bottom:38px}.answer-list{display:grid;gap:12px}.answer{width:100%;padding:20px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:#fff;text-align:left;cursor:pointer;transition:background 150ms,border-color 150ms,opacity 150ms;}.answer:active{transform:scale(.99)}.answer:hover{border-color:rgba(212,168,92,.55);background:rgba(255,255,255,.06)}.answer.chosen{background:rgba(212,168,92,.16);border-color:var(--gold)}.answer.chosen .key{background:var(--gold);border-color:var(--gold);color:var(--navy)}.answer.chosen .arrow{color:var(--gold)}.answer-row{display:flex;gap:15px;align-items:flex-start}.answer .key{width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.6);font-size:12px}.answer b{display:block;font-size:17px;font-weight:500;line-height:1.5}.answer small{display:block;color:rgba(255,255,255,.52);font-size:13px;line-height:1.8;margin-top:5px}.answer .arrow{margin-left:auto;color:rgba(255,255,255,.35)}.key-hint{margin-top:22px;color:rgba(255,255,255,.32);font-size:11px}
+.result{flex:0 0 100%;padding:48px var(--gutter) 100px}.result-inner{width:min(860px,100%);margin:auto}.result-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}.result-label{color:var(--gold);font-size:12px;font-weight:600}.recompare{color:rgba(255,255,255,.5);background:transparent;border:0;cursor:pointer;font:500 13.5px/1 inherit}.recompare:hover{color:#fff}.result .h1{color:#fff;max-width:820px;margin-bottom:30px}.narrative{display:grid;gap:15px;max-width:740px;margin-bottom:30px}.narrative p{color:rgba(255,255,255,.82);font-size:17px;line-height:1.8}.marker{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:12px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:bold;vertical-align:top;margin-top:3px}.marker.miss{background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.25)}.piece-label{display:inline-block;min-width:42px;color:rgba(255,255,255,.42);font-size:11px;font-weight:600;margin-right:9px}.closing{max-width:700px;border-left:2px solid rgba(212,168,92,.55);padding-left:18px;color:rgba(255,255,255,.72);font-style:italic;line-height:1.9}
+.matched-case{display:grid;margin-top:52px;background:#fff;color:var(--tx);border:1px solid rgba(212,168,92,.3)}.case-photo{position:relative;min-height:220px;overflow:hidden;background:var(--navy-l)}.case-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.case-photo-overlay{position:absolute;inset:auto 0 0;padding:16px 18px;background:linear-gradient(to top,rgba(10,18,34,.85),transparent);color:#fff}.matched-case .case-num{color:var(--gold);font-size:42px;line-height:1;font-weight:300}.matched-case .case-headline{font-size:clamp(18px,2.3vw,24px);line-height:1.3;margin-top:7px}.case-body{padding:20px 22px}.case-body .case-tags,.case-body .small{font-size:12px;color:var(--tx3)}.case-body .small{margin-top:10px}.case-body blockquote{font-size:17px;font-weight:600;line-height:1.6;margin:8px 0 16px}.alternative{margin-top:16px;padding:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}.alternative p{color:rgba(255,255,255,.55);font-size:12px;margin-bottom:5px}.alternative a{color:#fff;font-size:17px;font-weight:600}.result-actions{margin-top:30px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.result-actions p{color:rgba(255,255,255,.7);font-size:16px}.result-actions small{display:block;color:rgba(255,255,255,.45);margin-top:5px}.result-actions .buttons{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.copy-btn{color:rgba(255,255,255,.75);background:transparent;border:0;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:3px}
+@media (min-width:700px){.matched-case{grid-template-columns:5fr 6fr}.case-photo{min-height:100%}}
+@media (prefers-reduced-motion:reduce){.answer,.answer-chips button,.prog-line i{transition-duration:0.01ms}}
+@media (max-width:499px){.authority{grid-template-columns:52px 1fr;gap:13px}.authority .monogram{width:52px;height:52px;font-size:19px}.case-links .grid{grid-template-columns:1fr}.entry-actions{gap:14px}.result-actions{flex-direction:column}.case-body{padding:20px}.matched-case{margin-top:36px}}
+</style>
+</head>
+<body data-page="assess" data-hero="dark">
+<div data-lufe-nav></div>
+<main class="assess">
+  <section class="entry" id="entry">
+    <p class="crumb" id="crumb"><a href="index.html">首頁</a> <span aria-hidden="true">/</span> <span>處境比對</span></p>
+    <div class="focus-case" id="focusCase"><div><b>正在比對</b><span id="focusTitle"></span></div></div>
+    <p class="eyebrow">三題 · 兩分鐘 · 不問 email</p>
+    <h1 class="h1">看看你的處境<br><span class="accent">跟誰最像</span></h1>
+    <p class="lead">三題問答，直接告訴你：你現在遇到的事、跟我們做過的四個案例，哪一個最接近 — 以及那個案例的判斷方法，多少能放在你身上。</p>
+    <div class="authority"><div class="monogram">AY</div><div><h2>Aaron Yu · 鹿飛創辦人</h2><div class="facts">42+ 年國際物流實戰 · 500+ 出口案件 · 30+ 國家</div><p>最近三個月我親自看過 47 家台灣公司的出海卡點。這三題是我每次開第一次會議前必問的問題 — 兩分鐘後你會拿到的不是評分，而是「跟你最像的人當時的真實決策」。</p></div></div>
+    <div class="entry-actions"><button class="btn btn-gold" type="button" id="start">開始比對 <span aria-hidden="true">→</span></button><a class="link" href="cases.html">先看案例再決定 <span aria-hidden="true">→</span></a></div>
+    <p class="honesty">我們不做 AI 評分、不給紅綠燈、不要你的 email。只要你願意給這三題 2 分鐘的專注，我們就給你一份誠實的比對 — 即使結論是「我們不是你需要的」，我們也會直說。</p>
+    <div class="case-links"><p>看過的人也讀這些</p><div class="grid"><a href="case.html?slug=costco-health"><small>食品 · 北美</small><b>保健品怎麼從台灣走進北美 Costco？</b><strong>6 個月</strong></a><a href="case.html?slug=electronics-tariff"><small>電子 · 美國</small><b>電子大廠怎麼靠產地轉移省下關稅？</b><strong>-15%</strong></a><a href="case.html?slug=shoe-brand"><small>服飾 · 美國</small><b>知名皮鞋品牌為什麼改賣襪子大賺？</b><strong>3x</strong></a><a href="case.html?slug=bubble-tea"><small>飲品 · 東南亞</small><b>珍珠奶茶品牌怎麼在菲律賓成功落地？</b><strong>10 家</strong></a></div></div>
+  </section>
+  <section class="wizard" id="wizard" aria-label="處境比對">
+    <div class="wizard-top"><button type="button" id="back">← 上一步</button><button type="button" id="reset">重新開始</button></div>
+    <div class="wizard-progress" id="wizardProgress"><div class="progress-num"><strong id="stepNum">01</strong><span>/ 03</span></div><div class="prog-line"><i id="progressLine"></i></div></div>
+    <div class="answer-chips" id="answerChips" aria-label="已回答的題目"></div>
+    <div class="wiz-vp" id="wizVp"><div class="wiz-track" id="wizTrack"></div></div>
+  </section>
+</main>
+<div data-lufe-footer></div>
+<template id="lufe-notes">
+  <li><b>每次選答案都會先確認</b>：選項會立刻變成金色，讓人知道答案已被接住；短暫停一下才進下一題，快速連按不會改掉這個選擇。</li>
+  <li><b>已回答的內容會留在上方</b>：每一題都會顯示「階段 起步期」這樣的小標籤。點標籤可直接回去修改，其他兩題會保留。</li>
+  <li><b>接下來只問還沒回答的題目</b>：改完答案後，會前往第一題尚未填答的問題；三題都答完便直接回到結果。</li>
+  <li><b>三題放在同一條橫向路徑</b>：選完往左進下一題；回上一題則往右回來。也可以把題目往右拉回去，甩動的力道會影響是否回上一題。</li>
+  <li><b>進度條是真實進度</b>：每答一題就前進三分之一；看結果時也會維持完整進度。</li>
+  <li><b>結果可以回頭核對</b>：結果上方同樣保留三個小標籤。案例卡會用真實照片、成果數字、當時的原話和完整案例連結，讓人知道這是實際發生過的事。</li>
+  <li><b>仍可用數字鍵快速選擇</b>：按 1、2、3 等數字就等同點選答案；若裝置偏好減少動態效果，確認與換題會立即完成。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { spring, draggable, project, rubberband, clamp } = LUFE;
+  const keys = ['stage', 'blocker', 'market'];
+  const cases = {
+    'costco-health': { stage:'scaling', blocker:'channel', market:'us', num:'6 個月', headline:'6 個月進 Costco 120+ 門市', title:'保健品怎麼從台灣走進北美 Costco？', tags:'食品 · 北美', pain:'產品在台灣很好，但北美通路都說「不認識」', heroImage:'costco-health-hero' },
+    'electronics-tariff': { stage:'scaling', blocker:'cost', market:'us', num:'-15%', headline:'關稅降 15%，年省 200 萬美金', title:'電子大廠怎麼靠產地轉移省下關稅？', tags:'電子 · 美國', pain:'中美關稅戰吃掉毛利，客戶再殺一刀訂單就要掉', heroImage:'electronics-tariff-hero' },
+    'shoe-brand': { stage:'tested', blocker:'execution', market:'us', num:'3x', headline:'襪子賣出皮鞋 3 倍營收', title:'知名皮鞋品牌為什麼改賣襪子大賺？', tags:'服飾 · 美國', pain:'200 萬行銷砸下去，半年只換回 50 萬', heroImage:'shoe-brand-hero' },
+    'bubble-tea': { stage:'scaling', blocker:'execution', market:'sea', num:'10 家', headline:'一年 10 家店，單店超母店 1.2x', title:'珍珠奶茶品牌怎麼在菲律賓成功落地？', tags:'飲品 · 東南亞', pain:'前兩次進菲律賓都失敗，一次被拿走配方、一次選錯區', heroImage:'bubbletea-manila-hero' }
+  };
+  const stage = [{value:'idea',label:'還在台灣賣，沒真的外銷過',hint:'訊號：產品在國內穩定，但從來沒真的把一批貨送到海外落地過。'}, {value:'tested',label:'少量試過外銷，但還沒穩定',hint:'訊號：跑過 1–3 次試單，有資料但抓不到節奏，下一步放不放大都不確定。'}, {value:'scaling',label:'已經在出海，想放大或修正',hint:'訊號：海外業務跑了超過一年，但成長停滯、或某一個環節開始卡住。'}];
+  const blocker = [{value:'market',label:'不知道該去哪個市場',hint:'訊號：手上有三個以上國家的代理聯絡，但沒有任何一個真的簽下去。'}, {value:'channel',label:'找不到對的通路或合作夥伴',hint:'訊號：進得去超商、卻進不了量販；或是上架了但產品沒有聲量。'}, {value:'cost',label:'成本算不清、毛利被吃掉',hint:'訊號：報價時覺得賺的，出貨後發現關稅、物流、匯率分掉一半。'}, {value:'execution',label:'方向知道，但沒人真的做執行',hint:'訊號：付過兩家顧問的策略 deck，但沒人真的幫你跑到落地。'}];
+  const market = [{value:'us',label:'美國 / 北美'}, {value:'sea',label:'東南亞'}, {value:'japan',label:'日韓'}, {value:'europe',label:'歐洲'}, {value:'other',label:'還沒決定 / 多市場並行'}];
+  const questions = [{eyebrow:'階段',question:'你目前在出海這條路上的哪個位置？',options:stage,key:'stage'}, {eyebrow:'卡點',question:'最讓你睡不著的是哪一件事？',options:blocker,key:'blocker'}, {eyebrow:'市場',question:'你主要在看哪個市場？',options:market,key:'market'}];
+  const short = {stage:{idea:'起步期',tested:'試水期',scaling:'放大期'},blocker:{market:'找市場',channel:'找通路',cost:'算成本',execution:'缺執行'},market:{us:'北美',sea:'東南亞',japan:'日韓',europe:'歐洲',other:'多市場並行'}};
+  const resultText = [['你的處境，幾乎就是他們當時遇到的事','這份案例就是為你寫的。他們的判斷邏輯跟具體做法，都能直接放到你身上。讀到最後一個字。'],['兩項對齊 — 同路但不同戰場','他們的判斷邏輯可以直接用，但具體做法要換成你的版本。這份案例值得讀到最後 — 學怎麼想，換怎麼做。'],['一項對齊 — 可以當參考方向','學他們怎麼想事情、怎麼做決定，不要照抄他們做的事。如果你想看更貼近的案例，我們手上還有幾個沒放上網的。'],['三個維度都不同 — 但方法仍然能用','顧問的價值不是模板，是判斷方法。這份案例你可以快速瀏覽 — 看他們當時的判斷邏輯，這部分對你仍然有用。想直接聊更貼近的狀況，我們這邊隨時可以安排。']];
+  let answers = {stage:null, blocker:null, market:null};
+  let index = 0, width = 0, dragFrom = 0, busy = false, confirmationTimer = 0;
+  const entry = document.getElementById('entry');
+  const wizard = document.getElementById('wizard');
+  const vp = document.getElementById('wizVp');
+  const track = document.getElementById('wizTrack');
+  const stepNum = document.getElementById('stepNum');
+  const progressLine = document.getElementById('progressLine');
+  const answerChips = document.getElementById('answerChips');
+  const focus = new URLSearchParams(location.search).get('case');
+
+  if (cases[focus]) {
+    document.getElementById('focusTitle').textContent = cases[focus].title;
+    document.getElementById('focusCase').classList.add('show');
+    document.getElementById('crumb').innerHTML = '<a href="index.html">首頁</a> <span aria-hidden="true">/</span> <a href="cases.html">案例</a> <span aria-hidden="true">/</span> <span>比對</span>';
+  }
+
+  function panel(question, questionIndex) {
+    return `<div class="question"><div class="question-inner"><p class="eyebrow">${question.eyebrow}</p><h2 class="h2">${question.question}</h2><div class="answer-list">${question.options.map((option, optionIndex) => `<button class="answer" type="button" data-question="${questionIndex}" data-value="${option.value}" aria-pressed="false"><span class="answer-row"><span class="key">${optionIndex + 1}</span><span><b>${option.label}</b>${option.hint ? `<small>${option.hint}</small>` : ''}</span><span class="arrow" aria-hidden="true">→</span></span></button>`).join('')}</div><p class="key-hint">也可以按數字鍵 ${question.options.map((_, optionIndex) => optionIndex + 1).join(' / ')} 快速選擇</p></div></div>`;
+  }
+
+  function scoreCases() {
+    const ranked = Object.entries(cases).map(([slug, candidate]) => ({ slug, candidate, score:keys.filter(key => answers[key] === candidate[key]).length })).sort((a, b) => b.score - a.score);
+    const primary = focus && ranked.find(result => result.slug === focus && result.score >= 1) || ranked[0];
+    const alternative = ranked.find(result => result.slug !== primary.slug && result.score >= 1) || ranked.find(result => result.slug !== primary.slug);
+    return { primary, alternative };
+  }
+
+  function pieceText(key, candidate) {
+    const matches = answers[key] === candidate[key];
+    if (key === 'stage') return matches ? `你和他們都在${short.stage[answers.stage]} — 同樣的壓力點。` : `你在${short.stage[answers.stage]}，他們當時在${short.stage[candidate.stage]} — 節奏不同。`;
+    if (key === 'blocker') return matches ? `都卡在「${short.blocker[answers.blocker]}」這件事上。` : `你卡在「${short.blocker[answers.blocker]}」，他們當時卡在「${short.blocker[candidate.blocker]}」 — 不同的戰場。`;
+    return matches ? `目標市場一致：${short.market[answers.market]}。` : `你看${short.market[answers.market]}，他們做的是${short.market[candidate.market]}。`;
+  }
+
+  function caseCard(result) {
+    const candidate = result.candidate;
+    return `<article class="matched-case"><div class="case-photo"><img src="https://lufe.world/images/cases/detail/${candidate.heroImage}.jpg" alt=""><div class="case-photo-overlay"><div class="case-num">${candidate.num}</div><div class="case-headline">${candidate.headline}</div></div></div><div class="case-body"><p class="case-tags">${candidate.tags}</p><p class="small">客戶當時的原話</p><blockquote>「${candidate.pain}」</blockquote><a class="btn btn-navy" href="case.html?slug=${result.slug}">讀完整案例 <span aria-hidden="true">→</span></a></div></article>`;
+  }
+
+  function renderResult() {
+    const { primary, alternative } = scoreCases();
+    const candidate = primary.candidate;
+    const [headline, closing] = resultText[3 - primary.score];
+    const pieces = keys.map(key => [questions.find(question => question.key === key).eyebrow, answers[key] === candidate[key], pieceText(key, candidate)]);
+    return `<div class="result"><div class="result-inner"><div class="result-top"><p class="result-label">比對結果 · 吻合 ${primary.score} / 3</p><button class="recompare" id="recompare" type="button">↺ 重新比對</button></div><h1 class="h1">${headline}</h1><div class="narrative">${pieces.map(([label, matches, text]) => `<p><span class="marker ${matches ? '' : 'miss'}">${matches ? '✓' : '×'}</span><span class="piece-label">${label}</span>${text}</p>`).join('')}</div><p class="closing">${closing}</p>${caseCard(primary)}${alternative ? `<article class="alternative"><p>也值得一看 · 吻合 ${alternative.score}/3</p><a href="case.html?slug=${alternative.slug}">看另一條路 <span aria-hidden="true">→</span></a></article>` : ''}<div class="result-actions"><div><p>想知道這個方法放在你身上會長什麼樣？</p><small>直接聊。不收費、不賣課、不承諾一定接。</small></div><div class="buttons"><button class="copy-btn" id="copyResult" type="button">複製這份比對 ↗</button><button class="btn btn-gold" type="button" data-chat>聊聊你的狀況 <span aria-hidden="true">→</span></button></div></div></div></div>`;
+  }
+
+  function render(x) { track.style.transform = `translate3d(${x}px,0,0)`; }
+  const motion = spring(0, render);
+
+  function answeredCount() { return keys.filter(key => answers[key]).length; }
+  function firstUnanswered() { return keys.findIndex(key => !answers[key]); }
+  function updateChrome() {
+    const answered = answeredCount();
+    stepNum.textContent = String(index === 3 ? 3 : index + 1).padStart(2, '0');
+    progressLine.style.transform = `scaleX(${answered / 3})`;
+    answerChips.innerHTML = questions.map((question, questionIndex) => answers[question.key] ? `<button type="button" data-jump="${questionIndex}"><span>${question.eyebrow}</span>${short[question.key][answers[question.key]]}</button>` : '').join('');
+    document.getElementById('back').style.visibility = index === 3 ? 'hidden' : '';
+  }
+
+  function go(nextIndex, velocity) {
+    index = clamp(nextIndex, 0, 3);
+    motion.to(-index * width, { response:.45, velocity, damping:Math.abs(velocity || 0) > 500 ? .85 : 1 });
+    updateChrome();
+  }
+
+  function markChosen(questionIndex) {
+    const key = questions[questionIndex].key;
+    track.children[questionIndex].querySelectorAll('.answer').forEach(button => {
+      const chosen = answers[key] === button.dataset.value;
+      button.classList.toggle('chosen', chosen);
+      button.setAttribute('aria-pressed', chosen ? 'true' : 'false');
+    });
+  }
+
+  function choose(questionIndex, value) {
+    if (busy) return;
+    busy = true;
+    answers[questions[questionIndex].key] = value;
+    markChosen(questionIndex);
+    updateChrome();
+    LUFE.haptic();
+    confirmationTimer = setTimeout(() => {
+      const next = firstUnanswered();
+      busy = false;
+      if (next === -1) {
+        track.children[3].outerHTML = renderResult();
+        go(3);
+        return;
+      }
+      go(next);
+    }, LUFE.reduce ? 0 : 260);
+  }
+
+  function reset() {
+    clearTimeout(confirmationTimer);
+    busy = false;
+    answers = {stage:null, blocker:null, market:null};
+    index = 0;
+    track.innerHTML = questions.map(panel).join('') + renderResult();
+    motion.jump(0);
+    entry.hidden = false;
+    wizard.classList.remove('live');
+    updateChrome();
+    scrollTo({top:0, behavior:LUFE.reduce ? 'auto' : 'smooth'});
+  }
+
+  track.innerHTML = questions.map(panel).join('') + renderResult();
+  updateChrome();
+
+  track.addEventListener('click', event => {
+    const answer = event.target.closest('.answer');
+    if (answer) choose(Number(answer.dataset.question), answer.dataset.value);
+    const recompare = event.target.closest('#recompare');
+    if (recompare) reset();
+    const copy = event.target.closest('#copyResult');
+    if (copy && navigator.clipboard) {
+      navigator.clipboard.writeText(location.href).then(() => {
+        copy.textContent = '✓ 連結已複製';
+        setTimeout(() => { copy.textContent = '複製這份比對 ↗'; }, 2400);
+      });
+    }
+  });
+
+  answerChips.addEventListener('click', event => {
+    const chip = event.target.closest('[data-jump]');
+    if (!chip || busy) return;
+    go(Number(chip.dataset.jump));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (!wizard.classList.contains('live') || index > 2 || event.target.matches('input,textarea')) return;
+    const optionIndex = Number.parseInt(event.key, 10) - 1;
+    const options = track.children[index].querySelectorAll('.answer');
+    if (optionIndex >= 0 && optionIndex < options.length) choose(index, options[optionIndex].dataset.value);
+  });
+
+  document.getElementById('start').addEventListener('click', () => {
+    entry.hidden = true;
+    wizard.classList.add('live');
+    measure();
+    go(firstUnanswered());
+    scrollTo({top:0, behavior:LUFE.reduce ? 'auto' : 'smooth'});
+  });
+  document.getElementById('back').addEventListener('click', () => { if (!busy) index === 0 ? reset() : go(index - 1); });
+  document.getElementById('reset').addEventListener('click', reset);
+
+  function measure() {
+    width = vp.clientWidth;
+    motion.jump(-index * width);
+  }
+
+  addEventListener('resize', measure);
+  document.fonts.ready.then(measure);
+  draggable(vp, 'x', {
+    start() {
+      if (busy) return;
+      motion.stop();
+      dragFrom = motion.value;
+      vp.classList.add('dragging');
+    },
+    move(distance) {
+      if (busy) return;
+      const min = -index * width;
+      let x = dragFrom + distance;
+      if (x > 0) x = rubberband(x, width);
+      if (x < min) x = min + rubberband(x - min, width);
+      motion.jump(x);
+    },
+    end(velocity) {
+      vp.classList.remove('dragging');
+      if (busy) return;
+      const proposed = motion.value + project(velocity, .99);
+      const target = clamp(Math.round(-proposed / width), 0, Math.min(index, 2));
+      go(target, velocity);
+    }
+  });
+})();
+</script>
+</body>
+</html>

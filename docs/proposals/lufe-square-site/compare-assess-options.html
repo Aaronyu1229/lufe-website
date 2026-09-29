@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>處境比對三個方案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+body { background: #fff; }
+.top { background: var(--navy); color: #fff; padding: 40px 0 32px; }
+.top h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 650; }
+.top p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 920px; }
+.top .how { margin-top: 16px; background: rgba(255,255,255,.08); padding: 14px 16px; font-size: 15px; line-height: 1.8; }
+.top .how b { color: var(--gold); }
+.variant { padding: 56px 0; border-bottom: 1px solid var(--bd2); }
+.variant:nth-of-type(even) { background: var(--cream); }
+.vhead { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; }
+.vhead i { font-style: normal; flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; background: var(--navy); color: var(--gold); font-weight: 700; font-size: 18px; }
+.vhead h2 { font-size: 24px; font-weight: 650; line-height: 1.3; }
+.vhead h2 small { display: block; font-size: 15px; font-weight: 500; color: var(--tx2); margin-top: 4px; }
+.why { display: grid; gap: 6px; margin: 0 0 18px 54px; max-width: 900px; color: var(--tx2); font-size: 15px; }
+.why li { margin-left: 18px; } .why b { color: var(--tx); }
+.why .skill { display: inline-block; font-size: 12px; font-weight: 600; color: var(--sky); background: rgba(58,107,132,.1); padding: 0 6px; margin-right: 4px; }
+.pick { display: inline-block; margin-left: 10px; font-size: 13px; font-weight: 700; color: #fff; background: var(--sky); padding: 2px 8px; vertical-align: 3px; }
+.tryme { font-size: 13px; color: var(--tx3); margin: 0 0 10px 54px; }
+
+/* Device frame */
+.dev { position: relative; background: var(--navy); color: #fff; max-width: 920px; margin: 0 auto; min-height: 640px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(16,27,48,.5); }
+.dev-bar { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; font-size: 13px; color: rgba(255,255,255,.55); border-bottom: 1px solid rgba(255,255,255,.08); }
+.dev-bar button { border: 0; background: none; color: rgba(255,255,255,.7); cursor: pointer; font-size: 13px; padding: 6px 4px; }
+.dev-bar button:disabled { opacity: .3; cursor: default; }
+.dev-bar button:active { opacity: .5; }
+.prog { height: 3px; background: rgba(255,255,255,.1); }
+.prog i { display: block; height: 100%; background: var(--gold); transform-origin: left; transform: scaleX(0); }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 24px 0; min-height: 44px; }
+.chips button { border: 1px solid rgba(212,168,92,.4); background: rgba(212,168,92,.1); color: var(--gold); font-size: 13px; padding: 5px 10px; cursor: pointer; transition: transform var(--press) ease-out, background-color 150ms; }
+.chips button:hover { background: rgba(212,168,92,.18); } .chips button:active { transform: scale(.95); }
+.chips button span { color: rgba(255,255,255,.5); margin-right: 4px; }
+.vp { overflow: hidden; touch-action: pan-y; }
+.track { display: flex; will-change: transform; }
+.q { flex: 0 0 100%; padding: 26px 24px 34px; }
+@media (min-width: 700px) { .q { padding: 34px 56px 44px; } }
+.q .eyebrow { color: var(--gold); margin-bottom: 8px; }
+.q h3 { font-size: clamp(22px, 2.6vw, 30px); font-weight: 650; line-height: 1.3; margin-bottom: 20px; }
+.opts { display: grid; gap: 10px; }
+.opt { display: grid; grid-template-columns: 30px 1fr 22px; gap: 12px; align-items: center; text-align: left; width: 100%; padding: 14px 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); color: #fff; cursor: pointer; font: inherit;
+  transition: transform var(--press) ease-out, background-color 150ms, border-color 150ms; -webkit-tap-highlight-color: transparent; }
+.opt:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.2); }
+.opt:active { transform: scale(.985); }
+.opt .k { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid rgba(255,255,255,.25); font-size: 12px; color: rgba(255,255,255,.7); }
+.opt b { display: block; font-size: 16px; font-weight: 600; }
+.opt small { display: block; font-size: 13px; color: rgba(255,255,255,.55); margin-top: 3px; line-height: 1.6; }
+.opt .ar { color: rgba(255,255,255,.4); }
+.opt.chosen { background: rgba(212,168,92,.16); border-color: var(--gold); }
+.opt.chosen .k { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.opt.chosen .ar { color: var(--gold); }
+/* Option 1: in-place swap */
+.swap { padding: 26px 24px 34px; transition: opacity 180ms ease, transform 320ms var(--ease-spring); }
+@media (min-width: 700px) { .swap { padding: 34px 56px 44px; } }
+.swap.out { opacity: 0; transform: translateY(8px); }
+
+/* Result */
+.res { padding: 28px 24px 36px; }
+@media (min-width: 700px) { .res { padding: 36px 56px 48px; } }
+.res .lbl { font-size: 13px; color: var(--gold); font-weight: 600; display: flex; justify-content: space-between; gap: 12px; }
+.res .lbl button { border: 0; background: none; color: rgba(255,255,255,.7); cursor: pointer; font-size: 13px; }
+.res h3 { font-size: clamp(22px, 2.8vw, 32px); font-weight: 650; line-height: 1.3; margin: 10px 0 16px; }
+.pieces { display: grid; gap: 10px; margin-bottom: 14px; }
+.piece { display: grid; grid-template-columns: 22px 44px 1fr; gap: 8px; align-items: baseline; font-size: 15px; color: rgba(255,255,255,.85); }
+.piece .m, .dim .m { display: grid; place-items: center; width: 20px; height: 20px; font-size: 12px; background: var(--gold); color: var(--navy); font-weight: 700; }
+.piece .m.miss, .dim .m.miss { background: rgba(255,255,255,.12); color: rgba(255,255,255,.6); }
+.piece .pl { font-size: 13px; color: rgba(255,255,255,.5); }
+.closing { color: rgba(255,255,255,.6); font-size: 14px; line-height: 1.8; font-style: normal; margin-bottom: 20px; }
+.casecard { background: #fff; color: var(--tx); display: grid; }
+@media (min-width: 700px) { .casecard { grid-template-columns: 5fr 6fr; } }
+.casecard .ph { position: relative; min-height: 200px; background: var(--navy-l); overflow: hidden; }
+.casecard .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 300ms; }
+.casecard .ph .ov { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 18px; background: linear-gradient(to top, rgba(10,18,34,.85), transparent); color: #fff; }
+.casecard .ph .num { font-size: 40px; line-height: 1; color: var(--gold); }
+.casecard .ph .hl { font-size: 13px; margin-top: 6px; }
+.casecard .bd { padding: 20px 22px; }
+.casecard .tag { font-size: 12px; color: var(--tx3); }
+.casecard blockquote { font-size: 17px; font-weight: 600; line-height: 1.6; margin: 8px 0 16px; }
+.alt { margin-top: 10px; padding: 14px 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+.alt span { color: rgba(255,255,255,.55); } .alt a { color: var(--gold); font-weight: 600; }
+.acts { margin-top: 22px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+.acts p { color: rgba(255,255,255,.75); font-size: 15px; } .acts small { display: block; color: rgba(255,255,255,.45); }
+/* Option 1 result sits on cream like production */
+.res.light { background: var(--cream); color: var(--tx); }
+.res.light .casecard { box-shadow: 0 20px 40px -24px rgba(16,27,48,.35); }
+.res.light .alt { background: #fff; border-color: var(--bd2); } .res.light .alt span { color: var(--tx3); } .res.light .alt a { color: var(--sky); }
+.res-top { padding: 28px 24px 22px; } @media (min-width: 700px) { .res-top { padding: 36px 56px 26px; } }
+/* Option 3: every dimension in the result is editable */
+.dim { display: grid; gap: 6px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.08); }
+.dim:last-child { border-bottom: 1px solid rgba(255,255,255,.08); }
+.dim .row { display: grid; grid-template-columns: 22px 44px 1fr; gap: 8px; align-items: baseline; font-size: 15px; color: rgba(255,255,255,.85); }
+.dim .seg { margin-left: 74px; background: rgba(255,255,255,.08); }
+.dim .seg button { color: rgba(255,255,255,.7); font-size: 13px; padding: 7px 12px; }
+.dim .seg button[aria-pressed=true] { color: var(--navy); }
+.dim .seg .seg-pill { background: var(--gold); }
+@media (max-width: 600px) { .dim .seg { margin-left: 0; } }
+.note3 { font-size: 13px; color: rgba(255,255,255,.5); margin: 10px 0 18px; }
+.fade { transition: opacity 220ms ease; } .fade.dim-out { opacity: 0; }
+.new { display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--gold); border: 1px solid currentColor; padding: 0 4px; margin-left: 4px; vertical-align: 2px; }
+.res.light .new { color: var(--ember); }
+.fab { display: none; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>2 分鐘處境比對：照 skill 重想的三個方案</h1>
+  <p>三題的題目、選項、計分方式和結果文字都照正式站。三個方案差在：<b style="color:#fff">點了答案之後的感覺、答錯想改時方不方便、結果頁能不能讓人多理解一點</b>。三個都是真的可以玩的，請每個都從第一題答到結果。</p>
+  <div class="how">我用 skill 的角度看這個工具，它真正的工作是：<b>讓老闆在 2 分鐘內覺得「有人跟我一樣，而且成功了」</b>，然後願意聊。<br>所以要顧好三件事：① 點下去立刻知道「我選到了」 ② 答錯可以輕鬆改、不用重來 ③ 結果看得懂「為什麼是這個案例」。<br>回覆：<b>1、2 或 3</b>（也可以說「2 但是…」）。</div>
+</div></header>
+
+<section class="variant"><div class="wrap">
+  <div class="vhead"><i>1</i><h2>穩健版：跟正式站一樣的流程，只把手感做好<small>改動最小</small></h2></div>
+  <ul class="why">
+    <li><span class="skill">回饋</span>點下答案，那一格先亮金色、打上勾，停一下才換題 → <b>確定「我選到了」</b>（正式站是一點就換，來不及看到）。</li>
+    <li><span class="skill">不打斷</span>題目原地淡出淡入，金色進度條順順長。</li>
+    <li>結果跟正式站一樣：換成米色背景、有照片的大案例卡。</li>
+    <li>缺點：想改第一題的答案，只能按「上一步」一題一題退。</li>
+  </ul>
+  <p class="tryme">↓ 直接點選答案試試（也可以按數字鍵 1–4）</p>
+  <div class="dev" data-mode="1"></div>
+</div></section>
+
+<section class="variant"><div class="wrap">
+  <div class="vhead"><i>2</i><h2>有方向感的流程：往前往左走、往回往右走，隨時點回任何一題<span class="pick">我推薦</span><small>中等改動</small></h2></div>
+  <ul class="why">
+    <li><span class="skill">空間一致</span>下一題從右邊滑進來、上一題往右滑回去 → 腦中有「一條路」的感覺，知道自己在第幾步。</li>
+    <li><span class="skill">回饋</span>點選一樣先亮金色打勾，停一下才滑走。</li>
+    <li><span class="skill">主導權＋寬容</span>上方會出現你已答的小標籤（例如「起步期」「找通路」），<b>點任何一個就直接回那一題改</b>，其他答案都保留。手機上可以用手指把題目往右拖回上一題。</li>
+    <li><span class="skill">目的</span>結果保留案例照片（照片是「真的有人做到」的證據，值得留），但留在同一個深藍畫面，不跳到另一個世界。</li>
+  </ul>
+  <p class="tryme">↓ 答到第 2、3 題時，試著點上方的小標籤回去改答案</p>
+  <div class="dev" data-mode="2"></div>
+</div></section>
+
+<section class="variant"><div class="wrap">
+  <div class="vhead"><i>3</i><h2>可以玩的結果：在結果頁直接改答案，案例即時換<small>改動最大、最有互動感</small></h2></div>
+  <ul class="why">
+    <li>答題流程跟方案 2 一樣。</li>
+    <li><span class="skill">直接操作＋連續回饋</span>結果頁的「階段／卡點／市場」三行，每行都能直接切換答案；一換，吻合幾項、最像的案例、說明文字<b>當場跟著變</b>。</li>
+    <li><span class="skill">理解</span>老闆可以自己玩出「如果我是放大期會對到哪個案例」，更懂 LUFÉ 的案例庫。</li>
+    <li>要考慮的風險：結果一直能變，<b>「這就是我的結果」的感覺會變淡</b>；而且多了一層操作，想快速看完的人可能用不到。</li>
+  </ul>
+  <p class="tryme">↓ 答完三題後，在結果頁切換「階段／卡點／市場」看看</p>
+  <div class="dev" data-mode="3"></div>
+</div></section>
+
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { spring, draggable, project, rubberband, clamp, segmented, reduce, esc, haptic } = LUFE;
+  // Data, scoring and result copy verbatim from src/components/assess/AssessWizard.tsx + src/data/cases.ts (via assess.html).
+  const CASES = {
+    'costco-health': { stage:'scaling', blocker:'channel', market:'us', num:'6 個月', headline:'6 個月進 Costco 120+ 門市', tags:'食品 · 北美', pain:'產品在台灣很好，但北美通路都說「不認識」', img:'costco-health-hero' },
+    'electronics-tariff': { stage:'scaling', blocker:'cost', market:'us', num:'-15%', headline:'關稅降 15%，年省 200 萬美金', tags:'電子 · 美國', pain:'中美關稅戰吃掉毛利，客戶再殺一刀訂單就要掉', img:'electronics-tariff-hero' },
+    'shoe-brand': { stage:'tested', blocker:'execution', market:'us', num:'3x', headline:'襪子賣出皮鞋 3 倍營收', tags:'服飾 · 美國', pain:'200 萬行銷砸下去，半年只換回 50 萬', img:'shoe-brand-hero' },
+    'bubble-tea': { stage:'scaling', blocker:'execution', market:'sea', num:'10 家', headline:'一年 10 家店，單店超母店 1.2x', tags:'飲品 · 東南亞', pain:'前兩次進菲律賓都失敗，一次被拿走配方、一次選錯區', img:'bubbletea-manila-hero' },
+  };
+  const Q = [
+    { key:'stage', eyebrow:'階段', question:'你目前在出海這條路上的哪個位置？', options:[{value:'idea',label:'還在台灣賣，沒真的外銷過',hint:'訊號：產品在國內穩定，但從來沒真的把一批貨送到海外落地過。'},{value:'tested',label:'少量試過外銷，但還沒穩定',hint:'訊號：跑過 1–3 次試單，有資料但抓不到節奏，下一步放不放大都不確定。'},{value:'scaling',label:'已經在出海，想放大或修正',hint:'訊號：海外業務跑了超過一年，但成長停滯、或某一個環節開始卡住。'}] },
+    { key:'blocker', eyebrow:'卡點', question:'最讓你睡不著的是哪一件事？', options:[{value:'market',label:'不知道該去哪個市場',hint:'訊號：手上有三個以上國家的代理聯絡，但沒有任何一個真的簽下去。'},{value:'channel',label:'找不到對的通路或合作夥伴',hint:'訊號：進得去超商、卻進不了量販；或是上架了但產品沒有聲量。'},{value:'cost',label:'成本算不清、毛利被吃掉',hint:'訊號：報價時覺得賺的，出貨後發現關稅、物流、匯率分掉一半。'},{value:'execution',label:'方向知道，但沒人真的做執行',hint:'訊號：付過兩家顧問的策略 deck，但沒人真的幫你跑到落地。'}] },
+    { key:'market', eyebrow:'市場', question:'你主要在看哪個市場？', options:[{value:'us',label:'美國 / 北美'},{value:'sea',label:'東南亞'},{value:'japan',label:'日韓'},{value:'europe',label:'歐洲'},{value:'other',label:'還沒決定 / 多市場並行'}] },
+  ];
+  const SHORT = { stage:{idea:'起步期',tested:'試水期',scaling:'放大期'}, blocker:{market:'找市場',channel:'找通路',cost:'算成本',execution:'缺執行'}, market:{us:'北美',sea:'東南亞',japan:'日韓',europe:'歐洲',other:'多市場並行'} };
+  const TIERS = [['你的處境，幾乎就是他們當時遇到的事','這份案例就是為你寫的。他們的判斷邏輯跟具體做法，都能直接放到你身上。讀到最後一個字。'],['兩項對齊 — 同路但不同戰場','他們的判斷邏輯可以直接用，但具體做法要換成你的版本。這份案例值得讀到最後 — 學怎麼想，換怎麼做。'],['一項對齊 — 可以當參考方向','學他們怎麼想事情、怎麼做決定，不要照抄他們做的事。如果你想看更貼近的案例，我們手上還有幾個沒放上網的。'],['三個維度都不同 — 但方法仍然能用','顧問的價值不是模板，是判斷方法。這份案例你可以快速瀏覽 — 看他們當時的判斷邏輯，這部分對你仍然有用。想直接聊更貼近的狀況，我們這邊隨時可以安排。']];
+  const KEYS = ['stage', 'blocker', 'market'];
+  const LBL = { stage:'階段', blocker:'卡點', market:'市場' };
+
+  function score(a) {
+    const ranked = Object.entries(CASES).map(([slug, c]) => ({ slug, c, score: KEYS.filter(k => a[k] === c[k]).length })).sort((x, y) => y.score - x.score);
+    const primary = ranked[0];
+    const alt = ranked.find(r => r.slug !== primary.slug && r.score >= 1) || ranked.find(r => r.slug !== primary.slug);
+    return { primary, alt };
+  }
+  const pieceText = (k, a, c) => {
+    const m = a[k] === c[k], s = SHORT[k];
+    if (k === 'stage') return m ? `你和他們都在${s[a[k]]} — 同樣的壓力點。` : `你在${s[a[k]]}，他們當時在${s[c[k]]} — 節奏不同。`;
+    if (k === 'blocker') return m ? `都卡在「${s[a[k]]}」這件事上。` : `你卡在「${s[a[k]]}」，他們當時卡在「${s[c[k]]}」 — 不同的戰場。`;
+    return m ? `目標市場一致：${s[a[k]]}。` : `你看${s[a[k]]}，他們做的是${s[c[k]]}。`;
+  };
+  const caseCard = r => `<article class="casecard"><div class="ph"><img src="https://lufe.world/images/cases/detail/${r.c.img}.jpg" alt=""><div class="ov"><div class="num">${r.c.num}</div><div class="hl">${r.c.headline}</div></div></div>
+    <div class="bd"><p class="tag">${r.c.tags}</p><p class="small" style="margin-top:10px">客戶當時的原話</p><blockquote>「${r.c.pain}」</blockquote><a class="btn btn-navy btn-sm" href="case.html?slug=${r.slug}">讀完整案例 →</a></div></article>`;
+  const altRow = r => r ? `<div class="alt"><span>也值得一看 · 吻合 ${r.score}/3</span><a href="case.html?slug=${r.slug}">看另一條路 →</a></div>` : '';
+  const actions = () => `<div class="acts"><div><p>想知道這個方法放在你身上會長什麼樣？</p><small>直接聊。不收費、不賣課、不承諾一定接。</small></div><button class="btn btn-gold btn-sm" type="button">聊聊你的狀況 →</button></div>`;
+  const optHTML = (q, qi) => `<div class="opts">${q.options.map((o, i) => `<button class="opt" type="button" data-q="${qi}" data-v="${o.value}"><span class="k">${i + 1}</span><span><b>${o.label}</b>${o.hint ? `<small>${o.hint}</small>` : ''}</span><span class="ar" aria-hidden="true">→</span></button>`).join('')}</div>`;
+  const qHTML = (q, qi) => `<p class="eyebrow">${q.eyebrow}</p><h3>${q.question}</h3>${optHTML(q, qi)}`;
+
+  function wizard(dev) {
+    const mode = Number(dev.dataset.mode);
+    let a = { stage: null, blocker: null, market: null }, at = 0, busy = false, done = false;
+    dev.innerHTML = `<div class="dev-bar"><button type="button" data-back>← 上一步</button><span data-count>01 / 03</span><button type="button" data-reset>重新開始</button></div><div class="prog"><i></i></div>
+      ${mode > 1 ? '<div class="chips" data-chips></div>' : ''}<div data-stage></div>`;
+    const stageEl = dev.querySelector('[data-stage]'), bar = dev.querySelector('.prog i'), back = dev.querySelector('[data-back]'), count = dev.querySelector('[data-count]'), chips = dev.querySelector('[data-chips]');
+    const prog = spring(0, v => { bar.style.transform = `scaleX(${v})`; }, .002);
+    let x, track, vp, W = 0;
+
+    function chrome() {
+      back.disabled = at === 0 || done;
+      count.textContent = done ? '完成' : `0${at + 1} / 03`;
+      prog.to(done ? 1 : (at) / 3 + (a[KEYS[at]] ? 1 / 3 : 0), { response: .45 });
+      if (chips) chips.innerHTML = KEYS.map((k, i) => a[k] ? `<button type="button" data-jump="${i}"><span>${LBL[k]}</span>${SHORT[k][a[k]]}</button>` : '').join('') + (KEYS.some(k => a[k]) ? '<span class="new" style="align-self:center">新</span>' : '');
+    }
+    function markChosen(root) { root.querySelectorAll('.opt').forEach(o => o.classList.toggle('chosen', a[Q[o.dataset.q].key] === o.dataset.v)); }
+
+    /* Mode 1: one question at a time, swapped in place */
+    function renderSwap() {
+      stageEl.innerHTML = `<div class="swap">${qHTML(Q[at], at)}</div>`; markChosen(stageEl); chrome();
+    }
+    function swapTo(i) {
+      const s = stageEl.querySelector('.swap'); s.classList.add('out');
+      setTimeout(() => { at = i; renderSwap(); const n = stageEl.querySelector('.swap'); n.classList.add('out'); void n.offsetWidth; n.classList.remove('out'); busy = false; }, reduce ? 0 : 180);
+    }
+
+    /* Modes 2–3: questions on a horizontal track — forward slides left, back slides right */
+    function renderTrack() {
+      stageEl.innerHTML = `<div class="vp"><div class="track">${Q.map((q, i) => `<section class="q" aria-hidden="${i !== at}">${qHTML(q, i)}</section>`).join('')}</div></div>`;
+      vp = stageEl.querySelector('.vp'); track = stageEl.querySelector('.track'); W = vp.clientWidth;
+      x = spring(-at * W, v => { track.style.transform = `translate3d(${v}px,0,0)`; });
+      markChosen(stageEl); chrome(); inertOthers();
+      let from = 0;
+      draggable(vp, 'x', {
+        start() { x.stop(); from = x.value; },
+        move(d) { let v = from + d; const min = -at * W; if (v < min) v = min + rubberband(v - min, W); if (v > 0) v = rubberband(v, W); x.jump(v); },
+        end(vel) {   // only "back" is a gesture; going forward needs an answer
+          const target = at > 0 && (x.value + project(vel, .99)) > -at * W + W / 2 ? at - 1 : at;
+          if (target !== at) haptic();
+          slideTo(target, { velocity: vel });
+        },
+      });
+    }
+    function inertOthers() { track && [...track.children].forEach((s, i) => { s.inert = i !== at; s.setAttribute('aria-hidden', i !== at); }); }
+    function slideTo(i, o = {}) { at = i; x.to(-i * W, { response: .45, velocity: o.velocity, damping: Math.abs(o.velocity || 0) > 500 ? .9 : 1 }); inertOthers(); chrome(); busy = false; }
+
+    /* Result */
+    function showResult() {
+      done = true; chrome();
+      const { primary, alt } = score(a), t = TIERS[3 - primary.score];
+      if (mode === 1) {
+        stageEl.innerHTML = `<div class="res-top"><div class="res" style="padding:0"><p class="lbl"><span>比對結果 · 吻合 ${primary.score} / 3</span><button type="button" data-redo>↺ 重新比對</button></p><h3>${t[0]}</h3><div class="pieces">${KEYS.map(k => `<div class="piece"><span class="m ${a[k] === primary.c[k] ? '' : 'miss'}">${a[k] === primary.c[k] ? '✓' : '×'}</span><span class="pl">${LBL[k]}</span><span>${pieceText(k, a, primary.c)}</span></div>`).join('')}</div><p class="closing">${t[1]}</p></div></div>
+          <div class="res light">${caseCard(primary)}${altRow(alt)}</div><div class="res" style="padding-top:0">${actions()}</div>`;
+      } else if (mode === 2) {
+        stageEl.innerHTML = `<div class="res"><p class="lbl"><span>比對結果 · 吻合 ${primary.score} / 3</span><button type="button" data-redo>↺ 重新比對</button></p><h3>${t[0]}</h3><div class="pieces">${KEYS.map(k => `<div class="piece"><span class="m ${a[k] === primary.c[k] ? '' : 'miss'}">${a[k] === primary.c[k] ? '✓' : '×'}</span><span class="pl">${LBL[k]}</span><span>${pieceText(k, a, primary.c)}</span></div>`).join('')}</div><p class="closing">${t[1]}</p>${caseCard(primary)}${altRow(alt)}${actions()}</div>`;
+      } else {
+        stageEl.innerHTML = `<div class="res"><p class="lbl"><span data-score>比對結果 · 吻合 ${primary.score} / 3</span><button type="button" data-redo>↺ 重新比對</button></p><h3 data-title>${t[0]}</h3>
+          <div data-dims>${KEYS.map(k => `<div class="dim" data-k="${k}"><div class="row"><span class="m"></span><span class="pl">${LBL[k]}</span><span data-txt></span></div><div class="seg">${Q.find(q => q.key === k).options.map(o => `<button type="button" data-value="${o.value}" aria-pressed="${a[k] === o.value}">${SHORT[k][o.value]}</button>`).join('')}</div></div>`).join('')}</div>
+          <p class="note3">↑ 換一個答案看看，案例會跟著變<span class="new">新文字</span></p>
+          <p class="closing" data-closing>${t[1]}</p><div class="fade" data-case>${caseCard(primary)}${altRow(alt)}</div>${actions()}</div>`;
+        let shown = primary.slug;
+        const update = () => {
+          const { primary: p, alt: al } = score(a), tt = TIERS[3 - p.score];
+          stageEl.querySelector('[data-score]').textContent = `比對結果 · 吻合 ${p.score} / 3`;
+          stageEl.querySelector('[data-title]').textContent = tt[0];
+          stageEl.querySelector('[data-closing]').textContent = tt[1];
+          stageEl.querySelectorAll('.dim').forEach(d => {
+            const k = d.dataset.k, m = a[k] === p.c[k], mk = d.querySelector('.m');
+            mk.textContent = m ? '✓' : '×'; mk.classList.toggle('miss', !m);
+            d.querySelector('[data-txt]').textContent = pieceText(k, a, p.c);
+          });
+          const box = stageEl.querySelector('[data-case]');
+          if (p.slug !== shown) {   // cross-fade the card only when the best match actually changes
+            shown = p.slug; box.classList.add('dim-out');
+            setTimeout(() => { box.innerHTML = caseCard(p) + altRow(al); box.classList.remove('dim-out'); }, reduce ? 0 : 220);
+          } else box.querySelector('.alt') && (box.querySelector('.alt').outerHTML = altRow(al));
+        };
+        stageEl.querySelectorAll('.dim').forEach(d => segmented(d.querySelector('.seg'), v => { a[d.dataset.k] = v; haptic(); update(); chrome(); }));
+        update();
+      }
+      stageEl.querySelector('[data-redo]').addEventListener('click', reset);
+    }
+    function reset() { a = { stage: null, blocker: null, market: null }; at = 0; done = false; mode === 1 ? renderSwap() : renderTrack(); }
+
+    /* Answering: confirm the choice visibly, then move on */
+    stageEl.addEventListener('click', e => {
+      const o = e.target.closest('.opt'); if (!o || busy || done) return;
+      busy = true; const qi = Number(o.dataset.q); a[Q[qi].key] = o.dataset.v; markChosen(stageEl); chrome(); haptic();
+      setTimeout(() => {
+        const next = mode === 1 ? qi + 1 : KEYS.findIndex(k => !a[k]);
+        if (next === -1 || next >= 3) { busy = false; return showResult(); }
+        mode === 1 ? swapTo(next) : slideTo(next);
+      }, reduce ? 0 : 260);
+    });
+    back.addEventListener('click', () => { if (at === 0 || done) return; mode === 1 ? swapTo(at - 1) : slideTo(at - 1); });
+    dev.querySelector('[data-reset]').addEventListener('click', reset);
+    chips && chips.addEventListener('click', e => {
+      const j = e.target.closest('[data-jump]'); if (!j) return;
+      if (done) { done = false; renderTrack(); }
+      slideTo(Number(j.dataset.jump));
+    });
+    dev.addEventListener('keydown', e => { const n = Number(e.key); if (n >= 1 && n <= 5 && !done) { const o = stageEl.querySelectorAll(mode === 1 ? '.opt' : `.q:nth-child(${at + 1}) .opt`)[n - 1]; o && o.click(); } });
+    dev.tabIndex = 0;
+    addEventListener('resize', () => { if (track) { W = vp.clientWidth; x.jump(-at * W); } });
+    reset();
+  }
+  document.querySelectorAll('.dev').forEach(wizard);
+})();
+</script>
+</body>
+</html>

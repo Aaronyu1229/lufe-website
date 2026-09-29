@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>補助計畫卡視覺提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+body { background: #fff; }
+.top { background: var(--navy); color: #fff; padding: 40px 0 32px; }
+.top h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 650; }
+.top p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 920px; }
+.top .how { margin-top: 16px; background: rgba(255,255,255,.08); padding: 14px 16px; font-size: 15px; line-height: 1.8; }
+.top .how b { color: var(--gold); }
+.variant { padding: 56px 0; border-bottom: 1px solid var(--bd2); background: var(--cream); }
+.variant:nth-of-type(even) { background: #EFEBE3; }
+.vhead { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 8px; }
+.vhead i { font-style: normal; flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; background: var(--navy); color: var(--gold); font-weight: 700; font-size: 18px; }
+.vhead h2 { font-size: 23px; font-weight: 650; line-height: 1.35; }
+.vhead h2 small { display: block; font-size: 14px; font-weight: 500; color: var(--tx2); margin-top: 4px; }
+.why { margin: 0 0 22px 54px; max-width: 880px; color: var(--tx2); font-size: 15px; display: grid; gap: 4px; }
+.why li { margin-left: 18px; } .why b { color: var(--tx); }
+.meter { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 8px; margin-left: 8px; vertical-align: 3px; background: var(--navy); color: var(--gold); }
+.pick { display: inline-block; margin-left: 8px; font-size: 13px; font-weight: 700; color: #fff; background: var(--sky); padding: 2px 8px; vertical-align: 3px; }
+
+/* Shared card anatomy (square, same tokens as the site) */
+.plan { --accent: var(--sky); max-width: 1040px; margin: 0 auto; background: #fff; box-shadow: 0 0 0 1px var(--bd), 0 24px 48px -30px rgba(16,27,48,.35); border-left: 4px solid var(--accent); padding: 28px; }
+@media (min-width: 760px) { .plan { padding: 36px 40px; } }
+.ph { display: flex; gap: 14px; align-items: flex-start; }
+.ph .ic { width: 48px; height: 48px; flex: 0 0 48px; display: grid; place-items: center; color: var(--accent); background: rgba(58,107,132,.08); }
+.ph .n { font-size: 26px; font-weight: 600; color: var(--accent); font-family: Inter, sans-serif; letter-spacing: -.02em; }
+.ph .ag { font-size: 12px; color: var(--tx3); margin-left: 8px; }
+.ph h3 { font-size: 24px; font-weight: 650; margin-top: 2px; }
+.ph .pg { font-size: 13px; color: var(--tx3); margin-top: 2px; }
+.ph .stage { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--sky); background: rgba(58,107,132,.08); padding: 4px 10px; white-space: nowrap; }
+.hl { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; font-size: 13px; color: var(--ember); }
+.hl b { background: var(--ember); color: #fff; font-size: 12px; padding: 3px 8px; font-weight: 600; }
+.kv { display: grid; gap: 16px; margin: 22px 0 18px; padding: 18px 0; border-top: 1px solid var(--bd); border-bottom: 1px solid var(--bd); }
+@media (min-width: 700px) { .kv { grid-template-columns: 1fr 1fr; } }
+.kv .k { font-size: 12px; color: var(--tx3); font-weight: 600; margin-bottom: 4px; }
+.kv .amt { font-size: 26px; font-weight: 600; color: var(--accent); line-height: 1.2; }
+.kv .v { font-size: 17px; font-weight: 600; }
+.kv small { display: block; font-size: 13px; color: var(--tx2); margin-top: 4px; line-height: 1.6; }
+.one { color: var(--tx2); line-height: 1.85; margin-bottom: 18px; }
+.lbl { font-size: 12px; font-weight: 700; color: var(--tx3); margin: 18px 0 8px; letter-spacing: .02em; }
+.list { list-style: none; display: grid; gap: 8px; }
+.list li { position: relative; padding-left: 16px; color: var(--tx); line-height: 1.7; font-size: 15px; }
+.list li::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 6px; background: var(--accent); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span { font-size: 13px; padding: 5px 10px; background: rgba(58,107,132,.07); color: var(--tx2); }
+.lufe { background: var(--navy); color: rgba(255,255,255,.85); padding: 16px 18px; margin-top: 20px; font-size: 14.5px; line-height: 1.8; }
+.lufe b { display: block; color: var(--gold); font-size: 12px; margin-bottom: 4px; }
+.foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 18px; font-size: 12.5px; color: var(--tx3); }
+.foot .acts { display: flex; gap: 16px; align-items: center; }
+.toggle { all: unset; box-sizing: border-box; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 14px 0; border-top: 1px solid var(--bd2); font-weight: 600; color: var(--sky); font-size: 15px; }
+.toggle .chev { display: inline-grid; transition: transform 450ms var(--ease-spring); }
+.toggle[aria-expanded=true] .chev { transform: rotate(180deg); }
+.coll { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 450ms var(--ease-spring); }
+.coll.open { grid-template-rows: 1fr; } .coll > div { overflow: hidden; }
+.detail h4 { font-size: 15px; font-weight: 650; margin: 18px 0 10px; }
+.costs { display: grid; gap: 0; }
+.costs div { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 12px 0; border-top: 1px solid var(--bd); }
+.costs b { font-size: 15px; } .costs em { font-style: normal; font-size: 12.5px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.costs p { grid-column: 1 / -1; font-size: 13.5px; color: var(--tx2); line-height: 1.7; }
+.steps { counter-reset: s; list-style: none; display: grid; gap: 10px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; font-size: 14.5px; line-height: 1.7; }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 26px; height: 26px; background: rgba(58,107,132,.1); color: var(--accent); font-weight: 700; font-size: 13px; }
+.steps li b { display: block; } .steps li span { color: var(--tx2); font-size: 13.5px; }
+.warn { list-style: none; display: grid; gap: 8px; }
+.warn li { background: rgba(164,90,32,.06); border-left: 3px solid var(--ember); padding: 10px 12px; font-size: 14px; line-height: 1.7; }
+
+/* C: short card */
+.short .kv { margin-bottom: 14px; }
+.short .row-acts { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
+/* D: accordion rows */
+.acc { margin-top: 0; } .acc:last-of-type { border-bottom: 1px solid var(--bd2); } .plan .acc:first-of-type { margin-top: 8px; }
+.acc .toggle { color: var(--tx); }
+.acc .toggle small { color: var(--tx3); font-weight: 500; font-size: 13px; margin-left: 8px; }
+.acc .coll > div > div { padding: 0 0 14px; }
+/* E: visual */
+.vis-grid { display: grid; gap: 22px; margin-top: 20px; }
+@media (min-width: 860px) { .vis-grid { grid-template-columns: 1fr 1fr; } }
+.box { border: 1px solid var(--bd2); padding: 16px 18px; }
+.box .lbl { margin-top: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { font-size: 13.5px; padding: 6px 10px; border: 1px solid var(--bd2); background: #fff; }
+.who { list-style: none; display: grid; gap: 6px; font-size: 14.5px; }
+.who li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 4px; position: relative; }
+.flow::before { content: ""; position: absolute; left: 10%; right: 10%; top: 17px; height: 2px; background: var(--bd2); }
+.flow button { all: unset; box-sizing: border-box; cursor: pointer; position: relative; display: grid; justify-items: center; gap: 8px; text-align: center; padding: 0 4px; -webkit-tap-highlight-color: transparent; }
+.flow button i { font-style: normal; display: grid; place-items: center; width: 36px; height: 36px; background: #fff; border: 2px solid var(--bd2); font-weight: 700; font-size: 14px; color: var(--tx3); transition: transform var(--press) ease-out, background-color 200ms, border-color 200ms, color 200ms; }
+.flow button:active i { transform: scale(.92); }
+.flow button b { font-size: 13px; font-weight: 600; line-height: 1.35; color: var(--tx2); }
+.flow button[aria-selected=true] i { background: var(--accent); border-color: var(--accent); color: #fff; }
+.flow button[aria-selected=true] b { color: var(--tx); }
+.flow button:focus-visible i { outline: 2px solid var(--sky); outline-offset: 2px; }
+.flow-note { margin-top: 14px; min-height: 48px; background: rgba(58,107,132,.06); padding: 12px 14px; font-size: 14px; line-height: 1.7; }
+.flow-note b { color: var(--accent); margin-right: 6px; }
+.ctable { width: 100%; border-collapse: collapse; font-size: 14px; }
+.ctable td { padding: 9px 0; border-top: 1px solid var(--bd); vertical-align: top; }
+.ctable td:last-child { text-align: right; color: var(--accent); font-weight: 600; white-space: nowrap; padding-left: 12px; }
+.ctable tr.sel td { background: rgba(58,107,132,.05); }
+.ctable button { all: unset; cursor: pointer; } .ctable button:hover { text-decoration: underline; }
+.cnote { font-size: 13px; color: var(--tx2); line-height: 1.7; margin-top: 8px; min-height: 22px; }
+.alarm { display: grid; gap: 8px; list-style: none; }
+.alarm li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; font-size: 14px; line-height: 1.7; }
+.alarm li::before { content: "!"; display: grid; place-items: center; width: 20px; height: 20px; background: var(--ember); color: #fff; font-weight: 700; font-size: 12px; margin-top: 3px; }
+@media (max-width: 560px) { .flow button b { font-size: 11.5px; } .ph .stage { display: none; } }
+.fab { display: none; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>補助計畫卡：四種視覺提案</h1>
+  <p>同一張卡（115 年度「海外展覽參展補助」），內容一個字都一樣，只換呈現方式。每一個都是真的可以點的。</p>
+  <div class="how">每個方案標了 <b>「第一眼要讀的字量」</b>（實際量出來的，收起來的不算），方便你比較。<br>回覆：<b>A、C、D 或 E</b>（B 是你上一輪不採用的分頁版，這裡不再放）。</div>
+</div></header>
+
+<section class="variant"><div class="wrap">
+  <div class="vhead"><i>A</i><h2>正式站原樣（只套方角與字體）<span class="meter" data-meter="A"></span><small>適合、補助涵蓋、鹿飛怎麼幫全部攤開；細節按「看申請細節」往下長</small></h2></div>
+  <div class="plan" data-v="A"></div>
+</div></section>
+
+<section class="variant"><div class="wrap">
+  <div class="vhead"><i>C</i><h2>短卡＋點開浮動面板<span class="meter" data-meter="C"></span><small>卡片只留重點；按「看申請細節」，卡片放大成浮在畫面上的面板，全部細節在面板裡一路讀完（跟案例頁同一種）</small></h2></div>
+  <div class="plan short" data-v="C"></div>
+</div></section>
+
+<section class="variant"><div class="wrap">
+  <div class="vhead"><i>D</i><h2>短卡＋五段收合<span class="meter" data-meter="D"></span><small>卡片只留重點；下面五段各是一行標題，像常見問題一樣點哪段開哪段，可以同時打開好幾段</small></h2></div>
+  <div class="plan short" data-v="D"></div>
+</div></section>
+
+<section class="variant"><div class="wrap">
+  <div class="vhead"><i>E</i><h2>短卡＋點開後用「圖」讀細節<span class="meter" data-meter="E"></span><span class="pick">我推薦</span><small>第一眼跟 D 一樣短；差別是打開以後，內容換成一眼看得懂的形狀</small></h2></div>
+  <ul class="why">
+    <li>卡片只留：補助額度、申請時程、一句話介紹、鹿飛怎麼幫上忙。</li>
+    <li>五段收成五行，每行後面寫「3 項／5 步」，先知道裡面有多少。<b>容易踩雷的點用橘色</b>，不會被忽略。</li>
+    <li>打開「申請與核銷流程」→ 5 個步驟畫成時間軸，點哪一步看哪一步的說明。</li>
+    <li>打開「可補助費用明細」→ 變成「項目｜上限」的表，點項目才看說明。</li>
+  </ul>
+  <div class="plan short" data-v="E"></div>
+</div></section>
+
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { expand, esc, ICON, reduce } = LUFE;
+  // Verbatim from src/data/subsidies.ts (overseas-exhibition).
+  const P = {
+    num: '02', agency: '經濟部 · 國際貿易署', program: '補助公司或商號參加海外國際展覽', shortTitle: '海外展覽參展補助', stage: '準備出海找方向',
+    highlight: '115 年度加碼版', highlightNote: '歷年最優 · 經費用罄即止',
+    amount: '每展最高 NT$16 萬', amountNote: '1 攤補助 12 萬，每增一攤 +1 萬，封頂 16 萬 · 補助比例最高 90%，企業自籌 10%',
+    deadline: '預計 4-5 月開放（第 2 次公告）', applicationNote: '第 2 次公告 · 展覽執行期 115/7/1–115/12/31',
+    oneLiner: '因應國際關稅情勢，經濟部依特別條例加碼補助赴海外參展。往年每展 4-5 萬，115 年度加碼至 16 萬，歷年最優。',
+    whoFor: ['要參加北美、東南亞 B2B 展覽的企業', '新創事業與新南向農業業者享特殊優先待遇', '想透過展覽直接接觸通路買手與海外代理商'],
+    covers: ['場地租金（必要項目）', '場地佈置費', '口譯費（每日上限 NT$14,000）', '展品運費（限至國外）', '型錄 / DM / 名片等印刷費', '展前展中文宣廣告費'],
+    coversDetail: [['場地租金', '攤位租賃費用，所有申請案的必備項目。核實報銷。', '必要項目'], ['場地佈置費', '攤位設計與裝潢費用。核實報銷，單據須齊全。', '核實報銷'], ['口譯費', '口譯人員須為非參展廠商並出具切結書。不含午休時間。', '每日上限 NT$14,000'], ['展品運費', '限「至國外」的展品來回運費。國內運費不得申請。', '限國外段'], ['印刷費', '型錄、DM、名片等印刷品。須提供實品或照片樣本（不可為設計檔）。', '核實報銷'], ['文宣廣告費', '展前展中之宣傳廣告投放費用。須附實品照片樣本。', '核實報銷']],
+    process: [['展前申請', '線上填寫公司資料、展覽資訊、預算表。'], ['審查核配', '貿易署審查資格、保留補助額度（尚未撥款）。'], ['赴海外參展', '攤位明顯處張貼臺灣一等一標誌（A3 以上）。'], ['展後核銷', '展後 1 個月內檢附單據、發票、攤位照片。'], ['撥款入帳', '審查通過後匯入公司帳戶。']],
+    notes: ['款項非核定後即撥付，而是展後核銷審查通過才撥款', '攤位明顯處須張貼臺灣一等一標誌（A3 以上），忘了貼會影響核銷', '一年分 2 次公告，115 年度第 2 次預計 4-5 月開放，經費用罄即止'],
+    lufe: '我們幫客戶規劃展覽策略、媒合買手、設計展位話術，也協助準備申請資料與展後核銷。補助解決錢的問題，鹿飛解決要和誰談、怎麼談、怎麼不卡核銷的問題。',
+    verifiedOn: '2026-04-23',
+  };
+  const BOOTH = '<svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 10L6 6H26L28 10V12H4V10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 12V26H26V12" stroke="currentColor" stroke-width="1.5"/><path d="M12 26V18H20V26" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="22" r="0.8" fill="currentColor"/></svg>';
+  const head = () => `<div class="hl"><b>${P.highlight}</b>${P.highlightNote}</div><div class="ph"><span class="ic">${BOOTH}</span><div><div><span class="n">${P.num}</span><span class="ag">${P.agency}</span></div><h3>${P.shortTitle}</h3><p class="pg">${P.program}</p></div><span class="stage">${P.stage}</span></div>`;
+  const kv = () => `<div class="kv"><div><p class="k">補助額度</p><p class="amt">${P.amount}</p><small>${P.amountNote}</small></div><div><p class="k">申請時程</p><p class="v">${P.deadline}</p><small>${P.applicationNote}</small></div></div>`;
+  const lufe = () => `<div class="lufe"><b>鹿飛怎麼幫上忙</b>${P.lufe}</div>`;
+  const foot = () => `<div class="foot"><span>資料最後確認：${P.verifiedOn}（經濟部、國際貿易署公告）</span><span class="acts"><a class="link" href="#">查我是否符合 →</a><a class="link" href="#">官方公告 ↗</a></span></div>`;
+  const whoList = () => `<ul class="list">${P.whoFor.map(x => `<li>${x}</li>`).join('')}</ul>`;
+  const coverTags = () => `<div class="tags">${P.covers.map(x => `<span>${x}</span>`).join('')}</div>`;
+  const costs = () => `<div class="costs">${P.coversDetail.map(([t, n, l]) => `<div><b>${t}</b><em>${l}</em><p>${n}</p></div>`).join('')}</div>`;
+  const steps = () => `<ol class="steps">${P.process.map(([t, n]) => `<li><div><b>${t}</b><span>${n}</span></div></li>`).join('')}</ol>`;
+  const warn = () => `<ul class="warn">${P.notes.map(x => `<li>${x}</li>`).join('')}</ul>`;
+  const toggle = (label, id, open = false) => `<button class="toggle" type="button" aria-expanded="${open}" aria-controls="${id}">${label}<span class="chev" aria-hidden="true">${ICON.chevDown}</span></button>`;
+  const bindToggles = root => root.querySelectorAll('.toggle').forEach(b => b.addEventListener('click', () => {
+    const c = document.getElementById(b.getAttribute('aria-controls')), o = b.getAttribute('aria-expanded') !== 'true';
+    b.setAttribute('aria-expanded', o); c.classList.toggle('open', o);
+  }));
+
+  /* A — production layout */
+  const A = document.querySelector('[data-v="A"]');
+  A.innerHTML = head() + kv() + `<p class="one">${P.oneLiner}</p><p class="lbl">適合</p>${whoList()}<p class="lbl">補助涵蓋</p>${coverTags()}${lufe()}
+    <div style="margin-top:20px">${toggle('看申請細節（可補助項目 · 流程 · 注意事項）', 'aD')}<div class="coll" id="aD"><div><div class="detail"><h4>可補助費用明細</h4>${costs()}<h4>申請與核銷流程</h4>${steps()}<h4>容易踩雷的點</h4>${warn()}</div></div></div></div>` + foot();
+  bindToggles(A);
+
+  /* C — short card, details in a panel that grows out of the card */
+  const C = document.querySelector('[data-v="C"]');
+  C.innerHTML = head() + kv() + `<p class="one">${P.oneLiner}</p><div class="row-acts"><button class="btn btn-navy btn-sm" type="button" data-open>看申請細節 ＋</button><a class="link" href="#">官方公告 ↗</a></div>` + foot();
+  C.querySelector('[data-open]').addEventListener('click', () => expand(C, { html: `<p class="eyebrow">${P.num} · ${P.agency}</p><h2 class="h2" id="xpTitle" style="font-size:28px;margin:6px 0 14px">${P.shortTitle}</h2><p class="one">${P.oneLiner}</p><p class="lbl">適合</p>${whoList()}<p class="lbl">補助涵蓋</p>${coverTags()}<div class="detail"><h4>可補助費用明細</h4>${costs()}<h4>申請與核銷流程</h4>${steps()}<h4>容易踩雷的點</h4>${warn()}</div>${lufe()}` }));
+
+  /* D — short card + five collapsible sections */
+  const D = document.querySelector('[data-v="D"]');
+  const secs = [['適合', whoList(), `${P.whoFor.length} 項`], ['補助涵蓋', coverTags(), `${P.covers.length} 項`], ['可補助費用明細', costs(), `${P.coversDetail.length} 項`], ['申請與核銷流程', steps(), `${P.process.length} 步`], ['容易踩雷的點', warn(), `${P.notes.length} 點`]];
+  D.innerHTML = head() + kv() + `<p class="one">${P.oneLiner}</p>` + secs.map(([t, body, c], i) => `<div class="acc">${toggle(`<span>${t}<small>${c}</small></span>`, 'dS' + i)}<div class="coll" id="dS${i}"><div><div>${body}</div></div></div></div>`).join('') + lufe() + foot();
+  bindToggles(D);
+
+  /* E — short card; each section opens into a scannable shape */
+  const E = document.querySelector('[data-v="E"]');
+  const eSecs = [
+    ['適合', `<ul class="who">${P.whoFor.map(x => `<li>${x}</li>`).join('')}</ul>`, `${P.whoFor.length} 項`],
+    ['補助涵蓋', `<div class="chips">${P.covers.map(x => `<span>${x}</span>`).join('')}</div>`, `${P.covers.length} 項`],
+    ['可補助費用明細', `<table class="ctable"><tbody>${P.coversDetail.map(([t, n, l], i) => `<tr data-i="${i}"><td><button type="button">${t}</button></td><td>${l}</td></tr>`).join('')}</tbody></table><p class="cnote" aria-live="polite"></p>`, `${P.coversDetail.length} 項`],
+    ['申請與核銷流程', `<div class="flow" role="tablist">${P.process.map(([t], i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}"><i>${i + 1}</i><b>${t}</b></button>`).join('')}</div><p class="flow-note" aria-live="polite"></p>`, `${P.process.length} 步`],
+    ['容易踩雷的點', `<ul class="alarm">${P.notes.map(x => `<li>${x}</li>`).join('')}</ul>`, `${P.notes.length} 點`, true],
+  ];
+  E.innerHTML = head() + kv() + `<p class="one">${P.oneLiner}</p>` + eSecs.map(([t, body, c, warn], i) => `<div class="acc">${toggle(`<span${warn ? ' style="color:var(--ember)"' : ''}>${t}<small${warn ? ' style="color:var(--ember)"' : ''}>${c}</small></span>`, 'eS' + i)}<div class="coll" id="eS${i}"><div><div>${body}</div></div></div></div>`).join('') + lufe() + foot();
+  bindToggles(E);
+  const note = E.querySelector('.flow-note'), flow = [...E.querySelectorAll('.flow button')];
+  const pickStep = i => { flow.forEach((b, k) => b.setAttribute('aria-selected', k === i)); note.innerHTML = `<b>${i + 1}. ${P.process[i][0]}</b>${P.process[i][1]}`; };
+  flow.forEach((b, i) => b.addEventListener('click', () => pickStep(i)));
+  E.querySelector('.flow').addEventListener('keydown', e => {
+    const cur = flow.findIndex(b => b.getAttribute('aria-selected') === 'true');
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const n = (cur + (e.key === 'ArrowRight' ? 1 : -1) + flow.length) % flow.length; pickStep(n); flow[n].focus(); }
+  });
+  pickStep(0);
+  const cnote = E.querySelector('.cnote');
+  E.querySelectorAll('.ctable tr').forEach(tr => tr.querySelector('button').addEventListener('click', () => {
+    E.querySelectorAll('.ctable tr').forEach(r => r.classList.toggle('sel', r === tr));
+    const [t, n] = P.coversDetail[tr.dataset.i]; cnote.textContent = `${t}：${n}`;
+  }));
+  E.querySelector('.ctable tr button').click();
+
+  /* Meters: count what is actually readable at first glance (collapsed sections, header badge and footer excluded) */
+  ['A', 'C', 'D', 'E'].forEach(v => {
+    const el = document.querySelector(`[data-v="${v}"]`).cloneNode(true);
+    el.querySelectorAll('.coll:not(.open), .foot, .hl').forEach(x => x.remove());
+    const n = el.textContent.replace(/\s/g, '').length;
+    document.querySelector(`[data-meter="${v}"]`).textContent = `第一眼約 ${Math.round(n / 10) * 10} 字`;
+  });
+})();
+</script>
+</body>
+</html>

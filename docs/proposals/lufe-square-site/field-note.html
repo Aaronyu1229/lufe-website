@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>現場筆記 · 鹿飛 LUFÉ（方正版提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+.note-head { padding: calc(var(--nav-h) + 56px) 0 32px; }
+.note-head .crumbs { color: var(--tx3); }
+.note-head .crumbs a:hover { color: var(--tx); }
+.where { font-size: 14px; font-weight: 600; color: var(--gold-ink); margin: 8px 0 14px; }
+.cover { position: relative; aspect-ratio: 16/9; background: var(--navy); display: grid; place-items: center; color: rgba(255,255,255,.35); font-size: 32px; margin: 8px 0 36px; }
+.tbd { position: absolute; right: 14px; bottom: 12px; font-size: 13px; color: var(--gold); }
+.seo { margin-top: 48px; padding: 18px 20px; background: rgba(58,107,132,.08); font-size: 14px; line-height: 1.8; color: var(--tx2); }
+.seo b { color: var(--tx); }
+.seo code { font-family: ui-monospace, Menlo, monospace; font-size: 13px; background: #fff; padding: 1px 6px; }
+.pn { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 40px; }
+.pn a { padding: 16px 18px; font-size: 14px; }
+.pn a span { display: block; color: var(--tx3); font-size: 12px; margin-bottom: 4px; }
+.pn a.next { text-align: right; }
+</style>
+</head>
+<body data-page="field-notes" data-hero="light">
+<div data-lufe-nav></div>
+<main>
+  <article class="wrap-narrow note-head">
+    <nav class="crumbs" aria-label="麵包屑"><a href="index.html">首頁</a><span aria-hidden="true">/</span><a href="field-notes.html">現場紀錄</a><span aria-hidden="true">/</span><span id="crumb"></span></nav>
+    <p class="eyebrow">現場筆記</p>
+    <h1 class="h1" id="title"></h1>
+    <p class="where" id="where"></p>
+    <div class="cover" aria-hidden="true">⌁<span class="tbd">待補</span></div>
+    <div class="prose"><p id="body"></p></div>
+    <div class="pn" id="pn"></div>
+    <div class="seo" id="seo"></div>
+  </article>
+</main>
+<div data-lufe-footer></div>
+<template id="lufe-notes">
+  <li><b>每則筆記有自己的網頁</b>：從現場紀錄列表點進來，網址與分頁標題都是這則筆記自己的，可以被 Google 單獨收錄，也可以直接分享到 LINE。</li>
+  <li><b>頁尾有上一則／下一則</b>：讀完可以直接看下一則，不用回列表。</li>
+  <li><b>下方藍框是說明用</b>：列出這頁在正式站會有的網址與標題，正式上線時不會出現。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  // Same three notes as field-notes.html (verbatim from src/data/fieldNotes.ts). Real URLs would use a slug; ?n= is proposal-only.
+  const notes = [
+    { slug: 'manila-three-chains', location: '馬尼拉', date: '2026 XX 月', title: '上週在馬尼拉見了三家連鎖通路', body: '待補 · 這裡會寫一段 150–250 字的現場觀察：我上週見了哪幾家通路、他們對台灣品牌的態度、哪些類別現在最缺、哪些類別已經過度競爭。這類觀察平常不會寫成正式文章，但是對正在考慮菲律賓的台灣老闆來說很有用。' },
+    { slug: 'indonesia-halal', location: '雅加達', date: '2026 XX 月', title: '印尼清真認證這件事沒你想得那麼難', body: '待補 · 印尼的 Halal 認證在台灣老闆心裡是個難關，但實際上流程和成本沒有那麼嚇人。這段記錄一個真實的認證過程，從送件到拿到證書大約花了多少時間、多少錢、卡在哪幾個環節。' },
+    { slug: 'costco-hq-40-minutes', location: '洛杉磯', date: '2025 XX 月', title: '在 Costco 總部門口等了 40 分鐘', body: '待補 · 北美 Costco 採購會議的現場紀錄。從機場到總部、門口等候、會議室內的 18 分鐘、會後的停車場對話——這些細節才是真的「怎麼跟美國大通路打交道」。' },
+  ];
+  const { esc } = LUFE;
+  const n = Number(new URLSearchParams(location.search).get('n'));
+  const i = Number.isInteger(n) && notes[n] ? n : 0;
+  const note = notes[i];
+  document.title = `${note.title} · 鹿飛 LUFÉ（方正版提案）`;
+  document.getElementById('crumb').textContent = note.title;
+  document.getElementById('title').textContent = note.title;
+  document.getElementById('where').textContent = `📍 ${note.location}　·　${note.date}`;
+  document.getElementById('body').textContent = note.body;
+  const prev = notes[i - 1], next = notes[i + 1];
+  document.getElementById('pn').innerHTML =
+    (prev ? `<a class="card" href="field-note.html?n=${i - 1}"><span>← 上一則</span>${esc(prev.title)}</a>` : '<span></span>') +
+    (next ? `<a class="card next" href="field-note.html?n=${i + 1}"><span>下一則 →</span>${esc(next.title)}</a>` : '<span></span>');
+  document.getElementById('seo').innerHTML = `<b>正式站上這頁會有（說明用，不會出現在網站上）：</b><br>
+    網址：<code>lufe.world/field-notes/${esc(note.slug)}</code><br>
+    分頁標題：<code>${esc(note.title)} — 鹿飛 LUFÉ</code><br>
+    搜尋結果摘要：取內文前 80 字。現在內文是「待補」，<b>要等內容寫好才適合上線</b>。`;
+})();
+</script>
+</body>
+</html>

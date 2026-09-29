@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>聯絡我們（重新提案）· 鹿飛 LUFÉ（方正版提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+/* Proposal-only marker for wording that does not exist on the live site */
+.new { display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--ember); border: 1px solid currentColor; padding: 0 4px; margin-left: 4px; vertical-align: 2px; letter-spacing: 0; }
+.dark .new, .aside .new { color: var(--gold); }
+
+.c-hero { background: var(--cream); padding: calc(var(--nav-h) + 56px) 0 24px; }
+.c-hero .lead { margin-top: 12px; max-width: 620px; }
+
+.c-main { background: var(--cream); padding: 24px 0 96px; }
+.c-grid { display: grid; gap: 24px; }
+@media (min-width: 960px) { .c-grid { grid-template-columns: 7fr 4fr; align-items: start; } .aside { position: sticky; top: 88px; } }
+
+/* The one form */
+.form-card { position: relative; background: #fff; box-shadow: 0 0 0 1px var(--bd), 0 24px 48px -28px rgba(16,27,48,.25); padding: 28px; }
+@media (min-width: 700px) { .form-card { padding: 40px; } }
+.form-card .eyebrow { margin-bottom: 8px; }
+.form-card .h3 { margin-bottom: 6px; }
+.form-card .hint { color: var(--tx2); font-size: 15px; margin-bottom: 26px; }
+.row2 { display: grid; gap: 0 16px; } @media (min-width: 640px) { .row2 { grid-template-columns: 1fr 1fr; } }
+.row2 > * { min-width: 0; }
+.draft { font-size: 12.5px; color: var(--tx3); height: 18px; margin: -6px 0 10px; opacity: 0; transition: opacity 300ms; }
+.draft.on { opacity: 1; }
+.more { border-top: 1px solid var(--bd2); border-bottom: 1px solid var(--bd2); margin: 8px 0 22px; }
+.more > button { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 0; -webkit-tap-highlight-color: transparent; }
+.more > button:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+.more > button:active .t { opacity: .55; }
+.more .t { font-weight: 600; font-size: 15px; color: var(--sky); transition: opacity 120ms; }
+.more .t small { font-weight: 500; color: var(--tx3); font-size: 13px; margin-left: 6px; }
+.more .chev { display: inline-grid; place-items: center; width: 28px; height: 28px; background: rgba(26,26,46,.06); transition: transform 450ms var(--ease-spring); flex: 0 0 auto; }
+.more.open .chev { transform: rotate(180deg); }
+.more .ans { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 450ms var(--ease-spring); }
+.more.open .ans { grid-template-rows: 1fr; }
+.more .ans > div { overflow: hidden; }
+.more .ans > div > div { padding: 4px 0 6px; }
+.filled { font-size: 12px; color: var(--gold-ink); font-weight: 600; margin-left: 6px; }
+.send { width: 100%; }
+.send[aria-busy=true] { opacity: .7; cursor: progress; }
+.privacy { font-size: 13px; color: var(--tx3); text-align: center; margin-top: 12px; }
+
+/* Success replaces the form in place, and goes back the same way */
+.success { display: none; text-align: center; }
+.form-card.sent form { display: none; } .form-card.sent .success { display: block; }
+.success .tick { margin-bottom: 16px; }
+.success .sum { text-align: left; max-width: 460px; margin: 20px auto 0; background: var(--cream); padding: 14px 16px; font-size: 14px; line-height: 1.8; color: var(--tx2); }
+.success .sum b { color: var(--tx); font-weight: 600; }
+.success .next { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+
+/* Side panel: promise first, other ways second */
+.aside { display: grid; gap: 16px; }
+.promise { background: var(--navy); color: #fff; padding: 26px; }
+.promise h3 { font-size: 18px; font-weight: 650; margin-bottom: 16px; }
+.promise dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; font-size: 14px; }
+.promise dt { color: var(--gold); font-weight: 600; }
+.promise dd { color: rgba(255,255,255,.85); }
+.promise dd small { display: block; color: rgba(255,255,255,.55); font-size: 12.5px; }
+.others { background: #fff; box-shadow: 0 0 0 1px var(--bd); padding: 8px 0; }
+.others h3 { font-size: 14px; font-weight: 600; color: var(--tx3); padding: 12px 20px 4px; }
+.way { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; padding: 14px 20px; width: 100%; border: 0; background: none; text-align: left; cursor: pointer; font: inherit; color: inherit; transition: background-color 120ms; -webkit-tap-highlight-color: transparent; }
+.way + .way { border-top: 1px solid var(--bd); }
+.way:hover { background: rgba(26,26,46,.03); } .way:active { background: rgba(26,26,46,.07); }
+.way .ic { width: 40px; height: 40px; display: grid; place-items: center; background: rgba(212,168,92,.12); color: var(--gold-d); }
+.way b { display: block; font-size: 15px; font-weight: 600; }
+.way span { font-size: 13px; color: var(--tx3); }
+.way .act { font-size: 13px; font-weight: 600; color: var(--sky); white-space: nowrap; }
+.way.broken { cursor: default; }
+.way.broken .act { color: var(--danger); }
+.bugnote { margin: 0 20px 12px; padding: 10px 12px; font-size: 12.5px; line-height: 1.6; background: rgba(179,38,30,.07); color: #8C1D18; }
+.copied { color: #2E6B45 !important; }
+
+.partner { position: relative; overflow: hidden; }
+.partner .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .14; }
+.partner .wash { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,27,48,.98), rgba(16,27,48,.86), rgba(16,27,48,.65)); }
+.partner .wrap { position: relative; }
+.partner .lead { color: rgba(255,255,255,.68); max-width: 640px; margin-top: 18px; }
+.partner-cards { margin: 38px 0; }
+.partner-cards .card { background: rgba(255,255,255,.055); color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
+.partner-cards .body { color: rgba(255,255,255,.62); margin-top: 8px; font-size: 14px; }
+</style>
+</head>
+<body data-page="contact" data-hero="light">
+<div data-lufe-nav></div>
+<main>
+  <header class="c-hero"><div class="wrap">
+    <h1 class="h1">選一個你最方便的方式</h1>
+    <p class="lead">三個管道都會收到。訊息我們通常一個工作天內回覆。</p>
+  </div></header>
+
+  <section class="c-main"><div class="wrap c-grid">
+    <!-- One form that grows: the quick message and the full form were the same job -->
+    <div class="form-card" id="formCard">
+      <form id="cform" novalidate>
+        <p class="eyebrow">完整表單</p>
+        <h2 class="h3">想一次講完所有細節？</h2>
+        <p class="hint">填這份表單，我們能在第一次回覆時就給你比較精準的建議，省下幾輪來回。</p>
+        <div class="row2">
+          <div class="field" data-f="name"><label for="f-name">姓名 *</label><input id="f-name" name="name" type="text" placeholder="你的姓名" autocomplete="name" enterkeyhint="next"><div class="err"></div></div>
+          <div class="field" data-f="email"><label for="f-email">Email *</label><input id="f-email" name="email" type="email" inputmode="email" placeholder="you@company.com" autocomplete="email" enterkeyhint="next"><div class="err"></div></div>
+        </div>
+        <div class="field" data-f="message"><label for="f-message">你想問什麼？ *</label><textarea id="f-message" name="message" placeholder="任何問題都可以，不確定也沒關係。"></textarea><div class="err"></div></div>
+        <p class="draft" id="draft" aria-live="polite">已自動存成草稿，離開再回來也還在<span class="new">新文字</span></p>
+
+        <div class="more" id="more">
+          <button type="button" aria-expanded="false" aria-controls="moreBody">
+            <span class="t">多說一點，第一次回覆就更準<small>選填 · 4 格</small><span class="filled" id="filled"></span><span class="new">新文字</span></span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+          <div class="ans" id="moreBody"><div><div>
+            <div class="row2">
+              <div class="field"><label for="f-company">公司名稱</label><input id="f-company" name="company" type="text" placeholder="公司名稱" autocomplete="organization"></div>
+              <div class="field"><label for="f-phone">電話</label><input id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="09xx-xxx-xxx" autocomplete="tel"></div>
+            </div>
+            <div class="field"><label for="f-product">你的產品</label><input id="f-product" name="product" type="text" placeholder="簡單描述你的產品或品牌"></div>
+            <div class="field"><span class="lbl" id="stageLbl">目前出海階段</span>
+              <div class="choices" id="stage" role="group" aria-labelledby="stageLbl">
+                <button type="button" aria-pressed="false">還在觀望，想了解出海</button><button type="button" aria-pressed="false">準備出海，需要方向</button><button type="button" aria-pressed="false">已經在出海，想做更好</button><button type="button" aria-pressed="false">其他</button>
+              </div></div>
+          </div></div></div>
+        </div>
+
+        <button class="btn btn-gold send" id="send" type="submit">送出表單</button>
+        <p class="privacy">我們不會把你的資料分享給任何第三方。</p>
+      </form>
+
+      <div class="success" role="status" aria-live="polite" tabindex="-1" id="success">
+        <div class="tick" id="tick"></div>
+        <h2 class="h3" style="margin-bottom:8px">收到了！</h2>
+        <p style="color:var(--tx2)">我們會在 <b style="color:var(--tx)">24 小時內</b>用你提供的 Email 回覆你。</p>
+        <div class="sum" id="sum"></div>
+        <div class="next">
+          <button class="btn btn-tint" type="button" id="edit">改一下再送<span class="new">新文字</span></button>
+          <a class="btn btn-navy" href="cases.html">等待時先看案例<span class="new">新文字</span></a>
+        </div>
+        <p class="small" style="margin-top:14px">（提案稿，不會真的送出）</p>
+      </div>
+    </div>
+
+    <aside class="aside">
+      <div class="promise">
+        <h3>送出之後<span class="new">新文字</span></h3>
+        <dl>
+          <dt>回覆時間</dt><dd>週一 – 週五<small>09:00 – 18:00</small></dd>
+          <dt>一般回覆</dt><dd>1 個工作天內</dd>
+          <dt>誰回你</dt><dd>鹿飛 LUFÉ<small>Aaron Yu 創辦</small></dd>
+          <dt>地點</dt><dd>台北市<small>線上為主</small></dd>
+        </dl>
+      </div>
+      <div class="others">
+        <h3>或者選擇其他方式聯繫我們：</h3>
+        <button class="way" type="button" id="copyMail">
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M6 8L14 14L22 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="6" width="20" height="16" stroke="currentColor" stroke-width="1.5"/></svg></span>
+          <span><b>Email</b><span>寫封信給我們，詳細說明你的需求。</span></span>
+          <span class="act" id="copyAct">複製信箱<span class="new">新文字</span></span>
+        </button>
+        <a class="way broken" aria-disabled="true">
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" stroke="currentColor" stroke-width="1.5"/><path d="M4 10H24M10 2V6M18 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <span><b>預約諮詢</b><span>選一個你方便的時間，30 分鐘免費聊聊。</span></span>
+          <span class="act">選時間</span>
+        </a>
+        <p class="bugnote">⚠️ 提案說明：正式站這顆按鈕連到 calendly.com/lufe-co/30min，<b>目前是 404（找不到頁面）</b>。上線前要換成可用的預約連結，或先拿掉。</p>
+      </div>
+    </aside>
+  </div></section>
+
+  <section class="dark partner" id="partners">
+    <img class="bg" src="https://lufe.world/images/contact/partners-handshake.jpg" alt=""><div class="wash"></div>
+    <div class="wrap wrap-narrow">
+      <h2 class="h2">商會、顧問、服務商，<br><span class="accent">歡迎來談合作</span></h2>
+      <p class="lead">如果你是商會、同業顧問公司、在地服務商或物流夥伴，想跟鹿飛一起幫台灣企業把海外這條路走得更順——我們有專門的合作入口。不收介紹費、不綁獨家，純粹看有沒有把事情做好的機會。</p>
+      <div class="grid-3 partner-cards">
+        <article class="card pad"><h3 class="h3">商會 / 公協會</h3><p class="body">台商會、工商協會、進出口公會</p></article>
+        <article class="card pad"><h3 class="h3">同業顧問 / 事務所</h3><p class="body">跨境顧問、品牌、律師、會計事務所</p></article>
+        <article class="card pad"><h3 class="h3">在地服務商 / 物流</h3><p class="body">北美、東南亞當地倉儲、通路、代理商</p></article>
+      </div>
+      <a class="btn btn-gold" href="mailto:aaron.yu@reborn.in?subject=%E5%90%88%E4%BD%9C%E5%A4%A5%E4%BC%B4%E6%B4%BD%E8%AB%87">寄信洽談合作 <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+<div data-lufe-footer></div>
+
+<template id="lufe-notes">
+  <li><b>兩份表單合成一份</b>（skill：先決定什麼不要做）：正式站有「快速留言」和「完整表單」兩份，欄位重疊，客人得先想「我要選哪個」。現在只有一份：填 3 格就能送，想多說再展開 4 格選填。在這頁按右上「聊聊你的產品」會直接帶到這份表單，不會再疊一個視窗。</li>
+  <li><b>最重要的放最上面</b>（skill：常用的路先給、進階的放下一層）：表單移到第一屏，合作夥伴區移到後面，兩種不同目的的人不互相干擾。</li>
+  <li><b>送出前就讓人安心</b>（skill：回饋要涵蓋狀態）：右邊先寫清楚回覆時間、誰回你，文字都是正式站原本的資訊，只是集中放在表單旁邊。</li>
+  <li><b>不怕打錯、不怕手滑</b>（skill：寬容，讓人放心操作）：每一格離開就檢查，錯誤訊息跟正式站一樣；寫到一半關掉頁面，回來草稿還在；送出後可以「改一下再送」，內容都保留。</li>
+  <li><b>每一步都看得到結果</b>（skill：回饋分狀態、完成、警告、錯誤四種）：按下送出，按鈕先顯示「送出中」，接著表單原地變成「收到了！」並列出你填的重點；「改一下再送」從同一個位置變回表單。</li>
+  <li><b>其他聯絡方式放第二層</b>：Email 一按就複製信箱並顯示「已複製」。預約諮詢的連結在正式站是 404（壞掉的），已標出來，上線前要處理。</li>
+  <li><b>手機好填</b>：Email、電話欄會跳出對應的鍵盤，瀏覽器可以自動帶入姓名、Email；所有按鈕都夠大、按下去立刻有反應。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { spring, choices, haptic, reduce, esc, ICON } = LUFE;
+  const $ = id => document.getElementById(id);
+  const card = $('formCard'), form = $('cform');
+  document.querySelector('#more .chev').innerHTML = ICON.chevDown;
+  $('tick').innerHTML = ICON.check;
+
+  /* Rules and messages verbatim from ContactPage.tsx; shown as soon as a field is left. */
+  const isValidEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const rules = {
+    name: v => (!v ? '請填寫姓名' : ''),
+    email: v => (!v ? '請填寫 Email' : !isValidEmail(v) ? 'Email 格式不正確' : ''),
+    message: v => (!v ? '請填寫你的問題' : ''),
+  };
+  const checkers = Object.entries(rules).map(([k, rule]) => {
+    const input = form.elements[k], box = input.closest('.field');
+    const run = () => { const m = rule(input.value.trim()); box.classList.toggle('bad', !!m); box.querySelector('.err').textContent = m; return m ? input : null; };
+    input.addEventListener('blur', run);
+    input.addEventListener('input', () => { if (box.classList.contains('bad')) run(); });
+    return run;
+  });
+
+  /* Optional details, one level deeper. Opening moves focus into the first new field. */
+  const more = $('more'), moreBtn = more.querySelector('button');
+  const setMore = open => { more.classList.toggle('open', open); moreBtn.setAttribute('aria-expanded', open); };
+  moreBtn.addEventListener('click', () => {
+    const open = !more.classList.contains('open'); setMore(open);
+    if (open) setTimeout(() => $('f-company').focus({ preventScroll: true }), reduce ? 0 : 200);
+  });
+  let stage = '';
+  choices($('stage'), v => { stage = v; saveDraft(); countFilled(); });
+  const optional = ['company', 'phone', 'product'];
+  const countFilled = () => { const n = optional.filter(k => form.elements[k].value.trim()).length + (stage ? 1 : 0); $('filled').textContent = n ? `已填 ${n}` : ''; };
+
+  /* Draft: a per-viewer convenience, so an accidental close never loses what was typed. */
+  const KEY = 'lufe-contact-draft';
+  const fields = ['name', 'email', 'message', ...optional];
+  let draftT = 0;
+  function saveDraft() {
+    try { localStorage.setItem(KEY, JSON.stringify({ ...Object.fromEntries(fields.map(k => [k, form.elements[k].value])), stage })); } catch (_) { return; }
+    const d = $('draft'); d.classList.add('on'); clearTimeout(draftT); draftT = setTimeout(() => d.classList.remove('on'), 2200);
+  }
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved) {
+      fields.forEach(k => { if (saved[k]) form.elements[k].value = saved[k]; });
+      if (saved.stage) $('stage').querySelectorAll('button').forEach(b => { if (b.textContent === saved.stage) b.click(); });
+      if (optional.some(k => saved[k]) || saved.stage) setMore(true);
+    }
+  } catch (_) {}
+  form.addEventListener('input', () => { saveDraft(); countFilled(); });
+  countFilled();
+
+  /* On this page the nav's "聊聊你的產品" leads to this form instead of stacking a second one. */
+  addEventListener('click', e => {
+    if (!e.target.closest('[data-chat]')) return;
+    e.preventDefault(); e.stopPropagation();
+    card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    setTimeout(() => form.elements.name.focus({ preventScroll: true }), reduce ? 0 : 450);
+  }, true);
+
+  /* Status → completion, in place. The card morphs between form and success along one path. */
+  const morph = spring(1, v => { card.style.opacity = v; card.style.transform = `scale(${.97 + .03 * v})`; }, .002);
+  const swap = toSent => {
+    morph.to(0, { response: .22, onRest: () => {
+      card.classList.toggle('sent', toSent);
+      morph.to(1, { response: .35 });
+      (toSent ? $('success') : form.elements.name).focus({ preventScroll: true });
+    } });
+  };
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const firstBad = checkers.map(c => c()).find(Boolean);
+    if (firstBad) return firstBad.focus();
+    const send = $('send'); send.setAttribute('aria-busy', 'true'); send.textContent = '送出中…'; send.disabled = true;
+    setTimeout(() => {   // stands in for the network round-trip
+      const v = k => form.elements[k].value.trim();
+      const rows = [['姓名', v('name')], ['Email', v('email')], ['你的產品', v('product')], ['目前出海階段', stage], ['你想問什麼？', v('message')]].filter(r => r[1]);
+      $('sum').innerHTML = rows.map(([a, b]) => `<b>${a}</b>${/[？?]$/.test(a) ? '' : '：'}${esc(b.length > 60 ? b.slice(0, 60) + '…' : b)}`).join('<br>');
+      try { localStorage.removeItem(KEY); } catch (_) {}
+      send.removeAttribute('aria-busy'); send.textContent = '送出表單'; send.disabled = false;
+      haptic(); swap(true);
+    }, reduce ? 200 : 700);
+  });
+  $('edit').addEventListener('click', () => swap(false));   // values are still in the form
+
+  /* Email: copy with visible confirmation, fall back to opening mail. */
+  $('copyMail').addEventListener('click', async () => {
+    const act = $('copyAct');
+    try { await navigator.clipboard.writeText('aaron.yu@reborn.in'); haptic(); act.textContent = '已複製 ✓'; act.classList.add('copied'); setTimeout(() => { act.innerHTML = '複製信箱<span class="new">新文字</span>'; act.classList.remove('copied'); }, 1800); }
+    catch (_) { location.href = 'mailto:aaron.yu@reborn.in'; }
+  });
+})();
+</script>
+</body>
+</html>

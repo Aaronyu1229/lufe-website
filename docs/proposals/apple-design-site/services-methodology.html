@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>鹿飛方法論 · 鹿飛 LUFÉ（流體介面提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+.method-hero { background: radial-gradient(ellipse at 50% 0, rgba(212,168,92,.14), transparent 53%), var(--navy); }
+.method-shell { position: relative; }
+.method-index { position: sticky; top: calc(var(--nav-h) + 8px); z-index: 20; display: flex; justify-content: center; padding: 12px var(--gutter); pointer-events: none; }
+.method-index .seg { pointer-events: auto; box-shadow: 0 10px 28px rgba(16,27,48,.13); background: rgba(245,242,236,.92); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.framework-key { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 38px; }
+.framework-key button { all: unset; display: grid; place-items: center; min-height: 94px; border-radius: var(--radius-m); background: rgba(212,168,92,.1); color: var(--gold-d); cursor: pointer; text-align: center; }
+.framework-key button:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+.framework-key b { font-family: Inter, sans-serif; font-size: clamp(28px,5vw,46px); line-height: 1; }
+.framework-key span { color: var(--tx); font-size: 13px; font-weight: 600; margin-top: 8px; }
+.framework-key small { color: var(--gold-d); font-size: 12px; margin-top: 2px; }
+.method-qa { max-width: 900px; margin: 36px auto 0; }
+.method-qa .qa > button { grid-template-columns: 52px 1fr auto 28px; gap: 10px; }
+.method-qa .qa .n { font-size: 26px; line-height: 1; color: var(--gold-d); }
+.method-qa .weight { color: var(--gold-d); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.method-qa .ans > div { padding-left: 62px; }
+.criteria { list-style: none; display: grid; gap: 9px; margin: 20px 0; }
+.criteria li { position: relative; padding-left: 16px; color: var(--tx2); line-height: 1.7; }
+.criteria li::before { content: ""; position: absolute; left: 0; top: .7em; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+.redline { margin-top: 20px; padding: 18px; background: rgba(179,38,30,.055); border-left: 3px solid rgba(179,38,30,.55); }
+.redline .eyebrow { color: var(--danger); margin-bottom: 6px; }
+.redline p { color: #8b2722; line-height: 1.75; }
+.decision-list { display: grid; gap: 12px; margin-top: 38px; }
+.decision { display: grid; grid-template-columns: 96px 1fr; gap: 20px; padding: 22px; border-left: 4px solid; }
+.decision .score { font: 650 24px/1 Inter, sans-serif; }
+.decision .h4 { margin-bottom: 5px; }
+.decision p { color: var(--tx2); line-height: 1.75; }
+.go { border-color: #16875a; background: rgba(22,135,90,.06); }.conditional { border-color: #c58a12; background: rgba(197,138,18,.07); }.hold { border-color: #c36b22; background: rgba(195,107,34,.07); }.no-go { border-color: var(--danger); background: rgba(179,38,30,.055); }
+.worked { border-radius: var(--radius-l); padding: 28px; background: rgba(255,255,255,.045); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); margin-top: 40px; }
+.worked-row { display: grid; grid-template-columns: 86px 1fr 48px; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+.worked-row:last-child { border-bottom: 0; }
+.worked-row .dim { color: var(--gold); font-weight: 600; font-size: 14px; }.worked-row .score { font: 400 22px/1 Inter, sans-serif; text-align: right; }
+.bar { height: 7px; background: rgba(255,255,255,.1); overflow: hidden; }.bar i { display: block; height: 100%; background: linear-gradient(90deg, rgba(212,168,92,.45), var(--gold)); }
+.worked-row small { display: block; color: rgba(255,255,255,.58); margin-top: 7px; line-height: 1.55; }
+.worked-total { display: flex; justify-content: space-between; gap: 24px; padding-top: 28px; margin-top: 8px; border-top: 1px solid rgba(255,255,255,.14); flex-wrap: wrap; }.worked-total .num { color: var(--gold); font-size: 42px; }.worked-total .h3 { color: #f1c75a; }.worked-total p { width: 100%; color: rgba(255,255,255,.75); line-height: 1.8; }.worked-total b { color: var(--gold); }
+.why { max-width: 760px; }.why p + p { margin-top: 18px; }
+@media (max-width: 699px) { .method-index { justify-content: flex-start; padding-inline: 16px; } .framework-key { gap: 4px; }.framework-key button { min-height: 80px; }.framework-key span { font-size: 11px; }.framework-key small { font-size: 10px; }.method-qa .qa > button { grid-template-columns: 38px 1fr 28px; }.method-qa .weight { display: none; }.method-qa .ans > div { padding-left: 46px; }.decision { grid-template-columns: 1fr; gap: 10px; }.worked { padding: 20px; }.worked-row { grid-template-columns: 72px 1fr 36px; gap: 9px; }.worked-row .dim { font-size: 12px; }.worked-row small { font-size: 11px; } }
+</style>
+</head>
+<body data-page="services-methodology" data-hero="dark">
+<div data-lufe-nav></div>
+<main>
+  <section class="page-hero method-hero"><div class="wrap" style="max-width:1000px"><div class="crumbs"><a href="services.html">服務</a><span aria-hidden="true">/</span><span>方法論</span></div><p class="eyebrow">鹿飛方法論</p><h1 class="h1" style="margin-top:10px">我們怎麼判斷<br><span class="accent">值不值得去</span></h1><p class="lead">這頁不是行銷文案，是我們實際用來替每個客戶做 Go / No-Go 決策的框架。如果你想了解顧問公司背後的判斷邏輯，而不是只看結論，這頁就是為你寫的。</p></div></section>
+
+  <div class="method-shell">
+    <nav class="method-index" aria-label="頁內導覽"><div class="seg" id="methodSeg"><button aria-pressed="true" data-target="framework">MBCPR 五維評分</button><button aria-pressed="false" data-target="dimensions">具體評的是什麼</button><button aria-pressed="false" data-target="decision">加權總分 → 決策</button><button aria-pressed="false" data-target="example">這套框架跑一次長什麼樣</button><button aria-pressed="false" data-target="why">我們不靠直覺做決策</button></div></nav>
+
+    <section id="framework" data-index class="cream"><div class="wrap" style="max-width:900px"><p class="eyebrow">框架全貌</p><h2 class="h2" style="margin-top:10px">MBCPR 五維評分</h2><p class="lead" style="margin-top:16px">每個案子我們都會從五個維度打分，每個維度有各自的權重與紅線。加權後的總分直接決定 Go / No-Go。</p><div class="framework-key" aria-label="MARKET · BARRIER · COMPETITION · PROFITABILITY · REGULATORY"><button type="button" data-jump="dimensions"><b>M</b><span>Market</span><small>20%</small></button><button type="button" data-jump="dimensions"><b>B</b><span>Barrier</span><small>20%</small></button><button type="button" data-jump="dimensions"><b>C</b><span>Competition</span><small>20%</small></button><button type="button" data-jump="dimensions"><b>P</b><span>Profitability</span><small>25%</small></button><button type="button" data-jump="dimensions"><b>R</b><span>Regulatory</span><small>15%</small></button></div><p class="small center" style="margin-top:14px">MARKET · BARRIER · COMPETITION · PROFITABILITY · REGULATORY</p></div></section>
+
+    <section id="dimensions" data-index><div class="wrap"><p class="eyebrow">每個維度詳解</p><h2 class="h2" style="margin-top:10px">具體評的是什麼</h2><div class="method-qa">
+      <div class="qa"><button type="button"><span class="n">M</span><span class="q">Market<br><small class="body">「這個市場夠大嗎？」</small></span><span class="weight">權重 20%</span><span class="chev" aria-hidden="true">⌄</span></button><div class="ans"><div><p class="eyebrow">評分依據</p><ul class="criteria"><li>目標品類的可觸達市場規模（TAM / SAM）</li><li>年複合成長率（CAGR）</li><li>消費者支付意願（ARPU）</li><li>市場成熟度曲線位置</li></ul><div class="redline"><p class="eyebrow">紅線</p><p>若 SAM &lt; 預估年營收的 20 倍，我們會建議換市場。</p></div></div></div></div>
+      <div class="qa"><button type="button"><span class="n">B</span><span class="q">Barrier<br><small class="body">「進去的門檻有多高？」</small></span><span class="weight">權重 20%</span><span class="chev" aria-hidden="true">⌄</span></button><div class="ans"><div><p class="eyebrow">評分依據</p><ul class="criteria"><li>認證要求與成本</li><li>通路進入難度（是否需要特殊關係）</li><li>在地化改造成本（包裝、配方、標示）</li><li>合規風險與灰色地帶</li></ul><div class="redline"><p class="eyebrow">紅線</p><p>若合規認證成本 &gt; 預估首年毛利的 50%，直接 No-Go。</p></div></div></div></div>
+      <div class="qa"><button type="button"><span class="n">C</span><span class="q">Competition<br><small class="body">「你打得過嗎？」</small></span><span class="weight">權重 20%</span><span class="chev" aria-hidden="true">⌄</span></button><div class="ans"><div><p class="eyebrow">評分依據</p><ul class="criteria"><li>前 10 大品牌的市佔集中度</li><li>競品的品牌護城河深度</li><li>競品的弱點（哪些客戶抱怨無人回應）</li><li>價格戰的可能性</li></ul><div class="redline"><p class="eyebrow">紅線</p><p>若 CR3（前 3 名市佔總和）&gt; 70%，正面競爭我們不做。</p></div></div></div></div>
+      <div class="qa"><button type="button"><span class="n">P</span><span class="q">Profitability<br><small class="body">「做得動嗎？」</small></span><span class="weight">權重 25%</span><span class="chev" aria-hidden="true">⌄</span></button><div class="ans"><div><p class="eyebrow">評分依據</p><ul class="criteria"><li>到岸成本（FOB + 關稅 + 物流 + 保險）</li><li>通路佣金與行銷攤提</li><li>退貨 / 換貨預估</li><li>外幣波動風險</li></ul><div class="redline"><p class="eyebrow">紅線</p><p>若悲觀情境下淨利率 &lt; 5%，我們會建議回頭調整產品或定價。</p></div></div></div></div>
+      <div class="qa"><button type="button"><span class="n">R</span><span class="q">Regulatory<br><small class="body">「法規會不會突然改變？」</small></span><span class="weight">權重 15%</span><span class="chev" aria-hidden="true">⌄</span></button><div class="ans"><div><p class="eyebrow">評分依據</p><ul class="criteria"><li>當地貿易政策穩定度</li><li>產品類別的法規變動歷史</li><li>政治風險與突發事件</li><li>退出成本（如果一年後想撤）</li></ul><div class="redline"><p class="eyebrow">紅線</p><p>若該產品類別在目標市場過去 3 年曾被禁或大幅加稅，風險加權。</p></div></div></div></div>
+    </div></div></section>
+
+    <section id="decision" data-index class="cream"><div class="wrap" style="max-width:900px"><p class="eyebrow">決策樹</p><h2 class="h2" style="margin-top:10px">加權總分 → 決策</h2><p class="lead" style="margin-top:16px">五個維度的加權平均直接對應到四種結論。我們不玩「都有機會」的話術。</p><div class="decision-list"><article class="decision go"><div><p class="small">總分</p><div class="score">≥ 75</div></div><div><h3 class="h4">Go</h3><p>可以進，建議正常執行四階段路徑。</p></div></article><article class="decision conditional"><div><p class="small">總分</p><div class="score">60–74</div></div><div><h3 class="h4">Conditional Go</h3><p>可以進，但需要先解決某 1–2 個弱項（通常是 Barrier 或 Profitability）。</p></div></article><article class="decision hold"><div><p class="small">總分</p><div class="score">45–59</div></div><div><h3 class="h4">Hold</h3><p>建議暫緩 6–12 個月，等市場、法規或你的產品本身發生某個關鍵變化再重估。</p></div></article><article class="decision no-go"><div><p class="small">總分</p><div class="score">&lt; 45</div></div><div><h3 class="h4">No-Go</h3><p>直接不建議。我們會給出下次可以重新考慮的具體條件。</p></div></article></div></div></section>
+
+    <section id="example" data-index class="dark"><div class="wrap" style="max-width:900px"><p class="eyebrow">實戰範例</p><h2 class="h2" style="margin-top:10px">這套框架跑一次<span class="accent">長什麼樣</span></h2><p class="lead" style="margin-top:16px">下面是我們跑「保健品 → 北美 Costco（真實案例）」時的實際評分表。</p><div class="worked"><div class="worked-row"><span class="dim">Market</span><div><div class="bar"><i style="width:82%"></i></div><small>北美保健品市場 $600B+，年增 5.2%</small></div><span class="score">82</span></div><div class="worked-row"><span class="dim">Barrier</span><div><div class="bar"><i style="width:62%"></i></div><small>FDA 註冊成本可控，Costco 關係是關鍵</small></div><span class="score">62</span></div><div class="worked-row"><span class="dim">Competition</span><div><div class="bar"><i style="width:71%"></i></div><small>CR3 約 45%，中位集中度</small></div><span class="score">71</span></div><div class="worked-row"><span class="dim">Profitability</span><div><div class="bar"><i style="width:78%"></i></div><small>毛利空間充足，但需承受 Costco 條款</small></div><span class="score">78</span></div><div class="worked-row"><span class="dim">Regulatory</span><div><div class="bar"><i style="width:80%"></i></div><small>北美法規穩定，風險低</small></div><span class="score">80</span></div><div class="worked-total"><div><p class="small">加權總分</p><div class="num">74</div></div><div><p class="small">結論</p><h3 class="h3">Conditional Go</h3></div><p><b>條件：</b>前提是配方需微調符合北美口感偏好（Barrier 弱項需先解決）</p><p><b>實際結果：</b>實際執行後 6 個月上架，首月銷量超標 40%。</p></div></div><a class="link" href="case.html?slug=costco-health" style="margin-top:26px">看這個案例的完整故事 <span class="chev" aria-hidden="true">›</span></a></div></section>
+
+    <section id="why" data-index class="cream"><div class="wrap why"><p class="eyebrow">為什麼要這樣做</p><h2 class="h2" style="margin-top:10px">我們不靠直覺做決策</h2><div class="body" style="margin-top:24px"><p>多數顧問公司的「建議」是建立在老闆的個人經驗上。有經驗當然是好事，但經驗會老化、會帶偏見、而且最重要的是——<b style="color:var(--tx)">客戶無法檢驗</b>。</p><p>我們寫出這套框架的目的，是讓客戶在跟我們合作時，能知道我們的每一個判斷「是怎麼得出來的」。如果你覺得我們某個維度打分不合理，你可以直接問，我們會拿出依據。</p><p>這套框架也是我們內部的自律工具——它強迫我們在接案前必須跑完整個流程。如果總分不到 60，我們不會接。不管客戶多想做，也不管我們短期內需不需要這筆營收。</p></div></div></section>
+
+    <section class="dark center"><div class="wrap"><h2 class="h2">想用這套框架<span class="accent">評估你的產品</span>？</h2><p class="lead" style="max-width:520px;margin:18px auto 34px">聊聊你的狀況，我們會用 30 分鐘粗跑一次這五個維度，告訴你目前的大致落點，不收費。</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><button class="btn btn-gold" type="button" data-chat>聊聊你的產品</button><a class="btn btn-glass" href="assess.html">先做 2 分鐘處境比對</a></div></div></section>
+  </div>
+</main>
+<div data-lufe-footer></div>
+
+<template id="lufe-notes">
+  <li><b>五個評分面向改成一次只打開一個</b>：先看問題與比重，要看依據和紅線再按開，閱讀不會被長清單淹沒。</li>
+  <li><b>打開別的面向時，前一個會收回</b>：同一時間只專注一個判斷點，避免要一直上下比對。</li>
+  <li><b>上方索引會跟著你看的段落</b>：捲動時現在的位置會留在選取鈕上，也可以按鈕直接跳到想看的部分。</li>
+  <li><b>案例分數保留成清楚的讀數</b>：每一項分數、依據、總分和結論都在同一張表，容易核對。</li>
+  <li><b>聯絡面板從按鈕的位置開出</b>：按下去立刻有回饋，關掉後會回到原來的按鈕，不會迷路。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { segmented, reduce } = LUFE;
+  const seg = document.getElementById('methodSeg');
+  const api = segmented(seg, (target) => document.getElementById(target).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+  document.querySelectorAll('[data-jump]').forEach((button) => button.addEventListener('click', () => document.getElementById(button.dataset.jump).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })));
+  document.querySelectorAll('.method-qa .qa > button').forEach((button) => button.addEventListener('click', () => {
+    const current = button.parentElement;
+    if (!current.classList.contains('open')) return;
+    document.querySelectorAll('.method-qa .qa').forEach((item) => {
+      if (item === current) return;
+      item.classList.remove('open');
+      item.querySelector('button').setAttribute('aria-expanded', 'false');
+    });
+  }));
+  const indexed = [...document.querySelectorAll('[data-index]')];
+  const observer = new IntersectionObserver((entries) => {
+    const active = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (active) api.select(indexed.indexOf(active.target), true);
+  }, { rootMargin: '-24% 0px -58% 0px', threshold: [0, .15, .35] });
+  indexed.forEach((section) => observer.observe(section));
+})();
+</script>
+</body>
+</html>

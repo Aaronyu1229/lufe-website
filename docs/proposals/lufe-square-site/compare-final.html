@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最後一批：手機版與小項目</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root { --navy: #101B30; --gold: #D4A85C; --gold-ink: #7A5A1A; --cream: #F5F2EC; --tx: #1A1A2E; --tx2: #5A6070; --bd: rgba(26,26,46,.12); --sky: #3A6B84; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font: 16px/1.7 "Inter", "Noto Sans TC", -apple-system, "PingFang TC", sans-serif; color: var(--tx); background: #fff; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 20px; }
+header { background: var(--navy); color: #fff; padding: 44px 0 36px; }
+header h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 650; }
+header p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 900px; }
+.how { margin-top: 16px; background: rgba(255,255,255,.08); padding: 14px 16px; font-size: 15px; line-height: 1.8; }
+.how b { color: var(--gold); }
+.blk { padding: 52px 0; border-bottom: 1px solid var(--bd); }
+.blk:nth-of-type(even) { background: var(--cream); }
+.blk h2 { font-size: 24px; font-weight: 650; margin-bottom: 6px; }
+.blk .sub { color: var(--tx2); margin-bottom: 20px; max-width: 900px; }
+.num { display: inline-grid; place-items: center; min-width: 40px; height: 32px; padding: 0 8px; background: var(--navy); color: var(--gold); font-weight: 700; font-size: 15px; margin-right: 8px; vertical-align: 3px; }
+.pairs { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+.pair h3 { font-size: 17px; font-weight: 650; margin-bottom: 10px; }
+.phones { display: flex; gap: 14px; flex-wrap: wrap; }
+.ph .cap { font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+.scr { width: 300px; height: 620px; border: 9px solid #1B1B1F; overflow: auto; background: #fff; }
+.scr img { width: 100%; display: block; }
+.scr iframe { width: 390px; height: 844px; border: 0; transform: scale(.7446); transform-origin: 0 0; }
+.scr.fr { overflow: hidden; }
+.shots { display: grid; gap: 12px; } @media (min-width: 900px) { .shots { grid-template-columns: 1fr 1fr; } }
+figure { border: 1px solid var(--bd); background: #fff; } figcaption { font-size: 13px; font-weight: 600; padding: 8px 12px; background: var(--cream); } figure img { width: 100%; display: block; }
+.ask { margin-top: 18px; background: #fff; border: 1px solid var(--bd); padding: 14px 16px; font-size: 15px; line-height: 1.8; max-width: 900px; }
+.ask b { color: var(--tx); } .ask .a { display: inline-block; min-width: 26px; text-align: center; font-weight: 700; color: var(--gold-ink); background: var(--cream); margin-right: 6px; }
+.slug { font-family: ui-monospace, Menlo, monospace; font-size: 13.5px; background: var(--cream); padding: 1px 6px; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>最後一批：手機版整體＋三個小項目</h1>
+  <p>手機版左邊是正式站（截圖，可以上下捲），右邊是方正版提案（<b style="color:#fff">真的網頁，可以捲、可以點</b>，包含選單和表單）。</p>
+  <div class="how">回覆方式：每一項打 <b>「編號＋OK」</b> 或 <b>「編號＋哪裡怪」</b>。例如「M1 OK、M2 OK、M3 表單太長、M4 OK、R OK、E B、F OK」。</div>
+</div></header>
+
+<section class="blk"><div class="wrap">
+  <h2>手機版整體（390 寬，iPhone 大小）</h2>
+  <p class="sub">目前所有對照都是用電腦畫面做的，這裡補上手機。挑客人最常走的四頁。</p>
+  <div class="pairs">
+    <div class="pair"><h3><span class="num">M1</span>首頁</h3><div class="phones">
+      <div class="ph"><p class="cap">正式站</p><div class="scr"><img src="compare/mobile/live-home.jpg" alt=""></div></div>
+      <div class="ph"><p class="cap">方正版（可操作）</p><div class="scr fr"><iframe src="index.html" title="首頁提案" loading="lazy"></iframe></div></div></div></div>
+    <div class="pair"><h3><span class="num">M2</span>服務總覽</h3><div class="phones">
+      <div class="ph"><p class="cap">正式站</p><div class="scr"><img src="compare/mobile/live-services.jpg" alt=""></div></div>
+      <div class="ph"><p class="cap">方正版（可操作）</p><div class="scr fr"><iframe src="services.html" title="服務提案" loading="lazy"></iframe></div></div></div></div>
+    <div class="pair"><h3><span class="num">M3</span>聯絡我們</h3><div class="phones">
+      <div class="ph"><p class="cap">正式站</p><div class="scr"><img src="compare/mobile/live-contact.jpg" alt=""></div></div>
+      <div class="ph"><p class="cap">方正版（可操作）</p><div class="scr fr"><iframe src="contact.html" title="聯絡提案" loading="lazy"></iframe></div></div></div></div>
+    <div class="pair"><h3><span class="num">M4</span>2 分鐘處境比對</h3><div class="phones">
+      <div class="ph"><p class="cap">正式站</p><div class="scr"><img src="compare/mobile/live-assess.jpg" alt=""></div></div>
+      <div class="ph"><p class="cap">方正版（可操作）</p><div class="scr fr"><iframe src="assess.html" title="處境比對提案" loading="lazy"></iframe></div></div></div></div>
+  </div>
+  <div class="ask">每一頁回 <b>OK</b> 或寫哪裡怪。其他頁手機版我都檢查過不會左右捲動、沒有錯誤；想看哪一頁的手機版，直接跟我說。</div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <h2><span class="num">R</span>資源頁</h2>
+  <p class="sub">之前我判斷「跟正式站只差全站共用做法」就直接定案了，這裡補給你看。</p>
+  <div class="shots"><figure><figcaption>正式站</figcaption><img src="compare/misc/live-resources.jpg" alt=""></figure><figure><figcaption>方正版</figcaption><img src="compare/misc/new-resources.jpg" alt=""></figure></div>
+  <div class="ask">差別只有：粗標題、方角、毛玻璃導覽列（都是你前面選過的全站做法）。回 <b>OK</b> 或寫哪裡要改。</div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <h2><span class="num">E</span>處境比對的開始畫面：下面的 4 個案例</h2>
+  <p class="sub">還沒開始答題前，頁面下方「看過的人也讀這些」那四個案例。</p>
+  <div class="shots"><figure><figcaption>A 正式站：一排 4 個</figcaption><img src="compare/misc/live-assess-entry.jpg" alt=""></figure><figure><figcaption>B 方正版：2×2</figcaption><img src="compare/misc/new-assess-entry.jpg" alt=""></figure></div>
+  <div class="ask"><span class="a">A</span>一排 4 個，比較省高度。<br><span class="a">B</span>2×2，每格比較寬、標題不容易被切成三行。<br>回 <b>E A</b> 或 <b>E B</b>。</div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <h2><span class="num">F</span>現場筆記的單則頁</h2>
+  <p class="sub">你選了「每則筆記一個獨立網頁」，這是真正的頁面（可操作，試試下面的上一則／下一則）。</p>
+  <div class="phones">
+    <div class="ph"><p class="cap">桌機寬度縮小顯示</p><div class="scr fr" style="width:620px;height:560px"><iframe src="field-note.html?n=1" title="現場筆記單則頁" style="width:1200px;height:1080px;transform:scale(.5033)" loading="lazy"></iframe></div></div>
+    <div class="ph"><p class="cap">手機</p><div class="scr fr"><iframe src="field-note.html?n=1" title="現場筆記單則頁（手機）" loading="lazy"></iframe></div></div>
+  </div>
+  <div class="ask">
+    正式站上的網址會是我暫時取的這三個：<br>
+    <span class="slug">/field-notes/manila-three-chains</span>（上週在馬尼拉見了三家連鎖通路）<br>
+    <span class="slug">/field-notes/indonesia-halal</span>（印尼清真認證這件事沒你想得那麼難）<br>
+    <span class="slug">/field-notes/costco-hq-40-minutes</span>（在 Costco 總部門口等了 40 分鐘）<br>
+    頁面最下方藍框是說明用，上線不會出現。回 <b>F OK</b>，或告訴我想怎麼改（例如網址名稱）。<br>
+    ⚠️ 提醒：三則內容還是「待補」，寫好之前不上線這些頁。
+  </div>
+</div></section>
+</body>
+</html>

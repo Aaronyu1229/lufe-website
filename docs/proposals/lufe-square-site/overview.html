@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>方正版全站總覽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+body { background: var(--cream); }
+.top { background: var(--navy); color: #fff; padding: 48px 0 40px; }
+.top h1 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 650; }
+.top p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 820px; line-height: 1.8; }
+.top .how { margin-top: 18px; background: rgba(255,255,255,.08); padding: 14px 16px; font-size: 15px; line-height: 1.8; max-width: 820px; }
+.top .how b { color: var(--gold); }
+.group { padding: 40px 0 8px; }
+.group h2 { font-size: 20px; font-weight: 650; margin-bottom: 14px; }
+.pages { display: grid; gap: 12px; }
+@media (min-width: 760px) { .pages { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .pages { grid-template-columns: 1fr 1fr 1fr; } }
+.pg { display: grid; grid-template-rows: auto 1fr auto; gap: 8px; background: #fff; padding: 20px; box-shadow: 0 0 0 1px var(--bd); transition: transform 400ms var(--ease-spring), box-shadow 400ms var(--ease-spring); }
+.pg:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--bd), 0 18px 36px -20px rgba(16,27,48,.3); }
+.pg:active { transform: translateY(-1px) scale(.99); transition-duration: var(--press); }
+.pg b { font-size: 17px; font-weight: 650; }
+.pg p { font-size: 14px; color: var(--tx2); line-height: 1.7; }
+.pg .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; }
+.pg .ok { color: #2E6B45; font-weight: 600; }
+.pg .go { color: var(--sky); font-weight: 600; }
+.warn { margin-top: 40px; background: #fff; box-shadow: 0 0 0 1px rgba(164,90,32,.3); padding: 20px 22px; }
+.warn h2 { font-size: 18px; font-weight: 650; color: var(--ember); margin-bottom: 10px; }
+.warn li { margin-left: 18px; line-height: 1.8; color: var(--tx2); font-size: 15px; }
+.warn b { color: var(--tx); }
+.end { padding: 40px 0 80px; color: var(--tx3); font-size: 13px; }
+.fab { display: none; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>鹿飛 LUFÉ 方正版提案：全站總覽</h1>
+  <p>每一頁都已經逐項確認過。點任何一張卡片就會打開那一頁，頁面之間也可以用最上方的導覽列互相切換，就像真的網站一樣。</p>
+  <div class="how">建議這樣看：<b>從首頁開始，照一般客人的路線逛</b>（首頁 → 服務 → 案例 → 聯絡），感覺整體是不是一致。<br>每頁右下角的「這頁改了什麼」會列出那頁的變更。表單不會真的送出。</div>
+</div></header>
+
+<main class="wrap">
+  <section class="group"><h2>主要頁面</h2><div class="pages">
+    <a class="pg" href="index.html"><b>首頁</b><p>Hero 跟正式站一樣（淡入淡出＋整排分佈條）；案例改可甩一列、點開從卡片展開；FAQ 可收合。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="services.html"><b>服務總覽</b><p>三個支柱改成會黏著走的切換鈕；物流數字放大；FAQ 左右兩欄。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="about.html"><b>關於我們</b><p>三段故事、四個階段改可甩一列；「我們不做什麼」改一欄清單。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="contact.html"><b>聯絡我們</b><p>出海階段改方塊按鈕；送出鈕一直可按、離開欄位就提示。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+  </div></section>
+
+  <section class="group"><h2>服務細頁</h2><div class="pages">
+    <a class="pg" href="services-methodology.html"><b>鹿飛方法論</b><p>MBCPR 大字母方塊；五維度收合；會黏著走的頁內小目錄。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="services-optimize.html"><b>進階優化方案</b><p>問題卡的解法、方案卡的交付成果都收合。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="services-market-assessment.html"><b>市場評估</b><p>四個階段頁共用：交付物可甩一列、每週節奏收合、喊停卡收合。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="services-product-testing.html"><b>產品測試</b><p>同上（階段頁共用版型）。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="services-channel-entry.html"><b>通路進入</b><p>同上（階段頁共用版型）。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="services-localization.html"><b>海外落地</b><p>同上（階段頁共用版型）。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+  </div></section>
+
+  <section class="group"><h2>案例與洞察</h2><div class="pages">
+    <a class="pg" href="cases.html"><b>案例列表</b><p>篩選用滑動方塊、卡片順順移位；點卡片放大成浮動面板。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="case.html?slug=costco-health"><b>案例詳情（Costco）</b><p>時間軸改可甩方卡列；引言放大。其他三個案例同版型。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="insights.html"><b>洞察列表</b><p>一排 3 篇；分類篩選跟案例頁同一種。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="article.html?slug=overseas-exhibition-subsidy-115-upgrade"><b>文章頁</b><p>閱讀進度條；內文「**」星號改成粗體。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="field-notes.html"><b>現場紀錄</b><p>每則筆記是獨立網頁（可被 Google 收錄）。內容寫好才上線。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+  </div></section>
+
+  <section class="group"><h2>工具與資源</h2><div class="pages">
+    <a class="pg" href="assess.html"><b>2 分鐘處境比對</b><p>點答案先亮金色打勾；已答小標籤可點回任一題改；結果保留案例照片。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="subsidies.html"><b>政府補助</b><p>配對工具跟處境比對同一套；四個計畫一眼比較；計畫卡只留重點，細節收成五行、打開用時間軸和表格讀。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+    <a class="pg" href="resources.html"><b>資源</b><p>跟正式站一樣，只套全站共用做法。</p><div class="row"><span class="ok">✓ 已定案</span><span class="go">打開 →</span></div></a>
+  </div></section>
+
+  <section class="warn">
+    <h2>進正式站之前要記得的事</h2>
+    <ul>
+      <li><b>SEO：</b>所有「收起來、點了才展開」的內容，文字必須一開始就寫在網頁裡。提案稿有些是點了才產生，改正式站時不能照抄做法。</li>
+      <li><b>正式站現有錯誤：</b>「預約諮詢」連到的 Calendly 是 404；文章內文露出「**」星號（13 篇共 26 行）。</li>
+      <li><b>現場紀錄：</b>三則筆記內容仍是「待補」，寫好才上線獨立頁。</li>
+      <li>完整決定紀錄在同資料夾的 <b>DECISIONS.md</b>。</li>
+    </ul>
+  </section>
+  <p class="end">方正版提案稿 · 2026-09-29 · 非正式站</p>
+</main>
+<script src="assets/lufe.js"></script>
+</body>
+</html>

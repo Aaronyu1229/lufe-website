@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>案例 · 鹿飛 LUFÉ（流體介面提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+.case-hero { min-height: 530px; display: flex; align-items: end; }
+.case-hero .bgimg { opacity: .28; }
+.case-hero .shade { background: linear-gradient(180deg, rgba(16,27,48,.8), rgba(16,27,48,.62) 58%, var(--navy)); }
+.case-hero .wrap { width: 100%; }
+.case-hero .h1 { max-width: 880px; }
+.case-hero .lead { max-width: 600px; margin-top: 22px; }
+.case-hero .strip { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; margin-top: 44px; display: flex; flex-wrap: wrap; gap: 8px 24px; color: rgba(255,255,255,.55); font-size: 15px; }
+.case-hero .strip b { color: var(--gold); font-weight: 600; }
+.filters { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 28px; margin-bottom: 42px; }
+.filters .filter-block { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.filters .filter-label { font-size: 13px; color: var(--tx3); font-weight: 600; flex: 0 0 auto; }
+.filters .seg { min-width: 0; }
+.filters .count { margin-left: auto; font-size: 13px; color: var(--tx3); white-space: nowrap; }
+.case-stack { display: grid; gap: 22px; }
+.case-card { overflow: hidden; text-align: left; transform-origin: center top; }
+.case-card[hidden] { display: none; }
+.case-card:focus-visible { outline: 2px solid var(--sky); outline-offset: 4px; }
+.case-card .case-media { position: relative; height: clamp(250px, 35vw, 340px); overflow: hidden; background: var(--navy); }
+.case-card .case-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(16,27,48,.92), rgba(16,27,48,.14) 68%); }
+.case-card .case-media img { width: 100%; height: 100%; object-fit: cover; }
+.case-card .case-tags { position: absolute; z-index: 1; top: 26px; left: clamp(24px, 5vw, 40px); display: flex; align-items: center; gap: 9px; color: rgba(237,217,174,.95); font-size: 12px; font-weight: 600; }
+.case-card .case-tags::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+.case-card .case-outcome { position: absolute; z-index: 1; right: clamp(24px, 5vw, 40px); bottom: 28px; left: clamp(24px, 5vw, 40px); color: #fff; }
+.case-card .case-num { color: var(--gold); font: 300 clamp(50px, 7vw, 72px)/.95 Inter, sans-serif; letter-spacing: -.05em; margin-bottom: 8px; }
+.case-card .case-headline { font-size: clamp(16px, 2vw, 18px); line-height: 1.4; }
+.case-card .case-body { padding: 28px clamp(24px, 5vw, 40px) 30px; display: grid; grid-template-columns: 1fr auto; gap: 16px 28px; align-items: start; }
+.case-card .case-kicker { color: var(--tx3); font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+.case-card h2 { font-size: clamp(20px, 2.3vw, 25px); line-height: 1.5; font-weight: 600; }
+.case-card .case-expand { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--bd2); background: transparent; color: var(--tx2); font-size: 22px; line-height: 1; cursor: pointer; transition: transform var(--press) ease-out, background-color 200ms, color 200ms; }
+.case-card:hover .case-expand { border-color: var(--gold); color: var(--gold-d); }
+.case-card .case-expand:active { transform: scale(.92); }
+.case-card .case-hint { grid-column: 1 / -1; margin-top: 2px; color: var(--tx3); font-size: 14px; font-weight: 500; }
+.empty { padding: 80px 24px; text-align: center; background: var(--cream); border: 1px solid var(--bd); color: var(--tx3); }
+.case-cta { text-align: center; margin-top: 80px; padding-top: 56px; border-top: 1px solid var(--bd); }
+.case-cta .body { max-width: 440px; margin: 10px auto 26px; }
+.case-acts { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.xp-body .xp-tagline { font-size: 13px; color: var(--tx3); font-weight: 500; margin-bottom: 6px; }
+.xp-body .xp-num { color: var(--gold-d); font: 300 56px/.95 Inter, sans-serif; letter-spacing: -.05em; }
+.xp-body .xp-headline { font-size: 17px; color: var(--tx2); margin: 8px 0 22px; }
+.xp-body .xp-title { font-size: clamp(24px, 3vw, 32px); line-height: 1.35; margin-bottom: 24px; }
+.case-beats { display: grid; gap: 0; border-top: 1px solid var(--bd); }
+.case-beat { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 17px 0; border-bottom: 1px solid var(--bd); }
+.case-beat b { color: var(--gold-d); font-size: 14px; padding-top: 2px; }
+.case-beat p { color: var(--tx2); line-height: 1.8; }
+.xp-body .xp-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 18px 0 26px; color: var(--tx3); font-size: 14px; }
+@media (max-width: 699px) { .case-hero { min-height: 560px; } .filters { align-items: flex-start; } .filters .filter-block { width: 100%; align-items: flex-start; flex-direction: column; gap: 7px; } .filters .count { margin-left: 0; } }
+</style>
+</head>
+<body data-page="cases" data-hero="dark">
+<div data-lufe-nav></div>
+<main>
+  <section class="page-hero case-hero">
+    <img class="bgimg" src="https://lufe.world/images/cases/cases-hero-collab.jpg" alt="">
+    <div class="shade"></div>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">首頁</a><span aria-hidden="true">/</span><span>案例</span></nav>
+      <h1 class="h1">兩個主戰場，<br><span class="accent">同一組人走出來的</span></h1>
+      <p class="lead">北美和東南亞，不同產業、不同卡點，但每一個案例我們都真的做過、<br>都能翻到最後一個決策。</p>
+      <div class="strip"><span><b>北美</b> · 保健品 / 電子 / 服飾</span><span aria-hidden="true">·</span><span><b>東南亞</b> · 餐飲連鎖</span><span aria-hidden="true">·</span><span><b>1</b> 組團隊從頭做到尾</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:1080px">
+      <div class="filters">
+        <div class="filter-block"><span class="filter-label">產業</span><div class="seg" id="industrySeg"><button aria-pressed="true" data-value="all">全部產業</button><button aria-pressed="false" data-value="food">食品保健</button><button aria-pressed="false" data-value="electronics">電子產品</button><button aria-pressed="false" data-value="apparel">服飾配件</button><button aria-pressed="false" data-value="fnb">餐飲飲品</button></div></div>
+        <div class="filter-block"><span class="filter-label">市場</span><div class="seg" id="marketSeg"><button aria-pressed="true" data-value="all">全部市場</button><button aria-pressed="false" data-value="north-america">北美</button><button aria-pressed="false" data-value="sea">東南亞</button></div></div>
+        <p class="count" id="caseCount" aria-live="polite">共 4 則</p>
+      </div>
+      <div class="case-stack" id="caseStack" aria-live="polite"></div>
+      <div class="empty" id="empty" hidden>這個組合暫時沒有案例。試試調整篩選條件。</div>
+      <div class="case-cta">
+        <p class="h3">想知道你的產品適合哪條路？</p>
+        <p class="body">聊聊，不收費、不承諾、不賣課。我們會老實告訴你值不值得一試。</p>
+        <div class="case-acts"><button class="btn btn-gold" type="button" data-chat>聊聊你的產品 <span aria-hidden="true">→</span></button><a class="btn btn-tint" href="assess.html">先做 2 分鐘處境比對</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<div data-lufe-footer></div>
+
+<template id="lufe-notes">
+  <li><b>先用兩組篩選縮小範圍</b>：產業和市場放在案例前面，想看的路徑可以更快找到。</li>
+  <li><b>卡片換位不會跳一下</b>：改條件時，留下的案例會從原本位置滑到新位置，讓你看得懂剛才改變了什麼。</li>
+  <li><b>按案例就從它的位置展開</b>：摘要長成一張完整說明卡，收起時也回到同一張案例，不會失去方向。</li>
+  <li><b>圖片可以往下拉回去</b>：想離開摘要時，直接往下拉圖片或按關閉，手勢和畫面方向一致。</li>
+  <li><b>刻意沒做</b>：捲動淡入、會自己跳出的視窗、跟內容無關的動畫。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { segmented, flip, expand, esc } = LUFE;
+  const CASES = [
+    { slug: "costco-health", tags: [{ label: "食品", variant: "sky" }, { label: "北美", variant: "gold" }], industry: "food", market: "north-america", num: "6 個月", title: "保健品怎麼從台灣走進北美 Costco？", heroImage: "/images/cases/detail/costco-health-hero.jpg" },
+    { slug: "electronics-tariff", tags: [{ label: "電子", variant: "sky" }, { label: "美國", variant: "gold" }], industry: "electronics", market: "north-america", num: "-15%", title: "電子大廠怎麼靠產地轉移省下關稅？", heroImage: "/images/cases/detail/electronics-tariff-hero.jpg" },
+    { slug: "shoe-brand", tags: [{ label: "服飾", variant: "sky" }, { label: "美國", variant: "gold" }], industry: "apparel", market: "north-america", num: "3x", title: "知名皮鞋品牌為什麼改賣襪子大賺？", heroImage: "/images/cases/detail/shoe-brand-hero.jpg" },
+    { slug: "bubble-tea", tags: [{ label: "飲品", variant: "sky" }, { label: "東南亞", variant: "gold" }], industry: "fnb", market: "sea", num: "10 家", title: "珍珠奶茶品牌怎麼在菲律賓成功落地？", heroImage: "/images/cases/detail/bubbletea-manila-hero.jpg" }
+  ];
+  const CARD_META = {
+    "costco-health": { headline: "6 個月進 Costco 120+ 門市", painTitle: "產品在台灣很好，但北美通路都說「不認識」", beats: ["台灣保健品牌在國內穩定，想打進全球最大會員制零售通路 Costco。", "找過貿易商只管物流、找過顧問只丟 80 頁報告，沒人真的做執行。", "從消費者口感倒推配方、合約付款期硬談進 45 天、首批為了準時自掏腰包空運補救。", "6 個月上架 120+ 家門市，首月銷量超標 40%，直接進入第二批訂單談判。"] },
+    "electronics-tariff": { headline: "關稅降 15%，年省 200 萬美金", painTitle: "中美關稅戰吃掉毛利，客戶再殺一刀訂單就要掉", beats: ["工廠在大陸、客戶在美國，25% 額外關稅把毛利直接打到負數。", "搬整條產線要 6 個月起跳，但客戶降價要求已經在信件裡了。", "四地（越南、印度、墨西哥、馬來）打分後選越南，大陸越南雙線並行 6 個月當保險。", "關稅成本降 15%、物流時效反而縮短 3 天、一年省下 200 萬美金。"] },
+    "shoe-brand": { headline: "襪子賣出皮鞋 3 倍營收", painTitle: "200 萬行銷砸下去，半年只換回 50 萬", beats: ["台灣皮鞋品牌上亞馬遜，前 20 名競品全是國際品牌、退貨率高達 30%。", "品牌方堅持「我們叫 XX 鞋業，不能賣襪子」——情感擋在數據前面。", "兩小時會議把 CAC 和 LTV 攤在桌上，說服品牌先用襪子賺進場票。", "三個月做到皮鞋品類 3 倍、4.7 星評分，反過來拉動皮鞋銷量 +120%。"] },
+    "bubble-tea": { headline: "一年 10 家店，單店超母店 1.2x", painTitle: "前兩次進菲律賓都失敗，一次被拿走配方、一次選錯區", beats: ["台灣珍奶第三次進馬尼拉，市場已被日出茶太、COCO、Tiger Sugar 佔住。", "低價打不過規模、高端市場太窄、加盟合約怎麼寫都有被反吃掉的風險。", "鎖定 P150–200 中高端、第一家開在 BGC 當行銷投資、混合直營與加盟。", "一年開 10 家店（含 6 家加盟）、單店月營收做到台灣母店的 1.2 倍。"] }
+  };
+  const BEAT_LABELS = ["情境", "卡點", "決策", "結果"];
+  const image = c => `https://lufe.world${c.heroImage}`;
+  const stack = document.getElementById("caseStack");
+  stack.innerHTML = CASES.map(c => {
+    const m = CARD_META[c.slug];
+    return `<button class="card case-card" type="button" data-key="${c.slug}" data-slug="${c.slug}" aria-label="展開案例：${esc(c.title)}">
+      <div class="case-media"><img src="${image(c)}" alt="${esc(c.title)}" loading="lazy" draggable="false"><div class="case-tags">${c.tags.map(t => esc(t.label)).join(" · ")}</div><div class="case-outcome"><div class="case-num">${esc(c.num)}</div><div class="case-headline">${esc(m.headline)}</div></div></div>
+      <div class="case-body"><div><p class="case-kicker">客戶的原話</p><h2>「${esc(m.painTitle)}」</h2></div><span class="case-expand" aria-hidden="true">+</span><p class="case-hint">展開故事 · 四段 20 秒看完 →</p></div>
+    </button>`;
+  }).join("");
+
+  let industry = "all", market = "all";
+  const count = document.getElementById("caseCount"), empty = document.getElementById("empty");
+  function update() {
+    flip(stack, () => {
+      let total = 0;
+      [...stack.children].forEach(card => {
+        const c = CASES.find(item => item.slug === card.dataset.slug);
+        const show = (industry === "all" || c.industry === industry) && (market === "all" || c.market === market);
+        card.hidden = !show;
+        if (show) total += 1;
+      });
+      count.textContent = `共 ${total} 則`;
+      empty.hidden = total !== 0;
+    });
+  }
+  segmented(document.getElementById("industrySeg"), value => { industry = value; update(); });
+  segmented(document.getElementById("marketSeg"), value => { market = value; update(); });
+  stack.addEventListener("click", event => {
+    const card = event.target.closest(".case-card");
+    if (!card) return;
+    const c = CASES.find(item => item.slug === card.dataset.slug), m = CARD_META[c.slug];
+    expand(card, { img: image(c), html: `<p class="xp-tagline">${c.tags.map(t => esc(t.label)).join(" · ")}</p><div class="xp-num">${esc(c.num)}</div><p class="xp-headline">${esc(m.headline)}</p><h2 class="xp-title" id="xpTitle">${esc(c.title)}</h2><div class="case-beats">${m.beats.map((beat, i) => `<div class="case-beat"><b>${BEAT_LABELS[i]}</b><p>${esc(beat)}</p></div>`).join("")}</div><div class="xp-foot"><span>完整時間軸、關鍵決策推理、客戶回饋——都在內頁</span></div><div class="case-acts"><a class="btn btn-navy" href="case.html?slug=${encodeURIComponent(c.slug)}">讀完整案例 <span aria-hidden="true">→</span></a><a class="btn btn-tint" href="assess.html?case=${encodeURIComponent(c.slug)}">比對你的處境</a></div>` });
+  });
+})();
+</script>
+</body>
+</html>

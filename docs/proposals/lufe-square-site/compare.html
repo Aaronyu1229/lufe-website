@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>首頁逐項對照</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+TC:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root { --navy: #101B30; --gold: #D4A85C; --gold-ink: #7A5A1A; --cream: #F5F2EC; --tx: #1A1A2E; --tx2: #5A6070; --bd: rgba(26,26,46,.12); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font: 16px/1.7 "Inter", "Noto Sans TC", -apple-system, "PingFang TC", sans-serif; color: var(--tx); background: #fff; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 20px; }
+header { background: var(--navy); color: #fff; padding: 48px 0 40px; }
+header h1 { font-size: clamp(26px, 3.4vw, 38px); font-weight: 650; }
+header p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 760px; }
+.how { margin-top: 20px; background: rgba(255,255,255,.08); padding: 16px 18px; font-size: 15px; }
+.how b { color: var(--gold); }
+.block { padding: 56px 0; border-bottom: 1px solid var(--bd); }
+.block h2 { font-size: 24px; font-weight: 650; margin-bottom: 20px; }
+.pair { display: grid; gap: 16px; }
+@media (min-width: 900px) { .pair { grid-template-columns: 1fr 1fr; } }
+figure { border: 1px solid var(--bd); }
+figcaption { font-size: 14px; font-weight: 700; padding: 10px 14px; background: var(--cream); }
+figcaption.b { background: var(--navy); color: #fff; }
+figure img { width: 100%; display: block; }
+.items { margin-top: 24px; display: grid; gap: 12px; }
+.item { border: 1px solid var(--bd); padding: 16px 18px; display: grid; gap: 8px; }
+.item .t { font-weight: 700; font-size: 17px; }
+.item .t span { display: inline-block; min-width: 34px; background: var(--navy); color: #fff; text-align: center; margin-right: 8px; font-size: 14px; padding: 1px 6px; }
+.opt { display: grid; grid-template-columns: 26px 1fr; gap: 8px; color: var(--tx2); }
+.opt b { color: var(--tx); }
+.opt i { font-style: normal; font-weight: 700; display: inline-grid; place-items: center; width: 26px; height: 26px; background: var(--cream); color: var(--gold-ink); }
+.done { background: #F3F7F9; border-color: rgba(58,107,132,.3); }
+.done .t span { background: #3A6B84; }
+.note { font-size: 14px; color: var(--tx2); }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>首頁逐項對照：正式站 vs 方正版提案</h1>
+  <p>每一區都放了兩張截圖：左邊是現在的正式站（lufe.world），右邊是方正版提案。下面列出兩邊不一樣的地方，每一項都有編號。</p>
+  <div class="how">回覆方式：直接打<b>「編號＋A 或 B」</b>，例如「5A 6B 7B 8A」。<b>A＝跟正式站一樣</b>，<b>B＝用提案的做法</b>。不確定的可以跳過或直接問我。</div>
+</div></header>
+
+<div class="block"><div class="wrap">
+  <h2>① 已經確定、已改好的</h2>
+  <div class="items">
+    <div class="item done"><div class="t"><span>✓</span>全站改方角；新的間距、字體、排版保留</div></div>
+    <div class="item done"><div class="t"><span>✓</span>Hero 跟正式站一樣：不能拖、淡入淡出、底部整排分佈條＋金色進度線</div></div>
+    <div class="item done"><div class="t"><span>✓</span>Hero 第二顆按鈕用半透明方框；導覽列用毛玻璃</div></div>
+  </div>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h2>② 導覽列與 Hero</h2>
+  <div class="pair">
+    <figure><figcaption>A　正式站</figcaption><img src="compare/live-0.jpg" alt="正式站首屏"></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/new-0.jpg" alt="提案首屏"></figure>
+  </div>
+  <div class="items">
+    <div class="item"><div class="t"><span>1</span>左上角 Logo</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：鹿頭 Logo 比較大，「鹿飛 LUFÉ」用粗體，É 是金色。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：Logo 較小，文字是一般字重、沒有金色 É。<span class="note">（這是我做提案時沒照抄到，建議選 A）</span></div></div></div>
+    <div class="item"><div class="t"><span>2</span>右上角「聊聊你的產品」按鈕</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：文字後面有「→」箭頭，按鈕較大。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：沒有箭頭，按鈕較小。</div></div></div>
+  </div>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h2>③「真的跑過船的人」區塊</h2>
+  <div class="pair">
+    <figure><figcaption>A　正式站</figcaption><img src="compare/live-pos.jpg" alt="正式站定位區塊"></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/new-pos.jpg" alt="提案定位區塊"></figure>
+  </div>
+  <div class="items">
+    <div class="item"><div class="t"><span>3</span>大標題上方的小金字「躍馬企業 · 42 年實戰」</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：沒有這行，標題直接開始。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：多了一行小金字。<span class="note">（這行是我自己加的，正式站這裡沒有）</span></div></div></div>
+    <div class="item"><div class="t"><span>4</span>背景裝飾</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：標題後面有一團很淡的金色光暈，區塊之間有細的分隔線。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：純奶油色，沒有光暈也沒有分隔線。</div></div></div>
+    <div class="item"><div class="t"><span>5</span>深藍色物流卡（42+／500+／30+）</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：卡片頂端有一條金色細線；數字是很細的字；數字和左邊文字之間有一條直線隔開。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：沒有金線、沒有直線；數字是粗體；卡片下方有陰影。</div></div></div>
+    <div class="item"><div class="t"><span>6</span>兩張支柱卡的編號「01／02」</div>
+      <div class="opt"><i>A</i><div><b>正式站風格</b>：編號外面有框（正式站是圓框，方正版會改成<b>方框</b>）。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：不加框，直接放大號數字。</div></div></div>
+  </div>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h2>④ 海外參展補助</h2>
+  <div class="pair">
+    <figure><figcaption>A　正式站</figcaption><img src="compare/live-2.jpg" alt="正式站補助區"></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/new-2.jpg" alt="提案補助區"></figure>
+  </div>
+  <div class="items">
+    <div class="item"><div class="t"><span>7</span>補助區怎麼擺</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：一整條深藍色橫跨整個畫面；左邊橘色「115 年度加碼」標籤；標題上方有英文小字 MINISTRY OF ECONOMIC AFFAIRS。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：深藍色變成一張卡片，放在奶油色背景裡；標籤改金色；拿掉英文小字。</div></div></div>
+  </div>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h2>⑤ 案例</h2>
+  <div class="pair">
+    <figure><figcaption>A　正式站</figcaption><img src="compare/live-3.jpg" alt="正式站案例區"></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/new-3.jpg" alt="提案案例區"></figure>
+  </div>
+  <div class="items">
+    <div class="item"><div class="t"><span>8</span>四個案例的排法</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：全部攤開，一張大的加三張並排；「卡點」「怎麼解」、產業標籤（食品／北美）、「客戶授權公開」都直接看得到。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：排成一列，要左右滑才看得到第四張；卡片上只放數字和標題，按「＋」才展開看「卡點」「怎麼解」。</div></div></div>
+  </div>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h2>⑥「你面對的只有我們」</h2>
+  <div class="pair">
+    <figure><figcaption>A　正式站</figcaption><img src="compare/live-4.jpg" alt="正式站對照表"></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/new-4.jpg" alt="提案對照表"></figure>
+  </div>
+  <div class="items">
+    <div class="item"><div class="t"><span>9</span>對照表</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：每格是小方塊，沒涵蓋的是虛線框；鹿飛那列最右邊有打勾；表格下面有一段說明文字（「對手做完一件事交給下一家……」）。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：簡化成一般表格，只有圓點；拿掉打勾和下面那段說明。</div></div></div>
+    <div class="item"><div class="t"><span>10</span>客戶見證（陳執行長）</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：靠左，左側一條金色直線，名字旁有「陳」字方塊頭像。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：置中，用引號框住，沒有頭像。</div></div></div>
+  </div>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h2>⑦ 常見問題</h2>
+  <div class="pair">
+    <figure><figcaption>A　正式站</figcaption><img src="compare/live-5.jpg" alt="正式站 FAQ"></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/new-5.jpg" alt="提案 FAQ"></figure>
+  </div>
+  <div class="items">
+    <div class="item"><div class="t"><span>11</span>三個問題怎麼呈現</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：三題的答案全部直接展開。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：只有第一題打開，其他兩題點了才展開。</div></div></div>
+  </div>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h2>⑧ 最後的「聊聊」區塊</h2>
+  <div class="pair">
+    <figure><figcaption>A　正式站</figcaption><img src="compare/live-6.jpg" alt="正式站 CTA"></figure>
+    <figure><figcaption class="b">B　方正版提案</figcaption><img src="compare/new-6.jpg" alt="提案 CTA"></figure>
+  </div>
+  <div class="items">
+    <div class="item"><div class="t"><span>12</span>第二顆按鈕「先做 2 分鐘處境比對」</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：文字加底線。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：半透明方框按鈕（跟你剛選的 Hero 按鈕一致）。</div></div></div>
+    <div class="item"><div class="t"><span>13</span>按「聊聊你的產品」之後</div>
+      <div class="opt"><i>A</i><div><b>正式站</b>：跳出原本的留言視窗。</div></div>
+      <div class="opt"><i>B</i><div><b>提案</b>：從底部拉上來一個面板，可以拖動停在半屏或全屏，後面的頁面會微微縮小。</div></div></div>
+  </div>
+</div></div>
+</body>
+</html>

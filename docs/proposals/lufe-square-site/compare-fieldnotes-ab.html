@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>現場筆記 A／B 對照</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+body { background: #fff; }
+.top { background: var(--navy); color: #fff; padding: 40px 0 32px; }
+.top h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 650; }
+.top p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 860px; }
+.top .how { margin-top: 16px; background: rgba(255,255,255,.08); padding: 14px 16px; font-size: 15px; }
+.top .how b { color: var(--gold); }
+.cols { display: grid; gap: 24px; padding: 32px 0 64px; }
+@media (min-width: 1000px) { .cols { grid-template-columns: 1fr 1fr; } }
+.col h2 { font-size: 22px; font-weight: 650; display: flex; align-items: center; gap: 10px; }
+.col h2 i { font-style: normal; display: inline-grid; place-items: center; width: 34px; height: 34px; background: var(--navy); color: var(--gold); }
+.col .desc { color: var(--tx2); font-size: 15px; margin: 8px 0 14px; min-height: 48px; }
+/* A fake browser window, so the address bar shows whether the URL changes */
+.win { border: 1px solid var(--bd2); box-shadow: 0 20px 40px -20px rgba(16,27,48,.25); background: var(--cream); }
+.bar { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: #E9E6E0; border-bottom: 1px solid var(--bd2); }
+.bar .dots { display: flex; gap: 5px; } .bar .dots span { width: 9px; height: 9px; background: rgba(26,26,46,.18); }
+.bar .back { border: 0; background: none; cursor: pointer; font-size: 16px; color: var(--tx3); padding: 0 4px; }
+.bar .back:disabled { opacity: .3; cursor: default; }
+.url { flex: 1; background: #fff; padding: 5px 10px; font: 13px ui-monospace, Menlo, monospace; color: var(--tx2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background-color 400ms; }
+.url.flash { background: var(--gold-l); }
+.tab { font-size: 12px; color: var(--tx3); padding: 6px 12px; border-bottom: 1px solid var(--bd2); background: #F3F0EA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.view { padding: 22px; min-height: 560px; }
+.view .eyebrow { margin-bottom: 8px; }
+.view .h3 { margin-bottom: 16px; }
+.note { display: grid; grid-template-columns: 120px 1fr; gap: 0; margin-bottom: 12px; overflow: hidden; }
+.note .ph { background: var(--navy); color: rgba(255,255,255,.35); display: grid; place-items: center; font-size: 22px; position: relative; }
+.note .ph small { position: absolute; right: 8px; bottom: 6px; font-size: 11px; color: var(--gold); }
+.note .cbody { padding: 14px 16px; }
+.note .where { font-size: 12px; font-weight: 600; color: var(--gold-ink); margin-bottom: 4px; }
+.note h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.note p { font-size: 13px; color: var(--tx2); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.page .crumbs { color: var(--tx3); margin-bottom: 16px; }
+.page .cover { aspect-ratio: 16/8; background: var(--navy); display: grid; place-items: center; color: rgba(255,255,255,.35); font-size: 28px; margin: 14px 0 20px; position: relative; }
+.page .cover small { position: absolute; right: 10px; bottom: 8px; font-size: 12px; color: var(--gold); }
+.page .h2 { font-size: 26px; }
+.page .pn { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+.page .pn button { padding: 12px 14px; font-size: 13px; }
+.page .pn span { display: block; color: var(--tx3); font-size: 11px; margin-bottom: 2px; }
+.seo { margin-top: 14px; font-size: 13px; line-height: 1.8; padding: 12px 14px; }
+.seo.good { background: #EEF5EF; color: #2E5E3A; } .seo.none { background: #F6EFE7; color: #7A4B1A; }
+.fab { display: none; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>現場筆記：A 浮動面板 vs B 每則獨立網頁</h1>
+  <p>下面左右兩個都是模擬的瀏覽器，內容一樣是現場紀錄頁的三則筆記。<b style="color:#fff">兩邊都點一則筆記試試看</b>，注意最上面的網址列有沒有變。</p>
+  <div class="how">重點看兩件事：<b>① 點了之後畫面怎麼變</b>　<b>② 網址有沒有變</b>（網址會變＝Google 可以把那則筆記當成一篇文章收錄）。</div>
+</div></header>
+
+<div class="wrap cols">
+  <section class="col" id="colA">
+    <h2><i>A</i>浮動面板</h2>
+    <p class="desc">點筆記 → 卡片放大浮在畫面上，關掉就縮回原位。<b>網址不變。</b></p>
+    <div class="win">
+      <div class="bar"><div class="dots"><span></span><span></span><span></span></div><button class="back" disabled aria-label="上一頁">←</button><div class="url">lufe.world/field-notes</div></div>
+      <div class="tab">現場紀錄 — 鹿飛 LUFÉ</div>
+      <div class="view" id="viewA"></div>
+    </div>
+    <div class="seo none"><b>SEO：</b>三則筆記都在同一個網址上，Google 只看得到「現場紀錄」這一頁，不會單獨收錄每一則。</div>
+  </section>
+
+  <section class="col" id="colB">
+    <h2><i>B</i>每則獨立網頁</h2>
+    <p class="desc">點筆記 → 換到一個新網頁（像部落格文章），可以按 ← 回列表。<b>網址會變。</b></p>
+    <div class="win">
+      <div class="bar"><div class="dots"><span></span><span></span><span></span></div><button class="back" id="backB" disabled aria-label="上一頁">←</button><div class="url" id="urlB">lufe.world/field-notes</div></div>
+      <div class="tab" id="tabB">現場紀錄 — 鹿飛 LUFÉ</div>
+      <div class="view" id="viewB"></div>
+    </div>
+    <div class="seo good"><b>SEO：</b>每則筆記有自己的網址與標題，可以單獨被 Google 收錄、分享到 LINE。<br>⚠️ 前提是內容要寫好；現在三則都是「待補」，太早上線反而扣分。</div>
+  </section>
+</div>
+
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  // Verbatim from src/data/fieldNotes.ts. Slugs in B's URL are illustrative only.
+  const notes = [
+    { slug: 'manila-three-chains', location: '馬尼拉', date: '2026 XX 月', title: '上週在馬尼拉見了三家連鎖通路', body: '待補 · 這裡會寫一段 150–250 字的現場觀察：我上週見了哪幾家通路、他們對台灣品牌的態度、哪些類別現在最缺、哪些類別已經過度競爭。這類觀察平常不會寫成正式文章，但是對正在考慮菲律賓的台灣老闆來說很有用。' },
+    { slug: 'indonesia-halal', location: '雅加達', date: '2026 XX 月', title: '印尼清真認證這件事沒你想得那麼難', body: '待補 · 印尼的 Halal 認證在台灣老闆心裡是個難關，但實際上流程和成本沒有那麼嚇人。這段記錄一個真實的認證過程，從送件到拿到證書大約花了多少時間、多少錢、卡在哪幾個環節。' },
+    { slug: 'costco-hq-40-minutes', location: '洛杉磯', date: '2025 XX 月', title: '在 Costco 總部門口等了 40 分鐘', body: '待補 · 北美 Costco 採購會議的現場紀錄。從機場到總部、門口等候、會議室內的 18 分鐘、會後的停車場對話——這些細節才是真的「怎麼跟美國大通路打交道」。' },
+  ];
+  const { esc, expand } = LUFE;
+  const listHTML = side => `<p class="eyebrow">現場筆記</p><h3 class="h3">飛回來之後，<span class="accent">馬上記下來的事</span></h3>` +
+    notes.map((n, i) => `<button class="card note" type="button" data-side="${side}" data-i="${i}"><div class="ph">⌁<small>待補</small></div><div class="cbody"><div class="where">📍 ${esc(n.location)} · ${esc(n.date)}</div><h4>${esc(n.title)}</h4><p>${esc(n.body)}</p></div></button>`).join('');
+
+  // A — floating panel, URL untouched
+  const viewA = document.getElementById('viewA');
+  viewA.innerHTML = listHTML('A');
+  viewA.addEventListener('click', e => {
+    const card = e.target.closest('.note'); if (!card) return;
+    const n = notes[card.dataset.i];
+    expand(card, { html: `<p class="eyebrow">📍 ${esc(n.location)}　·　${esc(n.date)}</p><h2 id="xpTitle" class="h2" style="margin-top:12px">${esc(n.title)}</h2><p class="body" style="margin-top:20px">${esc(n.body)}</p><p class="small" style="margin-top:24px">↑ 往上看左邊的網址列：還是 lufe.world/field-notes。按 ✕ 或 Esc 關閉。</p>` });
+  });
+
+  // B — navigates to its own page, URL + tab title change
+  const viewB = document.getElementById('viewB'), urlB = document.getElementById('urlB'), tabB = document.getElementById('tabB'), backB = document.getElementById('backB');
+  const setUrl = (u, t) => { urlB.textContent = u; tabB.textContent = t; urlB.classList.add('flash'); setTimeout(() => urlB.classList.remove('flash'), 600); };
+  const showList = () => { viewB.innerHTML = listHTML('B'); backB.disabled = true; setUrl('lufe.world/field-notes', '現場紀錄 — 鹿飛 LUFÉ'); };
+  const showNote = i => {
+    const n = notes[i], prev = notes[i - 1], next = notes[i + 1];
+    viewB.innerHTML = `<div class="page"><nav class="crumbs small">首頁 / <button class="link" type="button" data-list style="font-size:13px">現場紀錄</button> / ${esc(n.title)}</nav>
+      <p class="eyebrow">現場筆記</p><h2 class="h2">${esc(n.title)}</h2><p class="small" style="color:var(--gold-ink);font-weight:600;margin-top:8px">📍 ${esc(n.location)}　·　${esc(n.date)}</p>
+      <div class="cover">⌁<small>待補</small></div><p class="body">${esc(n.body)}</p>
+      <div class="pn">${prev ? `<button class="card" type="button" data-go="${i - 1}"><span>← 上一則</span>${esc(prev.title)}</button>` : '<span></span>'}${next ? `<button class="card" type="button" data-go="${i + 1}" style="text-align:right"><span>下一則 →</span>${esc(next.title)}</button>` : '<span></span>'}</div></div>`;
+    backB.disabled = false; setUrl(`lufe.world/field-notes/${n.slug}`, `${n.title} — 鹿飛 LUFÉ`);
+    viewB.closest('.win').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
+  viewB.addEventListener('click', e => {
+    const card = e.target.closest('.note'); if (card) return showNote(Number(card.dataset.i));
+    const go = e.target.closest('[data-go]'); if (go) return showNote(Number(go.dataset.go));
+    if (e.target.closest('[data-list]')) showList();
+  });
+  backB.addEventListener('click', showList);
+  showList();
+})();
+</script>
+</body>
+</html>

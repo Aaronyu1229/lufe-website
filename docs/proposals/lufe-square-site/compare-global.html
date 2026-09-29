@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>導覽列・手機選單・頁尾對照</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+body { background: #fff; }
+.top { background: var(--navy); color: #fff; padding: 40px 0 32px; }
+.top h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 650; }
+.top p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 920px; line-height: 1.8; }
+.top .how { margin-top: 16px; background: rgba(255,255,255,.08); padding: 14px 16px; font-size: 15px; line-height: 1.8; }
+.top .how b { color: var(--gold); }
+.blk { padding: 56px 0; border-bottom: 1px solid var(--bd2); }
+.blk:nth-of-type(even) { background: var(--cream); }
+.blk > .wrap > h2 { font-size: 26px; font-weight: 650; margin-bottom: 6px; }
+.blk > .wrap > .sub { color: var(--tx2); margin-bottom: 22px; max-width: 900px; }
+.opt { margin-top: 34px; }
+.opt h3 { display: flex; gap: 12px; align-items: center; font-size: 20px; font-weight: 650; margin-bottom: 6px; }
+.opt h3 i { font-style: normal; display: grid; place-items: center; width: 36px; height: 36px; background: var(--navy); color: var(--gold); font-weight: 700; }
+.opt .d { color: var(--tx2); font-size: 15px; margin: 0 0 14px 48px; max-width: 880px; line-height: 1.8; }
+.opt .d b { color: var(--tx); }
+.pick { display: inline-block; font-size: 13px; font-weight: 700; color: #fff; background: var(--sky); padding: 2px 8px; }
+.shots { display: grid; gap: 12px; }
+@media (min-width: 900px) { .shots.two { grid-template-columns: 1fr 1fr; } }
+.shots figure { border: 1px solid var(--bd2); background: #fff; }
+.shots figcaption { font-size: 13px; font-weight: 600; padding: 8px 12px; background: var(--cream); }
+.shots img { width: 100%; display: block; }
+
+/* C demo: a mock nav bar with mega panels that grow out of the trigger */
+.demo { position: relative; background: var(--navy); min-height: 520px; overflow: hidden; }
+.demo .bgimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .35; }
+.mnav { position: relative; z-index: 3; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; color: #fff;
+  background: rgba(16,27,48,.35); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); }
+.mnav .brand { font-weight: 600; font-size: 17px; }
+.mnav .links { display: flex; gap: 4px; }
+.mnav .links button { border: 0; background: none; color: rgba(255,255,255,.85); cursor: pointer; font-size: 14px; padding: 8px 14px; transition: background-color 150ms, color 150ms; }
+.mnav .links button:hover, .mnav .links button[aria-expanded=true] { background: rgba(255,255,255,.12); color: #fff; }
+.mnav .cta { background: var(--gold); color: var(--navy); font-weight: 600; font-size: 14px; padding: 9px 16px; }
+.mega { position: absolute; z-index: 2; left: 28px; right: 28px; top: 68px; overflow: hidden; visibility: hidden;
+  background: rgba(255,255,255,.86); -webkit-backdrop-filter: blur(30px) saturate(180%); backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: 0 30px 60px -20px rgba(10,18,34,.5), inset 0 1px 0 rgba(255,255,255,.7); color: var(--tx); }
+.mega .pane { position: absolute; left: 0; right: 0; top: 0; padding: 26px 28px 24px; display: grid; gap: 24px; opacity: 0; pointer-events: none; transition: opacity 180ms ease; }
+.mega .pane.on { opacity: 1; pointer-events: auto; transition-delay: 60ms; }
+.cols4 { grid-template-columns: repeat(4, 1fr); } .cols3 { grid-template-columns: 1fr 1fr 1.1fr; } .cols-cases { grid-template-columns: 2fr 1fr; }
+.mega .lbl { font-size: 11.5px; font-weight: 700; color: var(--gold-ink); margin-bottom: 10px; letter-spacing: .02em; }
+.mega a.it { display: block; padding: 6px 0; }
+.mega a.it b { display: block; font-size: 14.5px; font-weight: 600; }
+.mega a.it span { font-size: 12.5px; color: var(--tx3); }
+.mega a.it:hover b { color: var(--sky); }
+.mega .case { display: grid; grid-template-columns: 70px 1fr; gap: 10px; padding: 8px 0; align-items: baseline; }
+.mega .case .n { font-size: 20px; color: var(--gold-d); font-weight: 600; font-family: Inter, sans-serif; }
+.mega .case b { font-size: 14px; font-weight: 600; display: block; } .mega .case span { font-size: 12px; color: var(--tx3); }
+.mega .latest img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 8px; }
+.mega .latest b { font-size: 14px; font-weight: 600; line-height: 1.5; display: block; }
+.mega .latest span { font-size: 12px; color: var(--tx3); }
+.mega .founder { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; }
+.mega .founder .mono { width: 52px; height: 52px; display: grid; place-items: center; background: var(--gold); color: var(--navy); font-weight: 700; }
+.mega .founder b { display: block; } .mega .founder small { display: block; font-size: 12px; color: var(--tx3); }
+.mega .more { font-size: 13.5px; font-weight: 600; color: var(--sky); display: inline-block; margin-top: 8px; }
+.demo-hint { position: absolute; z-index: 1; left: 28px; bottom: 24px; color: rgba(255,255,255,.7); font-size: 14px; }
+
+/* Phone frames */
+.phones { display: grid; gap: 20px; justify-content: start; grid-template-columns: repeat(auto-fit, 320px); }
+.phone { width: 320px; }
+.phone .cap { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.phone .scr { width: 320px; height: 640px; border: 10px solid #1B1B1F; background: var(--navy); overflow: hidden; position: relative; }
+.phone .scr img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.pbar { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; color: #fff; position: relative; z-index: 3;
+  background: rgba(16,27,48,.4); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+.pbar b { font-size: 15px; } .pbar .r { display: flex; gap: 8px; align-items: center; }
+.pbar .c { background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 600; padding: 6px 10px; }
+.pbar .hb { width: 36px; height: 36px; border: 0; background: none; color: #fff; cursor: pointer; display: grid; place-items: center; }
+.pbar .hb:active { opacity: .6; }
+.pbg { position: absolute; inset: 52px 0 0; padding: 26px 18px; color: #fff; }
+.pbg h4 { font-size: 26px; line-height: 1.3; font-weight: 650; }
+.pmenu { position: absolute; z-index: 2; top: 58px; right: 8px; left: 8px; max-height: 560px; overflow: auto; padding: 6px 0; visibility: hidden;
+  background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(30px) saturate(180%); backdrop-filter: blur(30px) saturate(180%); box-shadow: 0 20px 50px rgba(0,0,0,.35); color: var(--tx); transform-origin: calc(100% - 22px) -6px; }
+.pmenu .g > button { all: unset; box-sizing: border-box; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; font-size: 16px; font-weight: 600; cursor: pointer; border-bottom: 1px solid var(--bd); }
+.pmenu .g > button .chev { display: inline-grid; transition: transform 400ms var(--ease-spring); }
+.pmenu .g.open > button .chev { transform: rotate(180deg); }
+.pmenu .sub { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 400ms var(--ease-spring); }
+.pmenu .g.open .sub { grid-template-rows: 1fr; } .pmenu .sub > div { overflow: hidden; }
+.pmenu .sub a { display: block; padding: 10px 16px 10px 28px; font-size: 14.5px; color: var(--tx2); border-bottom: 1px solid var(--bd); }
+.pmenu .sub a:active { background: rgba(26,26,46,.06); }
+.pmenu .pc { margin: 12px 14px 8px; display: block; text-align: center; background: var(--gold); color: var(--navy); font-weight: 600; padding: 12px; }
+.fab { display: none; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>還沒對照過的全站共用部分：導覽列下拉、手機選單、頁尾</h1>
+  <p>這三個東西每一頁都會出現。我查了才發現：<b style="color:#fff">提案裡的下拉選單和頁尾，內容是我自己重排的</b>，少了正式站原本的東西（例如「關於我們」的下拉、「團隊體質」那一欄、各頁的小說明）。這次給你三種方案。</p>
+  <div class="how"><b>A＝正式站原樣</b>（只套方角與字體）｜<b>B＝目前提案</b>（我自己重排的內容）｜<b>C＝新方案：內容照正式站，外觀與動作用 skill</b>（可以直接操作）。<br>回覆例如：「下拉 C、手機 C、頁尾 A」。</div>
+</div></header>
+
+<section class="blk"><div class="wrap">
+  <h2>① 導覽列的下拉選單（桌機）</h2>
+  <p class="sub">滑到「服務／案例／洞察／關於我們」時出現的選單。</p>
+
+  <div class="opt"><h3><i>A</i>正式站原樣</h3><p class="d">從導覽列下面整片展開、撐滿畫面寬度的奶油色大面板。<b>內容最完整</b>：服務分三個支柱＋工具入口四欄；案例有數字；洞察有主題分類和最新文章縮圖；關於我們有創辦人卡。</p>
+    <div class="shots two"><figure><figcaption>服務</figcaption><img src="compare/global/live-nav-服務.jpg" alt=""></figure><figure><figcaption>案例</figcaption><img src="compare/global/live-nav-案例.jpg" alt=""></figure><figure><figcaption>洞察</figcaption><img src="compare/global/live-nav-洞察.jpg" alt=""></figure><figure><figcaption>關於我們</figcaption><img src="compare/global/live-nav-關於我們.jpg" alt=""></figure></div></div>
+
+  <div class="opt"><h3><i>B</i>目前提案</h3><p class="d">毛玻璃小方框，從按鈕下方長出來。<b>但內容是我自己排的</b>：只有兩欄文字，沒有「團隊體質」分類、沒有「關於我們」下拉、沒有最新文章。</p>
+    <div class="shots two"><figure><figcaption>服務</figcaption><img src="compare/global/new-nav-services.jpg" alt=""></figure><figure><figcaption>案例</figcaption><img src="compare/global/new-nav-cases.jpg" alt=""></figure></div></div>
+
+  <div class="opt"><h3><i>C</i>內容照正式站，外觀與動作用 skill <span class="pick">我推薦</span></h3><p class="d">內容跟 A 一模一樣（四個下拉、每一欄、每一行說明都照抄）。差別：<b>毛玻璃面板</b>浮在頁面上（背後內容透得出來），<b>從你滑到的那個字的位置長出來</b>；在四個字之間移動時，<b>面板不會關掉重開，而是原地換內容、高度順順調整</b>——像 apple.com 的選單。<br>↓ 直接把滑鼠移到下面的「服務／案例／洞察／關於我們」試試看。</p>
+    <div class="demo" id="demo">
+      <img class="bgimg" src="https://lufe.world/images/hero/hero-poster-1600.webp" alt="">
+      <div class="mnav"><span class="brand">鹿飛 LUFÉ</span><div class="links" id="mlinks"><button type="button" data-k="svc" aria-expanded="false">服務</button><button type="button" data-k="cases" aria-expanded="false">案例</button><button type="button" data-k="ins" aria-expanded="false">洞察</button><button type="button" data-k="about" aria-expanded="false">關於我們</button></div><span class="cta">聊聊你的產品 →</span></div>
+      <div class="mega" id="mega">
+        <div class="pane cols4" data-k="svc">
+          <div><p class="lbl">01 · 產品適配性 · 勝率</p><a class="it"><b>支柱總覽</b><span>這個市場真的要你嗎？</span></a><a class="it"><b>市場機會評估</b><span>2–4 週搞清楚值不值得去</span></a><a class="it"><b>小批量產品測試</b><span>真實消費者用錢投票</span></a><a class="it"><b>MBCPR 決策框架</b><span>Go / No-Go 五維矩陣</span></a></div>
+          <div><p class="lbl">02 · 通路銷售力 · 潛力</p><a class="it"><b>支柱總覽</b><span>上得了架，還要賣得動</span></a><a class="it"><b>通路進入與媒合</b><span>北美連鎖 + 東南亞通路</span></a><a class="it"><b>展會與加盟佈局</b><span>食品 / 電子 / 加盟展</span></a><a class="it"><b>AI 集客引擎</b><span>SEO + AI 搜尋佈局</span></a></div>
+          <div><p class="lbl">03 · 團隊體質 · 成功率</p><a class="it"><b>支柱總覽</b><span>進得去，還要留得下</span></a><a class="it"><b>海外團隊建置</b><span>當地人才、落地合規</span></a><a class="it"><b>運營優化方案</b><span>已在海外的進階方案</span></a><a class="it"><b>海外營運系統五階</b><span>Notion + AI 數位員工</span></a></div>
+          <div><p class="lbl">工具與入口</p><a class="it"><b>2 分鐘處境比對</b><span>跟哪個案例最像</span></a><a class="it"><b>三支柱總覽</b><span>一頁看完整方法論</span></a><a class="it"><b>補助與活動</b><span>政府補助 + 現場紀錄</span></a><a class="it"><b>TradePilot 關稅工具</b><span>免費 HS code 查詢</span></a></div>
+        </div>
+        <div class="pane cols-cases" data-k="cases">
+          <div><p class="lbl">精選案例</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 24px">
+            <a class="case"><span class="n">6 個月</span><div><b>保健品怎麼從台灣走進北美 Costco？</b><span>食品 · 北美</span></div></a>
+            <a class="case"><span class="n">-15%</span><div><b>電子大廠怎麼靠產地轉移省下關稅？</b><span>電子 · 美國</span></div></a>
+            <a class="case"><span class="n">3x</span><div><b>知名皮鞋品牌為什麼改賣襪子大賺？</b><span>服飾 · 美國</span></div></a>
+            <a class="case"><span class="n">10 家</span><div><b>珍珠奶茶品牌怎麼在菲律賓成功落地？</b><span>飲品 · 東南亞</span></div></a></div></div>
+          <div><p class="lbl">分類瀏覽</p><p class="small">按產業</p><p style="font-size:14px;margin-bottom:10px">食品 · 電子 · 服飾 · 餐飲</p><p class="small">按市場</p><p style="font-size:14px">北美 · 東南亞</p><a class="more">看所有案例 →</a></div>
+        </div>
+        <div class="pane cols3" data-k="ins">
+          <div><p class="lbl">主題分類</p><a class="it"><b>🇵🇭 菲律賓</b></a><a class="it"><b>🇮🇩 印尼</b></a><a class="it"><b>🌏 東南亞趨勢</b></a><a class="it"><b>🌎 北美市場</b></a><a class="it"><b>🎯 出海實戰</b></a><a class="it"><b>🧠 企業體質</b></a></div>
+          <div><p class="lbl">其他內容</p><a class="it"><b>補助與活動</b><span>政府補助 + 現場紀錄</span></a><a class="it"><b>現場紀錄</b><span>活動、演講、媒體露出</span></a><a class="it"><b>TradePilot 關稅工具</b></a><a class="it"><b>鹿飛方法論</b></a><a class="it"><b>看所有文章</b></a></div>
+          <div class="latest"><p class="lbl">最新文章</p><img src="https://lufe.world/images/insights/tradepilot-tariff.jpg" alt=""><b>政府這次是認真的——海外參展補助從 4 萬跳到 16 萬，但你只有兩個月能動</b><span>2026-04-23 · 8 分鐘</span></div>
+        </div>
+        <div class="pane cols3" data-k="about">
+          <div><p class="lbl">認識鹿飛</p><a class="it"><b>創辦故事</b><span>我們為什麼做這件事</span></a><a class="it"><b>團隊組成</b><span>台灣核心團隊 + 全球節點</span></a><a class="it"><b>我們怎麼合作</b><span>你會得到什麼樣的陪跑</span></a></div>
+          <div><p class="lbl">立場與網絡</p><a class="it"><b>合作夥伴網絡</b><span>北美 / 東南亞 / 全球物流</span></a><a class="it"><b>品牌理念</b><span>我們相信的事</span></a><a class="it"><b>我們不做什麼</b><span>誠實的邊界</span></a></div>
+          <div><p class="lbl">創辦人</p><div class="founder"><span class="mono">AY</span><div><b>Aaron Yu</b><small style="color:var(--gold-ink)">鹿飛 LUFÉ 創辦人</small><small>42+ 年國際物流實戰</small><small>500+ 出口案件 · 30+ 國家</small></div></div></div>
+        </div>
+      </div>
+      <p class="demo-hint">← 滑鼠移到上面四個字之間來回移動</p>
+    </div></div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <h2>② 手機版選單（右上角三條線）</h2>
+  <p class="sub">手機上點選單按鈕後出現的東西。</p>
+  <div class="phones">
+    <div class="phone"><p class="cap">A 正式站：從上面蓋下來的奶油色面板，四大項點了才展開</p><div class="scr"><img src="compare/global/live-mmenu.jpg" alt=""></div></div>
+    <div class="phone"><p class="cap">B 目前提案：毛玻璃方框，所有連結一次全部列出（內容我自己排的）</p><div class="scr"><img src="compare/global/new-mmenu.jpg" alt=""></div></div>
+    <div class="phone"><p class="cap">C 新方案：內容照正式站、點了才展開；毛玻璃方框從按鈕長出來 <span class="pick">我推薦</span></p>
+      <div class="scr" id="phoneC">
+        <div class="pbar"><b>鹿飛 LUFÉ</b><span class="r"><span class="c">聊聊你的產品</span><button class="hb" type="button" id="hb" aria-expanded="false" aria-label="開啟選單"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 6h12M3 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></span></div>
+        <div class="pbg"><p style="color:var(--gold);font-size:12px;font-weight:600;margin-bottom:12px">產品適配性</p><h4>協助台灣企業<br>在北美與東南亞落地</h4><p style="margin-top:14px;font-size:13px;color:rgba(255,255,255,.7)">↑ 點右上角三條線</p></div>
+        <div class="pmenu" id="pmenu"></div>
+      </div></div>
+  </div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <h2>③ 頁尾</h2>
+  <p class="sub">每頁最下面的深藍區塊。</p>
+  <div class="shots two">
+    <figure><figcaption>A 正式站：服務（三支柱＋方法論）｜資源（7 項）｜聯絡（信箱、合作夥伴、台北市）</figcaption><img src="compare/global/live-footer.jpg" alt=""></figure>
+    <figure><figcaption>B 目前提案：服務（改列 7 個服務頁）｜案例與洞察｜資源｜聯絡（內容我自己排的）</figcaption><img src="compare/global/new-footer.jpg" alt=""></figure>
+  </div>
+  <div class="opt"><p class="d" style="margin-left:0"><b>我的看法：</b>頁尾內容以 <b>A 正式站為準</b>比較安全（那是你原本的網站架構）。B 唯一的好處是多連了幾個服務細頁，對 SEO 有一點點幫助（Google 比較容易找到那些頁）；如果想要這點好處，可以選「A＋補服務細頁連結」。<br>回覆：<b>A、B，或「A＋補連結」</b>。</p></div>
+</div></section>
+
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { spring, clamp, lerp, reduce, ICON } = LUFE;
+
+  /* C — one panel that stays open while you move between triggers; height and content morph */
+  const demo = document.getElementById('demo'), mega = document.getElementById('mega');
+  const btns = [...document.querySelectorAll('#mlinks button')], panes = [...mega.querySelectorAll('.pane')];
+  let cur = null, closeT = 0;
+  const reveal = spring(0, p => {
+    mega.style.visibility = p > .01 ? 'visible' : 'hidden';
+    mega.style.opacity = clamp(p * 1.5, 0, 1);
+    mega.style.transform = `scaleY(${lerp(.92, 1, p)})`;
+  }, .002);
+  const height = spring(0, h => { mega.style.height = h + 'px'; });
+  function open(k) {
+    clearTimeout(closeT);
+    const pane = panes.find(p => p.dataset.k === k), b = btns.find(x => x.dataset.k === k);
+    // Grow out of the word you pointed at (origin = trigger's x within the panel).
+    const mr = mega.getBoundingClientRect(), br = b.getBoundingClientRect();
+    if (!cur) mega.style.transformOrigin = `${br.left + br.width / 2 - mr.left}px 0`;
+    panes.forEach(p => p.classList.toggle('on', p === pane));
+    btns.forEach(x => x.setAttribute('aria-expanded', x === b));
+    const h = pane.scrollHeight;
+    if (!cur) height.jump(h); else height.to(h, { response: .35 });
+    reveal.to(1, { response: .35 });
+    cur = k;
+  }
+  function close() { closeT = setTimeout(() => { reveal.to(0, { response: .3 }); btns.forEach(x => x.setAttribute('aria-expanded', false)); cur = null; }, 180); }
+  btns.forEach(b => { b.addEventListener('mouseenter', () => open(b.dataset.k)); b.addEventListener('focus', () => open(b.dataset.k)); b.addEventListener('click', () => (cur === b.dataset.k ? close() : open(b.dataset.k))); });
+  document.getElementById('mlinks').addEventListener('mouseleave', close);
+  mega.addEventListener('mouseenter', () => clearTimeout(closeT));
+  mega.addEventListener('mouseleave', close);
+  demo.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  /* C — phone menu: live content, grouped, grows out of the button */
+  const groups = [
+    ['服務', ['市場評估', '產品測試', '通路進入', '海外落地', '運營優化方案', '鹿飛方法論', '服務總覽']],
+    ['案例', ['6 個月 保健品怎麼從台灣走進北美 Costco？', '-15% 電子大廠怎麼靠產地轉移省下關稅？', '3x 知名皮鞋品牌為什麼改賣襪子大賺？', '10 家 珍珠奶茶品牌怎麼在菲律賓成功落地？', '看所有案例']],
+    ['洞察', ['所有文章', '🌏 東南亞趨勢', '🌎 北美市場', '🎯 出海實戰', '🧠 企業體質', '現場紀錄', '補助與活動']],
+    ['關於我們', ['創辦故事', '團隊組成', '我們怎麼合作', '合作夥伴網絡', '我們不做什麼']],
+  ];
+  const pm = document.getElementById('pmenu'), hb = document.getElementById('hb');
+  pm.innerHTML = groups.map(([g, items]) => `<div class="g"><button type="button" aria-expanded="false">${g}<span class="chev" aria-hidden="true">${ICON.chevDown}</span></button><div class="sub"><div>${items.map(t => `<a>${t}</a>`).join('')}</div></div></div>`).join('') + '<a class="pc">聊聊你的產品 →</a>';
+  pm.querySelectorAll('.g > button').forEach(b => b.addEventListener('click', () => { const g = b.parentElement, o = !g.classList.contains('open'); g.classList.toggle('open', o); b.setAttribute('aria-expanded', o); }));
+  const pms = spring(0, p => { pm.style.visibility = p > .01 ? 'visible' : 'hidden'; pm.style.opacity = clamp(p * 1.4, 0, 1); pm.style.transform = `scale(${lerp(.6, 1, p)})`; }, .002);
+  hb.addEventListener('click', () => { const o = pms.target < .5; hb.setAttribute('aria-expanded', o); pms.to(o ? 1 : 0, { response: .35 }); });
+})();
+</script>
+</body>
+</html>

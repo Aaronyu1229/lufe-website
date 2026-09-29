@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>關於鹿飛 · 鹿飛 LUFÉ（流體介面提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+.about-hero { min-height: min(860px, 100svh); display: flex; align-items: end; }
+.about-hero .bgimg { object-position: 65% center; opacity: .34; }
+.about-hero .shade { background: linear-gradient(90deg, rgba(10,18,34,.94), rgba(10,18,34,.77) 56%, rgba(10,18,34,.32)); }
+.about-hero .wrap { padding-top: calc(var(--nav-h) + 72px); padding-bottom: 72px; }
+.about-hero .display { max-width: 760px; }
+.founder { max-width: 790px; margin-top: 42px; padding-left: 22px; border-left: 3px solid var(--gold); display: grid; gap: 20px; }
+@media (min-width: 700px) { .founder { grid-template-columns: 148px 1fr; align-items: center; padding-left: 28px; } }
+.portrait { width: 128px; aspect-ratio: 1; border-radius: 50%; object-fit: cover; object-position: center 18%; box-shadow: 0 18px 36px rgba(0,0,0,.28); outline: 1.5px solid rgba(212,168,92,.7); }
+@media (min-width: 700px) { .portrait { width: 148px; } }
+.founder .role { color: var(--gold); margin-top: 2px; font-weight: 600; }
+.founder .body { color: rgba(255,255,255,.66); margin-top: 10px; max-width: 510px; }
+.hero-stats { max-width: 790px; margin-top: 34px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.12); }
+.hero-stats .num { color: var(--gold); font-size: clamp(26px, 3vw, 32px); }
+.story { background: var(--navy); color: #fff; padding-top: 76px; overflow: hidden; }
+.story-intro { max-width: 760px; margin-bottom: 40px; }
+.story-intro .h2 { font-size: clamp(32px, 4.8vw, 56px); }
+.story-vp { padding-bottom: 12px; }
+.story-track > article { flex-basis: min(82vw, 660px); }
+.story-card { min-height: 100%; background: rgba(255,255,255,.055); border-radius: var(--radius-l); overflow: hidden; display: grid; box-shadow: inset 0 0 0 1px rgba(255,255,255,.09); }
+.story-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.story-card .copy { padding: 28px; }
+.story-card .n { color: var(--gold); font: 600 14px "Inter", sans-serif; margin-bottom: 20px; }
+.story-card .h2 { font-size: clamp(28px, 3vw, 40px); margin-bottom: 16px; }
+.story-card .body { color: rgba(255,255,255,.74); font-size: 17px; line-height: 1.9; }
+.story-card .body a { color: var(--gold); text-decoration: underline; text-underline-offset: 4px; }
+.section-intro { max-width: 760px; margin-bottom: 40px; }
+.section-intro .lead { margin-top: 16px; }
+.team-cards .card, .network-cards .card { min-height: 100%; }
+.role-icon, .network-icon { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: var(--gold-d); background: rgba(212,168,92,.1); margin-bottom: 22px; }
+.role-scale { color: var(--gold-d); font: 600 13px "Inter", "Noto Sans TC", sans-serif; margin-bottom: 8px; }
+.afterword { margin-top: 28px; font-size: 14px; color: var(--tx3); font-style: italic; }
+.workflow-vp { margin-top: 36px; }
+.workflow-track > article { flex-basis: min(82vw, 410px); }
+.work-card { padding: 30px; min-height: 100%; }
+.work-card .step { color: var(--gold-d); font: 600 32px/1 "Inter", sans-serif; letter-spacing: -.035em; }
+.work-card .h3 { margin: 22px 0 10px; }
+.work-card .body { font-size: 15px; }
+.network-banner { position: relative; min-height: 200px; overflow: hidden; border-radius: var(--radius-l); margin-bottom: 40px; display: flex; align-items: end; color: #fff; }
+.network-banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.network-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,27,48,.86), rgba(16,27,48,.44), transparent); }
+.network-banner .copy { position: relative; z-index: 1; padding: 26px; }
+.network-banner .eyebrow { color: var(--gold); margin-bottom: 8px; }
+.network-banner p { font-size: clamp(17px, 2vw, 21px); }
+.dont-list { display: grid; gap: 0; margin-top: 38px; }
+.dont-list article { padding: 26px 0 26px 18px; border-top: 1px solid var(--bd2); border-left: 4px solid rgba(179,38,30,.45); }
+.dont-list article:last-child { border-bottom: 1px solid var(--bd2); }
+.dont-list .h3 { margin-bottom: 8px; }
+.philosophy { position: relative; overflow: hidden; }
+.philosophy .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .2; }
+.philosophy .wash { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,27,48,.98), rgba(16,27,48,.84), rgba(16,27,48,.64)); }
+.philosophy .wrap { position: relative; }
+.beliefs { display: grid; gap: 12px; max-width: 760px; margin-top: 36px; }
+.belief { display: grid; grid-template-columns: 36px 1fr; gap: 16px; padding: 22px; border-radius: var(--radius-m); background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
+.belief .num { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--navy); font-size: 15px; }
+.belief .h3 { margin-bottom: 6px; }
+.belief .body { color: rgba(255,255,255,.68); font-size: 15px; }
+.teaching { width: min(100%, 680px); height: 180px; display: block; object-fit: cover; object-position: center 35%; margin: 56px auto 28px; border-radius: var(--radius-l); }
+.final-cta { max-width: 640px; margin: 0 auto; }
+.final-cta .lead { color: rgba(255,255,255,.65); margin: 10px 0 24px; }
+.final-cta .acts { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 699px) { .about-hero .wrap { padding-bottom: 58px; } .founder { margin-top: 34px; } .story { padding-top: 64px; } }
+</style>
+</head>
+<body data-page="about" data-hero="dark">
+<div data-lufe-nav></div>
+<main>
+  <section class="page-hero about-hero">
+    <img class="bgimg" src="https://lufe.world/images/about/about-hero-executive.jpg" alt="">
+    <div class="shade"></div>
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html">首頁</a><span aria-hidden="true">/</span><span>關於我們</span></div>
+      <h1 class="display">協助台灣企業<br>在北美與東南亞落地</h1>
+      <p class="lead">「別人幫你開車，我們幫你找路。」</p>
+      <div class="founder">
+        <img class="portrait" src="https://lufe.world/images/about/aaron-portrait.jpg" alt="Aaron Yu — 鹿飛 LUFÉ 創辦人">
+        <div><h2 class="h3">Aaron Yu</h2><p class="role">鹿飛 LUFÉ 創辦人</p><p class="body">從國際物流第一線走到全程跨境陪跑。四十二年，五百多個案子，三十多個國家——這些不是數字，是我看過多少產品走對、走錯、走回頭路的經驗值。</p></div>
+      </div>
+      <div class="stats hero-stats">
+        <div><div class="num">42+</div><small>年國際物流實戰</small></div>
+        <div><div class="num">500+</div><small>出口案件</small></div>
+        <div><div class="num">30+</div><small>國家覆蓋</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story" id="story">
+    <div class="wrap story-intro"><h2 class="h2">別人幫你開車，<br>我們幫你找路。</h2></div>
+    <div class="car-vp story-vp" id="storyVp" aria-roledescription="carousel" aria-label="鹿飛的故事"><div class="car-track story-track">
+      <article class="story-card"><img src="https://lufe.world/images/about/aaron-workshop.jpg" alt="Aaron 在工作坊上分享跨境實戰觀察"><div class="copy"><p class="n">01</p><h2 class="h2">看到的問題</h2><p class="body">在國際物流業做了十多年，我看到太多好產品倒在跨境這條路上——不是產品不好，是沒人幫他們把路走通。找顧問只做評估、找貿易商只管買賣、找物流公司只跑運輸、找代操公司只買工具。每一段都有人做，但沒有人幫你串起來。企業自己得當專案經理，在三四家公司之間來回溝通，效率極低，成本極高。</p></div></article>
+      <article class="story-card"><img src="https://lufe.world/images/about/story-belief-compass.jpg" alt="羅盤放在世界地圖上 — 有計畫的探索"><div class="copy"><p class="n">02</p><h2 class="h2">相信的事</h2><p class="body">我相信每一家有好產品的台灣公司，都值得試試走向海外。不是每個產品都適合，但至少應該有人幫你搞清楚。跨境不應該是一場冒險，而應該是一次有計畫的探索——用三個維度判斷：這個市場的勝率（產品適配）、潛力（通路銷售）、成功率（團隊體質）。有人帶路、有框架可用，風險就小了一半。</p></div></article>
+      <article class="story-card"><img src="https://lufe.world/images/about/aaron-news-interview.jpg" alt="台視新聞訪問躍馬企業市場經理 — 真實業界背書"><div class="copy"><p class="n">03</p><h2 class="h2">做了什麼</h2><p class="body">所以我創立了鹿飛——一個用三支柱方法論幫台灣企業落地的跨境團隊。從產品適配、通路銷售到團隊體質，三個支柱全程自營；底下還有<a href="https://jumping.group" target="_blank" rel="noopener">躍馬企業</a> 42 年的國際物流實戰當基礎。主要戰場是北美和東南亞——兩個地方我們每個月都真的有人在現場。別人幫你開車，我們幫你找路。</p></div></article>
+    </div></div>
+  </section>
+
+  <section class="cream" id="team">
+    <div class="wrap">
+      <div class="section-intro"><h2 class="h2">不是 Aaron 一個人，<br>是一個小而精的團隊 + 全球節點</h2><p class="lead">我們刻意不做大型顧問公司。規模保持在能讓創辦人親自過目每一個案子，同時又有足夠的專業分工與在地夥伴支援。</p></div>
+      <div class="grid-3 team-cards">
+        <article class="card pad"><div class="role-icon" aria-hidden="true">◌</div><p class="role-scale">5 人</p><h3 class="h3">台灣核心團隊</h3><p class="body" style="margin-top:10px">創辦人 Aaron 領軍，專案經理、供應鏈顧問、合規法規專家、資料分析師各司其職。每個案子都有固定窗口，不會在多家公司之間被踢皮球。</p></article>
+        <article class="card pad"><div class="role-icon" aria-hidden="true">◎</div><p class="role-scale">越南 / 菲律賓 / 泰國</p><h3 class="h3">東南亞在地夥伴</h3><p class="body" style="margin-top:10px">長期合作的當地顧問與代理，熟悉當地法規、清關、通路生態。你不用自己飛一趟去找人。</p></article>
+        <article class="card pad"><div class="role-icon" aria-hidden="true">□</div><p class="role-scale">Costco / Amazon / Walmart</p><h3 class="h3">北美通路關係</h3><p class="body" style="margin-top:10px">十年累積的直接對接窗口。不是拿名片介紹，是能真的把你的產品推進買手會議的關係。</p></article>
+      </div>
+      <p class="afterword">* 我們的定位是「小型精品 + 全球網絡」——不是萬人顧問公司，也不是 solo freelancer。</p>
+    </div>
+  </section>
+
+  <section id="how-we-work">
+    <div class="wrap">
+      <div class="section-intro"><h2 class="h2">從第一次對話到交付，四個階段</h2><p class="lead">我們的流程很清楚——每一步你都知道接下來會發生什麼、要做什麼、需要多久。</p></div>
+      <div class="car-vp workflow-vp" id="workflowVp" aria-roledescription="carousel" aria-label="合作流程"><div class="car-track workflow-track">
+        <article class="card work-card"><p class="step">01</p><h3 class="h3">第一次對話（免費）</h3><p class="body">30–60 分鐘，我們聽你講目前的狀況、疑問、顧慮。不推銷、不承諾。聊完後如果你覺得不適合，就直接結束；適合就進入下一步。</p></article>
+        <article class="card work-card"><p class="step">02</p><h3 class="h3">範圍確認與報價</h3><p class="body">我們根據你的需求，給你一份明確的服務範圍、時程、報價。所有數字都透明，沒有隱藏費用。你有 1 週時間考慮。</p></article>
+        <article class="card work-card"><p class="step">03</p><h3 class="h3">Kickoff 與執行</h3><p class="body">簽約後兩週內 kickoff。每週或雙週一次進度同步會，中間有問題隨時能直接 LINE 找到負責人——不用透過業務轉達。</p></article>
+        <article class="card work-card"><p class="step">04</p><h3 class="h3">交付與後續</h3><p class="body">階段結束時交付完整文件與結論。我們會告訴你是否需要進入下一階段，以及為什麼。如果不需要，我們會誠實地說「就到這」。</p></article>
+      </div></div>
+    </div>
+  </section>
+
+  <section id="network">
+    <div class="wrap">
+      <div class="network-banner"><img src="https://lufe.world/images/about/network-saigon-night.jpg" alt="西貢金融塔 Bitexco 夜景 — LUFÉ 東南亞網絡的象徵"><div class="copy"><p class="eyebrow">全球節點</p><p>30+ 國家 · 500+ 出口案件 · 10 年實戰</p></div></div>
+      <div class="section-intro"><h2 class="h2">你不只是找到一家公司<br>而是接上一整個網絡</h2><p class="lead">十年累積的通路關係、在地夥伴和科技工具，全部為你的跨境計畫服務。</p></div>
+      <div class="grid-2 network-cards">
+        <article class="card pad"><div class="network-icon" aria-hidden="true">▭</div><h3 class="h3">北美通路</h3><p class="body" style="margin-top:10px">與 Costco、Walmart、Amazon 等主流通路的直接合作關係，幫你省去一層層中間人。</p></article>
+        <article class="card pad"><div class="network-icon" aria-hidden="true">◎</div><h3 class="h3">東南亞團隊</h3><p class="body" style="margin-top:10px">菲律賓、越南、泰國在地夥伴，從法規到營運都有人幫你搞定，不用自己摸索。</p></article>
+        <article class="card pad"><div class="network-icon" aria-hidden="true">▦</div><h3 class="h3">國際物流</h3><p class="body" style="margin-top:10px">覆蓋 30+ 國家的物流網絡，從報關、倉儲到最後一哩配送，全程可追蹤。</p></article>
+        <article class="card pad"><div class="network-icon" aria-hidden="true">✓</div><h3 class="h3">科技工具</h3><p class="body" style="margin-top:10px">自主開發的 TradePilot 關稅查詢工具，2,400+ 用戶使用中。用科技降低跨境的資訊門檻。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cream" id="what-we-dont-do">
+    <div class="wrap wrap-narrow">
+      <div class="section-intro"><h2 class="h2">我們不做什麼</h2><p class="lead">專業分工比萬能重要。我們誠實告訴你哪些事不該找我們——這樣你才知道什麼時候該找我們。</p></div>
+      <div class="dont-list">
+        <article><h3 class="h3">不做純貿易買賣</h3><p class="body">我們不賺中間價差，也不替你採購。我們的收入來自服務費，而不是產品加價。這讓我們的建議可以完全站在你的角度。</p></article>
+        <article><h3 class="h3">不做純物流運輸</h3><p class="body">物流執行我們會串接，但不是我們的主業。市面上有很多優秀的物流公司，我們不搶他們的飯碗——只會幫你找到對的那家。</p></article>
+        <article><h3 class="h3">不拿股權、不投資</h3><p class="body">我們不參股、不當股東。這是為了避免利益綁定扭曲判斷——當我們拿股權，你就不會聽到我們說「這案子不該做」。</p></article>
+        <article><h3 class="h3">不做行銷代操</h3><p class="body">行銷策略我們會一起規劃，但日常的廣告投放、社群運營、KOL 合作這些執行工作，建議交給專業的 marketing agency。</p></article>
+        <article><h3 class="h3">不賣課、不收招生費</h3><p class="body">我們不辦「出海大師班」、不賣線上課、不做付費講座招生。我們的工作是陪你實戰，不是做知識付費。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark philosophy" id="philosophy">
+    <img class="bg" src="https://lufe.world/images/about/philosophy-compass.jpg" alt=""><div class="wash"></div>
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow">品牌理念</p><h2 class="h2" style="margin-top:12px">我們相信的事</h2>
+      <div class="beliefs">
+        <article class="belief"><span class="num">1</span><div><h3 class="h3">好產品值得被世界看見</h3><p class="body">台灣有太多好產品，只是缺一條順暢的路。我們的工作就是幫你找到那條路。</p></div></article>
+        <article class="belief"><span class="num">2</span><div><h3 class="h3">全程陪跑，不只做其中一段</h3><p class="body">從評估到落地，你不需要找三家公司才能走完一條路。一個團隊，一條線，全程搞定。</p></div></article>
+        <article class="belief"><span class="num">3</span><div><h3 class="h3">用數據做決策，不靠猜</h3><p class="body">每一步都有數據支撐。我們不會叫你「先試試看」，而是先幫你搞清楚值不值得試。</p></div></article>
+      </div>
+      <img class="teaching" src="https://lufe.world/images/about/aaron-teaching.jpg" alt="Aaron 在工作坊現場陪學員操作 — 陪跑的日常">
+      <div class="center final-cta"><h3 class="h3">想認識我們？聊聊你的跨境計畫</h3><p class="lead">不確定該不該跨境？先聊聊，不收費、不承諾、不賣課。</p><div class="acts"><button class="btn btn-gold" type="button" data-chat>聊聊你的產品</button><a class="btn btn-glass" href="assess.html">先做 2 分鐘處境比對</a></div></div>
+    </div>
+  </section>
+</main>
+<div data-lufe-footer></div>
+
+<template id="lufe-notes">
+  <li><b>故事改成大字與留白</b>：把「看到、相信、做到」留給閱讀節奏，讓重要經驗先被看懂。</li>
+  <li><b>三段故事與合作流程可左右推動</b>：用手拖或甩一下就停在下一張，對應它們原本的前後順序。</li>
+  <li><b>資歷數字固定呈現</b>：直接看見 42+、500+、30+，沒有會分散注意力的跳動效果。</li>
+  <li><b>團隊與網絡完整放在卡片裡</b>：每張卡片已經能看完內容，不需要再多點一步才知道重點。</li>
+  <li><b>圖片只支撐內容</b>：保留人物、羅盤與在地網絡的實景，沒有額外自動播放或捲動特效。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { carousel } = LUFE;
+  carousel(document.getElementById('storyVp'));
+  carousel(document.getElementById('workflowVp'));
+})();
+</script>
+</body>
+</html>

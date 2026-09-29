@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>市場評估 · 鹿飛 LUFÉ（方正版提案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+:root { --stage: #2F5A70; --stage-soft: rgba(58,107,132,.07); --stage-line: rgba(47,90,112,.26); --stage-hero: #3A6B84; }
+.stage-hero { background:var(--navy); color:#fff; padding:calc(var(--nav-h) + 72px) 0 80px; position:relative; overflow:hidden; }
+.stage-hero .bgimg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.3; }.stage-hero .shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(10,18,34,.9),rgba(10,18,34,.52)); }.stage-hero .wrap { position:relative; }.crumbs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; color:rgba(255,255,255,.6); font-size:13px; }.crumbs a:hover { color:#fff; }.stage-kicker { color:var(--stage-hero); font-size:13px; font-weight:600; letter-spacing:.06em; margin-bottom:14px; }.stage-hero .lead { color:rgba(255,255,255,.78); max-width:720px; margin-top:20px; }.hero-line { color:var(--stage-hero); max-width:700px; margin-top:26px; font-size:17px; line-height:1.8; }
+.stage-head { max-width:900px; }.stage-head .lead { max-width:680px; margin-top:16px; }.purpose { display:grid; gap:26px; align-items:start; margin-top:32px; }.stage-marker { width:128px; height:128px; display:grid; place-items:center; color:var(--stage); background:var(--stage-soft); border:1px solid var(--stage-line); font-size:62px; line-height:1; }.purpose .body { max-width:720px; }.accent { color:var(--stage); }
+.outcomes { display:grid; gap:10px; margin-top:32px; list-style:none; }.outcomes li { display:grid; grid-template-columns:26px 1fr; gap:12px; align-items:start; padding:16px; background:#fff; border:1px solid var(--bd); color:var(--tx); line-height:1.7; }.check { width:24px; height:24px; display:grid; place-items:center; color:var(--stage); background:var(--stage-soft); border-radius:0; font-size:15px; font-weight:700; }.deliver-head { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:42px 0 2px; }.deliver-head .h3 { color:var(--gold-ink); }.stage-card { min-height:210px; padding:28px; border-left:4px solid rgba(212,168,92,.75); }.stage-card p { margin-top:12px; color:var(--tx2); font-size:14px; line-height:1.8; }.carousel-actions { display:flex; gap:8px; }.car-track .stage-card { flex-basis:clamp(270px,78vw,390px); }
+.process-title { color:var(--gold); }.process .qa .n { color:var(--gold); }.process .qa .q { display:block; color:#fff; }.step-week { display:block; margin-bottom:5px; color:var(--gold); font-size:13px; font-weight:600; }.process .qa .ans > div { color:rgba(255,255,255,.74); }.process .qa li { position:relative; margin:0 0 10px 16px; line-height:1.8; }.process .qa li::marker { color:var(--gold); }
+.readiness { display:grid; gap:12px; margin-top:32px; }.readiness li { display:grid; grid-template-columns:22px 1fr; gap:11px; padding:16px; background:#fff; border:1px solid var(--bd); border-left:4px solid #35a66f; color:var(--tx); list-style:none; line-height:1.65; }.readiness li.warn { border-left-color:#d29a24; }.sign { width:20px; height:20px; display:grid; place-items:center; border-radius:0; background:#35a66f; color:#fff; font-size:12px; font-weight:700; }.warn .sign { background:#d29a24; }.risk-head { margin-top:52px; }.risk-grid { display:grid; gap:14px; margin-top:24px; }.risk-card { min-height:124px; padding:24px 26px; border-left:4px solid rgba(179,38,30,.7); }.risk-card .h4 { color:#a32f29; }.risk-card .plus { margin-top:auto; margin-left:auto; background:#a32f29; font-size:20px; }.xp-body .risk-desc { color:var(--tx2); font-size:17px; line-height:1.9; }
+.faq-list { margin-top:32px; }.faq-list .qa .q { color:var(--tx); }.case-card { margin-top:32px; overflow:hidden; }.case-card .case-media { aspect-ratio:16/9; overflow:hidden; background:var(--cream-d); }.case-card .case-media img { width:100%; height:100%; object-fit:cover; }.case-copy { padding:28px; }.case-copy .num { color:var(--gold-ink); font-size:48px; line-height:1; margin:16px 0 12px; }.case-copy .body { margin:12px 0 20px; }.case-copy .link { color:var(--gold-ink); }.stage-cta .lead { max-width:520px; margin:16px auto 34px; }.stage-cta .acts { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }.stage-nav { display:grid; grid-template-columns:1fr 1fr; gap:14px; }.stage-nav a { min-height:132px; padding:22px; }.stage-nav a:last-child { text-align:right; }.stage-nav .small { margin-bottom:6px; }.stage-nav .h4 { color:var(--tx); }.stage-nav a:hover .h4 { color:var(--stage); }
+@media (min-width:700px) { .stage-hero { padding-top:calc(var(--nav-h) + 104px); padding-bottom:104px; }.purpose { grid-template-columns:148px 1fr; gap:40px; }.stage-marker { width:148px; height:148px; font-size:72px; }.stage-content { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }.outcomes { margin-top:0; }.deliver-head { margin-top:0; }.risk-grid { grid-template-columns:repeat(3,1fr); }.case-card { display:grid; grid-template-columns:1.15fr 1fr; }.case-card .case-media { aspect-ratio:auto; min-height:290px; }.stage-nav { gap:24px; }.stage-nav a { padding:28px; } }
+
+/* Grid items default to min-width:auto and can blow past the viewport on phones. */
+.two > *, .grid-2 > *, .grid-3 > *, .grid-4 > * { min-width: 0; }
+
+.stage-content > * { min-width: 0; }
+</style>
+</head>
+<body data-page="services-market-assessment" data-hero="dark">
+<div data-lufe-nav></div>
+<main id="stageMain"></main>
+<div data-lufe-footer></div>
+<template id="lufe-notes">
+  <li><b>交付物改成可左右查看</b>：用手拖、滑鼠拖或按左右鈕都能逐張看；甩得快會多滑一些，最後停在卡片邊緣。</li>
+  <li><b>每個工作步驟先看標題</b>：想知道細節再按開，避免一開始被長清單淹沒；關掉時仍回到同一列。</li>
+  <li><b>喊停訊號只在需要時展開</b>：卡片本身先說清楚風險，按下才看判斷理由，讓重要警告容易找、不搶走全部注意力。</li>
+  <li><b>上一與下一階段位置固定</b>：回頭永遠在左、往前永遠在右，閱讀路徑不用重新猜。</li>
+  <li><b>刻意沒做</b>：數字跳動、捲動淡入、自動彈窗。</li>
+</template>
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { carousel, expand, initQA, ICON, esc } = LUFE;
+  const stage = {
+    num: "01", title: "市場評估", subtitle: "在你花大錢之前，先花小錢搞清楚", timeline: "2–4 週", heroLine: "值不值得去，是可以算得出來的。", image: "https://lufe.world/images/services/stage-01-map-assess.jpg",
+    purpose: "多數企業跨境失敗不是因為產品不好，而是因為沒把「值不值得去」這件事算清楚就上路。這個階段我們用數據回答五個問題：這個市場夠大嗎？門檻夠低嗎？你打得過競爭嗎？利潤撐得起成本嗎？法規允許嗎？",
+    outcomes: ["一份明確的 Go / No-Go 建議，附上數據來源", "目標市場的需求缺口與競爭密度地圖", "進入該市場的合規與認證清單（含成本估算）", "預估的到岸成本結構與毛利空間", "如果不進，什麼條件改變後可以再考慮"],
+    deliverables: [["市場機會評估報告", "30–50 頁，涵蓋市場規模、競品分析、定位建議、進入門檻。資料來源都可追溯。"], ["Go / No-Go 決策摘要", "一頁 A4 給你高層開會用的結論版，含五維評分矩陣。"], ["成本結構試算表", "從工廠到貨架的每一筆成本，包含關稅、物流、通路佣金、合規支出。"], ["下一步行動建議", "如果 Go：列出接下來 3 個月的關鍵任務。如果 No-Go：列出 6–12 個月後可重新評估的觸發條件。"]],
+    process: [["Week 1", "需求訪談 + 資料蒐集", ["與你的團隊 1–2 次深度訪談，釐清目標與現有資源", "蒐集目標市場的公開數據、進口紀錄、競品 listing", "盤點你現有產品的規格、成本、認證狀態"]], ["Week 2", "市場結構與競品分析", ["建立目標市場的需求與供給圖", "Top 10 競品的定價、通路、賣點拆解", "初步識別差異化切入點"]], ["Week 3", "合規與成本試算", ["法規盤點：認證、標示、進口限制", "到岸成本試算（FOB → 關稅 → 物流 → 通路佣金 → 零售價）", "毛利空間與定價帶建議"]], ["Week 4", "Go / No-Go 報告與決策會議", ["完整報告交付", "與你的團隊 1 次決策會議，回答所有疑問", "如果 Go，輸出下一階段（產品測試）的執行計畫"]]],
+    readiness: [[true, "你有一個已在國內市場驗證過的產品，不是概念"], [true, "你願意在正式投入前先花小錢搞清楚值不值得"], [true, "決策權在你或你能直接對話的高層"], [false, "你已經決定非做不可，只是想要一份報告背書"], [false, "你的產品還在早期原型階段，尚未出貨"]],
+    risks: [["市場規模太小", "如果目標市場的可觸達需求無法支撐你回收初期投入，我們會直接告訴你「這不是你的市場」。"], ["合規成本超過預期毛利", "有些市場的認證成本極高（例如部分醫材在歐盟），我們會試算如果做完 CE，毛利還剩多少。"], ["你的競品護城河太深", "如果前 3 大競品合計超過 70% 市場份額且品牌老牌，我們會建議你換市場而不是正面對決。"]],
+    faqs: [["如果評估結果是 No-Go，錢花得值得嗎？", "絕對值得。一份 No-Go 報告替你省下後面 50–500 萬的錯誤投入。我們看過太多企業沒做評估直接衝，半年後產品卡在港口或毛利被吃光，那時候後悔才是真的貴。"], ["報告會告訴我該用什麼品牌名嗎？", "不會。品牌命名屬於行銷策略範疇，不是市場評估。我們會告訴你市場需要什麼「類型」的品牌定位（例如：高端養生 vs 大眾日用），但具體 naming 建議你找專業的 branding agency。"], ["如果我只想評估一個市場，可以縮短到 1–2 週嗎？", "可以。如果你只要單一市場的快速掃描版（約 15 頁報告），我們有 1 週的 quick scan 版本。但我們不建議——資訊密度會降到無法支持真正的決策。"]]
+  };
+  const related = { tags: ["食品", "北美"], num: "6 個月", title: "保健品怎麼從台灣走進北美 Costco？", summary: "從 FDA 註冊到通路談判，6 個月打進全球最大會員制零售通路。完整走過評估、測試、通路進入的每一步。", image: "https://lufe.world/images/cases/detail/costco-health-hero.jpg", href: "case.html?slug=costco-health" };
+  const prev = { href: "services.html", label: "← 回服務總覽", title: "看完整四階段路徑", sub: "" };
+  const next = { href: "services-product-testing.html", label: "下一階段 →", title: "02 產品測試", sub: "4–6 週" };
+  const qa = (item, i, open = false) => `<div class="qa${open ? " open" : ""}"><button type="button"><span class="n">${String(i + 1).padStart(2, "0")}</span><span><span class="step-week">${esc(item[0])}</span><span class="q">${esc(item[1])}</span></span><span class="chev" aria-hidden="true">${ICON.chevDown}</span></button><div class="ans"><div><ul>${item[2].map(x => `<li>${esc(x)}</li>`).join("")}</ul></div></div></div>`;
+  const faq = (item, i) => `<div class="qa${i === 0 ? " open" : ""}"><button type="button"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="q">${esc(item[0])}</span><span class="chev" aria-hidden="true">${ICON.chevDown}</span></button><div class="ans"><div><p class="body">${esc(item[1])}</p></div></div></div>`;
+  document.getElementById("stageMain").innerHTML = `
+    <section class="stage-hero"><img class="bgimg" src="${stage.image}" alt=""><div class="shade"></div><div class="wrap"><nav class="crumbs" aria-label="麵包屑"><a href="services.html">服務</a><span aria-hidden="true">/</span><span>階段 ${stage.num}</span></nav><p class="stage-kicker">STAGE ${stage.num} · ${stage.timeline}</p><h1 class="h1">${stage.title}</h1><p class="lead">${stage.subtitle}</p><p class="hero-line">${stage.heroLine}</p></div></section>
+    <section><div class="wrap"><div class="stage-head"><h2 class="h2">為什麼要有<span class="accent">這個階段</span></h2><div class="purpose"><div class="stage-marker num">${stage.num}</div><p class="body">${stage.purpose}</p></div></div></div></section>
+    <section class="cream"><div class="wrap"><div class="stage-head"><h2 class="h2">這階段結束時，<span class="accent">你會拿到什麼</span></h2><p class="lead">不是抽象承諾，分成兩層：你會「知道」什麼，以及你會實際「拿到」什麼。</p></div><div class="stage-content" style="margin-top:40px"><div><h3 class="h3 accent" style="margin-bottom:16px">你會知道什麼</h3><ul class="outcomes">${stage.outcomes.map(x => `<li><span class="check" aria-hidden="true">✓</span><span>${esc(x)}</span></li>`).join("")}</ul></div><div><div class="deliver-head"><h3 class="h3">你會實際拿到</h3><div class="carousel-actions"><button class="round" type="button" id="deliverPrev" aria-label="上一份交付物"></button><button class="round" type="button" id="deliverNext" aria-label="下一份交付物"></button></div></div><div class="car-vp" id="deliverVp" aria-roledescription="carousel" aria-label="你會實際拿到"><div class="car-track">${stage.deliverables.map(d => `<article class="card stage-card"><h4 class="h4">${esc(d[0])}</h4><p>${esc(d[1])}</p></article>`).join("")}</div></div></div></div></div></section>
+    <section class="dark process"><div class="wrap-narrow"><div class="stage-head"><h2 class="h2"><span class="process-title">${stage.timeline}</span> 的實際節奏</h2><p class="lead">每個階段我們都有明確的週進度，不會讓你不知道現在在做什麼。</p></div><div style="margin-top:40px">${stage.process.map((x, i) => qa(x, i)).join("")}</div></div></section>
+    <section class="cream"><div class="wrap-narrow"><div class="stage-head"><h2 class="h2">你<span class="accent">是不是該</span>進這個階段</h2><p class="lead">兩個自我檢視：第一個看你準備好了沒，第二個看有沒有該先喊停的訊號。</p></div><h3 class="h3" style="color:#26784f;margin-top:34px">準備好的訊號</h3><ul class="readiness">${stage.readiness.map(r => `<li class="${r[0] ? "" : "warn"}"><span class="sign" aria-hidden="true">${r[0] ? "✓" : "!"}</span><span>${esc(r[1])}</span></li>`).join("")}</ul><div class="risk-head"><h3 class="h3" style="color:#a32f29">如果遇到這些，我們會喊停</h3><div class="risk-grid">${stage.risks.map(r => `<button class="card risk-card" type="button" data-risk-title="${esc(r[0])}" data-risk-desc="${esc(r[1])}"><h4 class="h4">${esc(r[0])}</h4><span class="plus" aria-hidden="true">+</span></button>`).join("")}</div></div></div></section>
+    <section><div class="wrap-narrow"><h2 class="h2">這階段最常被問到的問題</h2><div class="faq-list">${stage.faqs.map(faq).join("")}</div></div></section>
+    <section class="cream"><div class="wrap-narrow"><h2 class="h2">這階段在真實案子裡<span class="accent">長什麼樣</span></h2><a class="card case-card" href="${related.href}"><div class="case-media"><img src="${related.image}" alt="${related.title}"></div><div class="case-copy"><div>${related.tags.map((t, i) => `<span class="tag" style="margin-right:6px;${i ? "color:var(--gold-ink);background:rgba(212,168,92,.14)" : ""}">${t}</span>`).join("")}</div><div class="num">${related.num}</div><h3 class="h3">${related.title}</h3><p class="body">${related.summary}</p><span class="link">看完整案例 <span class="chev" aria-hidden="true">→</span></span></div></a></div></section>
+    <section class="dark center stage-cta"><div class="wrap"><h2 class="h2">準備好進入<span class="accent">${stage.title}</span>了嗎？</h2><p class="lead">聊聊你的狀況，我們會告訴你這個階段對你是不是現在最該做的事。</p><div class="acts"><button class="btn btn-gold" type="button" data-chat>聊聊你的產品 →</button><a class="btn btn-glass" href="assess.html">先做 2 分鐘評估 →</a></div></div></section>
+    <section class="tight"><div class="wrap"><nav class="stage-nav" aria-label="服務階段"><a class="card" href="${prev.href}"><p class="small">${prev.label}</p><h3 class="h4">${prev.title}</h3>${prev.sub ? `<p class="small" style="margin-top:5px">${prev.sub}</p>` : ""}</a><a class="card" href="${next.href}"><p class="small">${next.label}</p><h3 class="h4">${next.title}</h3><p class="small" style="margin-top:5px">${next.sub}</p></a></nav></div></section>`;
+  const nav = document.getElementById("nav"), hero = document.querySelector("#stageMain > section");
+  const updateNav = () => nav.classList.toggle("solid", hero.getBoundingClientRect().bottom <= 56);
+  addEventListener("scroll", updateNav, { passive: true }); addEventListener("resize", updateNav); updateNav();
+  const deliverPrev = document.getElementById("deliverPrev"), deliverNext = document.getElementById("deliverNext");
+  deliverPrev.innerHTML = ICON.left; deliverNext.innerHTML = ICON.right;
+  carousel(document.getElementById("deliverVp"), { prev: deliverPrev, next: deliverNext });
+  document.querySelectorAll("[data-risk-title]").forEach(card => card.addEventListener("click", () => expand(card, { html: `<h2 class="h2" id="xpTitle">${card.dataset.riskTitle}</h2><p class="risk-desc" style="margin-top:22px">${card.dataset.riskDesc}</p>` })));
+  initQA(document.getElementById("stageMain"));
+})();
+</script>
+</body>
+</html>

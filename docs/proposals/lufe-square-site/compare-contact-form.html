@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>聯絡表單三案對照</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+TC:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lufe.css">
+<style>
+body { background: #fff; }
+.top { background: var(--navy); color: #fff; padding: 40px 0 32px; }
+.top h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 650; }
+.top p { color: rgba(255,255,255,.75); margin-top: 10px; max-width: 900px; }
+.top .how { margin-top: 16px; background: rgba(255,255,255,.08); padding: 14px 16px; font-size: 15px; }
+.top .how b { color: var(--gold); }
+.variant { padding: 64px 0; border-bottom: 1px solid var(--bd2); }
+.variant.cream { background: var(--cream); }
+.vhead { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 8px; }
+.vhead i { font-style: normal; flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; background: var(--navy); color: var(--gold); font-weight: 700; font-size: 18px; }
+.vhead h2 { font-size: 24px; font-weight: 650; line-height: 1.3; }
+.why { color: var(--tx2); margin: 0 0 8px 54px; max-width: 760px; }
+.why li { margin-left: 18px; }
+.new { display: inline-block; font-size: 11px; font-weight: 700; color: var(--ember); border: 1px solid currentColor; padding: 0 5px; margin-left: 4px; vertical-align: 2px; }
+.stage { margin-top: 28px; }
+.sec-intro { text-align: center; max-width: 620px; margin: 0 auto 28px; }
+.sec-intro .eyebrow { margin-bottom: 10px; } .sec-intro .lead { margin-top: 10px; font-size: 16px; }
+.formbox { background: #fff; box-shadow: 0 0 0 1px var(--bd); padding: 28px; }
+.row2 { display: grid; gap: 0 16px; } @media (min-width: 700px) { .row2 { grid-template-columns: 1fr 1fr; } }
+.note { font-size: 13px; color: var(--tx3); text-align: center; margin-top: 12px; }
+.done { display: none; text-align: center; padding: 24px 8px; }
+.sent .done { display: block; } .sent form, .sent .steps-ui { display: none; }
+.done .summary { text-align: left; margin: 18px auto 0; max-width: 420px; font-size: 14px; color: var(--tx2); background: var(--cream); padding: 12px 14px; }
+.done .summary b { color: var(--tx); }
+/* Current (B) */
+.w-narrow { max-width: 720px; margin: 0 auto; }
+/* C: split — reassurance left, short form right */
+.split { display: grid; gap: 24px; } @media (min-width: 900px) { .split { grid-template-columns: 5fr 7fr; align-items: start; } .after { position: sticky; top: 90px; } }
+.after { background: var(--navy); color: #fff; padding: 28px; }
+.after h3 { font-size: 20px; font-weight: 650; margin-bottom: 18px; }
+.after ol { list-style: none; display: grid; gap: 16px; }
+.after li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; color: rgba(255,255,255,.8); line-height: 1.7; font-size: 15px; }
+.after li span { display: grid; place-items: center; width: 28px; height: 28px; background: rgba(212,168,92,.18); color: var(--gold); font-weight: 700; font-size: 13px; }
+.more { border-top: 1px solid var(--bd2); margin: 6px 0 18px; }
+.more > button { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; font-weight: 600; font-size: 15px; color: var(--sky); }
+.more > button:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+.more .chev { transition: transform 450ms var(--ease-spring); display: inline-grid; }
+.more.open .chev { transform: rotate(180deg); }
+.more .ans { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 450ms var(--ease-spring); }
+.more.open .ans { grid-template-rows: 1fr; }
+.more .ans > div { overflow: hidden; }
+.more .ans > div > div { padding-top: 4px; }
+.count { font-size: 13px; color: var(--tx3); font-weight: 500; }
+/* D: steps on a horizontal track */
+.steps-ui .prog { height: 3px; background: var(--bd2); margin-bottom: 22px; overflow: hidden; }
+.steps-ui .prog i { display: block; height: 100%; background: var(--gold); transform-origin: left; transform: scaleX(.333); }
+.steps-ui .meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--tx3); margin-bottom: 6px; }
+.vp { overflow: hidden; }
+.track { display: flex; will-change: transform; }
+.step { flex: 0 0 100%; padding: 2px; }
+.step h3 { font-size: 22px; font-weight: 650; margin-bottom: 4px; }
+.step .sub { color: var(--tx2); font-size: 15px; margin-bottom: 20px; }
+.nav2 { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+@media (max-width: 520px) { .nav2 .btn { padding: 12px 16px; font-size: 15px; } }
+.nav2 .left { display: flex; gap: 8px; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>聯絡頁「完整表單」：三個方案</h1>
+  <p>三個方案的欄位都一樣（照正式站：姓名、Email、你想問什麼必填；公司名稱、電話、你的產品、目前出海階段選填）。差別在<b style="color:#fff">一次給多少、順序怎麼排、送出前後讓人多安心</b>。每一個都可以實際填填看、按送出（不會真的送出）。</p>
+  <div class="how">標了 <span class="new" style="color:var(--gold)">新文字</span> 的地方，是正式站沒有、我為了這個方案新寫的字，你可以改。其餘文字都照正式站。回覆：<b>B、C 或 D</b>（也可以說「C 但是…」）。</div>
+</div></header>
+
+<!-- B: what the square proposal has now -->
+<section class="variant">
+  <div class="wrap">
+    <div class="vhead"><i>B</i><h2>目前的提案：一張表全部攤開</h2></div>
+    <ul class="why"><li>跟正式站一樣 7 格一次全部出現；出海階段改成方塊按鈕；離開欄位就提示錯誤。</li><li>問題：第一眼看到 7 格，會覺得「要填很多」，有些人就不填了。</li></ul>
+    <div class="stage w-narrow" id="vB">
+      <div class="sec-intro"><p class="eyebrow">完整表單</p><h2 class="h2" style="font-size:clamp(26px,3vw,36px)">想一次講完所有細節？</h2><p class="lead">填這份表單，我們能在第一次回覆時就給你比較精準的建議，省下幾輪來回。</p></div>
+      <div class="formbox" data-form></div>
+    </div>
+  </div>
+</section>
+
+<!-- C: short form + reassurance -->
+<section class="variant cream">
+  <div class="wrap">
+    <div class="vhead"><i>C</i><h2>只要填 3 格：必填在前，選填收起來，旁邊說清楚送出後會怎樣</h2></div>
+    <ul class="why"><li>一開始只看到 3 格必填，負擔小；想多說的人點開「選填」再補，欄位會順順展開。</li><li>左邊深藍塊先回答「送出之後會發生什麼」，讓人安心再填（文字都用正式站原有的句子）。</li><li>送出後把他填的重點列給他看，確認沒填錯。</li></ul>
+    <div class="stage" id="vC">
+      <div class="sec-intro"><p class="eyebrow">完整表單</p><h2 class="h2" style="font-size:clamp(26px,3vw,36px)">想一次講完所有細節？</h2><p class="lead">填這份表單，我們能在第一次回覆時就給你比較精準的建議，省下幾輪來回。</p></div>
+      <div class="split">
+        <aside class="after">
+          <h3>送出之後<span class="new" style="color:var(--gold)">新文字</span></h3>
+          <ol>
+            <li><span>1</span><div>我們會在 <b style="color:#fff">24 小時內</b>用你提供的 Email 回覆你。</div></li>
+            <li><span>2</span><div>填這份表單，我們能在第一次回覆時就給你比較精準的建議，省下幾輪來回。</div></li>
+            <li><span>3</span><div>我們不會把你的資料分享給任何第三方。</div></li>
+          </ol>
+        </aside>
+        <div class="formbox" data-form-c></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- D: one step at a time -->
+<section class="variant">
+  <div class="wrap">
+    <div class="vhead"><i>D</i><h2>一步一步：先問你想問什麼，最後才留聯絡方式</h2></div>
+    <ul class="why"><li>一次只看到一個問題，像在聊天；第 1 步就先寫「你想問什麼」，最有意願的事先做。</li><li>第 2 步產品與出海階段可以「先跳過」；姓名、Email 放最後——人已經寫了一半，比較願意留下聯絡方式。</li><li>往下一步畫面往左滑、回上一步往右滑，進度條跟著長。</li></ul>
+    <div class="stage w-narrow" id="vD">
+      <div class="sec-intro"><p class="eyebrow">完整表單</p><h2 class="h2" style="font-size:clamp(26px,3vw,36px)">想一次講完所有細節？</h2><p class="lead">填這份表單，我們能在第一次回覆時就給你比較精準的建議，省下幾輪來回。</p></div>
+      <div class="formbox" data-form-d></div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/lufe.js"></script>
+<script>
+(() => {
+  const { esc, spring, choices, haptic, ICON } = LUFE;
+  // Labels, placeholders, options, rules and messages verbatim from src/components/contact/ContactPage.tsx.
+  const STAGES = ['還在觀望，想了解出海', '準備出海，需要方向', '已經在出海，想做更好', '其他'];
+  const F = {
+    name:    { label: '姓名 *', ph: '你的姓名', type: 'text', req: true },
+    email:   { label: 'Email *', ph: 'you@company.com', type: 'email', req: true },
+    company: { label: '公司名稱', ph: '公司名稱', type: 'text' },
+    phone:   { label: '電話', ph: '09xx-xxx-xxx', type: 'tel' },
+    product: { label: '你的產品', ph: '簡單描述你的產品或品牌', type: 'text' },
+    message: { label: '你想問什麼？ *', ph: '任何問題都可以，不確定也沒關係。', type: 'textarea', req: true },
+  };
+  const isValidEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const errOf = (k, v) => {
+    if (k === 'name' && !v) return '請填寫姓名';
+    if (k === 'email') return !v ? '請填寫 Email' : !isValidEmail(v) ? 'Email 格式不正確' : '';
+    if (k === 'message' && !v) return '請填寫你的問題';
+    return '';
+  };
+  let uid = 0;
+  const field = (k, prefix) => {
+    const f = F[k], id = `${prefix}-${k}-${++uid}`;
+    const input = f.type === 'textarea' ? `<textarea id="${id}" data-k="${k}" placeholder="${f.ph}"></textarea>` : `<input id="${id}" data-k="${k}" type="${f.type}" placeholder="${f.ph}">`;
+    return `<div class="field" data-f="${k}"><label for="${id}">${f.label}</label>${input}<div class="err"></div></div>`;
+  };
+  const stageField = () => `<div class="field"><span class="lbl">目前出海階段</span><div class="choices" role="group" aria-label="目前出海階段">${STAGES.map(s => `<button type="button" aria-pressed="false">${s}</button>`).join('')}</div></div>`;
+  const doneHTML = () => `<div class="done" role="status"><div class="tick">${ICON.check}</div><h3 class="h3" style="margin-bottom:8px">收到了！</h3><p style="color:var(--tx2)">我們會在 <b style="color:var(--tx)">24 小時內</b>用你提供的 Email 回覆你。</p><div class="summary"></div><p class="small" style="margin-top:12px">（提案稿，不會真的送出）</p></div>`;
+
+  // Shared wiring: inline validation on blur, clears once valid; stage pills.
+  function wire(root) {
+    const state = { stage: '' };
+    root.querySelectorAll('[data-k]').forEach(el => {
+      const box = el.closest('.field'), k = el.dataset.k;
+      const show = () => { const m = errOf(k, el.value.trim()); box.classList.toggle('bad', !!m); box.querySelector('.err').textContent = m; return !m; };
+      el.addEventListener('blur', () => { if (el.value.trim() || F[k].req) show(); });
+      el.addEventListener('input', () => { if (box.classList.contains('bad')) show(); });
+      el._check = show;
+    });
+    root.querySelectorAll('.choices').forEach(g => choices(g, v => { state.stage = v; }));
+    state.check = keys => { let first = null; keys.forEach(k => { const el = root.querySelector(`[data-k="${k}"]`); if (el && !el._check() && !first) first = el; }); if (first) first.focus(); return !first; };
+    state.val = k => (root.querySelector(`[data-k="${k}"]`) || {}).value?.trim() || '';
+    state.finish = () => {
+      haptic(); root.classList.add('sent');
+      const rows = [['姓名', state.val('name')], ['Email', state.val('email')], ['你的產品', state.val('product')], ['目前出海階段', state.stage], ['你想問什麼？', state.val('message')]].filter(r => r[1]);
+      root.querySelector('.summary').innerHTML = `<b>你填的內容<span class="new">新文字</span></b><br>` + rows.map(([a, b]) => `${a}：${esc(b.length > 40 ? b.slice(0, 40) + '…' : b)}`).join('<br>');
+    };
+    return state;
+  }
+
+  /* B */
+  const b = document.querySelector('[data-form]');
+  b.innerHTML = `<form novalidate><div class="row2">${field('name', 'b')}${field('email', 'b')}</div><div class="row2">${field('company', 'b')}${field('phone', 'b')}</div>${field('product', 'b')}${stageField()}${field('message', 'b')}<button class="btn btn-gold" type="submit" style="width:100%">送出表單</button><p class="note">我們不會把你的資料分享給任何第三方。</p></form>${doneHTML()}`;
+  const sb = wire(b);
+  b.querySelector('form').addEventListener('submit', e => { e.preventDefault(); if (sb.check(['name', 'email', 'message'])) sb.finish(); });
+
+  /* C */
+  const c = document.querySelector('[data-form-c]');
+  c.innerHTML = `<form novalidate>${field('name', 'c')}${field('email', 'c')}${field('message', 'c')}
+    <div class="more"><button type="button" aria-expanded="false"><span>多說一點，第一次回覆就更準 <span class="count">（選填 · 4 格）</span><span class="new">新文字</span></span><span class="chev" aria-hidden="true">${ICON.chevDown}</span></button>
+      <div class="ans"><div><div><div class="row2">${field('company', 'c')}${field('phone', 'c')}</div>${field('product', 'c')}${stageField()}</div></div></div></div>
+    <button class="btn btn-gold" type="submit" style="width:100%">送出表單</button></form>${doneHTML()}`;
+  const sc = wire(c);
+  const more = c.querySelector('.more');
+  more.querySelector('button').addEventListener('click', e => { const o = !more.classList.contains('open'); more.classList.toggle('open', o); e.currentTarget.setAttribute('aria-expanded', o); });
+  c.querySelector('form').addEventListener('submit', e => { e.preventDefault(); if (sc.check(['name', 'email', 'message'])) sc.finish(); });
+
+  /* D — forward slides left, back slides right; progress rides the same spring */
+  const d = document.querySelector('[data-form-d]');
+  const STEPS = [
+    { t: '你想問什麼？', s: '任何問題都可以，不確定也沒關係。', body: field('message', 'd').replace('你想問什麼？ *', '你想問什麼？ *'), req: ['message'] },
+    { t: '跟我們說說你的產品', s: '選填，可以先跳過。', body: field('product', 'd') + stageField() + `<div class="row2">${field('company', 'd')}</div>`, req: [], skip: true },
+    { t: '最後，怎麼聯絡你？', s: '我們會在 24 小時內用你提供的 Email 回覆你。', body: `<div class="row2">${field('name', 'd')}${field('email', 'd')}</div>${field('phone', 'd')}<p class="note" style="text-align:left">我們不會把你的資料分享給任何第三方。</p>`, req: ['name', 'email'] },
+  ];
+  d.innerHTML = `<div class="steps-ui"><div class="meta"><span id="dMeta">第 1 / 3 步<span class="new">新文字</span></span><span></span></div><div class="prog"><i id="dProg"></i></div>
+    <form novalidate><div class="vp"><div class="track" id="dTrack">${STEPS.map((st, i) => `<div class="step" aria-hidden="${i ? 'true' : 'false'}"><h3>${st.t}<span class="new">新文字</span></h3><p class="sub">${st.s}</p>${st.body}</div>`).join('')}</div></div>
+    <div class="nav2"><div class="left"><button class="btn btn-tint" type="button" id="dBack" disabled>← 上一步</button></div><div class="left"><button class="btn btn-tint" type="button" id="dSkip" hidden>先跳過</button><button class="btn btn-gold" type="button" id="dNext">下一步 →</button></div></div></form></div>${doneHTML()}`;
+  const sd = wire(d);
+  const track = d.querySelector('#dTrack'), prog = d.querySelector('#dProg'), vp = d.querySelector('.vp');
+  const steps = [...track.children];
+  let at = 0;
+  const pos = spring(0, v => {
+    track.style.transform = `translate3d(${-v * vp.clientWidth}px,0,0)`;
+    prog.style.transform = `scaleX(${(v + 1) / STEPS.length})`;
+  }, .001);
+  const go = i => {
+    at = i; pos.to(i, { response: .45 });
+    steps.forEach((s, k) => { s.setAttribute('aria-hidden', k !== i); s.inert = k !== i; });
+    d.querySelector('#dMeta').innerHTML = `第 ${i + 1} / ${STEPS.length} 步<span class="new">新文字</span>`;
+    d.querySelector('#dBack').disabled = i === 0;
+    d.querySelector('#dSkip').hidden = !STEPS[i].skip;
+    d.querySelector('#dNext').textContent = i === STEPS.length - 1 ? '送出表單' : '下一步 →';
+    setTimeout(() => { const f = steps[i].querySelector('input,textarea'); f && f.focus({ preventScroll: true }); }, 250);
+  };
+  d.querySelector('#dNext').addEventListener('click', () => {
+    if (!sd.check(STEPS[at].req)) return;
+    if (at === STEPS.length - 1) return sd.finish();
+    go(at + 1);
+  });
+  d.querySelector('#dSkip').addEventListener('click', () => go(at + 1));
+  d.querySelector('#dBack').addEventListener('click', () => go(at - 1));
+  addEventListener('resize', () => pos.jump(at));
+  steps.forEach((s, k) => { s.inert = k !== 0; });
+})();
+</script>
+</body>
+</html>
