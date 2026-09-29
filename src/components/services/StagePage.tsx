@@ -43,7 +43,7 @@ export function StagePage({ stage }: Props) {
           </nav>
           <p className={`eyebrow mb-3 ${accent.text}`}>STAGE {stage.num} · {stage.timeline}</p>
           <h1 className="h1 font-sans text-white">{stage.title}</h1>
-          <p className="lead mt-5 max-w-[720px] text-white/75">{stage.subtitle}</p>
+          <p className="lead mt-5 max-w-[720px] !text-white/70">{stage.subtitle}</p>
           <p className={`mt-8 max-w-[700px] text-[17px] leading-[1.8] md:text-[18px] ${accent.text}`}>
             {stage.heroLine}
           </p>
@@ -114,7 +114,7 @@ export function StagePage({ stage }: Props) {
           <h2 className="h2 font-sans text-white">
             <span className="text-gold">{stage.timeline}</span> 的實際節奏
           </h2>
-          <p className="lead mt-4 max-w-[520px] text-white/60">每個階段我們都有明確的週進度，不會讓你不知道現在在做什麼。</p>
+          <p className="lead mt-4 max-w-[520px] !text-white/70">每個階段我們都有明確的週進度，不會讓你不知道現在在做什麼。</p>
 
           <div className="mt-8 border-b border-white/10">
             {stage.process.map((process) => (
@@ -174,13 +174,13 @@ export function StagePage({ stage }: Props) {
           </div>
 
           <div className="mt-10 border-t border-bd2 pt-10">
-            <h3 className="h3 font-sans text-red-700">如果遇到這些，我們會喊停</h3>
-            <div className="mt-4 grid gap-3">
+            <h3 className="h3 font-sans text-[#A32F29]">如果遇到這些，我們會喊停</h3>
+            <div className="mt-4 border-t border-bd">
               {stage.redFlags.map((redFlag) => (
-                <article key={redFlag.title} className="border border-bd bg-white border-l-4 border-l-red-400/70">
+                <article key={redFlag.title} className="border-b border-bd border-l-4 border-l-[rgba(179,38,30,.7)] bg-white px-5 [&>div]:!border-0">
                   <Disclosure
                     id={`${stage.slug}-${redFlag.title}`}
-                    summary={<span className="h4 font-sans text-red-700">{redFlag.title}</span>}
+                    summary={<span className="h4 min-w-0 font-sans text-[#A32F29]">{redFlag.title}</span>}
                   >
                     <p className="text-[14.5px] leading-[1.8] text-tx2">{redFlag.desc}</p>
                   </Disclosure>
@@ -254,7 +254,7 @@ export function StagePage({ stage }: Props) {
           <h2 className="h2 font-sans text-white">
             準備好進入<span className="text-gold">{stage.title}</span>了嗎？
           </h2>
-          <p className="lead mx-auto mt-4 max-w-[520px] text-white/70">聊聊你的狀況，我們會告訴你這個階段對你是不是現在最該做的事。</p>
+          <p className="lead mx-auto mt-4 max-w-[520px] !text-white/70">聊聊你的狀況，我們會告訴你這個階段對你是不是現在最該做的事。</p>
           <div className="mt-[34px] flex flex-wrap items-center justify-center gap-3">
             <button onClick={open} className="cursor-pointer bg-gold px-[26px] py-[14px] text-[16px] font-semibold text-navy hover:bg-gold-l">
               聊聊你的產品 →
