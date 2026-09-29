@@ -28,4 +28,13 @@ describe("InsightsPageContent", () => {
   it("does not render rounded utility classes", () => {
     expect(renderPage()).not.toMatch(/\brounded-(?!full\b)/);
   });
+
+  it("renders a neutral placeholder for an article without an image", () => {
+    const articleWithoutImage = { ...insightCards[0], image: "" };
+    const markup = renderToStaticMarkup(
+      createElement(InsightsPageContent, { articles: [articleWithoutImage], active: "全部" }),
+    );
+
+    expect(markup).toContain("bg-black/[.06]");
+  });
 });

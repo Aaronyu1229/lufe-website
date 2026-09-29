@@ -19,7 +19,6 @@ export type FilterCategory = Category | "全部";
 
 interface Props {
   readonly articles: readonly InsightCard[];
-  readonly initialCategory?: FilterCategory;
 }
 
 interface InsightsPageContentProps extends Props {
@@ -38,6 +37,10 @@ function isExternalImage(image: string): boolean {
 }
 
 function CoverImage({ article, sizes }: { article: InsightCard; sizes?: string }) {
+  if (!article.image) {
+    return <div aria-hidden="true" className="absolute inset-0 bg-black/[.06]" />;
+  }
+
   return isExternalImage(article.image) ? (
     <img src={article.image} alt={article.title} className="absolute inset-0 h-full w-full object-cover" />
   ) : (
@@ -89,7 +92,7 @@ export function InsightsPageContent({
               <br />
               <span className="text-gold">知識就是捷徑</span>
             </h1>
-            <p className="lead mb-10 max-w-[540px] text-white/65">
+            <p className="lead mb-10 max-w-[540px] text-white/70">
               菲律賓、印尼、北美市場趨勢，出海實戰與企業體質——幫你用最少的時間搞懂跨境這件事。
             </p>
 
@@ -206,9 +209,9 @@ function categoryFromLocation(): FilterCategory {
     : "全部";
 }
 
-export function InsightsPage({ articles, initialCategory = "全部" }: Props) {
+export function InsightsPage({ articles }: Props) {
   const { open } = useMessageBox();
-  const [active, setActive] = useState<FilterCategory>(initialCategory);
+  const [active, setActive] = useState<FilterCategory>("全部");
   const articleGridRef = useRef<HTMLDivElement>(null);
 
   const selectCategory = (category: FilterCategory) => {
@@ -231,13 +234,10 @@ export function InsightsPage({ articles, initialCategory = "全部" }: Props) {
 
   useEffect(() => {
     const syncCategory = () => setActive(categoryFromLocation());
+    syncCategory();
     window.addEventListener("popstate", syncCategory);
     return () => window.removeEventListener("popstate", syncCategory);
   }, []);
-
-  useEffect(() => {
-    setActive(initialCategory);
-  }, [initialCategory]);
 
   return (
     <InsightsPageContent

@@ -41,7 +41,7 @@ export function FieldNotesPage() {
             <br />
             <span className="text-gold">在哪裡</span>
           </h1>
-          <p className="lead mb-12 max-w-[620px] text-white/65">
+          <p className="lead mb-12 max-w-[620px] text-white/70">
             活動、演講、客戶現場、媒體露出——北美和東南亞兩個主戰場的第一手紀錄。
             <br />
             這些是正式文章裡不會寫、但對你來說可能最有用的細節。
@@ -188,7 +188,7 @@ export function FieldNotesPage() {
       <section className="bg-navy px-5 py-[72px] text-white md:px-10 md:py-[96px]">
         <div className="mx-auto max-w-[720px] text-center">
           <h2 className="h2 mb-4 text-white">想知道我們下個月在哪？</h2>
-          <p className="lead mx-auto mb-10 max-w-[520px] text-white/65">如果你在考慮北美或東南亞、剛好碰上我們的行程，可以約一杯咖啡。</p>
+          <p className="lead mx-auto mb-10 max-w-[520px] text-white/70">如果你在考慮北美或東南亞、剛好碰上我們的行程，可以約一杯咖啡。</p>
           <div className="flex flex-wrap items-center justify-center gap-6">
             <button onClick={open} className="cursor-pointer bg-gold px-8 py-3.5 text-[15.5px] font-semibold text-navy hover:bg-gold-l">
               聊聊你的狀況 →
