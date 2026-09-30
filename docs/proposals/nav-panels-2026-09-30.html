@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>導覽面板統一提案</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#101B30;--gold:#D4A85C;--gold-d:#8F6A1F;--cream:#F5F2EC;--cream-d:#E8E3DA;--sky:#3A6B84;--tx:#1A1A2E;--tx2:#5A6070;--tx3:#6A6F80;--bd:rgba(26,26,46,.09);--spring:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,"Noto Sans TC",sans-serif;color:var(--tx);background:#dfe3e8;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.intro{max-width:1160px;margin:0 auto;padding:36px 20px 20px}
+.intro h1{font-size:28px;letter-spacing:-.02em;margin-bottom:8px}
+.intro p{color:var(--tx2);font-size:15px;line-height:1.8;max-width:860px}
+.tabs{display:flex;gap:4px;background:#fff;padding:4px;width:max-content;margin:18px 0 0}
+.tabs button{font:inherit;font-size:14px;border:0;background:none;padding:8px 16px;cursor:pointer;color:var(--tx2)}
+.tabs button.on{background:var(--navy);color:#fff;font-weight:600}
+
+.stage{position:relative;max-width:1160px;margin:0 auto 60px;height:720px;overflow:hidden;background:#2a3444 url(https://lufe.world/images/v5/product-testing-2400.webp) center 35%/cover}
+.stage::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,27,48,.86),rgba(16,27,48,.4) 60%,rgba(16,27,48,.1))}
+.before-img{display:none;max-width:1160px;margin:0 auto 60px}
+.before-img img{width:100%;display:block}
+body.show-before .stage{display:none}body.show-before .before-img{display:block}
+
+/* header */
+.hd{position:absolute;left:0;right:0;top:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:linear-gradient(180deg,rgba(8,13,24,.5),rgba(8,13,24,0));z-index:5}
+.logo{color:#fff;font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px}
+.logo img{width:28px}
+.logo em{font-style:normal;color:var(--gold)}
+.menu{display:flex;gap:2px}
+.menu button{font:inherit;font-size:15px;color:rgba(255,255,255,.82);background:none;border:0;padding:9px 14px;cursor:pointer;transition:color .15s,background-color .15s}
+.menu button.on{color:#fff;background:rgba(255,255,255,.1)}
+.cta{background:var(--gold);color:var(--navy);font-weight:600;font-size:14px;padding:10px 16px}
+.hero-copy{position:absolute;left:48px;bottom:70px;color:#fff;z-index:1}
+.hero-copy small{color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.02em}
+.hero-copy h2{font-size:52px;letter-spacing:-.025em;line-height:1.1;margin-top:10px;text-shadow:0 10px 40px rgba(0,0,0,.35)}
+
+/* panel: one skeleton for all five */
+.panel{position:absolute;left:28px;right:28px;top:72px;z-index:4;background:rgba(255,255,255,.84);-webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);border:1px solid rgba(255,255,255,.7);box-shadow:0 30px 70px -28px rgba(8,13,24,.55),0 0 0 1px rgba(16,27,48,.04);overflow:hidden;transform-origin:var(--ox,50%) 0;will-change:height,transform}
+.panel.closed{opacity:0;transform:translateY(-6px) scale(.97);filter:blur(4px);pointer-events:none;transition:opacity .16s,transform .22s,filter .2s}
+.panel.open{opacity:1;transform:none;filter:none;transition:opacity .2s,transform .45s var(--spring),filter .25s}
+.pane{position:absolute;left:0;right:0;top:0;min-height:300px;display:grid;grid-template-columns:1fr 1fr 320px;gap:0;opacity:0;pointer-events:none;transition:opacity .18s}
+.pane.on{opacity:1;pointer-events:auto;position:relative;transition:opacity .28s .06s}
+.col{padding:26px 26px 28px}
+.col+.col{border-left:1px solid var(--bd)}
+.rail{padding:26px;background:rgba(245,242,236,.7);border-left:1px solid var(--bd)}
+.lbl{font-size:12px;font-weight:600;color:var(--tx3);letter-spacing:.04em;margin-bottom:12px}
+.item{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;padding:10px 12px;margin:0 -12px;transition:background-color .15s,transform .1s}
+.item:hover{background:rgba(58,107,132,.07)}
+.item:active{transform:scale(.985)}
+.item .ic{width:28px;height:28px;display:grid;place-items:center;color:var(--gold-d);transition:color .15s,transform .35s var(--spring)}
+.item:hover .ic{color:#7A5A1A;transform:translateX(1px)}
+.item .ic svg{width:18px;height:18px}
+.item .ic.code{font-family:Inter;font-size:12px;font-weight:700;letter-spacing:-.01em}
+.item .ic.num{font-family:Inter;font-size:13px;font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+.item b{display:block;font-size:15px;font-weight:650;letter-spacing:-.005em;transition:color .15s}
+.item:hover b{color:var(--sky)}
+.item span.d{display:block;font-size:12.5px;color:var(--tx3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.more{display:inline-flex;gap:6px;margin-top:10px;font-size:13.5px;font-weight:600;color:var(--sky)}
+.feat{display:block}
+.feat .im{aspect-ratio:16/9;background:#ccc center/cover;margin-bottom:12px}
+.feat b{display:block;font-size:15px;line-height:1.5;font-weight:650}
+.feat span{display:block;font-size:12.5px;color:var(--tx3);margin-top:6px}
+.feat.box{background:var(--navy);color:#fff;padding:20px}
+.feat.box b{font-size:17px}
+.feat.box .big{font-family:Inter;font-size:38px;font-weight:650;color:var(--gold);letter-spacing:-.02em;line-height:1;margin:8px 0}
+.feat.box span{color:rgba(255,255,255,.7)}
+.feat.box .go{display:inline-block;margin-top:14px;background:var(--gold);color:var(--navy);font-weight:600;font-size:13.5px;padding:9px 14px}
+.founder{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center}
+.founder .ph{width:64px;height:64px;background:#ccc center 18%/cover;box-shadow:0 0 0 1px rgba(212,168,92,.6)}
+.founder b{font-size:16px}
+.founder small{display:block;color:var(--gold-d);font-weight:600;font-size:12.5px;margin-top:2px}
+.founder p{font-size:12.5px;color:var(--tx2);margin-top:8px;line-height:1.7;grid-column:1/-1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips a{font-size:12.5px;padding:5px 10px;border:1px solid var(--bd);background:#fff;transition:border-color .15s,color .15s}
+.chips a:hover{border-color:var(--sky);color:var(--sky)}
+
+/* notes */
+.notes{max-width:1160px;margin:0 auto 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;padding:0 20px}
+.notes div{background:#fff;padding:18px 20px;border-top:3px solid var(--gold);font-size:14px;line-height:1.75;color:var(--tx2)}
+.notes b{display:block;color:var(--tx);font-size:15px;margin-bottom:4px}
+.notes em{font-style:normal;color:var(--sky);font-size:12px;font-weight:600}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>導覽列五個面板：統一成同一個骨架</h1>
+  <p>滑鼠移到上方「服務／進階／案例／洞察／關於我們」看效果。五個面板現在共用同一套版面：<b>左兩欄是清單</b>（每一項都是「圖示＋標題＋一行說明」），<b>右邊固定一欄精選</b>；面板高度在切換時用彈簧平順變化，不再一下 84、一下 340 地跳。</p>
+  <div class="tabs"><button class="on" data-v="after">提案（可滑過操作）</button><button data-v="before">現在的五個面板</button></div>
+</div>
+
+<div class="stage" id="stage">
+  <div class="hd">
+    <span class="logo"><img src="https://lufe.world/images/logo/logo-mark-white.png" alt=""><span>鹿飛 LUF<em>É</em></span></span>
+    <nav class="menu" id="menu">
+      <button data-k="services">服務</button><button data-k="advanced">進階</button><button data-k="cases">案例</button><button data-k="insights">洞察</button><button data-k="about">關於我們</button>
+    </nav>
+    <a class="cta">聊聊你的產品 →</a>
+  </div>
+  <div class="hero-copy"><small>第一個月 · 品測</small><h2>先讓馬尼拉的媽媽<br>拿起來看看</h2></div>
+
+  <div class="panel closed" id="panel">
+    <!-- 服務 -->
+    <div class="pane" data-k="services">
+      <div class="col"><p class="lbl">菲律賓 · 第一年四章</p>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span><b>品測</b><span class="d">第一個月 · 1～2 萬</span></span></a>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><span><b>寄賣</b><span class="d">第三個月 · 5～6 萬</span></span></a>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/><path d="M15 9h4a1 1 0 0 1 1 1v11"/><path d="M3 21h18"/></svg></span><span><b>公司落地</b><span class="d">第九個月 · 按案報價</span></span></a>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M3 14h4v6H3zM17 14h4v6h-4z"/></svg></span><span><b>海外客服</b><span class="d">之後的每一天 · 2027 Q1 首批</span></span></a>
+      </div>
+      <div class="col"><p class="lbl">另一條線</p>
+        <a class="item"><span class="ic code">US</span><span><b>北美通路</b><span class="d">Costco、Walmart、Amazon</span></span></a>
+        <p class="lbl" style="margin-top:18px">一頁看完</p>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><span><b>四章總覽</b><span class="d">一家品牌在馬尼拉的第一年</span></span></a>
+      </div>
+      <div class="rail"><p class="lbl">從這裡開始</p>
+        <a class="feat box"><b>出海起手包</b><div class="big">7 萬</div><span>品測 1～2 萬＋寄賣包 5～6 萬。<br>沒過，錢到此為止。</span><span class="go">看品測怎麼做 →</span></a>
+      </div>
+    </div>
+    <!-- 進階 -->
+    <div class="pane" data-k="advanced">
+      <div class="col"><p class="lbl">已經在海外</p>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 19h16"/><path d="M6 15l4-4 3 3 5-6"/></svg></span><span><b>運營優化</b><span class="d">已經跑起來了，該讓每公里更省</span></span></a>
+      </div>
+      <div class="col"><p class="lbl">我們怎麼判斷</p>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span><b>鹿飛方法論</b><span class="d">五個問題、分數怎麼讀</span></span></a>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><b>2 分鐘處境比對</b><span class="d">看你最像哪一個案例</span></span></a>
+      </div>
+      <div class="rail"><p class="lbl">不確定從哪一段開始</p>
+        <a class="feat box"><b>免費初步評估</b><div class="big">30 分鐘</div><span>粗跑五個問題，不收費。</span><span class="go">預約 30 分鐘 →</span></a>
+      </div>
+    </div>
+    <!-- 案例 -->
+    <div class="pane" data-k="cases">
+      <div class="col"><p class="lbl">精選案例</p>
+        <a class="item"><span class="ic num">6月</span><span><b>保健品走進北美 Costco</b><span class="d">食品 · 北美</span></span></a>
+        <a class="item"><span class="ic num">3x</span><span><b>皮鞋品牌改賣襪子大賺</b><span class="d">服飾 · 美國</span></span></a>
+      </div>
+      <div class="col"><p class="lbl">&nbsp;</p>
+        <a class="item"><span class="ic num">-15%</span><span><b>電子大廠靠產地轉移省關稅</b><span class="d">電子 · 美國</span></span></a>
+        <a class="item"><span class="ic num">10家</span><span><b>珍奶品牌在菲律賓落地</b><span class="d">飲品 · 東南亞</span></span></a>
+        <a class="more">看所有案例 →</a>
+      </div>
+      <div class="rail"><p class="lbl">按產業、按市場</p>
+        <div class="chips"><a>食品</a><a>電子</a><a>服飾</a><a>飲品</a></div>
+        <div class="chips"><a>北美</a><a>東南亞</a></div>
+        <a class="feat box" style="margin-top:16px"><b>不確定比較像哪一條？</b><span>先做 2 分鐘處境比對。</span><span class="go">開始比對 →</span></a>
+      </div>
+    </div>
+    <!-- 洞察 -->
+    <div class="pane" data-k="insights">
+      <div class="col"><p class="lbl">按章節找</p>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span><b>第一個月：市場與品測</b><span class="d">3 篇</span></span></a>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><span><b>第三個月：通路與證</b><span class="d">1 篇</span></span></a>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/><path d="M15 9h4a1 1 0 0 1 1 1v11"/><path d="M3 21h18"/></svg></span><span><b>第九個月：落地與團隊</b><span class="d">1 篇</span></span></a>
+        <a class="item"><span class="ic code">US</span><span><b>北美市場</b><span class="d">2 篇</span></span></a>
+      </div>
+      <div class="col"><p class="lbl">其他內容</p>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span><span><b>補助與活動</b><span class="d">政府補助＋現場紀錄</span></span></a>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg></span><span><b>現場紀錄</b><span class="d">活動、演講、媒體露出</span></span></a>
+        <a class="item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg></span><span><b>TradePilot 關稅工具</b><span class="d">三分鐘查完目標市場關稅 ↗</span></span></a>
+        <a class="more">看所有文章 →</a>
+      </div>
+      <div class="rail"><p class="lbl">最新文章</p>
+        <a class="feat"><div class="im" style="background-image:url(https://lufe.world/images/insights/tradepilot-tariff.jpg)"></div><b>政府這次是認真的——海外參展補助從 4 萬跳到 16 萬，但你只有兩個月能動</b><span>2026-04-23 · 8 分鐘</span></a>
+      </div>
+    </div>
+    <!-- 關於我們 -->
+    <div class="pane" data-k="about">
+      <div class="col"><p class="lbl">認識鹿飛</p>
+        <a class="item"><span class="ic num">01</span><span><b>創辦故事</b><span class="d">我們為什麼做這件事</span></span></a>
+        <a class="item"><span class="ic num">02</span><span><b>團隊組成</b><span class="d">台灣核心＋全球節點</span></span></a>
+        <a class="item"><span class="ic num">03</span><span><b>我們怎麼合作</b><span class="d">你會得到什麼樣的陪跑</span></span></a>
+      </div>
+      <div class="col"><p class="lbl">立場與網絡</p>
+        <a class="item"><span class="ic num">04</span><span><b>合作夥伴網絡</b><span class="d">北美／東南亞／全球物流</span></span></a>
+        <a class="item"><span class="ic num">05</span><span><b>我們相信的事</b><span class="d">品牌理念</span></span></a>
+        <a class="item"><span class="ic num">06</span><span><b>誠實的邊界</b><span class="d">我們不做什麼</span></span></a>
+      </div>
+      <div class="rail"><p class="lbl">創辦人</p>
+        <a class="founder"><span class="ph" style="background-image:url(https://lufe.world/images/about/aaron-portrait.jpg)"></span><span><b>Aaron Yu</b><small>鹿飛 LUFÉ 創辦人・來自躍馬企業</small></span><p>看了很多年貨櫃出去，決定去接貨到了之後的事。</p></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="before-img"><img src="nav-panels-before-2026-09-30.png" alt="現在的五個面板"></div>
+
+<div class="notes">
+  <div><b>同一個骨架</b>左兩欄清單＋右邊一欄精選，五個面板都一樣。滑過去時，眼睛永遠知道「主要選項在左、推薦在右」。<em>§16 熟悉感・一致</em></div>
+  <div><b>每一項長得一樣</b>圖示＋標題＋一行說明。說明只留一行（月份＋價格），不再擠成三行。進階、關於也補上說明。<em>§16 簡潔・§15 用字重分層</em></div>
+  <div><b>高度用彈簧變化</b>切換面板時，高度從舊的平順長到新的，內容淡入；不會 84→340 地跳。<em>§3 可中斷・§4 彈簧・§7 空間一致</em></div>
+  <div><b>從按鈕長出來</b>面板以你滑到的那個選單為原點展開（縮放＋去模糊），離開延遲 120ms 才收。<em>§7 從觸發點出現・§10</em></div>
+  <div><b>假連結變真連結</b>案例的「按產業／按市場」現在是純文字、點不了；改成可點的標籤。<em>§16 找路</em></div>
+  <div><b>舊字順手換掉</b>關於我們的創辦人卡還寫「42 年國際物流實戰」＋「AY」字母方塊；換成照片和 v4 的創辦人卡文字。<em>全站規則</em></div>
+  <div><b>進階不再空一半</b>補上「2 分鐘處境比對」與「免費初步評估」精選卡，都是網站上已有的頁面與承諾。<em>§16 每個元素都要有用</em></div>
+  <div><b>圖示去背、統一金色</b>所有圖示拿掉白色方框，顏色跟案例數字同一個深金色（#8F6A1F，淺底上對比約 4.4:1）；滑過時再深一階。<em>Aaron 2026-09-30</em></div>
+  <div><b>一個小標樣式</b>面板裡的分組標題統一成灰色小字（不是金色），只當分組用。<em>§16 找路</em></div>
+</div>
+
+<script>
+const panel = document.getElementById("panel"), menu = document.getElementById("menu"), stage = document.getElementById("stage");
+const panes = [...panel.querySelectorAll(".pane")];
+// Height spring: re-targets from the current value and velocity, so fast menu-hopping never jumps.
+let h = 0, v = 0, target = 0, raf = 0, last = 0;
+const K = Math.pow(2 * Math.PI / 0.38, 2), C = 4 * Math.PI * 1 / 0.38;
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function step(t) { let dt = Math.min((t - last) / 1000, 1 / 30); last = t; for (let i = 0; i < 4; i++) { const a = -K * (h - target) - C * v; v += a * dt / 4; h += v * dt / 4; }
+  panel.style.height = h + "px"; if (Math.abs(v) < 1 && Math.abs(h - target) < .5) { h = target; panel.style.height = h + "px"; raf = 0; return; } raf = requestAnimationFrame(step); }
+function to(x) { target = x; if (reduced) { h = x; panel.style.height = x + "px"; return; } if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); } }
+let closeT;
+function open(k, btn) {
+  clearTimeout(closeT);
+  menu.querySelectorAll("button").forEach(b => b.classList.toggle("on", b === btn));
+  const wasClosed = panel.classList.contains("closed");
+  const r = btn.getBoundingClientRect(), pr = stage.getBoundingClientRect();
+  panel.style.setProperty("--ox", (r.left + r.width / 2 - pr.left - 28) + "px");
+  panes.forEach(p => p.classList.toggle("on", p.dataset.k === k));
+  const nh = panel.querySelector(".pane.on").offsetHeight;
+  if (wasClosed) { h = nh; v = 0; panel.style.height = nh + "px"; }
+  panel.classList.remove("closed"); panel.classList.add("open"); to(nh);
+}
+function close() { closeT = setTimeout(() => { panel.classList.add("closed"); panel.classList.remove("open"); menu.querySelectorAll("button").forEach(b => b.classList.remove("on")); }, 120); }
+menu.querySelectorAll("button").forEach(b => { b.addEventListener("mouseenter", () => open(b.dataset.k, b)); b.addEventListener("focus", () => open(b.dataset.k, b)); });
+menu.addEventListener("mouseleave", close); panel.addEventListener("mouseenter", () => clearTimeout(closeT)); panel.addEventListener("mouseleave", close);
+document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; document.querySelectorAll(".tabs button").forEach(x => x.classList.toggle("on", x === b)); document.body.classList.toggle("show-before", b.dataset.v === "before"); });
+open("services", menu.querySelector("button"));
+</script>
+</body>
+</html>
