@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
-import { CasesPageContent } from "@/components/cases/CasesPage";
+import { CASE_ROADS, CasesPageContent } from "@/components/cases/CasesPage";
 import { CASES, CASE_CARD_META, INDUSTRIES, MARKETS } from "@/data/cases";
 
 const renderCasesPage = () => renderToStaticMarkup(
@@ -16,6 +16,13 @@ describe("CasesPageContent", () => {
     for (const option of [...INDUSTRIES, ...MARKETS]) {
       expect(markup).toContain(option.label);
     }
+
+    for (const road of CASE_ROADS) {
+      expect(markup).toContain(road.title);
+      expect(markup).toContain(road.body);
+      expect(markup).toContain(road.lesson);
+    }
+    expect(markup).toContain("你的故事會是哪一條？");
 
     for (const caseItem of CASES) {
       const meta = CASE_CARD_META[caseItem.slug];

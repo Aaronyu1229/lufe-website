@@ -1,5 +1,6 @@
 import { InsightsPage } from "@/components/insights/InsightsPage";
 import { articles } from "@/data/articles";
+import { CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
 import { toDatabaseInsightCard, toInsightCard } from "@/lib/articles/presentation";
 import { listPublishedArticles } from "@/lib/articles/repository";
 import type { DatabaseArticle } from "@/lib/articles/repository";
@@ -21,10 +22,19 @@ export default async function Insights() {
     databaseArticles = [];
   }
 
+  const chapterBySlug: Record<string, ArticleChapterKey> = {};
+  const chapterEntries = Object.entries(CHAPTER_ARTICLE_TAGS) as [ArticleChapterKey, string][];
+  for (const article of databaseArticles) {
+    const chapter = chapterEntries.find(([, tag]) => article.tags.includes(tag))?.[0];
+    if (chapter) chapterBySlug[article.slug] = chapter;
+  }
+
   const insightCards = [
     ...articles.map(toInsightCard),
     ...databaseArticles.map(toDatabaseInsightCard),
-  ].sort((left, right) => right.date.localeCompare(left.date));
+  ]
+    .filter((article) => article.slug !== "vietnam-market-entry-guide")
+    .sort((left, right) => right.date.localeCompare(left.date));
 
-  return <InsightsPage articles={insightCards} />;
+  return <InsightsPage articles={insightCards} chapterBySlug={chapterBySlug} />;
 }

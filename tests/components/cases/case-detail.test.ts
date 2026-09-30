@@ -44,4 +44,12 @@ describe("CaseDetailPageContent", () => {
     expect(markup).not.toMatch(/\brounded-(?!full\b)/);
     expect(markup).toContain("rounded-full");
   });
+
+  it("maps legacy stages to the new service routes without duplicate links", () => {
+    const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: CASES[0] }));
+
+    expect(markup).toContain('href="/services/product-testing"');
+    expect(markup).toContain('href="/services/north-america"');
+    expect(markup.match(/href="\/services\/product-testing"/g)).toHaveLength(1);
+  });
 });
