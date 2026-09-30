@@ -15,6 +15,7 @@ import { useMessageBox } from "./MessageBox";
 import { useSpring } from "@/lib/motion";
 import { articles, getArticleImage } from "@/data/articles";
 import { CASES } from "@/data/cases";
+import { CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
 
 type MenuKey = "services" | "advanced" | "cases" | "insights" | "about";
 
@@ -303,28 +304,27 @@ function CasesMenu() {
   </div>;
 }
 
-// Monochrome line icons, stroke weighted to match the semibold labels, replacing emoji so category marks follow text color.
-const CATEGORY_ICON_PATHS: Record<string, ReactNode> = {
-  印尼: <><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></>,
-  東南亞趨勢: <><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></>,
-  出海實戰: <><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></>,
-  企業體質: <><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" /><path d="M15 9h4a1 1 0 0 1 1 1v11" /><path d="M3 21h18" /><path d="M8 8h3M8 12h3M8 16h3" /></>,
+// Monochrome line icons, stroke weighted to match the semibold labels, one per insight chapter.
+const CHAPTER_ICON_PATHS: Record<Exclude<ArticleChapterKey, "na" | "sub">, ReactNode> = {
+  m1: <><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></>,
+  m3: <><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></>,
+  m9: <><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" /><path d="M15 9h4a1 1 0 0 1 1 1v11" /><path d="M3 21h18" /><path d="M8 8h3M8 12h3M8 16h3" /></>,
+  after: <><path d="M4 14a8 8 0 0 1 16 0" /><path d="M3 14h4v6H3zM17 14h4v6h-4z" /></>,
 };
 
-// Markets with an unambiguous country get a code badge instead of a generic pin.
-const CATEGORY_CODES: Record<string, string> = { 菲律賓: "PH", 北美市場: "US" };
+// "補助與活動" already has its own entry (the resources page), so the menu lists the five story chapters.
+const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
 
-function CategoryIcon({ category }: { category: string }) {
-  const code = CATEGORY_CODES[category];
-  if (code) return <span aria-hidden="true" className="grid h-4 w-4 shrink-0 place-items-center rounded-[3px] border-[1.5px] border-current text-[7.5px] font-bold leading-none tracking-[-.02em]">{code}</span>;
-  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="block shrink-0">{CATEGORY_ICON_PATHS[category]}</svg>;
+function ChapterIcon({ chapter }: { chapter: (typeof INSIGHT_MENU_CHAPTERS)[number] }) {
+  // North America is the only unambiguous country, so it gets a code badge instead of a line icon.
+  if (chapter === "na") return <span aria-hidden="true" className="grid h-4 w-4 shrink-0 place-items-center border-[1.5px] border-current text-[7.5px] font-bold leading-none tracking-[-.02em]">US</span>;
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="block shrink-0">{CHAPTER_ICON_PATHS[chapter]}</svg>;
 }
 
 function InsightsMenu() {
   const latestArticle = articles[0];
-  const categories = ["菲律賓", "印尼", "東南亞趨勢", "北美市場", "出海實戰", "企業體質"] as const;
   return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
-    <MenuColumn label="主題分類">{categories.map((category) => <MenuLink key={category} href={`/insights?cat=${encodeURIComponent(category)}`} title={category} icon={<CategoryIcon category={category} />} />)}</MenuColumn>
+    <MenuColumn label="按章節找">{INSIGHT_MENU_CHAPTERS.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} icon={<ChapterIcon chapter={chapter} />} />)}</MenuColumn>
     <MenuColumn label="其他內容"><MenuLink href="/resources" title="補助與活動" desc="政府補助 + 現場紀錄" /><MenuLink href="/field-notes" title="現場紀錄" desc="活動、演講、媒體露出" /><MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具" external /><MenuLink href="/services/methodology" title="鹿飛方法論" /><MenuLink href="/insights" title="看所有文章" /></MenuColumn>
     <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">最新文章</p>{latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group"><div className="relative mb-2 aspect-video overflow-hidden"><Image src={getArticleImage(latestArticle)} alt={latestArticle.title} fill sizes="360px" className="object-cover" /></div><b className="block text-[14px] font-semibold leading-[1.5] group-hover:text-sky">{latestArticle.title}</b><span className="text-[12px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}</div>
   </div>;
@@ -363,7 +363,7 @@ function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: ()
   if (itemKey === "advanced") return <>{ADVANCED_MENU_ITEMS.map((item) => <MobileSubLink key={item.href} href={item.href} title={item.title} onClose={onClose} />)}</>;
   if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={`${caseItem.num} ${caseItem.title}`} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例" onClose={onClose} /></>;
   if (itemKey === "about") return <><MobileSubLink href="/about#story" title="創辦故事" onClose={onClose} /><MobileSubLink href="/about#team" title="團隊組成" onClose={onClose} /><MobileSubLink href="/about#how-we-work" title="我們怎麼合作" onClose={onClose} /><MobileSubLink href="/about#network" title="合作夥伴網絡" onClose={onClose} /><MobileSubLink href="/about#what-we-dont-do" title="我們不做什麼" onClose={onClose} /></>;
-  return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} /><MobileSubLink href="/insights?cat=東南亞趨勢" title="東南亞趨勢" icon={<CategoryIcon category="東南亞趨勢" />} onClose={onClose} /><MobileSubLink href="/insights?cat=北美市場" title="北美市場" icon={<CategoryIcon category="北美市場" />} onClose={onClose} /><MobileSubLink href="/insights?cat=出海實戰" title="出海實戰" icon={<CategoryIcon category="出海實戰" />} onClose={onClose} /><MobileSubLink href="/insights?cat=企業體質" title="企業體質" icon={<CategoryIcon category="企業體質" />} onClose={onClose} /><MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;
+  return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} />{INSIGHT_MENU_CHAPTERS.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} icon={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}<MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;
 }
 
 function MessageBoxTrigger({ className = "", onOpen }: { className?: string; onOpen?: () => void }) {
