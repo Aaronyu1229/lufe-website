@@ -17,7 +17,7 @@ export function RelatedReadingContent({ articles: reading }: { readonly articles
         <h2 className="h2 mb-8 text-tx">延伸閱讀</h2>
         <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">
           {reading.map((article) => (
-            <Link key={article.slug} href={`/insights/${article.slug}`} className="lufe-card group min-w-0 overflow-hidden border border-bd bg-white hover:border-gold">
+            <Link key={article.slug} href={`/insights/${article.slug}`} className="lufe-card lufe-insight-card group min-w-0 overflow-hidden border border-bd bg-white hover:border-gold">
               <div className="relative aspect-[16/10] overflow-hidden">
                 {isExternalImage(article.image) ? (
                   // Database article images are not known to Next's static image configuration.

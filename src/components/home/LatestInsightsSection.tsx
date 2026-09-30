@@ -14,7 +14,7 @@ export function LatestInsightsSection({ articles }: { articles: readonly Insight
         </h2>
         <div className="mt-9 grid gap-5 md:grid-cols-3">
           {articles.map((article) => (
-            <Link key={article.slug} href={`/insights/${article.slug}`} className="lufe-card group border border-bd bg-white">
+            <Link key={article.slug} href={`/insights/${article.slug}`} className="lufe-card lufe-insight-card group border border-bd bg-white">
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image src={article.image} alt={article.title} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
               </div>

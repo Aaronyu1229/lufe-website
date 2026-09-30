@@ -12,6 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { useMessageBox } from "./MessageBox";
+import { DelightLayer } from "./DelightLayer";
 import { useSpring } from "@/lib/motion";
 import { articles, getArticleImage } from "@/data/articles";
 import { CASES } from "@/data/cases";
@@ -253,6 +254,7 @@ export function Navbar({ children }: { readonly children?: ReactNode }) {
         <span>第一次談不收費</span>
         <strong>聊聊你的產品 →</strong>
       </button>
+      <DelightLayer />
       </header>
       {children}
       <div
