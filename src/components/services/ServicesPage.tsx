@@ -7,23 +7,11 @@ import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
 import { Disclosure } from "@/components/ui";
 import { CHAPTERS, PHILIPPINES_CHAPTER_KEYS } from "@/data/chapters";
+import { SERVICE_FAQS } from "@/data/serviceFaqs";
 
 import { ContactButton } from "./ContactButton";
 
-export const SERVICE_FAQS = [
-  {
-    q: "我該從第一章開始，還是直接落地？",
-    a: "沒出過海、或出過但沒站穩的，從品測開始。已經有菲律賓通路、確定要開公司的，直接談落地。只有客服需求的，直接談客服。不確定，第一次談我們幫你看；有時候我們會建議你再等等，那也是一種答案。",
-  },
-  {
-    q: "四個方案的收費方式？",
-    a: "數字：品測 1～2 萬（前 10 家實驗價）。寄賣包 5～6 萬，合起來是 7 萬起手包，品測費可抵。\n公司落地按案，第一次談就給範圍；海外客服的區間，也是第一次談就給。\n\n真心話：我們不會先報價再問你需求。\n第一次見面，我們想先聽你的產品在台灣怎麼賣、為什麼想出去。\n有時候聽完，我們會建議你再等等——那也是一種答案。",
-  },
-  {
-    q: "鹿飛跟傳統貿易商或顧問公司有什麼不同？",
-    a: "顧問出報告，貿易商做買賣，貨代送貨。鹿飛做的是四件事一份合約，陪你走完第一年。底下有躍馬企業 42 年物流，不會因為不懂現場而卡在海上。我們不做貿易商，也不做純接單的貨代，邊界寫在「我們不做什麼」。",
-  },
-] as const;
+export { SERVICE_FAQS } from "@/data/serviceFaqs";
 
 const heroStats = [
   { value: "4", label: "個章節 · 菲律賓" },

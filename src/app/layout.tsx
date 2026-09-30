@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
+import { SiteStructuredData } from "@/components/seo/StructuredData";
 import { SITE_URL, SITE_NAME, SITE_LOCALE } from "@/lib/site";
 
 const playfair = Playfair_Display({
@@ -119,8 +120,10 @@ export default function RootLayout({
     >
       <body>
         <MessageBoxProvider>
-          <Navbar />
-          <main id="main-content">{children}</main>
+          <SiteStructuredData />
+          <Navbar>
+            <main id="main-content">{children}</main>
+          </Navbar>
           <Footer />
           <MessageBox />
         </MessageBoxProvider>

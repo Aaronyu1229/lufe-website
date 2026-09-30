@@ -2,21 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
+import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { SUBSIDIES } from "@/data/subsidies";
 import { ACTIVITIES } from "@/data/fieldNotes";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "資源 · 補助與活動 — 鹿飛 LUFÉ",
-  description:
-    "正在開放的政府出海補助、加盟展、論壇、商會活動——一個入口看完所有可以幫你出海的資源。",
-};
+export const metadata: Metadata = createPageMetadata({
+  path: "/resources",
+  title: "資源 · 補助與活動",
+  description: "正在開放的政府出海補助、加盟展、論壇、商會活動——一個入口看完所有可以幫你出海的資源。",
+});
 
 const subsidyCount = SUBSIDIES.length;
 const activityCount = ACTIVITIES.length;
 
 export default function ResourcesPage() {
   return (
-    <div className="bg-white">
+    <>
+      <BreadcrumbJsonLd items={[{ name: "首頁", path: "/" }, { name: "資源", path: "/resources" }]} />
+      <div className="bg-white">
       {/* ───── Hero ───── */}
       <section className="lufe-hero bg-navy px-5 text-white md:px-10 lg:px-16">
         <HeroBackdrop src="/images/hero/hero-compass.jpg" />
@@ -150,6 +154,7 @@ export default function ResourcesPage() {
           </p>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }
