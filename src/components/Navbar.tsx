@@ -43,7 +43,7 @@ const ADVANCED_MENU_ITEMS = [
 ] as const;
 
 function pathnameHasDarkHero(pathname: string): boolean {
-  if (["/", "/about", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
+  if (["/", "/about", "/contact", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
   if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
   return pathname.startsWith("/services") || pathname.startsWith("/cases");
 }
