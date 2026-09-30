@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
 
 /**
@@ -21,7 +20,7 @@ export function CTASection() {
           還沒想清楚，也可以聊聊
         </h2>
         <p className="text-[17px] text-white/55 max-w-[520px] mx-auto leading-[1.7] mb-9 font-normal">
-          送出後 24 小時內由 Aaron 本人回覆。第一次對話就把費用結構和時間表講清楚。
+          我們想找的，是想把事業做大、也願意先走一小步的人。送出後 24 小時內由 Aaron 本人回覆，第一次談就把費用跟時間講清楚。
         </p>
         <div className="flex justify-center items-center gap-3 flex-wrap">
           <button
@@ -30,12 +29,6 @@ export function CTASection() {
           >
             聊聊你的產品 →
           </button>
-          <Link
-            href="/assess"
-            className="inline-flex items-center gap-2 border border-white/30 bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white backdrop-blur-[16px]"
-          >
-            先做 2 分鐘處境比對 <span aria-hidden="true">→</span>
-          </Link>
         </div>
       </div>
     </section>

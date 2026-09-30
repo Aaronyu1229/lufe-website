@@ -48,7 +48,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="text-[14px] max-w-[260px] leading-[1.8] font-normal mt-[14px] text-white/60">
-            協助台灣企業在北美與東南亞落地。產品適配、通路銷售、團隊體質——三個支柱，兩個主戰場。
+            貨到了之後，我們接著走。品測、寄賣、公司落地、海外客服，陪台灣品牌走完在菲律賓的第一年。底下是躍馬企業 42 年的國際物流。
           </p>
         </div>
 

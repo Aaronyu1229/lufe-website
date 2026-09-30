@@ -15,18 +15,31 @@ import { useMessageBox } from "./MessageBox";
 import { useSpring } from "@/lib/motion";
 import { articles, getArticleImage } from "@/data/articles";
 import { CASES } from "@/data/cases";
-import { STAGES, STAGE_ORDER } from "@/data/services";
 
-type MenuKey = "services" | "cases" | "insights" | "about";
+type MenuKey = "services" | "advanced" | "cases" | "insights" | "about";
 
 const NAV_HEIGHT = 64;
 
 const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
   { key: "services", label: "服務" },
+  { key: "advanced", label: "進階" },
   { key: "cases", label: "案例" },
   { key: "insights", label: "洞察" },
   { key: "about", label: "關於我們" },
 ];
+
+const SERVICE_MENU_ITEMS = [
+  { href: "/services/product-testing", title: "品測", desc: "第一個月 · 先讓馬尼拉的媽媽拿起來看看" },
+  { href: "/services/consignment", title: "寄賣", desc: "第三個月 · 上架了，讓人先用過再說" },
+  { href: "/services/localization", title: "公司落地", desc: "第九個月 · 開始想要在當地有自己的人" },
+  { href: "/services/call-center", title: "海外客服", desc: "之後的每一天 · 星期五晚上十一點的那封信" },
+  { href: "/services/north-america", title: "北美通路", desc: "另一個故事 · 北美貨架" },
+] as const;
+
+const ADVANCED_MENU_ITEMS = [
+  { href: "/services/optimize", title: "運營優化" },
+  { href: "/services/methodology", title: "鹿飛方法論" },
+] as const;
 
 function pathnameHasDarkHero(pathname: string): boolean {
   if (["/", "/about", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
@@ -255,6 +268,7 @@ function MegaPane({ itemKey, active, setRef }: { itemKey: MenuKey; active: boole
   return (
     <div ref={setRef} aria-hidden={!active} className={`absolute inset-x-0 top-0 grid gap-6 px-7 pb-6 pt-[26px] transition-opacity duration-150 ${active ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
       {itemKey === "services" && <ServicesMenu />}
+      {itemKey === "advanced" && <AdvancedMenu />}
       {itemKey === "cases" && <CasesMenu />}
       {itemKey === "insights" && <InsightsMenu />}
       {itemKey === "about" && <AboutMenu />}
@@ -273,12 +287,11 @@ function MenuLink({ href, title, desc, icon, external = false }: { href: string;
 }
 
 function ServicesMenu() {
-  return <div className="grid grid-cols-4 gap-6">
-    <MenuColumn label="01 · 產品適配性 · 勝率"><MenuLink href="/services#pillar-fit" title="支柱總覽" desc="這個市場真的要你嗎？" /><MenuLink href="/services/market-assessment" title="市場機會評估" desc="2–4 週搞清楚值不值得去" /><MenuLink href="/services/product-testing" title="小批量產品測試" desc="真實消費者用錢投票" /><MenuLink href="/services/methodology" title="MBCPR 決策框架" desc="Go / No-Go 五維矩陣" /></MenuColumn>
-    <MenuColumn label="02 · 通路銷售力 · 潛力"><MenuLink href="/services#pillar-channel" title="支柱總覽" desc="上得了架，還要賣得動" /><MenuLink href="/services/channel-entry" title="通路進入與媒合" desc="北美連鎖 + 東南亞通路" /><MenuLink href="/services#pillar-channel" title="展會與加盟佈局" desc="食品 / 電子 / 加盟展" /><MenuLink href="/services#pillar-channel" title="AI 集客引擎" desc="SEO + AI 搜尋佈局" /></MenuColumn>
-    <MenuColumn label="03 · 團隊體質 · 成功率"><MenuLink href="/services#pillar-team" title="支柱總覽" desc="進得去，還要留得下" /><MenuLink href="/services/localization" title="海外團隊建置" desc="當地人才、落地合規" /><MenuLink href="/services/optimize" title="運營優化方案" desc="已在海外的進階方案" /><MenuLink href="/services#pillar-team" title="海外營運系統五階" desc="Notion + AI 數位員工" /></MenuColumn>
-    <MenuColumn label="工具與入口"><MenuLink href="/assess" title="2 分鐘處境比對" desc="跟哪個案例最像" /><MenuLink href="/services" title="三支柱總覽" desc="一頁看完整方法論" /><MenuLink href="/resources" title="補助與活動" desc="政府補助 + 現場紀錄" /><MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具" desc="免費 HS code 查詢" external /></MenuColumn>
-  </div>;
+  return <div className="grid grid-cols-5 gap-5">{SERVICE_MENU_ITEMS.map((item) => <MenuLink key={item.href} {...item} />)}</div>;
+}
+
+function AdvancedMenu() {
+  return <div className="grid max-w-[520px] grid-cols-2 gap-6">{ADVANCED_MENU_ITEMS.map((item) => <MenuLink key={item.href} {...item} />)}</div>;
 }
 
 function CasesMenu() {
@@ -321,7 +334,7 @@ function AboutMenu() {
   return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
     <MenuColumn label="認識鹿飛"><MenuLink href="/about#story" title="創辦故事" desc="我們為什麼做這件事" /><MenuLink href="/about#team" title="團隊組成" desc="台灣核心團隊 + 全球節點" /><MenuLink href="/about#how-we-work" title="我們怎麼合作" desc="你會得到什麼樣的陪跑" /></MenuColumn>
     <MenuColumn label="立場與網絡"><MenuLink href="/about#network" title="合作夥伴網絡" desc="北美 / 東南亞 / 全球物流" /><MenuLink href="/about#philosophy" title="品牌理念" desc="我們相信的事" /><MenuLink href="/about#what-we-dont-do" title="我們不做什麼" desc="誠實的邊界" /></MenuColumn>
-    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">創辦人</p><Link href="/about" className="group grid grid-cols-[52px_1fr] items-center gap-3"><span className="grid h-[52px] w-[52px] place-items-center bg-gold font-bold text-navy">AY</span><span><b className="block text-[14px] font-semibold group-hover:text-sky">Aaron Yu</b><small className="block text-[12px] text-gold-d">鹿飛 LUFÉ 創辦人</small><small className="block text-[12px] text-tx3">42+ 年國際物流實戰<br />500+ 出口案件 · 30+ 國家</small></span></Link></div>
+    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">創辦人</p><Link href="/about" className="group grid grid-cols-[52px_1fr] items-center gap-3"><span className="grid h-[52px] w-[52px] place-items-center bg-gold font-bold text-navy">AY</span><span><b className="block text-[14px] font-semibold group-hover:text-sky">Aaron Yu</b><small className="block text-[12px] text-gold-d">鹿飛 LUFÉ 創辦人</small><small className="block text-[12px] text-tx3">42 年國際物流實戰<br />500+ 出口案件 · 30+ 國家</small></span></Link></div>
   </div>;
 }
 
@@ -346,7 +359,8 @@ function MobileSubLink({ href, title, icon, onClose }: { href: string; title: st
 }
 
 function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: () => void }) {
-  if (itemKey === "services") return <><p className="mb-1 mt-1 px-7 text-[11px] font-semibold tracking-[.05em] text-tx2">完整路徑</p>{STAGE_ORDER.map((slug) => <MobileSubLink key={slug} href={`/services/${slug}`} title={STAGES[slug].title} onClose={onClose} />)}<p className="mb-1 mt-3 px-7 text-[11px] font-semibold tracking-[.05em] text-tx2">進階方案</p><MobileSubLink href="/services/optimize" title="運營優化方案" onClose={onClose} /><MobileSubLink href="/services/methodology" title="鹿飛方法論" onClose={onClose} /><MobileSubLink href="/services" title="服務總覽" onClose={onClose} /></>;
+  if (itemKey === "services") return <>{SERVICE_MENU_ITEMS.map((item) => <MobileSubLink key={item.href} href={item.href} title={item.title} onClose={onClose} />)}</>;
+  if (itemKey === "advanced") return <>{ADVANCED_MENU_ITEMS.map((item) => <MobileSubLink key={item.href} href={item.href} title={item.title} onClose={onClose} />)}</>;
   if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={`${caseItem.num} ${caseItem.title}`} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例" onClose={onClose} /></>;
   if (itemKey === "about") return <><MobileSubLink href="/about#story" title="創辦故事" onClose={onClose} /><MobileSubLink href="/about#team" title="團隊組成" onClose={onClose} /><MobileSubLink href="/about#how-we-work" title="我們怎麼合作" onClose={onClose} /><MobileSubLink href="/about#network" title="合作夥伴網絡" onClose={onClose} /><MobileSubLink href="/about#what-we-dont-do" title="我們不做什麼" onClose={onClose} /></>;
   return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} /><MobileSubLink href="/insights?cat=東南亞趨勢" title="東南亞趨勢" icon={<CategoryIcon category="東南亞趨勢" />} onClose={onClose} /><MobileSubLink href="/insights?cat=北美市場" title="北美市場" icon={<CategoryIcon category="北美市場" />} onClose={onClose} /><MobileSubLink href="/insights?cat=出海實戰" title="出海實戰" icon={<CategoryIcon category="出海實戰" />} onClose={onClose} /><MobileSubLink href="/insights?cat=企業體質" title="企業體質" icon={<CategoryIcon category="企業體質" />} onClose={onClose} /><MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;

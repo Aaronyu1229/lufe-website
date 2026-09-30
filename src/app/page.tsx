@@ -1,10 +1,16 @@
 import { HeroSection } from "@/components/home/HeroSection";
-import { PositioningBand } from "@/components/home/PositioningBand";
-import { SubsidyAlertBand } from "@/components/home/SubsidyAlertBand";
+import { OpeningSection } from "@/components/home/OpeningSection";
+import { ChaptersSection } from "@/components/home/PositioningBand";
+import { JumpingSection } from "@/components/home/JumpingSection";
 import { CasesSection } from "@/components/home/CasesSection";
-import { WhySection } from "@/components/home/WhySection";
+import { LatestInsightsSection } from "@/components/home/LatestInsightsSection";
+import { OneContractSection } from "@/components/home/WhySection";
 import { HomeFAQ } from "@/components/home/HomeFAQ";
 import { CTASection } from "@/components/home/CTASection";
+import { articles } from "@/data/articles";
+import { toDatabaseInsightCard, toInsightCard } from "@/lib/articles/presentation";
+import { listPublishedArticles } from "@/lib/articles/repository";
+import type { DatabaseArticle } from "@/lib/articles/repository";
 
 // Self-referencing canonical. The root layout no longer sets a global one —
 // it made every page claim the homepage as its canonical. Each page owns its
@@ -14,14 +20,34 @@ export const metadata = {
   openGraph: { url: "/" },
 };
 
-export default function Home() {
+export const revalidate = 300;
+
+export default async function Home() {
+  let databaseArticles: DatabaseArticle[] = [];
+
+  try {
+    databaseArticles = await listPublishedArticles();
+  } catch {
+    databaseArticles = [];
+  }
+
+  const latestArticles = [
+    ...articles.map(toInsightCard),
+    ...databaseArticles.map(toDatabaseInsightCard),
+  ]
+    .filter((article) => article.slug !== "vietnam-market-entry-guide")
+    .sort((left, right) => right.date.localeCompare(left.date))
+    .slice(0, 3);
+
   return (
     <>
       <HeroSection />
-      <PositioningBand />
-      <SubsidyAlertBand />
+      <OpeningSection />
+      <ChaptersSection />
+      <JumpingSection />
       <CasesSection />
-      <WhySection />
+      <LatestInsightsSection articles={latestArticles} />
+      <OneContractSection />
       <HomeFAQ />
       <CTASection />
     </>
