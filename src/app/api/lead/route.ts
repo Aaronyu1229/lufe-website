@@ -1,6 +1,6 @@
 import { createLead, updateLeadNotification, type LeadValues } from "@/lib/leads/repository";
 
-type LeadForm = "quick" | "contact";
+type LeadForm = "quick" | "contact" | "waitlist";
 
 type LeadInput = {
   form: LeadForm;
@@ -12,6 +12,8 @@ type LeadInput = {
   product: string;
   stage: string;
   message: string;
+  monthlyVolume: string;
+  currentHandler: string;
   page: string;
 };
 
@@ -43,7 +45,10 @@ const maxLengths = {
   product: 200,
   stage: 60,
   message: 3000,
+  currentHandler: 100,
 } as const;
+
+const monthlyVolumes = ["<100", "100～500", "500 以上"] as const;
 
 const stringValue = (value: unknown): string => typeof value === "string" ? value.trim() : "";
 
@@ -61,7 +66,7 @@ const validateLead = (body: unknown): { input?: LeadInput; errors?: Record<strin
 
   const record = body as Record<string, unknown>;
   const form = stringValue(record.form);
-  if (form !== "quick" && form !== "contact") {
+  if (form !== "quick" && form !== "contact" && form !== "waitlist") {
     return { errors: { form: "表單格式不正確" } };
   }
 
@@ -74,7 +79,9 @@ const validateLead = (body: unknown): { input?: LeadInput; errors?: Record<strin
     company: stringValue(record.company),
     product: stringValue(record.product),
     stage: stringValue(record.stage),
-    message: stringValue(record.message),
+    message: form === "waitlist" ? "海外客服首批登記" : stringValue(record.message),
+    monthlyVolume: stringValue(record.monthlyVolume),
+    currentHandler: stringValue(record.currentHandler),
     page: stringValue(record.page),
   };
   const errors: Record<string, string> = {};
@@ -83,11 +90,19 @@ const validateLead = (body: unknown): { input?: LeadInput; errors?: Record<strin
     if (!input.name) errors.name = "請填姓名";
     if (!input.contact) errors.contact = "請留 Email 或電話";
     if (!input.message) errors.message = "請簡單說明一下";
-  } else {
+  } else if (input.form === "contact") {
     if (!input.name) errors.name = "請填寫姓名";
     if (!input.email) errors.email = "請填寫 Email";
     else if (!emailPattern.test(input.email)) errors.email = "Email 格式不正確";
     if (!input.message) errors.message = "請填寫你的問題";
+  } else {
+    if (!input.name) errors.name = "請填寫品牌名稱";
+    if (!input.email) errors.email = "請填寫 Email";
+    else if (!emailPattern.test(input.email)) errors.email = "Email 格式不正確";
+    if (!input.monthlyVolume) errors.monthlyVolume = "請選擇每月客訊量";
+    else if (!monthlyVolumes.includes(input.monthlyVolume as (typeof monthlyVolumes)[number])) {
+      errors.monthlyVolume = "每月客訊量不正確";
+    }
   }
 
   if (!errors.name && input.name.length > maxLengths.name) errors.name = "姓名不可超過 100 字";
@@ -98,6 +113,9 @@ const validateLead = (body: unknown): { input?: LeadInput; errors?: Record<strin
   if (input.product.length > maxLengths.product) errors.product = "產品不可超過 200 字";
   if (input.stage.length > maxLengths.stage) errors.stage = "出海階段不可超過 60 字";
   if (!errors.message && input.message.length > maxLengths.message) errors.message = "訊息不可超過 3000 字";
+  if (input.currentHandler.length > maxLengths.currentHandler) {
+    errors.currentHandler = "現在誰在接不可超過 100 字";
+  }
 
   return Object.keys(errors).length > 0 ? { errors } : { input };
 };
@@ -105,7 +123,9 @@ const validateLead = (body: unknown): { input?: LeadInput; errors?: Record<strin
 const notificationPayload = (input: LeadInput): LeadNotification => {
   const payload: LeadNotification = {
     kind: "inquiry",
-    source: input.form === "quick" ? "快速留言" : "聯絡頁完整表單",
+    source: input.form === "quick"
+      ? "快速留言"
+      : input.form === "contact" ? "聯絡頁完整表單" : "海外客服首批登記",
     lang: "zh",
   };
 
@@ -121,9 +141,17 @@ const notificationPayload = (input: LeadInput): LeadNotification => {
     if (input.phone) payload.phone = cut(input.phone, 50);
   }
 
-  const message = [input.message];
-  if (input.product) message.push(`產品：${input.product}`);
-  if (input.stage) message.push(`出海階段：${input.stage}`);
+  const message = input.form === "waitlist"
+    ? [
+      input.message,
+      `每月客訊：${input.monthlyVolume}`,
+      `現在誰在接：${input.currentHandler || "未填寫"}`,
+    ]
+    : [
+      input.message,
+      ...(input.product ? [`產品：${input.product}`] : []),
+      ...(input.stage ? [`出海階段：${input.stage}`] : []),
+    ];
   payload.msg = cut(message.join("\n"), 3000);
 
   return payload;
@@ -199,6 +227,8 @@ export async function POST(request: Request): Promise<Response> {
     product: nullable(input.product),
     stage: nullable(input.stage),
     message: input.message,
+    monthlyVolume: input.form === "waitlist" ? nullable(input.monthlyVolume) : null,
+    currentHandler: input.form === "waitlist" ? nullable(input.currentHandler) : null,
     page: nullable(input.page),
     userAgent: nullable(request.headers.get("user-agent")?.trim() ?? ""),
   };

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { StagePage } from "@/components/services/StagePage";
-import { STAGES } from "@/data/services";
+import { ChapterPage } from "@/components/services/ChapterPage";
+import { CHAPTERS } from "@/data/chapters";
 
 export const metadata: Metadata = {
-  title: "產品測試 | 鹿飛 LUFÉ",
+  title: "品測｜先讓馬尼拉的媽媽拿起來看看 | 鹿飛 LUFÉ",
   description:
-    "小批量投放，用真實數據取代主觀猜測。4–6 週內讓市場告訴你產品該怎麼調整。",
+    "你在台灣問了一百個人，還是不知道馬尼拉的媽媽會不會掏錢。品測就是把這個問題，拿去問她本人。",
 };
 
 export default function ProductTestingPage() {
-  return <StagePage stage={STAGES["product-testing"]} />;
+  return <ChapterPage chapter={CHAPTERS.m1} />;
 }

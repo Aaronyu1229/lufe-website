@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { StagePage } from "@/components/services/StagePage";
-import { STAGES } from "@/data/services";
+import { ChapterPage } from "@/components/services/ChapterPage";
+import { CHAPTERS } from "@/data/chapters";
 
 export const metadata: Metadata = {
-  title: "海外落地 | 鹿飛 LUFÉ",
+  title: "公司落地｜開始想要在當地有自己的人 | 鹿飛 LUFÉ",
   description:
-    "不只是賣出去，還要站得穩。持續性的在地營運支援，從 SOP 到數據儀表板。",
+    "賣得動了。你開始想：要不要開一間自己的公司、找第一個員工、把證掛到自己名下。然後你發現，每一件事都需要有人在當地。",
 };
 
 export default function LocalizationPage() {
-  return <StagePage stage={STAGES.localization} />;
+  return <ChapterPage chapter={CHAPTERS.m9} />;
 }

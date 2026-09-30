@@ -72,6 +72,21 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/services/market-assessment",
+        destination: "/services/product-testing",
+        permanent: true,
+      },
+      {
+        source: "/services/channel-entry",
+        destination: "/services/north-america",
+        permanent: true,
+      },
+      {
+        source: "/insights/vietnam-market-entry-guide",
+        destination: "/insights/southeast-asia-ecommerce-2026",
+        permanent: true,
+      },
+      {
         source: "/:path((?!ghost/).+)/",
         destination: "/:path",
         permanent: true,
