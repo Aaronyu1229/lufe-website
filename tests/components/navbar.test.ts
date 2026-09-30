@@ -31,4 +31,10 @@ describe("Navbar", () => {
     expect(markup).not.toContain("AY");
     expect(markup).not.toContain("分類瀏覽");
   });
+
+  it("never lists an insight chapter that has no articles", () => {
+    const markup = renderNavbar();
+
+    expect(markup).not.toContain("0 篇");
+  });
 });

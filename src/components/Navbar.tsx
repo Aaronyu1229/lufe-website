@@ -34,6 +34,8 @@ const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
 ];
 
 const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
+// Chapters without articles stay out of the menu (a "0 篇" row reads as an empty site); they appear once an article is mapped.
+const VISIBLE_INSIGHT_CHAPTERS = INSIGHT_MENU_CHAPTERS.filter((chapter) => CHAPTER_ARTICLES[chapter].length > 0);
 
 const ABOUT_MENU_ITEMS = [
   { href: "/about#story", title: "創辦故事", desc: "我們為什麼做這件事", num: "01" },
@@ -462,7 +464,7 @@ function InsightsMenu() {
 
   return <>
     <MenuColumn label="按章節找">
-      {INSIGHT_MENU_CHAPTERS.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} desc={`${CHAPTER_ARTICLES[chapter].length} 篇`} marker={<ChapterIcon chapter={chapter} />} />)}
+      {VISIBLE_INSIGHT_CHAPTERS.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} desc={`${CHAPTER_ARTICLES[chapter].length} 篇`} marker={<ChapterIcon chapter={chapter} />} />)}
     </MenuColumn>
     <MenuColumn label="其他內容" bordered>
       <MenuLink href="/resources" title="補助與活動" desc="政府補助＋現場紀錄" marker={<FileIcon />} />
@@ -539,7 +541,7 @@ function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: ()
   if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={caseItem.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例 →" onClose={onClose} /></>;
   if (itemKey === "about") return <>{ABOUT_MENU_ITEMS.map((item) => <MobileSubLink key={item.num} href={item.href} title={item.title} marker={<span className="num text-[13px] font-bold">{item.num}</span>} onClose={onClose} />)}</>;
   return <>
-    {INSIGHT_MENU_CHAPTERS.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
+    {VISIBLE_INSIGHT_CHAPTERS.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
     <MobileSubLink href="/resources" title="補助與活動" marker={<FileIcon />} onClose={onClose} />
     <MobileSubLink href="/field-notes" title="現場紀錄" marker={<PinIcon />} onClose={onClose} />
     <MobileSubLink href="https://tradepiloter.com" title="TradePilot 關稅工具 ↗" marker={<TradeIcon />} external onClose={onClose} />
