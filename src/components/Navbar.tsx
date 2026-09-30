@@ -292,15 +292,18 @@ function CasesMenu() {
 
 // Monochrome line icons, stroke weighted to match the semibold labels, replacing emoji so category marks follow text color.
 const CATEGORY_ICON_PATHS: Record<string, ReactNode> = {
-  菲律賓: <><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></>,
   印尼: <><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></>,
   東南亞趨勢: <><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></>,
-  北美市場: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z" /></>,
   出海實戰: <><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></>,
   企業體質: <><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" /><path d="M15 9h4a1 1 0 0 1 1 1v11" /><path d="M3 21h18" /><path d="M8 8h3M8 12h3M8 16h3" /></>,
 };
 
+// Markets with an unambiguous country get a code badge instead of a generic pin.
+const CATEGORY_CODES: Record<string, string> = { 菲律賓: "PH", 北美市場: "US" };
+
 function CategoryIcon({ category }: { category: string }) {
+  const code = CATEGORY_CODES[category];
+  if (code) return <span aria-hidden="true" className="grid h-4 w-4 shrink-0 place-items-center rounded-[3px] border-[1.5px] border-current text-[7.5px] font-bold leading-none tracking-[-.02em]">{code}</span>;
   return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="block shrink-0">{CATEGORY_ICON_PATHS[category]}</svg>;
 }
 
