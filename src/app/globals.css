@@ -539,20 +539,17 @@ h3:not(.sr-only) { letter-spacing: -.008em; }
   transition: transform .25s var(--ease-spring);
 }
 [data-lufe-text-link]:hover::after { transform: scaleX(1); }
-[data-lufe-heading] [class*="text-gold"] { position: relative; display: inline-block; }
-[data-lufe-heading] [class*="text-gold"]::after {
-  position: absolute;
-  right: 0;
-  bottom: -.08em;
-  left: 0;
-  height: 2px;
-  content: "";
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
+/* Gold words keep wrapping as their own balanced block; the underline is a text decoration, so it sits under each line of text. */
+[data-lufe-heading] [class*="text-gold"] {
+  display: inline-block;
+  text-wrap: balance;
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .18em;
+  text-decoration-color: transparent;
+  transition: text-decoration-color .9s var(--ease-spring) .15s;
 }
-[data-lufe-heading][data-lufe-heading-lit] [class*="text-gold"]::after { animation: lufe-gold-underline .7s var(--ease-spring) both; }
-@keyframes lufe-gold-underline { to { transform: scaleX(1); } }
+[data-lufe-heading][data-lufe-heading-lit] [class*="text-gold"] { text-decoration-color: currentColor; }
 
 [data-lufe-hero-photo] {
   transform: translateY(var(--lufe-hero-drift, 0)) scale(1.08);
@@ -671,8 +668,9 @@ h3:not(.sr-only) { letter-spacing: -.008em; }
 }
 @media (prefers-reduced-motion: reduce) {
   .lufe-reading-progress, .lufe-back-to-top, [data-lufe-arrow], [data-lufe-text-link]::after, [data-lufe-hero-photo], .lufe-mail-preview, .lufe-score-zone, .lufe-track-row, .lufe-local-owner::before, .lufe-insight-card img, .lufe-case-cover { transition: none !important; }
-  [data-lufe-heading] [class*="text-gold"]::after, .lufe-contract-row[data-lufe-sweep=""]::after, .lufe-track-row[data-lufe-track-arrived]::after { animation: none !important; }
+  .lufe-contract-row[data-lufe-sweep=""]::after, .lufe-track-row[data-lufe-track-arrived]::after { animation: none !important; }
   [data-lufe-hero-photo], [data-lufe-hero-photo][data-lufe-hero-settled] { transform: none; }
+  [data-lufe-heading] [class*="text-gold"] { text-decoration-color: currentColor; transition: none; }
   .lufe-mail-preview { opacity: 1; transform: none; }
   .lufe-mail-reply { display: block; }
   [data-lufe-belief] .lufe-belief-number { background: var(--color-gold); color: var(--color-navy); }
