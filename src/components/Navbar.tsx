@@ -53,7 +53,7 @@ function pathnameHasDarkHero(pathname: string): boolean {
   return pathname.startsWith("/services") || pathname.startsWith("/cases");
 }
 
-export function Navbar() {
+export function Navbar({ children }: { readonly children?: ReactNode }) {
   const pathname = usePathname() ?? "";
   const { open: openMessageBox } = useMessageBox();
   const darkHero = pathnameHasDarkHero(pathname);
@@ -64,6 +64,7 @@ export function Navbar() {
   const [mobileGroup, setMobileGroup] = useState<MenuKey | null>(null);
   const [megaOrigin, setMegaOrigin] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
+  const megaMenuRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<Partial<Record<MenuKey, HTMLDivElement>>>({});
   const closeTimer = useRef<number | undefined>(undefined);
   const megaReveal = useSpring(0, { precision: 0.002 });
@@ -91,7 +92,6 @@ export function Navbar() {
     if (!mobileOpen) return;
     setMobileOpen(false);
     setMobileGroup(null);
-    mobileReveal.to(0, { response: 0.3 });
   }
 
   function openMega(key: MenuKey, trigger: HTMLButtonElement) {
@@ -110,7 +110,6 @@ export function Navbar() {
       return;
     }
     setMobileOpen(true);
-    mobileReveal.to(1, { response: 0.35 });
   }
 
   useEffect(() => {
@@ -150,9 +149,13 @@ export function Navbar() {
   }, [mobileOpen]);
 
   useEffect(() => {
+    mobileReveal.to(mobileOpen ? 1 : 0, { response: mobileOpen ? 0.35 : 0.3 });
+  }, [mobileOpen, mobileReveal]);
+
+  useEffect(() => {
     const closeOnScroll = () => closeMega(0);
     const closeOnPointerDown = (event: PointerEvent) => {
-      if (headerRef.current?.contains(event.target as Node)) return;
+      if (headerRef.current?.contains(event.target as Node) || megaMenuRef.current?.contains(event.target as Node)) return;
       closeMega(0);
     };
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -183,7 +186,8 @@ export function Navbar() {
   const mobileOpacity = mobileReveal.value;
 
   return (
-    <header ref={headerRef} className="fixed inset-x-0 top-0 z-[100]" onMouseLeave={() => closeMega()}>
+    <>
+      <header ref={headerRef} className="fixed inset-x-0 top-0 z-[100]" onMouseLeave={() => closeMega()}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-gold focus:px-4 focus:py-2 focus:text-[14.5px] focus:font-semibold focus:text-navy">
         跳到主要內容
       </a>
@@ -225,34 +229,6 @@ export function Navbar() {
         </div>
       </nav>
 
-      <div
-        id="desktop-mega-menu"
-        className="lufe-glass-panel absolute left-1/2 top-[64px] hidden min-h-[300px] w-[min(1120px,calc(100vw-24px))] overflow-hidden text-tx min-[900px]:block"
-        style={{
-          height: megaHeight.value,
-          opacity: menuOpacity,
-          pointerEvents: megaOpen ? "auto" : "none",
-          transform: `translateX(-50%) scaleY(${menuScale})`,
-          transformOrigin: `${megaOrigin}px top`,
-          filter: `blur(${(1 - menuOpacity) * 4}px)`,
-          visibility: menuOpacity > 0.01 ? "visible" : "hidden",
-        }}
-        onMouseEnter={clearClose}
-        onMouseLeave={() => closeMega()}
-      >
-        {navItems.map((item) => (
-          <MegaPane
-            key={item.key}
-            itemKey={item.key}
-            active={activeMenu === item.key && megaOpen}
-            onMessageOpen={openMessageBox}
-            setRef={(node) => {
-              if (node) panelRefs.current[item.key] = node;
-            }}
-          />
-        ))}
-      </div>
-
       <div className="fixed inset-0 top-[64px] z-[-1] bg-[#0B1322]/42 min-[900px]:hidden" style={{ opacity: mobileOpacity, pointerEvents: mobileOpen ? "auto" : "none", visibility: mobileOpacity > 0.01 ? "visible" : "hidden" }} onClick={closeMobile} />
       <div
         id="mobile-navigation"
@@ -279,7 +255,37 @@ export function Navbar() {
         <strong>聊聊你的產品 →</strong>
       </button>
       <DelightLayer />
-    </header>
+      </header>
+      {children}
+      <div
+        ref={megaMenuRef}
+        id="desktop-mega-menu"
+        className="lufe-glass-panel fixed left-1/2 top-[64px] z-[100] hidden min-h-[300px] w-[min(1120px,calc(100vw-24px))] overflow-hidden text-tx min-[900px]:block"
+        style={{
+          height: megaHeight.value,
+          opacity: menuOpacity,
+          pointerEvents: megaOpen ? "auto" : "none",
+          transform: `translateX(-50%) scaleY(${menuScale})`,
+          transformOrigin: `${megaOrigin}px top`,
+          filter: `blur(${(1 - menuOpacity) * 4}px)`,
+          visibility: menuOpacity > 0.01 ? "visible" : "hidden",
+        }}
+        onMouseEnter={clearClose}
+        onMouseLeave={() => closeMega()}
+      >
+        {navItems.map((item) => (
+          <MegaPane
+            key={item.key}
+            itemKey={item.key}
+            active={activeMenu === item.key && megaOpen}
+            onMessageOpen={openMessageBox}
+            setRef={(node) => {
+              if (node) panelRefs.current[item.key] = node;
+            }}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 

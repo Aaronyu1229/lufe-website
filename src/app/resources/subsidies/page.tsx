@@ -5,20 +5,37 @@ import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
 import { Disclosure } from "@/components/ui";
+import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/StructuredData";
 import { SubsidiesCTASection } from "@/components/subsidy/SubsidiesCTASection";
 import { SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
 import { SubsidyComparison, SubsidyPlanCard } from "@/components/subsidy/SubsidyPlanCard";
 import { STAGE_LABELS, SUBSIDIES, SUBSIDY_CARD_COPY } from "@/data/subsidies";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "2026 政府出海補助 — 鹿飛 LUFÉ",
-  description:
-    "貿易署、經濟部、中企署——四個正在開放的計畫，幫台灣企業降低出海成本。鹿飛整理的實戰版本，直接告訴你哪個適合你。",
-};
+export const metadata: Metadata = createPageMetadata({
+  path: "/resources/subsidies",
+  title: "2026 政府出海補助",
+  description: "貿易署、經濟部、中企署——四個正在開放的計畫，幫台灣企業降低出海成本。鹿飛整理的實戰版本，直接告訴你哪個適合你。",
+});
+
+export const SUBSIDY_FAQS = [
+  { question: "鹿飛會幫我申請補助嗎？", answer: "我們不是代辦公司。但我們能幫你把「為什麼要出海、要去哪、要怎麼做」講清楚——這剛好就是計畫書的核心。很多客戶是把我們的評估報告直接當成申請依據。" },
+  { question: "我要自己寫計畫書嗎？", answer: "計畫書的主體要由你公司提出（這是規定）。但鹿飛會提供完整的市場分析、策略規劃與執行方案，讓你只要把內容整理成官方格式即可。" },
+  { question: "可以同時申請多個計畫嗎？", answer: "可以。不同計畫針對不同用途，例如展覽補助不衝突海外通路布建補助。但同一筆費用不能重複請款，這是基本原則。" },
+  { question: "申請通過率高嗎？", answer: "各計畫不同，但有策略、有數據、有明確商業目標的申請案明顯較容易過。鹿飛的產出剛好符合這三項——我們不會保證你一定拿到，但會把你的勝率拉到最高。" },
+  { question: "如果我還沒開始出海，現在申請會不會太早？", answer: "第 4 項跨境電商輔導就是為你這種情況設計的——先用免費資源學，不用先投錢。等你有方向了再申請金額較大的計畫。" },
+] as const;
 
 export default function SubsidiesPage() {
   return (
-    <div className="overflow-hidden bg-white">
+    <>
+      <BreadcrumbJsonLd items={[
+        { name: "首頁", path: "/" },
+        { name: "資源", path: "/resources" },
+        { name: "2026 政府出海補助", path: "/resources/subsidies" },
+      ]} />
+      <FaqJsonLd items={SUBSIDY_FAQS} />
+      <div className="overflow-hidden bg-white">
       <section className="lufe-hero bg-navy px-5 text-white md:px-10 lg:px-16">
         <HeroBackdrop src={SUBSIDY_CARD_COPY.hero} />
         <div className="lufe-hero-content mx-auto max-w-[1400px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
@@ -83,7 +100,7 @@ export default function SubsidiesPage() {
       <section className="bg-white px-5 py-[72px] md:px-10 md:py-[96px] lg:px-16">
         <div className="mx-auto max-w-[860px]">
           <h2 className="h2 mb-12 text-tx">申請前你最可能想問的事</h2>
-          <div className="border-b border-bd2"><FAQItem q="鹿飛會幫我申請補助嗎？" a="我們不是代辦公司。但我們能幫你把「為什麼要出海、要去哪、要怎麼做」講清楚——這剛好就是計畫書的核心。很多客戶是把我們的評估報告直接當成申請依據。" /><FAQItem q="我要自己寫計畫書嗎？" a="計畫書的主體要由你公司提出（這是規定）。但鹿飛會提供完整的市場分析、策略規劃與執行方案，讓你只要把內容整理成官方格式即可。" /><FAQItem q="可以同時申請多個計畫嗎？" a="可以。不同計畫針對不同用途，例如展覽補助不衝突海外通路布建補助。但同一筆費用不能重複請款，這是基本原則。" /><FAQItem q="申請通過率高嗎？" a="各計畫不同，但有策略、有數據、有明確商業目標的申請案明顯較容易過。鹿飛的產出剛好符合這三項——我們不會保證你一定拿到，但會把你的勝率拉到最高。" /><FAQItem q="如果我還沒開始出海，現在申請會不會太早？" a="第 4 項跨境電商輔導就是為你這種情況設計的——先用免費資源學，不用先投錢。等你有方向了再申請金額較大的計畫。" /></div>
+          <div className="border-b border-bd2">{SUBSIDY_FAQS.map((faq) => <FAQItem key={faq.question} q={faq.question} a={faq.answer} />)}</div>
         </div>
       </section>
 
@@ -91,7 +108,8 @@ export default function SubsidiesPage() {
         <div className="mx-auto flex max-w-[860px] flex-col gap-6 md:flex-row md:items-center md:justify-between"><div className="max-w-[520px]"><h3 className="h3 text-tx">補助一有更新，我們通知你</h3><p className="mt-2 text-[14.5px] leading-[1.8] text-tx2">每次有新計畫公告、金額加碼、截止日變動，鹿飛整理成一封信寄給你。不是每週轟炸，只在真的有事時才發。</p></div><div className="shrink-0"><a href="mailto:aaron.yu@reborn.in?subject=%E8%A8%82%E9%96%B1%E8%A3%9C%E5%8A%A9%E5%BF%AB%E8%A8%8A&body=%E5%B8%8C%E6%9C%9B%E6%94%B6%E5%88%B0%E9%B9%BF%E9%A3%9B%E7%9A%84%E6%94%BF%E5%BA%9C%E5%87%BA%E6%B5%B7%E8%A3%9C%E5%8A%A9%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5%EF%BC%9A%0A%0A%E5%85%AC%E5%8F%B8%EF%BC%9A%0A%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E4%B8%BB%E8%A6%81%E5%B8%82%E5%A0%B4%EF%BC%88%E5%8C%97%E7%BE%8E%2F%E6%9D%B1%E5%8D%97%E4%BA%9E%EF%BC%89%EF%BC%9A%0A" className="inline-flex items-center gap-2 bg-navy px-6 py-3.5 text-[14.5px] font-semibold text-white transition-colors hover:bg-navy/90">訂閱補助快訊 →</a><p className="mt-2 text-center text-[11px] text-tx3 md:text-right">寄信到 aaron.yu@reborn.in · 隨時退訂</p></div></div>
       </section>
       <SubsidiesCTASection />
-    </div>
+      </div>
+    </>
   );
 }
 

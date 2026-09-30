@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>鹿飛部落格計畫</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#101B30;--gold:#D4A85C;--gold-d:#8F6A1F;--cream:#F5F2EC;--cream-d:#E8E3DA;--sky:#3A6B84;--ember:#A45A20;--tx:#1A1A2E;--tx2:#5A6070;--tx3:#6A6F80;--bd:rgba(26,26,46,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,"Noto Sans TC",sans-serif;color:var(--tx);background:#fff;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header{background:var(--navy);color:#fff;padding:64px 0 48px}
+header small{color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.04em}
+header h1{font-size:clamp(30px,4.5vw,46px);letter-spacing:-.02em;line-height:1.15;margin:10px 0 14px}
+header p{color:rgba(255,255,255,.78);max-width:760px;font-size:16.5px}
+nav.toc{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:10px;padding-bottom:10px}
+nav.toc a{white-space:nowrap;font-size:13.5px;color:var(--tx2);padding:6px 12px;text-decoration:none}
+nav.toc a:hover{color:var(--sky);background:var(--cream)}
+section{padding:56px 0;border-bottom:1px solid var(--bd)}
+section.cream{background:var(--cream)}
+h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.015em;margin-bottom:8px}
+h2+p.lead{color:var(--tx2);margin-bottom:28px;max-width:820px}
+h3{font-size:19px;margin-bottom:8px;letter-spacing:-.005em}
+.grid3{display:grid;gap:16px}
+@media(min-width:900px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.grid2{display:grid;gap:16px}
+@media(min-width:800px){.grid2{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border:1px solid var(--bd);padding:22px}
+.card.a{border-top:3px solid var(--gold)}.card.b{border-top:3px solid var(--sky)}.card.c{border-top:3px solid var(--ember)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;margin-bottom:10px}
+.tA{background:#FBF1DE;color:var(--gold-d)}.tB{background:#E4EEF3;color:var(--sky)}.tC{background:#F6E6DA;color:var(--ember)}
+.card ul{padding-left:18px;font-size:14.5px;color:var(--tx2)}
+.card li{margin:4px 0}
+.quote{font-size:14.5px;border-left:3px solid var(--gold);padding:6px 12px;margin:10px 0;color:var(--tx);background:var(--cream)}
+.k{font-size:12.5px;font-weight:700;color:var(--tx3);margin:12px 0 4px;letter-spacing:.02em}
+.rules{display:grid;gap:12px}
+@media(min-width:800px){.rules{grid-template-columns:1fr 1fr}}
+.rule{background:#fff;border:1px solid var(--bd);padding:16px 18px;font-size:14.5px}
+.rule b{display:block;font-size:15px;margin-bottom:2px}
+.rule.no{border-left:4px solid #b3261e}.rule.yes{border-left:4px solid #2e7d4f}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:14px}
+th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-size:13px;font-weight:600;position:sticky;top:48px}
+td{padding:11px 12px;border-bottom:1px solid var(--bd);vertical-align:top;line-height:1.65}
+td:first-child{font-family:Inter;font-weight:700;color:var(--gold-d);white-space:nowrap}
+td b{display:block;font-size:14.5px;color:var(--tx)}
+.who{white-space:nowrap}
+.pri{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;background:var(--gold);color:var(--navy)}
+.tblwrap{overflow-x:auto;border:1px solid var(--bd)}
+.steps{display:grid;gap:10px;counter-reset:s}
+.steps div{background:#fff;border:1px solid var(--bd);padding:14px 18px 14px 56px;position:relative;font-size:14.5px}
+.steps div::before{counter-increment:s;content:counter(s,decimal-leading-zero);position:absolute;left:16px;top:14px;font-family:Inter;font-weight:700;color:var(--gold-d)}
+.steps b{display:block}
+.note{background:#FFF8E6;border:1px dashed var(--gold);padding:12px 16px;font-size:13.5px;color:#6b5217;margin-top:18px}
+.src{font-size:12.5px;color:var(--tx3)}
+.src a{color:var(--sky)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <small>鹿飛 LUFÉ · 部落格計畫 · 2026-09-30</small>
+  <h1>讓 Google 和 AI 回答「台灣品牌怎麼進菲律賓」時，引用的是我們</h1>
+  <p>依三種讀者模擬（第一次想出海的老闆、被指派研究的經理、出過海卡住的連鎖品牌）與 2026 年 SEO／GEO 規則整理。前提：先不公開品測結果、費用、案例的真實數字；作者掛 Aaron；四篇離題舊文改寫。</p>
+</div></header>
+<nav class="toc"><div class="wrap">
+  <a href="#p">三種讀者</a><a href="#r">寫作規則</a><a href="#arch">內容架構</a><a href="#list">文章清單</a><a href="#old">舊文改寫</a><a href="#tpl">每篇的骨架</a><a href="#dl">可下載工具</a><a href="#eeat">作者與網站外</a><a href="#tech">技術修正</a><a href="#m">怎麼量</a><a href="#cad">節奏</a>
+</div></nav>
+
+<section id="p"><div class="wrap">
+  <h2>三種讀者</h2>
+  <p class="lead">三個分身各自用第一人稱模擬了 20 組 Google 搜尋字、15 句問 AI 的話、擔心與信任訊號。以下是精華；完整模擬在對話紀錄裡。</p>
+  <div class="grid3">
+    <div class="card a"><span class="tag tA">甲 · 第一次想出海的品牌老闆</span>
+      <p style="font-size:14.5px;color:var(--tx2)">食品／保健／美妝，台灣通路賣得穩但不成長。晚上躺沙發用手機查。花自己的錢，最怕砸幾百萬回不來、又被中間人坑。</p>
+      <div class="quote">「我不怕花錢，我怕花了幾百萬，最後連失敗在哪裡都不知道。」</div>
+      <p class="k">他會搜</p><ul><li>菲律賓 FDA 註冊 要多久／費用</li><li>菲律賓代理商 被騙</li><li>外銷 小量 測試市場 怎麼做</li><li>出海 第一年 要準備多少錢</li></ul>
+      <p class="k">他會相信</p><ul><li>講得出順序和卡點</li><li>敢說「這種不建議去」</li><li>有真人、做過物流現場</li><li>最小一步花多少、做完能停</li></ul>
+      <p class="k">讓他關掉</p><ul><li>開頭「東南亞人口六億」</li><li>一直叫他預約諮詢</li><li>「保證上架」</li></ul>
+    </div>
+    <div class="card b"><span class="tag tB">乙 · 被指派研究出海的經理</span>
+      <p style="font-size:14.5px;color:var(--tx2)">海外業務／行銷／特助，幾週內要交簡報讓老闆決定。認真比價，要能截圖、能引用的中文資料，怕推薦錯人背責任。</p>
+      <div class="quote">「大家都說『看個案』，但我的簡報上不能寫『看個案』。」</div>
+      <p class="k">他會搜</p><ul><li>菲律賓 LTO CPR CPN 差異</li><li>進口商 LTO 代持 風險</li><li>台灣食品 外銷菲律賓 需要什麼文件</li><li>菲律賓 市場進入 顧問 推薦</li></ul>
+      <p class="k">他敢引用</p><ul><li>有日期、有官方連結</li><li>有具名作者與經歷</li><li>比較表、流程圖、清單</li><li>分清「法規」與「我們的經驗」</li></ul>
+      <p class="k">他最想要</p><ul><li>可下載的簡報大綱、詢價清單</li><li>空白的五題評分表</li></ul>
+    </div>
+    <div class="card c"><span class="tag tC">丙 · 出過海、卡住、想收回自己做</span>
+      <p style="font-size:14.5px;color:var(--tx2)">連鎖餐飲或美業，透過代理／加盟進了菲律賓：配方被換、店選錯、商標沒註冊、客訴沒人回。懂生意，對顧問很不耐煩。</p>
+      <div class="quote">「你們講的東西我問 AI 都查得到。我要付錢買的是你們踩過的坑。」</div>
+      <p class="k">他會搜</p><ul><li>菲律賓 解除代理 商標 拿回來</li><li>菲律賓 員工 突然不來 AWOL</li><li>Shopee 菲律賓 客服 外包</li><li>台灣品牌 菲律賓 自己做 踩雷</li></ul>
+      <p class="k">他會相信</p><ul><li>講自己的失敗</li><li>營運現場的小事（班表、收銀、雨季）</li><li>Taglish 回覆範例</li><li>「清關慢→加盟主換原料」這種因果</li></ul>
+      <p class="k">他怎麼聯絡</p><ul><li>先 LINE 問一句具體的，看回得專不專業</li></ul>
+    </div>
+  </div>
+  <p class="note">這是依角色推想的模擬，不是訪談。發文前用 DataForSEO 驗證搜尋量、挑優先順序；有機會的話找 2～3 位真實客戶對一次。</p>
+</div></section>
+
+<section id="r" class="cream"><div class="wrap">
+  <h2>寫作規則：三種讀者＋2026 年的 Google 與 AI 都同意的事</h2>
+  <p class="lead">2026 年 Google 把 AI 模式設為預設，兩次核心更新都在獎勵「第一手、有證據」的內容；AI 最常引用的是開頭就答、每個小標題能獨立成立、有出處的段落。剛好跟三種讀者要的一樣。</p>
+  <div class="rules">
+    <div class="rule yes"><b>開頭 60 字內直接回答</b>題目問什麼就先答什麼，再展開。AI 摘要和甲、乙都靠這一段決定要不要讀下去。</div>
+    <div class="rule yes"><b>講順序與卡點，不列法條</b>「先做哪個、再做哪個、通常卡在哪一步、為什麼」。這是我們的獨家價值，也是 Google 說的「資訊增益」。</div>
+    <div class="rule yes"><b>至少一個「我們在現場看到的」</b>不放數字也能寫：情境、做錯的決定、後來怎麼改。丙只信這個。</div>
+    <div class="rule yes"><b>敢寫「什麼情況不建議」</b>每篇一段。甲說這會讓他相信其他內容。</div>
+    <div class="rule yes"><b>法規一律附官方連結＋查證日期</b>分開標示「法規怎麼寫」與「實務上我們看到」。</div>
+    <div class="rule yes"><b>作者、最後更新日、可截圖的表</b>乙要引用，AI 也更愛引用有作者與日期的頁面。</div>
+    <div class="rule no"><b>不寫「東南亞人口紅利、黃金十年」開場</b>三種讀者都說看到就關。</div>
+    <div class="rule no"><b>不在每段叫人預約</b>文末只放一個最小下一步：品測 1～2 萬、做完可以停。</div>
+    <div class="rule no"><b>不寫沒出處的精確數字、不寫「保證」</b>也不公開品測結果、費用、案例的真實數字（目前決定）。</div>
+    <div class="rule no"><b>不量產 AI 文</b>2026 年的更新專門降權模板化內容。可以用 AI 起草，但素材必須來自 Aaron 或合作夥伴的第一手經驗。</div>
+  </div>
+</div></section>
+
+<section id="arch"><div class="wrap">
+  <h2>內容架構：四章是四個主題群，再加一個「基礎」</h2>
+  <p class="lead">每章的方案頁當主頁，底下掛 3～5 篇回答具體問題的文章，互相連結；網站上的「延伸閱讀」已經是這個結構。另外加一個跨章的「基礎」群，放乙最需要的名詞、流程、文件清單。</p>
+  <div class="grid2">
+    <div class="card a"><h3>第一個月：市場與品測</h3><p style="font-size:14px;color:var(--tx2)">主讀者：甲、乙　主頁：品測</p><p style="font-size:14px">要不要去、賣多少錢有人買、怎麼小量測試、報告怎麼看。</p></div>
+    <div class="card b"><h3>第三個月：通路與證</h3><p style="font-size:14px;color:var(--tx2)">主讀者：乙、甲　主頁：寄賣</p><p style="font-size:14px">證要辦什麼、掛誰名下、代理獨家能不能答應、電商先走哪個。</p></div>
+    <div class="card c"><h3>第九個月：落地與團隊</h3><p style="font-size:14px;color:var(--tx2)">主讀者：丙　主頁：公司落地</p><p style="font-size:14px">收回代理、開公司、聘第一個店長、選商場、商標。</p></div>
+    <div class="card"><h3>之後的每一天：客服與營運</h3><p style="font-size:14px;color:var(--tx2)">主讀者：丙　主頁：海外客服、運營優化</p><p style="font-size:14px">客訴誰回、Taglish、員工突然不來、遠端管店。</p></div>
+    <div class="card"><h3>基礎：名詞、流程、文件</h3><p style="font-size:14px;color:var(--tx2)">主讀者：乙　主頁：方法論</p><p style="font-size:14px">LTO／CPR／CPN、四種進入模式、文件清單、標籤。</p></div>
+    <div class="card"><h3>北美市場（另一條線）</h3><p style="font-size:14px;color:var(--tx2)">主讀者：甲　主頁：北美通路</p><p style="font-size:14px">既有 FDA、亞馬遜兩篇＋改寫。</p></div>
+  </div>
+</div></section>
+
+<section id="list" class="cream"><div class="wrap">
+  <h2>文章清單（24 篇，標 <span class="pri">先寫</span> 的是第一季）</h2>
+  <p class="lead">題目用讀者的口吻；「第一手素材」都是不需要公開數字的經驗與流程。法律、法規類的段落一律要查證並寫上日期。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>#</th><th>題目／要回答的問題</th><th>章</th><th>寫給</th><th>第一手素材（不放數字）</th></tr></thead>
+    <tbody>
+      <tr><td>01</td><td><span class="pri">先寫</span><b>我的產品在菲律賓要賣多少錢才有人買？不出一櫃貨也能先知道的方法</b>回答：怎麼判斷價格帶、該問誰、品測在做什麼</td><td>一</td><td class="who">甲</td><td>品測面板的進行方式；家長「看到價格放下」那一刻的觀察（描述，不給比例）</td></tr>
+      <tr><td>02</td><td><span class="pri">先寫</span><b>菲律賓 FDA 的 LTO、CPR、CPN 到底差在哪？食品和美妝各要辦什麼</b>回答：名詞、誰申請、順序（一張表）</td><td>基礎</td><td class="who">乙</td><td>我們處理時的順序與常見退件原因（附官方連結＋查證日）</td></tr>
+      <tr><td>03</td><td><span class="pri">先寫</span><b>產品證掛在進口商名下，以後要換人怎麼辦？出海前一定要先談清楚的事</b></td><td>三</td><td class="who">甲乙丙</td><td>寄賣包「證代持、資料歸你、換人只換一張合約」的做法；合約要寫的條款清單</td></tr>
+      <tr><td>04</td><td><span class="pri">先寫</span><b>菲律賓代理商跟我要獨家、要我壓貨：哪些條件可以答應、哪些一定要拒絕</b></td><td>三</td><td class="who">甲</td><td>Aaron 在躍馬看過的代理案例（匿名、講過程）</td></tr>
+      <tr><td>05</td><td><span class="pri">先寫</span><b>我想把菲律賓代理收回來自己做：交接時哪些東西要先拿回來</b>公司、商標、FDA 文件、POS、會員資料、員工</td><td>九</td><td class="who">丙</td><td>交接清單；「收回時才發現○○不在自己名下」的過程</td></tr>
+      <tr><td>06</td><td><span class="pri">先寫</span><b>加盟主不照 SOP，是合約的問題，還是補貨的問題？</b>原料清關慢，加盟主就自己換原料的因果</td><td>九</td><td class="who">丙</td><td>躍馬物流視角的獨家因果；一個「糖漿被換掉」的故事</td></tr>
+      <tr><td>07</td><td><span class="pri">先寫</span><b>保養品上了 Shopee 卻沒人回訊息：當地客服該怎麼回、用什麼語言</b></td><td>之後</td><td class="who">丙</td><td>合作夥伴客服團隊的做法；Taglish 回覆範例；客訴處理流程</td></tr>
+      <tr><td>08</td><td><span class="pri">先寫</span><b>老闆叫我評估菲律賓：簡報該放哪 12 頁？（附可下載大綱）</b></td><td>基礎</td><td class="who">乙</td><td>我們第一次談時會問的問題，整理成簡報骨架</td></tr>
+      <tr><td>09</td><td><b>第一年只想花幾十萬試水溫，實際上可以做到哪、做不到哪</b></td><td>一</td><td class="who">甲</td><td>四章各自的「做到哪」邊界（用方案內容，不放額外數字）</td></tr>
+      <tr><td>10</td><td><b>在台灣賣得好的東西，去菲律賓通常卡在哪一關？（食品／保健／保養分開講）</b></td><td>一</td><td class="who">甲</td><td>現場觀察到的卡點類型</td></tr>
+      <tr><td>11</td><td><b>一份市場報告要怎麼看才能做決定？哪些是廢話、哪些才該問</b></td><td>一</td><td class="who">甲乙</td><td>「不出 80 頁報告」的理由；五題評分怎麼讀</td></tr>
+      <tr><td>12</td><td><b>正式出口前，怎麼用小預算測試菲律賓消費者喜不喜歡？</b></td><td>一</td><td class="who">乙</td><td>面板、試吃、社群、電商小量的比較（方法，不放成本）</td></tr>
+      <tr><td>13</td><td><b>找進口商、找經銷、自己設公司、跨境電商：四種模式比較表</b></td><td>基礎</td><td class="who">乙</td><td>控制權、前期投入、風險、適合階段（質性比較）</td></tr>
+      <tr><td>14</td><td><b>台灣食品出口菲律賓：從寄樣品到上架的流程圖（附每步文件）</b></td><td>基礎</td><td class="who">乙</td><td>躍馬報關、倉儲、清關的實務順序</td></tr>
+      <tr><td>15</td><td><b>台灣包裝拿到菲律賓要改哪些地方？標籤檢查清單</b></td><td>三</td><td class="who">乙</td><td>我們遇過要改的項目類型（附官方來源）</td></tr>
+      <tr><td>16</td><td><b>證要 6～12 週，這段時間可以先做的三件事</b></td><td>三</td><td class="who">甲乙</td><td>學校家長活動在做什麼（網站已公開的時程）</td></tr>
+      <tr><td>17</td><td><b>在菲律賓只投廣告為什麼不夠</b></td><td>三</td><td class="who">甲丙</td><td>網紅、活動、「有人真的用過」的觀察</td></tr>
+      <tr><td>18</td><td><b>在菲律賓聘第一位店長之前，我希望有人先跟我說的事</b></td><td>九</td><td class="who">丙</td><td>合作夥伴從零做英語教育機構、手搖飲的招聘經驗（需本人同意）</td></tr>
+      <tr><td>19</td><td><b>員工突然不來了：那一週我們實際做了什麼</b></td><td>之後</td><td class="who">丙</td><td>純過程敘事、留紀錄的順序（法律部分附查證）</td></tr>
+      <tr><td>20</td><td><b>商場給你的位置，為什麼剛好是那一個？選商圈、樓層、租約怎麼看</b></td><td>九</td><td class="who">丙</td><td>一間選錯位置的店的判斷過程</td></tr>
+      <tr><td>21</td><td><b>配方被學走之後，才知道該在第一天做的三件事</b>商標、營業秘密、合約</td><td>九</td><td class="who">丙</td><td>匿名故事；註明「經驗分享，非法律意見」＋查證日</td></tr>
+      <tr><td>22</td><td><b>老闆一季飛一次，怎麼遠端管兩三間門市？</b></td><td>之後</td><td class="who">丙</td><td>週報、例會節奏、看哪些東西</td></tr>
+      <tr><td>23</td><td><b>如果試了發現不行，要怎麼乾淨地撤？哪些東西會卡住你</b></td><td>一</td><td class="who">甲</td><td>「沒過就停」的設計；撤場要先想好的清單</td></tr>
+      <tr><td>24</td><td><b>評估出海服務商要問的 15 個問題，以及聽到哪些回答要小心</b></td><td>基礎</td><td class="who">乙丙</td><td>把我們自己也放進去被檢驗；包含「這種情況不要找我們」</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">第一季 8 篇刻意三種讀者都照顧到：甲 2 篇（01、04）、乙 2 篇（02、08）、丙 3 篇（05、06、07）、三者共用 1 篇（03）。07 客服那篇可以自然帶到 2027 Q1 的海外客服登記，但不寫成廣告。</p>
+</div></section>
+
+<section id="old"><div class="wrap">
+  <h2>四篇舊文怎麼改寫</h2>
+  <p class="lead">不刪文章、保留原網址的累積；換成符合新方向的題目與內容，並更新日期。越南那篇目前已轉址，改寫後讓舊網址轉到新文章。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>舊文</th><th>改寫成</th><th>章</th><th>怎麼改</th></tr></thead>
+    <tbody>
+      <tr><td>越南市場進入指南</td><td><b>東南亞先去哪一國？為什麼我們建議台灣品牌先從菲律賓開始</b></td><td>一</td><td>用五題評分的邏輯比較，誠實寫出「哪些品類不一定先去菲律賓」。舊網址 301 改指到這篇。</td></tr>
+      <tr><td>2026 東南亞電商市場</td><td><b>菲律賓電商第一年：Shopee、Lazada、TikTok Shop 先走哪一個？</b></td><td>三</td><td>從「三國市場規模」改成「一個台灣品牌第一年怎麼選平台、誰來顧店」。拿掉沒出處的市場數字。</td></tr>
+      <tr><td>中美關稅戰產地轉移</td><td><b>關稅一直變，台灣品牌出海前怎麼先估到岸成本？</b></td><td>三</td><td>保留躍馬物流視角，改成「到岸成本由哪幾塊組成、誰能幫你估」，連到 TradePilot 關稅工具。不放估算數字。</td></tr>
+      <tr><td>亞馬遜品類分析</td><td><b>產品在台灣站穩了，要不要上 Amazon 美國？先做這三個判斷</b></td><td>北美</td><td>接到北美通路那條線；方法論保留，改成決策題。</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section id="tpl" class="cream"><div class="wrap">
+  <h2>每篇文章的骨架</h2>
+  <p class="lead">固定骨架讓讀者好找，也讓 AI 好擷取；每一段都對應一個讀者需求或一條 GEO 規則。</p>
+  <div class="steps">
+    <div><b>標題＝讀者的問題</b>用他會打、會問 AI 的說法。</div>
+    <div><b>60 字直接回答</b>放在最上面，AI 摘要最常擷取這一段。</div>
+    <div><b>這篇適合誰／不適合誰</b>一句話，對應甲、乙、丙。</div>
+    <div><b>順序與卡點</b>步驟、流程圖或比較表（乙要截圖的那張）。</div>
+    <div><b>我們在現場看到的</b>一個情境、一個做錯的決定、後來怎麼改（丙要的那段）。</div>
+    <div><b>什麼情況不建議</b>誠實的邊界（甲信任的來源）。</div>
+    <div><b>常見問題 3 題</b>加 FAQ 結構化資料。</div>
+    <div><b>出處與查證日期</b>官方連結＋「最後查證：2026-xx-xx」。</div>
+    <div><b>作者卡</b>Aaron 照片、一句經歷、LinkedIn。</div>
+    <div><b>一個最小下一步</b>「先花 1～2 萬做品測，做完可以直接停」，或 LINE 問一句。不在文中重複叫人預約。</div>
+  </div>
+</div></section>
+
+<section id="dl"><div class="wrap">
+  <h2>可下載工具（乙最會回頭的理由）</h2>
+  <p class="lead">都不需要公開數字，卻是乙最可能主動回頭、也最可能被轉給老闆的東西。</p>
+  <div class="grid2">
+    <div class="card"><h3>菲律賓評估簡報 12 頁大綱</h3><p style="font-size:14px;color:var(--tx2)">配第 08 篇。每頁該放什麼、資料去哪找。</p></div>
+    <div class="card"><h3>空白的五題評分表</h3><p style="font-size:14px;color:var(--tx2)">網站方法論的空白版，可以自己評自己的產品。網站上已有互動評分卡，這是可列印版。</p></div>
+    <div class="card"><h3>服務商評估 15 問</h3><p style="font-size:14px;color:var(--tx2)">配第 24 篇。</p></div>
+    <div class="card"><h3>出口文件清單＋名詞中英對照</h3><p style="font-size:14px;color:var(--tx2)">配第 02、14 篇。</p></div>
+  </div>
+</div></section>
+
+<section id="eeat" class="cream"><div class="wrap">
+  <h2>作者與網站外的信任</h2>
+  <p class="lead">ChatGPT 判斷「這家可不可信」主要看網站外：維基類、媒體、LinkedIn、名錄；Perplexity 看近期更新的專業來源。兩者引用的網站只有約 11% 重疊，要分開經營。</p>
+  <div class="grid2">
+    <div class="card"><h3>網站上</h3><ul><li>新增 Aaron 作者頁：照片、經歷（躍馬 42 年物流現場）、文章列表、LinkedIn</li><li>每篇文章作者＝Aaron（現在是「鹿飛 LUFÉ」）</li><li>合作夥伴的故事要本人同意，寫明哪些可公開</li></ul></div>
+    <div class="card"><h3>網站外</h3><ul><li>Aaron 的 LinkedIn：名稱「鹿飛 LUFÉ 創辦人・來自躍馬企業」全網一致；每篇文章發一則重點</li><li>產業媒體、貿協、經濟部活動頁的講者或受訪紀錄（現場紀錄頁已有架構）</li><li>公司在各名錄的名稱、網址、介紹一致</li></ul></div>
+  </div>
+</div></section>
+
+<section id="tech"><div class="wrap">
+  <h2>技術修正（可以先做，不用等內容）</h2>
+  <p class="lead">上一輪實際檢查 lufe.world 發現的漏洞。修好後每篇新文章都直接受益。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>#</th><th>現況</th><th>要改成</th></tr></thead>
+    <tbody>
+      <tr><td>T1</td><td><b>全站沒有結構化資料</b></td><td>Organization、Person（Aaron）、Article、FAQPage、BreadcrumbList</td></tr>
+      <tr><td>T2</td><td><b>除首頁外沒有 canonical</b></td><td>每頁自己的 canonical</td></tr>
+      <tr><td>T3</td><td><b>文章作者是「鹿飛 LUFÉ」、og:type 是 website</b></td><td>作者 Aaron、og:type article、發布與更新時間</td></tr>
+      <tr><td>T4</td><td><b>文章標題品牌重複兩次</b></td><td>「文章標題 | 鹿飛 LUFÉ」一次</td></tr>
+      <tr><td>T5</td><td><b>導覽面板的文字在原始碼裡排在文章前</b></td><td>面板內容延後載入或移到 main 之後，讓「開頭 200 字」是文章本身</td></tr>
+      <tr><td>T6</td><td><b>AI 爬蟲政策沒寫</b></td><td>robots.txt 明確允許 OAI-SearchBot、PerplexityBot、Claude-SearchBot 等搜尋型爬蟲；訓練型爬蟲要不要擋，請你決定。llms.txt 不做（主要 AI 都不讀）。</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section id="m" class="cream"><div class="wrap">
+  <h2>怎麼量</h2>
+  <div class="grid2">
+    <div class="card"><h3>Google</h3><ul><li>Search Console（2026-09-30 已驗證）：每月看查詢字、曝光、點擊、哪些文章開始有排名</li><li>發文前用 DataForSEO 驗證三種讀者的搜尋字，挑有量的先寫</li></ul></div>
+    <div class="card"><h3>AI 引用</h3><ul><li>從三份模擬挑 20 句「問 AI 的話」當固定題庫</li><li>每月在 ChatGPT、Perplexity、Google AI 模式各問一次，記錄有沒有引用 lufe.world、引用哪一篇</li><li>之後可以做成自動化月報</li></ul></div>
+  </div>
+</div></section>
+
+<section id="cad"><div class="wrap">
+  <h2>節奏</h2>
+  <div class="steps">
+    <div><b>第 1 個月</b>技術修正 T1～T5；Aaron 作者頁與 LinkedIn；改寫四篇舊文；建立 AI 引用題庫、量第一次基準。</div>
+    <div><b>第 2～3 個月</b>第一季 8 篇（每月 4 篇，約每週一篇）。做法：每篇先跟 Aaron 做 20 分鐘口述訪談（第一手素材）→ 我起草 → Aaron 看過定稿 → 透過網站既有的發文 API 上架。</div>
+    <div><b>第 4 個月起</b>每月 2～4 篇；每季回頭更新舊文日期與法規查證；看 Search Console 與 AI 題庫結果調整題目。</div>
+  </div>
+  <p class="note">要你決定：① 技術修正要不要現在派工；② AI 訓練型爬蟲（GPTBot、Google-Extended 等）要不要擋——擋了不影響 AI 搜尋引用，但內容不會被拿去訓練模型；③ 第一季 8 篇的題目順序要不要調。</p>
+  <p class="src" style="margin-top:18px">參考：<a href="https://www.enrichlabs.ai/blog/generative-engine-optimization-geo-complete-guide-2026">Enrich Labs GEO 2026</a>・<a href="https://seotuners.com/blog/generative-engine-optimization/generative-engine-optimization-best-practices/">SEO Tuners GEO Best Practices</a>・<a href="https://www.yellowhead.com/blog/google-search-changes-2026/">Yellowhead Google 2026</a>・<a href="https://www.marcfriedmanportfolio.com/blog/google-algorithm-update-2026/">Google 2026 更新整理</a>・<a href="https://www.tryprofound.com/blog/ai-platform-citation-patterns">Profound 引用模式</a>・<a href="https://authoritytech.io/curated/ai-citation-11-percent-platform-overlap-per-engine-audit-2026">ChatGPT／Perplexity 11% 重疊</a>・<a href="https://byfaro.ai/blog/ai-crawlers-ignore-llmstxt-97-of-the-time-so-stop-making-one">llms.txt 研究</a></p>
+</div></section>
+</body>
+</html>

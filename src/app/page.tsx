@@ -6,19 +6,16 @@ import { CasesSection } from "@/components/home/CasesSection";
 import { LatestInsightsSection } from "@/components/home/LatestInsightsSection";
 import { OneContractSection } from "@/components/home/WhySection";
 import { HomeFAQ } from "@/components/home/HomeFAQ";
+import { FaqJsonLd } from "@/components/seo/StructuredData";
 import { CTASection } from "@/components/home/CTASection";
 import { articles } from "@/data/articles";
+import { HOME_FAQ_ITEMS } from "@/data/homeFaq";
 import { toDatabaseInsightCard, toInsightCard } from "@/lib/articles/presentation";
 import { listPublishedArticles } from "@/lib/articles/repository";
 import type { DatabaseArticle } from "@/lib/articles/repository";
+import { createPageMetadata } from "@/lib/seo";
 
-// Self-referencing canonical. The root layout no longer sets a global one —
-// it made every page claim the homepage as its canonical. Each page owns its
-// own from here on; the remaining pages are handled in a follow-up.
-export const metadata = {
-  alternates: { canonical: "/" },
-  openGraph: { url: "/" },
-};
+export const metadata = createPageMetadata({ path: "/" });
 
 export const revalidate = 300;
 
@@ -41,6 +38,7 @@ export default async function Home() {
 
   return (
     <>
+      <FaqJsonLd items={HOME_FAQ_ITEMS.map(({ question, answer }) => ({ question, answer }))} />
       <HeroSection />
       <OpeningSection />
       <ChaptersSection />
