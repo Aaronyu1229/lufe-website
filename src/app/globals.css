@@ -539,17 +539,16 @@ h3:not(.sr-only) { letter-spacing: -.008em; }
   transition: transform .25s var(--ease-spring);
 }
 [data-lufe-text-link]:hover::after { transform: scaleX(1); }
-/* Gold words keep wrapping as their own balanced block; the underline is a text decoration, so it sits under each line of text. */
+/* Gold words keep wrapping as their own balanced block; the underline is a static text decoration under each line
+   (no color animation: this layer only animates transform/opacity). */
 [data-lufe-heading] [class*="text-gold"] {
   display: inline-block;
   text-wrap: balance;
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: .18em;
-  text-decoration-color: transparent;
-  transition: text-decoration-color .9s var(--ease-spring) .15s;
+  text-decoration-color: currentColor;
 }
-[data-lufe-heading][data-lufe-heading-lit] [class*="text-gold"] { text-decoration-color: currentColor; }
 
 [data-lufe-hero-photo] {
   transform: translateY(var(--lufe-hero-drift, 0)) scale(1.08);
@@ -670,7 +669,6 @@ h3:not(.sr-only) { letter-spacing: -.008em; }
   .lufe-reading-progress, .lufe-back-to-top, [data-lufe-arrow], [data-lufe-text-link]::after, [data-lufe-hero-photo], .lufe-mail-preview, .lufe-score-zone, .lufe-track-row, .lufe-local-owner::before, .lufe-insight-card img, .lufe-case-cover { transition: none !important; }
   .lufe-contract-row[data-lufe-sweep=""]::after, .lufe-track-row[data-lufe-track-arrived]::after { animation: none !important; }
   [data-lufe-hero-photo], [data-lufe-hero-photo][data-lufe-hero-settled] { transform: none; }
-  [data-lufe-heading] [class*="text-gold"] { text-decoration-color: currentColor; transition: none; }
   .lufe-mail-preview { opacity: 1; transform: none; }
   .lufe-mail-reply { display: block; }
   [data-lufe-belief] .lufe-belief-number { background: var(--color-gold); color: var(--color-navy); }
