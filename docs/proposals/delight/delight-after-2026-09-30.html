@@ -1,0 +1,2559 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>鹿飛 LUFÉ — 貨到了之後，我們接著走｜台灣品牌進菲律賓</title>
+<meta name="description" content="貨代把貨送到，故事才開始。鹿飛陪台灣品牌走完在菲律賓的第一年：品測、寄賣、公司落地、海外客服，四個方案各有價，先花 1～2 萬看市場反應。創辦人來自躍馬企業，底下是 42 年的國際物流。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#101B30;--navy-l:#1A2B48;--gold:#D4A85C;--gold-d:#8F6A1F;--gold-l:#EDD9AE;
+  --cream:#F5F2EC;--cream-d:#E8E3DA;--sky:#3A6B84;--ember:#A45A20;
+  --tx:#1A1A2E;--tx2:#5A6070;--tx3:#6A6F80;--bd:rgba(26,26,46,.09);
+  --img:"https://lufe.world/images";
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,"Noto Sans TC",sans-serif;color:var(--tx);background:#fff;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+@media(min-width:768px){.wrap{padding:0 40px}}
+
+/* prototype switcher */
+.proto{position:sticky;top:0;z-index:60;background:#0a1120;color:#fff;font-size:12.5px;border-bottom:1px solid rgba(255,255,255,.08)}
+.proto .wrap{display:flex;gap:6px;align-items:center;overflow-x:auto;padding-top:8px;padding-bottom:8px;white-space:nowrap}
+.proto b{color:var(--gold);margin-right:8px;font-weight:600}
+.proto a{padding:4px 10px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+.proto a.on{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600}
+
+/* site nav */
+.nav{position:sticky;top:41px;z-index:50;background:var(--navy);color:#fff}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px}
+.logo img{width:30px;height:30px}
+.logo em{font-style:normal;color:var(--gold)}
+.menu{display:none;gap:4px}
+@media(min-width:900px){.menu{display:flex}}
+.menu>div{position:relative}
+.menu>div>a{display:block;padding:8px 14px;font-size:15px;color:rgba(255,255,255,.85)}
+.menu>div:hover>a{color:#fff;background:rgba(255,255,255,.06)}
+.drop{position:absolute;top:100%;left:0;min-width:240px;background:#fff;color:var(--tx);padding:14px 0;box-shadow:0 20px 40px -12px rgba(16,27,48,.3);opacity:0;pointer-events:none;transform:translateY(4px);transition:opacity .15s,transform .15s}
+.menu>div:hover .drop{opacity:1;pointer-events:auto;transform:none}
+.drop a{display:block;padding:7px 20px;font-size:14.5px;font-weight:600}
+.drop a small{display:block;font-weight:400;font-size:12.5px;color:var(--tx3)}
+.drop a:hover{color:var(--sky)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:14px 26px;font-weight:600;font-size:15.5px;cursor:pointer;border:0;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-ghost{border:1px solid rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.08)}
+.btn-line{border:1px solid var(--tx);color:var(--tx);background:transparent}
+.btn-sm{padding:9px 16px;font-size:14px}
+
+/* page switching */
+.page{display:none}.page.on{display:block}
+
+/* hero */
+.hero{position:relative;background:var(--navy) center/cover no-repeat;color:#fff;min-height:640px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,27,48,.9) 0%,rgba(16,27,48,.55) 55%,rgba(16,27,48,.25))}
+.hero .wrap{position:relative;width:100%}
+.hero-body{padding:120px 0 56px;max-width:800px}
+.display{font-size:clamp(36px,6vw,68px);line-height:1.12;font-weight:650;text-wrap:balance;margin-bottom:24px;white-space:pre-line}
+.hero p.sub{font-size:clamp(16px,1.5vw,19px);color:rgba(255,255,255,.88);max-width:560px;margin-bottom:36px;white-space:pre-line}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.tabs{position:relative;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.12)}
+.tabs button{background:none;border:0;color:rgba(255,255,255,.55);font:inherit;font-size:14px;font-weight:600;padding:18px 8px;cursor:pointer;position:relative}
+.tabs button.on{color:#fff}
+.tabs button.on::after{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--gold)}
+.slide{display:none}.slide.on{display:block;animation:fade .5s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* page hero (sub) */
+.phero{background:var(--navy) center/cover;color:#fff;position:relative}
+.phero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,27,48,.94),rgba(16,27,48,.7))}
+.phero .wrap{position:relative;padding-top:96px;padding-bottom:80px}
+.crumb{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:24px}
+.h1{font-size:clamp(32px,5vw,56px);line-height:1.15;font-weight:650;text-wrap:balance;margin-bottom:20px}
+.h1 .pipe{color:var(--gold)}
+.lead{font-size:clamp(16px,1.5vw,19px);line-height:1.8;color:rgba(255,255,255,.82);max-width:720px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,.12)}
+@media(min-width:768px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stats b{display:block;font-size:34px;color:var(--gold);font-weight:600;letter-spacing:-.03em;font-family:Inter}
+.stats span{font-size:13px;color:rgba(255,255,255,.65)}
+
+/* sections */
+.sec{padding:88px 0}
+@media(min-width:768px){.sec{padding:112px 0}}
+.cream{background:var(--cream)}
+.dark{background:var(--navy);color:#fff}
+.h2{font-size:clamp(28px,4.2vw,48px);line-height:1.18;font-weight:650;text-wrap:balance;margin-bottom:20px}
+.h2 .g{color:var(--gold-d)}.dark .h2 .g{color:var(--gold)}
+.h3{font-size:clamp(20px,2.2vw,25px);line-height:1.35;font-weight:600;margin-bottom:10px}
+.intro{font-size:17px;line-height:1.85;color:var(--tx2);max-width:760px;white-space:pre-line}
+.dark .intro{color:rgba(255,255,255,.78)}
+.center{text-align:center}.center .intro{margin:0 auto}
+
+/* plan cards */
+.plans{display:grid;gap:18px;margin-top:56px}
+@media(min-width:768px){.plans{grid-template-columns:repeat(2,1fr)}}
+
+.plan{background:#fff;border:1px solid var(--bd);border-top:3px solid var(--gold);padding:28px 26px;display:flex;flex-direction:column}
+.plan .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+.plan .num{font-family:Inter;font-size:32px;font-weight:600;color:var(--sky);letter-spacing:-.03em}
+.plan .tag{font-size:12px;font-weight:600;padding:3px 8px;background:var(--cream);color:var(--gold-d)}
+.plan h3{font-size:24px;font-weight:650;margin-bottom:4px}
+.plan .q{color:var(--sky);font-weight:600;font-size:15px;margin-bottom:18px}
+.plan .stuck{font-size:14px;line-height:1.75;color:var(--tx2);padding:12px 14px;background:var(--cream);margin-bottom:14px}
+.plan .do{font-size:14px;line-height:1.75;color:var(--tx);margin-bottom:18px;white-space:pre-line}
+.plan .price{margin-top:auto;border-top:1px solid var(--bd);padding-top:16px}
+.plan .price b{display:block;font-size:19px;color:var(--gold-d);font-weight:650}
+.plan .price p{font-size:13px;color:var(--tx3);line-height:1.7;white-space:pre-line}
+.plan .more{margin-top:16px;font-weight:600;font-size:14.5px;color:var(--sky)}
+.plan.p2{border-top-color:var(--sky)}.plan.p3{border-top-color:var(--ember)}.plan.p4{border-top-color:var(--navy-l)}
+.plan.p2 .num{color:var(--gold-d)}.plan.p3 .num{color:var(--ember)}.plan.p4 .num{color:var(--navy-l)}
+.kit{margin-top:28px;background:var(--navy);color:#fff;padding:22px 26px;font-size:15.5px;line-height:1.8}
+.kit b{color:var(--gold)}
+.nextline{margin-top:18px;display:inline-block;font-weight:600;color:var(--sky);font-size:15.5px}
+
+/* jumping band */
+.jband{display:grid;gap:40px;align-items:center}
+@media(min-width:900px){.jband{grid-template-columns:1.25fr 1fr}}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.nums b{display:block;font-family:Inter;font-size:clamp(32px,4vw,46px);font-weight:600;color:var(--gold);letter-spacing:-.03em}
+.nums b sup{font-size:.5em}
+.nums span{font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.5;display:block}
+.subbox{border-left:3px solid var(--gold);padding:6px 0 6px 22px}
+.subbox h3{font-size:21px;margin-bottom:10px}
+.subbox p{color:rgba(255,255,255,.78);font-size:15.5px;line-height:1.85}
+
+/* cases */
+.cases{display:grid;gap:18px;margin-top:44px}
+@media(min-width:768px){.cases{grid-template-columns:repeat(2,1fr)}}
+.case{position:relative;min-height:220px;background:var(--navy) center/cover;color:#fff;padding:24px;display:flex;flex-direction:column;justify-content:flex-end}
+.case::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,27,48,.92),rgba(16,27,48,.2))}
+.case>*{position:relative}
+.case small{color:var(--gold-l);font-size:12.5px}
+.case b{font-size:19px;line-height:1.4}
+.placeholder{font-size:12px;color:var(--tx3);margin-top:12px}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;margin-top:44px;font-size:15px;background:#fff}
+.tbl th,.tbl td{padding:16px 14px;border-bottom:1px solid var(--bd);text-align:center}
+.tbl th{font-size:13.5px;color:var(--tx2);font-weight:600;background:var(--cream)}
+.tbl td:first-child,.tbl th:first-child{text-align:left}
+.tbl .dot{color:var(--gold-d);font-size:18px}
+.tbl .no{color:#c7c9cf}
+.tbl tr.us td{background:var(--navy);color:#fff;font-weight:600}
+.tbl tr.us .dot{color:var(--gold)}
+.tblwrap{overflow-x:auto}
+.after{margin-top:22px;font-size:15.5px;color:var(--tx2)}
+
+/* faq */
+.faq{margin-top:40px;border-top:1px solid var(--bd)}
+.faq details{border-bottom:1px solid var(--bd)}
+.faq summary{list-style:none;cursor:pointer;padding:24px 0;display:grid;grid-template-columns:48px 1fr 24px;gap:10px;align-items:start}
+.faq summary::-webkit-details-marker{display:none}
+.faq .n{font-family:Inter;color:var(--gold-d);font-weight:600}
+.faq .qq{font-size:19px;font-weight:600}
+.faq .qs{display:block;font-size:14px;color:var(--tx3);font-weight:400;margin-top:4px}
+.faq .pm{font-size:22px;color:var(--tx3);transition:transform .2s}
+.faq details[open] .pm{transform:rotate(45deg)}
+.faq .a{padding:0 0 26px 58px;color:var(--tx2);font-size:15.5px;line-height:1.9;max-width:860px}
+
+/* cta */
+.cta{background:var(--navy) center/cover;position:relative;color:#fff;text-align:center}
+.cta::before{content:"";position:absolute;inset:0;background:rgba(16,27,48,.86)}
+.cta .wrap{position:relative;padding-top:104px;padding-bottom:104px}
+.cta .h2{white-space:pre-line}
+.cta p{color:rgba(255,255,255,.8);max-width:640px;margin:0 auto 34px;font-size:17px}
+
+/* subpage blocks */
+.blocks{display:grid;gap:18px}
+@media(min-width:900px){.blocks.two{grid-template-columns:1fr 1fr}}
+.block{background:#fff;border:1px solid var(--bd);padding:32px}
+.block h3{font-size:22px;font-weight:650;margin-bottom:14px}
+.block .txt{color:var(--tx2);font-size:16px;line-height:1.9;white-space:pre-line}
+.block.stuck{background:var(--cream);border-left:4px solid var(--sky)}
+.block.do{border-left:4px solid var(--gold)}
+.block.out{border-left:4px solid var(--ember)}
+.facts{display:grid;gap:18px;margin-top:18px}
+@media(min-width:900px){.facts{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
+.fact{background:var(--navy);color:#fff;padding:28px}
+.fact h4{font-size:14px;color:var(--gold);font-weight:600;margin-bottom:8px}
+.fact p{font-size:15.5px;line-height:1.85;color:rgba(255,255,255,.88)}
+
+/* two lines */
+.lines{display:grid;gap:18px;margin-top:48px}
+@media(min-width:900px){.lines{grid-template-columns:1fr 1fr}}
+.line{background:#fff;border:1px solid var(--bd);padding:34px}
+.line.ph{border-top:4px solid var(--gold)}.line.na{border-top:4px solid var(--sky)}
+.line h3{font-size:24px;font-weight:650;margin-bottom:6px}
+.line .k{font-weight:600;color:var(--gold-d);font-size:15px;margin-bottom:6px}
+.line.na .k{color:var(--sky)}
+.line p{color:var(--tx2);font-size:15.5px;line-height:1.85;margin-top:14px}
+.line p strong{color:var(--tx)}
+.svc{display:grid;gap:0;margin-top:44px;border-top:1px solid var(--bd)}
+.svc a{display:grid;grid-template-columns:56px 1fr 24px;gap:14px;padding:26px 0;border-bottom:1px solid var(--bd);align-items:start}
+.svc a:hover h3{color:var(--sky)}
+.svc .num{font-family:Inter;font-size:26px;font-weight:600;color:var(--gold-d)}
+.svc h3{font-size:22px;margin-bottom:6px;transition:color .15s}
+.svc p{color:var(--tx2);font-size:15.5px;line-height:1.85}
+.svc p b{color:var(--gold-d)}
+.svc .arr{color:var(--tx3);font-size:20px;padding-top:4px}
+
+/* about */
+.beliefs{display:grid;gap:14px;margin-top:36px}
+.beliefs div{border-left:3px solid var(--gold);padding:10px 0 10px 22px;font-size:17px;line-height:1.85;color:rgba(255,255,255,.9)}
+.donts{display:grid;gap:14px;margin-top:36px}
+.donts div{background:#fff;border:1px solid var(--bd);padding:22px 24px;font-size:16px;line-height:1.85;color:var(--tx2)}
+.donts div b{color:var(--tx)}
+.founder{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:center;margin-top:36px;background:#fff;border:1px solid var(--bd);padding:20px}
+.founder .av{width:64px;height:64px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:700;font-size:20px}
+.founder p{font-size:14.5px;color:var(--tx2);line-height:1.7}
+.note{background:#FFF8E6;border:1px dashed var(--gold);color:#6b5217;font-size:13.5px;padding:12px 16px;margin-top:24px;line-height:1.7}
+
+footer{background:#0a1120;color:rgba(255,255,255,.6);padding:56px 0;font-size:14px}
+footer .wrap{display:grid;gap:18px}
+footer .one{color:rgba(255,255,255,.85);font-size:15.5px;max-width:720px}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* v4 story additions */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--gold-d);margin-bottom:16px}
+.eyebrow::before{content:"";width:20px;height:1px;background:currentColor}
+.dark .eyebrow{color:var(--gold)}
+.opening{display:grid;gap:40px}
+@media(min-width:900px){.opening{grid-template-columns:1fr 1.1fr;align-items:start}}
+.opening .h2{white-space:pre-line}
+.scene{font-size:17.5px;line-height:2;color:var(--tx2);white-space:pre-line;border-left:3px solid var(--gold);padding-left:24px}
+.scene .punch{display:block;margin-top:14px;color:var(--tx);font-weight:600}
+.h2.pre{white-space:pre-line}
+.plan .chap{font-size:13px;font-weight:600;color:var(--gold-d);letter-spacing:.04em;margin-bottom:10px}
+.plan.p2 .chap{color:var(--sky)}.plan.p3 .chap{color:var(--ember)}.plan.p4 .chap{color:var(--navy-l)}
+.plan .scn{font-size:15px;line-height:1.9;color:var(--tx);background:var(--cream);padding:16px 18px;margin:14px 0;white-space:pre-line}
+.plan .do{color:var(--tx2)}
+.timeline{display:none}
+@media(min-width:768px){.timeline{display:grid;grid-template-columns:repeat(4,1fr);margin-top:48px;position:relative}
+.timeline::before{content:"";position:absolute;left:12.5%;right:12.5%;top:7px;height:2px;background:var(--cream-d)}
+.timeline div{text-align:center;font-size:13px;color:var(--tx3);font-weight:600;position:relative}
+.timeline div::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--gold);margin:0 auto 10px}
+.timeline div:nth-child(2)::before{border-color:var(--sky)}.timeline div:nth-child(3)::before{border-color:var(--ember)}.timeline div:nth-child(4)::before{border-color:var(--navy-l)}}
+.roads{display:grid;gap:18px;margin-top:40px}
+@media(min-width:900px){.roads{grid-template-columns:repeat(3,1fr)}}
+.road{border-top:3px solid var(--gold);background:var(--cream);padding:26px}
+.road b{display:block;font-size:13px;color:var(--gold-d);margin-bottom:6px}
+.road h3{font-size:20px;margin-bottom:10px}
+.road p{font-size:15px;line-height:1.9;color:var(--tx2);white-space:pre-line}
+.week{display:grid;gap:10px;margin-top:28px}
+@media(min-width:768px){.week{grid-template-columns:repeat(4,1fr)}}
+.week div{background:#fff;border:1px solid var(--bd);padding:16px 18px;font-size:14.5px;color:var(--tx2);line-height:1.7}
+.week div b{display:block;color:var(--tx);font-size:13px;margin-bottom:4px}
+.believe{margin-top:28px;border-left:3px solid var(--gold);padding:4px 0 4px 22px}
+.believe h3{font-size:20px;margin-bottom:10px}
+.believe p{color:rgba(255,255,255,.82);font-size:16px;line-height:2;white-space:pre-line}
+.faq .a{white-space:pre-line}
+.chapters .svc a{grid-template-columns:1fr 24px}
+.chapters .lbl{font-size:13px;font-weight:600;color:var(--gold-d);margin-bottom:4px;display:block}
+.chapters .svc p{white-space:pre-line}
+.phero .chaplbl{color:var(--gold);font-weight:600;font-size:14px;margin-bottom:12px;display:block}
+.phero .scene-lead{font-size:clamp(17px,1.6vw,20px);line-height:1.9;color:rgba(255,255,255,.85);max-width:720px;white-space:pre-line;border-left:3px solid var(--gold);padding-left:20px;margin-top:8px}
+.cta .h2 .br{display:block}
+
+/* v4.1 inner-page components */
+.chapbar{background:#fff;border-bottom:1px solid var(--bd);position:sticky;top:105px;z-index:40}
+.chapbar .wrap{display:flex;align-items:center;overflow-x:auto;gap:0;padding-top:14px;padding-bottom:14px;scrollbar-width:none}
+.chapbar .wrap::-webkit-scrollbar{display:none}
+.chapbar a{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:13.5px;color:var(--tx3);flex-shrink:0}
+.chapbar a .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--cream-d);background:#fff;flex-shrink:0}
+.chapbar a small{display:block;font-size:11.5px;color:var(--tx3)}
+.chapbar a b{font-weight:500}
+.chapbar a.on{color:var(--tx)}.chapbar a.on b{font-weight:700}
+.chapbar a.on .dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,168,92,.2)}
+.chapbar a.done .dot{border-color:var(--gold)}
+.chapbar .ln{flex:1;min-width:40px;height:2px;background:var(--cream-d);margin:0 14px}
+.anotherline{background:var(--cream);border-bottom:1px solid var(--bd);font-size:14px;color:var(--tx2)}
+.anotherline .wrap{padding-top:14px;padding-bottom:14px}
+.anotherline b{color:var(--sky)}
+
+.sechead{margin-bottom:36px}
+.sechead .h2{margin-bottom:10px}
+.sechead p{color:var(--tx2);font-size:16.5px;max-width:720px}
+.trio{display:grid;gap:14px}
+@media(min-width:768px){.trio{grid-template-columns:repeat(3,1fr)}}
+.trio div{background:#fff;border:1px solid var(--bd);padding:22px 24px;font-size:15.5px;line-height:1.85;color:var(--tx)}
+.cream .trio div{background:#fff}
+
+.steps{display:grid;gap:0;position:relative}
+@media(min-width:900px){.steps.h4{grid-template-columns:repeat(4,1fr);gap:18px}.steps.h5{grid-template-columns:repeat(5,1fr);gap:14px}}
+.step{position:relative;padding:0 0 28px 44px}
+.step::before{content:"";position:absolute;left:13px;top:30px;bottom:0;width:2px;background:var(--cream-d)}
+.step:last-child::before{display:none}
+.step .sn{position:absolute;left:0;top:0;width:28px;height:28px;background:var(--gold);color:var(--navy);font-family:Inter;font-weight:700;font-size:12.5px;display:grid;place-items:center}
+.step h4{font-size:18px;font-weight:650;margin-bottom:6px;line-height:1.4}
+.step p{font-size:14.5px;line-height:1.85;color:var(--tx2);white-space:pre-line}
+@media(min-width:900px){
+ .steps.h4 .step,.steps.h5 .step{padding:0;background:#fff;border:1px solid var(--bd);border-top:3px solid var(--gold);padding:24px 22px}
+ .steps.h4 .step::before,.steps.h5 .step::before{display:none}
+ .steps.h4 .step .sn,.steps.h5 .step .sn{position:static;margin-bottom:14px}
+ .steps.alt .step{border-top-color:var(--sky)}.steps.alt .step .sn{background:var(--sky);color:#fff}
+}
+.dark .step h4{color:#fff}.dark .step p{color:rgba(255,255,255,.75)}
+
+.report{display:grid;gap:32px;align-items:center}
+@media(min-width:900px){.report{grid-template-columns:320px 1fr}}
+.paper{background:#fff;border:1px solid var(--bd);box-shadow:0 24px 50px -24px rgba(16,27,48,.35);padding:26px 24px;aspect-ratio:1/1.35;display:flex;flex-direction:column;gap:12px;transform:rotate(-1.5deg)}
+.paper .t{font-weight:700;font-size:14px;border-bottom:2px solid var(--navy);padding-bottom:8px}
+.paper .r{display:grid;gap:5px}
+.paper .r b{font-size:11px;color:var(--gold-d)}
+.paper .r i{display:block;height:7px;background:var(--cream-d)}
+.paper .r i.s{width:70%}.paper .r i.m{width:85%}
+.paper .bars{display:flex;gap:6px;align-items:flex-end;height:54px;margin-top:auto}
+.paper .bars span{flex:1;background:var(--sky);opacity:.8}
+.report ul{list-style:none;display:grid;gap:12px;margin:18px 0}
+.report li{font-size:16.5px;line-height:1.75;padding-left:18px;position:relative}
+.report li::before{content:"";position:absolute;left:0;top:.75em;width:7px;height:7px;background:var(--gold)}
+.report li b{color:var(--tx)}
+.report .fin{color:var(--tx2);font-size:15.5px;border-top:1px solid var(--bd);padding-top:14px}
+
+.pricecard{background:var(--navy);color:#fff;display:grid;gap:26px;padding:40px 34px}
+@media(min-width:900px){.pricecard{grid-template-columns:300px 1fr;align-items:center;padding:48px 52px}}
+.pricecard .big{font-family:Inter,"Noto Sans TC";font-size:clamp(44px,6vw,64px);font-weight:650;color:var(--gold);line-height:1;letter-spacing:-.02em}
+.pricecard .big small{display:block;font-size:14px;color:rgba(255,255,255,.65);font-weight:500;margin-top:12px;letter-spacing:0}
+.pricecard .info p{color:rgba(255,255,255,.85);font-size:15.5px;line-height:1.9;margin-bottom:10px}
+.pricecard .path{display:grid;gap:10px;margin-top:14px}
+.pricecard .path div{padding:12px 16px;font-size:15px;line-height:1.7;border-left:3px solid var(--gold);background:rgba(255,255,255,.05)}
+.pricecard .path div.no{border-left-color:rgba(255,255,255,.3)}
+.pricecard .path b{color:var(--gold)}
+
+.tracks{display:grid;gap:18px}
+.track{padding:26px 28px}
+.track.passive{background:#EDEEF1;color:var(--tx3);border-left:4px solid #b8bcc6}
+.track.passive h4{color:var(--tx2)}
+.track.active{background:#fff;border:1px solid var(--bd);border-left:4px solid var(--gold)}
+.track h4{font-size:15px;font-weight:700;margin-bottom:12px}
+.track .rows{display:grid;gap:0}
+.track .rows div{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--bd);font-size:15px;line-height:1.75;color:var(--tx2)}
+.track .rows div b{color:var(--gold-d);font-weight:650}
+.track .rows div.last b,.track .rows div.last{color:var(--tx);font-weight:650}
+@media(min-width:900px){.tracks{grid-template-columns:1fr 2fr}}
+
+.mini5{display:grid;gap:12px}
+@media(min-width:768px){.mini5{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1100px){.mini5{grid-template-columns:repeat(5,1fr)}}
+.mini5 div{background:#fff;border:1px solid var(--bd);padding:20px}
+.mini5 b{display:block;font-size:16px;margin-bottom:8px}
+.mini5 p{font-size:13.5px;line-height:1.8;color:var(--tx2)}
+
+.got{border-left:4px solid var(--ember);background:#fff;padding:26px 30px;font-size:17px;line-height:1.9}
+.got span{display:block;color:var(--tx2);font-size:15.5px;margin-top:6px}
+
+.who{width:100%;border-collapse:collapse;background:#fff;font-size:15.5px}
+.who th{background:var(--navy);color:#fff;text-align:left;padding:14px 18px;font-size:14px;font-weight:600}
+.who td{padding:16px 18px;border-bottom:1px solid var(--bd);line-height:1.7;vertical-align:top}
+.who td:first-child{font-weight:600;width:38%}
+.who tr.you td{background:var(--cream);color:var(--gold-d);font-weight:650}
+
+.roads3{display:grid;gap:18px}
+@media(min-width:900px){.roads3{grid-template-columns:repeat(3,1fr)}}
+.road3{background:#fff;border:1px solid var(--bd);border-top:3px solid var(--gold);padding:28px;display:flex;flex-direction:column}
+.road3:nth-child(2){border-top-color:var(--sky)}.road3:nth-child(3){border-top-color:var(--ember)}
+.road3 .no{font-size:13px;font-weight:600;color:var(--gold-d)}
+.road3 h3{font-size:22px;margin:4px 0 12px}
+.road3 p{font-size:15px;line-height:1.9;color:var(--tx2);white-space:pre-line}
+.road3 .fit{margin-top:auto;padding-top:16px;border-top:1px solid var(--bd);font-size:14px;color:var(--tx);font-weight:600}
+.road3 .learn{margin-top:16px;padding:14px 16px;background:var(--cream);font-size:14.5px;line-height:1.8;color:var(--tx)}
+.road3 .learn b{display:block;font-size:12.5px;color:var(--gold-d);margin-bottom:2px}
+.roads-foot{margin-top:24px;font-size:16px;color:var(--tx2)}
+
+.why3{max-width:820px}
+.why3 p{font-size:17px;line-height:2;color:var(--tx2);margin-bottom:12px}
+.why3 p:first-of-type{color:var(--tx);font-weight:600}
+
+.regcard{background:var(--navy);color:#fff;padding:40px;display:grid;gap:28px}
+@media(min-width:900px){.regcard{grid-template-columns:1fr 1fr;align-items:start;padding:48px 52px}}
+.regcard .badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:12.5px;font-weight:700;padding:4px 10px;margin-bottom:14px}
+.regcard h3{font-size:clamp(24px,3vw,32px);font-weight:650;margin-bottom:10px}
+.regcard p{color:rgba(255,255,255,.8)}
+.form{display:grid;gap:14px}
+.form label{display:grid;gap:6px;font-size:13.5px;color:rgba(255,255,255,.75)}
+.form input,.form select{font:inherit;font-size:15px;padding:12px 14px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff}
+.form .opts{display:flex;gap:8px;flex-wrap:wrap}
+.form .opts span{border:1px solid rgba(255,255,255,.25);padding:8px 14px;font-size:14px;color:#fff}
+.form .opts span.on{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600}
+.form .newf{outline:1px dashed var(--gold);outline-offset:6px}
+
+.hbadge{display:inline-block;background:var(--gold);color:var(--navy);font-size:12.5px;font-weight:700;padding:5px 12px;margin-bottom:18px}
+.phero.night::before{background:linear-gradient(90deg,rgba(8,13,24,.96),rgba(8,13,24,.82))}
+.phero .ctas{margin-top:30px}
+
+.reading .cards{display:grid;gap:18px}
+@media(min-width:768px){.reading .cards{grid-template-columns:repeat(3,1fr)}}
+.acard{background:#fff;border:1px solid var(--bd);display:flex;flex-direction:column}
+.acard .img{aspect-ratio:16/9;background:var(--navy) center/cover}
+.acard .img.todo{background:repeating-linear-gradient(45deg,var(--cream),var(--cream) 10px,var(--cream-d) 10px,var(--cream-d) 20px);display:grid;place-items:center;color:var(--tx3);font-size:13px;font-weight:600}
+.acard .bd{padding:18px 20px}
+.acard .cat{font-size:12px;color:var(--gold-d);font-weight:600}
+.acard h4{font-size:16.5px;line-height:1.5;margin:6px 0 8px}
+.acard small{font-size:12.5px;color:var(--tx3)}
+.acard .tag{display:inline-block;margin-left:6px;background:#FFF1D6;color:#8a5a00;font-size:11.5px;padding:1px 6px;font-weight:600}
+.reading .all{display:inline-block;margin-top:22px;color:var(--sky);font-weight:600}
+
+.nextch{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;background:#fff;border:1px solid var(--bd);border-left:4px solid var(--gold);padding:26px 30px;transition:transform .1s}
+.nextch:hover{box-shadow:0 12px 30px -16px rgba(16,27,48,.35)}
+.nextch:active{transform:scale(.99)}
+.nextch small{font-size:13px;color:var(--gold-d);font-weight:700}
+.nextch b{display:block;font-size:14px;color:var(--tx3);font-weight:600;margin-top:6px}
+.nextch h3{font-size:22px;margin-top:2px}
+.nextch .ar{font-size:28px;color:var(--gold-d)}
+
+.cta2 .wrap{padding-top:88px;padding-bottom:88px}
+.cta2 p.sm{font-size:15.5px;color:rgba(255,255,255,.7);margin-top:-18px}
+
+.stuck3{display:grid;gap:14px}
+@media(min-width:768px){.stuck3{grid-template-columns:repeat(3,1fr)}}
+.stuck3 a{background:#fff;border:1px solid var(--bd);border-top:3px solid var(--gold);padding:24px;display:flex;flex-direction:column;gap:8px}
+.stuck3 a:nth-child(2){border-top-color:var(--sky)}.stuck3 a:nth-child(3){border-top-color:var(--ember)}
+.stuck3 b{font-size:20px}
+.stuck3 p{font-size:15px;color:var(--tx2);line-height:1.8}
+.stuck3 span{margin-top:auto;color:var(--sky);font-weight:600;font-size:14.5px}
+.quoteline{font-size:15px;color:var(--tx2);border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin-bottom:22px}
+
+.bridge{background:var(--sky);color:#fff;padding:34px;display:grid;gap:18px;align-items:center}
+@media(min-width:900px){.bridge{grid-template-columns:1fr auto}}
+.bridge h3{font-size:24px}
+.bridge p{color:rgba(255,255,255,.85)}
+.casecards{display:grid;gap:18px}
+@media(min-width:768px){.casecards{grid-template-columns:repeat(2,1fr)}}
+.ccard{position:relative;min-height:300px;background:var(--navy) center/cover;color:#fff;padding:26px;display:flex;flex-direction:column;justify-content:flex-end}
+.ccard::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,27,48,.95) 10%,rgba(16,27,48,.15))}
+.ccard>*{position:relative}
+.ccard .tags{display:flex;gap:6px;margin-bottom:auto}
+.ccard .tags span{font-size:11.5px;padding:3px 8px;background:rgba(255,255,255,.15)}
+.ccard .num{font-family:Inter;font-size:40px;font-weight:650;color:var(--gold);line-height:1}
+.ccard h3{font-size:20px;margin-top:8px}
+.pending{display:inline-block;margin-top:8px;background:#FFF1D6;color:#8a5a00;font-size:12px;padding:2px 8px;font-weight:600}
+
+.cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:34px}
+.cats span{padding:10px 16px;border:1px solid rgba(255,255,255,.2);font-size:14px;color:rgba(255,255,255,.8);cursor:pointer}
+.cats span.on{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600}
+.oldtags{margin-top:14px;font-size:12.5px;color:rgba(255,255,255,.5)}
+.oldtags i{font-style:normal;border:1px solid rgba(255,255,255,.2);padding:1px 7px;margin-left:4px}
+.chgroup{margin-bottom:56px}
+.chgroup>h3{font-size:14px;font-weight:700;color:var(--gold-d);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--bd)}
+
+.team3{display:grid;gap:18px}
+@media(min-width:900px){.team3{grid-template-columns:repeat(3,1fr)}}
+.team3 div{background:#fff;border:1px solid var(--bd);padding:28px}
+.team3 h3{font-size:21px;margin-bottom:10px}
+.team3 p{color:var(--tx2);font-size:15.5px;line-height:1.85}
+.netw{display:grid;gap:0;border-top:1px solid rgba(255,255,255,.15)}
+.netw div{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.netw b{color:var(--gold);font-size:17px}
+.netw p{color:rgba(255,255,255,.85);font-size:16px;line-height:1.8}
+.fcard{display:grid;grid-template-columns:88px 1fr;gap:22px;align-items:center;background:#fff;border:1px solid var(--bd);padding:26px;max-width:640px}
+.fcard .av{width:88px;height:88px;background:var(--navy) center/cover}
+.fcard b{font-size:20px}
+.fcard small{display:block;color:var(--gold-d);font-weight:600;margin:2px 0 6px}
+.fcard p{color:var(--tx2);font-size:15px}
+.backcard{display:inline-flex;gap:10px;align-items:center;margin-top:28px;border:1px solid var(--bd);background:#fff;padding:18px 22px;font-weight:600}
+.designnote{font-size:12.5px;color:#8a5a00;background:#FFF8E6;border:1px dashed var(--gold);padding:6px 10px;margin-top:10px;display:inline-block}
+
+.nav{top:41px}
+/* advanced pages (v4.1 addendum) */
+.stuck5{display:grid;gap:12px}
+@media(min-width:768px){.stuck5{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.stuck5{grid-template-columns:repeat(5,1fr)}}
+.stuck5 a{background:#fff;border:1px solid var(--bd);border-top:3px solid var(--ember);padding:22px;display:flex;flex-direction:column;gap:8px}
+.stuck5 a:hover{box-shadow:0 12px 26px -16px rgba(16,27,48,.35)}
+.stuck5 b{font-size:19px}
+.stuck5 p{font-size:14px;color:var(--tx2);line-height:1.8}
+.stuck5 span{margin-top:auto;color:var(--ember);font-weight:600;font-size:13.5px}
+.split{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.split{grid-template-columns:1fr 1.15fr}.split.rev{grid-template-columns:1.3fr 1fr}}
+.splitimg{aspect-ratio:4/3;background:var(--navy) center/cover}
+.optno{font-family:Inter;font-size:14px;font-weight:700;color:var(--ember);margin-bottom:8px}
+.bignum{font-size:clamp(22px,2.4vw,28px);font-weight:650;color:var(--gold-d);margin-top:18px}
+.verify{margin-top:12px;background:#FFF8E6;border:1px dashed var(--gold);color:#6b5217;font-size:13.5px;padding:10px 14px;line-height:1.7;max-width:640px}
+.verify b{display:inline-block;background:var(--gold);color:var(--navy);font-size:11.5px;padding:1px 7px;margin-right:8px}
+.vtag{display:inline-block;background:#FFF1D6;color:#8a5a00;font-size:12px;padding:1px 7px;font-weight:600}
+.three-things{display:grid;gap:10px}
+.three-things div{background:var(--cream);border-left:4px solid var(--ember);padding:20px 22px;font-size:20px;font-weight:650}
+.rule{margin-top:26px;display:inline-block;background:var(--navy);color:var(--gold);font-size:clamp(18px,2vw,22px);font-weight:650;padding:16px 22px}
+.dims{display:grid;gap:14px}
+@media(min-width:900px){.dims{grid-template-columns:repeat(5,1fr)}}
+.dim{background:#fff;border:1px solid var(--bd);border-top:3px solid var(--navy-l);padding:22px;display:flex;flex-direction:column}
+.dh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.dh b{font-size:15px}
+.dh span{font-family:Inter;font-weight:700;color:var(--gold-d);font-size:18px}
+.dq{font-size:17px;font-weight:650;color:var(--sky);margin-bottom:10px;line-height:1.5}
+.dl{font-size:13.5px;color:var(--tx2);line-height:1.8;margin-bottom:14px}
+.red{margin-top:auto;background:#FBEDED;border-left:3px solid #b3261e;padding:10px 12px;font-size:13px;line-height:1.7;color:#5c1a16}
+.red b{display:block;color:#b3261e;font-size:12px;margin-bottom:2px}
+.scores{display:grid;gap:12px}
+@media(min-width:768px){.scores{grid-template-columns:repeat(4,1fr)}}
+.scores div{padding:24px;border:1px solid var(--bd)}
+.scores b{display:block;font-family:Inter;font-size:30px;font-weight:650;line-height:1.1}
+.scores span{display:block;font-weight:700;font-size:14px;margin:6px 0 10px}
+.scores p{font-size:14.5px;color:var(--tx2);line-height:1.75}
+.scores .go{border-top:4px solid #2e7d4f}.scores .go b,.scores .go span{color:#2e7d4f}
+.scores .cgo{border-top:4px solid var(--gold)}.scores .cgo b,.scores .cgo span{color:var(--gold-d)}
+.scores .hold{border-top:4px solid var(--ember)}.scores .hold b,.scores .hold span{color:var(--ember)}
+.scores .nogo{border-top:4px solid #b3261e}.scores .nogo b,.scores .nogo span{color:#b3261e}
+.example{display:grid;gap:24px;background:#fff;border:1px solid var(--bd);padding:30px}
+@media(min-width:900px){.example{grid-template-columns:1fr 260px;align-items:center}}
+.bars2{display:grid;gap:14px}
+.bars2 div{display:grid;grid-template-columns:110px 1fr 36px;gap:12px;align-items:center}
+.bars2 b{font-size:14px}
+.bars2 i{display:block;height:10px;background:var(--cream-d);position:relative}
+.bars2 i::after{content:"";position:absolute;inset:0 auto 0 0;width:calc(var(--v)*1%);background:var(--sky)}
+.bars2 span{font-family:Inter;font-weight:700;text-align:right}
+.bars2 em{grid-column:2/4;font-style:normal;font-size:13px;color:var(--tx3);margin-top:-8px}
+.total{background:var(--navy);color:#fff;padding:24px;text-align:center}
+.total small{color:rgba(255,255,255,.6)}
+.total b{display:block;font-family:Inter;font-size:56px;color:var(--gold);line-height:1.1}
+.total span{display:block;font-weight:700;margin-bottom:8px}
+.total p{font-size:14px;color:rgba(255,255,255,.8)}
+/* about (original site layout, v4.1 copy) */
+.ab-hero{position:relative;background:var(--navy) 65% center/cover;color:#fff}
+.ab-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy) 0%,rgba(16,27,48,.88) 50%,rgba(16,27,48,.45))}
+.ab-hero .wrap{position:relative;padding-top:110px;padding-bottom:90px}
+.ab-quote{font-size:18px;color:rgba(255,255,255,.6);font-style:italic;font-weight:300;margin-bottom:44px}
+.ab-founder{display:flex;gap:28px;align-items:flex-start;border-left:3px solid var(--gold);padding:8px 0 8px 28px;max-width:780px;margin-bottom:36px;flex-wrap:wrap}
+.ab-portrait{width:140px;height:140px;background:center 18%/cover;box-shadow:0 0 0 1.5px rgba(212,168,92,.6),0 20px 40px -10px rgba(212,168,92,.25);flex-shrink:0}
+.ab-founder b{font-size:25px;font-weight:600}
+.ab-founder .role{display:block;color:var(--gold);font-weight:500;margin-top:4px}
+.ab-founder p{color:rgba(255,255,255,.65);margin-top:12px;max-width:480px;line-height:1.8}
+.ab-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid rgba(255,255,255,.1);padding-top:26px;max-width:780px}
+.ab-stats b{display:block;font-family:Inter;font-size:30px;color:var(--gold);font-weight:600;letter-spacing:-.03em}
+.ab-stats span{font-size:12px;color:rgba(255,255,255,.55)}
+.ab-story{border-top:1px solid rgba(255,255,255,.05)}
+.ab-cards{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;margin-top:10px}
+.ab-cards article{flex:0 0 min(82vw,380px);scroll-snap-align:start;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04)}
+@media(min-width:1100px){.ab-cards article{flex-basis:calc((100% - 36px)/3)}}
+.ab-cards .im{aspect-ratio:4/4.3;background:center/cover}
+.ab-cards .bd{padding:26px}
+.ab-cards .bd span{font-size:11px;color:var(--gold);font-weight:600}
+.ab-cards h3{font-size:clamp(26px,2.6vw,34px);color:var(--gold);font-weight:650;margin:10px 0 14px}
+.ab-cards p{color:rgba(255,255,255,.78);font-size:15px;line-height:1.95;white-space:pre-line}
+.ab-team{display:grid;gap:18px;margin-top:36px}
+@media(min-width:900px){.ab-team{grid-template-columns:repeat(3,1fr)}}
+.ab-team div{background:#fff;border:1px solid var(--bd);padding:26px;transition:border-color .15s}
+.ab-team div:hover{border-color:var(--gold)}
+.ab-team .ic,.ab-net .ic{display:grid;place-items:center;width:48px;height:48px;background:rgba(212,168,92,.08);border:1px solid rgba(143,106,31,.25);color:var(--gold-d);margin-bottom:16px}
+.ab-team h3,.ab-net h3{font-size:22px;margin-bottom:8px}
+.ab-team p,.ab-net p{color:var(--tx2);font-size:15px;line-height:1.85}
+.ab-foot{margin-top:26px;color:var(--tx3);font-style:italic;font-size:14.5px}
+.ab-steps{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:34px;padding-bottom:10px}
+.ab-steps article{flex:0 0 min(78vw,280px);scroll-snap-align:start;background:var(--cream);border:1px solid var(--bd);padding:26px}
+@media(min-width:1100px){.ab-steps article{flex-basis:calc((100% - 64px)/5)}}
+.ab-steps b{display:block;font-family:Inter;font-size:32px;color:var(--gold-d);font-weight:600;letter-spacing:-.03em;margin-bottom:26px}
+.ab-steps h3{font-size:21px;margin-bottom:8px}
+.ab-steps p{color:var(--tx2);font-size:15px;line-height:1.85}
+.ab-banner{height:200px;background:center/cover;position:relative;display:flex;align-items:center;margin-bottom:40px}
+.ab-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,27,48,.8),rgba(16,27,48,.35),transparent)}
+.ab-banner span{position:relative;color:#fff;font-size:clamp(17px,2vw,22px);font-weight:300;padding-left:36px}
+.ab-net{display:grid;gap:18px;margin-top:28px}
+@media(min-width:768px){.ab-net{grid-template-columns:1fr 1fr}}
+.ab-net>div{padding:28px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05);border:1px solid transparent;transition:border-color .15s,box-shadow .15s}
+.ab-net>div:hover{box-shadow:0 12px 30px -14px rgba(16,27,48,.25)}
+.ab-net .g:hover{border-color:var(--gold)}.ab-net .s:hover{border-color:var(--sky)}.ab-net .e:hover{border-color:var(--ember)}
+.ab-net .ic{width:56px;height:56px;border:0}
+.ab-phil{position:relative;background:var(--navy) center/cover;color:#fff;padding:96px 0}
+.ab-phil::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy),rgba(16,27,48,.87),rgba(16,27,48,.7))}
+.ab-phil .wrap{position:relative}
+.ab-beliefs{display:grid;gap:16px;margin-top:36px}
+.ab-beliefs div{display:flex;gap:20px;align-items:flex-start;padding:24px;background:rgba(255,255,255,.04);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.08)}
+.ab-beliefs b{width:32px;height:32px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-family:Inter;flex-shrink:0}
+.ab-beliefs p{font-size:18px;line-height:1.8;color:rgba(255,255,255,.9)}
+.ab-dont{margin-top:36px}
+.ab-dont article{border-top:1px solid var(--bd);border-left:4px solid rgba(239,68,68,.45);padding:24px 24px 24px 20px}
+.ab-dont article:last-child{border-bottom:1px solid var(--bd)}
+.ab-dont article.old{background:rgba(255,255,255,.55)}
+.ab-dont h3{font-size:21px;margin-bottom:6px}
+.ab-dont p{color:var(--tx2);font-size:15px;line-height:1.85}
+.ab-cta{background:var(--navy);color:#fff;padding:0 0 96px}
+.ab-ctaimg{height:180px;background:center 35%/cover;margin-bottom:30px;position:relative}
+.ab-ctaimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,27,48,.3),rgba(16,27,48,.75))}
+.ab-cta h3{font-size:25px;margin-bottom:8px}
+.ab-cta p{color:rgba(255,255,255,.6);margin-bottom:24px}
+/* insights (original site layout, v4.1 chapters) */
+.in-hero{position:relative;background:var(--navy) center/cover;color:#fff}
+.in-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy),rgba(16,27,48,.82),rgba(16,27,48,.45))}
+.in-hero .wrap{position:relative;padding-top:100px;padding-bottom:80px}
+.in-grid{display:grid;gap:40px;align-items:start}
+@media(min-width:1024px){.in-grid{grid-template-columns:1.2fr 1fr}}
+.in-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid rgba(255,255,255,.1);padding-top:22px;max-width:520px}
+.in-stats b{display:block;font-family:Inter;font-size:30px;color:var(--gold);font-weight:600}
+.in-stats span{font-size:12px;color:rgba(255,255,255,.55)}
+.in-feat{display:none;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);transition:border-color .15s}
+@media(min-width:1024px){.in-feat{display:block}}
+.in-feat:hover{border-color:rgba(212,168,92,.6)}
+.in-feat .fi{height:180px;background:center/cover;position:relative}
+.in-feat .fi::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,27,48,.8),transparent)}
+.in-feat .pill{position:absolute;left:16px;bottom:12px;z-index:1;background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;padding:2px 8px}
+.in-feat .fc{position:absolute;left:64px;bottom:13px;z-index:1;font-size:12px;color:rgba(255,255,255,.85)}
+.in-feat .fb{padding:20px}
+.in-feat h3{font-size:19px;line-height:1.45;margin-bottom:8px}
+.in-feat p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.in-feat .fb div{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.45);margin-top:12px}
+.in-filter{display:flex;gap:4px;overflow-x:auto;background:var(--cream);padding:4px;width:max-content;max-width:100%}
+.in-filter button{font:inherit;font-size:14px;border:0;background:none;padding:9px 14px;cursor:pointer;color:var(--tx2);white-space:nowrap}
+.in-filter button.on{background:#fff;color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.in-oldtags{margin:14px 0 30px;font-size:12.5px;color:var(--tx3)}
+.in-oldtags i{font-style:normal;border:1px solid var(--bd);padding:1px 7px;margin-left:4px;background:#fff}
+.in-grid-cards{display:grid;gap:20px}
+@media(min-width:768px){.in-grid-cards{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.in-grid-cards{grid-template-columns:repeat(3,1fr)}}
+.acard .sum{font-size:14px;color:var(--tx2);line-height:1.8;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px}
+.acard .meta{display:flex;justify-content:space-between;align-items:center}
+.acard .rm{font-size:13px;color:var(--gold-d);font-weight:600}
+.acard .tag2{display:inline-block;margin-left:6px;background:rgba(91,143,168,.1);color:var(--sky);font-size:11.5px;padding:1px 6px}
+.acard.tagonly{opacity:.8}
+.acard.tagonly .cat{color:var(--tx3)}
+.in-cta{margin-top:56px;border:1px solid var(--bd);background:var(--cream);padding:34px;text-align:center}
+.in-cta h3{font-size:22px;margin-bottom:8px}
+.in-cta p{color:var(--tx2);margin-bottom:22px}
+.in-cta div{display:flex;gap:24px;justify-content:center;align-items:center;flex-wrap:wrap}
+.in-link{color:var(--tx2);border-bottom:1px solid rgba(106,111,128,.4)}
+
+/* ================= Apple-design pass (v5 after) ================= */
+:root{--spring:cubic-bezier(.22,1,.36,1);--out:cubic-bezier(.2,.8,.2,1);--mat-dark:rgba(16,27,48,.72);--mat-light:rgba(255,255,255,.78)}
+html{scroll-padding-top:120px}
+body{text-rendering:optimizeLegibility}
+main.page>section,main.page>nav,main.page>div{scroll-margin-top:110px}
+
+/* 15. Typography: size-specific tracking + inverse leading */
+.display{letter-spacing:-.028em;line-height:1.08}
+.h1{letter-spacing:-.022em;line-height:1.1}
+.h2{letter-spacing:-.016em;line-height:1.16}
+.h3,.plan h3,.road3 h3,.nextch h3,.line h3,.team3 h3,.ab-team h3,.ab-steps h3,.ab-net h3,.step h4,.stuck3 b,.stuck5 b{letter-spacing:-.008em}
+.intro,.lead,.scene,.scene-lead,.block .txt,.faq .a,.acard .sum{letter-spacing:.006em}
+.crumb,.chaplbl,.plan .chap,.acard .cat,.line .k,.lbl,.optno,.tabs button,.stats span,.nums span,.ab-stats span,.in-stats span{letter-spacing:.02em}
+.scene .punch{font-weight:650}
+.h2 .g{font-weight:650}
+
+/* 1. Response: feedback on press, instantly */
+.btn,.more,.nextch,.plan,.acard,.stuck3 a,.stuck5 a,.svc a,.ccard,.road3,.in-filter button,.tabs button,.chapbar a,.faq summary,.backcard,.trio div,.mini5 div,.dim,.ab-net>div,.ab-team div{-webkit-tap-highlight-color:transparent}
+.btn{transition:transform 100ms var(--out),background-color .15s,box-shadow .2s}
+.btn:active{transform:scale(.97)}
+.btn-gold{box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -10px rgba(212,168,92,.8)}
+.btn-gold:hover{box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 12px 28px -10px rgba(212,168,92,.9)}
+.plan,.acard,.stuck3 a,.stuck5 a,.ccard,.road3,.nextch,.dim,.ab-net>div,.ab-team div,.team3 div,.mini5 div,.line{transition:transform 320ms var(--spring),box-shadow 320ms var(--spring),border-color .2s}
+@media(hover:hover){
+ .plan:hover,.acard:hover,.stuck3 a:hover,.stuck5 a:hover,.road3:hover,.nextch:hover,.dim:hover,.ab-net>div:hover,.ab-team div:hover,.line:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(16,27,48,.38)}
+ .ccard:hover{transform:translateY(-3px)}
+ .ccard:hover::before{background:linear-gradient(0deg,rgba(16,27,48,.95) 15%,rgba(16,27,48,.05))}
+}
+.plan:active,.acard:active,.stuck3 a:active,.stuck5 a:active,.ccard:active,.nextch:active{transform:scale(.985);transition-duration:100ms}
+.svc a{transition:background-color .15s,padding .3s var(--spring)}
+@media(hover:hover){.svc a:hover{background:linear-gradient(90deg,rgba(212,168,92,.07),transparent);padding-left:10px}}
+.svc a:active{background:rgba(212,168,92,.12)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* 12. Materials: translucent chrome, content scrolls under */
+.proto{background:rgba(8,13,24,.86);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%)}
+.nav{background:var(--mat-dark);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);transition:box-shadow .25s,background-color .25s}
+.nav.edge{box-shadow:0 1px 0 rgba(255,255,255,.06),0 10px 30px -18px rgba(0,0,0,.6)}
+.menu>div>a{border-radius:0;transition:color .15s,background-color .15s}
+.drop{background:var(--mat-light);-webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);border:1px solid rgba(255,255,255,.6);box-shadow:0 24px 60px -20px rgba(16,27,48,.45),0 0 0 1px rgba(16,27,48,.04);
+  transform-origin:24px 0;transform:translateY(-6px) scale(.96);filter:blur(4px);transition:opacity .16s var(--out) .12s,transform .22s var(--out) .12s,filter .2s .12s}
+.menu>div:hover .drop,.menu>div:focus-within .drop{opacity:1;pointer-events:auto;transform:none;filter:none;transition:opacity .2s var(--out),transform .42s var(--spring),filter .25s}
+.drop a{transition:color .12s,background-color .12s,padding .25s var(--spring)}
+.drop a:hover{background:rgba(58,107,132,.07);padding-left:24px}
+
+.chapbar{background:var(--mat-light);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border-bottom:0;box-shadow:0 1px 0 rgba(16,27,48,.06)}
+.chapbar.edge{box-shadow:0 1px 0 rgba(16,27,48,.06),0 14px 24px -18px rgba(16,27,48,.35)}
+.chapbar .ln{position:relative;overflow:hidden;background:var(--cream-d)}
+.chapbar .ln.done::after{content:"";position:absolute;inset:0;background:var(--gold);transform-origin:left;animation:fillx .9s var(--spring) both}
+@keyframes fillx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.chapbar a{transition:color .15s}
+.chapbar a .dot{transition:transform .35s var(--spring),box-shadow .35s}
+.chapbar a:active .dot{transform:scale(.85)}
+.chapbar a.done .dot{background:var(--gold-l);border-color:var(--gold)}
+.chapbar a.on .dot{transform:scale(1.15)}
+
+/* Scroll edge effect instead of hard dividers under sticky chrome */
+.anotherline{border-bottom:0;box-shadow:inset 0 -1px 0 rgba(16,27,48,.05)}
+
+/* 7/8. Hero: tabs show the time left; content slides in the direction it came from */
+.tabs button{overflow:hidden;transition:color .2s}
+.tabs button .bar{position:absolute;left:0;top:-1px;height:2px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:left}
+.tabs button.on::after{display:none}
+.tabs button.on .bar{animation:tabfill var(--dur,10s) linear forwards}
+.hero:hover .tabs button.on .bar{animation-play-state:paused}
+@keyframes tabfill{to{transform:scaleX(1)}}
+.tabs button:active{background:rgba(255,255,255,.05)}
+.slide.on{animation:heroin .9s var(--spring) both}
+@keyframes heroin{from{opacity:0;transform:translateY(14px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.hero{transition:background-image .6s}
+
+/* Page hero headings materialize once */
+.phero .h1,.ab-hero .display,.in-hero .display{animation:heroin 1s var(--spring) both}
+.phero .scene-lead,.phero .lead{animation:heroin 1s var(--spring) .08s both}
+.phero .ctas{animation:heroin 1s var(--spring) .16s both}
+
+/* Reveal on enter (skipped under reduced motion) */
+.rv{opacity:0;transform:translateY(16px)}
+.rv.in{opacity:1;transform:none;transition:opacity .7s var(--out),transform .9s var(--spring);transition-delay:var(--d,0s)}
+
+/* FAQ accordion: spring height, interruptible */
+.faq .acc{overflow:hidden}
+.faq summary{transition:background-color .12s}
+.faq summary:active{background:rgba(16,27,48,.03)}
+.faq .pm{transition:transform .45s var(--spring)}
+
+/* Segmented control with a sliding pill */
+.in-filter{position:relative}
+.in-filter .pill{position:absolute;top:4px;bottom:4px;left:0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1),0 0 0 .5px rgba(0,0,0,.04);z-index:0;will-change:transform,width}
+.in-filter button{position:relative;z-index:1;transition:color .2s}
+.in-filter button.on{background:none;box-shadow:none}
+.in-filter button:active{transform:scale(.96)}
+.in-grid-cards .acard{animation:cardin .55s var(--spring) both;animation-delay:calc(var(--i,0)*35ms)}
+@keyframes cardin{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
+
+/* Horizontal scrollers: drag with momentum + rubber-band */
+.ab-cards,.ab-steps{cursor:grab;scrollbar-width:none;scroll-behavior:auto}
+.ab-cards::-webkit-scrollbar,.ab-steps::-webkit-scrollbar{display:none}
+.ab-cards.dragging,.ab-steps.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.hscroll-hint{display:flex;gap:8px;margin-top:14px}
+.hscroll-hint button{width:40px;height:40px;border:1px solid rgba(255,255,255,.25);background:transparent;color:inherit;font-size:18px;cursor:pointer;transition:transform .1s,background-color .15s}
+.hscroll-hint button:active{transform:scale(.92)}
+.sec:not(.dark) .hscroll-hint button{border-color:var(--bd);color:var(--tx)}
+
+/* Report paper follows the pointer */
+.paper{transition:box-shadow .3s;will-change:transform}
+
+/* Methodology bars grow in */
+.bars2 i::after{transform-origin:left;transform:scaleX(0);transition:transform 1.1s var(--spring);transition-delay:var(--d,0s)}
+.bars2.in i::after{transform:scaleX(1)}
+
+/* Home timeline: scroll-linked progress, nodes jump to their chapter */
+.timeline{cursor:default}
+.timeline::after{content:"";position:absolute;left:12.5%;top:7px;height:2px;width:calc(75% * var(--p,0));background:var(--gold);transition:width .15s linear}
+.timeline div{cursor:pointer;transition:color .2s}
+.timeline div.hit{color:var(--tx)}
+.timeline div::before{transition:transform .35s var(--spring),background-color .2s}
+.timeline div.hit::before{transform:scale(1.2);background:var(--gold)}
+.plan.flash{box-shadow:0 0 0 2px var(--gold),0 18px 40px -22px rgba(16,27,48,.38)}
+
+/* Sheet: contact form, drag to dismiss */
+.scrim{position:fixed;inset:0;background:rgba(8,13,24,.5);opacity:0;pointer-events:none;z-index:90}
+.sheet{position:fixed;left:50%;bottom:0;width:min(560px,100%);transform:translate(-50%,100%);z-index:91;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);box-shadow:0 -20px 60px -20px rgba(8,13,24,.5);padding:10px 28px 32px;touch-action:none;will-change:transform}
+.sheet .grab{width:44px;height:5px;background:rgba(16,27,48,.2);margin:4px auto 18px;border-radius:3px;cursor:grab}
+.sheet h3{font-size:24px;letter-spacing:-.01em;margin-bottom:6px}
+.sheet p.s{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.sheet label{display:grid;gap:6px;font-size:13px;color:var(--tx2);margin-bottom:14px}
+.sheet input,.sheet textarea{font:inherit;font-size:15.5px;padding:12px 14px;border:1px solid var(--cream-d);background:#fff;color:var(--tx);transition:border-color .15s,box-shadow .15s}
+.sheet input:focus,.sheet textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,168,92,.2)}
+.sheet .btn{width:100%;justify-content:center;margin-top:6px}
+.sheet .fine{font-size:12.5px;color:var(--tx3);text-align:center;margin-top:12px}
+
+/* Mobile: floating CTA on a material bar */
+.fab{position:fixed;left:12px;right:12px;bottom:12px;z-index:80;display:none;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 16px;background:var(--mat-dark);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);color:#fff;box-shadow:0 12px 30px -12px rgba(0,0,0,.5);transform:translateY(140%);transition:transform .5s var(--spring)}
+.fab span{font-size:13.5px;color:rgba(255,255,255,.85)}
+.fab.show{transform:none}
+@media(max-width:767px){.fab{display:flex}}
+
+/* 14. Accessibility preferences */
+@media (prefers-reduced-motion:reduce){
+ .rv{opacity:1;transform:none}
+ .slide.on,.phero .h1,.phero .lead,.phero .scene-lead,.phero .ctas,.ab-hero .display,.in-hero .display,.in-grid-cards .acard{animation:none}
+ .tabs button.on .bar{animation:none;transform:scaleX(1)}
+ .chapbar .ln.done::after{animation:none}
+ *{transition-duration:.01ms!important}
+}
+@media (prefers-reduced-transparency:reduce){
+ .nav,.proto,.fab{background:var(--navy);backdrop-filter:none;-webkit-backdrop-filter:none}
+ .drop,.chapbar,.sheet{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@media (prefers-contrast:more){
+ .nav,.chapbar,.drop,.sheet{backdrop-filter:none;-webkit-backdrop-filter:none}
+ .drop,.chapbar{background:#fff;border:1px solid var(--tx)}
+ .intro,.lead,.scene,.block .txt{color:var(--tx)}
+}
+
+/* decisions made: hide review annotations in AFTER */
+.vtag,.designnote,.verify,.note,.pending,.acard .tag{display:none!important}
+
+/* ================= Full-bleed heroes + photo backgrounds + scrim modes ================= */
+:root{--chrome:105px}
+.phero,.ab-hero,.in-hero,.hero{min-height:calc(100svh - var(--chrome));display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center}
+.phero>.wrap,.ab-hero>.wrap,.in-hero>.wrap{width:100%;padding-top:96px;padding-bottom:clamp(64px,12vh,120px)}
+.in-hero>.wrap.in-grid{align-items:end}
+.hero .hero-body{padding-top:96px}
+.cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:2;width:38px;height:38px;display:grid;place-items:center;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(255,255,255,.06);cursor:pointer;transition:transform .1s,background-color .15s}
+.cue:hover{background:rgba(255,255,255,.14)}.cue:active{transform:translateX(-50%) scale(.92)}
+.hero .cue{display:none}
+
+/* new photos (Pexels, free for commercial use) */
+#p-product-testing .phero{background-image:url(https://images.pexels.com/photos/8545635/pexels-photo-8545635.jpeg?auto=compress&cs=tinysrgb&w=2400)!important;background-position:center 35%}
+#p-consignment .phero{background-image:url(https://images.pexels.com/photos/4487383/pexels-photo-4487383.jpeg?auto=compress&cs=tinysrgb&w=2400)!important}
+#p-localization .phero{background-image:url(https://images.pexels.com/photos/21563946/pexels-photo-21563946.jpeg?auto=compress&cs=tinysrgb&w=2400)!important;background-position:center 40%}
+#p-call-center .phero{background-image:url(https://images.pexels.com/photos/7709179/pexels-photo-7709179.jpeg?auto=compress&cs=tinysrgb&w=2400)!important;background-position:right center}
+#p-north-america .phero{background-image:url(https://images.pexels.com/photos/11835349/pexels-photo-11835349.jpeg?auto=compress&cs=tinysrgb&w=2400)!important}
+#p-optimize .phero{background-image:url(https://images.pexels.com/photos/4484075/pexels-photo-4484075.jpeg?auto=compress&cs=tinysrgb&w=2400)!important;background-position:70% 30%}
+#p-methodology .phero{background-image:url(https://images.pexels.com/photos/5302808/pexels-photo-5302808.jpeg?auto=compress&cs=tinysrgb&w=2400)!important}
+#p-cases .phero{background-image:url(https://images.pexels.com/photos/10869666/pexels-photo-10869666.jpeg?auto=compress&cs=tinysrgb&w=2400)!important;background-position:center 60%}
+.in-hero{background-image:url(https://images.pexels.com/photos/5951549/pexels-photo-5951549.jpeg?auto=compress&cs=tinysrgb&w=2400)!important}
+
+/* scrim modes: full (today) / none / local (recommended) */
+html[data-scrim="none"] .hero::before,html[data-scrim="none"] .phero::before,html[data-scrim="none"] .ab-hero::before,html[data-scrim="none"] .in-hero::before{background:none}
+html[data-scrim="local"] .hero::before,html[data-scrim="local"] .phero::before,html[data-scrim="local"] .ab-hero::before,html[data-scrim="local"] .in-hero::before{
+  background:linear-gradient(90deg,rgba(16,27,48,.86) 0%,rgba(16,27,48,.68) 36%,rgba(16,27,48,.22) 60%,rgba(16,27,48,0) 78%),linear-gradient(0deg,rgba(16,27,48,.6) 0%,rgba(16,27,48,0) 40%)}
+html[data-scrim="local"] .phero.night::before{background:linear-gradient(90deg,rgba(8,13,24,.88) 0%,rgba(8,13,24,.7) 36%,rgba(8,13,24,.24) 60%,rgba(8,13,24,0) 78%),linear-gradient(0deg,rgba(8,13,24,.6),rgba(8,13,24,0) 40%)}
+html[data-scrim="local"] :is(.hero,.phero,.ab-hero,.in-hero) :is(h1,.display,.h1){text-shadow:0 1px 2px rgba(0,0,0,.35),0 10px 40px rgba(0,0,0,.35)}
+html[data-scrim="local"] :is(.hero,.phero,.ab-hero,.in-hero) :is(.sub,.lead,.scene-lead,.crumb,.chaplbl,.ab-quote,p){text-shadow:0 1px 2px rgba(0,0,0,.45)}
+html[data-scrim="none"] :is(.hero,.phero,.ab-hero,.in-hero) :is(h1,.display,.h1,.sub,.lead,.scene-lead,p){text-shadow:none}
+@media(max-width:767px){
+  html[data-scrim="local"] .hero::before,html[data-scrim="local"] .phero::before,html[data-scrim="local"] .ab-hero::before,html[data-scrim="local"] .in-hero::before{
+    background:linear-gradient(0deg,rgba(16,27,48,.9) 0%,rgba(16,27,48,.72) 45%,rgba(16,27,48,.42) 75%,rgba(16,27,48,.2) 100%)}
+}
+/* hero sub-elements that had their own dark backing stay readable in every mode */
+.ab-founder{-webkit-backdrop-filter:none}
+
+/* prototype-only scrim switcher */
+.scrimsw{position:fixed;left:14px;bottom:14px;z-index:95;display:flex;align-items:center;gap:4px;padding:4px 4px 4px 12px;background:rgba(8,13,24,.8);-webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);color:#fff;font-size:12.5px;box-shadow:0 10px 30px -12px rgba(0,0,0,.6)}
+.scrimsw b{font-weight:600;margin-right:6px;color:var(--gold)}
+.scrimsw button{font:inherit;font-size:12.5px;border:0;background:none;color:rgba(255,255,255,.75);padding:7px 10px;cursor:pointer}
+.scrimsw button.on{background:var(--gold);color:var(--navy);font-weight:700}
+.scrimsw button:active{transform:scale(.95)}
+@media(max-width:767px){.scrimsw{bottom:auto;top:118px;left:8px}}
+
+/* ===== Hero like live lufe.world: one full-screen image, header floats on top ===== */
+.proto{position:fixed;left:0;right:0;top:0;z-index:60}
+.nav{position:fixed;left:0;right:0;top:41px}
+.phero,.ab-hero,.in-hero,.hero{min-height:100vh;min-height:var(--hero-h,100svh)}
+.phero>.wrap,.ab-hero>.wrap,.in-hero>.wrap{padding-top:150px}
+.hero .hero-body{padding-top:150px}
+.nav.over{background:linear-gradient(180deg,rgba(8,13,24,.5),rgba(8,13,24,0));-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+.nav{transition:background-color .3s,box-shadow .3s,-webkit-backdrop-filter .3s,backdrop-filter .3s}
+
+/* ================= v6 delight layer ================= */
+/* G1 reading progress: a gold hairline under the header */
+.readbar{position:fixed;left:0;top:105px;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--gold),#e8c486);z-index:61;pointer-events:none}
+html.embed .readbar{top:64px}
+
+/* G2 arrows nudge forward on hover (the arrow points where you are going) */
+.arw{display:inline-block;transition:transform .35s var(--spring)}
+a:hover .arw,button:hover .arw,.btn:hover .arw,.nextch:hover .arw{transform:translateX(4px)}
+
+/* G3 text links draw a gold underline from the left */
+.more,.all,.nextline,.in-link,.backcard{background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat;transition:background-size .45s var(--spring),color .15s}
+.more:hover,.all:hover,.nextline:hover,.in-link:hover,.backcard:hover{background-size:100% 1.5px}
+
+/* G4 hero arrival: the photo settles in once, then drifts slower than the page */
+.hero,.phero,.ab-hero,.in-hero{overflow:hidden}
+.herobg{position:absolute;inset:-6% 0 -6% 0;background:inherit;background-size:cover;background-position:inherit;z-index:0;will-change:transform;animation:settle 1.6s var(--spring) both}
+@keyframes settle{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero>.wrap,.phero>.wrap,.ab-hero>.wrap,.in-hero>.wrap{position:relative;z-index:2}
+.hero::before,.phero::before,.ab-hero::before,.in-hero::before{z-index:1}
+.cue{z-index:3}
+.mail{z-index:3}
+
+/* G6 highlighted words get a gold underline that sweeps in when the heading appears */
+.h2 .g{background:linear-gradient(90deg,rgba(212,168,92,.35),rgba(212,168,92,.35)) 0 92%/0 .18em no-repeat;transition:background-size 1s var(--spring) .25s}
+.h2.lit .g{background-size:100% .18em}
+.dark .h2 .g{background-image:linear-gradient(90deg,rgba(212,168,92,.45),rgba(212,168,92,.45))}
+
+/* G7 dark call-to-action panels catch a soft light where the pointer is */
+.cta{--mx:50%;--my:50%}
+.cta .glow{position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(212,168,92,.16),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
+.cta:hover .glow{opacity:1}
+.cta .wrap{z-index:1}
+
+/* H1 home: hovering a chapter card lights its month on the timeline */
+.timeline div.peek{color:var(--tx)}
+.timeline div.peek::before{transform:scale(1.35);background:var(--gold-l)}
+
+/* H3 home: the LUFÉ row in the comparison table glows once when it scrolls in */
+.tbl tr.us td{position:relative}
+.tbl tr.us.sweep td::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(212,168,92,.35) 50%,transparent 70%) -100% 0/200% 100% no-repeat;animation:sheen 1.4s var(--out) .2s both;pointer-events:none}
+@keyframes sheen{to{background-position:200% 0}}
+.tbl tbody tr:not(.us){transition:background-color .15s}
+.tbl tbody tr:not(.us):hover{background:var(--cream)}
+
+/* S1 services list: a price chip slides in from the right on hover */
+.svc a .chip{justify-self:end;align-self:center;font-size:12.5px;font-weight:600;color:var(--gold-d);background:var(--cream);padding:4px 10px;opacity:0;transform:translateX(-8px);transition:opacity .25s,transform .45s var(--spring);white-space:nowrap}
+.svc a:hover .chip{opacity:1;transform:none}
+.chapters .svc a{grid-template-columns:1fr auto 24px}
+
+/* P1 step timelines fill as you scroll through them */
+.steps{--sp:0}
+.steps.h4::after,.steps.h5::after{content:"";position:absolute;left:0;top:-14px;height:2px;width:calc(var(--sp)*100%);background:var(--gold);transition:width .12s linear}
+.steps.h4,.steps.h5{position:relative}
+.steps .step.reached .sn{box-shadow:0 0 0 4px rgba(212,168,92,.25)}
+.steps.alt::after{background:var(--sky)}
+
+/* P2 price paths: the two outcomes respond to the pointer */
+.pricecard .path div{transition:transform .35s var(--spring),background-color .2s,border-color .2s}
+.pricecard .path div:hover{transform:translateX(6px);background:rgba(255,255,255,.1)}
+.pricecard .path div .to{display:inline-block;margin-left:8px;font-size:12.5px;color:var(--gold);opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .4s var(--spring)}
+.pricecard .path div:hover .to{opacity:1;transform:none}
+
+/* C1 consignment: the day the licence lands */
+.track .rows div.last{position:relative;overflow:hidden}
+.track .rows div.last.arrive::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(212,168,92,.28) 50%,transparent 70%) -100% 0/200% 100% no-repeat;animation:sheen 1.6s var(--out) both}
+.track.active .rows div{transition:opacity .5s,transform .6s var(--spring)}
+.track.active .rows div.wait{opacity:.35;transform:translateX(-6px)}
+
+/* L1 localization: rows show where the work happens */
+.who tbody tr{transition:background-color .15s}
+.who tbody tr:hover{background:var(--cream)}
+.who td:last-child{position:relative;padding-left:40px}
+.who td:last-child::before{content:"";position:absolute;left:16px;top:21px;width:10px;height:10px;border:2px solid var(--gold-d);border-radius:50% 50% 50% 0;transform:rotate(-45deg) scale(.8);opacity:.45;transition:opacity .2s,transform .35s var(--spring)}
+.who tr:hover td:last-child::before{opacity:1;transform:rotate(-45deg) scale(1)}
+
+/* CC1 call center: the Friday-night email actually arrives, then gets answered */
+.mail{position:absolute;right:48px;bottom:120px;z-index:2;width:340px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);color:var(--tx);box-shadow:0 24px 60px -20px rgba(0,0,0,.6);padding:14px 16px;font-size:13px;transform:translateY(24px);opacity:0;transition:transform .7s var(--spring),opacity .4s}
+.mail.in{transform:none;opacity:1}
+.mail .top{display:flex;justify-content:space-between;color:var(--tx3);font-size:11.5px;margin-bottom:6px}
+.mail b{display:block;font-size:14px;margin-bottom:2px}
+.mail p{color:var(--tx2);line-height:1.6}
+.mail .reply{margin-top:10px;padding-top:10px;border-top:1px solid var(--bd);display:flex;gap:8px;align-items:center;color:var(--sky);font-weight:600;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .5s var(--spring)}
+.mail.answered .reply{opacity:1;transform:none}
+.mail .check{width:18px;height:18px}
+.mail .check path{stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .6s var(--out) .2s}
+.mail.answered .check path{stroke-dashoffset:0}
+.mail .demo{position:absolute;top:-22px;right:0;font-size:11px;color:rgba(255,255,255,.6)}
+@media(max-width:767px){.mail{left:16px;right:16px;width:auto;bottom:auto;top:130px}}
+
+/* M1 methodology: try the scorecard yourself */
+.scorer{display:grid;gap:24px;background:#fff;border:1px solid var(--bd);padding:28px;margin-top:22px}
+@media(min-width:900px){.scorer{grid-template-columns:1fr 280px;align-items:center}}
+.scorer .rows{display:grid;gap:14px}
+.scorer label{display:grid;grid-template-columns:150px minmax(0,1fr) 44px;gap:14px;align-items:center;font-size:14px;font-weight:600}
+.scorer label small{display:block;font-weight:500;color:var(--tx3);font-size:12px}
+.scorer input[type=range]{-webkit-appearance:none;appearance:none;height:4px;background:linear-gradient(90deg,var(--sky) var(--v),var(--cream-d) var(--v));outline:none}
+.scorer input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;background:#fff;border:2px solid var(--sky);box-shadow:0 2px 6px rgba(0,0,0,.2);cursor:grab;transition:transform .1s}
+.scorer input[type=range]:active::-webkit-slider-thumb{transform:scale(1.2);cursor:grabbing}
+.scorer output{font-family:Inter;font-weight:700;text-align:right}
+.scorer .result{background:var(--navy);color:#fff;padding:22px;text-align:center}
+.scorer .result small{color:rgba(255,255,255,.6)}
+.scorer .result b{display:block;font-family:Inter;font-size:56px;line-height:1.1;color:var(--gold)}
+.scorer .result span{display:block;font-weight:700;margin-top:4px;transition:color .2s}
+.scorer .result p{font-size:13px;color:rgba(255,255,255,.75);margin-top:8px;min-height:3.4em}
+.scores>div{transition:transform .4s var(--spring),box-shadow .3s,opacity .3s}
+.scores.live>div{opacity:.45}
+.scores.live>div.hit{opacity:1;transform:translateY(-4px);box-shadow:0 16px 30px -18px rgba(16,27,48,.4)}
+
+/* CA1 cases: metrics count up, photos lean in */
+.ccard{overflow:hidden}
+.ccard .ph{position:absolute;inset:0;background:inherit;background-size:cover;background-position:center;transition:transform 1.2s var(--spring);z-index:0}
+.ccard::before{z-index:1}.ccard>*:not(.ph){z-index:2}
+.ccard:hover .ph{transform:scale(1.05)}
+
+/* I1 insights: covers lean in, filter pills show how many */
+.acard .img{transition:transform 1s var(--spring)}
+.acard{overflow:hidden}
+.acard:hover .img{transform:scale(1.04)}
+.in-filter button .n{display:inline-block;min-width:18px;margin-left:6px;font-size:11px;font-weight:700;color:var(--tx3);font-family:Inter}
+.in-filter button.on .n{color:var(--gold-d)}
+
+/* A1 about: the founder signs */
+.sig{display:block;margin-top:10px;width:150px;height:44px;color:var(--gold)}
+.sig path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420}
+.sig.draw path{animation:sign 2.2s var(--out) .4s forwards}
+@keyframes sign{to{stroke-dashoffset:0}}
+.ab-beliefs div b{transition:background-color .3s,color .3s,transform .4s var(--spring)}
+.ab-beliefs div:not(.lit) b{background:transparent;color:var(--gold);box-shadow:inset 0 0 0 1.5px var(--gold)}
+.ab-beliefs div.lit b{transform:scale(1.06)}
+
+/* F1 back to top, grown from the corner */
+.totop{position:fixed;right:16px;bottom:16px;z-index:79;width:44px;height:44px;display:grid;place-items:center;background:rgba(16,27,48,.72);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);color:#fff;border:1px solid rgba(255,255,255,.15);cursor:pointer;transform:scale(.6) translateY(10px);opacity:0;transition:transform .45s var(--spring),opacity .25s;transform-origin:100% 100%}
+.totop.show{transform:none;opacity:1}
+.totop:active{transform:scale(.92)}
+.totop svg{width:18px;height:18px}
+@media(max-width:767px){.totop{bottom:84px}}
+
+@media (prefers-reduced-motion:reduce){
+  .herobg,.sig.draw path,.tbl tr.us.sweep td::after,.track .rows div.last.arrive::after{animation:none}
+  .sig path{stroke-dashoffset:0}
+  .h2 .g{background-size:100% .18em}
+  .mail{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="proto"><div class="wrap" id="proto">
+  <b>AFTER · v6 體驗與小巧思提案</b>
+  <a href="#home">首頁</a>
+  <a href="#services">服務總覽</a>
+  <a href="#product-testing">品測</a>
+  <a href="#consignment">寄賣 🆕</a>
+  <a href="#localization">公司落地</a>
+  <a href="#call-center">海外客服 🆕</a>
+  <a href="#north-america">北美通路 🆕</a>
+  <a href="#optimize">運營優化</a>
+  <a href="#methodology">方法論</a>
+  <a href="#cases">案例</a>
+  <a href="#insights">洞察</a>
+  <a href="#about">關於我們</a>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <a class="logo" href="#home"><img src="https://lufe.world/images/logo/logo-mark-white.png" alt=""><span>鹿飛 LUF<em>É</em></span></a>
+  <nav class="menu">
+    <div><a href="#services">服務</a><div class="drop">
+      <a href="#product-testing">品測<small>第一個月 · 先讓馬尼拉的媽媽拿起來看看</small></a>
+      <a href="#consignment">寄賣<small>第三個月 · 上架了，讓人先用過再說</small></a>
+      <a href="#localization">公司落地<small>第九個月 · 開始想要在當地有自己的人</small></a>
+      <a href="#call-center">海外客服<small>之後的每一天 · 星期五晚上十一點的那封信</small></a>
+      <a href="#north-america">北美通路<small>另一個故事 · 北美貨架</small></a>
+    </div></div>
+    <div><a href="#optimize">進階</a><div class="drop">
+      <a href="#optimize">運營優化</a>
+      <a href="#methodology">鹿飛方法論</a>
+    </div></div>
+    <div><a href="#cases">案例</a></div>
+    <div><a href="#insights">洞察</a></div>
+    <div><a href="#about">關於我們</a></div>
+  </nav>
+  <a class="btn btn-gold btn-sm">聊聊你的產品 →</a>
+</div></header>
+
+<!-- ============ HOME ============ -->
+<main class="page" id="p-home">
+  <section class="hero" id="hero" style="background-image:url(https://lufe.world/images/hero/hero-poster-1600.webp)">
+    <div class="wrap">
+      <div class="hero-body">
+        <div class="slide on">
+          <h1 class="display">協助台灣企業
+在北美與東南亞落地</h1>
+          <p class="sub">這個市場真的要你嗎？市場評估、產品測試、決策框架 — 先把勝率搞清楚。</p>
+          <div class="ctas"><a class="btn btn-gold">看真實案例 →</a><a class="btn btn-ghost">先做 2 分鐘處境比對</a></div>
+        </div>
+        <div class="slide">
+          <h1 class="display">上得了架
+還要賣得動</h1>
+          <p class="sub">通路進入、展會佈局、數位集客 — 把產品放進對的通路，讓消費者找得到。</p>
+          <div class="ctas"><a class="btn btn-gold" href="#services">看完整服務內容 →</a><a class="btn btn-ghost">先做 2 分鐘處境比對</a></div>
+        </div>
+        <div class="slide">
+          <h1 class="display">真的跑過船的人，
+才懂出海的眉角</h1>
+          <p class="sub">出海不是報告寫得出來的。鹿飛站在躍馬企業 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通。</p>
+          <div class="ctas"><a class="btn btn-gold">認識躍馬企業 ↗</a><a class="btn btn-ghost" href="#services">看完整服務內容</a></div>
+        </div>
+      </div>
+      <div class="tabs">
+        <button class="on" data-i="0" data-go="plans">產品適配性</button>
+        <button data-i="1" data-go="card-02">通路銷售力</button>
+        <button data-i="2" data-go="jumping">基石 · 42 年國際物流</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec"><div class="wrap opening">
+    <div>
+      
+      <h2 class="h2">很多品牌的出海故事，
+<span class="g">都在貨到的那一天結束</span></h2>
+    </div>
+    <p class="scene">我們聽過太多這個版本：
+
+貨代把貨送到馬尼拉，報關、清關、進倉，一切順利。
+然後——證還在申請，架上沒有人看見，
+第一封客訴信是英文的，沒有人回。
+三個月後貨還在倉庫，老闆說：算了，先回台灣。
+<span class="punch">貨都有送到，差別從來不在物流。
+差別在到了之後，有沒有人接著走。
+鹿飛做的，就是那一段。</span></p>
+  </div></section>
+
+  <section class="sec cream" id="plans"><div class="wrap">
+    <div class="center">
+      <h2 class="h2 pre">一家品牌在馬尼拉的第一年，
+<span class="g">通常是這樣走的</span></h2>
+      <p class="intro">四個章節，四個方案。可以只走第一章，也可以一路走完。每一章都有價，每一章結束你都可以決定要不要繼續。</p>
+    </div>
+    <div class="timeline"><div>第一個月</div><div>第三個月</div><div>第九個月</div><div>之後的每一天</div></div>
+    <div class="plans">
+      <article class="plan p1">
+        <p class="chap">第一個月 · 品測</p>
+        <h3>先讓馬尼拉的媽媽拿起來看看</h3>
+        <p class="scn">你把三支產品寄到馬尼拉。兩個星期後，
+一群當地學校的老師和家長圍著桌子，拿起來、聞一聞、翻價錢。
+有人皺眉，有人問哪裡買得到。</p>
+        <p class="do">我們把這一桌的反應整理成一頁：
+誰會買、多少錢會買、為什麼不買。</p>
+        <div class="price"><b>1～2 萬（前 10 家實驗價）</b><p>沒過，故事在這裡停，你花的是 1～2 萬，不是幾百萬。
+過了，這筆抵進下一章。</p></div>
+        <a class="more" href="#product-testing">看品測怎麼做 →</a>
+      </article>
+      <article class="plan p2" id="card-02">
+        <p class="chap">第三個月 · 寄賣</p>
+        <h3>上架了，讓人先用過再說</h3>
+        <p class="scn">報告說可以。貨上了菲律賓的電商，
+產品證還在跑，這 6～12 週，學校的家長活動先讓大家用過。
+有人在社群裡問，有人拍了影片，證下來那天，架上已經有人在等。</p>
+        <p class="do">我們做的：電商上架、產品證代持、學校家長活動、市場報告，
+加上網紅與活動的配套。貨放合作夥伴的倉，賣多少算多少。</p>
+        <div class="price"><b>5～6 萬（跟品測合起來就是 7 萬起手包，品測費可抵）</b></div>
+        <a class="more" href="#consignment">看寄賣包內容 →</a>
+      </article>
+      <article class="plan p3">
+        <p class="chap">第九個月 · 公司落地</p>
+        <h3>開始想要在當地有自己的人</h3>
+        <p class="scn">賣得動了。你開始想：要不要開一間自己的公司、
+找第一個員工、把證掛到自己名下。
+這時候你會發現，每一件事都需要有人在當地——而你不可能一直飛。</p>
+        <p class="do">我們做的：註冊、招聘、律師行文件、FDA 掛證、日常營運陪跑。
+不是每個品牌都會走到這一章；走到的，我們接得住。</p>
+        <div class="price"><b>按案報價，第一次談就給成本框架</b></div>
+        <a class="more" href="#localization">看落地怎麼做 →</a>
+      </article>
+      <article class="plan p4">
+        <p class="chap">之後的每一天 · 海外客服</p>
+        <h3>星期五晚上十一點的那封信</h3>
+        <p class="scn">一封英文客訴信。退貨、換貨、問哪裡有賣。
+你不會想為了這件事養一組人，但也不能不回。</p>
+        <p class="do">我們做的：一群受過完整訓練、英文老師等級的菲律賓客服團隊，替你接。
+寄賣就用得到，落地更用得到，要去北美的，一樣用得到。</p>
+        <div class="price"><b>2027 Q1 開放首批，先登記</b></div>
+        <a class="more" href="#call-center">登記首批 →</a>
+      </article>
+    </div>
+    <div class="kit">出海起手包 <b>7 萬</b> ＝ 第一章品測 1～2 萬 ＋ 第二章寄賣包 5～6 萬。<br>先付品測。沒過，錢到此為止；過了，這筆抵進寄賣包。前 10 家是實驗價。</div>
+    <a class="nextline" href="#north-america">產品已經成熟、目標是北美貨架？那是另一個故事，由北美團隊執行 →</a>
+  </div></section>
+
+  <section class="sec dark" id="jumping"><div class="wrap jband">
+    <div>
+      
+      <h2 class="h2 pre">四十二年，
+<span class="g">看著貨櫃一個一個出去</span></h2>
+      <p class="intro">躍馬企業做國際物流 42 年，500 多個出口案件，30 多個國家。
+我在裡面看的不是報表，是貨櫃出去以後，後面的故事。
+
+有的品牌在當地開了第二家店。
+更多的，是幾個月後貨退回來，或者就沒有下文了。
+差別從來不在物流——貨都有送到。
+差別在到了之後，有沒有人接。
+
+鹿飛就是從這個觀察長出來的。</p>
+    </div>
+    <div>
+      <div class="nums" style="margin-top:0">
+        <div><b>42<sup>+</sup></b><span>躍馬企業 · 年國際物流實戰</span></div>
+        <div><b>500<sup>+</sup></b><span>躍馬企業 · 出口實戰案件</span></div>
+        <div><b>30<sup>+</sup></b><span>國家與地區覆蓋</span></div>
+      </div>
+      <div class="believe">
+        <h3>我們相信的事很簡單</h3>
+        <p>台灣市場不夠大，這件事做生意的人都知道。
+出去有難度，但出得去。
+我們想做的，是讓第一步小到你敢踏，
+後面的每一步，都有人在。</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="home-cases"><div class="wrap">
+    <h2 class="h2 pre">我們不是跟你賭夢想，
+<span class="g">是有做過的事</span></h2>
+    <p class="intro">在菲律賓，我們跟合作夥伴走過三條不一樣的路。</p>
+    <div class="roads">
+      <div class="road"><b>第一條</b><h3>從零開始。</h3><p>在當地蓋一間英語教育機構——找老師、找場地、招第一個學生；
+後來用同樣的方法，做了一個連鎖手搖飲品牌。</p></div>
+      <div class="road"><b>第二條</b><h3>改了再帶過去。</h3><p>台灣的產品到了當地，改配方、改價格、改包裝，
+變成當地人願意掏錢的樣子。</p></div>
+      <div class="road"><b>第三條</b><h3>原封不動帶過去。</h3><p>一個台灣的美業品牌，什麼都不改，只做當地的行銷，看它站不站得住。</p></div>
+    </div>
+    <p class="intro" style="margin-top:28px">三條路的成本、坑、時間都不一樣。
+第一次談，我們會先問你比較像哪一條。</p>
+    <div class="cases">
+      <div class="case" style="background-image:url(https://lufe.world/images/stages/stage-1-uncertain.jpg)"><small>個案卡 01</small><b>（沿用現有個案卡，本輪不動）</b></div>
+      <div class="case" style="background-image:url(https://lufe.world/images/stages/stage-2-ready.jpg)"><small>個案卡 02</small><b>（沿用現有個案卡，本輪不動）</b></div>
+      <div class="case" style="background-image:url(https://lufe.world/images/about/story-problem-warehouse.jpg)"><small>個案卡 03</small><b>（沿用現有個案卡，本輪不動）</b></div>
+      <div class="case" style="background-image:url(https://lufe.world/images/about/network-saigon-night.jpg)"><small>個案卡 04</small><b>（沿用現有個案卡，本輪不動）</b></div>
+    </div>
+  </div></section>
+
+  <section class="sec cream reading"><div class="wrap">
+    <div class="sechead"><h2 class="h2">讀到一半想深入的，<span class="g">這裡有</span></h2></div>
+    <div class="cards" id="latest3"></div>
+    <a class="all" href="#insights">看所有文章 →</a>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <h2 class="h2 pre">一個窗口，
+<span class="g">一條進度線</span></h2>
+    <p class="intro">我們常聽到的版本是這樣：</p>
+    <div class="week">
+      <div><b>星期一</b>顧問來催進度</div>
+      <div><b>星期二</b>貿易商來催付款</div>
+      <div><b>星期三</b>貨代來催艙位</div>
+      <div><b>星期四</b>客服外包問這封信要怎麼回</div>
+    </div>
+    <p class="intro" style="margin-top:24px">老闆自己變成了中央窗口——每一家做完一件事，就交給下一家。
+
+鹿飛把品測、寄賣、落地、客服，加上物流，放在同一份合約裡。
+你開一次會，其他人我們去對。</p>
+    <div class="tblwrap"><table class="tbl">
+      <thead><tr><th>類型</th><th>品測與寄賣</th><th>落地與客服</th><th>國際物流</th></tr></thead>
+      <tbody>
+        <tr><td>顧問公司，出一份策略報告</td><td class="dot">●</td><td class="no">—</td><td class="no">—</td></tr>
+        <tr><td>貿易商，幫你把貨賣掉</td><td class="dot">●</td><td class="no">—</td><td class="no">—</td></tr>
+        <tr><td>客服外包，幫你接電話</td><td class="no">—</td><td class="dot">●</td><td class="no">—</td></tr>
+        <tr><td>貨代，把貨送到</td><td class="no">—</td><td class="no">—</td><td class="dot">●</td></tr>
+        <tr class="us"><td>鹿飛 LUFÉ，一份合約走完</td><td class="dot">●</td><td class="dot">●</td><td class="dot">●</td></tr>
+      </tbody>
+    </table></div>
+    <p class="after">沒有責任轉交，沒有窗口切換，貨到了之後也不會沒人接。</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2 class="h2">你可能想先問的三件事</h2>
+    <div class="faq">
+      <details open><summary><span class="n">01</span><span class="qq">這要花多少錢？<span class="qs">先講數字，再講一句真心話。</span></span><span class="pm">+</span></summary>
+        <p class="a">數字：品測 1～2 萬（前 10 家實驗價）。寄賣包 5～6 萬，合起來是 7 萬起手包，品測費可抵。
+公司落地按案，第一次談就給範圍；海外客服的區間，也是第一次談就給。
+
+真心話：我們不會先報價再問你需求。
+第一次見面，我們想先聽你的產品在台灣怎麼賣、為什麼想出去。
+有時候聽完，我們會建議你再等等——那也是一種答案。</p></details>
+      <details><summary><span class="n">02</span><span class="qq">從開始到看到結果要多久？<span class="qs">品測跑完就有報告 · 產品證 6～12 週</span></span><span class="pm">+</span></summary>
+        <p class="a">品測：面板跑完就給你那一頁，不用等證。
+寄賣：產品證要 6～12 週，這段時間學校活動先跑，證下來貨就上架。
+公司落地：看你要開什麼公司、要幾個人，第一次談給時間表。
+我們不說「一個月交付」，因為證的時間不是我們能壓的。</p></details>
+      <details><summary><span class="n">03</span><span class="qq">如果發現我的產品不適合怎麼辦？<span class="qs">那是品測最有價值的一種結果。</span></span><span class="pm">+</span></summary>
+        <p class="a">花 1～2 萬知道菲律賓現在不要你，比花幾百萬落地才知道，便宜太多。
+報告會寫清楚為什麼、什麼條件改了可以再試。
+我們想跟你做久一點，不是收一次錢。</p></details>
+    </div>
+    <p class="note">原型備註：FAQ 區塊標題文件沒有給，這裡沿用示意文字「你可能想先問的三件事」，請定稿。</p>
+  </div></section>
+
+  <section class="cta" style="background-image:url(https://lufe.world/images/cta/cta-executive.jpg)"><div class="wrap">
+    <h2 class="h2"><span class="br">想清楚了，就聊聊</span><span class="br" style="color:var(--gold)">還沒想清楚，也可以聊聊</span></h2>
+    <p>我們想找的，是想把事業做大、也願意先走一小步的人。送出後 24 小時內由 Aaron 本人回覆，第一次談就把費用跟時間講清楚。</p>
+    <a class="btn btn-gold">聊聊你的產品 →</a>
+  </div></section>
+</main>
+
+<!-- ============ SERVICES ============ -->
+<main class="page" id="p-services">
+  <section class="phero" style="background-image:url(https://lufe.world/images/hero/hero-slide-2-poster-1600.webp)"><div class="wrap">
+    <p class="crumb">首頁 / 服務</p>
+    <h1 class="h1">一家品牌在馬尼拉的第一年</h1>
+    <p class="lead">品測、寄賣、公司落地、海外客服——同一家公司在不同月份會遇到的四件事，我們做成四個方案。可以只走第一章，也可以一路走完。北美通路是另一個故事，由北美團隊執行。底下是躍馬企業 42 年的物流，貨怎麼過去不用另外找人。</p>
+    <div class="stats">
+      <div><b>4</b><span>個章節 · 菲律賓</span></div>
+      <div><b>42+</b><span>躍馬企業 · 年物流底層</span></div>
+      <div><b>500+</b><span>出口案件</span></div>
+      <div><b>30+</b><span>國家覆蓋</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec chapters"><div class="wrap">
+    <div class="svc">
+      <a href="#product-testing"><div><span class="lbl">第一個月 · 品測 · 1～2 萬</span><p>你在台灣問一百個人，也不知道馬尼拉的媽媽會不會掏錢。
+我們把產品放進當地學校的老師與家長面板跑一輪，
+給你一頁：誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。
+前 10 家實驗價。沒過，到此為止；過了，抵進下一章。</p><span class="more" style="display:inline-block;margin-top:10px;color:var(--sky);font-weight:600">品測怎麼做 →</span></div><span class="arr">→</span></a>
+      <a href="#consignment"><div><span class="lbl" style="color:var(--sky)">第三個月 · 寄賣 · 5～6 萬</span><p>上架不難，難的是證還沒下來的那 6～12 週怎麼辦、上了架誰來推。
+我們做的：電商上架、產品證代持、學校家長活動、市場報告、網紅與活動配套。
+貨放合作夥伴的倉，賣多少算多少。跟品測合起來就是 7 萬起手包。</p><span style="display:inline-block;margin-top:10px;color:var(--sky);font-weight:600">寄賣包內容 →</span></div><span class="arr">→</span></a>
+      <a href="#localization"><div><span class="lbl" style="color:var(--ember)">第九個月 · 公司落地 · 按案報價</span><p>開公司、找人、辦證、日常營運——每一件都要有人在當地。
+我們做的：註冊、招聘（實體或遠程團隊）、律師行文件、FDA 掛證、營運陪跑。
+第一次談就給成本框架。</p><span style="display:inline-block;margin-top:10px;color:var(--sky);font-weight:600">落地怎麼做 →</span></div><span class="arr">→</span></a>
+      <a href="#call-center"><div><span class="lbl" style="color:var(--navy-l)">之後的每一天 · 海外客服 · 2027 Q1 首批</span><p>星期五晚上十一點的英文客訴信，要有人接。
+一群受過完整訓練、英文老師等級的菲律賓客服團隊；
+客戶合約、服務規則、品質指標由鹿飛台灣公司負責。</p><span style="display:inline-block;margin-top:10px;color:var(--sky);font-weight:600">登記首批 →</span></div><span class="arr">→</span></a>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <h2 class="h2">兩個故事：<span class="g">菲律賓的第一年，北美的貨架</span></h2>
+    <div class="lines">
+      <div class="line ph">
+        <p class="k">菲律賓 · 第一年四章</p>
+        <h3>先花 1～2 萬，看馬尼拉要不要你</h3>
+        <p>品測 → 寄賣 → 公司落地 → 海外客服。<br>可以只走一章，也可以一路走完。</p>
+        <p><strong>比較像你如果：</strong>連鎖餐飲、美妝保養、美業，或任何有產品的品牌——<br>沒出過海，或出過但沒站穩。</p>
+        <p><strong>收費：</strong>每章明碼。起手包 7 萬＝品測 1～2 萬＋寄賣包 5～6 萬，品測費可抵；<br>落地按案；客服第一次談給區間。</p>
+      </div>
+      <div class="line na">
+        <p class="k">北美 · 貨架</p>
+        <h3>產品成熟了，要進 Costco、Walmart、Amazon</h3>
+        <p>市場研究、展覽佈局、引進買家、上桌談判。<br>由北美團隊執行，鹿飛負責合約與進度。</p>
+        <p><strong>比較像你如果：</strong>產品已經在台灣或其他市場站穩。</p>
+        <p><strong>收費：</strong>前期低服務費＋成交抽成，第一次談給明確數字。</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec dark"><div class="wrap">
+    <p class="intro" style="max-width:900px;font-size:18px">鹿飛不是新手上路的跨境顧問。
+躍馬企業 42 年做國際貨運承攬——報關、倉儲、海空運、最後一哩，每一段都還在做。
+所以你的貨怎麼過去、證掛在哪、到岸成本大概多少，我們報得出範圍。
+也因為看了 42 年貨到了之後的事，我們才敢把「落地」跟「客服」做成方案，而不是只出一份報告。</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2 class="h2">三個關鍵問題</h2>
+    <div class="faq">
+      <details open><summary><span class="n">01</span><span class="qq">我該從第一章開始，還是直接落地？</span><span class="pm">+</span></summary>
+        <p class="a">沒出過海、或出過但沒站穩的，從品測開始。已經有菲律賓通路、確定要開公司的，直接談落地。只有客服需求的，直接談客服。不確定，第一次談我們幫你看；有時候我們會建議你再等等，那也是一種答案。</p></details>
+      <details><summary><span class="n">02</span><span class="qq">四個方案的收費方式？</span><span class="pm">+</span></summary>
+        <p class="a">數字：品測 1～2 萬（前 10 家實驗價）。寄賣包 5～6 萬，合起來是 7 萬起手包，品測費可抵。
+公司落地按案，第一次談就給範圍；海外客服的區間，也是第一次談就給。
+
+真心話：我們不會先報價再問你需求。
+第一次見面，我們想先聽你的產品在台灣怎麼賣、為什麼想出去。
+有時候聽完，我們會建議你再等等——那也是一種答案。</p></details>
+      <details><summary><span class="n">03</span><span class="qq">鹿飛跟傳統貿易商或顧問公司有什麼不同？</span><span class="pm">+</span></summary>
+        <p class="a">顧問出報告，貿易商做買賣，貨代送貨。鹿飛做的是四件事一份合約，陪你走完第一年。底下有躍馬企業 42 年物流，不會因為不懂現場而卡在海上。我們不做貿易商，也不做純接單的貨代，邊界寫在「我們不做什麼」。</p></details>
+    </div>
+  </div></section>
+
+  <section class="cta" style="background-image:url(https://lufe.world/images/about/cta-team.jpg)"><div class="wrap">
+    <h2 class="h2">想知道你該從哪一章開始？</h2>
+    <p>聊聊你的狀況，我們幫你看——也可能建議你再等等。不收費、不承諾、不賣課。</p>
+    <a class="btn btn-gold">聊聊你的產品 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 1.1 品測 ============ -->
+<main class="page" id="p-product-testing">
+  <section class="phero" style="background-image:url(https://lufe.world/images/services/stage-02-product-test.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 服務 / 品測</p>
+    <span class="chaplbl">第一個月 · 品測</span>
+    <h1 class="h1">先讓馬尼拉的媽媽拿起來看看</h1>
+    <p class="scene-lead">你在台灣問了一百個人，還是不知道馬尼拉的媽媽會不會掏錢。
+品測就是把這個問題，拿去問她本人。</p>
+    <div class="ctas"><a class="btn btn-gold">聊聊你的產品 →</a><a class="btn btn-ghost">先做 2 分鐘處境比對</a></div>
+  </div></section>
+  <nav class="chapbar" data-chap="0"></nav>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">你可能是這樣走到這裡的</h2></div>
+    <div class="trio">
+      <div>有產品，聽說東南亞有機會，但不知道從哪裡開始。</div>
+      <div>找過顧問，拿到一份很厚的報告，還是不知道該不該去。</div>
+      <div>怕一去就是幾百萬，想先花小錢確認。</div>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">品測那一天<span class="g">會發生什麼</span></h2></div>
+    <div class="steps h4">
+      <div class="step"><span class="sn">01</span><h4>你寄三支產品到馬尼拉</h4><p>我們先幫你看：這三支在當地有沒有類似的、賣多少錢。</p></div>
+      <div class="step"><span class="sn">02</span><h4>一桌老師和家長</h4><p>當地學校的老師（高收入的工薪階層）和家長（真正掏錢的人）圍著桌子。
+拿起來、聞一聞、翻價錢。有人皺眉，有人問哪裡買得到。</p></div>
+      <div class="step"><span class="sn">03</span><h4>我們在旁邊記</h4><p>誰拿了第二次、誰看到價錢放下、誰問了成分。每一支產品至少六個數據來源。</p></div>
+      <div class="step"><span class="sn">04</span><h4>一頁報告</h4><p>誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。
+面板跑完就給，不用等產品證。</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap report">
+    <div class="paper" aria-hidden="true">
+      <div class="t">品測報告 · 產品 A</div>
+      <div class="r"><b>誰會買</b><i class="m"></i><i class="s"></i></div>
+      <div class="r"><b>多少錢會買</b><i></i><i class="s"></i></div>
+      <div class="r"><b>為什麼不買</b><i class="m"></i><i class="s"></i></div>
+      <div class="bars"><span style="height:40%"></span><span style="height:75%"></span><span style="height:55%"></span><span style="height:90%"></span><span style="height:30%"></span></div>
+    </div>
+    <div>
+      <h2 class="h2">你會拿到一頁，<span class="g">不是八十頁</span></h2>
+      <ul>
+        <li><b>誰會買：</b>哪一群人拿了第二次</li>
+        <li><b>多少錢會買：</b>價格帶落在哪、跟台灣差多少</li>
+        <li><b>為什麼不買：</b>皺眉的那幾個人說了什麼</li>
+      </ul>
+      <p class="fin">這一頁是拿來做下一個決定的，不是拿來歸檔的。</p>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="pricecard">
+      <div class="big">1～2 萬<small>前 10 家實驗價</small></div>
+      <div class="info">
+        <p>面板跑完就給報告，不用等產品證。</p>
+        <div class="path">
+          <div><b>過了 →</b> 這筆抵進第三個月的寄賣包（5～6 萬），合起來就是 7 萬起手包。</div>
+          <div class="no"><b style="color:#fff">沒過 →</b> 故事在這裡停。你花的是 1～2 萬，不是幾百萬。</div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2 class="h2">常見問題</h2>
+    <div class="faq">
+      <details open><summary><span class="n">01</span><span class="qq">品測沒過會怎樣？</span><span class="pm">+</span></summary><p class="a">報告會寫清楚為什麼、什麼條件改了可以再試。這是 1～2 萬買到的最有價值的答案之一。</p></details>
+      <details><summary><span class="n">02</span><span class="qq">可以只做品測嗎？</span><span class="pm">+</span></summary><p class="a">可以。品測是獨立的，你拿著那一頁去做任何決定都行。</p></details>
+      <details><summary><span class="n">03</span><span class="qq">為什麼是老師和家長？</span><span class="pm">+</span></summary><p class="a">老師是當地高收入的工薪階層，家長是真正掏錢買東西的人。這兩群人的反應，比問卷準。</p></details>
+    </div>
+  </div></section>
+
+  <section class="sec cream reading" data-reading="m1"></section>
+
+  <section class="sec" style="padding-top:0;padding-bottom:64px"><div class="wrap" style="padding-top:64px">
+    <a class="nextch" href="#consignment"><div><small>下一章 →</small><b>第三個月 · 寄賣</b><h3>上架了，讓人先用過再說</h3></div><span class="ar">→</span></a>
+  </div></section>
+
+  <section class="cta cta2" style="background-image:url(https://lufe.world/images/cta/cta-executive.jpg)"><div class="wrap">
+    <h2 class="h2">聊聊你的產品</h2>
+    <p>我們先聽你的產品在台灣怎麼賣，再說適不適合去測。</p>
+    <p class="sm">有時候聽完，我們會建議你再等等——那也是一種答案。</p>
+    <a class="btn btn-gold">聊聊你的產品 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 1.2 寄賣 ============ -->
+<main class="page" id="p-consignment">
+  <section class="phero" style="background-image:url(https://lufe.world/images/services/stage-03-retail-aisle.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 服務 / 寄賣 · <span style="color:var(--gold)">新頁</span></p>
+    <span class="chaplbl">第三個月 · 寄賣</span>
+    <h1 class="h1">上架了，讓人先用過再說</h1>
+    <p class="scene-lead">報告說可以。接下來的問題是：證要多久、貨放哪、上了架誰來推。</p>
+    <div class="ctas"><a class="btn btn-gold">看你的產品適不適合寄賣 →</a></div>
+  </div></section>
+  <nav class="chapbar" data-chap="1"></nav>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">你可能是這樣走到這裡的</h2></div>
+    <div class="trio">
+      <div>品測過了，想放貨去賣，但不知道證怎麼辦、貨放哪、誰來推。</div>
+      <div>自己上過東南亞平台，投了廣告，沒人看見。</div>
+      <div>有代理商找上門，只想抽成，不管你賣不賣得動。</div>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">證在跑的 6～12 週，<span class="g">我們在做什麼</span></h2></div>
+    <div class="tracks">
+      <div class="track passive"><h4>證那一軌（你看不到，但在動）</h4><p style="font-size:15px;line-height:1.85">持證進口商代辦、代持。資料歸你，換人只換一張合約。</p></div>
+      <div class="track active"><h4>我們這一軌（每週有事發生）</h4>
+        <div class="rows">
+          <div><b>第 1～2 週</b><span>貨進合作夥伴的倉，商品頁、當地說明、價格帶定下來。</span></div>
+          <div><b>第 3～6 週</b><span>學校家長活動：先讓人用過。有人在社群裡問，有人拍了影片。</span></div>
+          <div><b>第 6～10 週</b><span>網紅與活動配套排進去。市場報告從品測那一頁展開：價格帶、競品、通路。</span></div>
+          <div class="last"><b>證下來那天</b><span>貨上架。架上已經有人在等。</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">寄賣包裡有什麼</h2></div>
+    <div class="mini5">
+      <div><b>電商通路上架</b><p>放進合作的菲律賓電商通路，貨放合作夥伴的倉，賣多少算多少。</p></div>
+      <div><b>產品證代持</b><p>化妝品、食品的證由持證進口商代辦代持，資料歸你。</p></div>
+      <div><b>學校家長活動</b><p>證還沒下來的那段時間，先在學校家長社群做試用與活動。</p></div>
+      <div><b>市場報告</b><p>把品測那一頁展開，補價格帶、競品、通路。</p></div>
+      <div><b>網紅與活動配套</b><p>只投廣告不夠，這部分跟你一起排。</p></div>
+    </div>
+    <div class="got" style="margin-top:28px">架上的商品、每月的銷售數字、一份市場報告。<span>三個月看數字。賣不動我們會直接說，也會告訴你原因。</span></div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="pricecard">
+      <div class="big">5～6 萬<small>品測費可抵。跟第一個月合起來，就是 7 萬起手包。</small></div>
+      <div class="info">
+        <p>產品證 6～12 週，證下來貨就上架；這段時間活動先跑。</p>
+        <p style="color:rgba(255,255,255,.65);font-size:14.5px">平台費用與抽成、產品到當地的包裝與說明調整另計，第一次談會先講。</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2 class="h2">常見問題</h2>
+    <div class="faq">
+      <details open><summary><span class="n">01</span><span class="qq">為什麼不直接投廣告？</span><span class="pm">+</span></summary><p class="a">老實說，我們的經驗是不夠。菲律賓的消費者看網紅、看活動、看有沒有人真的用過，廣告只是其中一段。</p></details>
+      <details><summary><span class="n">02</span><span class="qq">賣不動怎麼辦？</span><span class="pm">+</span></summary><p class="a">寄賣是賣多少算多少，不會逼你進貨。三個月看數字，賣不動我們會直接說。</p></details>
+      <details><summary><span class="n">03</span><span class="qq">證掛在誰名下？</span><span class="pm">+</span></summary><p class="a">持證進口商代持，合約寫清楚資料歸你、轉移配合。不綁任何一家通路。</p></details>
+    </div>
+  </div></section>
+
+  <section class="sec cream reading" data-reading="m3"></section>
+
+  <section class="sec" style="padding-top:64px;padding-bottom:64px"><div class="wrap">
+    <a class="nextch" href="#localization"><div><small>下一章 →</small><b>第九個月 · 公司落地</b><h3>開始想要在當地有自己的人</h3></div><span class="ar">→</span></a>
+  </div></section>
+
+  <section class="cta cta2" style="background-image:url(https://lufe.world/images/cta/cta-executive.jpg)"><div class="wrap">
+    <h2 class="h2">看你的產品適不適合寄賣</h2>
+    <p>沒做過品測也可以聊，我們會先問你在台灣賣得怎麼樣。</p>
+    <a class="btn btn-gold">聊聊你的產品 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 1.3 公司落地 ============ -->
+<main class="page" id="p-localization">
+  <section class="phero" style="background-image:url(https://lufe.world/images/services/stage-04-asian-team.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 服務 / 公司落地</p>
+    <span class="chaplbl">第九個月 · 公司落地</span>
+    <h1 class="h1">開始想要在當地有自己的人</h1>
+    <p class="scene-lead">賣得動了。你開始想：要不要開一間自己的公司、找第一個員工、把證掛到自己名下。
+然後你發現，每一件事都需要有人在當地。</p>
+    <div class="ctas"><a class="btn btn-gold">聊聊你想在菲律賓開什麼 →</a></div>
+  </div></section>
+  <nav class="chapbar" data-chap="2"></nav>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">你可能是這樣走到這裡的</h2></div>
+    <div class="trio">
+      <div>寄賣或代理跑順了，想在當地設點，不知道從註冊到招聘要花多少、多久。</div>
+      <div>連鎖餐飲、美業品牌，想開第一家店，怕被拿走配方、怕選錯區。</div>
+      <div>在台灣有團隊，想在菲律賓聘人遠程做，不知道怎麼合規。</div>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">落地的每一件事，<span class="g">都要有人在當地</span></h2></div>
+    <div class="tblwrap"><table class="who">
+      <thead><tr><th>要處理的事</th><th>誰在當地</th></tr></thead>
+      <tbody>
+        <tr><td>公司註冊、律師行文件</td><td>合作的律師行，我們對窗口</td></tr>
+        <tr><td>招聘：實體或遠程團隊</td><td>合作夥伴的 HR 體系，面試、到職、第一批人的訓練</td></tr>
+        <tr><td>FDA 掛證與合規</td><td>持證進口商＋律師行，我們統籌</td></tr>
+        <tr><td>場地、設備、日常營運</td><td>合作夥伴的營運團隊，第一批人到位、流程跑順</td></tr>
+        <tr class="you"><td>你的角色</td><td>做決定、看進度。不用一直飛。</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">我們跟合作夥伴<span class="g">走過的三條路</span></h2></div>
+    <div class="roads3">
+      <div class="road3"><span class="no">第一條</span><h3>從零開始</h3><p>在當地蓋一間英語教育機構——找老師、找場地、招第一個學生。
+後來用同樣的方法，做了一個連鎖手搖飲品牌。</p><p class="fit">適合：要在當地從頭建團隊、開店的品牌。</p></div>
+      <div class="road3"><span class="no">第二條</span><h3>改了再帶過去</h3><p>台灣的產品到了當地，改配方、改價格、改包裝，
+變成當地人願意掏錢的樣子。</p><p class="fit">適合：產品好、但知道當地口味和價格帶不一樣的品牌。</p></div>
+      <div class="road3"><span class="no">第三條</span><h3>原封不動帶過去</h3><p>一個台灣的美業品牌，什麼都不改，只做當地的行銷，看它站不站得住。</p><p class="fit">適合：品牌本身就是賣點、不想動產品的。</p></div>
+    </div>
+    <p class="roads-foot">三條路的成本、坑、時間都不一樣。第一次談，我們會先問你比較像哪一條。</p>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="pricecard">
+      <div class="big">按案報價</div>
+      <div class="info">
+        <p>第一次談就給成本框架的範圍：註冊、律師、招聘、場地各大概多少。</p>
+        <p>時間看你要開什麼公司、要幾個人，第一次談給時間表。</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2 class="h2">常見問題</h2>
+    <div class="faq">
+      <details open><summary><span class="n">01</span><span class="qq">一定要先做品測跟寄賣嗎？</span><span class="pm">+</span></summary><p class="a">不一定。已經有菲律賓通路、確定要開公司的，可以直接談落地。</p></details>
+      <details><summary><span class="n">02</span><span class="qq">你們負責合規嗎？</span><span class="pm">+</span></summary><p class="a">證幫你申請、坑幫你避，責任在品牌方。這是我們在「不做什麼」裡寫清楚的邊界。</p></details>
+      <details><summary><span class="n">03</span><span class="qq">遠程團隊是什麼意思？</span><span class="pm">+</span></summary><p class="a">台灣公司在菲律賓聘人，人在當地、報告給台灣。菲律賓很流行這種做法，我們幫你把合規和招聘處理好。</p></details>
+    </div>
+  </div></section>
+
+  <section class="sec cream reading" data-reading="m9"></section>
+
+  <section class="sec" style="padding-top:64px;padding-bottom:64px"><div class="wrap">
+    <a class="nextch" href="#call-center"><div><small>下一章 →</small><b>之後的每一天 · 海外客服</b><h3>星期五晚上十一點的那封信</h3></div><span class="ar">→</span></a>
+  </div></section>
+
+  <section class="cta cta2" style="background-image:url(https://lufe.world/images/about/cta-team.jpg)"><div class="wrap">
+    <h2 class="h2">聊聊你想在菲律賓開什麼</h2>
+    <p>先說你比較像三條路的哪一條，我們告訴你大概要多少、多久。</p>
+    <a class="btn btn-gold">聊聊你的狀況 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 1.4 海外客服 ============ -->
+<main class="page" id="p-call-center">
+  <section class="phero night" style="background-image:url(https://lufe.world/images/services/pillar-team-collab.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 服務 / 海外客服 · <span style="color:var(--gold)">新頁</span></p>
+    <span class="hbadge">2027 Q1 首批・登記中</span>
+    <span class="chaplbl">之後的每一天 · 海外客服</span>
+    <h1 class="h1">星期五晚上十一點的那封信</h1>
+    <p class="scene-lead">一封英文客訴信。退貨、換貨、問哪裡有賣。
+你不會想為了這件事養一組人，但也不能不回。</p>
+    <div class="ctas"><a class="btn btn-gold" href="#reg">登記首批 →</a></div>
+  </div></section>
+  <nav class="chapbar" data-chap="3"></nav>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">你可能是這樣走到這裡的</h2></div>
+    <div class="trio">
+      <div>貨在海外賣，客訴和退換貨的訊息回不了，或回得很慢。</div>
+      <div>去北美賣，請不起北美客服；去東南亞賣，自己人英文不夠。</div>
+      <div>找過台灣的客服外包，價格不便宜。</div>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">一封信進來之後</h2></div>
+    <div class="steps h4 alt">
+      <div class="step"><span class="sn">01</span><h4>進到同一個信箱</h4><p>你的客服信箱、平台訊息、社群私訊，接到同一個工作台。</p></div>
+      <div class="step"><span class="sn">02</span><h4>老師等級的人接</h4><p>一群受過完整訓練、英文老師等級的菲律賓客服團隊。
+合作夥伴在當地經營英語教育機構與連鎖餐飲，客服來自老師體系，已經服務過家長和餐飲客戶。</p></div>
+      <div class="step"><span class="sn">03</span><h4>照你的規則回</h4><p>回覆範本、退換貨規則、什麼情況要升級給你——這些寫在服務流程裡，由鹿飛台灣公司負責。</p></div>
+      <div class="step"><span class="sn">04</span><h4>你看得到</h4><p>每月的量、回覆時間、升級次數，一份報表。</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec dark"><div class="wrap why3">
+    <h2 class="h2">為什麼是菲律賓、<span class="g">為什麼是老師</span></h2>
+    <p style="color:#fff">菲律賓是全世界做英文客服最成熟的地方，不是我們發明的。</p>
+    <p style="color:rgba(255,255,255,.8)">我們多做的一件事，是人從老師體系來——能教家長的人，能接你的客戶。</p>
+    <p style="color:rgba(255,255,255,.8)">規則、合約、品質指標留在台灣公司；人在菲律賓。你面對的窗口是我們，不是當地的廠。</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">適合誰</h2></div>
+    <div class="got" style="border-left-color:var(--sky)">寄賣就用得到，落地更用得到。<span>要去北美的，一樣用得到——北美的客服，多半也在菲律賓。</span></div>
+  </div></section>
+
+  <section class="sec cream" id="reg"><div class="wrap">
+    <div class="regcard">
+      <div>
+        <span class="badge">登記中</span>
+        <h3>2027 Q1 開放首批客戶</h3>
+        <p>現在登記，開放時優先。報價區間第一次談就給。</p>
+      </div>
+      <div class="form">
+        <label>品牌名稱<input placeholder="你的品牌"></label>
+        <label>Email<input placeholder="you@brand.com"></label>
+        <label class="newf">每月大概幾封客訊<div class="opts"><span>&lt;100</span><span class="on">100～500</span><span>500 以上</span></div></label>
+        <label class="newf">現在誰在接<input placeholder="例如：老闆自己、台灣客服、還沒人接"></label>
+        <a class="btn btn-gold" style="justify-content:center">登記首批 →</a>
+        <span class="designnote">虛線框＝這頁表單新增的兩個欄位</span>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2 class="h2">常見問題</h2>
+    <div class="faq">
+      <details open><summary><span class="n">01</span><span class="qq">跟一般客服外包差在哪？</span><span class="pm">+</span></summary><p class="a">兩件事：人是老師等級的英文，不是話務員；規則在台灣公司，你面對的窗口是我們，不是菲律賓的廠。</p></details>
+      <details><summary><span class="n">02</span><span class="qq">現在可以簽嗎？</span><span class="pm">+</span></summary><p class="a">現在是登記首批。2027 Q1 開始服務，登記的人優先。</p></details>
+      <details><summary><span class="n">03</span><span class="qq">我的量很小也可以嗎？</span><span class="pm">+</span></summary><p class="a">可以先登記。首批我們想找的是量不大、但每一封都重要的品牌，正好一起把服務磨好。</p></details>
+    </div>
+  </div></section>
+
+  <section class="sec cream reading" data-reading="after"></section>
+
+  <section class="sec" style="padding-top:64px;padding-bottom:64px"><div class="wrap">
+    <a class="nextch" href="#product-testing"><div><small>故事從頭來 →</small><b>第一個月 · 品測</b><h3>先讓馬尼拉的媽媽拿起來看看</h3></div><span class="ar">↺</span></a>
+  </div></section>
+
+  <section class="cta cta2" style="background-image:url(https://lufe.world/images/cta/cta-executive.jpg)"><div class="wrap">
+    <h2 class="h2">登記首批</h2>
+    <p>留下你的品牌、大概的訊息量、現在誰在接。開放時我們先找你。</p>
+    <a class="btn btn-gold" href="#reg">登記首批 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 1.5 北美通路 ============ -->
+<main class="page" id="p-north-america">
+  <section class="phero" style="background-image:url(https://lufe.world/images/cases/detail/costco-health-hero.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 服務 / 北美通路 · <span style="color:var(--gold)">新頁</span></p>
+    <span class="chaplbl">另一個故事 · 北美貨架</span>
+    <h1 class="h1">產品成熟了，要進 Costco、Walmart、Amazon</h1>
+    <p class="scene-lead">參過展、發過樣品、沒有下文——很多品牌的北美故事停在這裡。</p>
+    <div class="ctas"><a class="btn btn-gold">聊聊你的產品 →</a></div>
+  </div></section>
+  <div class="anotherline"><div class="wrap"><b>另一個故事 ·</b> 這一頁跟菲律賓的四章是兩個故事。北美由北美團隊執行，鹿飛負責合約與進度。</div></div>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">你可能是這樣走到這裡的</h2></div>
+    <div class="trio">
+      <div>產品在台灣站穩了，想進北美主流通路，不知道從哪一步開始。</div>
+      <div>參過展、發過 sample，沒有下文。</div>
+      <div>怕砸了幾百萬行銷，回不來。</div>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">北美這條路<span class="g">怎麼走</span></h2></div>
+    <div class="steps h4 alt">
+      <div class="step"><span class="sn">01</span><h4>市場研究與選品</h4><p>哪一支產品先去、什麼規格、什麼價格帶。</p></div>
+      <div class="step"><span class="sn">02</span><h4>展覽佈局</h4><p>展位、銷售、把買家帶到你桌前。</p></div>
+      <div class="step"><span class="sn">03</span><h4>上桌談判</h4><p>合約條件、付款期、首單量。</p></div>
+      <div class="step"><span class="sn">04</span><h4>進通路</h4><p>平均 6～9 個月，食品保健品 9～12 個月（認證要求較高）。</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">誰在做</h2></div>
+    <div class="blocks two">
+      <div class="block" style="border-left:4px solid var(--sky)"><h3>北美團隊</h3><p class="txt">在當地執行：研究、展覽、買家、談判。</p></div>
+      <div class="block" style="border-left:4px solid var(--gold)"><h3>鹿飛</h3><p class="txt">負責合約與進度：你面對的是一份合約、一條進度線。</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="pricecard">
+      <div class="big" style="font-size:clamp(28px,3.4vw,38px)">前期低服務費<br>＋成交抽成</div>
+      <div class="info"><p>第一次談給明確數字。</p></div>
+    </div>
+    <a class="nextch" href="#call-center" style="margin-top:18px"><div><small style="color:var(--sky)">去北美的品牌，第一封英文客訴信也會來。</small><h3>海外客服一樣用得到 →</h3></div><span class="ar">→</span></a>
+  </div></section>
+
+  <section class="sec reading" data-reading="na"></section>
+
+  <section class="cta cta2" style="background-image:url(https://lufe.world/images/cta/cta-executive.jpg)"><div class="wrap">
+    <h2 class="h2">聊聊你的產品</h2>
+    <p>先說你的產品現在在哪裡賣、賣得怎麼樣。</p>
+    <a class="btn btn-gold">聊聊你的產品 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 2.1 運營優化（補件） ============ -->
+<main class="page" id="p-optimize">
+  <section class="phero" style="background-image:url(https://lufe.world/images/services/services-optimize-whiteboard.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 進階 / 運營優化</p>
+    <span class="chaplbl">進階 · 運營優化</span>
+    <h1 class="h1">已經跑起來了，該讓每公里更省</h1>
+    <p class="scene-lead">產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。
+這不是第一年的事，是走過第一年之後的事。</p>
+    <div class="ctas"><a class="btn btn-gold">聊聊你卡在哪一段 →</a></div>
+  </div></section>
+  <div class="anotherline"><div class="wrap"><b>進階 ·</b> 還沒開始的品牌，先看<a href="#services" style="color:var(--sky);font-weight:600">四章</a>。這一頁是給已經在海外跑了一段時間的人。</div></div>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">你大概卡在<span class="g">這五段之一</span></h2></div>
+    <div class="stuck5">
+      <a href="#opt-cost"><b>省不下來</b><p>海運報價每半年漲一次，你沒有議價籌碼；倉儲月結單看不懂；退貨的運費比正品還貴。</p><span>→ 重新盤點物流結構</span></a>
+      <a href="#opt-sales"><b>賣得起伏</b><p>節慶暴增、平常低迷；廣告一停就沒訂單；退貨率和評價忽高忽低。</p><span>→ 通路績效調整</span></a>
+      <a href="#opt-find"><b>沒被找到</b><p>產品在架上，但搜尋、AI 問答、社群裡都沒有你。</p><span>→ 集客</span></a>
+      <a href="#opt-sys"><b>跑得卡卡</b><p>跨時區溝通延遲；台灣總部和在地團隊對不上；SOP 散在各處，新人培訓很久。</p><span>→ 營運系統</span></a>
+      <a href="#opt-see"><b>看不見</b><p>每個月不知道哪裡賺、哪裡漏，決策像在猜。</p><span>→ 儀表板</span></a>
+    </div>
+  </div></section>
+
+  <section class="sec cream" id="opt-cost"><div class="wrap split">
+    <div class="splitimg" style="background-image:url(https://lufe.world/images/why/cathay-loading.jpg)"></div>
+    <div>
+      <p class="optno">01</p>
+      <h2 class="h2">省不下來：<span class="g">先看你的物流帳單</span></h2>
+      <p class="intro">我們是做物流出身的，最知道一張月結單裡哪些數字不該長那樣。
+從運輸方式、倉儲位置、退貨處理三個層面重新盤點。</p>
+      <p class="bignum">盤完通常都有可省的空間，數字第一次談給你範圍。</p>
+    </div>
+  </div></section>
+
+  <section class="sec" id="opt-sales"><div class="wrap split rev">
+    <div>
+      <p class="optno">02</p>
+      <h2 class="h2">賣得起伏：<span class="g">廣告一停就沒單，通常不是廣告的問題</span></h2>
+      <p class="intro">銷量跟著節慶走、廣告停了就掉、評價忽高忽低——
+多半是通路組合、價格帶、上架內容三件事有一件沒對。
+我們把三件事攤開來看，再決定調哪一個。</p>
+    </div>
+    <div class="three-things"><div>通路組合</div><div>價格帶</div><div>上架內容</div></div>
+  </div></section>
+
+  <section class="sec cream" id="opt-find"><div class="wrap split">
+    <div class="splitimg" style="background-image:url(https://lufe.world/images/insights/amazon-category.jpg)"></div>
+    <div>
+      <p class="optno">03</p>
+      <h2 class="h2">沒被找到：<span class="g">客人在問 AI，AI 沒提到你</span></h2>
+      <p class="intro">越來越多人買東西前先問 ChatGPT、Perplexity。
+SEO 文章月產 30 篇以上 + AI 搜尋引擎佈局（AIO），讓 ChatGPT、Perplexity 在回答相關問題時推薦你的品牌。</p>
+      <p class="bignum">目標是讓 AI 回答時有你的名字。</p>
+    </div>
+  </div></section>
+
+  <section class="sec" id="opt-sys"><div class="wrap">
+    <p class="optno">04</p>
+    <h2 class="h2">跑得卡卡：<span class="g">事情都在人的腦子裡</span></h2>
+    <p class="intro">台灣早上九點，馬尼拉也是九點，但事情還是對不上——
+因為流程在人身上，不在系統裡。
+
+一套五階導入的營運作業系統：</p>
+    <div class="steps h5" style="margin-top:28px">
+      <div class="step"><span class="sn">①</span><h4>Notion 任務管理</h4></div>
+      <div class="step"><span class="sn">②</span><h4>AI 複利知識庫</h4></div>
+      <div class="step"><span class="sn">③</span><h4>AI 數位員工</h4></div>
+      <div class="step"><span class="sn">④</span><h4>事業營運儀表板</h4></div>
+      <div class="step"><span class="sn">⑤</span><h4>團隊創新共創</h4></div>
+    </div>
+    <p class="bignum" style="margin-top:28px">目標是新人第一天就知道東西在哪、事情怎麼跑。</p>
+  </div></section>
+
+  <section class="sec dark" id="opt-see"><div class="wrap" style="max-width:900px">
+    <p class="optno" style="color:var(--gold)">05</p>
+    <h2 class="h2">看不見：<span class="g">每個月結束才知道賺沒賺</span></h2>
+    <p class="intro">五階裡的第四階就是這件事：把物流、通路、客服的數字放到同一個畫面。
+不是為了好看，是為了下個月的決定不用猜。</p>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">兩種合作方式</h2></div>
+    <div class="lines" style="margin-top:0">
+      <div class="line ph">
+        <p class="k">先診斷</p>
+        <h3>2–3 週，定額診斷費</h3>
+        <p><strong>交付：</strong>一份診斷報告＋90 分鐘結論會議。</p>
+        <p><strong>範圍：</strong>供應鏈、通路績效、成本拆解、合規風險、團隊運作。</p>
+        <p><strong>適合：</strong>不確定問題在哪一段的。</p>
+      </div>
+      <div class="line na" style="border-top-color:var(--ember)">
+        <p class="k" style="color:var(--ember)">直接優化</p>
+        <h3>1–3 個月，月費＋績效獎金</h3>
+        <p><strong>交付：</strong>物流重規劃、倉儲優化、通路調整、行銷策略升級、SOP 建立與團隊訓練。</p>
+        <p><strong>適合：</strong>已經知道卡哪裡、要人進來一起做的。</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2 class="h2">常見問題</h2>
+    <div class="faq">
+      <details open><summary><span class="n">01</span><span class="qq">沒跟你們走過第一年也可以嗎？</span><span class="pm">+</span></summary><p class="a">可以。這一頁的方案是獨立的，第一次談我們會先問你現在的狀況。</p></details>
+      <details><summary><span class="n">02</span><span class="qq">不確定我的問題屬於哪一類？</span><span class="pm">+</span></summary><p class="a">先聊聊。我們會花 30 分鐘聽你現在的狀況，告訴你是該先診斷，還是可以直接進優化。</p></details>
+      <details><summary><span class="n">03</span><span class="qq">怎麼收費？</span><span class="pm">+</span></summary><p class="a">診斷是定額，優化是月費加績效。第一次談給範圍。</p></details>
+    </div>
+  </div></section>
+
+  <section class="sec cream reading" data-reading="after"></section>
+
+  <section class="cta cta2" style="background-image:url(https://lufe.world/images/about/cta-team.jpg)"><div class="wrap">
+    <h2 class="h2">聊聊你卡在哪一段</h2>
+    <p>30 分鐘，聽你現在的狀況，告訴你該先診斷還是直接做。</p>
+    <a class="btn btn-gold">聊聊你的狀況 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 2.2 方法論（補件） ============ -->
+<main class="page" id="p-methodology">
+  <section class="phero" style="background-image:url(https://lufe.world/images/about/philosophy-compass.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 進階 / 鹿飛方法論</p>
+    <span class="chaplbl">方法論</span>
+    <h1 class="h1">四個方案，是從這裡長出來的</h1>
+    <p class="scene-lead">這一頁是我們判斷「該不該去、該從哪一章開始」的底層。
+你不需要讀完才能開始；但如果你想知道我們怎麼想，都在這裡。</p>
+  </div></section>
+  <div class="anotherline"><div class="wrap"><b>不是第五章 ·</b> 這不是第五章。這是我們第一次談的時候，腦子裡跑的那張表。</div></div>
+
+  <section class="sec"><div class="wrap" style="max-width:900px">
+    <h2 class="h2">為什麼要有一張表</h2>
+    <p class="intro">出海的決定太常靠感覺：朋友說好、展會上人很多、對方老闆很熱情。
+我們把它換成五個問題，每個問題有分數、有紅線。
+分數不是為了好看，是為了在花錢之前，先知道哪一題會出事。</p>
+    <p class="rule">我們自己的規矩：總分不到 60 分，我們不接。</p>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">五個問題</h2></div>
+    <div class="dims">
+      <div class="dim"><div class="dh"><b>Market 市場</b><span>20%</span></div><p class="dq">「這個市場夠大嗎？」</p><p class="dl">看：可觸達的市場規模、成長率、消費者願意付多少、市場在哪個階段。</p><p class="red"><b>紅線</b>可觸達市場不到你預估年營收的 20 倍，建議換市場。</p></div>
+      <div class="dim"><div class="dh"><b>Barrier 門檻</b><span>20%</span></div><p class="dq">「進去要花多少力氣？」</p><p class="dl">看：認證要求與成本、通路進入難度、在地化改造（包裝、配方、標示）、合規灰色地帶。</p><p class="red"><b>紅線</b>合規認證成本超過首年毛利的一半，直接 No-Go。</p></div>
+      <div class="dim"><div class="dh"><b>Competition 競爭</b><span>20%</span></div><p class="dq">「你打得過嗎？」</p><p class="dl">看：前十大品牌市佔集中度、競品護城河、競品弱點、會不會打價格戰。</p><p class="red"><b>紅線</b>前三名市佔加起來超過 70%，不做正面競爭。</p></div>
+      <div class="dim"><div class="dh"><b>Profitability 獲利</b><span>25%</span></div><p class="dq">「做得動嗎？」</p><p class="dl">看：到岸成本（FOB＋關稅＋物流＋保險）、通路佣金與行銷攤提、退換貨預估、匯率風險。</p><p class="red"><b>紅線</b>悲觀情境淨利率低於 5%，建議調整。</p></div>
+      <div class="dim"><div class="dh"><b>Regulatory 法規</b><span>15%</span></div><p class="dq">「法規會不會突然變？」</p><p class="dl">看：當地貿易政策穩定度、產品類別法規變動歷史、政治風險、退出成本。</p><p class="red"><b>紅線</b>過去三年曾被禁或大幅加稅，風險加權。</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">分數怎麼讀</h2></div>
+    <div class="scores">
+      <div class="go"><b>≥ 75</b><span>Go</span><p>可以進，照四章正常走。</p></div>
+      <div class="cgo"><b>60–74</b><span>Conditional Go</span><p>可以進，先解決一到兩個弱項。</p></div>
+      <div class="hold"><b>45–59</b><span>Hold</span><p>建議暫緩 6–12 個月，等關鍵變化。</p></div>
+      <div class="nogo"><b>&lt; 45</b><span>No-Go</span><p>不建議，我們會寫清楚什麼條件改了可以再看。</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">五個問題，<span class="g">四章裡誰在回答</span></h2></div>
+    <div class="tblwrap"><table class="who">
+      <thead><tr><th>問題</th><th>哪一章在回答</th></tr></thead>
+      <tbody>
+        <tr><td>Market、Competition</td><td><a href="#product-testing" style="color:var(--sky);font-weight:600">第一個月的品測。</a>一桌老師和家長拿起來看看，比報表準。</td></tr>
+        <tr><td>Barrier、Profitability</td><td><a href="#consignment" style="color:var(--sky);font-weight:600">第三個月的寄賣。</a>證要多久、到岸多少、平台抽多少，跑一輪就有真數字。</td></tr>
+        <tr><td>Regulatory、Barrier</td><td><a href="#localization" style="color:var(--sky);font-weight:600">第九個月的公司落地。</a>律師行、持證進口商、合規安排。</td></tr>
+        <tr class="you"><td>海外客服</td><td>不在五題裡。它不是「該不該去」的問題，是「去了之後」的問題。</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sechead"><h2 class="h2">一個評分的例子：<span class="g">保健品 → 北美 Costco</span></h2></div>
+    <div class="example">
+      <div class="bars2">
+        <div><b>Market</b><i style="--v:82"></i><span>82</span><em>北美保健品市場大、穩定成長</em></div>
+        <div><b>Barrier</b><i style="--v:62"></i><span>62</span><em>FDA 註冊成本可控，Costco 關係是關鍵</em></div>
+        <div><b>Competition</b><i style="--v:71"></i><span>71</span><em>前三名市佔中位集中</em></div>
+        <div><b>Profitability</b><i style="--v:78"></i><span>78</span><em>毛利空間夠，要承受 Costco 條款</em></div>
+        <div><b>Regulatory</b><i style="--v:80"></i><span>80</span><em>北美法規穩定</em></div>
+      </div>
+      <div class="total"><small>加權總分</small><b>74</b><span>Conditional Go</span><p>條件：配方微調符合北美口感。</p></div>
+    </div>
+    <div class="verify"><b>網站原有・待你確認</b>這個案例跟四篇個案卡是同一個，還沒確認能講到哪；不確定就整段拿掉。原網站另有「實際結果：6 個月上架，首月銷量超標 40%」，這裡先不放。</div>
+  </div></section>
+
+  <section class="sec cream"><div class="wrap">
+    <div class="sechead"><h2 class="h2">五個問題背後，<span class="g">是三件事</span></h2><p>產品適配性（這個市場真的要你嗎）、通路銷售力（上得了架，還要賣得動）、團隊體質（進得去，還要留得下）。<br>五個問題是量尺，三件事是量的東西。</p></div>
+    <div class="trio">
+      <div><b style="display:block;font-size:18px;margin-bottom:6px">產品適配性</b><span style="color:var(--tx3)">（原服務總覽頁的三支柱說明，原字搬入）</span></div>
+      <div><b style="display:block;font-size:18px;margin-bottom:6px">通路銷售力</b><span style="color:var(--tx3)">（原字搬入）</span></div>
+      <div><b style="display:block;font-size:18px;margin-bottom:6px">團隊體質</b><span style="color:var(--tx3)">（原字搬入）</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <h2 class="h2">常見問題</h2>
+    <div class="faq">
+      <details open><summary><span class="n">01</span><span class="qq">我一定要先被評分才能開始嗎？</span><span class="pm">+</span></summary><p class="a">不用。第一次談我們會粗跑一遍，30 分鐘，不收費。多數人是談完才知道自己在哪一格。</p></details>
+      <details><summary><span class="n">02</span><span class="qq">分數低就不能做嗎？</span><span class="pm">+</span></summary><p class="a">60 分以下我們不接，這是對雙方的保護。但我們會寫清楚哪一題掉分、什麼條件改了可以再看。</p></details>
+      <details><summary><span class="n">03</span><span class="qq">分數是誰打的？</span><span class="pm">+</span></summary><p class="a">我們打，依據是公開數據、你給的成本、和我們在當地的經驗。品測跑完，Market 和 Competition 兩題會用真實反應重打一次。</p></details>
+    </div>
+    <a class="nextch" href="#services" style="margin-top:40px"><div><small>看完量尺，回去看路 →</small><h3>一家品牌在馬尼拉的第一年：品測、寄賣、公司落地、海外客服</h3></div><span class="ar">→</span></a>
+  </div></section>
+
+  <section class="cta cta2" style="background-image:url(https://lufe.world/images/cta/cta-executive.jpg)"><div class="wrap">
+    <h2 class="h2">免費初步評估</h2>
+    <p>30 分鐘，粗跑五個問題，不收費。談完你會知道自己在哪一格、該從哪一章開始。</p>
+    <a class="btn btn-gold">預約 30 分鐘 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 3.1 案例 ============ -->
+<main class="page" id="p-cases">
+  <section class="phero" style="background-image:url(https://lufe.world/images/cases/detail/bubbletea-manila-hero.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 案例</p>
+    <h1 class="h1">我們不是跟你賭夢想，<br><span style="color:var(--gold)">是有做過的事</span></h1>
+    <p class="lead">在菲律賓，我們跟合作夥伴走過三條不一樣的路。<br>底下是其中幾個決策的完整過程。</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="roads3">
+      <div class="road3"><span class="no">第一條</span><h3>從零開始</h3><p>在當地蓋一間英語教育機構，後來用同樣的方法做了一個連鎖手搖飲品牌。</p><div class="learn"><b>這條路教我們的事</b>找人比找店面難，第一批人決定後面所有事。</div></div>
+      <div class="road3"><span class="no">第二條</span><h3>改了再帶過去</h3><p>台灣的產品到了當地，改配方、改價格、改包裝。</p><div class="learn"><b>這條路教我們的事</b>台灣的「好」不一定是當地的「好」，先讓當地人拿起來看看。</div></div>
+      <div class="road3"><span class="no">第三條</span><h3>原封不動帶過去</h3><p>一個台灣的美業品牌，什麼都不改，只做當地行銷。</p><div class="learn"><b>這條路教我們的事</b>品牌可以不改，但講故事的方式一定要改。</div></div>
+    </div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0;padding-bottom:0"><div class="wrap">
+    <div class="bridge"><div><h3>不確定自己比較像哪一條？</h3><p>先做 2 分鐘處境比對，我們告訴你最像哪一個案例。</p></div><a class="btn btn-gold">先做 2 分鐘處境比對 →</a></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="casecards">
+      <div class="ccard" style="background-image:url(https://lufe.world/images/cases/detail/costco-health-hero.jpg)"><div class="tags"><span>食品</span><span>北美</span></div><span class="num">6 個月</span><h3>保健品怎麼從台灣走進北美 Costco？</h3></div>
+      <div class="ccard" style="background-image:url(https://lufe.world/images/cases/detail/electronics-tariff-hero.jpg)"><div class="tags"><span>電子</span><span>美國</span></div><span class="num">-15%</span><h3>電子大廠怎麼靠產地轉移省下關稅？</h3></div>
+      <div class="ccard" style="background-image:url(https://lufe.world/images/cases/detail/shoe-brand-hero.jpg)"><div class="tags"><span>服飾</span><span>美國</span></div><span class="num">3x</span><h3>知名皮鞋品牌為什麼改賣襪子大賺？</h3></div>
+      <div class="ccard" style="background-image:url(https://lufe.world/images/cases/detail/bubbletea-manila-hero.jpg)"><div class="tags"><span>飲品</span><span>東南亞</span></div><span class="num">10 家</span><h3>珍珠奶茶品牌怎麼在菲律賓成功落地？</h3></div>
+    </div>
+    <span class="pending">待確認：四篇個案能講到哪（確認前照現況掛著）</span>
+  </div></section>
+
+  <section class="cta cta2" style="background-image:url(https://lufe.world/images/cta/cta-executive.jpg)"><div class="wrap">
+    <h2 class="h2">你的故事會是哪一條？</h2>
+    <p>聊聊你的產品，我們先幫你看比較像哪一條路。</p>
+    <a class="btn btn-gold">聊聊你的產品 →</a>
+  </div></section>
+</main>
+
+<!-- ============ 3.2 洞察（原站版面 × v4.1 章節分類） ============ -->
+<main class="page" id="p-insights">
+  <section class="in-hero" style="background-image:url(https://lufe.world/images/insights/insights-hero-analysis.jpg)"><div class="wrap in-grid">
+    <div>
+      <p class="crumb">首頁 / 洞察</p>
+      <span class="chaplbl">洞察</span>
+      <h1 class="display" style="font-size:clamp(34px,5vw,58px)">每一章讀到一半會想問的事，<span style="color:var(--gold)">這裡先寫好</span></h1>
+      <p class="lead" style="margin-bottom:34px">按你現在在故事的哪一個月找。</p>
+      <div class="in-stats"><div><b id="in-count">10</b><span>篇實戰文章</span></div><div><b>6</b><span>章節分類</span></div><div><b>每月</b><span>新增更新</span></div></div>
+    </div>
+    <a class="in-feat" id="in-feat"></a>
+  </div></section>
+
+  <section class="sec" style="padding-top:56px"><div class="wrap">
+    <div class="in-filter" id="in-filter"></div>
+    <p class="in-oldtags">舊分類降為標籤、文章不刪：<i>菲律賓</i><i>東南亞趨勢</i><i>北美市場</i><i>出海實戰</i><i>企業體質</i></p>
+    <div class="in-grid-cards" id="in-cards"></div>
+    <div class="in-cta">
+      <h3>看完文章，想聊聊你的狀況？</h3>
+      <p>聊聊，不收費、不承諾。我們會老實告訴你值不值得一試。</p>
+      <div><a class="btn btn-gold">聊聊你的產品 →</a><a class="in-link">先做 2 分鐘評估 →</a></div>
+    </div>
+    <span class="designnote">原站 hero（數字列＋右側精選卡）、篩選列、文章卡（分類／分鐘／摘要／日期／閱讀更多）、底部聊聊框都保留；篩選改成 v4.1 的六個章節</span>
+  </div></section>
+</main>
+
+<!-- ============ 3.3 關於我們（原站版面 × v4.1 文字） ============ -->
+<main class="page" id="p-about">
+  <section class="ab-hero" id="story-top" style="background-image:url(https://lufe.world/images/about/about-hero-executive.jpg)"><div class="wrap">
+    <p class="crumb">首頁 / 關於我們</p>
+    <h1 class="display" style="max-width:920px">協助台灣企業<br>在<span style="color:var(--gold)">北美</span>與<span style="color:var(--gold)">東南亞</span>落地</h1>
+    <p class="ab-quote">「別人幫你開車，我們幫你找路。」</p>
+    <div class="ab-founder">
+      <span class="ab-portrait" style="background-image:url(https://lufe.world/images/about/aaron-portrait.jpg)"></span>
+      <div>
+        <b>Aaron Yu</b>
+        <span class="role">鹿飛 LUFÉ 創辦人・來自躍馬企業</span>
+        <p>看了很多年貨櫃出去，決定去接貨到了之後的事。</p>
+      </div>
+    </div>
+    <div class="ab-stats">
+      <div><b>42+</b><span>躍馬企業 · 年國際物流實戰</span></div>
+      <div><b>500+</b><span>躍馬企業 · 出口實戰案件</span></div>
+      <div><b>30+</b><span>國家與地區覆蓋</span></div>
+    </div>
+    <span class="designnote" style="margin-top:22px">原站 hero 版面保留；創辦人卡換成 v4.1 的字，三個數字照 v4 標「躍馬企業」</span>
+  </div></section>
+
+  <section class="sec dark ab-story" id="story"><div class="wrap">
+    <h2 class="h2">創辦故事</h2>
+    <div class="ab-cards">
+      <article><div class="im" style="background-image:url(https://lufe.world/images/about/aaron-workshop.jpg);background-position:center 30%"></div><div class="bd"><span>01</span><h3>看到的問題</h3><p>我在躍馬企業看了很多年。
+
+躍馬做的是把貨送出去——42 年，500 多個出口案件，30 多個國家。
+我在裡面看的不是報表，是貨櫃出去以後的事。
+有的品牌在當地開了第二家店。
+更多的是幾個月後貨退回來，或者就沒有下文了。</p></div></article>
+      <article><div class="im" style="background-image:url(https://lufe.world/images/about/story-belief-compass.jpg)"></div><div class="bd"><span>02</span><h3>想通的事</h3><p>我後來想通一件事：差別從來不在物流，貨都有送到。
+差別在到了之後，有沒有人接著走。
+證有沒有人辦、架上有沒有人推、第一封英文客訴信有沒有人回。</p></div></article>
+      <article><div class="im" style="background-image:url(https://lufe.world/images/about/aaron-news-interview.jpg);background-position:42% center"></div><div class="bd"><span>03</span><h3>做了什麼</h3><p>台灣市場不夠大，這件事做生意的人都知道。出去有難度，但出得去。
+鹿飛做的，是把貨到了之後最難的四件事做成四個方案，
+讓第一步小到你敢踏，後面的每一步都有人在。</p></div></article>
+    </div>
+    <span class="designnote">原站三張故事圖卡保留；v4.1 的創辦故事照段落拆進三張卡，字一字不改。第二張標題原為「相信的事」，這裡改成「想通的事」配合內文</span>
+  </div></section>
+
+  <section class="sec cream" id="team"><div class="wrap" style="max-width:1000px">
+    <h2 class="h2">不是 Aaron 一個人，<br>是一個<span class="g">小而精</span>的團隊 + 全球節點</h2>
+    <p class="intro">我們刻意不做大型顧問公司。規模保持在能讓創辦人親自過目每一個案子，同時又有足夠的專業分工與在地夥伴支援。</p>
+    <div class="ab-team">
+      <div><span class="ic"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="11" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M7 26C7 21 11 17 16 17C21 17 25 21 25 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><h3>台灣核心</h3><p>合約、進度、你的窗口。第一次談的人是 Aaron，之後每一章的窗口也是同一個人。</p></div>
+      <div><span class="ic"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M5 16H27M16 5C19 8 19 24 16 27M16 5C13 8 13 24 16 27" stroke="currentColor" stroke-width="1.2"/></svg></span><h3>菲律賓合作夥伴</h3><p>在當地經營英語教育機構與連鎖餐飲多年，品測面板、落地執行、客服團隊都從這裡來。</p></div>
+      <div><span class="ic"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="4" y="10" width="24" height="14" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M4 15H28" stroke="currentColor" stroke-width="1.2"/><path d="M10 6V10M22 6V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><h3>北美團隊</h3><p>在北美當地做研究、展覽、買家引進、談判。北美這條線由他們執行。</p></div>
+    </div>
+    <p class="ab-foot">* 我們的定位是「小型精品 + 全球網絡」——不是萬人顧問公司，也不是 solo freelancer。</p>
+    <span class="designnote">標題、引言、註腳沿用原站；三張卡換成 v4.1。原站卡上的「5 人」「越南 / 菲律賓 / 泰國」小字拿掉（與菲律賓單一市場衝突）</span>
+  </div></section>
+
+  <section class="sec" id="how-we-work"><div class="wrap">
+    <h2 class="h2">你會得到<span class="g">什麼樣的陪跑</span></h2>
+    <p class="intro">我們的流程很清楚——每一步你都知道接下來會發生什麼、要做什麼、需要多久。</p>
+    <div class="ab-steps">
+      <article><b>01</b><h3>第一次談</h3><p>我們先聽：你的產品在台灣怎麼賣、為什麼想出去、卡在哪。不報價。</p></article>
+      <article><b>02</b><h3>一頁建議</h3><p>談完給你一頁：我們覺得你該從哪一章開始，或者建議你再等等。</p></article>
+      <article><b>03</b><h3>選一章</h3><p>你決定要不要開始、從哪一章開始。每一章都有價，都可以只買一章。</p></article>
+      <article><b>04</b><h3>一份合約</h3><p>不管走幾章，一份合約、一個窗口、一條進度線。</p></article>
+      <article><b>05</b><h3>每一章結束</h3><p>你拿到那一章交出來的東西，決定要不要翻下一頁。</p></article>
+    </div>
+    <span class="designnote">沿用原站大數字卡片；原站「四個階段」改成 v4.1 的五步</span>
+  </div></section>
+
+  <section class="sec" id="network" style="border-top:1px solid var(--bd)"><div class="wrap" style="max-width:1000px">
+    <div class="ab-banner" style="background-image:url(https://lufe.world/images/about/network-saigon-night.jpg)"><span>30+ 國家 · 500+ 出口案件 · 42 年國際物流</span></div>
+    <h2 class="h2">你不只是找到一家公司<br>而是接上一整個網絡</h2>
+    <div class="ab-net">
+      <div class="g"><span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="3" stroke="#D4A85C" stroke-width="1.5"/><path d="M4 13H28" stroke="#D4A85C" stroke-width="1.5"/></svg></span><h3>北美</h3><p>北美團隊：研究、展覽、買家、談判。</p></div>
+      <div class="s"><span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="4" stroke="#5B8FA8" stroke-width="1.5"/><path d="M8 26C8 21.6 11.6 18 16 18C20.4 18 24 21.6 24 26" stroke="#5B8FA8" stroke-width="1.5" stroke-linecap="round"/></svg></span><h3>東南亞</h3><p>菲律賓合作夥伴：教育機構、連鎖餐飲、客服團隊、律師行、持證進口商。</p></div>
+      <div class="g"><span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="14" width="10" height="12" rx="1" stroke="#D4A85C" stroke-width="1.5"/><rect x="16" y="8" width="10" height="18" rx="1" stroke="#D4A85C" stroke-width="1.5"/></svg></span><h3>全球物流</h3><p>躍馬企業 42 年國際貨運承攬：報關、倉儲、海空運、最後一哩。</p></div>
+      <div class="e"><span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="6" width="20" height="20" rx="4" stroke="#D98B4A" stroke-width="1.5"/><path d="M12 16L15 19L21 13" stroke="#D98B4A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>科技工具</h3><p>自主開發的 TradePilot 關稅查詢工具，2,400+ 用戶使用中。用科技降低跨境的資訊門檻。</p><span class="vtag" style="margin-top:10px">原站有、v4.1 沒列，要不要留？</span></div>
+    </div>
+    <span class="designnote">橫幅照片與標題沿用原站；橫幅字原為「10 年實戰」，改成 42 年國際物流對齊全站。前三張換成 v4.1，第四張 TradePilot 是原站的</span>
+  </div></section>
+
+  <section class="ab-phil" id="philosophy" style="background-image:url(https://lufe.world/images/about/philosophy-compass.jpg)"><div class="wrap" style="max-width:900px">
+    <h2 class="h2">我們相信的事</h2>
+    <div class="ab-beliefs">
+      <div><b>1</b><p>台灣市場不夠大，出去是遲早的事。早一點、小一點開始，比晚一點、大一點便宜。</p></div>
+      <div><b>2</b><p>先做最難的那一件。辦證、開公司、接客訴——最難的我們先做；做不到的，我們老實說。</p></div>
+      <div><b>3</b><p>有立場。兩個選擇都對的時候，我們會建議能讓你長大的那一個，不是省事的那一個。</p></div>
+      <div><b>4</b><p>我們不是跟你賭夢想，是有做過的事。</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec cream" id="what-we-dont-do"><div class="wrap" style="max-width:900px">
+    <h2 class="h2">誠實的邊界</h2>
+    <p class="intro">專業分工比萬能重要。我們誠實告訴你哪些事不該找我們——這樣你才知道什麼時候該找我們。</p>
+    <div class="ab-dont">
+      <article><h3>我們不當貿易商。</h3><p>不買你的貨、不扛你的業績，我們把賣出去的路打通，貨還是你的。</p></article>
+      <article><h3>我們不當純接單的貨代。</h3><p>物流是躍馬 42 年的底，但鹿飛賣的不是運費。</p></article>
+      <article><h3>我們不接「放貨給你賣、賣掉再抽成」的合作。</h3><p>這種模式通常對雙方都不划算，我們會第一次談就說。</p></article>
+      <article><h3>我們不保證合規、不保證進通路。</h3><p>證幫你申請、坑幫你避，責任在品牌方；通路幫你談，賣不賣得動，品測會先告訴你。</p></article>
+      <article class="old"><h3>不拿股權、不投資</h3><p>我們不參股、不當股東。這是為了避免利益綁定扭曲判斷——當我們拿股權，你就不會聽到我們說「這案子不該做」。</p><span class="vtag">原站有、不衝突，要不要留？</span></article>
+      <article class="old"><h3>不賣課、不收招生費</h3><p>我們不辦「出海大師班」、不賣線上課、不做付費講座招生。我們的工作是陪你實戰，不是做知識付費。</p><span class="vtag">原站有、不衝突，要不要留？</span></article>
+    </div>
+    <span class="designnote">引言沿用原站。原站「不做行銷代操」已拿掉：跟寄賣包的「網紅與活動配套」衝突</span>
+  </div></section>
+
+  <section class="ab-cta"><div class="wrap" style="max-width:720px;text-align:center">
+    <div class="ab-ctaimg" style="background-image:url(https://lufe.world/images/about/aaron-teaching.jpg)"></div>
+    <h3>想認識我們？聊聊你的跨境計畫</h3>
+    <p>不確定該不該跨境？先聊聊，不收費、不承諾、不賣課。</p>
+    <a class="btn btn-gold">聊聊你的產品 →</a>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <a class="logo" href="#home"><img src="https://lufe.world/images/logo/logo-mark-white.png" alt=""><span>鹿飛 LUF<em>É</em></span></a>
+  <p class="one">貨到了之後，我們接著走。品測、寄賣、公司落地、海外客服，陪台灣品牌走完在菲律賓的第一年。底下是躍馬企業 42 年的國際物流。</p>
+</div></footer>
+
+<script>
+/* compare support: stable ids per section + embed mode (no visual change) */
+document.querySelectorAll("main.page").forEach(p => { let i = 0; [...p.children].forEach(c => { if (/^(SECTION|NAV|DIV)$/.test(c.tagName)) { if (!c.dataset.sid) c.dataset.sid = p.id.slice(2) + "__" + (++i); if (!c.id) c.id = c.dataset.sid; else if (!document.getElementById(c.dataset.sid)) { const a = document.createElement("a"); a.id = c.dataset.sid; a.setAttribute("aria-hidden", "true"); a.style.cssText = "display:block;height:0;scroll-margin-top:110px"; c.prepend(a); } } }); });
+if (window.self !== window.top) { const s = document.createElement("style"); s.textContent = ".proto{display:none}.nav{top:0!important}.chapbar{top:64px!important}html{scroll-padding-top:80px}"; document.head.appendChild(s); }
+</script>
+<script>
+const IMG = "https://lufe.world/images/";
+const CHAPTERS = [
+  ["第一個月", "品測", "product-testing"],
+  ["第三個月", "寄賣", "consignment"],
+  ["第九個月", "公司落地", "localization"],
+  ["之後的每一天", "海外客服", "call-center"],
+];
+document.querySelectorAll(".chapbar").forEach(bar => {
+  const cur = +bar.dataset.chap;
+  bar.innerHTML = `<div class="wrap">${CHAPTERS.map(([m, n, slug], i) =>
+    `${i ? '<span class="ln"></span>' : ""}<a href="#${slug}" class="${i === cur ? "on" : i < cur ? "done" : ""}"><span class="dot"></span><span><small>${m}</small><b>${n}</b></span></a>`
+  ).join("")}</div>`;
+});
+
+// Real articles currently on lufe.world/insights (scraped 2026-09-30), mapped to v4.1 chapters.
+// ch: m1 m3 m9 after na sub | null = tag only (東南亞趨勢, not in a main chapter per v4.1)
+const REAL = [
+  { t: "政府這次是認真的——海外參展補助從 4 萬跳到 16 萬，但你只有兩個月能動", s: "115 年度海外參展補助因應國際關稅情勢加碼至歷年最優：每展最高 NT$16 萬、補助比例上拉到 90%。第 2 次公告預計 4-5 月開放，經費用罄即止。這篇寫給還沒申請過、也想知道怎麼不卡核銷的老闆。", tag: "出海實戰", rt: "8 分鐘", d: "2026-04-23", img: "insights/tradepilot-tariff.jpg", ch: "sub" },
+  { t: "在馬尼拉開第一家手搖店的 90 天 — 台灣飲料品牌的菲律賓首店實戰", s: "一家經營快 15 年的台灣手搖品牌想進菲律賓，從簽約到開幕的 90 天裡，我們在現場解決了三個關鍵問題：口味、定價、排隊動線。這不是一份策略簡報——是我們真的踩過的事。", tag: "菲律賓", rt: "10 分鐘", d: "2026-04-05", img: "cases/detail/bubbletea-manila-hero.jpg", ch: "m9" },
+  { t: "跨境 Go / No-Go 決策框架：我們怎麼判斷一個案子值不值得做", s: "多數顧問的建議靠個人經驗，我們靠一套五維評分矩陣。這篇文章把 MBCPR 框架完整攤開，包含每個維度的紅線與一個真實案例的打分過程。", tag: "企業體質", rt: "14 分鐘", d: "2026-04-02", img: "insights/first-time-export-checklist.jpg", ch: "m1", flag: "文件說企業體質放第九個月或之後；內容是「該不該去」，先放第一個月" },
+  { t: "2026 東南亞電商市場：台灣品牌的三大機會", s: "東南亞電商市場預計在 2026 年突破 2,000 億美元。我們分析了菲律賓、越南、泰國三個市場，找到台灣品牌最有機會切入的品類和通路。", tag: "東南亞趨勢", rt: "8 分鐘", d: "2026-03-28", img: "insights/southeast-asia-ecommerce.jpg", ch: null },
+  { t: "第一次出海就上手：從零到上架的完整 Checklist", s: "我們把十年來幫客戶出海的經驗濃縮成一份 Checklist。從市場評估到產品上架，每個階段該做什麼、要注意什麼，一次講清楚。", tag: "出海實戰", rt: "12 分鐘", d: "2026-03-15", img: "insights/first-time-export-checklist.jpg", ch: "m1" },
+  { t: "產品測試該怎麼做？避開三個常見的錯誤", s: "產品測試是跨境路上最常被誤解的階段。很多品牌把它當成「小量出貨看反應」，結果數據沒用、時間白花。這篇拆解真正有用的產品測試該怎麼設計。", tag: "出海實戰", rt: "7 分鐘", d: "2026-03-10", img: "insights/amazon-category.jpg", ch: "m1" },
+  { t: "美國 FDA 註冊全攻略：保健品出海必讀", s: "想把保健品賣到美國？FDA 註冊是第一關。這篇文章完整解析註冊流程、費用、時程，以及台灣企業最常踩的五個坑。", tag: "北美市場", rt: "10 分鐘", d: "2026-03-01", img: "insights/us-fda-registration.jpg", ch: "na" },
+  { t: "TradePilot 使用教學：三分鐘查完目標市場關稅", s: "我們自主開發的關稅查詢工具 TradePilot，已有 2,400+ 用戶。這篇手把手教你如何用它計算出海成本，做出更精準的定價決策。", tag: "出海實戰", rt: "5 分鐘", d: "2026-02-20", img: "insights/tradepilot-tariff.jpg", ch: "m3", flag: "算到岸成本＝寄賣那章的事，先放第三個月" },
+  { t: "中美關稅戰下的產地轉移策略：越南還是印度？", s: "越來越多企業考慮將產線從中國轉移。我們比較了越南和印度在成本、效率、法規上的優劣，幫你選對下一個生產基地。", tag: "東南亞趨勢", rt: "9 分鐘", d: "2026-02-10", img: "insights/china-relocation.jpg", ch: null },
+  { t: "亞馬遜品類分析：如何找到你的藍海品項", s: "在亞馬遜上賣什麼比怎麼賣更重要。這篇分享我們幫客戶做品類分析的方法論，以及如何用數據找到高毛利、低競爭的品項。", tag: "北美市場", rt: "11 分鐘", d: "2026-01-25", img: "insights/amazon-category.jpg", ch: "na" },
+];
+// First writing batch from v4.1 §3.2 (not written yet)
+const PLANNED = [
+  { t: "為什麼我們不做問卷，改讓老師和家長拿起來看", ch: "m1" },
+  { t: "台灣賣 299 的東西，在馬尼拉該賣多少", ch: "m1" },
+  { t: "產品證 6～12 週，這段時間你可以做的三件事", ch: "m3" },
+  { t: "在菲律賓只投廣告為什麼不夠", ch: "m3" },
+  { t: "在菲律賓開一間公司，第一件事不是註冊", ch: "m9" },
+  { t: "遠程團隊是什麼：台灣公司在菲律賓聘人", ch: "m9" },
+  { t: "星期五晚上十一點那封信，該由誰回", ch: "after" },
+  { t: "為什麼全世界的英文客服都在菲律賓", ch: "after" },
+].map(a => ({ ...a, todo: true }));
+const CH_NAME = { m1: "第一個月：市場與品測", m3: "第三個月：通路與證", m9: "第九個月：落地與團隊", after: "之後的每一天：客服與營運", na: "北美市場", sub: "補助與活動" };
+const ALL = [...REAL, ...PLANNED];
+
+const card = (a, withSummary) => `<article class="acard${a.ch === null ? " tagonly" : ""}">${a.todo
+  ? `<div class="img todo">待寫</div>`
+  : `<div class="img" style="background-image:url(${IMG + a.img})"></div>`}
+  <div class="bd"><span class="cat">${a.ch ? CH_NAME[a.ch] : "僅標籤（不進主分類）"}</span>${a.todo ? '<span class="tag">第一批待寫</span>' : `<span class="tag2">${a.tag}</span>`}
+  <h4>${a.t}</h4>${withSummary && a.s ? `<p class="sum">${a.s}</p>` : ""}
+  <div class="meta"><small>${a.todo ? "6～8 分鐘 · 從一個場景開頭" : `${a.d} · ${a.rt}`}</small>${a.todo ? "" : '<span class="rm">閱讀更多 →</span>'}</div>
+  ${a.flag ? `<span class="vtag" style="margin-top:8px">${a.flag}</span>` : ""}</div></article>`;
+
+// 延伸閱讀 on each chapter page: real articles first, then planned, max 3
+document.querySelectorAll("[data-reading]").forEach(sec => {
+  const ch = sec.dataset.reading;
+  const items = [...REAL.filter(a => a.ch === ch), ...PLANNED.filter(a => a.ch === ch)].slice(0, 3);
+  sec.innerHTML = `<div class="wrap"><div class="sechead"><h2 class="h2">延伸閱讀</h2><p>${CH_NAME[ch]}</p></div>
+    <div class="cards">${items.map(a => card(a, false)).join("")}</div>
+    <a class="all" href="#insights">看所有文章 →</a></div>`;
+});
+document.getElementById("latest3").innerHTML = REAL.slice(0, 3).map(a => card(a, false)).join("");
+
+// insights page: featured + chapter filter
+const feat = REAL[0];
+document.getElementById("in-feat").innerHTML = `<div class="fi" style="background-image:url(${IMG + feat.img})"><span class="pill">精選</span><span class="fc">${CH_NAME[feat.ch]}</span></div>
+  <div class="fb"><h3>${feat.t}</h3><p>${feat.s}</p><div><span>${feat.d}</span><span>${feat.rt}</span></div></div>`;
+const FILTERS = [["all", "全部"], ...Object.entries(CH_NAME)];
+let activeCh = "all";
+function renderInsights() {
+  document.getElementById("in-filter").innerHTML = FILTERS.map(([k, n]) => `<button data-k="${k}" class="${k === activeCh ? "on" : ""}">${n}</button>`).join("");
+  const list = activeCh === "all" ? ALL : ALL.filter(a => a.ch === activeCh);
+  document.getElementById("in-cards").innerHTML = list.map(a => card(a, true)).join("");
+}
+document.getElementById("in-filter").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  activeCh = b.dataset.k; renderInsights();
+});
+renderInsights();
+
+// hero carousel
+const slides = [...document.querySelectorAll("#hero .slide")];
+const tabs = [...document.querySelectorAll("#hero .tabs button")];
+const posters = ["hero-poster-1600.webp", "hero-slide-2-poster-1600.webp", "hero-slide-3-poster-1600.webp"];
+let cur = 0, timer;
+function show(i) {
+  cur = i;
+  slides.forEach((s, j) => s.classList.toggle("on", j === i));
+  tabs.forEach((t, j) => t.classList.toggle("on", j === i));
+  document.getElementById("hero").style.backgroundImage = `url(${IMG}hero/${posters[i]})`;
+}
+function auto() { clearInterval(timer); timer = setInterval(() => show((cur + 1) % 3), 10000); }
+tabs.forEach(t => t.addEventListener("click", () => { show(+t.dataset.i); auto(); }));
+auto();
+
+// routing
+const PAGES = [...document.querySelectorAll(".page")].map(p => p.id.slice(2));
+function route() {
+  const h = location.hash.slice(1);
+  if (PAGES.includes(h) || !h) {
+    setPage(h || "home");
+    window.scrollTo(0, 0);
+    return;
+  }
+  const target = document.getElementById(h);
+  const page = target && target.closest(".page");
+  if (page) { setPage(page.id.slice(2)); target.scrollIntoView(); }
+}
+function setPage(p) {
+  document.querySelectorAll(".page").forEach(el => el.classList.toggle("on", el.id === "p-" + p));
+  document.querySelectorAll("#proto a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + p));
+}
+addEventListener("hashchange", route);
+route();
+</script>
+
+<script>
+/* ================= Apple-design pass: motion layer ================= */
+(() => {
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* §4 Springs: damping ratio + response (seconds), not duration. Re-targeting keeps velocity (§3). */
+class Spring {
+  constructor(value, onUpdate) { this.value = value; this.velocity = 0; this.target = value; this.onUpdate = onUpdate; this.raf = 0; }
+  to(target, { response = 0.4, damping = 1, velocity } = {}) {
+    this.target = target;
+    if (velocity !== undefined) this.velocity = velocity;
+    this.k = Math.pow(2 * Math.PI / response, 2);
+    this.c = 4 * Math.PI * damping / response;
+    if (REDUCED) { this.set(target); return this; }
+    if (!this.raf) { this.last = performance.now(); this.raf = requestAnimationFrame(t => this.step(t)); }
+    return new Promise(r => (this.done = r));
+  }
+  set(v) { cancelAnimationFrame(this.raf); this.raf = 0; this.value = this.target = v; this.velocity = 0; this.onUpdate(v); this.done && this.done(); }
+  step(now) {
+    let dt = Math.min((now - this.last) / 1000, 1 / 30); this.last = now;
+    const n = 4; dt /= n;
+    for (let i = 0; i < n; i++) {
+      const a = -this.k * (this.value - this.target) - this.c * this.velocity;
+      this.velocity += a * dt; this.value += this.velocity * dt;
+    }
+    this.onUpdate(this.value);
+    if (Math.abs(this.velocity) < 0.5 && Math.abs(this.value - this.target) < 0.5) { this.set(this.target); return; }
+    this.raf = requestAnimationFrame(t => this.step(t));
+  }
+}
+const project = (v, d = 0.998) => (v / 1000) * d / (1 - d);             // §6 Apple's projection
+const rubber = (x, dim, c = 0.55) => (x * dim * c) / (dim + c * Math.abs(x)); // §9
+window.__Spring = Spring;
+
+/* Translucent chrome gets a scroll-edge shadow only when content is under it */
+const nav = document.querySelector(".nav");
+const onScroll = () => {
+  nav.classList.toggle("edge", scrollY > 8);
+  document.querySelectorAll(".page.on .chapbar").forEach(b => b.classList.toggle("edge", b.getBoundingClientRect().top <= 106));
+  fab && fab.classList.toggle("show", scrollY > 520);
+  timelineProgress();
+};
+addEventListener("scroll", onScroll, { passive: true });
+
+/* Hero: tabs carry a progress bar; hover pauses; clicking the active tab jumps to its section */
+const heroTabs = [...document.querySelectorAll("#hero .tabs button")];
+if (heroTabs.length && typeof timer !== "undefined") {
+  clearInterval(timer);
+  heroTabs.forEach(t => { const b = document.createElement("span"); b.className = "bar"; t.appendChild(b);
+    b.addEventListener("animationend", () => { if (t.classList.contains("on")) goSlide((+t.dataset.i + 1) % heroTabs.length); }); });
+  const goSlide = i => { heroTabs.forEach(t => { const b = t.querySelector(".bar"); b.style.animation = "none"; b.offsetWidth; b.style.animation = ""; }); show(i); };
+  heroTabs.forEach(t => t.addEventListener("click", e => {
+    e.stopImmediatePropagation();
+    if (t.classList.contains("on") && t.dataset.go) { document.getElementById(t.dataset.go)?.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth" }); return; }
+    goSlide(+t.dataset.i);
+  }, true));
+  goSlide(0);
+}
+
+/* FAQ: spring height, interruptible mid-flight (§3) */
+document.querySelectorAll(".faq details").forEach(d => {
+  const a = d.querySelector(".a"); if (!a) return;
+  const wrap = document.createElement("div"); wrap.className = "acc"; a.before(wrap); wrap.appendChild(a);
+  const pm = d.querySelector(".pm");
+  const sp = new Spring(d.open ? 1 : 0, v => { wrap.style.height = d.open || v > 0.001 ? `${Math.max(0, v) * a.offsetHeight}px` : "0px"; pm && (pm.style.transform = `rotate(${45 * Math.min(1, Math.max(0, v))}deg)`); });
+  sp.onUpdate(sp.value);
+  d.querySelector("summary").addEventListener("click", e => {
+    e.preventDefault();
+    const opening = sp.target < 0.5;
+    if (opening) d.open = true;
+    const p = sp.to(opening ? 1 : 0, { response: 0.42, damping: 1 });
+    if (!opening) Promise.resolve(p).then(() => { if (sp.target === 0) d.open = false; });
+  });
+});
+
+/* Segmented control: sliding pill with independent x / width springs (§3 decompose) */
+const filter = document.getElementById("in-filter");
+if (filter) {
+  const pill = document.createElement("span"); pill.className = "pill"; filter.prepend(pill);
+  const x = new Spring(0, v => pill.style.transform = `translateX(${v}px)`), w = new Spring(0, v => pill.style.width = `${v}px`);
+  const place = (instant) => { const b = filter.querySelector("button.on"); if (!b) return;
+    const X = b.offsetLeft, W = b.offsetWidth; if (instant) { x.set(X); w.set(W); } else { x.to(X, { response: 0.35 }); w.to(W, { response: 0.35 }); } };
+  new MutationObserver(() => { if (!filter.contains(pill)) filter.prepend(pill); place(false);
+    document.querySelectorAll("#in-cards .acard").forEach((c, i) => c.style.setProperty("--i", i)); }).observe(filter, { childList: true });
+  addEventListener("hashchange", () => setTimeout(() => place(true), 30));
+  setTimeout(() => place(true), 60);
+}
+
+/* Horizontal scrollers: 1:1 drag, velocity projection to a snap point, rubber-band at edges */
+document.querySelectorAll(".ab-cards,.ab-steps").forEach(el => {
+  const items = () => [...el.children].map(c => c.offsetLeft - el.offsetLeft);
+  const sp = new Spring(0, v => { const max = el.scrollWidth - el.clientWidth; const over = v < 0 ? v : v > max ? v - max : 0;
+    el.scrollLeft = Math.min(max, Math.max(0, v)); el.style.transform = over ? `translateX(${-rubber(over, el.clientWidth)}px)` : ""; });
+  let startX = 0, startScroll = 0, hist = [], dragging = false;
+  el.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") return; dragging = true; el.setPointerCapture(e.pointerId);
+    sp.set(el.scrollLeft); startX = e.clientX; startScroll = el.scrollLeft; hist = [{ x: e.clientX, t: e.timeStamp }]; el.classList.add("dragging"); });
+  el.addEventListener("pointermove", e => { if (!dragging) return; const v = startScroll - (e.clientX - startX); sp.onUpdate(v); sp.value = v;
+    hist.push({ x: e.clientX, t: e.timeStamp }); hist = hist.filter(h => e.timeStamp - h.t < 100); });
+  const end = e => { if (!dragging) return; dragging = false; el.classList.remove("dragging");
+    const f = hist[0], l = hist[hist.length - 1]; const vx = l && f && l.t > f.t ? -(l.x - f.x) / (l.t - f.t) * 1000 : 0;
+    const max = el.scrollWidth - el.clientWidth; const proj = sp.value + project(vx, 0.99);
+    const snap = items().reduce((b, p) => Math.abs(p - proj) < Math.abs(b - proj) ? p : b, 0);
+    sp.to(Math.min(max, Math.max(0, snap)), { response: 0.45, damping: 0.9, velocity: vx }); };
+  el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end);
+  const hint = document.createElement("div"); hint.className = "hscroll-hint";
+  hint.innerHTML = '<button aria-label="上一張">←</button><button aria-label="下一張">→</button>';
+  hint.children[0].onclick = () => { const p = items().filter(x => x < el.scrollLeft - 4).pop() ?? 0; sp.set(el.scrollLeft); sp.to(p, { response: 0.45 }); };
+  hint.children[1].onclick = () => { const max = el.scrollWidth - el.clientWidth; const p = items().find(x => x > el.scrollLeft + 4) ?? max; sp.set(el.scrollLeft); sp.to(Math.min(p, max), { response: 0.45 }); };
+  el.after(hint);
+});
+
+/* Report paper: tilts toward the pointer on a spring */
+document.querySelectorAll(".paper").forEach(p => {
+  const rx = new Spring(0, () => apply()), ry = new Spring(-1.5, () => apply());
+  const apply = () => p.style.transform = `perspective(900px) rotateX(${rx.value}deg) rotateZ(${ry.value}deg) rotateY(${rx.y || 0}deg)`;
+  const box = p.parentElement;
+  box.addEventListener("pointermove", e => { const r = p.getBoundingClientRect(); const dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
+    rx.y = dx * 10; rx.to(-dy * 8, { response: 0.5 }); ry.to(-1.5 + dx * 2, { response: 0.5 }); });
+  box.addEventListener("pointerleave", () => { rx.y = 0; rx.to(0, { response: 0.6, damping: 0.8 }); ry.to(-1.5, { response: 0.6, damping: 0.8 }); });
+});
+
+/* Reveal on enter: headings and card groups, gently staggered */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+if (!REDUCED) {
+  document.querySelectorAll("main.page .sec .h2, main.page .sec .intro, .sechead, .plans>*, .trio>*, .steps>*, .mini5>*, .roads3>*, .dims>*, .scores>*, .stuck3>*, .stuck5>*, .team3>*, .ab-team>*, .ab-net>*, .donts>*, .ab-dont>*, .beliefs>*, .ab-beliefs>*, .casecards>*, .lines>*, .svc>*, .pricecard, .regcard, .tracks>*, .got, .who, .tbl, .kit, .nextch, .bridge").forEach(el => {
+    if (el.closest(".hero,.phero")) return;
+    const sib = el.parentElement ? [...el.parentElement.children].indexOf(el) : 0;
+    el.classList.add("rv"); el.style.setProperty("--d", `${Math.min(sib, 5) * 60}ms`); io.observe(el);
+  });
+}
+document.querySelectorAll(".bars2").forEach((b, i) => { [...b.querySelectorAll("i")].forEach((x, j) => x.style.setProperty("--d", `${j * 90}ms`)); io.observe(b); });
+
+/* Home timeline: progress fills as the four chapters scroll by; nodes jump to their card */
+const tl = document.querySelector("#p-home .timeline"), plans = document.querySelectorAll("#p-home .plans .plan");
+function timelineProgress() {
+  if (!tl || !tl.offsetParent) return;
+  const r = document.querySelector("#p-home .plans").getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, (innerHeight * 0.6 - r.top) / r.height));
+  tl.style.setProperty("--p", p.toFixed(3));
+  [...tl.children].forEach((n, i) => n.classList.toggle("hit", p >= i / 3 - 0.02));
+}
+tl && [...tl.children].forEach((n, i) => n.addEventListener("click", () => { const c = plans[i]; if (!c) return;
+  c.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "center" }); c.classList.add("flash"); setTimeout(() => c.classList.remove("flash"), 1200); }));
+
+/* Sheet: opens from the bottom, leaves to the bottom (§7); drag 1:1, project, rubber-band upward */
+const scrim = document.createElement("div"); scrim.className = "scrim";
+const sheet = document.createElement("div"); sheet.className = "sheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "聊聊你的產品");
+sheet.innerHTML = `<div class="grab" aria-hidden="true"></div><h3>聊聊你的產品</h3><p class="s">我們先聽你的產品在台灣怎麼賣。送出後 24 小時內由 Aaron 本人回覆。</p>
+<label>你的品牌／產品<input placeholder="例如：手工果醬，台灣賣了 5 年"></label><label>Email<input placeholder="you@brand.com"></label>
+<label>想問什麼<textarea rows="3" placeholder="例如：想知道菲律賓有沒有人要"></textarea></label><a class="btn btn-gold">送出 →</a><p class="fine">不收費、不承諾、不賣課。往下拖可以關閉。</p>`;
+document.body.append(scrim, sheet);
+let H = 0;
+const sy = new Spring(1, v => { sheet.style.transform = v < 0 ? `translate(-50%, ${-rubber(-v * H, H)}px)` : `translate(-50%, calc(${v * 100}% + ${v > 0.999 ? 40 : 0}px))`; const o = 1 - Math.min(1, Math.max(0, v)); scrim.style.opacity = o; scrim.style.pointerEvents = o > 0.05 ? "auto" : "none"; });
+sy.onUpdate(1);
+const openSheet = () => { H = sheet.offsetHeight; sy.to(0, { response: 0.42, damping: 0.86 }); setTimeout(() => sheet.querySelector("input")?.focus({ preventScroll: true }), 250); };
+const closeSheet = (v = 0) => sy.to(1, { response: 0.36, damping: 1, velocity: v });
+document.addEventListener("click", e => { const b = e.target.closest(".btn-gold,.btn-ghost"); if (!b || sheet.contains(b)) return;
+  if (/聊聊|登記|預約|比對|評估/.test(b.textContent) && !b.getAttribute("href")) { e.preventDefault(); openSheet(); } });
+scrim.addEventListener("click", () => closeSheet());
+addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
+let dy0 = 0, v0 = 0, hs = [], dragS = false;
+sheet.addEventListener("pointerdown", e => { if (e.target.closest("input,textarea,.btn")) return; dragS = true; sheet.setPointerCapture(e.pointerId); H = sheet.offsetHeight; sy.set(sy.value); dy0 = e.clientY; v0 = sy.value; hs = [{ y: e.clientY, t: e.timeStamp }]; });
+sheet.addEventListener("pointermove", e => { if (!dragS) return; const v = v0 + (e.clientY - dy0) / H; sy.value = v; sy.onUpdate(v); hs.push({ y: e.clientY, t: e.timeStamp }); hs = hs.filter(h => e.timeStamp - h.t < 100); });
+const upS = () => { if (!dragS) return; dragS = false; const f = hs[0], l = hs[hs.length - 1]; const vy = l && f && l.t > f.t ? (l.y - f.y) / (l.t - f.t) * 1000 : 0;
+  const end = sy.value * H + project(vy); if (end > H * 0.4) closeSheet(vy / H); else sy.to(0, { response: 0.4, damping: 0.86, velocity: vy / H }); };
+sheet.addEventListener("pointerup", upS); sheet.addEventListener("pointercancel", upS);
+
+/* Mobile floating CTA */
+const fab = document.createElement("div"); fab.className = "fab"; fab.innerHTML = '<span>第一次談不收費</span><a class="btn btn-gold btn-sm">聊聊你的產品 →</a>';
+document.body.appendChild(fab);
+
+addEventListener("hashchange", () => setTimeout(onScroll, 50));
+onScroll();
+})();
+</script>
+
+<script>
+/* Full-bleed hero helpers + scrim mode switcher (prototype only) */
+(() => {
+const root = document.documentElement;
+if (window.self !== window.top) root.style.setProperty("--chrome", "64px");
+const MODES = [["full", "整片深色（現在）"], ["none", "拿掉"], ["local", "只在文字側（建議）"]];
+const setMode = m => { root.dataset.scrim = m; document.querySelectorAll(".scrimsw button").forEach(b => b.classList.toggle("on", b.dataset.m === m)); };
+const sw = document.createElement("div"); sw.className = "scrimsw";
+sw.innerHTML = `<b>大圖遮罩</b>${MODES.map(([k, n]) => `<button data-m="${k}">${n}</button>`).join("")}`;
+sw.addEventListener("click", e => { const b = e.target.closest("button"); if (b) setMode(b.dataset.m); });
+if (window.self === window.top) document.body.appendChild(sw);
+addEventListener("message", e => { if (e.data && e.data.scrim) setMode(e.data.scrim); if (e.data && e.data.heroH) root.style.setProperty("--hero-h", e.data.heroH + "px"); });
+setMode(new URLSearchParams(location.search).get("scrim") || "local");
+const hh = +new URLSearchParams(location.search).get("heroH"); if (hh) { root.style.setProperty("--hero-h", hh + "px"); if (typeof route === "function") requestAnimationFrame(route); }
+document.querySelectorAll(".phero,.ab-hero,.in-hero").forEach(h => {
+  if (getComputedStyle(h).position === "static") h.style.position = "relative";
+  const c = document.createElement("button"); c.className = "cue"; c.setAttribute("aria-label", "往下看");
+  c.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  c.onclick = () => { const n = h.nextElementSibling; n && scrollTo({ top: scrollY + h.getBoundingClientRect().bottom - (window.self === window.top ? 105 : 64), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); };
+  h.appendChild(c);
+});
+})();
+</script>
+
+<script>
+/* Header is transparent while it sits over the page's hero image */
+(() => {
+const nav = document.querySelector(".nav");
+const update = () => {
+  const hero = document.querySelector(".page.on > :is(.hero,.phero,.ab-hero,.in-hero)");
+  const over = hero && hero.getBoundingClientRect().bottom > nav.getBoundingClientRect().bottom + 1;
+  nav.classList.toggle("over", !!over);
+};
+addEventListener("scroll", update, { passive: true });
+addEventListener("hashchange", () => setTimeout(update, 30));
+addEventListener("resize", update);
+update();
+})();
+</script>
+<script>
+/* ================= v6 delight layer (prototype) ================= */
+(() => {
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+if (window.self !== window.top) document.documentElement.classList.add("embed");
+const onView = (els, fn, opts = {}) => { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { fn(e.target); io.unobserve(e.target); } }), { rootMargin: "0px 0px -12% 0px", ...opts }); els.forEach(el => io.observe(el)); };
+
+/* G2 arrows: wrap every "→" so it can nudge toward where it leads */
+$$("a, button, .btn, .nextch h3, .nextch small").forEach(el => [...el.childNodes].forEach(n => {
+  if (n.nodeType === 3 && n.textContent.includes("→")) { const s = document.createElement("span"); s.innerHTML = n.textContent.replace(/→/g, '<span class="arw">→</span>'); n.replaceWith(...s.childNodes); }
+}));
+
+/* G4 hero: the photo settles in once, then drifts at 85% of the scroll speed */
+const heroes = $$(".hero, .phero, .ab-hero, .in-hero");
+heroes.forEach(h => { const bg = document.createElement("div"); bg.className = "herobg"; bg.setAttribute("aria-hidden", "true"); h.prepend(bg); });
+const drift = () => { if (REDUCED) return; heroes.forEach(h => { if (!h.offsetParent) return; const r = h.getBoundingClientRect(); if (r.bottom < 0) return; h.firstElementChild.style.transform = `translateY(${Math.max(0, -r.top) * 0.15}px)`; }); };
+
+/* G5 numbers count up once, keeping their prefix and suffix */
+const counters = $$(".stats b, .nums b, .ab-stats b, .in-stats b, .ccard .num, .total b");
+const countUp = el => {
+  const src = el.textContent.trim(); const m = src.match(/^([^\d-]*)(-?\d+)(.*)$/s); if (!m || REDUCED) return;
+  const [, pre, num, post] = m; const end = +num; const sup = el.querySelector("sup"); const tail = sup ? sup.outerHTML : post;
+  const t0 = performance.now(), dur = 900 + Math.min(Math.abs(end), 600);
+  const tick = t => { const p = Math.min(1, (t - t0) / dur); const e = 1 - Math.pow(1 - p, 4); el.innerHTML = pre + Math.round(end * e) + tail; if (p < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+};
+onView(counters, countUp);
+
+/* G6 highlighted words sweep their underline in as the heading appears */
+onView($$(".h2"), el => el.classList.add("lit"));
+
+/* G7 dark CTA panels catch the light where the pointer is */
+$$(".cta").forEach(c => { const g = document.createElement("div"); g.className = "glow"; c.prepend(g);
+  c.addEventListener("pointermove", e => { const r = c.getBoundingClientRect(); c.style.setProperty("--mx", `${e.clientX - r.left}px`); c.style.setProperty("--my", `${e.clientY - r.top}px`); }); });
+
+/* G1 reading progress on long pages */
+const bar = document.createElement("div"); bar.className = "readbar"; document.body.appendChild(bar);
+const readProgress = () => { const page = document.querySelector(".page.on"); const long = page && page.offsetHeight > innerHeight * 2.5;
+  bar.style.opacity = long ? 1 : 0; if (!long) return; const max = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`; };
+
+/* H1 home: hovering a chapter card lights its month on the timeline */
+const tl = document.querySelector("#p-home .timeline");
+$$("#p-home .plans .plan").forEach((p, i) => { p.addEventListener("pointerenter", () => tl && tl.children[i]?.classList.add("peek")); p.addEventListener("pointerleave", () => tl && tl.children[i]?.classList.remove("peek")); });
+
+/* H3 home: the LUFÉ row sweeps once when the table comes into view */
+onView($$(".tbl tr.us"), r => r.classList.add("sweep"));
+
+/* S1 services: the price slides in beside each chapter */
+$$("#p-services .svc a").forEach(a => { const lbl = a.querySelector(".lbl"); if (!lbl) return; const price = lbl.textContent.split("·").pop().trim();
+  const chip = document.createElement("span"); chip.className = "chip"; chip.textContent = price; a.insertBefore(chip, a.querySelector(".arr")); });
+
+/* P1 step timelines fill as you read through them */
+const stepsets = $$(".steps.h4, .steps.h5");
+const stepProgress = () => stepsets.forEach(s => { if (!s.offsetParent) return; const r = s.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, (innerHeight * 0.75 - r.top) / (r.height + innerHeight * 0.25))); s.style.setProperty("--sp", p.toFixed(3));
+  [...s.children].forEach((st, i, all) => st.classList.toggle("reached", p >= (i + 0.5) / all.length)); });
+
+/* P2 price outcomes say where each path goes */
+$$(".pricecard .path div").forEach(d => { const pass = !d.classList.contains("no"); const t = document.createElement("span"); t.className = "to";
+  t.textContent = pass ? "接到第三個月 →" : "你只花了這一筆"; d.appendChild(t); });
+
+/* C1 consignment: the weeks unfold as you scroll, then the licence day lands */
+const weekRows = $$("#p-consignment .track.active .rows div");
+const weeks = () => { if (!weekRows.length || !weekRows[0].offsetParent) return; const box = weekRows[0].parentElement.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, (innerHeight * 0.7 - box.top) / box.height));
+  weekRows.forEach((r, i) => { const on = p >= i / weekRows.length; r.classList.toggle("wait", !on && !REDUCED); if (on && r.classList.contains("last") && !r.classList.contains("arrive")) r.classList.add("arrive"); }); };
+
+/* CC1 call center: Friday 23:04, an email arrives — and gets answered */
+const ccHero = document.querySelector("#p-call-center .phero");
+if (ccHero) {
+  const m = document.createElement("div"); m.className = "mail"; m.setAttribute("aria-hidden", "true");
+  m.innerHTML = `<span class="demo">示意</span><div class="top"><span>📩 新郵件</span><span>週五 23:04</span></div><b>Where is my refund?</b><p>I returned the order two weeks ago and haven't heard back…</p>
+    <div class="reply"><svg class="check" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>已由菲律賓客服回覆 · 23:09</div>`;
+  ccHero.appendChild(m);
+  let played = false; const play = () => { if (played || !ccHero.offsetParent) return; played = true;
+    setTimeout(() => m.classList.add("in"), REDUCED ? 0 : 900); setTimeout(() => m.classList.add("answered"), REDUCED ? 0 : 3200); };
+  addEventListener("hashchange", () => setTimeout(play, 60)); setTimeout(play, 60);
+}
+
+/* M1 methodology: an interactive scorecard wired to the real weights and thresholds */
+const scoreSec = [...$$("#p-methodology .sec")].find(s => s.querySelector(".scores"));
+if (scoreSec) {
+  const DIM = [["Market 市場", 20, 82], ["Barrier 門檻", 20, 62], ["Competition 競爭", 20, 71], ["Profitability 獲利", 25, 78], ["Regulatory 法規", 15, 80]];
+  const ZONES = [[75, "Go", "可以進，照四章正常走。", "go"], [60, "Conditional Go", "可以進，先解決一到兩個弱項。", "cgo"], [45, "Hold", "建議暫緩 6–12 個月，等關鍵變化。", "hold"], [0, "No-Go", "不建議，我們會寫清楚什麼條件改了可以再看。", "nogo"]];
+  const box = document.createElement("div"); box.className = "scorer";
+  box.innerHTML = `<div class="rows">${DIM.map(([n, w, v], i) => `<label><span>${n}<small>權重 ${w}%</small></span><input type="range" min="0" max="100" value="${v}" data-i="${i}" aria-label="${n}"><output>${v}</output></label>`).join("")}</div>
+    <div class="result"><small>拖拖看 · 加權總分</small><b>0</b><span></span><p></p></div>`;
+  scoreSec.querySelector(".scores").after(box);
+  const scores = scoreSec.querySelector(".scores"); const cells = [...scores.children];
+  const calc = () => { const vals = $$("input", box).map(x => +x.value); $$("input", box).forEach((x, i) => { x.style.setProperty("--v", x.value + "%"); x.nextElementSibling.textContent = x.value; });
+    // Floor, not round: the published Costco example (74.5) reads 74 · Conditional Go.
+    const total = Math.floor(vals.reduce((s, v, i) => s + v * DIM[i][1] / 100, 0)); const z = ZONES.find(([min]) => total >= min);
+    box.querySelector(".result b").textContent = total; box.querySelector(".result span").textContent = z[1]; box.querySelector(".result p").textContent = z[2] + (total < 60 ? " 我們自己的規矩：不到 60 分，我們不接。" : "");
+    scores.classList.add("live"); cells.forEach(c => c.classList.toggle("hit", c.classList.contains(z[3]))); };
+  box.addEventListener("input", calc); calc();
+}
+
+/* CA1 cases: photos lean in on hover */
+$$(".ccard").forEach(c => { const ph = document.createElement("div"); ph.className = "ph"; ph.style.backgroundImage = c.style.backgroundImage; c.prepend(ph); });
+
+/* I1 insights: each chapter pill shows how many articles it holds */
+const filter = document.getElementById("in-filter");
+if (filter && typeof ALL !== "undefined") {
+  const addCounts = () => $$("button", filter).forEach(b => { if (b.querySelector(".n")) return; const k = b.dataset.k; const n = k === "all" ? ALL.length : ALL.filter(a => a.ch === k).length;
+    const s = document.createElement("span"); s.className = "n"; s.textContent = n; b.appendChild(s); });
+  new MutationObserver(addCounts).observe(filter, { childList: true }); addCounts();
+}
+
+/* A1 about: the founder signs his card; beliefs light up one by one */
+const founder = document.querySelector("#p-about .ab-founder > div");
+if (founder) { const sig = document.createElementNS("http://www.w3.org/2000/svg", "svg"); sig.setAttribute("class", "sig"); sig.setAttribute("viewBox", "0 0 150 44"); sig.setAttribute("aria-hidden", "true");
+  sig.innerHTML = '<path d="M6 34 C14 10 22 4 26 8 C30 12 20 30 16 34 M13 24 L30 22 M34 30 C36 22 44 20 44 26 C44 32 36 34 36 28 C38 36 46 34 50 28 C52 24 54 24 54 28 L56 34 C58 26 64 22 68 24 M70 30 C72 22 82 22 80 30 C78 36 70 34 72 28 M86 34 L88 24 C92 20 98 22 98 28 L98 34 M104 30 C118 26 132 24 144 20"/>';
+  founder.appendChild(sig); onView([sig], s => s.classList.add("draw")); }
+onView($$(".ab-beliefs div"), d => d.classList.add("lit"), { rootMargin: "0px 0px -30% 0px" });
+
+/* F1 back to top */
+const top = document.createElement("button"); top.className = "totop"; top.setAttribute("aria-label", "回到頂端");
+top.innerHTML = '<svg viewBox="0 0 24 24" fill="none"><path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+top.onclick = () => scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" }); document.body.appendChild(top);
+
+/* G8 page switches cross-fade instead of cutting */
+if (document.startViewTransition && typeof setPage === "function" && !REDUCED) { const orig = setPage; window.setPage = p => document.startViewTransition(() => orig(p)); }
+
+const onScroll = () => { drift(); readProgress(); stepProgress(); weeks(); top.classList.toggle("show", scrollY > innerHeight * 1.5); };
+addEventListener("scroll", onScroll, { passive: true }); addEventListener("hashchange", () => setTimeout(onScroll, 80)); onScroll();
+})();
+</script>
+
+</body>
+</html>
