@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { ScrollCue } from "@/components/ScrollCue";
 import { Disclosure } from "@/components/ui";
 import { SubsidiesCTASection } from "@/components/subsidy/SubsidiesCTASection";
 import { SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
@@ -18,13 +20,9 @@ export const metadata: Metadata = {
 export default function SubsidiesPage() {
   return (
     <div className="overflow-hidden bg-white">
-      <section className="relative overflow-hidden bg-navy text-white">
-        <div className="absolute inset-0">
-          <Image src={SUBSIDY_CARD_COPY.hero} alt="" fill priority sizes="100vw" className="object-cover opacity-[0.22]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/75 via-navy/65 to-navy" />
-        </div>
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle at 20% 30%, #D4A85C 0%, transparent 40%), radial-gradient(circle at 80% 70%, #5B8FA8 0%, transparent 45%)" }} />
-        <div className="relative mx-auto max-w-[1400px] px-5 pb-[72px] pt-[130px] md:px-10 md:pb-[100px] md:pt-[170px] lg:px-16">
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10 lg:px-16">
+        <HeroBackdrop src={SUBSIDY_CARD_COPY.hero} />
+        <div className="lufe-hero-content mx-auto max-w-[1400px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <h1 className="h1 mb-8 max-w-[900px] text-white">政府在幫你出海，<br /><span className="text-gold/90">你知道怎麼拿嗎？</span></h1>
           <p className="lead mb-12 max-w-[700px] !text-white/[.72]">
             貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入<span className="font-medium text-white">北美</span>和<span className="font-medium text-white">東南亞</span>兩個主戰場。
@@ -35,6 +33,7 @@ export default function SubsidiesPage() {
             <Stat num="4" label="當期開放計畫" /><Stat num="1,000萬" label="單筆最高補助額" /><Stat num="3" label="主管機關" /><Stat num="100%" label="和鹿飛服務對齊" />
           </div>
         </div>
+        <ScrollCue />
       </section>
 
       <section className="border-y border-bd/60 bg-cream/60 px-5 py-7 md:px-10 lg:px-16">

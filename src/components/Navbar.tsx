@@ -50,6 +50,7 @@ function pathnameHasDarkHero(pathname: string): boolean {
 
 export function Navbar() {
   const pathname = usePathname() ?? "";
+  const { open: openMessageBox } = useMessageBox();
   const darkHero = pathnameHasDarkHero(pathname);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
@@ -64,14 +65,15 @@ export function Navbar() {
   const megaHeight = useSpring(0);
   const mobileReveal = useSpring(0, { precision: 0.002 });
 
-  const lightGlass = !darkHero || scrolledPastHero;
+  const transparentOverHero = darkHero && !scrolledPastHero;
+  const lightGlass = !darkHero;
 
   function clearClose() {
     if (closeTimer.current !== undefined) window.clearTimeout(closeTimer.current);
     closeTimer.current = undefined;
   }
 
-  function closeMega(delay = 180) {
+  function closeMega(delay = 120) {
     clearClose();
     if (!megaOpen) return;
     closeTimer.current = window.setTimeout(() => {
@@ -181,7 +183,7 @@ export function Navbar() {
         跳到主要內容
       </a>
 
-      <nav className={`relative transition-colors duration-300 ${lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark text-white"}`} aria-label="主要導航">
+      <nav className={`relative transition-colors duration-300 ${transparentOverHero ? "navbar-over-hero" : lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark navbar-scrolled text-white"}`} aria-label="主要導航">
         <div className="relative mx-auto flex h-[64px] max-w-[1200px] items-center justify-between gap-4 px-5 md:px-10">
           <Link href="/" className="flex items-center gap-2.5 text-[17px] font-semibold">
             <Image src={lightGlass ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"} alt="鹿飛 LUFÉ" width={26} height={26} priority />
@@ -227,6 +229,7 @@ export function Navbar() {
           pointerEvents: megaOpen ? "auto" : "none",
           transform: `translateX(-50%) scaleY(${menuScale})`,
           transformOrigin: `${megaOrigin}px top`,
+          filter: `blur(${(1 - menuOpacity) * 4}px)`,
           visibility: menuOpacity > 0.01 ? "visible" : "hidden",
         }}
         onMouseEnter={clearClose}
@@ -261,6 +264,14 @@ export function Navbar() {
         ))}
         <MessageBoxTrigger className="m-3 flex w-[calc(100%-24px)] justify-center" onOpen={closeMobile} />
       </div>
+      <button
+        type="button"
+        className={`lufe-mobile-cta ${scrolledPastHero ? "lufe-mobile-cta-visible" : ""}`}
+        onClick={openMessageBox}
+      >
+        <span>第一次談不收費</span>
+        <strong>聊聊你的產品 →</strong>
+      </button>
     </header>
   );
 }

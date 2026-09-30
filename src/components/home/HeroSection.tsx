@@ -198,7 +198,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="h-screen min-h-[640px] relative overflow-hidden flex items-center"
+      className="lufe-hero h-[100svh] min-h-[640px]"
       role="region"
       aria-label="好產品值得一條順暢的出海路"
       onMouseEnter={() => setPaused(true)}
@@ -217,7 +217,6 @@ export function HeroSection() {
             className="absolute inset-0 transition-opacity duration-[900ms] ease-out"
             style={{
               opacity: isActive ? 1 : 0,
-              filter: slide.heavyOverlay ? "brightness(0.74)" : undefined,
             }}
             aria-hidden="true"
           >
@@ -282,7 +281,7 @@ export function HeroSection() {
       </h1>
 
       {/* All slide copy stays in the server HTML; only the active layer is visible. */}
-      <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 relative z-10 w-full">
+      <div className="lufe-hero-content max-w-[1400px] mx-auto mt-auto w-full px-5 pb-[104px] md:px-10 md:pb-[128px] lg:px-16">
         {HOME_HERO_SLIDES.map((slide, i) => {
           const isActive = i === activeIndex;
 

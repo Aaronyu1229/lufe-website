@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { Reveal } from "@/components/Reveal";
+import { ScrollCue } from "@/components/ScrollCue";
 import { useMessageBox } from "../MessageBox";
 import { ACTIVITIES, FIELD_NOTES, MEDIA_MENTIONS, PARTNER_LOGOS } from "@/data/fieldNotes";
 
@@ -23,13 +26,9 @@ export function FieldNotesPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy px-5 pb-[70px] pt-[130px] text-white md:px-10 md:pb-[90px] md:pt-[170px]">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 60% 50% at 25% 15%, rgba(212,168,92,0.12) 0%, transparent 70%)" }}
-        />
-        <div className="relative mx-auto max-w-[1200px]">
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+        <HeroBackdrop src="/images/field-notes/activity-forum.jpg" />
+        <div className="lufe-hero-content mx-auto max-w-[1200px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
@@ -61,6 +60,7 @@ export function FieldNotesPage() {
             ))}
           </div>
         </div>
+        <ScrollCue />
       </section>
 
       <section className="bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
@@ -72,9 +72,9 @@ export function FieldNotesPage() {
           </h2>
           <p className="lead mt-5 max-w-[620px]">加盟展、論壇、商會活動、客戶現場——這些都是平常不會寫成正式內容的紀錄。</p>
 
-          <div className="mt-10 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          <Reveal className="mt-10 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {ACTIVITIES.map((activity) => (
-              <article key={activity.id} className="min-w-0 overflow-hidden border border-bd bg-white hover:border-gold/60">
+              <article key={activity.id} className="lufe-card min-w-0 overflow-hidden border border-bd bg-white hover:border-gold/60">
                 <div className="relative aspect-[16/10] overflow-hidden bg-navy text-gold">
                   {activity.image && !activity.tbd ? (
                     <Image
@@ -103,7 +103,7 @@ export function FieldNotesPage() {
                 </div>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 

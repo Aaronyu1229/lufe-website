@@ -2,6 +2,9 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { Reveal } from "@/components/Reveal";
+import { ScrollCue } from "@/components/ScrollCue";
 import { Disclosure } from "@/components/ui";
 
 import { ContactButton } from "./ContactButton";
@@ -72,12 +75,9 @@ function SectionHeading({ children }: { readonly children: ReactNode }) {
 export function OptimizePageContent({ relatedReading }: { readonly relatedReading?: ReactNode }) {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy px-5 pb-[80px] pt-[130px] text-white md:px-10 md:pb-[110px] md:pt-[170px]">
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image src="/images/services/services-optimize-whiteboard.jpg" alt="" fill priority sizes="100vw" className="object-cover opacity-[0.28]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/65 to-navy" />
-        </div>
-        <div className="relative mx-auto max-w-[1100px]">
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+        <HeroBackdrop src="/images/v5/optimize-2400.webp" mobileSrc="/images/v5/optimize-1600.webp" position="70% 30%" />
+        <div className="lufe-hero-content mx-auto max-w-[1100px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55">
             <Link href="/" className="hover:text-white">首頁</Link>
             <span className="mx-2 text-white/30">/</span>
@@ -90,6 +90,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
           <p className="lead mt-5 max-w-[650px] whitespace-pre-line !text-white/75">產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。{"\n"}這不是第一年的事，是走過第一年之後的事。</p>
           <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">聊聊你卡在哪一段 →</ContactButton>
         </div>
+        <ScrollCue />
       </section>
 
       <div className="border-b border-bd bg-cream px-5 py-4 text-[14px] leading-[1.8] text-tx2 md:px-10">
@@ -99,15 +100,15 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
       <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
         <div className="mx-auto max-w-[1100px]">
           <SectionHeading>你大概卡在<span className="text-gold-d">這五段之一</span></SectionHeading>
-          <div className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-5">
+          <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-5">
             {OPTIMIZE_PAIN_POINTS.map((point) => (
-              <Link key={point.anchor} href={`#${point.anchor}`} className="border border-bd bg-cream p-5 hover:border-gold hover:bg-white">
+              <Link key={point.anchor} href={`#${point.anchor}`} className="lufe-card border border-bd bg-cream p-5 hover:border-gold hover:bg-white">
                 <h3 className="h3 text-tx">{point.title}</h3>
                 <p className="mt-3 text-[14px] leading-[1.8] text-tx2">{point.scene}</p>
                 <p className="mt-5 text-[14px] font-semibold text-sky">→ {point.action}</p>
               </Link>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -151,9 +152,9 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
           <p className="text-[14px] font-semibold text-gold-d">04</p>
           <SectionHeading>跑得卡卡：<span className="text-gold-d">事情都在人的腦子裡</span></SectionHeading>
           <p className="mt-5 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.9] text-tx2">台灣早上九點，馬尼拉也是九點，但事情還是對不上——{"\n"}因為流程在人身上，不在系統裡。{"\n\n"}一套五階導入的營運作業系統：</p>
-          <div className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-5">
-            {["① Notion 任務管理", "② AI 複利知識庫", "③ AI 數位員工", "④ 事業營運儀表板", "⑤ 團隊創新共創"].map((step) => <p key={step} className="border border-bd bg-cream p-4 text-[15px] font-medium leading-[1.7] text-tx">{step}</p>)}
-          </div>
+          <Reveal className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-5">
+            {["① Notion 任務管理", "② AI 複利知識庫", "③ AI 數位員工", "④ 事業營運儀表板", "⑤ 團隊創新共創"].map((step) => <p key={step} className="lufe-card border border-bd bg-cream p-4 text-[15px] font-medium leading-[1.7] text-tx">{step}</p>)}
+          </Reveal>
           <p className="mt-7 border-l-4 border-gold bg-cream px-5 py-4 text-[16px] font-medium leading-[1.8] text-tx">目標是新人第一天就知道東西在哪、事情怎麼跑。</p>
         </div>
       </section>
@@ -169,9 +170,9 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
       <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
         <div className="mx-auto max-w-[1100px]">
           <SectionHeading>兩種合作方式</SectionHeading>
-          <div className="mt-8 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2">
-            {OPTIMIZE_SERVICES.map((service) => <article key={service.title} className="border-t-4 border-gold bg-white p-6 md:p-8"><p className="text-[14px] font-semibold text-gold-d">{service.title}</p><h3 className="h3 mt-3 text-tx">{service.timeline}</h3><div className="mt-6 grid gap-4">{service.details.map(([label, detail]) => <p key={label} className="text-[15px] leading-[1.8] text-tx2"><strong className="text-tx">{label}：</strong>{detail}</p>)}</div></article>)}
-          </div>
+          <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2">
+            {OPTIMIZE_SERVICES.map((service) => <article key={service.title} className="lufe-card border-t-4 border-gold bg-white p-6 md:p-8"><p className="text-[14px] font-semibold text-gold-d">{service.title}</p><h3 className="h3 mt-3 text-tx">{service.timeline}</h3><div className="mt-6 grid gap-4">{service.details.map(([label, detail]) => <p key={label} className="text-[15px] leading-[1.8] text-tx2"><strong className="text-tx">{label}：</strong>{detail}</p>)}</div></article>)}
+          </Reveal>
         </div>
       </section>
 
