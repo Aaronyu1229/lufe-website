@@ -20,7 +20,7 @@ export function JumpingSection() {
           <div className="grid grid-cols-3 gap-4 border-y border-white/15 py-6 md:gap-7">
             {JUMPING_STATS.map(([value, label]) => (
               <div key={label}>
-                <strong className="block font-sans text-[clamp(30px,4vw,44px)] font-semibold leading-none tracking-[-.035em] text-gold">{value}</strong>
+                <strong data-lufe-counter className="block font-sans text-[clamp(30px,4vw,44px)] font-semibold leading-none tracking-[-.035em] text-gold">{value}</strong>
                 <span className="mt-3 block text-[11px] leading-[1.5] text-white/65 md:text-[12px]">{label}</span>
               </div>
             ))}

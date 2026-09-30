@@ -52,4 +52,19 @@ describe("v5 design layer", () => {
     expect(designSources).toContain("/images/v5/");
     expect(designSources).not.toMatch(/\brounded-(?!full\b)/);
   });
+
+  it("ships the v6 delight layer with accessible, reduced-motion-safe behavior", () => {
+    const css = read("src/app/globals.css");
+    const delightCss = css.slice(css.indexOf(".lufe-reading-progress"));
+    const layer = read("src/components/DelightLayer.tsx");
+    const mailPreview = read("src/components/MailPreview.tsx");
+
+    expect(layer).toContain('aria-label="回到頂端"');
+    expect(layer).toContain('addEventListener("scroll", requestUpdate, { passive: true })');
+    expect(layer).toContain("observer.unobserve(entry.target)");
+    expect(mailPreview).toContain("Where is my refund?");
+    expect(css).toContain(".lufe-mail-reply { display: block; }");
+    expect(css).toContain("[data-lufe-hero-photo], [data-lufe-hero-photo][data-lufe-hero-settled] { transform: none; }");
+    expect(delightCss).not.toMatch(/transition:[^;]*(?:background|color|box-shadow)/);
+  });
 });

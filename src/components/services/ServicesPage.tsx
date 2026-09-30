@@ -57,7 +57,7 @@ export function ServicesPage() {
               const chapter = CHAPTERS[key];
               const overview = chapter.overview;
               if (!overview) return null;
-              return <Link key={key} href={chapter.path} className="grid gap-5 py-7 md:grid-cols-[minmax(0,1fr)_auto] md:px-5"><div><p className="text-[14px] font-semibold text-gold-d">{chapter.label} · {overview.price}</p><p className="mt-4 whitespace-pre-line text-[16px] leading-[1.85] text-tx2">{overview.body}</p><p className="mt-4 text-[15px] font-semibold text-sky">{overview.linkLabel}</p></div><span aria-hidden="true" className="self-center text-[28px] text-gold-d">→</span></Link>;
+              return <Link key={key} href={chapter.path} className="lufe-service-chapter grid gap-5 py-7 md:grid-cols-[minmax(0,1fr)_auto] md:px-5"><div><p className="text-[14px] font-semibold text-gold-d">{chapter.label} · {overview.price}</p><p className="mt-4 whitespace-pre-line text-[16px] leading-[1.85] text-tx2">{overview.body}</p><p className="mt-4 text-[15px] font-semibold text-sky">{overview.linkLabel}</p></div><span className="lufe-service-price" aria-hidden="true">{overview.price}</span><span aria-hidden="true" className="self-center text-[28px] text-gold-d">→</span></Link>;
             })}
           </Reveal>
         </div>

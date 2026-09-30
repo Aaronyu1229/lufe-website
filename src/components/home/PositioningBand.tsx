@@ -63,6 +63,7 @@ export function ChaptersSection() {
   const [progress, setProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [flashIndex, setFlashIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     let frame = 0;
@@ -117,7 +118,7 @@ export function ChaptersSection() {
         <ol className="lufe-home-timeline mx-auto mb-8 grid max-w-[1040px] grid-cols-4 gap-2 border-y border-bd py-5 md:mb-10 md:gap-5" style={{ "--lufe-home-progress": progress } as CSSProperties}>
           {TIMELINE_LABELS.map((label, index) => (
             <li key={label} className="min-w-0 text-center">
-              <button type="button" onClick={() => jumpToChapter(index)} className={`lufe-home-timeline-button ${index <= activeIndex ? "lufe-home-timeline-hit" : ""}`}>
+              <button type="button" onClick={() => jumpToChapter(index)} className={`lufe-home-timeline-button ${index <= activeIndex || hoveredIndex === index ? "lufe-home-timeline-hit" : ""}`}>
                 <span className="lufe-home-timeline-dot" aria-hidden="true" />
                 {label}
               </button>
@@ -127,7 +128,7 @@ export function ChaptersSection() {
 
         <div className="grid gap-4 md:grid-cols-2 md:gap-5">
           {HOME_CHAPTERS.map((chapter, index) => (
-            <article ref={(element) => { cardsRef.current[index] = element; }} id={chapter.id} key={chapter.label} className={`lufe-card flex min-w-0 flex-col border border-bd bg-white p-6 md:p-8 ${flashIndex === index ? "lufe-home-chapter-flash" : ""}`}>
+            <article ref={(element) => { cardsRef.current[index] = element; }} id={chapter.id} key={chapter.label} onPointerEnter={() => setHoveredIndex(index)} onPointerLeave={() => setHoveredIndex(null)} className={`lufe-card flex min-w-0 flex-col border border-bd bg-white p-6 md:p-8 ${flashIndex === index ? "lufe-home-chapter-flash" : ""}`}>
               <p className="mb-4 text-[13px] font-semibold text-gold-d">{chapter.label}</p>
               <h3 className="mb-5 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">{chapter.title}</h3>
               <p className="whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{chapter.scene}</p>

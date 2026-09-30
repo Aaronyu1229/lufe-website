@@ -87,6 +87,12 @@ export function InsightsPageContent({
   const listedArticles = articles.filter((article) => article.slug !== "vietnam-market-entry-guide");
   const featured = listedArticles[0];
   const hasMatches = active === "all" || listedArticles.some((article) => chapterForArticle(article.slug, chapterBySlug) === active);
+  const chapterCounts = new Map<InsightFilter, number>(INSIGHT_CHAPTERS.map((chapter) => [chapter.key, 0]));
+  chapterCounts.set("all", listedArticles.length);
+  listedArticles.forEach((article) => {
+    const chapter = chapterForArticle(article.slug, chapterBySlug);
+    if (chapter) chapterCounts.set(chapter, (chapterCounts.get(chapter) ?? 0) + 1);
+  });
 
   return (
     <>
@@ -107,7 +113,7 @@ export function InsightsPageContent({
 
       <section className="overflow-hidden bg-white px-5 pb-[80px] pt-[60px] md:px-10 md:pb-[110px] md:pt-[80px]">
         <div className="mx-auto max-w-[1080px] min-w-0">
-          <div className="mb-10 max-w-full overflow-x-auto pb-1"><Segmented label="洞察章節" value={active} onChange={(value) => { if (isValidCategory(value)) onCategoryChange(value); }} options={INSIGHT_CHAPTERS.map((chapter) => ({ value: chapter.key, label: chapter.label }))} className="max-w-none" /></div>
+          <div className="mb-10 max-w-full overflow-x-auto pb-1"><Segmented label="洞察章節" value={active} onChange={(value) => { if (isValidCategory(value)) onCategoryChange(value); }} options={INSIGHT_CHAPTERS.map((chapter) => ({ value: chapter.key, label: <>{chapter.label}<span className="lufe-insight-count" aria-hidden="true">{chapterCounts.get(chapter.key) ?? 0}</span></> }))} className="max-w-none" /></div>
           <Reveal>
             <div ref={articleGridRef} className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {listedArticles.map((article, index) => {
