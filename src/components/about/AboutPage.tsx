@@ -349,7 +349,7 @@ export function AboutPage() {
               { n: "30+", l: "國家與地區覆蓋" },
             ].map((s) => (
               <div key={s.l}>
-                <div className="font-sans text-[26px] md:text-[30px] font-semibold tracking-[-0.035em] text-gold leading-none tabular-nums">
+                <div data-lufe-counter className="font-sans text-[26px] md:text-[30px] font-semibold tracking-[-0.035em] text-gold leading-none tabular-nums">
                   {s.n}
                 </div>
                 <div className="text-[11px] md:text-[11.5px] text-white/50 mt-1.5 tracking-[0.5px]">
@@ -551,9 +551,10 @@ export function AboutPage() {
             {beliefs.map((item, i) => (
               <div
                 key={item.desc}
-                className="flex gap-5 items-start p-6 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]"
+                data-lufe-belief
+                className="lufe-belief flex gap-5 items-start p-6 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]"
               >
-                <div className="w-8 h-8 bg-gold flex items-center justify-center text-navy text-[15.5px] font-sans font-semibold tracking-[-0.035em] tabular-nums shrink-0 mt-0.5">
+                <div className="lufe-belief-number w-8 h-8 flex items-center justify-center text-[15.5px] font-sans font-semibold tracking-[-0.035em] tabular-nums shrink-0 mt-0.5">
                   {i + 1}
                 </div>
                 <div>

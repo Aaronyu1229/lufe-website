@@ -57,7 +57,7 @@ export function OneContractSection() {
             </thead>
             <tbody>
               {HOME_CONTRACT_ROWS.map((row) => (
-                <tr key={row.label} className={`border-t border-bd ${row.isLufe ? "bg-gold/10" : ""}`}>
+                <tr key={row.label} data-lufe-sweep={row.isLufe ? "" : undefined} className={`lufe-contract-row border-t border-bd ${row.isLufe ? "bg-gold/10" : ""}`}>
                   <th scope="row" className={`px-3 py-4 text-left text-[14px] font-medium md:px-5 ${row.isLufe ? "text-gold-d" : "text-tx"}`}>{row.label}</th>
                   {row.pillars.map((covered, index) => (
                     <td key={HOME_CONTRACT_COLUMNS[index]} aria-label={covered ? `${row.label}涵蓋${HOME_CONTRACT_COLUMNS[index]}` : `${row.label}不涵蓋${HOME_CONTRACT_COLUMNS[index]}`} className={`px-2 py-4 text-center text-[14px] ${covered ? (row.isLufe ? "text-gold-d" : "text-tx2") : "text-tx3"}`}>

@@ -121,7 +121,7 @@ function CaseCard({ caseItem }: { caseItem: (typeof CASES)[number] }) {
               alt={caseItem.title}
               fill
               sizes="(max-width: 1080px) 100vw, 1080px"
-              className="object-cover"
+              className="lufe-case-cover object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/30 to-transparent" />
 

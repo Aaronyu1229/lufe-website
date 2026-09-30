@@ -46,6 +46,15 @@ describe("MethodologyPage", () => {
     expect(renderPage()).toContain("實際結果：6 個月上架，首月銷量超標 40%。");
   });
 
+  it("keeps the interactive scorecard's default result fully in server markup", () => {
+    const markup = renderPage();
+
+    expect(markup).toContain("拖拖看 · 加權總分");
+    expect(markup).toContain('data-lufe-score-total="true"');
+    expect(markup).toContain(">74</output>");
+    expect(markup).toContain("Conditional Go");
+  });
+
   it("does not render rounded utility classes", () => {
     expect(renderPage()).not.toMatch(/\brounded-/);
   });

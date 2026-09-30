@@ -4,6 +4,7 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { ScoreBars } from "@/components/ScoreBars";
 import { ScrollCue } from "@/components/ScrollCue";
+import { InteractiveScorecard } from "@/components/InteractiveScorecard";
 import { Disclosure } from "@/components/ui";
 import { PILLARS } from "@/data/services";
 
@@ -119,8 +120,9 @@ export function MethodologyPage() {
         <div className="mx-auto max-w-[1100px]">
           <h2 className="h2 text-tx">分數怎麼讀</h2>
           <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {METHODOLOGY_DECISIONS.map((decision) => <article key={decision.verdict} className={`lufe-card border border-bd border-l-4 bg-cream p-5 ${decision.color}`}><p className="num text-[28px] leading-none text-gold-d">{decision.score}</p><h3 className="mt-4 text-[18px] font-semibold text-tx">{decision.verdict}</h3><p className="mt-3 text-[14px] leading-[1.8] text-tx2">{decision.advice}</p></article>)}
+            {METHODOLOGY_DECISIONS.map((decision) => <article key={decision.verdict} data-lufe-score-zone={decision.verdict} className={`lufe-card lufe-score-zone border border-bd border-l-4 bg-cream p-5 ${decision.color}`}><p className="num text-[28px] leading-none text-gold-d">{decision.score}</p><h3 className="mt-4 text-[18px] font-semibold text-tx">{decision.verdict}</h3><p className="mt-3 text-[14px] leading-[1.8] text-tx2">{decision.advice}</p></article>)}
           </Reveal>
+          <InteractiveScorecard dimensions={METHODOLOGY_DIMENSIONS} />
         </div>
       </section>
 
