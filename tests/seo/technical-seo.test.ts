@@ -57,6 +57,7 @@ describe("technical SEO", () => {
     expect(organization.name).toBe(SITE_NAME);
     expect(organization.sameAs).toEqual([]);
     expect(website.url).toBe("https://lufe.world");
+    expect(findJsonLd(markup, "Person").sameAs).toEqual(["https://www.linkedin.com/in/wibp/"]);
   });
 
   it("renders Article JSON-LD with Aaron Yu and a publication date", async () => {

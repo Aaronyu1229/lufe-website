@@ -62,6 +62,7 @@ export function SiteStructuredData() {
             jobTitle: "鹿飛 LUFÉ 創辦人",
             worksFor: { "@id": ORGANIZATION_ID },
             description: "看了很多年貨櫃出去，決定去接貨到了之後的事。",
+            sameAs: ["https://www.linkedin.com/in/wibp/"],
           },
         ],
       }}
