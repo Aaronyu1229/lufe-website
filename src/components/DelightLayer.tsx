@@ -45,7 +45,9 @@ export function DelightLayer() {
     });
 
     const counters = Array.from(root.querySelectorAll<HTMLElement>("[data-lufe-counter], .num"))
-      .filter((element) => !element.hasAttribute("data-lufe-score-total") && !element.dataset.lufeCounterReady);
+      // Skip anything React keeps live (the scorecard), and zero-padded labels like "01" that counting would reformat.
+      .filter((element) => !element.closest(".lufe-scorecard") && element.tagName !== "OUTPUT"
+        && !/^0\d/.test((element.textContent ?? "").trim()) && !element.dataset.lufeCounterReady);
     counters.forEach((element) => { element.dataset.lufeCounterReady = ""; });
     onView(counters, (element) => {
       const match = (element.textContent ?? "").trim().match(numberPattern);
@@ -76,7 +78,8 @@ export function DelightLayer() {
     else onView(beliefs, (belief) => { belief.dataset.lufeBeliefLit = ""; });
 
     const glowSections = Array.from(root.querySelectorAll<HTMLElement>("section.bg-navy"))
-      .filter((section) => /聊聊|登記|預約/.test(section.textContent ?? ""));
+      // Heroes are dark too and may carry a CTA button; they must never get the glow layer.
+      .filter((section) => !section.classList.contains("lufe-hero") && /聊聊|登記|預約/.test(section.textContent ?? ""));
     glowSections.forEach((section) => {
       section.dataset.lufeGlow = "";
       const move = (event: PointerEvent) => {

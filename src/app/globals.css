@@ -571,7 +571,7 @@ h3:not(.sr-only) { letter-spacing: -.008em; }
   pointer-events: none;
   background: radial-gradient(360px circle at var(--lufe-glow-x, 50%) var(--lufe-glow-y, 50%), rgba(212,168,92,.18), transparent 68%);
 }
-[data-lufe-glow] > * { position: relative; z-index: 1; }
+[data-lufe-glow] > :not(.lufe-hero-backdrop) { position: relative; z-index: 1; }
 
 .lufe-contract-row { position: relative; overflow: hidden; }
 .lufe-contract-row[data-lufe-sweep]::after {
