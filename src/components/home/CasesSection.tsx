@@ -171,7 +171,7 @@ function CaseCard({ item }: { item: CaseCardData }) {
       image={{ src: item.image, alt: item.title }}
       className="h-full"
       card={
-        <article className="flex h-full min-w-0 flex-col overflow-hidden border border-bd bg-white shadow-[0_12px_32px_rgba(16,27,48,0.08)]">
+        <article className="lufe-card flex h-full min-w-0 flex-col overflow-hidden border border-bd bg-white shadow-[0_12px_32px_rgba(16,27,48,0.08)]">
           <div className="flex min-w-0 flex-1 flex-col p-6">
             <CaseTags tags={item.tags} />
             {item.featured && (
@@ -242,7 +242,7 @@ export function CasesSection() {
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {HOME_CASE_ROADS.map((road) => (
-            <article key={road.label} className="border border-bd bg-cream p-6 md:p-7">
+            <article key={road.label} className="lufe-card border border-bd bg-cream p-6 md:p-7">
               <p className="text-[13px] font-semibold text-gold-d">{road.label}</p>
               <h3 className="mt-3 font-sans text-[22px] font-semibold leading-[1.35] text-tx">{road.title}</h3>
               <p className="mt-4 whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{road.detail}</p>

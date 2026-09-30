@@ -11,7 +11,7 @@ export function HeroBackdrop({ src, mobileSrc, position = "center", night = fals
     <div aria-hidden="true" className={`lufe-hero-backdrop${night ? " lufe-hero-backdrop-night" : ""}`}>
       <picture>
         {mobileSrc ? <source media="(max-width: 767px)" srcSet={mobileSrc} type="image/webp" /> : null}
-        {/* eslint-disable-next-line @next/next/no-img-element -- local responsive sources are pre-generated to the work-order sizes. */}
+        {/* Local responsive sources are pre-generated to the work-order sizes. */}
         <img src={src} alt="" className="lufe-hero-image" style={{ objectPosition: position }} />
       </picture>
       <div className="lufe-hero-scrim" />

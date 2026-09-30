@@ -192,6 +192,12 @@ button:not(:disabled):active,
 .lufe-gold-button {
   box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 8px 20px -10px rgba(212,168,92,.8);
 }
+.bg-gold:is(a, button) {
+  box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 8px 20px -10px rgba(212,168,92,.8);
+}
+@media (hover: hover) {
+  .bg-gold:is(a, button):hover { box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 12px 28px -10px rgba(212,168,92,.9); }
+}
 .lufe-card {
   transition: transform 320ms var(--ease-spring), box-shadow 320ms var(--ease-spring), border-color .2s;
 }
@@ -206,6 +212,15 @@ button:not(:disabled):active,
 .lufe-score-bars[data-score-bars-in] [data-score-fill] { transform: scaleX(1); }
 .lufe-insight-card { animation: lufe-card-in .55s var(--ease-spring) both; }
 @keyframes lufe-card-in { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: none; } }
+.lufe-home-timeline { position: relative; }
+.lufe-home-timeline::before, .lufe-home-timeline::after { content: ""; position: absolute; top: 25px; height: 2px; left: 12.5%; }
+.lufe-home-timeline::before { right: 12.5%; background: var(--color-cream-d); }
+.lufe-home-timeline::after { width: calc(75% * var(--lufe-home-progress, 0)); background: var(--color-gold); transition: width .15s linear; }
+.lufe-home-timeline-button { position: relative; z-index: 1; width: 100%; cursor: pointer; color: var(--color-tx3); font-size: 13px; font-weight: 500; line-height: 1.45; transition: color .2s; }
+.lufe-home-timeline-dot { display: block; width: 14px; height: 14px; margin: 0 auto 10px; border: 3px solid var(--color-gold); background: #fff; transition: transform .35s var(--ease-spring), background-color .2s; }
+.lufe-home-timeline-hit { color: var(--color-tx); }
+.lufe-home-timeline-hit .lufe-home-timeline-dot { transform: scale(1.2); background: var(--color-gold); }
+.lufe-home-chapter-flash { box-shadow: 0 0 0 2px var(--color-gold), 0 18px 40px -22px rgba(16,27,48,.38); }
 
 .lufe-chapter-bar {
   background: var(--lufe-material-light);
@@ -229,7 +244,7 @@ button:not(:disabled):active,
 h1:not(.sr-only) { letter-spacing: -.022em; line-height: 1.10; }
 h2:not(.sr-only) { letter-spacing: -.016em; line-height: 1.16; }
 h3:not(.sr-only) { letter-spacing: -.008em; }
-:is(nav, .section-label, .eyebrow, [class*="tracking-"]) { letter-spacing: .02em; }
+:is(nav[aria-label], .section-label, .eyebrow) { letter-spacing: .02em; }
 
 @media (max-width: 767px) {
   .lufe-mobile-cta { display: flex; }
@@ -240,6 +255,7 @@ h3:not(.sr-only) { letter-spacing: -.008em; }
   .lufe-hero-backdrop-night .lufe-hero-scrim {
     background: linear-gradient(0deg, rgba(8,13,24,.9) 0%, rgba(8,13,24,.72) 45%, rgba(8,13,24,.42) 75%, rgba(8,13,24,.2) 100%);
   }
+  .lufe-home-timeline { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

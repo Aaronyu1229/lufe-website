@@ -114,7 +114,7 @@ function CaseCard({ caseItem }: { caseItem: (typeof CASES)[number] }) {
       title={caseItem.title}
       image={{ src: caseItem.heroImage, alt: caseItem.title }}
       card={
-        <article className="group overflow-hidden border border-bd bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:border-gold/60">
+        <article className="lufe-card group overflow-hidden border border-bd bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:border-gold/60">
           <div className="relative h-[clamp(250px,35vw,340px)] overflow-hidden bg-navy">
             <Image
               src={caseItem.heroImage}
