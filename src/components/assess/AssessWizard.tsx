@@ -412,7 +412,7 @@ export function EntryScreen({
               Aaron Yu · 鹿飛創辦人
             </div>
             <div className="text-[11.5px] md:text-[13px] text-gold-l/90 font-medium mt-1.5 tracking-[0.3px]">
-              42+ 年國際物流實戰 · 500+ 出口案件 · 30+ 國家
+              躍馬企業 42 年國際物流實戰 · 500+ 出口案件 · 30+ 國家
             </div>
             <p className="text-[13.5px] md:text-[14.5px] text-white/70 font-normal mt-3 leading-[1.8]">
               最近三個月我親自看過 47 家台灣公司的出海卡點。這三題是我每次開第一次會議前必問的問題
