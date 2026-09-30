@@ -91,7 +91,7 @@ export function Segmented({ options, value, onChange, label, className }: Segmen
       role="radio"
       aria-checked={option.value === value}
       tabIndex={option.value === value ? 0 : -1}
-      className="relative z-10 cursor-pointer whitespace-nowrap px-4 py-2 text-sm font-medium text-tx2 outline-none focus-visible:ring-2 focus-visible:ring-sky"
+      className="relative z-10 cursor-pointer whitespace-nowrap px-4 py-2 text-sm font-medium text-tx2 outline-none focus-visible:ring-2 focus-visible:ring-gold"
       onClick={() => select(index)}
       onKeyDown={(event) => onKeyDown(event, index)}
     >

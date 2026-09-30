@@ -3,45 +3,41 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { SERVICE_FAQS, ServicesPage } from "@/components/services/ServicesPage";
-import { PILLARS, PILLAR_ORDER } from "@/data/services";
+import { CHAPTERS, PHILIPPINES_CHAPTER_KEYS } from "@/data/chapters";
 
 const renderPage = () => renderToStaticMarkup(createElement(ServicesPage));
+const normalizedMarkup = () => renderPage().replaceAll("\n", "");
 
 describe("ServicesPage", () => {
-  it("includes every segmented pillar and disclosure answer in the server markup", () => {
-    const markup = renderPage();
+  it("includes every chapter and disclosure answer in the server markup", () => {
+    const markup = normalizedMarkup();
 
-    for (const slug of PILLAR_ORDER) {
-      const pillar = PILLARS[slug];
-      expect(markup).toContain(pillar.title);
-      expect(markup).toContain(pillar.tagline);
-      expect(markup).toContain(pillar.description);
-
-      for (const service of pillar.services) {
-        expect(markup).toContain(service.title);
-        expect(markup).toContain(service.desc);
-      }
+    for (const key of PHILIPPINES_CHAPTER_KEYS) {
+      const chapter = CHAPTERS[key];
+      expect(markup).toContain(chapter.label);
+      expect(markup).toContain(chapter.overview?.body.replaceAll("\n", ""));
     }
 
     for (const faq of SERVICE_FAQS) {
       expect(markup).toContain(faq.q);
-      expect(markup).toContain(faq.a);
+      expect(markup).toContain(faq.a.replaceAll("\n", ""));
     }
+  });
+
+  it("never shows a literal backslash-n to visitors", () => {
+    expect(renderPage()).not.toContain("\\n");
   });
 
   it("does not render rounded utility classes", () => {
     expect(renderPage()).not.toMatch(/\brounded-(?!full\b)/);
   });
 
-  it("renders the proposal sticky switch and FAQ ordinals", () => {
-    const markup = renderPage();
+  it("renders the complete pricing answer and FAQ ordinals", () => {
+    const markup = normalizedMarkup();
 
-    expect(markup).toContain("sticky top-[74px]");
-    expect(markup).toContain("w-fit max-w-full");
-    expect(markup).toContain("bg-[rgba(245,242,236,0.9)]");
-    expect(markup).toContain("backdrop-blur-[16px]");
-    expect(markup).toContain("scroll-mt-[126px]");
-    expect(markup).not.toContain("font-heading");
+    expect(markup).toContain("我們不會先報價再問你需求。");
+    expect(markup).toContain("第一次見面，我們想先聽你的產品在台灣怎麼賣、為什麼想出去。有時候聽完，我們會建議你再等等——那也是一種答案。");
+    expect(markup).toContain("菲律賓的第一年，北美的貨架");
 
     for (const [index] of SERVICE_FAQS.entries()) {
       expect(markup).toContain(String(index + 1).padStart(2, "0"));

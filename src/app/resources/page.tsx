@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { ScrollCue } from "@/components/ScrollCue";
 import { SUBSIDIES } from "@/data/subsidies";
 import { ACTIVITIES } from "@/data/fieldNotes";
 
@@ -16,18 +18,9 @@ export default function ResourcesPage() {
   return (
     <div className="bg-white">
       {/* ───── Hero ───── */}
-      <section className="relative bg-navy text-white overflow-hidden">
-        {/* Ambient accents */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.08] pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 18% 28%, #D4A85C 0%, transparent 42%), radial-gradient(circle at 82% 72%, #5B8FA8 0%, transparent 48%)",
-          }}
-        />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-[130px] md:pt-[170px] pb-[64px] md:pb-[88px] relative">
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10 lg:px-16">
+        <HeroBackdrop src="/images/hero/hero-compass.jpg" />
+        <div className="lufe-hero-content mx-auto max-w-[1200px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <h1 className="h1 mb-7 max-w-[820px] text-white">
             正在開放的補助，
             <br />
@@ -42,6 +35,7 @@ export default function ResourcesPage() {
             告訴你我們這個月在哪裡、和誰談、看到什麼。 兩條路你都可以直接對接到鹿飛的服務。
           </p>
         </div>
+        <ScrollCue />
       </section>
 
       {/* ───── Two-card hub ───── */}
@@ -50,7 +44,7 @@ export default function ResourcesPage() {
           {/* Card 1 — 補助 */}
           <Link
             href="/resources/subsidies"
-            className="group relative bg-cream/40 border border-bd hover:border-gold transition-all duration-300 p-8 md:p-10 flex flex-col overflow-hidden"
+            className="lufe-card group relative bg-cream/40 border border-bd hover:border-gold transition-all duration-300 p-8 md:p-10 flex flex-col overflow-hidden"
           >
             <div
               aria-hidden="true"
@@ -94,7 +88,7 @@ export default function ResourcesPage() {
           {/* Card 2 — 活動 / 現場紀錄 */}
           <Link
             href="/field-notes"
-            className="group relative bg-cream/40 border border-bd hover:border-sky transition-all duration-300 p-8 md:p-10 flex flex-col overflow-hidden"
+            className="lufe-card group relative bg-cream/40 border border-bd hover:border-sky transition-all duration-300 p-8 md:p-10 flex flex-col overflow-hidden"
           >
             <div
               aria-hidden="true"

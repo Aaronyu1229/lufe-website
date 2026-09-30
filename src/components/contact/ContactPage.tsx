@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { ScrollCue } from "@/components/ScrollCue";
 import { ChoiceGroup } from "@/components/ui/ChoiceGroup";
 import { useMessageBox } from "../MessageBox";
 
@@ -223,14 +225,21 @@ export function ContactPage() {
   return (
     <>
       {/* ─── Hero + Channel Cards ─── */}
-      <section className="bg-white pt-[120px] pb-[60px] px-5 md:px-10">
-        <div className="max-w-[1000px] mx-auto">
-          <h1 className="h1">
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+        <HeroBackdrop src="/images/contact/hero-handshake.jpg" />
+        <div className="lufe-hero-content mx-auto w-full max-w-[1000px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+          <h1 className="h1 text-white">
             選一個你最方便的方式
           </h1>
-          <p className="section-desc">
+          <p className="lead mt-5 max-w-[600px] !text-white/75">
             三個管道都會收到。訊息我們通常一個工作天內回覆。
           </p>
+        </div>
+        <ScrollCue />
+      </section>
+
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="max-w-[1000px] mx-auto">
 
           {/* Business info strip — gives contact page a functional anchor */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 mb-12 pb-8 border-b border-bd text-[14.5px]">
@@ -259,7 +268,7 @@ export function ContactPage() {
             return (
               <button
                 onClick={() => handleChannelClick(primary.action)}
-                className={`relative w-full p-6 md:p-8 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer hover:shadow-lg border-2 border-gold/20 hover:border-gold mb-4 flex items-start gap-6`}
+                className={`lufe-card relative w-full p-6 md:p-8 bg-white text-left cursor-pointer border-2 border-gold/20 hover:border-gold mb-4 flex items-start gap-6`}
               >
                 <div
                   className={`w-14 h-14 ${c.iconBg} ${c.iconText} flex items-center justify-center flex-shrink-0`}
@@ -295,7 +304,7 @@ export function ContactPage() {
                 <button
                   key={ch.title}
                   onClick={() => handleChannelClick(ch.action)}
-                  className={`relative p-5 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-left cursor-pointer hover:shadow-lg ${c.border} flex items-start gap-4`}
+                  className={`lufe-card relative p-5 bg-white text-left cursor-pointer ${c.border} flex items-start gap-4`}
                 >
                   <div
                     className={`w-12 h-12 ${c.iconBg} ${c.iconText} flex items-center justify-center shrink-0`}

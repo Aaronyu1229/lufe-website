@@ -15,27 +15,42 @@ import { useMessageBox } from "./MessageBox";
 import { useSpring } from "@/lib/motion";
 import { articles, getArticleImage } from "@/data/articles";
 import { CASES } from "@/data/cases";
-import { STAGES, STAGE_ORDER } from "@/data/services";
+import { CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
 
-type MenuKey = "services" | "cases" | "insights" | "about";
+type MenuKey = "services" | "advanced" | "cases" | "insights" | "about";
 
 const NAV_HEIGHT = 64;
 
 const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
   { key: "services", label: "服務" },
+  { key: "advanced", label: "進階" },
   { key: "cases", label: "案例" },
   { key: "insights", label: "洞察" },
   { key: "about", label: "關於我們" },
 ];
 
+const SERVICE_MENU_ITEMS = [
+  { href: "/services/product-testing", title: "品測", desc: "第一個月 · 先讓馬尼拉的媽媽拿起來看看" },
+  { href: "/services/consignment", title: "寄賣", desc: "第三個月 · 上架了，讓人先用過再說" },
+  { href: "/services/localization", title: "公司落地", desc: "第九個月 · 開始想要在當地有自己的人" },
+  { href: "/services/call-center", title: "海外客服", desc: "之後的每一天 · 星期五晚上十一點的那封信" },
+  { href: "/services/north-america", title: "北美通路", desc: "另一個故事 · 北美貨架" },
+] as const;
+
+const ADVANCED_MENU_ITEMS = [
+  { href: "/services/optimize", title: "運營優化" },
+  { href: "/services/methodology", title: "鹿飛方法論" },
+] as const;
+
 function pathnameHasDarkHero(pathname: string): boolean {
-  if (["/", "/about", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
+  if (["/", "/about", "/contact", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
   if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
   return pathname.startsWith("/services") || pathname.startsWith("/cases");
 }
 
 export function Navbar() {
   const pathname = usePathname() ?? "";
+  const { open: openMessageBox } = useMessageBox();
   const darkHero = pathnameHasDarkHero(pathname);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
@@ -50,14 +65,15 @@ export function Navbar() {
   const megaHeight = useSpring(0);
   const mobileReveal = useSpring(0, { precision: 0.002 });
 
-  const lightGlass = !darkHero || scrolledPastHero;
+  const transparentOverHero = darkHero && !scrolledPastHero;
+  const lightGlass = !darkHero;
 
   function clearClose() {
     if (closeTimer.current !== undefined) window.clearTimeout(closeTimer.current);
     closeTimer.current = undefined;
   }
 
-  function closeMega(delay = 180) {
+  function closeMega(delay = 120) {
     clearClose();
     if (!megaOpen) return;
     closeTimer.current = window.setTimeout(() => {
@@ -167,7 +183,7 @@ export function Navbar() {
         跳到主要內容
       </a>
 
-      <nav className={`relative transition-colors duration-300 ${lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark text-white"}`} aria-label="主要導航">
+      <nav className={`relative transition-colors duration-300 ${transparentOverHero ? "navbar-over-hero" : lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark navbar-scrolled text-white"}`} aria-label="主要導航">
         <div className="relative mx-auto flex h-[64px] max-w-[1200px] items-center justify-between gap-4 px-5 md:px-10">
           <Link href="/" className="flex items-center gap-2.5 text-[17px] font-semibold">
             <Image src={lightGlass ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"} alt="鹿飛 LUFÉ" width={26} height={26} priority />
@@ -213,6 +229,7 @@ export function Navbar() {
           pointerEvents: megaOpen ? "auto" : "none",
           transform: `translateX(-50%) scaleY(${menuScale})`,
           transformOrigin: `${megaOrigin}px top`,
+          filter: `blur(${(1 - menuOpacity) * 4}px)`,
           visibility: menuOpacity > 0.01 ? "visible" : "hidden",
         }}
         onMouseEnter={clearClose}
@@ -247,6 +264,14 @@ export function Navbar() {
         ))}
         <MessageBoxTrigger className="m-3 flex w-[calc(100%-24px)] justify-center" onOpen={closeMobile} />
       </div>
+      <button
+        type="button"
+        className={`lufe-mobile-cta ${scrolledPastHero ? "lufe-mobile-cta-visible" : ""}`}
+        onClick={openMessageBox}
+      >
+        <span>第一次談不收費</span>
+        <strong>聊聊你的產品 →</strong>
+      </button>
     </header>
   );
 }
@@ -255,6 +280,7 @@ function MegaPane({ itemKey, active, setRef }: { itemKey: MenuKey; active: boole
   return (
     <div ref={setRef} aria-hidden={!active} className={`absolute inset-x-0 top-0 grid gap-6 px-7 pb-6 pt-[26px] transition-opacity duration-150 ${active ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
       {itemKey === "services" && <ServicesMenu />}
+      {itemKey === "advanced" && <AdvancedMenu />}
       {itemKey === "cases" && <CasesMenu />}
       {itemKey === "insights" && <InsightsMenu />}
       {itemKey === "about" && <AboutMenu />}
@@ -273,12 +299,11 @@ function MenuLink({ href, title, desc, icon, external = false }: { href: string;
 }
 
 function ServicesMenu() {
-  return <div className="grid grid-cols-4 gap-6">
-    <MenuColumn label="01 · 產品適配性 · 勝率"><MenuLink href="/services#pillar-fit" title="支柱總覽" desc="這個市場真的要你嗎？" /><MenuLink href="/services/market-assessment" title="市場機會評估" desc="2–4 週搞清楚值不值得去" /><MenuLink href="/services/product-testing" title="小批量產品測試" desc="真實消費者用錢投票" /><MenuLink href="/services/methodology" title="MBCPR 決策框架" desc="Go / No-Go 五維矩陣" /></MenuColumn>
-    <MenuColumn label="02 · 通路銷售力 · 潛力"><MenuLink href="/services#pillar-channel" title="支柱總覽" desc="上得了架，還要賣得動" /><MenuLink href="/services/channel-entry" title="通路進入與媒合" desc="北美連鎖 + 東南亞通路" /><MenuLink href="/services#pillar-channel" title="展會與加盟佈局" desc="食品 / 電子 / 加盟展" /><MenuLink href="/services#pillar-channel" title="AI 集客引擎" desc="SEO + AI 搜尋佈局" /></MenuColumn>
-    <MenuColumn label="03 · 團隊體質 · 成功率"><MenuLink href="/services#pillar-team" title="支柱總覽" desc="進得去，還要留得下" /><MenuLink href="/services/localization" title="海外團隊建置" desc="當地人才、落地合規" /><MenuLink href="/services/optimize" title="運營優化方案" desc="已在海外的進階方案" /><MenuLink href="/services#pillar-team" title="海外營運系統五階" desc="Notion + AI 數位員工" /></MenuColumn>
-    <MenuColumn label="工具與入口"><MenuLink href="/assess" title="2 分鐘處境比對" desc="跟哪個案例最像" /><MenuLink href="/services" title="三支柱總覽" desc="一頁看完整方法論" /><MenuLink href="/resources" title="補助與活動" desc="政府補助 + 現場紀錄" /><MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具" desc="免費 HS code 查詢" external /></MenuColumn>
-  </div>;
+  return <div className="grid grid-cols-5 gap-5">{SERVICE_MENU_ITEMS.map((item) => <MenuLink key={item.href} {...item} />)}</div>;
+}
+
+function AdvancedMenu() {
+  return <div className="grid max-w-[520px] grid-cols-2 gap-6">{ADVANCED_MENU_ITEMS.map((item) => <MenuLink key={item.href} {...item} />)}</div>;
 }
 
 function CasesMenu() {
@@ -290,28 +315,27 @@ function CasesMenu() {
   </div>;
 }
 
-// Monochrome line icons, stroke weighted to match the semibold labels, replacing emoji so category marks follow text color.
-const CATEGORY_ICON_PATHS: Record<string, ReactNode> = {
-  印尼: <><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></>,
-  東南亞趨勢: <><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></>,
-  出海實戰: <><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></>,
-  企業體質: <><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" /><path d="M15 9h4a1 1 0 0 1 1 1v11" /><path d="M3 21h18" /><path d="M8 8h3M8 12h3M8 16h3" /></>,
+// Monochrome line icons, stroke weighted to match the semibold labels, one per insight chapter.
+const CHAPTER_ICON_PATHS: Record<Exclude<ArticleChapterKey, "na" | "sub">, ReactNode> = {
+  m1: <><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></>,
+  m3: <><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></>,
+  m9: <><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" /><path d="M15 9h4a1 1 0 0 1 1 1v11" /><path d="M3 21h18" /><path d="M8 8h3M8 12h3M8 16h3" /></>,
+  after: <><path d="M4 14a8 8 0 0 1 16 0" /><path d="M3 14h4v6H3zM17 14h4v6h-4z" /></>,
 };
 
-// Markets with an unambiguous country get a code badge instead of a generic pin.
-const CATEGORY_CODES: Record<string, string> = { 菲律賓: "PH", 北美市場: "US" };
+// "補助與活動" already has its own entry (the resources page), so the menu lists the five story chapters.
+const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
 
-function CategoryIcon({ category }: { category: string }) {
-  const code = CATEGORY_CODES[category];
-  if (code) return <span aria-hidden="true" className="grid h-4 w-4 shrink-0 place-items-center rounded-[3px] border-[1.5px] border-current text-[7.5px] font-bold leading-none tracking-[-.02em]">{code}</span>;
-  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="block shrink-0">{CATEGORY_ICON_PATHS[category]}</svg>;
+function ChapterIcon({ chapter }: { chapter: (typeof INSIGHT_MENU_CHAPTERS)[number] }) {
+  // North America is the only unambiguous country, so it gets a code badge instead of a line icon.
+  if (chapter === "na") return <span aria-hidden="true" className="grid h-4 w-4 shrink-0 place-items-center border-[1.5px] border-current text-[7.5px] font-bold leading-none tracking-[-.02em]">US</span>;
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="block shrink-0">{CHAPTER_ICON_PATHS[chapter]}</svg>;
 }
 
 function InsightsMenu() {
   const latestArticle = articles[0];
-  const categories = ["菲律賓", "印尼", "東南亞趨勢", "北美市場", "出海實戰", "企業體質"] as const;
   return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
-    <MenuColumn label="主題分類">{categories.map((category) => <MenuLink key={category} href={`/insights?cat=${encodeURIComponent(category)}`} title={category} icon={<CategoryIcon category={category} />} />)}</MenuColumn>
+    <MenuColumn label="按章節找">{INSIGHT_MENU_CHAPTERS.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} icon={<ChapterIcon chapter={chapter} />} />)}</MenuColumn>
     <MenuColumn label="其他內容"><MenuLink href="/resources" title="補助與活動" desc="政府補助 + 現場紀錄" /><MenuLink href="/field-notes" title="現場紀錄" desc="活動、演講、媒體露出" /><MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具" external /><MenuLink href="/services/methodology" title="鹿飛方法論" /><MenuLink href="/insights" title="看所有文章" /></MenuColumn>
     <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">最新文章</p>{latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group"><div className="relative mb-2 aspect-video overflow-hidden"><Image src={getArticleImage(latestArticle)} alt={latestArticle.title} fill sizes="360px" className="object-cover" /></div><b className="block text-[14px] font-semibold leading-[1.5] group-hover:text-sky">{latestArticle.title}</b><span className="text-[12px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}</div>
   </div>;
@@ -321,7 +345,7 @@ function AboutMenu() {
   return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
     <MenuColumn label="認識鹿飛"><MenuLink href="/about#story" title="創辦故事" desc="我們為什麼做這件事" /><MenuLink href="/about#team" title="團隊組成" desc="台灣核心團隊 + 全球節點" /><MenuLink href="/about#how-we-work" title="我們怎麼合作" desc="你會得到什麼樣的陪跑" /></MenuColumn>
     <MenuColumn label="立場與網絡"><MenuLink href="/about#network" title="合作夥伴網絡" desc="北美 / 東南亞 / 全球物流" /><MenuLink href="/about#philosophy" title="品牌理念" desc="我們相信的事" /><MenuLink href="/about#what-we-dont-do" title="我們不做什麼" desc="誠實的邊界" /></MenuColumn>
-    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">創辦人</p><Link href="/about" className="group grid grid-cols-[52px_1fr] items-center gap-3"><span className="grid h-[52px] w-[52px] place-items-center bg-gold font-bold text-navy">AY</span><span><b className="block text-[14px] font-semibold group-hover:text-sky">Aaron Yu</b><small className="block text-[12px] text-gold-d">鹿飛 LUFÉ 創辦人</small><small className="block text-[12px] text-tx3">42+ 年國際物流實戰<br />500+ 出口案件 · 30+ 國家</small></span></Link></div>
+    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">創辦人</p><Link href="/about" className="group grid grid-cols-[52px_1fr] items-center gap-3"><span className="grid h-[52px] w-[52px] place-items-center bg-gold font-bold text-navy">AY</span><span><b className="block text-[14px] font-semibold group-hover:text-sky">Aaron Yu</b><small className="block text-[12px] text-gold-d">鹿飛 LUFÉ 創辦人</small><small className="block text-[12px] text-tx3">42 年國際物流實戰<br />500+ 出口案件 · 30+ 國家</small></span></Link></div>
   </div>;
 }
 
@@ -346,10 +370,11 @@ function MobileSubLink({ href, title, icon, onClose }: { href: string; title: st
 }
 
 function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: () => void }) {
-  if (itemKey === "services") return <><p className="mb-1 mt-1 px-7 text-[11px] font-semibold tracking-[.05em] text-tx2">完整路徑</p>{STAGE_ORDER.map((slug) => <MobileSubLink key={slug} href={`/services/${slug}`} title={STAGES[slug].title} onClose={onClose} />)}<p className="mb-1 mt-3 px-7 text-[11px] font-semibold tracking-[.05em] text-tx2">進階方案</p><MobileSubLink href="/services/optimize" title="運營優化方案" onClose={onClose} /><MobileSubLink href="/services/methodology" title="鹿飛方法論" onClose={onClose} /><MobileSubLink href="/services" title="服務總覽" onClose={onClose} /></>;
+  if (itemKey === "services") return <>{SERVICE_MENU_ITEMS.map((item) => <MobileSubLink key={item.href} href={item.href} title={item.title} onClose={onClose} />)}</>;
+  if (itemKey === "advanced") return <>{ADVANCED_MENU_ITEMS.map((item) => <MobileSubLink key={item.href} href={item.href} title={item.title} onClose={onClose} />)}</>;
   if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={`${caseItem.num} ${caseItem.title}`} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例" onClose={onClose} /></>;
   if (itemKey === "about") return <><MobileSubLink href="/about#story" title="創辦故事" onClose={onClose} /><MobileSubLink href="/about#team" title="團隊組成" onClose={onClose} /><MobileSubLink href="/about#how-we-work" title="我們怎麼合作" onClose={onClose} /><MobileSubLink href="/about#network" title="合作夥伴網絡" onClose={onClose} /><MobileSubLink href="/about#what-we-dont-do" title="我們不做什麼" onClose={onClose} /></>;
-  return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} /><MobileSubLink href="/insights?cat=東南亞趨勢" title="東南亞趨勢" icon={<CategoryIcon category="東南亞趨勢" />} onClose={onClose} /><MobileSubLink href="/insights?cat=北美市場" title="北美市場" icon={<CategoryIcon category="北美市場" />} onClose={onClose} /><MobileSubLink href="/insights?cat=出海實戰" title="出海實戰" icon={<CategoryIcon category="出海實戰" />} onClose={onClose} /><MobileSubLink href="/insights?cat=企業體質" title="企業體質" icon={<CategoryIcon category="企業體質" />} onClose={onClose} /><MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;
+  return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} />{INSIGHT_MENU_CHAPTERS.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} icon={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}<MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;
 }
 
 function MessageBoxTrigger({ className = "", onOpen }: { className?: string; onOpen?: () => void }) {

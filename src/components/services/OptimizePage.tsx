@@ -1,248 +1,203 @@
-"use client";
-
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { Reveal } from "@/components/Reveal";
+import { ScrollCue } from "@/components/ScrollCue";
 import { Disclosure } from "@/components/ui";
-import { useMessageBox } from "../MessageBox";
 
-export const OPTIMIZE_PAIN_POINTS: ReadonlyArray<{
-  icon: ReactNode;
-  title: string;
-  signs: readonly string[];
-  fix: string;
-}> = [
-  {
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3 8L12 3L21 8V16L12 21L3 16V8Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="M3 8L12 13L21 8M12 13V21" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: "物流成本吃掉毛利",
-    signs: [
-      "海運報價每半年漲一次，你沒有議價籌碼",
-      "倉儲費用不透明，月結單看不懂",
-      "退貨物流成本比正品物流還高",
-    ],
-    fix: "我們會重新盤點你的物流結構，從運輸方式、倉儲位置、退貨處理三個層面優化。通常可省 12–25%。",
-  },
-  {
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3 6L9 12L13 8L21 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M15 16H21V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M3 21H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-    title: "通路績效起伏大",
-    signs: [
-      "銷量看天吃飯，節慶暴增、平常低迷",
-      "廣告關了就沒單，自然流量難以累積",
-      "review 品質不穩定，退貨率偏高",
-    ],
-    fix: "我們會做通路健診，檢視 listing、定價、運營節奏、競品動態，給你一份可執行的改善計畫。",
-  },
-  {
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M12 2V5M12 19V22M4.22 4.22L6.34 6.34M17.66 17.66L19.78 19.78M2 12H5M19 12H22M4.22 19.78L6.34 17.66M17.66 6.34L19.78 4.22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-    title: "營運流程卡卡",
-    signs: [
-      "跨時區溝通成本高，一件事要來回好幾天",
-      "在地團隊與台灣總部經常對不上",
-      "SOP 散落在各處，新人接手要學一個月",
-    ],
-    fix: "我們會重整你的溝通流程、會議節奏、文件結構，必要時幫你招募 country manager。",
-  },
-];
+import { ContactButton } from "./ContactButton";
 
-export const OPTIMIZE_SERVICES = [
+export const OPTIMIZE_PAIN_POINTS = [
   {
-    title: "運營效率診斷",
-    timeline: "2–3 週",
-    price: "定額診斷費",
-    desc: "全面檢視你的海外運營，找出效率瓶頸與成本黑洞。",
-    items: [
-      "供應鏈與物流效率分析（從工廠到終端）",
-      "通路績效評估（Amazon、實體通路、自營站）",
-      "成本結構拆解（隱性成本識別）",
-      "合規與風險盤點（避免未爆彈）",
-      "在地團隊運作檢視",
-    ],
-    deliverable: "一份 40–60 頁的診斷報告 + 一次 90 分鐘的結論會議",
+    anchor: "opt-cost",
+    title: "省不下來",
+    scene: "海運報價每半年漲一次，你沒有議價籌碼；倉儲月結單看不懂；退貨的運費比正品還貴。",
+    action: "重新盤點物流結構",
   },
   {
-    title: "運營優化方案",
-    timeline: "1–3 個月",
-    price: "月費 + 績效獎金",
-    desc: "針對診斷結果，陪你執行具體的改善計畫。",
-    items: [
-      "物流路線重新規劃與簽約",
-      "倉儲方案優化（整合、遷移、委外）",
-      "通路結構調整（進入新通路 / 退出劣質通路）",
-      "行銷策略升級（降低 CAC、提升 LTV）",
-      "SOP 建立與在地團隊訓練",
-    ],
-    deliverable: "一套可持續運作的優化後營運體系，並留下文件與 SOP。",
+    anchor: "opt-sales",
+    title: "賣得起伏",
+    scene: "節慶暴增、平常低迷；廣告一停就沒訂單；退貨率和評價忽高忽低。",
+    action: "通路績效調整",
+  },
+  {
+    anchor: "opt-find",
+    title: "沒被找到",
+    scene: "產品在架上，但搜尋、AI 問答、社群裡都沒有你。",
+    action: "集客",
+  },
+  {
+    anchor: "opt-system",
+    title: "跑得卡卡",
+    scene: "跨時區溝通延遲；台灣總部和在地團隊對不上；SOP 散在各處，新人培訓很久。",
+    action: "營運系統",
+  },
+  {
+    anchor: "opt-dashboard",
+    title: "看不見",
+    scene: "每個月不知道哪裡賺、哪裡漏，決策像在猜。",
+    action: "儀表板",
   },
 ] as const;
 
-export function OptimizePage() {
-  const { open } = useMessageBox();
+export const OPTIMIZE_SERVICES = [
+  {
+    title: "先診斷",
+    timeline: "2–3 週，定額診斷費",
+    details: [
+      ["交付", "一份診斷報告＋90 分鐘結論會議。"],
+      ["範圍", "供應鏈、通路績效、成本拆解、合規風險、團隊運作。"],
+      ["適合", "不確定問題在哪一段的。"],
+    ],
+  },
+  {
+    title: "直接優化",
+    timeline: "1–3 個月，月費＋績效獎金",
+    details: [
+      ["交付", "物流重規劃、倉儲優化、通路調整、行銷策略升級、SOP 建立與團隊訓練。"],
+      ["適合", "已經知道卡哪裡、要人進來一起做的。"],
+    ],
+  },
+] as const;
 
+export const OPTIMIZE_FAQS = [
+  ["沒跟你們走過第一年也可以嗎？", "可以。這一頁的方案是獨立的，第一次談我們會先問你現在的狀況。"],
+  ["不確定我的問題屬於哪一類？", "先聊聊。我們會花 30 分鐘聽你現在的狀況，告訴你是該先診斷，還是可以直接進優化。"],
+  ["怎麼收費？", "診斷是定額，優化是月費加績效。第一次談給範圍。"],
+] as const;
+
+function SectionHeading({ children }: { readonly children: ReactNode }) {
+  return <h2 className="h2 text-tx">{children}</h2>;
+}
+
+export function OptimizePageContent({ relatedReading }: { readonly relatedReading?: ReactNode }) {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy px-5 pb-[72px] pt-[128px] text-white md:px-10 md:pb-[104px] md:pt-[160px]">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/services/services-optimize-whiteboard.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-[0.18]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/70 to-navy/95" />
-        </div>
-        <div className="relative mx-auto max-w-[1000px]">
-          <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
-            <Link href="/services" className="hover:text-gold">
-              服務
-            </Link>
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+        <HeroBackdrop src="/images/v5/optimize-2400.webp" mobileSrc="/images/v5/optimize-1600.webp" position="70% 30%" />
+        <div className="lufe-hero-content mx-auto max-w-[1100px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+          <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55">
+            <Link href="/" className="hover:text-white">首頁</Link>
             <span className="mx-2 text-white/30">/</span>
-            <span className="text-white/75">進階優化</span>
+            <Link href="/services" className="hover:text-white">服務</Link>
+            <span className="mx-2 text-white/30">/</span>
+            <span className="text-white/80">運營優化</span>
           </nav>
-          <h1 className="font-sans text-[clamp(34px,5vw,60px)] font-[650] leading-[1.12] tracking-normal [text-wrap:balance]">
-            已經跑起來了，
-            <br />
-            該讓每公里<span className="text-ember">更省</span>
-          </h1>
-          <p className="mt-5 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/75">
-            產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。
-            這個階段不需要從零開始——我們幫你把既有的營運診斷、優化、重整。
-          </p>
+          <p className="mb-4 text-[14px] font-semibold text-gold">進階 · 運營優化</p>
+          <h1 className="h1 max-w-[760px] text-white">已經跑起來了，該讓每公里更省</h1>
+          <p className="lead mt-5 max-w-[650px] whitespace-pre-line !text-white/75">產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。{"\n"}這不是第一年的事，是走過第一年之後的事。</p>
+          <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">聊聊你卡在哪一段 →</ContactButton>
         </div>
+        <ScrollCue />
       </section>
 
-      <section className="bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
-        <div className="mx-auto max-w-[1200px]">
-          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
-            你是不是也遇到<span className="text-ember">這些問題</span>？
-          </h2>
-          <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
-            如果你對下列任何一個場景點頭，這頁就是為你寫的。
-          </p>
-          <div className="mt-[38px] grid min-w-0 grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="border-b border-bd bg-cream px-5 py-4 text-[14px] leading-[1.8] text-tx2 md:px-10">
+        <p className="mx-auto max-w-[1100px]"><strong className="text-tx">進階 ·</strong> 還沒開始的品牌，先看<Link href="/services" className="font-semibold text-sky hover:text-navy">四章</Link>。這一頁是給已經在海外跑了一段時間的人。</p>
+      </div>
+
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[1100px]">
+          <SectionHeading>你大概卡在<span className="text-gold-d">這五段之一</span></SectionHeading>
+          <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-5">
             {OPTIMIZE_PAIN_POINTS.map((point) => (
-              <article key={point.title} className="min-w-0 border border-bd bg-white">
-                <div className="p-[26px]">
-                  <div className="mb-[18px] grid size-12 place-items-center bg-ember/10 text-ember">{point.icon}</div>
-                  <h3 className="mb-4 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">
-                    {point.title}
-                  </h3>
-                  <ul className="grid gap-2 text-[15px] leading-[1.65] text-tx2">
-                    {point.signs.map((sign) => (
-                      <li key={sign} className="flex items-start gap-2.5">
-                        <span aria-hidden="true" className="mt-[0.66em] size-[5px] shrink-0 bg-ember/65" />
-                        {sign}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="px-[26px] pb-2 [&>div]:!border-b-0 [&>div]:!border-bd">
-                <Disclosure
-                  id={`optimize-${point.title}`}
-                  summary={
-                    <span className="flex items-center justify-between gap-3 text-[14px] font-semibold text-ember">
-                      怎麼解
-                    </span>
-                  }
-                >
-                  <p className="text-[15px] leading-[1.8] text-tx2">{point.fix}</p>
-                </Disclosure>
-                </div>
-              </article>
+              <Link key={point.anchor} href={`#${point.anchor}`} className="lufe-card border border-bd bg-cream p-5 hover:border-gold hover:bg-white">
+                <h3 className="h3 text-tx">{point.title}</h3>
+                <p className="mt-3 text-[14px] leading-[1.8] text-tx2">{point.scene}</p>
+                <p className="mt-5 text-[14px] font-semibold text-sky">→ {point.action}</p>
+              </Link>
             ))}
+          </Reveal>
+        </div>
+      </section>
+
+      <section id="opt-cost" className="scroll-mt-[90px] bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
+          <div className="relative min-h-[260px] overflow-hidden border border-bd"><Image src="/images/services/services-optimize-whiteboard.jpg" alt="檢視物流與營運資料" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" /></div>
+          <div>
+            <p className="text-[14px] font-semibold text-gold-d">01</p>
+            <SectionHeading>省不下來：<span className="text-gold-d">先看你的物流帳單</span></SectionHeading>
+            <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">我們是做物流出身的，最知道一張月結單裡哪些數字不該長那樣。{"\n"}從運輸方式、倉儲位置、退貨處理三個層面重新盤點。</p>
+            <p className="mt-6 border-l-4 border-gold bg-white px-5 py-4 text-[16px] font-medium leading-[1.8] text-tx">盤完通常都有可省的空間，數字第一次談給你範圍。</p>
           </div>
         </div>
       </section>
 
-      <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
-        <div className="mx-auto max-w-[1200px]">
-          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
-            診斷為先，<span className="text-ember">執行為後</span>
-          </h2>
-          <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
-            你可以只做診斷，了解問題在哪；也可以直接進入執行。兩者都可以，順序不能顛倒。
-          </p>
-          <div className="mt-[38px] grid min-w-0 grid-cols-1 gap-[18px] md:grid-cols-2">
-            {OPTIMIZE_SERVICES.map((service, index) => (
-              <article key={service.title} className="min-w-0 border border-bd border-l-4 border-l-ember bg-white">
-                <div className="p-[30px]">
-                  <h3 className="mt-2 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">
-                    {service.title}
-                  </h3>
-                  <div className="my-4 flex flex-wrap gap-2.5 text-[13px]">
-                    <span className="bg-ember/10 px-2 py-[3px] text-ember">{service.timeline}</span>
-                    <span className="py-[3px] text-tx3">{service.price}</span>
-                  </div>
-                  <p className="text-[16px] leading-[1.85] text-tx2">{service.desc}</p>
-                </div>
-                <div className="px-[30px] pb-2 [&>div]:!border-b-0 [&>div]:!border-bd">
-                <Disclosure
-                  id={`optimize-service-${index + 1}`}
-                  summary={
-                    <span className="flex items-center justify-between gap-3 text-[14px] font-semibold text-ember">
-                      交付成果
-                    </span>
-                  }
-                >
-                  <div>
-                    <ul className="my-[22px] grid gap-[11px]">
-                      {service.items.map((item) => (
-                        <li key={item} className="flex items-start gap-3 text-[15px] leading-[1.75] text-tx2">
-                          <span aria-hidden="true" className="mt-[0.7em] size-1.5 shrink-0 bg-ember" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="border-t border-bd2 pt-5">
-                      <p className="bg-ember/10 p-[18px] text-[15px] font-semibold leading-[1.75] text-ember">
-                        {service.deliverable}
-                      </p>
-                    </div>
-                  </div>
-                </Disclosure>
-                </div>
-              </article>
-            ))}
+      <section id="opt-sales" className="scroll-mt-[90px] bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-12">
+          <div>
+            <p className="text-[14px] font-semibold text-gold-d">02</p>
+            <SectionHeading>賣得起伏：<span className="text-gold-d">廣告一停就沒單，通常不是廣告的問題</span></SectionHeading>
+            <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">銷量跟著節慶走、廣告停了就掉、評價忽高忽低——{"\n"}多半是通路組合、價格帶、上架內容三件事有一件沒對。{"\n"}我們把三件事攤開來看，再決定調哪一個。</p>
+          </div>
+          <div className="grid gap-3 border border-bd bg-cream p-5 text-[16px] font-medium text-tx"><p>通路組合</p><p>價格帶</p><p>上架內容</p></div>
+        </div>
+      </section>
+
+      <section id="opt-find" className="scroll-mt-[90px] bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
+          <div className="relative min-h-[260px] overflow-hidden border border-bd"><Image src="/images/insights/amazon-category.jpg" alt="線上通路與搜尋資料" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" /></div>
+          <div>
+            <p className="text-[14px] font-semibold text-gold-d">03</p>
+            <SectionHeading>沒被找到：<span className="text-gold-d">客人在問 AI，AI 沒提到你</span></SectionHeading>
+            <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">越來越多人買東西前先問 ChatGPT、Perplexity。{"\n"}SEO 文章月產 30 篇以上 + AI 搜尋引擎佈局（AIO），讓 ChatGPT、Perplexity 在回答相關問題時推薦你的品牌。</p>
+            <p className="mt-6 border-l-4 border-gold bg-white px-5 py-4 text-[16px] font-medium leading-[1.8] text-tx">目標是讓 AI 回答時有你的名字。</p>
           </div>
         </div>
       </section>
 
-      <section className="bg-navy px-5 py-[80px] text-white md:px-10 md:py-[110px]">
+      <section id="opt-system" className="scroll-mt-[90px] bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[1100px]">
+          <p className="text-[14px] font-semibold text-gold-d">04</p>
+          <SectionHeading>跑得卡卡：<span className="text-gold-d">事情都在人的腦子裡</span></SectionHeading>
+          <p className="mt-5 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.9] text-tx2">台灣早上九點，馬尼拉也是九點，但事情還是對不上——{"\n"}因為流程在人身上，不在系統裡。{"\n\n"}一套五階導入的營運作業系統：</p>
+          <Reveal className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-5">
+            {["① Notion 任務管理", "② AI 複利知識庫", "③ AI 數位員工", "④ 事業營運儀表板", "⑤ 團隊創新共創"].map((step) => <p key={step} className="lufe-card border border-bd bg-cream p-4 text-[15px] font-medium leading-[1.7] text-tx">{step}</p>)}
+          </Reveal>
+          <p className="mt-7 border-l-4 border-gold bg-cream px-5 py-4 text-[16px] font-medium leading-[1.8] text-tx">目標是新人第一天就知道東西在哪、事情怎麼跑。</p>
+        </div>
+      </section>
+
+      <section id="opt-dashboard" className="scroll-mt-[90px] bg-navy px-5 py-[72px] text-white md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[900px]">
+          <p className="text-[14px] font-semibold text-gold">05</p>
+          <h2 className="h2 text-white">看不見：<span className="text-gold">每個月結束才知道賺沒賺</span></h2>
+          <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-white/75">五階裡的第四階就是這件事：把物流、通路、客服的數字放到同一個畫面。{"\n"}不是為了好看，是為了下個月的決定不用猜。</p>
+        </div>
+      </section>
+
+      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[1100px]">
+          <SectionHeading>兩種合作方式</SectionHeading>
+          <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2">
+            {OPTIMIZE_SERVICES.map((service) => <article key={service.title} className="lufe-card border-t-4 border-gold bg-white p-6 md:p-8"><p className="text-[14px] font-semibold text-gold-d">{service.title}</p><h3 className="h3 mt-3 text-tx">{service.timeline}</h3><div className="mt-6 grid gap-4">{service.details.map(([label, detail]) => <p key={label} className="text-[15px] leading-[1.8] text-tx2"><strong className="text-tx">{label}：</strong>{detail}</p>)}</div></article>)}
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[860px]">
+          <SectionHeading>常見問題</SectionHeading>
+          <div className="mt-6 border-b border-bd">
+            {OPTIMIZE_FAQS.map(([question, answer], index) => <Disclosure key={question} id={`optimize-faq-${index + 1}`} defaultOpen={index === 0} summary={<span><span aria-hidden="true" className="mr-4 text-[13px] font-semibold text-gold-d">{String(index + 1).padStart(2, "0")}</span>{question}</span>}><p className="text-[15.5px] leading-[1.85] text-tx2">{answer}</p></Disclosure>)}
+          </div>
+        </div>
+      </section>
+
+      {relatedReading}
+
+      <section className="bg-navy px-5 py-[78px] text-white md:px-10 md:py-[96px]">
         <div className="mx-auto max-w-[720px] text-center">
-          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
-            不確定你的問題屬於哪一類？
-          </h2>
-          <p className="mx-auto mt-[18px] max-w-[520px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/70">
-            先聊聊。我們會花 30 分鐘聽你現在的狀況，告訴你是該做診斷還是可以直接進執行，不需要你先決定。
-          </p>
-          <div className="mt-[34px] flex flex-wrap items-center justify-center gap-3">
-            <button onClick={open} className="cursor-pointer bg-gold px-[26px] py-[14px] text-[16px] font-semibold text-navy hover:bg-gold-l">
-              聊聊你的產品 →
-            </button>
-            <Link href="/services" className="bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white hover:bg-white/25">
-              回服務總覽 →
-            </Link>
-          </div>
+          <h2 className="h2 text-white">聊聊你卡在哪一段</h2>
+          <p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，聽你現在的狀況，告訴你該先診斷還是直接做。</p>
+          <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">聊聊你的狀況 →</ContactButton>
         </div>
       </section>
     </>
   );
+}
+
+export function OptimizePage() {
+  return <OptimizePageContent />;
 }

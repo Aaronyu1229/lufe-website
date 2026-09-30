@@ -32,7 +32,7 @@ export const HOME_HERO_SLIDES: Slide[] = [
     id: "pillar-fit",
     heavyOverlay: true,
     chipLabel: "產品適配性",
-    chipHref: "/services#pillar-fit",
+    chipHref: "#chapters",
     titleLines: ["協助台灣企業", "在北美與東南亞落地"],
     subtitle: "這個市場真的要你嗎？市場評估、產品測試、決策框架 — 先把勝率搞清楚。",
     primary: { label: "看真實案例", href: "/cases" },
@@ -54,7 +54,7 @@ export const HOME_HERO_SLIDES: Slide[] = [
   {
     id: "pillar-channel",
     chipLabel: "通路銷售力",
-    chipHref: "/services#pillar-channel",
+    chipHref: "#chapter-2",
     titleLines: ["上得了架", "還要賣得動"],
     subtitle: "通路進入、展會佈局、數位集客 — 把產品放進對的通路，讓消費者找得到。",
     primary: { label: "看完整服務內容", href: "/services" },
@@ -75,7 +75,7 @@ export const HOME_HERO_SLIDES: Slide[] = [
     id: "logistics-moat",
     heavyOverlay: true,
     chipLabel: "基石 · 42 年國際物流",
-    chipHref: "/about",
+    chipHref: "#jumping",
     titleLines: ["真的跑過船的人，", "才懂出海的眉角"],
     subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬企業 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通。",
     primary: { label: "認識躍馬企業", href: "https://jumping.group", external: true },
@@ -198,7 +198,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="h-screen min-h-[640px] relative overflow-hidden flex items-center"
+      className="lufe-hero h-[100svh] min-h-[640px]"
       role="region"
       aria-label="好產品值得一條順暢的出海路"
       onMouseEnter={() => setPaused(true)}
@@ -217,7 +217,6 @@ export function HeroSection() {
             className="absolute inset-0 transition-opacity duration-[900ms] ease-out"
             style={{
               opacity: isActive ? 1 : 0,
-              filter: slide.heavyOverlay ? "brightness(0.74)" : undefined,
             }}
             aria-hidden="true"
           >
@@ -282,7 +281,7 @@ export function HeroSection() {
       </h1>
 
       {/* All slide copy stays in the server HTML; only the active layer is visible. */}
-      <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 relative z-10 w-full">
+      <div className="lufe-hero-content max-w-[1400px] mx-auto mt-auto w-full px-5 pb-[104px] md:px-10 md:pb-[128px] lg:px-16">
         {HOME_HERO_SLIDES.map((slide, i) => {
           const isActive = i === activeIndex;
 

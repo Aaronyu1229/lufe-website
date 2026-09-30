@@ -111,6 +111,24 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
   },
 ];
 
+export const HOME_CASE_ROADS = [
+  {
+    label: "第一條",
+    title: "從零開始。",
+    detail: "在當地蓋一間英語教育機構——找老師、找場地、招第一個學生；\n後來用同樣的方法，做了一個連鎖手搖飲品牌。",
+  },
+  {
+    label: "第二條",
+    title: "改了再帶過去。",
+    detail: "台灣的產品到了當地，改配方、改價格、改包裝，\n變成當地人願意掏錢的樣子。",
+  },
+  {
+    label: "第三條",
+    title: "原封不動帶過去。",
+    detail: "一個台灣的美業品牌，什麼都不改，只做當地的行銷，看它站不站得住。",
+  },
+] as const;
+
 const tagStyles: Record<"sky" | "gold", string> = {
   sky: "bg-[rgba(91,143,168,0.08)] text-sky",
   gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
@@ -153,7 +171,7 @@ function CaseCard({ item }: { item: CaseCardData }) {
       image={{ src: item.image, alt: item.title }}
       className="h-full"
       card={
-        <article className="flex h-full min-w-0 flex-col overflow-hidden border border-bd bg-white shadow-[0_12px_32px_rgba(16,27,48,0.08)]">
+        <article className="lufe-card flex h-full min-w-0 flex-col overflow-hidden border border-bd bg-white shadow-[0_12px_32px_rgba(16,27,48,0.08)]">
           <div className="flex min-w-0 flex-1 flex-col p-6">
             <CaseTags tags={item.tags} />
             {item.featured && (
@@ -213,16 +231,25 @@ function CaseCard({ item }: { item: CaseCardData }) {
 export function CasesSection() {
   return (
     <section className="overflow-hidden py-[80px]">
-      <div className="mx-auto flex max-w-[1200px] items-end justify-between gap-6 px-5 md:px-10">
-        <div className="min-w-0">
+      <div className="mx-auto max-w-[1200px] px-5 md:px-10">
+        <div className="max-w-[820px]">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
-            這些企業都找到了自己的路
+            我們不是跟你賭夢想，
+            <br />
+            <span className="text-gold-d">是有做過的事</span>
           </h2>
-          <p className="mt-4 max-w-[560px] text-[17px] leading-[1.7] text-tx2 md:text-[20px]">
-            4 個案例，從食品到電子、從北美到東南亞——
-            <span className="text-tx">每一個都是真的決策、真的數字、真的結果</span>。
-          </p>
+          <p className="mt-5 text-[17px] leading-[1.8] text-tx2">在菲律賓，我們跟合作夥伴走過三條不一樣的路。</p>
         </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {HOME_CASE_ROADS.map((road) => (
+            <article key={road.label} className="lufe-card border border-bd bg-cream p-6 md:p-7">
+              <p className="text-[13px] font-semibold text-gold-d">{road.label}</p>
+              <h3 className="mt-3 font-sans text-[22px] font-semibold leading-[1.35] text-tx">{road.title}</h3>
+              <p className="mt-4 whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{road.detail}</p>
+            </article>
+          ))}
+        </div>
+        <p className="mt-6 max-w-[720px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">三條路的成本、坑、時間都不一樣。{"\n"}第一次談，我們會先問你比較像哪一條。</p>
       </div>
 
       <Carousel

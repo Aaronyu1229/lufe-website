@@ -47,6 +47,17 @@ const contactLead = (overrides: Record<string, unknown> = {}) => ({
   ...overrides,
 });
 
+const waitlistLead = (overrides: Record<string, unknown> = {}) => ({
+  form: "waitlist",
+  name: " 新品牌 ",
+  email: " hello@brand.com ",
+  monthlyVolume: " 100～500 ",
+  currentHandler: " 台灣客服 ",
+  page: " /services/call-center ",
+  website: "",
+  ...overrides,
+});
+
 beforeEach(() => {
   state.createLead.mockReset().mockResolvedValue("lead-1");
   state.updateLeadNotification.mockReset().mockResolvedValue(undefined);
@@ -128,6 +139,8 @@ describe("POST /api/lead", () => {
       product: "鳳梨酥",
       stage: "準備出海，需要方向",
       message: "想談日本市場",
+      monthlyVolume: null,
+      currentHandler: null,
       page: "/contact",
       userAgent: "vitest",
     });
@@ -211,5 +224,69 @@ describe("POST /api/lead", () => {
       false,
       "Missing notification environment variables: LUFE_LEAD_SECRET",
     );
+  });
+
+  it("saves a waitlist lead and sends its registration notification", async () => {
+    const response = await POST(request(waitlistLead()));
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({ ok: true });
+    expect(state.createLead).toHaveBeenCalledWith({
+      form: "waitlist",
+      name: "新品牌",
+      contact: null,
+      email: "hello@brand.com",
+      phone: null,
+      company: null,
+      product: null,
+      stage: null,
+      message: "海外客服首批登記",
+      monthlyVolume: "100～500",
+      currentHandler: "台灣客服",
+      page: "/services/call-center",
+      userAgent: "vitest",
+    });
+    const [, options] = state.fetch.mock.calls[0] as [string, RequestInit];
+    expect(JSON.parse(options.body as string)).toMatchObject({
+      source: "海外客服首批登記",
+      name: "新品牌",
+      email: "hello@brand.com",
+      page: "/services/call-center",
+      msg: "海外客服首批登記\n每月客訊：100～500\n現在誰在接：台灣客服",
+    });
+  });
+
+  it("returns waitlist required-field validation errors", async () => {
+    const response = await POST(request(waitlistLead({ name: "", email: "", monthlyVolume: "" })));
+
+    expect(response.status).toBe(400);
+    await expect(response.json()).resolves.toEqual({
+      ok: false,
+      errors: {
+        name: "請填寫品牌名稱",
+        email: "請填寫 Email",
+        monthlyVolume: "請選擇每月客訊量",
+      },
+    });
+    expect(state.createLead).not.toHaveBeenCalled();
+  });
+
+  it("rejects an invalid waitlist monthly volume", async () => {
+    const response = await POST(request(waitlistLead({ monthlyVolume: "1000" })));
+
+    expect(response.status).toBe(400);
+    await expect(response.json()).resolves.toEqual({
+      ok: false,
+      errors: { monthlyVolume: "每月客訊量不正確" },
+    });
+  });
+
+  it("accepts a waitlist honeypot without saving or notifying", async () => {
+    const response = await POST(request(waitlistLead({ website: "https://spam.example" })));
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({ ok: true });
+    expect(state.createLead).not.toHaveBeenCalled();
+    expect(state.fetch).not.toHaveBeenCalled();
   });
 });

@@ -22,6 +22,7 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { useMessageBox } from "../MessageBox";
 import { CASES, CASE_CARD_META, getCase, type CaseStudy } from "@/data/cases";
 import { MatcherFlow, type MatcherFlowQuestion } from "./MatcherFlow";
@@ -333,7 +334,8 @@ export function EntryScreen({
   onStart: () => void;
 }) {
   return (
-    <section className="relative min-h-screen bg-navy pt-[130px] md:pt-[160px] pb-20 md:pb-28 px-5 md:px-10 overflow-hidden">
+    <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+      <HeroBackdrop src="/images/cases/cases-hero-collab.jpg" />
       {/* Animated gold glow */}
       <div
         aria-hidden="true"
@@ -344,7 +346,7 @@ export function EntryScreen({
         }}
       />
 
-      <div className="relative max-w-[760px] mx-auto">
+      <div className="lufe-hero-content mx-auto max-w-[760px] pb-20 pt-[148px] md:pb-28 md:pt-[170px]">
         {/* Breadcrumb */}
         <nav
           aria-label="Breadcrumb"
@@ -412,7 +414,7 @@ export function EntryScreen({
               Aaron Yu · 鹿飛創辦人
             </div>
             <div className="text-[11.5px] md:text-[13px] text-gold-l/90 font-medium mt-1.5 tracking-[0.3px]">
-              42+ 年國際物流實戰 · 500+ 出口案件 · 30+ 國家
+              躍馬企業 42 年國際物流實戰 · 500+ 出口案件 · 30+ 國家
             </div>
             <p className="text-[13.5px] md:text-[14.5px] text-white/70 font-normal mt-3 leading-[1.8]">
               最近三個月我親自看過 47 家台灣公司的出海卡點。這三題是我每次開第一次會議前必問的問題
