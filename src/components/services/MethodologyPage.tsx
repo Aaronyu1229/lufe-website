@@ -1,416 +1,162 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
-import { Disclosure, Segmented } from "@/components/ui";
-import { useMessageBox } from "../MessageBox";
+import { Disclosure } from "@/components/ui";
+import { PILLARS } from "@/data/services";
+
+import { ContactButton } from "./ContactButton";
 
 export const METHODOLOGY_DIMENSIONS = [
   {
-    code: "M",
-    name: "Market",
+    name: "Market 市場",
     question: "這個市場夠大嗎？",
     weight: "20%",
-    criteria: [
-      "目標品類的可觸達市場規模（TAM / SAM）",
-      "年複合成長率（CAGR）",
-      "消費者支付意願（ARPU）",
-      "市場成熟度曲線位置",
-    ],
-    redAt: "若 SAM < 預估年營收的 20 倍，我們會建議換市場。",
+    criteria: "可觸達的市場規模、成長率、消費者願意付多少、市場在哪個階段。",
+    redAt: "可觸達市場不到你預估年營收的 20 倍，建議換市場。",
   },
   {
-    code: "B",
-    name: "Barrier",
-    question: "進去的門檻有多高？",
+    name: "Barrier 門檻",
+    question: "進去要花多少力氣？",
     weight: "20%",
-    criteria: [
-      "認證要求與成本",
-      "通路進入難度（是否需要特殊關係）",
-      "在地化改造成本（包裝、配方、標示）",
-      "合規風險與灰色地帶",
-    ],
-    redAt: "若合規認證成本 > 預估首年毛利的 50%，直接 No-Go。",
+    criteria: "認證要求與成本、通路進入難度、在地化改造（包裝、配方、標示）、合規灰色地帶。",
+    redAt: "合規認證成本超過首年毛利的一半，直接 No-Go。",
   },
   {
-    code: "C",
-    name: "Competition",
+    name: "Competition 競爭",
     question: "你打得過嗎？",
     weight: "20%",
-    criteria: [
-      "前 10 大品牌的市佔集中度",
-      "競品的品牌護城河深度",
-      "競品的弱點（哪些客戶抱怨無人回應）",
-      "價格戰的可能性",
-    ],
-    redAt: "若 CR3（前 3 名市佔總和）> 70%，正面競爭我們不做。",
+    criteria: "前十大品牌市佔集中度、競品護城河、競品弱點、會不會打價格戰。",
+    redAt: "前三名市佔加起來超過 70%，不做正面競爭。",
   },
   {
-    code: "P",
-    name: "Profitability",
+    name: "Profitability 獲利",
     question: "做得動嗎？",
     weight: "25%",
-    criteria: [
-      "到岸成本（FOB + 關稅 + 物流 + 保險）",
-      "通路佣金與行銷攤提",
-      "退貨 / 換貨預估",
-      "外幣波動風險",
-    ],
-    redAt: "若悲觀情境下淨利率 < 5%，我們會建議回頭調整產品或定價。",
+    criteria: "到岸成本（FOB＋關稅＋物流＋保險）、通路佣金與行銷攤提、退換貨預估、匯率風險。",
+    redAt: "悲觀情境淨利率低於 5%，建議調整。",
   },
   {
-    code: "R",
-    name: "Regulatory",
-    question: "法規會不會突然改變？",
+    name: "Regulatory 法規",
+    question: "法規會不會突然變？",
     weight: "15%",
-    criteria: [
-      "當地貿易政策穩定度",
-      "產品類別的法規變動歷史",
-      "政治風險與突發事件",
-      "退出成本（如果一年後想撤）",
-    ],
-    redAt: "若該產品類別在目標市場過去 3 年曾被禁或大幅加稅，風險加權。",
+    criteria: "當地貿易政策穩定度、產品類別法規變動歷史、政治風險、退出成本。",
+    redAt: "過去三年曾被禁或大幅加稅，風險加權。",
   },
 ] as const;
 
 export const METHODOLOGY_DECISIONS = [
-  {
-    score: "≥ 75",
-    verdict: "Go",
-    color: "border-l-emerald-500 bg-emerald-50/50",
-    advice: "可以進，建議正常執行四階段路徑。",
-  },
-  {
-    score: "60–74",
-    verdict: "Conditional Go",
-    color: "border-l-amber-500 bg-amber-50/50",
-    advice: "可以進，但需要先解決某 1–2 個弱項（通常是 Barrier 或 Profitability）。",
-  },
-  {
-    score: "45–59",
-    verdict: "Hold",
-    color: "border-l-orange-500 bg-orange-50/50",
-    advice: "建議暫緩 6–12 個月，等市場、法規或你的產品本身發生某個關鍵變化再重估。",
-  },
-  {
-    score: "< 45",
-    verdict: "No-Go",
-    color: "border-l-red-500 bg-red-50/50",
-    advice: "直接不建議。我們會給出下次可以重新考慮的具體條件。",
-  },
+  { score: "≥ 75", verdict: "Go", advice: "可以進，照四章正常走。", color: "border-emerald-500" },
+  { score: "60–74", verdict: "Conditional Go", advice: "可以進，先解決一到兩個弱項。", color: "border-amber-500" },
+  { score: "45–59", verdict: "Hold", advice: "建議暫緩 6–12 個月，等關鍵變化。", color: "border-ember" },
+  { score: "< 45", verdict: "No-Go", advice: "不建議，我們會寫清楚什麼條件改了可以再看。", color: "border-red-500" },
 ] as const;
 
 export const WORKED_EXAMPLE = {
-  caseName: "保健品 → 北美 Costco（真實案例）",
+  caseName: "保健品 → 北美 Costco",
   scores: [
-    { dim: "Market", score: 82, note: "北美保健品市場 $600B+，年增 5.2%" },
+    { dim: "Market", score: 82, note: "北美保健品市場大、穩定成長" },
     { dim: "Barrier", score: 62, note: "FDA 註冊成本可控，Costco 關係是關鍵" },
-    { dim: "Competition", score: 71, note: "CR3 約 45%，中位集中度" },
-    { dim: "Profitability", score: 78, note: "毛利空間充足，但需承受 Costco 條款" },
-    { dim: "Regulatory", score: 80, note: "北美法規穩定，風險低" },
+    { dim: "Competition", score: 71, note: "前三名市佔中位集中" },
+    { dim: "Profitability", score: 78, note: "毛利空間夠，要承受 Costco 條款" },
+    { dim: "Regulatory", score: 80, note: "北美法規穩定" },
   ],
   weighted: 74,
   verdict: "Conditional Go",
-  condition: "前提是配方需微調符合北美口感偏好（Barrier 弱項需先解決）",
-  outcome: "實際執行後 6 個月上架，首月銷量超標 40%。",
+  condition: "配方微調符合北美口感。",
+  outcome: "實際結果：6 個月上架，首月銷量超標 40%。",
 } as const;
 
-export const METHODOLOGY_INDEX = [
-  { value: "framework", label: "MBCPR 五維評分" },
-  { value: "dimensions", label: "具體評的是什麼" },
-  { value: "decision", label: "加權總分 → 決策" },
-  { value: "example", label: "這套框架跑一次長什麼樣" },
-  { value: "why", label: "我們不靠直覺做決策" },
+export const METHODOLOGY_FAQS = [
+  ["我一定要先被評分才能開始嗎？", "不用。第一次談我們會粗跑一遍，30 分鐘，不收費。多數人是談完才知道自己在哪一格。"],
+  ["分數低就不能做嗎？", "60 分以下我們不接，這是對雙方的保護。但我們會寫清楚哪一題掉分、什麼條件改了可以再看。"],
+  ["分數是誰打的？", "我們打，依據是公開數據、你給的成本、和我們在當地的經驗。品測跑完，Market 和 Competition 兩題會用真實反應重打一次。"],
+] as const;
+
+const CHAPTER_ANSWERS = [
+  { question: "Market、Competition", href: "/services/product-testing", label: "第一個月的品測。", body: "一桌老師和家長拿起來看看，比報表準。" },
+  { question: "Barrier、Profitability", href: "/services/consignment", label: "第三個月的寄賣。", body: "證要多久、到岸多少、平台抽多少，跑一輪就有真數字。" },
+  { question: "Regulatory、Barrier", href: "/services/localization", label: "第九個月的公司落地。", body: "律師行、持證進口商、合規安排。" },
+  { question: "海外客服", body: "不在五題裡。它不是「該不該去」的問題，是「去了之後」的問題。" },
 ] as const;
 
 export function MethodologyPage() {
-  const { open } = useMessageBox();
-  const [activeSection, setActiveSection] = useState<string>(METHODOLOGY_INDEX[0].value);
-
-  const goToSection = (value: string) => {
-    setActiveSection(value);
-    const target = document.getElementById(value);
-    if (!target) return;
-
-    target.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-      block: "start",
-    });
-  };
-
-  useEffect(() => {
-    const sections = METHODOLOGY_INDEX.map(({ value }) => document.getElementById(value)).filter(
-      (section): section is HTMLElement => section !== null,
-    );
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const active = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (active) setActiveSection(active.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
-      <section className="relative overflow-hidden bg-navy px-5 pb-[72px] pt-[128px] md:px-10 md:pb-[104px] md:pt-[160px]">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 0, rgba(212,168,92,0.14), transparent 53%)",
-          }}
-        />
-        <div className="relative mx-auto max-w-[1000px]">
-          <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
-            <Link href="/services" className="hover:text-gold">
-              服務
-            </Link>
-            <span className="mx-2 text-white/30">/</span>
-            <span className="text-white/75">方法論</span>
-          </nav>
-          <h1 className="font-sans text-[clamp(34px,5vw,60px)] font-[650] leading-[1.12] tracking-normal text-white [text-wrap:balance]">
-            我們怎麼判斷
-            <br />
-            <span className="text-gold">值不值得去</span>
-          </h1>
-          <p className="mt-5 max-w-[720px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/75">
-            這頁不是行銷文案，是我們實際用來替每個客戶做 Go / No-Go 決策的框架。
-            如果你想了解顧問公司背後的判斷邏輯，而不是只看結論，這頁就是為你寫的。
-          </p>
+      <section className="relative overflow-hidden bg-navy px-5 pb-[80px] pt-[130px] text-white md:px-10 md:pb-[110px] md:pt-[170px]">
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image src="/images/hero/hero-compass.jpg" alt="" fill priority sizes="100vw" className="object-cover opacity-[0.28]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/65 to-navy" />
+        </div>
+        <div className="relative mx-auto max-w-[1100px]">
+          <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55"><Link href="/" className="hover:text-white">首頁</Link><span className="mx-2 text-white/30">/</span><Link href="/services" className="hover:text-white">服務</Link><span className="mx-2 text-white/30">/</span><span className="text-white/80">方法論</span></nav>
+          <p className="mb-4 text-[14px] font-semibold text-gold">方法論</p>
+          <h1 className="h1 max-w-[760px] text-white">四個方案，是從這裡長出來的</h1>
+          <p className="lead mt-5 max-w-[680px] whitespace-pre-line !text-white/75">這一頁是我們判斷「該不該去、該從哪一章開始」的底層。{"\n"}你不需要讀完才能開始；但如果你想知道我們怎麼想，都在這裡。</p>
         </div>
       </section>
 
-      <div>
-        <div className="sticky top-[74px] z-20 mx-auto w-full max-w-full overflow-hidden px-5 py-[14px] md:w-fit md:px-10">
-          <div className="max-w-full overflow-hidden border border-bd bg-[rgba(245,242,236,0.92)] px-1 py-1 text-center shadow-[0_10px_28px_rgba(16,27,48,0.13)] backdrop-blur-[18px]">
-            <Segmented
-              label="頁內導覽"
-              value={activeSection}
-              onChange={goToSection}
-              options={METHODOLOGY_INDEX.map((item) => ({ ...item }))}
-              className="max-w-full justify-center bg-transparent"
-            />
-          </div>
+      <div className="border-b border-bd bg-cream px-5 py-4 text-[14px] leading-[1.8] text-tx2 md:px-10"><p className="mx-auto max-w-[1100px]"><strong className="text-tx">不是第五章 ·</strong> 這不是第五章。這是我們第一次談的時候，腦子裡跑的那張表。</p></div>
+
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[900px]">
+          <h2 className="h2 text-tx">為什麼要有一張表</h2>
+          <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">出海的決定太常靠感覺：朋友說好、展會上人很多、對方老闆很熱情。{"\n"}我們把它換成五個問題，每個問題有分數、有紅線。{"\n"}分數不是為了好看，是為了在花錢之前，先知道哪一題會出事。</p>
+          <p className="mt-7 border-l-4 border-gold bg-cream px-5 py-5 text-[18px] font-semibold leading-[1.7] text-tx">我們自己的規矩：總分不到 60 分，我們不接。</p>
         </div>
+      </section>
 
-        <section id="framework" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
-          <div className="mx-auto max-w-[900px]">
-            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
-              MBCPR 五維評分
-            </h2>
-            <p className="mt-4 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
-              每個案子我們都會從五個維度打分，每個維度有各自的權重與紅線。
-              加權後的總分直接決定 Go / No-Go。
-            </p>
-            <div
-              aria-label="MARKET · BARRIER · COMPETITION · PROFITABILITY · REGULATORY"
-              className="mt-[38px] grid min-w-0 grid-cols-5 gap-1.5 md:gap-2"
-            >
-              {METHODOLOGY_DIMENSIONS.map((dimension) => (
-                <button
-                  key={dimension.code}
-                  type="button"
-                  onClick={() => goToSection("dimensions")}
-                  className="grid min-w-0 place-items-center bg-gold/10 px-1 py-4 text-center outline-none focus-visible:ring-2 focus-visible:ring-sky md:min-h-[94px] md:px-2"
-                >
-                  <span className="font-sans text-[clamp(28px,5vw,46px)] font-semibold leading-none tracking-[-0.035em] text-gold-d">
-                    {dimension.code}
-                  </span>
-                  <span className="mt-2 break-words text-[10px] font-semibold leading-tight text-tx md:text-[13px]">
-                    {dimension.name}
-                  </span>
-                  <span className="mt-0.5 text-[10px] font-medium text-gold-d md:text-[12px]">
-                    {dimension.weight}
-                  </span>
-                </button>
-              ))}
-            </div>
-            <p className="mt-[14px] text-center text-[11px] tracking-wider text-tx3">
-              MARKET · BARRIER · COMPETITION · PROFITABILITY · REGULATORY
-            </p>
-          </div>
-        </section>
-
-        <section id="dimensions" className="scroll-mt-[126px] bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
-          <div className="mx-auto max-w-[900px]">
-            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
-              具體評的是什麼
-            </h2>
-            <div className="mt-9">
-              {METHODOLOGY_DIMENSIONS.map((dimension) => (
-                <Disclosure
-                  key={dimension.code}
-                  id={`methodology-${dimension.code}`}
-                  summary={
-                    <span className="grid min-w-0 grid-cols-[38px_minmax(0,1fr)_auto] items-center gap-2 md:grid-cols-[52px_minmax(0,1fr)_auto_28px] md:gap-3">
-                      <span className="font-sans text-[26px] font-semibold leading-none tracking-[-0.035em] text-gold-d">
-                        {dimension.code}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block font-sans text-[18px] font-semibold leading-[1.3] text-tx md:text-[21px]">
-                          {dimension.name}
-                        </span>
-                        <span className="mt-1 block text-[14px] font-normal leading-[1.7] text-tx2 md:text-[16px]">
-                          「{dimension.question}」
-                        </span>
-                      </span>
-                      <span className="hidden whitespace-nowrap text-[13px] font-semibold text-gold-d md:block">
-                        權重 {dimension.weight}
-                      </span>
-                    </span>
-                  }
-                >
-                  <div className="pl-[46px] md:pl-[62px]">
-                    <ul className="my-5 space-y-2.5">
-                      {dimension.criteria.map((criterion) => (
-                        <li key={criterion} className="flex items-start gap-3 text-[15px] leading-[1.7] text-tx2">
-                          <span aria-hidden="true" className="mt-[0.7em] size-[5px] shrink-0 bg-gold" />
-                          {criterion}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-5 border-l-[3px] border-red-700/55 bg-red-50/50 p-[18px]">
-                      <p className="text-[14.5px] leading-[1.75] text-red-800">{dimension.redAt}</p>
-                    </div>
-                  </div>
-                </Disclosure>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="decision" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
-          <div className="mx-auto max-w-[900px]">
-            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
-              加權總分 → 決策
-            </h2>
-            <p className="mt-4 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
-              五個維度的加權平均直接對應到四種結論。我們不玩「都有機會」的話術。
-            </p>
-            <div className="mt-[38px] grid gap-3">
-              {METHODOLOGY_DECISIONS.map((decision) => (
-                <article key={decision.verdict} className={`grid gap-2 border-l-4 p-[22px] md:grid-cols-[96px_minmax(0,1fr)] md:gap-5 ${decision.color}`}>
-                  <div>
-                    <p className="text-[14px] leading-[1.6] text-tx3">總分</p>
-                    <p className="font-sans text-[24px] font-semibold leading-none tracking-[-0.035em] tabular-nums text-tx">
-                      {decision.score}
-                    </p>
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="mb-1.5 font-sans text-[18px] font-semibold leading-[1.4] text-tx">
-                      {decision.verdict}
-                    </h3>
-                    <p className="text-[15px] leading-[1.75] text-tx2">{decision.advice}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="example" className="scroll-mt-[126px] bg-navy px-5 py-[80px] text-white md:px-10 md:py-[110px]">
-          <div className="mx-auto max-w-[900px]">
-            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
-              這套框架跑一次<span className="text-gold">長什麼樣</span>
-            </h2>
-            <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/70">
-              下面是我們跑「{WORKED_EXAMPLE.caseName}」時的實際評分表。
-            </p>
-            <div className="mt-10 border border-white/10 bg-white/[0.045] p-5 md:p-7">
-              <div>
-                {WORKED_EXAMPLE.scores.map((score) => (
-                  <div key={score.dim} className="grid min-w-0 grid-cols-[72px_minmax(0,1fr)_36px] items-center gap-2 border-b border-white/10 py-3.5 md:grid-cols-[86px_minmax(0,1fr)_48px] md:gap-3.5">
-                    <span className="text-[12px] font-semibold text-gold md:text-[14px]">{score.dim}</span>
-                    <span className="min-w-0">
-                      <span className="block h-[7px] overflow-hidden bg-white/10">
-                        <span className="block h-full bg-gradient-to-r from-gold/45 to-gold" style={{ width: `${score.score}%` }} />
-                      </span>
-                      <span className="mt-1.5 block text-[11px] leading-[1.55] text-white/60">{score.note}</span>
-                    </span>
-                    <span className="font-sans text-right text-[22px] font-semibold leading-none tracking-[-0.035em] tabular-nums text-white">
-                      {score.score}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-2 flex flex-wrap justify-between gap-x-6 gap-y-5 border-t border-white/15 pt-7">
-                <div>
-                  <p className="text-[14px] leading-[1.6] text-white/55">加權總分</p>
-                  <p className="font-sans text-[42px] font-semibold leading-none tracking-[-0.035em] tabular-nums text-gold">
-                    {WORKED_EXAMPLE.weighted}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[14px] leading-[1.6] text-white/55">結論</p>
-                  <h3 className="font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-amber-300">
-                    {WORKED_EXAMPLE.verdict}
-                  </h3>
-                </div>
-                <p className="w-full text-[15.5px] leading-[1.8] text-white/75">
-                  <span className="font-semibold text-gold">條件：</span>
-                  {WORKED_EXAMPLE.condition}
-                </p>
-                <p className="w-full text-[15.5px] leading-[1.8] text-white/75">
-                  <span className="font-semibold text-gold">實際結果：</span>
-                  {WORKED_EXAMPLE.outcome}
-                </p>
-              </div>
-            </div>
-            <Link href="/cases/costco-health" className="mt-[26px] inline-flex items-center gap-2 text-[16px] font-semibold text-gold hover:text-white">
-              看這個案例的完整故事 <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </section>
-
-        <section id="why" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
-          <div className="mx-auto max-w-[760px]">
-            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
-              我們不靠直覺做決策
-            </h2>
-            <div className="mt-6 space-y-[18px] text-[16px] leading-[1.85] text-tx2">
-              <p>
-                多數顧問公司的「建議」是建立在老闆的個人經驗上。有經驗當然是好事，但經驗會老化、會帶偏見、而且最重要的是——
-                <span className="font-medium text-tx">客戶無法檢驗</span>。
-              </p>
-              <p>
-                我們寫出這套框架的目的，是讓客戶在跟我們合作時，能知道我們的每一個判斷「是怎麼得出來的」。如果你覺得我們某個維度打分不合理，你可以直接問，我們會拿出依據。
-              </p>
-              <p>
-                這套框架也是我們內部的自律工具——它強迫我們在接案前必須跑完整個流程。如果總分不到 60，我們不會接。不管客戶多想做，也不管我們短期內需不需要這筆營收。
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <section className="bg-navy px-5 py-[80px] text-white md:px-10 md:py-[110px]">
-        <div className="mx-auto max-w-[720px] text-center">
-          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
-            想用這套框架<span className="text-gold">評估你的產品</span>？
-          </h2>
-          <p className="mx-auto mt-[18px] max-w-[520px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/70">
-            聊聊你的狀況，我們會用 30 分鐘粗跑一次這五個維度，告訴你目前的大致落點，不收費。
-          </p>
-          <div className="mt-[34px] flex flex-wrap items-center justify-center gap-3">
-            <button onClick={open} className="cursor-pointer bg-gold px-[26px] py-[14px] text-[16px] font-semibold text-navy hover:bg-gold-l">
-              聊聊你的產品 →
-            </button>
-            <Link href="/services/market-assessment" className="bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white hover:bg-white/25">
-              看完整市場評估服務 →
-            </Link>
+      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[1100px]">
+          <h2 className="h2 text-tx">五個問題</h2>
+          <div className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+            {METHODOLOGY_DIMENSIONS.map((dimension) => <article key={dimension.name} className="border border-bd bg-white p-5"><div className="flex items-baseline justify-between gap-3"><h3 className="text-[17px] font-semibold text-tx">{dimension.name}</h3><span className="text-[14px] font-semibold text-gold-d">{dimension.weight}</span></div><p className="mt-4 text-[16px] font-medium leading-[1.6] text-sky">「{dimension.question}」</p><p className="mt-5 text-[14px] leading-[1.8] text-tx2"><strong className="text-tx">看：</strong>{dimension.criteria}</p><p className="mt-5 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="text-ember">紅線：</strong>{dimension.redAt}</p></article>)}
           </div>
         </div>
       </section>
+
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[1100px]">
+          <h2 className="h2 text-tx">分數怎麼讀</h2>
+          <div className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {METHODOLOGY_DECISIONS.map((decision) => <article key={decision.verdict} className={`border border-bd border-l-4 bg-cream p-5 ${decision.color}`}><p className="num text-[28px] leading-none text-gold-d">{decision.score}</p><h3 className="mt-4 text-[18px] font-semibold text-tx">{decision.verdict}</h3><p className="mt-3 text-[14px] leading-[1.8] text-tx2">{decision.advice}</p></article>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[1100px]">
+          <h2 className="h2 text-tx">五個問題，<span className="text-gold-d">四章裡誰在回答</span></h2>
+          <div className="mt-8 overflow-x-auto border border-bd"><table className="min-w-[680px] w-full border-collapse bg-white text-left"><thead className="border-b border-bd bg-navy text-white"><tr><th className="p-4 text-[14px]">問題</th><th className="p-4 text-[14px]">哪一章在回答</th></tr></thead><tbody>{CHAPTER_ANSWERS.map((answer) => <tr key={answer.question} className="border-b border-bd last:border-b-0"><td className="p-4 text-[15px] font-medium text-tx">{answer.question}</td><td className="p-4 text-[15px] leading-[1.8] text-tx2">{"href" in answer ? <><Link href={answer.href} className="font-semibold text-sky hover:text-navy">{answer.label}</Link>{answer.body}</> : answer.body}</td></tr>)}</tbody></table></div>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[960px]">
+          <h2 className="h2 text-tx">一個評分的例子：<span className="text-gold-d">{WORKED_EXAMPLE.caseName}</span></h2>
+          <div className="mt-8 grid min-w-0 grid-cols-1 overflow-hidden border border-bd md:grid-cols-[minmax(0,1fr)_260px]">
+            <div className="bg-cream p-6 md:p-8"><div className="grid gap-4">{WORKED_EXAMPLE.scores.map((score) => <div key={score.dim} className="grid grid-cols-[110px_minmax(0,1fr)_34px] items-center gap-3"><strong className="text-[14px] text-tx">{score.dim}</strong><div><div className="h-2 bg-white"><div className="h-full bg-gold" style={{ width: `${score.score}%` }} /></div><p className="mt-2 text-[13px] leading-[1.6] text-tx2">{score.note}</p></div><span className="num text-[18px] text-gold-d">{score.score}</span></div>)}</div></div>
+            <div className="bg-navy p-6 text-white md:p-8"><p className="text-[14px] text-white/55">加權總分</p><p className="num mt-3 text-[52px] leading-none text-gold">{WORKED_EXAMPLE.weighted}</p><p className="mt-5 text-[18px] font-semibold text-amber-300">{WORKED_EXAMPLE.verdict}</p><p className="mt-5 text-[14px] leading-[1.8] text-white/75"><strong className="text-gold">條件：</strong>{WORKED_EXAMPLE.condition}</p><p className="mt-5 text-[14px] leading-[1.8] text-white/75">{WORKED_EXAMPLE.outcome}</p><Link href="/cases/costco-health" className="mt-6 inline-flex text-[14px] font-semibold text-gold hover:text-white">看這個案例的完整故事 →</Link></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[1100px]">
+          <h2 className="h2 text-tx">五個問題背後，<span className="text-gold-d">是三件事</span></h2>
+          <p className="mt-5 max-w-[760px] text-[16px] leading-[1.9] text-tx2">產品適配性（這個市場真的要你嗎）、通路銷售力（上得了架，還要賣得動）、團隊體質（進得去，還要留得下）。<br />五個問題是量尺，三件事是量的東西。</p>
+          <div className="mt-8 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">{Object.values(PILLARS).map((pillar) => <article key={pillar.slug} className="border border-bd bg-white p-6"><h3 className="h3 text-tx">{pillar.title}</h3><p className="mt-3 text-[15px] font-medium text-sky">{pillar.tagline}</p><p className="mt-5 text-[14px] leading-[1.8] text-tx2">{pillar.description}</p></article>)}</div>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
+        <div className="mx-auto max-w-[860px]">
+          <h2 className="h2 text-tx">常見問題</h2>
+          <div className="mt-6 border-b border-bd">{METHODOLOGY_FAQS.map(([question, answer], index) => <Disclosure key={question} id={`methodology-faq-${index + 1}`} defaultOpen={index === 0} summary={<span><span aria-hidden="true" className="mr-4 text-[13px] font-semibold text-gold-d">{String(index + 1).padStart(2, "0")}</span>{question}</span>}><p className="text-[15.5px] leading-[1.85] text-tx2">{answer}</p></Disclosure>)}</div>
+          <Link href="/services" className="mt-10 flex items-center justify-between gap-5 border border-bd bg-cream p-6 hover:border-gold"><div><p className="text-[14px] font-semibold text-sky">看完量尺，回去看路 →</p><h3 className="h3 mt-3 text-tx">一家品牌在馬尼拉的第一年：品測、寄賣、公司落地、海外客服</h3></div><span aria-hidden="true" className="text-[28px] text-gold-d">→</span></Link>
+        </div>
+      </section>
+
+      <section className="bg-navy px-5 py-[78px] text-white md:px-10 md:py-[96px]"><div className="mx-auto max-w-[720px] text-center"><h2 className="h2 text-white">免費初步評估</h2><p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，粗跑五個問題，不收費。談完你會知道自己在哪一格、該從哪一章開始。</p><ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">預約 30 分鐘 →</ContactButton></div></section>
     </>
   );
 }

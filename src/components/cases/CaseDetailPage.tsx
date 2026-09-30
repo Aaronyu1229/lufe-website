@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import { Carousel } from "@/components/ui";
 import { getRelatedCases, type CaseStudy } from "@/data/cases";
-import { STAGES } from "@/data/services";
 
 import { useMessageBox } from "../MessageBox";
 
@@ -23,12 +22,25 @@ const lightTagStyles: Record<string, string> = {
   gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
 };
 
+const CASE_STAGE_LINKS = {
+  "market-assessment": { label: "第一個月", title: "品測", href: "/services/product-testing" },
+  "product-testing": { label: "第一個月", title: "品測", href: "/services/product-testing" },
+  "channel-entry": { label: "北美", title: "北美通路", href: "/services/north-america" },
+  localization: { label: "第九個月", title: "公司落地", href: "/services/localization" },
+} as const;
+
 interface CaseDetailPageContentProps extends Props {
   readonly onMessageOpen?: () => void;
 }
 
 export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: CaseDetailPageContentProps) {
   const relatedCases = getRelatedCases(caseItem.slug);
+  const stageLinks = Array.from(
+    new Map(caseItem.stagesUsed.map((stageSlug) => {
+      const stage = CASE_STAGE_LINKS[stageSlug];
+      return [stage.href, stage] as const;
+    })).values(),
+  );
 
   return (
     <>
@@ -85,14 +97,13 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
             <h2 className="h3 mb-4 text-tx">怎麼切入這個問題？</h2>
             <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.approach}</p>
 
-            {caseItem.stagesUsed.length > 0 && (
+            {stageLinks.length > 0 && (
               <div className="mt-6 border-t border-bd pt-6">
                 <div className="flex flex-wrap gap-2">
-                  {caseItem.stagesUsed.map((stageSlug) => {
-                    const stage = STAGES[stageSlug];
+                  {stageLinks.map((stage) => {
                     return (
-                      <Link key={stageSlug} href={`/services/${stageSlug}`} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
-                        <span className="num text-gold-d">{stage.num}</span>
+                      <Link key={stage.href} href={stage.href} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
+                        <span className="num text-gold-d">{stage.label}</span>
                         <span>{stage.title}</span>
                         <span aria-hidden="true" className="text-tx3">→</span>
                       </Link>
@@ -117,7 +128,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
             <p className="max-w-[720px] text-[17px] leading-[1.8] text-tx2">不只寫「發生了什麼」，把當時的選項和為什麼這樣選也攤出來——這才是經驗真正的價值。</p>
 
             <div className="mt-10 grid gap-5">
-              {caseItem.keyDecisions.map((decision, index) => (
+              {caseItem.keyDecisions.map((decision) => (
                 <article key={decision.moment} className="border-l-4 border-gold bg-white p-6 md:p-8">
                   <h3 className="h3 mb-5 text-tx">{decision.moment}</h3>
 

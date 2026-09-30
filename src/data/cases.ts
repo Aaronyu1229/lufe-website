@@ -6,9 +6,8 @@
  * Each case is its own /cases/[slug] route.
  */
 
-import type { StageSlug } from "./services";
-
 export type TagVariant = "sky" | "gold";
+export type CaseStageSlug = "market-assessment" | "product-testing" | "channel-entry" | "localization";
 
 export interface CaseTag {
   readonly label: string;
@@ -47,7 +46,7 @@ export interface CaseStudy {
   readonly challenge: string;
   readonly approach: string;
   readonly result: string;
-  readonly stagesUsed: readonly StageSlug[];
+  readonly stagesUsed: readonly CaseStageSlug[];
   readonly keyDecisions: readonly KeyDecision[];
   readonly timeline: readonly TimelineEvent[];
   readonly quote?: {
