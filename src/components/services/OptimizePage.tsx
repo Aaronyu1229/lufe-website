@@ -184,9 +184,6 @@ export function OptimizePage() {
             {OPTIMIZE_SERVICES.map((service, index) => (
               <article key={service.title} className="min-w-0 border border-bd border-l-4 border-l-ember bg-white">
                 <div className="p-[30px]">
-                  <p className="font-sans text-[14px] font-semibold tracking-[0.08em] text-ember">
-                    STEP 0{index + 1}
-                  </p>
                   <h3 className="mt-2 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">
                     {service.title}
                   </h3>
@@ -215,7 +212,6 @@ export function OptimizePage() {
                       ))}
                     </ul>
                     <div className="border-t border-bd2 pt-5">
-                      <p className="mb-2 text-[13px] font-semibold tracking-[0.06em] text-ember">交付成果</p>
                       <p className="bg-ember/10 p-[18px] text-[15px] font-semibold leading-[1.75] text-ember">
                         {service.deliverable}
                       </p>

@@ -97,7 +97,6 @@ function ResultView({ result }: { readonly result: ReturnType<typeof matchSubsid
 
       {result.secondary.length > 0 && (
         <div className="mt-5">
-          <p className="eyebrow mb-3 text-white/50">同時可以疊加申請</p>
           <div className="grid gap-3">
             {result.secondary.map((match) => {
               const accent = accentToText[match.subsidy.accent];

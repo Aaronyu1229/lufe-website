@@ -44,12 +44,10 @@ export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
 
       <div className="mt-6 grid min-w-0 gap-5 border-y border-bd/60 py-5 sm:grid-cols-2">
         <div className="min-w-0">
-          <p className="eyebrow mb-1 text-tx3">補助額度</p>
           <p className={`num text-[22px] ${accent.num}`}>{subsidy.amount}</p>
           {subsidy.amountNote && <p className="mt-1 text-[11.5px] leading-[1.65] text-tx3">{subsidy.amountNote}</p>}
         </div>
         <div className="min-w-0 sm:text-right">
-          <p className="eyebrow mb-1 text-tx3">申請時程</p>
           <p className="text-[15.5px] font-medium text-tx">{subsidy.deadline}</p>
           <p className="mt-1 text-[11.5px] leading-[1.65] text-tx3">{subsidy.applicationNote}</p>
         </div>
@@ -106,7 +104,7 @@ export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
       </div>
 
       <div className="mt-6 bg-navy p-5 text-white/90">
-        <p className="eyebrow mb-2 text-gold">鹿飛怎麼幫上忙</p>
+        
         <p className="text-[14.5px] leading-[1.8]">{subsidy.lufeAngle}</p>
       </div>
 

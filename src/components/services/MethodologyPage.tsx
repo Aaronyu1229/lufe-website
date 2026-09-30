@@ -271,7 +271,6 @@ export function MethodologyPage() {
                   }
                 >
                   <div className="pl-[46px] md:pl-[62px]">
-                    <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">評分依據</p>
                     <ul className="my-5 space-y-2.5">
                       {dimension.criteria.map((criterion) => (
                         <li key={criterion} className="flex items-start gap-3 text-[15px] leading-[1.7] text-tx2">
@@ -281,7 +280,6 @@ export function MethodologyPage() {
                       ))}
                     </ul>
                     <div className="mt-5 border-l-[3px] border-red-700/55 bg-red-50/50 p-[18px]">
-                      <p className="mb-1.5 text-[13px] font-semibold tracking-[0.06em] text-red-600">紅線</p>
                       <p className="text-[14.5px] leading-[1.75] text-red-800">{dimension.redAt}</p>
                     </div>
                   </div>

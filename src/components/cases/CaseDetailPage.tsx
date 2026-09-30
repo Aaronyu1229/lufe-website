@@ -87,7 +87,6 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
             {caseItem.stagesUsed.length > 0 && (
               <div className="mt-6 border-t border-bd pt-6">
-                <p className="mb-3 text-[12px] font-semibold tracking-[0.1em] text-tx3">這個案子用到的階段</p>
                 <div className="flex flex-wrap gap-2">
                   {caseItem.stagesUsed.map((stageSlug) => {
                     const stage = STAGES[stageSlug];
@@ -120,11 +119,9 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
             <div className="mt-10 grid gap-5">
               {caseItem.keyDecisions.map((decision, index) => (
                 <article key={decision.moment} className="border-l-4 border-gold bg-white p-6 md:p-8">
-                  <p className="mb-3 text-[12px] font-semibold tracking-[0.1em] text-gold-d">決策 {index + 1}</p>
                   <h3 className="h3 mb-5 text-tx">{decision.moment}</h3>
 
                   <div className="mb-5">
-                    <p className="mb-2 text-[11px] font-semibold tracking-[0.08em] text-tx3">當時的選項</p>
                     <ul className="grid gap-1.5">
                       {decision.options.map((option) => {
                         const isChoice = option === decision.choice || decision.choice.includes(option.split("（")[0]?.trim() ?? option);

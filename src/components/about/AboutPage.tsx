@@ -487,9 +487,6 @@ export function AboutPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-navy/75 via-navy/40 to-transparent flex items-center">
               <div className="pl-6 md:pl-10">
-                <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold mb-2">
-                  全球節點
-                </div>
                 <div className="text-white text-[17px] md:text-[21px] font-light tracking-[-0.3px] leading-tight">
                   30+ 國家 · 500+ 出口案件 · 10 年實戰
                 </div>

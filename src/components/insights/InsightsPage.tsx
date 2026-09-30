@@ -112,7 +112,6 @@ export function InsightsPageContent({
 
           {featured ? (
             <div className="hidden min-w-0 lg:block">
-              <p className="eyebrow mb-3 text-white/50">本期精選</p>
               <Link href={`/insights/${featured.slug}`} className="block overflow-hidden border border-white/10 bg-white/[0.05] hover:border-gold/60">
                 <div className="relative h-[170px] overflow-hidden">
                   <CoverImage article={featured} sizes="(max-width: 1024px) 100vw, 40vw" />
