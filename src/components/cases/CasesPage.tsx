@@ -4,6 +4,9 @@ import { useRef, useState, type RefObject } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { Reveal } from "@/components/Reveal";
+import { ScrollCue } from "@/components/ScrollCue";
 import { ExpandCard, Segmented, flip } from "@/components/ui";
 import {
   CASES,
@@ -111,7 +114,7 @@ function CaseCard({ caseItem }: { caseItem: (typeof CASES)[number] }) {
       title={caseItem.title}
       image={{ src: caseItem.heroImage, alt: caseItem.title }}
       card={
-        <article className="group overflow-hidden border border-bd bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:border-gold/60">
+        <article className="lufe-card group overflow-hidden border border-bd bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:border-gold/60">
           <div className="relative h-[clamp(250px,35vw,340px)] overflow-hidden bg-navy">
             <Image
               src={caseItem.heroImage}
@@ -166,20 +169,9 @@ export function CasesPageContent({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy px-5 pb-[80px] pt-[130px] text-white md:px-10 md:pb-[110px] md:pt-[170px]">
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image
-            src="/images/cases/cases-hero-collab.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-[0.28]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
-        </div>
-
-        <div className="relative mx-auto max-w-[1100px] min-w-0">
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+        <HeroBackdrop src="/images/v5/cases-2400.webp" mobileSrc="/images/v5/cases-1600.webp" position="center 60%" />
+        <div className="lufe-hero-content mx-auto max-w-[1100px] min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
@@ -189,13 +181,14 @@ export function CasesPageContent({
           <h1 className="h1 mb-7 max-w-[880px] text-white">我們不是跟你賭夢想，<br /><span className="text-gold">是有做過的事</span></h1>
           <p className="lead max-w-[600px] whitespace-pre-line text-white/70">在菲律賓，我們跟合作夥伴走過三條不一樣的路。{"\n"}底下是其中幾個決策的完整過程。</p>
         </div>
+        <ScrollCue />
       </section>
 
       <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
         <div className="mx-auto max-w-[1080px]">
-          <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">
-            {CASE_ROADS.map((road) => <article key={road.label} className="border border-bd bg-cream p-6"><p className="text-[14px] font-semibold text-gold-d">{road.label}</p><h2 className="h3 mt-3 text-tx">{road.title}</h2><p className="mt-4 text-[15px] leading-[1.8] text-tx2">{road.body}</p><div className="mt-6 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="block text-tx">這條路教我們的事</strong>{road.lesson}</div></article>)}
-          </div>
+          <Reveal className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">
+            {CASE_ROADS.map((road) => <article key={road.label} className="lufe-card border border-bd bg-cream p-6"><p className="text-[14px] font-semibold text-gold-d">{road.label}</p><h2 className="h3 mt-3 text-tx">{road.title}</h2><p className="mt-4 text-[15px] leading-[1.8] text-tx2">{road.body}</p><div className="mt-6 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="block text-tx">這條路教我們的事</strong>{road.lesson}</div></article>)}
+          </Reveal>
         </div>
       </section>
 

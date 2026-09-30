@@ -4,6 +4,9 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { Reveal } from "@/components/Reveal";
+import { ScrollCue } from "@/components/ScrollCue";
 import { Segmented, flip } from "@/components/ui";
 import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
 import type { InsightCard } from "@/lib/articles/presentation";
@@ -87,9 +90,9 @@ export function InsightsPageContent({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy px-5 pb-[70px] pt-[130px] text-white md:px-10 md:pb-[90px] md:pt-[170px]">
-        <div className="absolute inset-0" aria-hidden="true"><Image src="/images/insights/insights-hero-analysis.jpg" alt="" fill priority sizes="100vw" className="object-cover opacity-30" /><div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-navy/40" /><div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-transparent to-navy" /></div>
-        <div className="relative mx-auto grid max-w-[1200px] min-w-0 grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14">
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+        <HeroBackdrop src="/images/v5/insights-2400.webp" mobileSrc="/images/v5/insights-1600.webp" />
+        <div className="lufe-hero-content mx-auto grid max-w-[1200px] min-w-0 grid-cols-1 items-end gap-10 pb-[78px] pt-[148px] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14 md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0">
             <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">洞察</span></nav>
             <p className="mb-4 text-[14px] font-semibold text-gold">洞察</p>
@@ -99,19 +102,22 @@ export function InsightsPageContent({
           </div>
           {featured ? <div className="hidden min-w-0 lg:block"><Link href={`/insights/${featured.slug}`} className="block overflow-hidden border border-white/10 bg-white/[0.05] hover:border-gold/60"><div className="relative h-[170px] overflow-hidden"><CoverImage article={featured} sizes="(max-width: 1024px) 100vw, 40vw" /><div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" /><div className="absolute bottom-3 left-4 flex items-center gap-2"><span className="bg-gold px-2 py-0.5 text-[10px] font-semibold tracking-[1px] text-navy">精選</span><span className="text-[10.5px] text-white/80">{chapterLabel(chapterForArticle(featured.slug, chapterBySlug), featured.category)}</span></div></div><div className="p-5"><h2 className="h3 mb-2 text-white">{featured.title}</h2><p className="line-clamp-2 text-[14px] leading-[1.75] text-white/70">{featured.summary}</p><div className="mt-3 flex items-center justify-between text-[11px] text-white/45"><span>{featured.date}</span><span>{featured.readTime}</span></div></div></Link></div> : null}
         </div>
+        <ScrollCue />
       </section>
 
       <section className="overflow-hidden bg-white px-5 pb-[80px] pt-[60px] md:px-10 md:pb-[110px] md:pt-[80px]">
         <div className="mx-auto max-w-[1080px] min-w-0">
           <div className="mb-10 max-w-full overflow-x-auto pb-1"><Segmented label="洞察章節" value={active} onChange={(value) => { if (isValidCategory(value)) onCategoryChange(value); }} options={INSIGHT_CHAPTERS.map((chapter) => ({ value: chapter.key, label: chapter.label }))} className="max-w-none" /></div>
-          <div ref={articleGridRef} className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {listedArticles.map((article) => {
+          <Reveal>
+            <div ref={articleGridRef} className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {listedArticles.map((article, index) => {
               const chapter = chapterForArticle(article.slug, chapterBySlug);
               const isMatch = active === "all" || chapter === active;
               const primaryLabel = chapterLabel(chapter, article.category);
-              return <Link key={article.slug} data-key={article.slug} href={`/insights/${article.slug}`} className={`group min-w-0 overflow-hidden border border-bd bg-white hover:border-gold/60 ${isMatch ? "" : "hidden"}`}><div className="relative aspect-[16/10] overflow-hidden"><CoverImage article={article} sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 360px" /></div><div className="min-w-0 p-5 md:p-6"><div className="mb-3 flex flex-wrap items-center gap-2"><span className={`px-2.5 py-[3px] text-[11px] font-medium ${colorMap[article.color]}`}>{primaryLabel}</span>{chapter && article.category !== primaryLabel ? <span className="border border-bd px-2 py-[2px] text-[10px] text-tx3">{article.category}</span> : null}<span className="text-[11px] text-tx3">{article.readTime}</span></div><h2 className="h3 mb-2 text-tx group-hover:text-gold-d">{article.title}</h2><p className="line-clamp-3 text-[14.5px] leading-[1.8] text-tx2">{article.summary}</p><div className="mt-4 flex items-center justify-between gap-3 text-[13px] text-tx3"><span>{article.date}</span><span className="shrink-0 font-medium text-gold-d">閱讀更多 →</span></div></div></Link>;
-            })}
-          </div>
+              return <Link key={`${article.slug}-${active}`} data-key={article.slug} href={`/insights/${article.slug}`} style={{ animationDelay: `${index * 35}ms` }} className={`lufe-card lufe-insight-card group min-w-0 overflow-hidden border border-bd bg-white hover:border-gold/60 ${isMatch ? "" : "hidden"}`}><div className="relative aspect-[16/10] overflow-hidden"><CoverImage article={article} sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 360px" /></div><div className="min-w-0 p-5 md:p-6"><div className="mb-3 flex flex-wrap items-center gap-2"><span className={`px-2.5 py-[3px] text-[11px] font-medium ${colorMap[article.color]}`}>{primaryLabel}</span>{chapter && article.category !== primaryLabel ? <span className="border border-bd px-2 py-[2px] text-[10px] text-tx3">{article.category}</span> : null}<span className="text-[11px] text-tx3">{article.readTime}</span></div><h2 className="h3 mb-2 text-tx group-hover:text-gold-d">{article.title}</h2><p className="line-clamp-3 text-[14.5px] leading-[1.8] text-tx2">{article.summary}</p><div className="mt-4 flex items-center justify-between gap-3 text-[13px] text-tx3"><span>{article.date}</span><span className="shrink-0 font-medium text-gold-d">閱讀更多 →</span></div></div></Link>;
+              })}
+            </div>
+          </Reveal>
           {!hasMatches ? <div className="py-16 text-center text-[15.5px] text-tx3">這個分類暫時還沒有文章，敬請期待！</div> : null}
           <div className="mt-14 border border-bd bg-cream px-5 py-8 text-center md:px-8"><h2 className="h3 mb-2 text-tx">看完文章，想聊聊你的狀況？</h2><p className="mx-auto mb-6 max-w-[440px] text-[15.5px] leading-[1.8] text-tx2">聊聊，不收費、不承諾。我們會老實告訴你值不值得一試。</p><div className="flex flex-wrap items-center justify-center gap-6"><button onClick={onMessageOpen} className="cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy hover:bg-gold-l">聊聊你的產品 →</button><Link href="/assess" className="inline-flex items-center gap-2 text-[15.5px] font-medium text-tx2 hover:text-navy"><span className="border-b border-tx3/40 pb-0.5">先做 2 分鐘評估</span><span aria-hidden="true">→</span></Link></div></div>
         </div>

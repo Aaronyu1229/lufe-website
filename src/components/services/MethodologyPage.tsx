@@ -1,6 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { Reveal } from "@/components/Reveal";
+import { ScoreBars } from "@/components/ScoreBars";
+import { ScrollCue } from "@/components/ScrollCue";
 import { Disclosure } from "@/components/ui";
 import { PILLARS } from "@/data/services";
 
@@ -82,17 +85,15 @@ const CHAPTER_ANSWERS = [
 export function MethodologyPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy px-5 pb-[80px] pt-[130px] text-white md:px-10 md:pb-[110px] md:pt-[170px]">
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image src="/images/hero/hero-compass.jpg" alt="" fill priority sizes="100vw" className="object-cover opacity-[0.28]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/65 to-navy" />
-        </div>
-        <div className="relative mx-auto max-w-[1100px]">
+      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+        <HeroBackdrop src="/images/v5/methodology-2400.webp" mobileSrc="/images/v5/methodology-1600.webp" />
+        <div className="lufe-hero-content mx-auto max-w-[1100px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55"><Link href="/" className="hover:text-white">首頁</Link><span className="mx-2 text-white/30">/</span><Link href="/services" className="hover:text-white">服務</Link><span className="mx-2 text-white/30">/</span><span className="text-white/80">方法論</span></nav>
           <p className="mb-4 text-[14px] font-semibold text-gold">方法論</p>
           <h1 className="h1 max-w-[760px] text-white">四個方案，是從這裡長出來的</h1>
           <p className="lead mt-5 max-w-[680px] whitespace-pre-line !text-white/75">這一頁是我們判斷「該不該去、該從哪一章開始」的底層。{"\n"}你不需要讀完才能開始；但如果你想知道我們怎麼想，都在這裡。</p>
         </div>
+        <ScrollCue />
       </section>
 
       <div className="border-b border-bd bg-cream px-5 py-4 text-[14px] leading-[1.8] text-tx2 md:px-10"><p className="mx-auto max-w-[1100px]"><strong className="text-tx">不是第五章 ·</strong> 這不是第五章。這是我們第一次談的時候，腦子裡跑的那張表。</p></div>
@@ -108,18 +109,18 @@ export function MethodologyPage() {
       <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
         <div className="mx-auto max-w-[1100px]">
           <h2 className="h2 text-tx">五個問題</h2>
-          <div className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
-            {METHODOLOGY_DIMENSIONS.map((dimension) => <article key={dimension.name} className="border border-bd bg-white p-5"><div className="flex items-baseline justify-between gap-3"><h3 className="text-[17px] font-semibold text-tx">{dimension.name}</h3><span className="text-[14px] font-semibold text-gold-d">{dimension.weight}</span></div><p className="mt-4 text-[16px] font-medium leading-[1.6] text-sky">「{dimension.question}」</p><p className="mt-5 text-[14px] leading-[1.8] text-tx2"><strong className="text-tx">看：</strong>{dimension.criteria}</p><p className="mt-5 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="text-ember">紅線：</strong>{dimension.redAt}</p></article>)}
-          </div>
+          <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+            {METHODOLOGY_DIMENSIONS.map((dimension) => <article key={dimension.name} className="lufe-card border border-bd bg-white p-5"><div className="flex items-baseline justify-between gap-3"><h3 className="text-[17px] font-semibold text-tx">{dimension.name}</h3><span className="text-[14px] font-semibold text-gold-d">{dimension.weight}</span></div><p className="mt-4 text-[16px] font-medium leading-[1.6] text-sky">「{dimension.question}」</p><p className="mt-5 text-[14px] leading-[1.8] text-tx2"><strong className="text-tx">看：</strong>{dimension.criteria}</p><p className="mt-5 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="text-ember">紅線：</strong>{dimension.redAt}</p></article>)}
+          </Reveal>
         </div>
       </section>
 
       <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
         <div className="mx-auto max-w-[1100px]">
           <h2 className="h2 text-tx">分數怎麼讀</h2>
-          <div className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {METHODOLOGY_DECISIONS.map((decision) => <article key={decision.verdict} className={`border border-bd border-l-4 bg-cream p-5 ${decision.color}`}><p className="num text-[28px] leading-none text-gold-d">{decision.score}</p><h3 className="mt-4 text-[18px] font-semibold text-tx">{decision.verdict}</h3><p className="mt-3 text-[14px] leading-[1.8] text-tx2">{decision.advice}</p></article>)}
-          </div>
+          <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {METHODOLOGY_DECISIONS.map((decision) => <article key={decision.verdict} className={`lufe-card border border-bd border-l-4 bg-cream p-5 ${decision.color}`}><p className="num text-[28px] leading-none text-gold-d">{decision.score}</p><h3 className="mt-4 text-[18px] font-semibold text-tx">{decision.verdict}</h3><p className="mt-3 text-[14px] leading-[1.8] text-tx2">{decision.advice}</p></article>)}
+          </Reveal>
         </div>
       </section>
 
@@ -134,7 +135,7 @@ export function MethodologyPage() {
         <div className="mx-auto max-w-[960px]">
           <h2 className="h2 text-tx">一個評分的例子：<span className="text-gold-d">{WORKED_EXAMPLE.caseName}</span></h2>
           <div className="mt-8 grid min-w-0 grid-cols-1 overflow-hidden border border-bd md:grid-cols-[minmax(0,1fr)_260px]">
-            <div className="bg-cream p-6 md:p-8"><div className="grid gap-4">{WORKED_EXAMPLE.scores.map((score) => <div key={score.dim} className="grid grid-cols-[110px_minmax(0,1fr)_34px] items-center gap-3"><strong className="text-[14px] text-tx">{score.dim}</strong><div><div className="h-2 bg-white"><div className="h-full bg-gold" style={{ width: `${score.score}%` }} /></div><p className="mt-2 text-[13px] leading-[1.6] text-tx2">{score.note}</p></div><span className="num text-[18px] text-gold-d">{score.score}</span></div>)}</div></div>
+            <ScoreBars className="bg-cream p-6 md:p-8"><div className="grid gap-4">{WORKED_EXAMPLE.scores.map((score, index) => <div key={score.dim} className="grid grid-cols-[110px_minmax(0,1fr)_34px] items-center gap-3"><strong className="text-[14px] text-tx">{score.dim}</strong><div><div className="h-2 bg-white"><div data-score-fill className="h-full bg-gold" style={{ width: `${score.score}%`, transitionDelay: `${index * 90}ms` }} /></div><p className="mt-2 text-[13px] leading-[1.6] text-tx2">{score.note}</p></div><span className="num text-[18px] text-gold-d">{score.score}</span></div>)}</div></ScoreBars>
             <div className="bg-navy p-6 text-white md:p-8"><p className="text-[14px] text-white/55">加權總分</p><p className="num mt-3 text-[52px] leading-none text-gold">{WORKED_EXAMPLE.weighted}</p><p className="mt-5 text-[18px] font-semibold text-amber-300">{WORKED_EXAMPLE.verdict}</p><p className="mt-5 text-[14px] leading-[1.8] text-white/75"><strong className="text-gold">條件：</strong>{WORKED_EXAMPLE.condition}</p><p className="mt-5 text-[14px] leading-[1.8] text-white/75">{WORKED_EXAMPLE.outcome}</p><Link href="/cases/costco-health" className="mt-6 inline-flex text-[14px] font-semibold text-gold hover:text-white">看這個案例的完整故事 →</Link></div>
           </div>
         </div>

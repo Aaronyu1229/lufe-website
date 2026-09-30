@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 type Chapter = {
   readonly id?: string;
@@ -56,6 +59,47 @@ export const HOME_CHAPTERS: readonly Chapter[] = [
 const TIMELINE_LABELS = ["第一個月", "第三個月", "第九個月", "之後的每一天"] as const;
 
 export function ChaptersSection() {
+  const cardsRef = useRef<Array<HTMLElement | null>>([]);
+  const [progress, setProgress] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [flashIndex, setFlashIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const cards = cardsRef.current.filter((card): card is HTMLElement => card !== null);
+      if (cards.length === 0) return;
+      const first = cards[0].getBoundingClientRect();
+      const last = cards.at(-1)?.getBoundingClientRect();
+      if (!last) return;
+      const start = window.scrollY + first.top - window.innerHeight * .68;
+      const end = window.scrollY + last.bottom - window.innerHeight * .45;
+      const nextProgress = end <= start ? 1 : Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)));
+      setProgress(nextProgress);
+      setActiveIndex(Math.min(cards.length - 1, Math.max(0, Math.floor(nextProgress * cards.length))));
+    };
+    const requestUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  function jumpToChapter(index: number) {
+    const card = cardsRef.current[index];
+    if (!card) return;
+    card.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+    setFlashIndex(index);
+    window.setTimeout(() => setFlashIndex(null), 1200);
+  }
+
   return (
     <section id="chapters" className="bg-cream px-5 py-[80px] md:px-10 md:py-[104px]">
       <div className="mx-auto max-w-[1200px]">
@@ -70,18 +114,20 @@ export function ChaptersSection() {
           </p>
         </div>
 
-        <ol className="mx-auto mb-8 grid max-w-[1040px] grid-cols-4 gap-2 border-y border-bd py-5 md:mb-10 md:gap-5">
-          {TIMELINE_LABELS.map((label) => (
-            <li key={label} className="min-w-0 text-center text-[11px] font-medium leading-[1.45] text-tx2 md:text-[13px]">
-              <span className="mx-auto mb-2 block h-2 w-2 bg-gold" aria-hidden="true" />
-              {label}
+        <ol className="lufe-home-timeline mx-auto mb-8 grid max-w-[1040px] grid-cols-4 gap-2 border-y border-bd py-5 md:mb-10 md:gap-5" style={{ "--lufe-home-progress": progress } as CSSProperties}>
+          {TIMELINE_LABELS.map((label, index) => (
+            <li key={label} className="min-w-0 text-center">
+              <button type="button" onClick={() => jumpToChapter(index)} className={`lufe-home-timeline-button ${index <= activeIndex ? "lufe-home-timeline-hit" : ""}`}>
+                <span className="lufe-home-timeline-dot" aria-hidden="true" />
+                {label}
+              </button>
             </li>
           ))}
         </ol>
 
         <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-          {HOME_CHAPTERS.map((chapter) => (
-            <article id={chapter.id} key={chapter.label} className="flex min-w-0 flex-col border border-bd bg-white p-6 md:p-8">
+          {HOME_CHAPTERS.map((chapter, index) => (
+            <article ref={(element) => { cardsRef.current[index] = element; }} id={chapter.id} key={chapter.label} className={`lufe-card flex min-w-0 flex-col border border-bd bg-white p-6 md:p-8 ${flashIndex === index ? "lufe-home-chapter-flash" : ""}`}>
               <p className="mb-4 text-[13px] font-semibold text-gold-d">{chapter.label}</p>
               <h3 className="mb-5 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">{chapter.title}</h3>
               <p className="whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{chapter.scene}</p>

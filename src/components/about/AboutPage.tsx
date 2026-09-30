@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { Reveal } from "@/components/Reveal";
+import { ScrollCue } from "@/components/ScrollCue";
 import { Carousel } from "@/components/ui/Carousel";
 import { useMessageBox } from "../MessageBox";
 
@@ -280,30 +283,9 @@ export function AboutPage() {
       {/* ─── Founder Story (executive window hero) ─── */}
       <section
         id="story"
-        className="relative bg-navy text-white pt-[130px] md:pt-[170px] pb-[80px] md:pb-[100px] px-5 md:px-10 overflow-hidden scroll-mt-[80px]"
+        className="lufe-hero bg-navy px-5 text-white md:px-10 scroll-mt-[80px]"
       >
-        {/* Executive window photo — conveys senior, reflective experience */}
-        <div className="absolute inset-0 overflow-hidden">
-          <Image
-            src="/images/about/about-hero-executive.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[65%_center] opacity-[0.35]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/35" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy" />
-          {/* Light sweep */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-y-0 -left-1/3 w-1/3 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.04) 40%, rgba(212,168,92,0.08) 50%, rgba(255,255,255,0.04) 60%, transparent 100%)",
-            }}
-          />
-        </div>
+        <HeroBackdrop src="/images/about/about-hero-executive.jpg" position="65% center" />
 
         {/* Soft gold glow — with pulse */}
         <div
@@ -315,7 +297,7 @@ export function AboutPage() {
           }}
         />
 
-        <div className="relative max-w-[1200px] mx-auto">
+        <div className="lufe-hero-content mx-auto max-w-[1200px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
             <Link href="/" className="hover:text-gold">首頁</Link>
@@ -377,6 +359,7 @@ export function AboutPage() {
             ))}
           </div>
         </div>
+        <ScrollCue />
       </section>
 
       {/* ─── Story: 3 flickable cards ─── */}
@@ -426,11 +409,11 @@ export function AboutPage() {
             同時又有足夠的專業分工與在地夥伴支援。
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
+          <Reveal className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
             {teamRoles.map((role) => (
               <div
                 key={role.title}
-                className="group bg-white border border-bd p-6 hover:border-gold hover:shadow-[0_8px_28px_rgba(16,27,48,0.07)]"
+                className="lufe-card group bg-white border border-bd p-6 hover:border-gold"
               >
                 <div className="w-12 h-12 bg-[rgba(212,168,92,0.08)] border border-gold-d/25 flex items-center justify-center text-gold-d mb-4 group-hover:bg-[rgba(212,168,92,0.14)]">
                   {role.icon}
@@ -443,7 +426,7 @@ export function AboutPage() {
                 </p>
               </div>
             ))}
-          </div>
+          </Reveal>
 
           <div className="mt-8 text-[14.5px] text-tx3 font-normal italic">
             * 我們的定位是「小型精品 + 全球網絡」——不是萬人顧問公司，也不是 solo freelancer。
@@ -518,13 +501,13 @@ export function AboutPage() {
             通路關係、在地夥伴和科技工具，全部為你的跨境計畫服務。
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <Reveal className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {networkCards.map((card) => {
               const c = colorMap[card.color];
               return (
                 <div
                   key={card.title}
-                  className={`p-7 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-lg ${c.border}`}
+                  className={`lufe-card p-7 bg-white ${c.border}`}
                 >
                   <div
                     className={`w-14 h-14 ${c.iconBg} flex items-center justify-center mb-4`}
@@ -538,7 +521,7 @@ export function AboutPage() {
                 </div>
               );
             })}
-          </div>
+          </Reveal>
         </div>
       </section>
 
