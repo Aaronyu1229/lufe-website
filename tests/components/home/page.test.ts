@@ -1,19 +1,22 @@
-import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("@/lib/articles/repository", () => ({
+  listPublishedArticles: async () => [],
+}));
 
 import Home from "@/app/page";
-import { HOME_CASE_CARDS } from "@/components/home/CasesSection";
+import { HOME_CASE_CARDS, HOME_CASE_ROADS } from "@/components/home/CasesSection";
 import { HOME_FAQ_ITEMS } from "@/components/home/HomeFAQ";
 import { HOME_HERO_SLIDES } from "@/components/home/HeroSection";
-import { HOME_COVERAGE_PILLARS, HOME_COVERAGE_ROWS } from "@/components/home/WhySection";
-import { getSubsidyBySlug } from "@/data/subsidies";
+import { HOME_CHAPTERS } from "@/components/home/PositioningBand";
+import { HOME_CONTRACT_COLUMNS, HOME_CONTRACT_ROWS, HOME_CONTRACT_WEEKDAYS } from "@/components/home/WhySection";
 
-const markup = () => renderToStaticMarkup(createElement(Home));
+const markup = async () => renderToStaticMarkup(await Home());
 
 describe("home page", () => {
-  it("keeps all tab, carousel, panel, and disclosure text in static markup", () => {
-    const rendered = markup();
+  it("keeps all tab, chapter, carousel, article, table, and disclosure text in static markup", async () => {
+    const rendered = await markup();
 
     for (const slide of HOME_HERO_SLIDES) {
       expect(rendered).toContain(slide.chipLabel);
@@ -37,27 +40,51 @@ describe("home page", () => {
       expect(rendered).toContain(item.trustSignal);
     }
 
+    for (const road of HOME_CASE_ROADS) {
+      expect(rendered).toContain(road.label);
+      expect(rendered).toContain(road.title);
+      expect(rendered).toContain(road.detail);
+    }
+
     for (const item of HOME_FAQ_ITEMS) {
       expect(rendered).toContain(item.question);
       expect(rendered).toContain(item.takeaway);
       expect(rendered).toContain(item.answer);
     }
 
-    for (const pillar of HOME_COVERAGE_PILLARS) expect(rendered).toContain(pillar);
-    for (const row of HOME_COVERAGE_ROWS) {
-      expect(rendered).toContain(row.label);
-      expect(rendered).toContain(row.note);
+    for (const chapter of HOME_CHAPTERS) {
+      expect(rendered).toContain(chapter.label);
+      expect(rendered).toContain(chapter.title);
+      expect(rendered).toContain(chapter.scene);
+      expect(rendered).toContain(chapter.detail);
+      expect(rendered).toContain(chapter.price);
+      expect(rendered).toContain(chapter.linkLabel);
     }
 
-    expect(rendered).toContain(getSubsidyBySlug("overseas-exhibition")!.verifiedOn);
+    for (const column of HOME_CONTRACT_COLUMNS) expect(rendered).toContain(column);
+    for (const row of HOME_CONTRACT_ROWS) expect(rendered).toContain(row.label);
+    for (const [day, text] of HOME_CONTRACT_WEEKDAYS) {
+      expect(rendered).toContain(day);
+      expect(rendered).toContain(text);
+    }
+
+    expect(rendered).toContain("很多品牌的出海故事，");
+    expect(rendered).toContain("貨代把貨送到馬尼拉，報關、清關、進倉，一切順利。");
+    expect(rendered).toContain("貨都有送到，差別從來不在物流。");
+    expect(rendered).toContain("四十二年，");
+    expect(rendered).toContain("我們相信的事很簡單");
+    expect(rendered).toContain("躍馬企業 · 年國際物流實戰");
+    expect(rendered).toContain("讀到一半想深入的，");
+    expect(rendered).toContain("看所有文章 →");
+    expect(rendered).not.toContain("越南市場進入指南：台灣品牌該知道的 5 個關鍵");
   });
 
-  it("uses no rounded utility classes", () => {
-    expect(markup()).not.toContain("rounded-");
+  it("uses no rounded utility classes", async () => {
+    expect(await markup()).not.toContain("rounded-");
   });
 
-  it("uses no legacy heading utility classes", () => {
-    const rendered = markup();
+  it("uses no legacy heading utility classes", async () => {
+    const rendered = await markup();
 
     expect(rendered).not.toContain("hero-title");
     expect(rendered).not.toContain("section-heading");

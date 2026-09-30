@@ -5,7 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_LOCALE } from "@/lib/site";
+import { SITE_URL, SITE_NAME, SITE_LOCALE } from "@/lib/site";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -37,7 +37,9 @@ const notoSansTC = localFont({
   adjustFontFallback: false,
 });
 
-const DEFAULT_TITLE = `${SITE_NAME} — 協助台灣企業落地北美與東南亞`;
+const DEFAULT_TITLE = "鹿飛 LUFÉ — 貨到了之後，我們接著走｜台灣品牌進菲律賓";
+const DEFAULT_DESCRIPTION = "貨代把貨送到，故事才開始。鹿飛陪台灣品牌走完在菲律賓的第一年：品測、寄賣、公司落地、海外客服，四個方案各有價，先花 1～2 萬看市場反應。創辦人來自躍馬企業，底下是 42 年的國際物流。";
+const DEFAULT_KEYWORDS = "台灣企業出海,菲律賓落地,菲律賓品測,菲律賓寄賣,菲律賓公司落地,海外客服外包,菲律賓 call center,出海起手包,連鎖餐飲出海,美妝出海菲律賓,北美通路,Costco 上架,鹿飛,LUFÉ";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -45,30 +47,16 @@ export const metadata: Metadata = {
     default: DEFAULT_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
-  description: SITE_DESCRIPTION,
+  description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],
-  keywords: [
-    "台灣企業出海",
-    "東南亞落地",
-    "北美通路",
-    "菲律賓商機",
-    "印尼市場",
-    "越南市場進入",
-    "產品適配性",
-    "通路銷售",
-    "海外團隊建置",
-    "跨境顧問",
-    "企業出海方法論",
-    "鹿飛",
-    "LUFÉ",
-  ],
+  keywords: DEFAULT_KEYWORDS,
   openGraph: {
     type: "website",
     locale: SITE_LOCALE,
     siteName: SITE_NAME,
     title: DEFAULT_TITLE,
-    description: SITE_DESCRIPTION,
+    description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: "/og-image.jpg",
@@ -81,7 +69,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: DEFAULT_TITLE,
-    description: SITE_DESCRIPTION,
+    description: DEFAULT_DESCRIPTION,
     images: ["/og-image.jpg"],
   },
   robots: {
