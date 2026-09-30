@@ -6,8 +6,8 @@ export function NextChapter({ chapter }: { readonly chapter: Chapter }) {
   if (!chapter.next) return null;
 
   return (
-    <section className="bg-white px-5 py-[64px] md:px-10">
-      <div className="mx-auto max-w-[960px]">
+    <section className="bg-white py-[64px]">
+      <div className="lufe-container">
         <Link href={chapter.next.href} className="lufe-card flex items-center justify-between gap-6 border border-bd bg-cream p-6 hover:border-gold md:p-8">
           <div>
             <p className="mb-2 text-[13px] font-medium text-gold-d">{chapter.next.label}</p>

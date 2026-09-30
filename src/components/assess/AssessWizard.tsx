@@ -269,8 +269,8 @@ export function AssessWizard() {
 
 function AssessFallback() {
   return (
-    <section className="min-h-screen bg-navy pt-[140px] pb-20 px-5 md:px-10">
-      <div className="max-w-[720px] mx-auto text-center text-white/50 text-[15.5px]">
+    <section className="min-h-screen bg-navy pb-20 pt-[140px]">
+      <div className="lufe-container text-center text-[15.5px] text-white/50">
         載入中…
       </div>
     </section>
@@ -301,8 +301,8 @@ export const assessQuestions: readonly MatcherFlowQuestion[] = [
 /** Exported for SSR-copy tests; all questions remain mounted in MatcherFlow. */
 export function AssessQuestionFlow({ focusCase, onExit }: { readonly focusCase?: CaseStudy; readonly onExit?: () => void }) {
   return (
-    <section className="min-h-screen overflow-hidden bg-navy px-5 pb-20 pt-[130px] text-white md:px-10 md:pb-24 md:pt-[160px]">
-      <div className="mx-auto max-w-[860px]">
+    <section className="min-h-screen overflow-hidden bg-navy pb-20 pt-[130px] text-white md:pb-24 md:pt-[160px]">
+      <div className="lufe-container">
         <MatcherFlow
           questions={assessQuestions}
           onRestartLabel="重新開始"
@@ -334,7 +334,7 @@ export function EntryScreen({
   onStart: () => void;
 }) {
   return (
-    <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+    <section className="lufe-hero bg-navy text-white">
       <HeroBackdrop src="/images/cases/cases-hero-collab.jpg" />
       {/* Animated gold glow */}
       <div
@@ -346,7 +346,7 @@ export function EntryScreen({
         }}
       />
 
-      <div className="lufe-hero-content mx-auto max-w-[760px] pb-20 pt-[148px] md:pb-28 md:pt-[170px]">
+      <div className="lufe-container lufe-hero-content"><div className="max-w-[760px] pb-20 pt-[148px] md:pb-28 md:pt-[170px]">
         {/* Breadcrumb */}
         <nav
           aria-label="Breadcrumb"
@@ -476,7 +476,7 @@ export function EntryScreen({
         </div>
 
         <AssessQuestionStaticCopy />
-      </div>
+      </div></div>
     </section>
   );
 }
@@ -533,7 +533,7 @@ function ResultScreen({
   return (
     <>
       {/* ─── Verdict hero (navy) ─── */}
-      <section className="relative bg-navy pt-[130px] md:pt-[160px] pb-[70px] md:pb-[90px] px-5 md:px-10 overflow-hidden">
+      <section className="relative overflow-hidden bg-navy pb-[70px] pt-[130px] md:pb-[90px] md:pt-[160px]">
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
@@ -543,7 +543,7 @@ function ResultScreen({
           }}
         />
 
-        <div className="relative max-w-[860px] mx-auto">
+        <div className="lufe-container relative"><div className="max-w-[860px]">
           {/* Top row */}
           <div className="flex items-center justify-end mb-8 flex-wrap gap-4">
             <button
@@ -589,12 +589,12 @@ function ResultScreen({
           <p className="text-[15.5px] md:text-[17px] text-white/70 leading-[1.9] font-normal italic max-w-[700px] border-l-2 border-gold/50 pl-5">
             {narrative.closing}
           </p>
-        </div>
+        </div></div>
       </section>
 
       {/* ─── Case card + quote (cream bg for reading comfort) ─── */}
-      <section className="bg-navy pt-[60px] md:pt-[80px] pb-[60px] md:pb-[80px] px-5 md:px-10">
-        <div className="max-w-[860px] mx-auto">
+      <section className="bg-navy pb-[60px] pt-[60px] md:pb-[80px] md:pt-[80px]">
+        <div className="lufe-container"><div className="max-w-[860px]">
           {/* Primary case card */}
           <article className="bg-white border border-gold/30 shadow-[0_12px_40px_rgba(18,38,63,0.08)] mb-8">
             <div className="relative h-[240px] md:h-[320px] overflow-hidden">
@@ -712,7 +712,7 @@ function ResultScreen({
               </button>
             </div>
           </div>
-        </div>
+        </div></div>
       </section>
     </>
   );

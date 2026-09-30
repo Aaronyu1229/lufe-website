@@ -24,10 +24,11 @@ export function SubsidyAlertBand() {
   return (
     <section
       aria-label="限期政府補助加碼"
-      className="bg-cream px-5 pb-[80px] md:px-10 md:pb-[104px]"
+      className="bg-cream pb-[80px] md:pb-[104px]"
     >
-      <div className="mx-auto max-w-[1200px] bg-navy px-7 py-9 text-white shadow-[0_30px_60px_-20px_rgba(16,27,48,0.35)] md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:px-14 md:py-11">
-        <div className="min-w-0">
+      <div className="lufe-container">
+        <div className="bg-navy px-7 py-9 text-white shadow-[0_30px_60px_-20px_rgba(16,27,48,0.35)] md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:px-14 md:py-11">
+          <div className="min-w-0">
           <span className="inline-flex bg-gold/15 px-3 py-[5px] text-[12px] font-semibold tracking-[0.04em] text-gold">
             115 年度加碼
           </span>
@@ -45,7 +46,7 @@ export function SubsidyAlertBand() {
           </div>
         </div>
 
-        <div className="mt-6 flex shrink-0 flex-col gap-3 md:mt-0 md:items-end">
+          <div className="mt-6 flex shrink-0 flex-col gap-3 md:mt-0 md:items-end">
             <Link
               href="/resources/subsidies#overseas-exhibition"
               className="inline-flex items-center gap-2 bg-gold px-[26px] py-[14px] text-[16px] font-semibold text-navy"
@@ -63,6 +64,7 @@ export function SubsidyAlertBand() {
                 className="h-[7px] w-[7px] shrink-0 rotate-[-45deg] border-b border-r border-current"
               />
             </Link>
+          </div>
         </div>
       </div>
     </section>

@@ -281,7 +281,7 @@ export function HeroSection() {
       </h1>
 
       {/* All slide copy stays in the server HTML; only the active layer is visible. */}
-      <div className="lufe-hero-content max-w-[1400px] mx-auto mt-auto w-full px-5 pb-[104px] md:px-10 md:pb-[128px] lg:px-16">
+      <div className="lufe-container lufe-hero-content mt-auto pb-[104px] md:pb-[216px]">
         {HOME_HERO_SLIDES.map((slide, i) => {
           const isActive = i === activeIndex;
 
@@ -343,7 +343,7 @@ export function HeroSection() {
 
       {/* Bottom slide navigator — Bain-style distributed bar */}
       <div className="absolute left-0 right-0 bottom-0 z-10 border-t border-white/10 bg-gradient-to-t from-black/30 to-transparent backdrop-blur-[2px]">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-16 h-[60px] md:h-[76px] flex items-stretch">
+        <div className="lufe-container flex h-[60px] items-stretch md:h-[76px]">
           {HOME_HERO_SLIDES.map((slide, i) => {
             const isActive = i === activeIndex;
             return (

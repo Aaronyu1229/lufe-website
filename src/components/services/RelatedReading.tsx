@@ -12,8 +12,8 @@ export function RelatedReadingContent({ articles: reading }: { readonly articles
   if (reading.length === 0) return null;
 
   return (
-    <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
-      <div className="mx-auto max-w-[1100px]">
+    <section className="bg-cream py-[72px] md:py-[88px]">
+      <div className="lufe-container">
         <h2 className="h2 mb-8 text-tx">延伸閱讀</h2>
         <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">
           {reading.map((article) => (

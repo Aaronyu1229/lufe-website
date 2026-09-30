@@ -91,9 +91,9 @@ export function ArticleDetail({ article, image }: Props) {
   const externalImage = /^https?:\/\//.test(image);
 
   return (
-    <article className="min-h-screen bg-white px-5 pb-[80px] pt-[126px] md:px-10 md:pb-[110px] md:pt-[148px]">
+    <article className="min-h-screen bg-white pb-[80px] pt-[126px] md:pb-[110px] md:pt-[148px]">
       <ReadingProgress />
-      <div className="mx-auto max-w-[720px] min-w-0">
+      <div className="lufe-container"><div className="max-w-[720px] min-w-0">
         <header className="mb-10">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-tx3">
             <Link href="/insights" className="hover:text-navy">洞察與資源</Link>
@@ -163,7 +163,7 @@ export function ArticleDetail({ article, image }: Props) {
             ← 回到所有文章
           </Link>
         </div>
-      </div>
+      </div></div>
     </article>
   );
 }

@@ -75,9 +75,9 @@ function SectionHeading({ children }: { readonly children: ReactNode }) {
 export function OptimizePageContent({ relatedReading }: { readonly relatedReading?: ReactNode }) {
   return (
     <>
-      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+      <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/v5/optimize-2400.webp" mobileSrc="/images/v5/optimize-1600.webp" position="70% 30%" />
-        <div className="lufe-hero-content mx-auto max-w-[1100px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55">
             <Link href="/" className="hover:text-white">首頁</Link>
             <span className="mx-2 text-white/30">/</span>
@@ -93,12 +93,12 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         <ScrollCue />
       </section>
 
-      <div className="border-b border-bd bg-cream px-5 py-4 text-[14px] leading-[1.8] text-tx2 md:px-10">
-        <p className="mx-auto max-w-[1100px]"><strong className="text-tx">進階 ·</strong> 還沒開始的品牌，先看<Link href="/services" className="font-semibold text-sky hover:text-navy">四章</Link>。這一頁是給已經在海外跑了一段時間的人。</p>
+      <div className="border-b border-bd bg-cream py-4 text-[14px] leading-[1.8] text-tx2">
+        <p className="lufe-container"><strong className="text-tx">進階 ·</strong> 還沒開始的品牌，先看<Link href="/services" className="font-semibold text-sky hover:text-navy">四章</Link>。這一頁是給已經在海外跑了一段時間的人。</p>
       </div>
 
-      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="mx-auto max-w-[1100px]">
+      <section className="bg-white py-[72px] md:py-[88px]">
+        <div className="lufe-container">
           <SectionHeading>你大概卡在<span className="text-gold-d">這五段之一</span></SectionHeading>
           <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-5">
             {OPTIMIZE_PAIN_POINTS.map((point) => (
@@ -112,10 +112,10 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         </div>
       </section>
 
-      <section id="opt-cost" className="scroll-mt-[90px] bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
-          <div className="relative min-h-[260px] overflow-hidden border border-bd"><Image src="/images/services/services-optimize-whiteboard.jpg" alt="檢視物流與營運資料" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" /></div>
-          <div>
+      <section id="opt-cost" className="scroll-mt-[90px] bg-cream py-[72px] md:py-[88px]">
+        <div className="lufe-container grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
+          <div className="relative min-h-[260px] overflow-hidden border border-bd md:order-2"><Image src="/images/services/services-optimize-whiteboard.jpg" alt="檢視物流與營運資料" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" /></div>
+          <div className="md:order-1">
             <p className="text-[14px] font-semibold text-gold-d">01</p>
             <SectionHeading>省不下來：<span className="text-gold-d">先看你的物流帳單</span></SectionHeading>
             <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">我們是做物流出身的，最知道一張月結單裡哪些數字不該長那樣。{"\n"}從運輸方式、倉儲位置、退貨處理三個層面重新盤點。</p>
@@ -124,8 +124,8 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         </div>
       </section>
 
-      <section id="opt-sales" className="scroll-mt-[90px] bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-12">
+      <section id="opt-sales" className="scroll-mt-[90px] bg-white py-[72px] md:py-[88px]">
+        <div className="lufe-container grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-12">
           <div>
             <p className="text-[14px] font-semibold text-gold-d">02</p>
             <SectionHeading>賣得起伏：<span className="text-gold-d">廣告一停就沒單，通常不是廣告的問題</span></SectionHeading>
@@ -135,10 +135,10 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         </div>
       </section>
 
-      <section id="opt-find" className="scroll-mt-[90px] bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
-          <div className="relative min-h-[260px] overflow-hidden border border-bd"><Image src="/images/insights/amazon-category.jpg" alt="線上通路與搜尋資料" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" /></div>
-          <div>
+      <section id="opt-find" className="scroll-mt-[90px] bg-cream py-[72px] md:py-[88px]">
+        <div className="lufe-container grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
+          <div className="relative min-h-[260px] overflow-hidden border border-bd md:order-2"><Image src="/images/insights/amazon-category.jpg" alt="線上通路與搜尋資料" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" /></div>
+          <div className="md:order-1">
             <p className="text-[14px] font-semibold text-gold-d">03</p>
             <SectionHeading>沒被找到：<span className="text-gold-d">客人在問 AI，AI 沒提到你</span></SectionHeading>
             <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">越來越多人買東西前先問 ChatGPT、Perplexity。{"\n"}SEO 文章月產 30 篇以上 + AI 搜尋引擎佈局（AIO），讓 ChatGPT、Perplexity 在回答相關問題時推薦你的品牌。</p>
@@ -147,8 +147,8 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         </div>
       </section>
 
-      <section id="opt-system" className="scroll-mt-[90px] bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="mx-auto max-w-[1100px]">
+      <section id="opt-system" className="scroll-mt-[90px] bg-white py-[72px] md:py-[88px]">
+        <div className="lufe-container">
           <p className="text-[14px] font-semibold text-gold-d">04</p>
           <SectionHeading>跑得卡卡：<span className="text-gold-d">事情都在人的腦子裡</span></SectionHeading>
           <p className="mt-5 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.9] text-tx2">台灣早上九點，馬尼拉也是九點，但事情還是對不上——{"\n"}因為流程在人身上，不在系統裡。{"\n\n"}一套五階導入的營運作業系統：</p>
@@ -159,16 +159,16 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         </div>
       </section>
 
-      <section id="opt-dashboard" className="scroll-mt-[90px] bg-navy px-5 py-[72px] text-white md:px-10 md:py-[88px]">
-        <div className="mx-auto max-w-[900px]">
+      <section id="opt-dashboard" className="scroll-mt-[90px] bg-navy py-[72px] text-white md:py-[88px]">
+        <div className="lufe-container">
           <p className="text-[14px] font-semibold text-gold">05</p>
           <h2 className="h2 text-white">看不見：<span className="text-gold">每個月結束才知道賺沒賺</span></h2>
           <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-white/75">五階裡的第四階就是這件事：把物流、通路、客服的數字放到同一個畫面。{"\n"}不是為了好看，是為了下個月的決定不用猜。</p>
         </div>
       </section>
 
-      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="mx-auto max-w-[1100px]">
+      <section className="bg-cream py-[72px] md:py-[88px]">
+        <div className="lufe-container">
           <SectionHeading>兩種合作方式</SectionHeading>
           <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2">
             {OPTIMIZE_SERVICES.map((service) => <article key={service.title} className="lufe-card border-t-4 border-gold bg-white p-6 md:p-8"><p className="text-[14px] font-semibold text-gold-d">{service.title}</p><h3 className="h3 mt-3 text-tx">{service.timeline}</h3><div className="mt-6 grid gap-4">{service.details.map(([label, detail]) => <p key={label} className="text-[15px] leading-[1.8] text-tx2"><strong className="text-tx">{label}：</strong>{detail}</p>)}</div></article>)}
@@ -176,8 +176,8 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         </div>
       </section>
 
-      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="mx-auto max-w-[860px]">
+      <section className="bg-white py-[72px] md:py-[88px]">
+        <div className="lufe-container">
           <SectionHeading>常見問題</SectionHeading>
           <div className="mt-6 border-b border-bd">
             {OPTIMIZE_FAQS.map(([question, answer], index) => <Disclosure key={question} id={`optimize-faq-${index + 1}`} defaultOpen={index === 0} summary={<span><span aria-hidden="true" className="mr-4 text-[13px] font-semibold text-gold-d">{String(index + 1).padStart(2, "0")}</span>{question}</span>}><p className="text-[15.5px] leading-[1.85] text-tx2">{answer}</p></Disclosure>)}
@@ -187,12 +187,12 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
 
       {relatedReading}
 
-      <section className="bg-navy px-5 py-[78px] text-white md:px-10 md:py-[96px]">
-        <div className="mx-auto max-w-[720px] text-center">
+      <section className="bg-navy py-[78px] text-white md:py-[96px]">
+        <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
           <h2 className="h2 text-white">聊聊你卡在哪一段</h2>
           <p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，聽你現在的狀況，告訴你該先診斷還是直接做。</p>
           <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">聊聊你的狀況 →</ContactButton>
-        </div>
+        </div></div>
       </section>
     </>
   );
