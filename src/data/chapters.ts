@@ -126,7 +126,7 @@ export const CHAPTER_ARTICLES = {
 } as const satisfies Record<ArticleChapterKey, readonly string[]>;
 
 export const CHAPTER_ARTICLE_TAGS = {
-  m1: "第一個月：市場與市場探查",
+  m1: "第一個月：市場探查",
   m3: "第三個月：通路與證",
   m9: "第九個月：落地與團隊",
   after: "之後的每一天：客服與營運",
