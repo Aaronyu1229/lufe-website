@@ -24,6 +24,10 @@ describe("ServicesPage", () => {
     }
   });
 
+  it("never shows a literal backslash-n to visitors", () => {
+    expect(renderPage()).not.toContain("\\n");
+  });
+
   it("does not render rounded utility classes", () => {
     expect(renderPage()).not.toMatch(/\brounded-(?!full\b)/);
   });
