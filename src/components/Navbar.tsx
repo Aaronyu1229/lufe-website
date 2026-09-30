@@ -266,8 +266,9 @@ function MenuColumn({ label, children }: { label: string; children: ReactNode })
   return <div><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">{label}</p>{children}</div>;
 }
 
-function MenuLink({ href, title, desc, external = false }: { href: string; title: string; desc?: string; external?: boolean }) {
-  const content = <><b className="block text-[14.5px] font-semibold transition-colors group-hover:text-sky">{title}</b>{desc && <span className="text-[12.5px] text-tx3">{desc}</span>}</>;
+function MenuLink({ href, title, desc, icon, external = false }: { href: string; title: string; desc?: string; icon?: ReactNode; external?: boolean }) {
+  const titleContent = icon ? <span className="flex items-center gap-2"><span className="text-tx2 transition-colors group-hover:text-sky">{icon}</span>{title}</span> : title;
+  const content = <><b className="block text-[14.5px] font-semibold transition-colors group-hover:text-sky">{titleContent}</b>{desc && <span className="text-[12.5px] text-tx3">{desc}</span>}</>;
   return external ? <a href={href} target="_blank" rel="noopener noreferrer" className="group block py-[6px]">{content}</a> : <Link href={href} className="group block py-[6px]">{content}</Link>;
 }
 
@@ -289,11 +290,25 @@ function CasesMenu() {
   </div>;
 }
 
+// Monochrome line icons, stroke weighted to match the semibold labels, replacing emoji so category marks follow text color.
+const CATEGORY_ICON_PATHS: Record<string, ReactNode> = {
+  菲律賓: <><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></>,
+  印尼: <><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></>,
+  東南亞趨勢: <><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></>,
+  北美市場: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z" /></>,
+  出海實戰: <><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></>,
+  企業體質: <><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" /><path d="M15 9h4a1 1 0 0 1 1 1v11" /><path d="M3 21h18" /><path d="M8 8h3M8 12h3M8 16h3" /></>,
+};
+
+function CategoryIcon({ category }: { category: string }) {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="block shrink-0">{CATEGORY_ICON_PATHS[category]}</svg>;
+}
+
 function InsightsMenu() {
   const latestArticle = articles[0];
-  const categories = [["🇵🇭 菲律賓", "菲律賓"], ["🇮🇩 印尼", "印尼"], ["🌏 東南亞趨勢", "東南亞趨勢"], ["🌎 北美市場", "北美市場"], ["🎯 出海實戰", "出海實戰"], ["🧠 企業體質", "企業體質"]] as const;
+  const categories = ["菲律賓", "印尼", "東南亞趨勢", "北美市場", "出海實戰", "企業體質"] as const;
   return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
-    <MenuColumn label="主題分類">{categories.map(([label, category]) => <MenuLink key={category} href={`/insights?cat=${encodeURIComponent(category)}`} title={label} />)}</MenuColumn>
+    <MenuColumn label="主題分類">{categories.map((category) => <MenuLink key={category} href={`/insights?cat=${encodeURIComponent(category)}`} title={category} icon={<CategoryIcon category={category} />} />)}</MenuColumn>
     <MenuColumn label="其他內容"><MenuLink href="/resources" title="補助與活動" desc="政府補助 + 現場紀錄" /><MenuLink href="/field-notes" title="現場紀錄" desc="活動、演講、媒體露出" /><MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具" external /><MenuLink href="/services/methodology" title="鹿飛方法論" /><MenuLink href="/insights" title="看所有文章" /></MenuColumn>
     <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">最新文章</p>{latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group"><div className="relative mb-2 aspect-video overflow-hidden"><Image src={getArticleImage(latestArticle)} alt={latestArticle.title} fill sizes="360px" className="object-cover" /></div><b className="block text-[14px] font-semibold leading-[1.5] group-hover:text-sky">{latestArticle.title}</b><span className="text-[12px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}</div>
   </div>;
@@ -323,15 +338,15 @@ function MobileGroup({ item, open, onToggle, onClose }: { item: { key: MenuKey; 
   </div>;
 }
 
-function MobileSubLink({ href, title, onClose }: { href: string; title: string; onClose: () => void }) {
-  return <Link href={href} onClick={onClose} className="block border-b border-bd px-7 py-[10px] text-[14.5px] text-tx2 active:bg-black/[.07]">{title}</Link>;
+function MobileSubLink({ href, title, icon, onClose }: { href: string; title: string; icon?: ReactNode; onClose: () => void }) {
+  return <Link href={href} onClick={onClose} className="flex items-center gap-2 border-b border-bd px-7 py-[10px] text-[14.5px] text-tx2 active:bg-black/[.07]">{icon && <span className="text-tx2">{icon}</span>}{title}</Link>;
 }
 
 function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: () => void }) {
   if (itemKey === "services") return <><p className="mb-1 mt-1 px-7 text-[11px] font-semibold tracking-[.05em] text-tx2">完整路徑</p>{STAGE_ORDER.map((slug) => <MobileSubLink key={slug} href={`/services/${slug}`} title={STAGES[slug].title} onClose={onClose} />)}<p className="mb-1 mt-3 px-7 text-[11px] font-semibold tracking-[.05em] text-tx2">進階方案</p><MobileSubLink href="/services/optimize" title="運營優化方案" onClose={onClose} /><MobileSubLink href="/services/methodology" title="鹿飛方法論" onClose={onClose} /><MobileSubLink href="/services" title="服務總覽" onClose={onClose} /></>;
   if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={`${caseItem.num} ${caseItem.title}`} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例" onClose={onClose} /></>;
   if (itemKey === "about") return <><MobileSubLink href="/about#story" title="創辦故事" onClose={onClose} /><MobileSubLink href="/about#team" title="團隊組成" onClose={onClose} /><MobileSubLink href="/about#how-we-work" title="我們怎麼合作" onClose={onClose} /><MobileSubLink href="/about#network" title="合作夥伴網絡" onClose={onClose} /><MobileSubLink href="/about#what-we-dont-do" title="我們不做什麼" onClose={onClose} /></>;
-  return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} /><MobileSubLink href="/insights?cat=東南亞趨勢" title="🌏 東南亞趨勢" onClose={onClose} /><MobileSubLink href="/insights?cat=北美市場" title="🌎 北美市場" onClose={onClose} /><MobileSubLink href="/insights?cat=出海實戰" title="🎯 出海實戰" onClose={onClose} /><MobileSubLink href="/insights?cat=企業體質" title="🧠 企業體質" onClose={onClose} /><MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;
+  return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} /><MobileSubLink href="/insights?cat=東南亞趨勢" title="東南亞趨勢" icon={<CategoryIcon category="東南亞趨勢" />} onClose={onClose} /><MobileSubLink href="/insights?cat=北美市場" title="北美市場" icon={<CategoryIcon category="北美市場" />} onClose={onClose} /><MobileSubLink href="/insights?cat=出海實戰" title="出海實戰" icon={<CategoryIcon category="出海實戰" />} onClose={onClose} /><MobileSubLink href="/insights?cat=企業體質" title="企業體質" icon={<CategoryIcon category="企業體質" />} onClose={onClose} /><MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;
 }
 
 function MessageBoxTrigger({ className = "", onOpen }: { className?: string; onOpen?: () => void }) {
