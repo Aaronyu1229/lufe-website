@@ -5,7 +5,7 @@ import { CHAPTERS, PHILIPPINES_CHAPTER_KEYS, type PhilippinesChapterKey } from "
 export function ChapterBar({ current }: { readonly current: PhilippinesChapterKey }) {
   return (
     <nav aria-label="菲律賓服務章節" className="sticky top-[74px] z-20 border-y border-bd bg-white px-5 py-3 md:px-10">
-      <div className="mx-auto flex max-w-[1100px] min-w-max items-center gap-2 overflow-x-auto md:min-w-0 md:justify-between">
+      <div className="mx-auto flex max-w-[1100px] items-center gap-2 overflow-x-auto md:justify-between">
         {PHILIPPINES_CHAPTER_KEYS.map((key, index) => {
           const chapter = CHAPTERS[key];
           const isCurrent = key === current;
