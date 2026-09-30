@@ -15,7 +15,11 @@ import { useMessageBox } from "./MessageBox";
 import { useSpring } from "@/lib/motion";
 import { articles, getArticleImage } from "@/data/articles";
 import { CASES } from "@/data/cases";
-import { CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
+import {
+  CHAPTER_ARTICLES,
+  CHAPTER_ARTICLE_TAGS,
+  type ArticleChapterKey,
+} from "@/data/chapters";
 
 type MenuKey = "services" | "advanced" | "cases" | "insights" | "about";
 
@@ -29,17 +33,15 @@ const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
   { key: "about", label: "關於我們" },
 ];
 
-const SERVICE_MENU_ITEMS = [
-  { href: "/services/product-testing", title: "品測", desc: "第一個月 · 先讓馬尼拉的媽媽拿起來看看" },
-  { href: "/services/consignment", title: "寄賣", desc: "第三個月 · 上架了，讓人先用過再說" },
-  { href: "/services/localization", title: "公司落地", desc: "第九個月 · 開始想要在當地有自己的人" },
-  { href: "/services/call-center", title: "海外客服", desc: "之後的每一天 · 星期五晚上十一點的那封信" },
-  { href: "/services/north-america", title: "北美通路", desc: "另一個故事 · 北美貨架" },
-] as const;
+const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
 
-const ADVANCED_MENU_ITEMS = [
-  { href: "/services/optimize", title: "運營優化" },
-  { href: "/services/methodology", title: "鹿飛方法論" },
+const ABOUT_MENU_ITEMS = [
+  { href: "/about#story", title: "創辦故事", desc: "我們為什麼做這件事", num: "01" },
+  { href: "/about#team", title: "團隊組成", desc: "台灣核心＋全球節點", num: "02" },
+  { href: "/about#how-we-work", title: "我們怎麼合作", desc: "你會得到什麼樣的陪跑", num: "03" },
+  { href: "/about#network", title: "合作夥伴網絡", desc: "北美／東南亞／全球物流", num: "04" },
+  { href: "/about#philosophy", title: "我們相信的事", desc: "品牌理念", num: "05" },
+  { href: "/about#what-we-dont-do", title: "誠實的邊界", desc: "我們不做什麼", num: "06" },
 ] as const;
 
 function pathnameHasDarkHero(pathname: string): boolean {
@@ -62,7 +64,7 @@ export function Navbar() {
   const panelRefs = useRef<Partial<Record<MenuKey, HTMLDivElement>>>({});
   const closeTimer = useRef<number | undefined>(undefined);
   const megaReveal = useSpring(0, { precision: 0.002 });
-  const megaHeight = useSpring(0);
+  const megaHeight = useSpring(0, { response: 0.38, damping: 1 });
   const mobileReveal = useSpring(0, { precision: 0.002 });
 
   const transparentOverHero = darkHero && !scrolledPastHero;
@@ -170,7 +172,7 @@ export function Navbar() {
     if (!activeMenu || !megaOpen) return;
     const panel = panelRefs.current[activeMenu];
     if (!panel) return;
-    megaHeight.to(panel.scrollHeight, { response: 0.35 });
+    megaHeight.to(panel.scrollHeight, { response: 0.38, damping: 1 });
   }, [activeMenu, megaOpen, megaHeight]);
 
   const menuOpacity = megaReveal.value;
@@ -222,7 +224,7 @@ export function Navbar() {
 
       <div
         id="desktop-mega-menu"
-        className="lufe-glass-panel absolute left-1/2 top-[64px] hidden w-[min(1120px,calc(100vw-24px))] overflow-hidden text-tx min-[900px]:block"
+        className="lufe-glass-panel absolute left-1/2 top-[64px] hidden min-h-[300px] w-[min(1120px,calc(100vw-24px))] overflow-hidden text-tx min-[900px]:block"
         style={{
           height: megaHeight.value,
           opacity: menuOpacity,
@@ -240,6 +242,7 @@ export function Navbar() {
             key={item.key}
             itemKey={item.key}
             active={activeMenu === item.key && megaOpen}
+            onMessageOpen={openMessageBox}
             setRef={(node) => {
               if (node) panelRefs.current[item.key] = node;
             }}
@@ -276,11 +279,11 @@ export function Navbar() {
   );
 }
 
-function MegaPane({ itemKey, active, setRef }: { itemKey: MenuKey; active: boolean; setRef: (node: HTMLDivElement | null) => void }) {
+function MegaPane({ itemKey, active, onMessageOpen, setRef }: { itemKey: MenuKey; active: boolean; onMessageOpen: () => void; setRef: (node: HTMLDivElement | null) => void }) {
   return (
-    <div ref={setRef} aria-hidden={!active} className={`absolute inset-x-0 top-0 grid gap-6 px-7 pb-6 pt-[26px] transition-opacity duration-150 ${active ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
+    <div ref={setRef} aria-hidden={!active} className={`${active ? "relative pointer-events-auto opacity-100 delay-[60ms]" : "absolute pointer-events-none opacity-0"} inset-x-0 top-0 grid min-h-[300px] grid-cols-[1fr_1fr_320px] transition-opacity duration-[180ms]`}>
       {itemKey === "services" && <ServicesMenu />}
-      {itemKey === "advanced" && <AdvancedMenu />}
+      {itemKey === "advanced" && <AdvancedMenu onMessageOpen={onMessageOpen} />}
       {itemKey === "cases" && <CasesMenu />}
       {itemKey === "insights" && <InsightsMenu />}
       {itemKey === "about" && <AboutMenu />}
@@ -288,34 +291,160 @@ function MegaPane({ itemKey, active, setRef }: { itemKey: MenuKey; active: boole
   );
 }
 
-function MenuColumn({ label, children }: { label: string; children: ReactNode }) {
-  return <div><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">{label}</p>{children}</div>;
+function MenuColumn({ label, bordered = false, children }: { label: string; bordered?: boolean; children: ReactNode }) {
+  return <section className={`${bordered ? "border-l border-bd" : ""} min-w-0 px-[26px] pb-7 pt-[26px]`}><MenuLabel>{label}</MenuLabel>{children}</section>;
 }
 
-function MenuLink({ href, title, desc, icon, external = false }: { href: string; title: string; desc?: string; icon?: ReactNode; external?: boolean }) {
-  const titleContent = icon ? <span className="flex items-center gap-2"><span className="text-tx2 transition-colors group-hover:text-sky">{icon}</span>{title}</span> : title;
-  const content = <><b className="block text-[14.5px] font-semibold transition-colors group-hover:text-sky">{titleContent}</b>{desc && <span className="text-[12.5px] text-tx3">{desc}</span>}</>;
-  return external ? <a href={href} target="_blank" rel="noopener noreferrer" className="group block py-[6px]">{content}</a> : <Link href={href} className="group block py-[6px]">{content}</Link>;
+function MenuRail({ label, children }: { label: string; children: ReactNode }) {
+  return <aside className="min-w-0 border-l border-bd bg-[rgba(245,242,236,.7)] px-[26px] pb-7 pt-[26px]"><MenuLabel>{label}</MenuLabel>{children}</aside>;
+}
+
+function MenuLabel({ children }: { children: ReactNode }) {
+  if (!children) return <div aria-hidden="true" className="mb-3 h-[18px]" />;
+  return <p className="mb-3 text-[12px] font-semibold text-tx3">{children}</p>;
+}
+
+function MenuMarker({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return <span className={`grid h-7 w-7 shrink-0 place-items-center text-gold-d transition-[color,transform] duration-[350ms] ease-[var(--ease-spring)] group-hover:translate-x-px group-hover:text-[#7A5A1A] ${className}`}>{children}</span>;
+}
+
+type MenuLinkProps = {
+  href: string;
+  title: string;
+  desc?: string;
+  marker: ReactNode;
+  external?: boolean;
+};
+
+function MenuLink({ href, title, desc, marker, external = false }: MenuLinkProps) {
+  const content = <><MenuMarker>{marker}</MenuMarker><span className="min-w-0"><b className="block text-[15px] font-[650] tracking-[-.005em] transition-colors group-hover:text-sky">{title}</b>{desc && <span className="mt-0.5 block truncate text-[12.5px] text-tx3">{desc}</span>}</span></>;
+  const className = "group -mx-3 grid grid-cols-[28px_minmax(0,1fr)] items-start gap-3 px-3 py-2.5 transition-[background-color,transform] duration-150 hover:bg-[rgba(58,107,132,.07)] active:scale-[.985]";
+
+  return external
+    ? <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
+    : <Link href={href} className={className}>{content}</Link>;
+}
+
+function MenuMoreLink({ href, children }: { href: string; children: ReactNode }) {
+  return <Link href={href} className="mt-2 inline-flex text-[13.5px] font-semibold text-sky hover:text-navy">{children}</Link>;
+}
+
+function FeatureLink({ href, title, value, desc, action }: { href: string; title: string; value?: string; desc: ReactNode; action: string }) {
+  return <Link href={href} className="group block bg-navy p-5 text-white hover:bg-navy-l"><b className="block text-[17px] font-[650]">{title}</b>{value && <strong className="num my-2 block text-[38px] leading-none text-gold">{value}</strong>}<span className="block text-[12.5px] leading-[1.6] text-white/70">{desc}</span><span className="mt-[14px] inline-block bg-gold px-[14px] py-[9px] text-[13.5px] font-semibold text-navy">{action}</span></Link>;
+}
+
+function FeatureAction({ title, value, desc, action, onClick }: { title: string; value: string; desc: string; action: string; onClick: () => void }) {
+  return <button type="button" onClick={onClick} className="block w-full cursor-pointer bg-navy p-5 text-left text-white hover:bg-navy-l active:!scale-[.985]"><b className="block text-[17px] font-[650]">{title}</b><strong className="num my-2 block text-[38px] leading-none text-gold">{value}</strong><span className="block text-[12.5px] leading-[1.6] text-white/70">{desc}</span><span className="mt-[14px] inline-block bg-gold px-[14px] py-[9px] text-[13.5px] font-semibold text-navy">{action}</span></button>;
+}
+
+function CompassIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></svg>;
+}
+
+function TrendIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></svg>;
+}
+
+function BuildingIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" /><path d="M15 9h4a1 1 0 0 1 1 1v11" /><path d="M3 21h18" /></svg>;
+}
+
+function HeadsetIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0" /><path d="M3 14h4v6H3zM17 14h4v6h-4z" /></svg>;
+}
+
+function ListIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10" /></svg>;
+}
+
+function BarsIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>;
+}
+
+function ClockIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>;
+}
+
+function FileIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z" /><path d="M14 3v5h5" /></svg>;
+}
+
+function PinIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></svg>;
+}
+
+function TradeIcon() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" /></svg>;
 }
 
 function ServicesMenu() {
-  return <div className="grid grid-cols-5 gap-5">{SERVICE_MENU_ITEMS.map((item) => <MenuLink key={item.href} {...item} />)}</div>;
+  return <>
+    <MenuColumn label="菲律賓 · 第一年四章">
+      <MenuLink href="/services/product-testing" title="品測" desc="第一個月 · 1～2 萬" marker={<CompassIcon />} />
+      <MenuLink href="/services/consignment" title="寄賣" desc="第三個月 · 5～6 萬" marker={<TrendIcon />} />
+      <MenuLink href="/services/localization" title="公司落地" desc="第九個月 · 按案報價" marker={<BuildingIcon />} />
+      <MenuLink href="/services/call-center" title="海外客服" desc="之後的每一天 · 2027 Q1 首批" marker={<HeadsetIcon />} />
+    </MenuColumn>
+    <MenuColumn label="另一條線" bordered>
+      <MenuLink href="/services/north-america" title="北美通路" desc="Costco、Walmart、Amazon" marker={<span className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>} />
+      <div className="mt-[18px]"><MenuLabel>一頁看完</MenuLabel></div>
+      <MenuLink href="/services" title="四章總覽" desc="一家品牌在馬尼拉的第一年" marker={<ListIcon />} />
+    </MenuColumn>
+    <MenuRail label="從這裡開始">
+      <FeatureLink href="/services/product-testing" title="出海起手包" value="7 萬" desc={<>品測 1～2 萬＋寄賣包 5～6 萬。<br />沒過，錢到此為止。</>} action="看品測怎麼做 →" />
+    </MenuRail>
+  </>;
 }
 
-function AdvancedMenu() {
-  return <div className="grid max-w-[520px] grid-cols-2 gap-6">{ADVANCED_MENU_ITEMS.map((item) => <MenuLink key={item.href} {...item} />)}</div>;
+function AdvancedMenu({ onMessageOpen }: { onMessageOpen: () => void }) {
+  return <>
+    <MenuColumn label="已經在海外">
+      <MenuLink href="/services/optimize" title="運營優化" desc="已經跑起來了，該讓每公里更省" marker={<TrendIcon />} />
+    </MenuColumn>
+    <MenuColumn label="我們怎麼判斷" bordered>
+      <MenuLink href="/services/methodology" title="鹿飛方法論" desc="五個問題、分數怎麼讀" marker={<BarsIcon />} />
+      <MenuLink href="/assess" title="2 分鐘處境比對" desc="看你最像哪一個案例" marker={<ClockIcon />} />
+    </MenuColumn>
+    <MenuRail label="不確定從哪一段開始">
+      <FeatureAction title="免費初步評估" value="30 分鐘" desc="粗跑五個問題，不收費。" action="預約 30 分鐘 →" onClick={onMessageOpen} />
+    </MenuRail>
+  </>;
 }
 
 function CasesMenu() {
-  return <div className="grid grid-cols-[2fr_1fr] gap-6">
-    <div><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">精選案例</p><div className="grid grid-cols-2 gap-x-6 gap-y-1">
-      {CASES.map((caseItem) => <Link key={caseItem.slug} href={`/cases/${caseItem.slug}`} className="group grid grid-cols-[70px_1fr] items-baseline gap-2 py-2"><span className="num text-[20px] text-gold-d">{caseItem.num}</span><span><b className="block text-[14px] font-semibold group-hover:text-sky">{caseItem.title}</b><span className="text-[12px] text-tx3">{caseItem.tags.map((tag) => tag.label).join(" · ")}</span></span></Link>)}
-    </div></div>
-    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">分類瀏覽</p><p className="text-[13px] text-tx2">按產業</p><p className="mb-[10px] text-[14px] text-tx2">食品 · 電子 · 服飾 · 餐飲</p><p className="text-[13px] text-tx2">按市場</p><p className="mb-2 text-[14px] text-tx2">北美 · 東南亞</p><Link href="/cases" className="text-[13.5px] font-semibold text-sky">看所有案例 →</Link></div>
-  </div>;
+  const caseColumns = [
+    CASES.filter((_, index) => index === 0 || index === 2),
+    CASES.filter((_, index) => index === 1 || index === 3),
+  ] as const;
+
+  return <>
+    <MenuColumn label="精選案例">
+      {caseColumns[0].map((caseItem) => <CaseMenuLink key={caseItem.slug} caseItem={caseItem} />)}
+    </MenuColumn>
+    <MenuColumn label="" bordered>
+      {caseColumns[1].map((caseItem) => <CaseMenuLink key={caseItem.slug} caseItem={caseItem} />)}
+      <MenuMoreLink href="/cases">看所有案例 →</MenuMoreLink>
+    </MenuColumn>
+    <MenuRail label="按產業、按市場">
+      <div className="flex flex-wrap gap-[6px]">
+        {["食品", "電子", "服飾", "飲品"].map((tag) => <CaseTagLink key={tag}>{tag}</CaseTagLink>)}
+      </div>
+      <div className="mt-[6px] flex flex-wrap gap-[6px]">
+        {["北美", "東南亞"].map((tag) => <CaseTagLink key={tag}>{tag}</CaseTagLink>)}
+      </div>
+      <div className="mt-4"><FeatureLink href="/assess" title="不確定比較像哪一條？" desc="先做 2 分鐘處境比對。" action="開始比對 →" /></div>
+    </MenuRail>
+  </>;
 }
 
-// Monochrome line icons, stroke weighted to match the semibold labels, one per insight chapter.
+function CaseMenuLink({ caseItem }: { caseItem: (typeof CASES)[number] }) {
+  return <MenuLink href={`/cases/${caseItem.slug}`} title={caseItem.title} desc={caseItem.tags.map((tag) => tag.label).join(" · ")} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} />;
+}
+
+function CaseTagLink({ children }: { children: ReactNode }) {
+  return <Link href="/cases" className="border border-bd bg-white px-2.5 py-[5px] text-[12.5px] text-tx2 hover:border-sky hover:text-sky">{children}</Link>;
+}
+
 const CHAPTER_ICON_PATHS: Record<Exclude<ArticleChapterKey, "na" | "sub">, ReactNode> = {
   m1: <><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></>,
   m3: <><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></>,
@@ -323,30 +452,50 @@ const CHAPTER_ICON_PATHS: Record<Exclude<ArticleChapterKey, "na" | "sub">, React
   after: <><path d="M4 14a8 8 0 0 1 16 0" /><path d="M3 14h4v6H3zM17 14h4v6h-4z" /></>,
 };
 
-// "補助與活動" already has its own entry (the resources page), so the menu lists the five story chapters.
-const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
-
 function ChapterIcon({ chapter }: { chapter: (typeof INSIGHT_MENU_CHAPTERS)[number] }) {
-  // North America is the only unambiguous country, so it gets a code badge instead of a line icon.
-  if (chapter === "na") return <span aria-hidden="true" className="grid h-4 w-4 shrink-0 place-items-center border-[1.5px] border-current text-[7.5px] font-bold leading-none tracking-[-.02em]">US</span>;
-  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="block shrink-0">{CHAPTER_ICON_PATHS[chapter]}</svg>;
+  if (chapter === "na") return <span aria-hidden="true" className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>;
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{CHAPTER_ICON_PATHS[chapter]}</svg>;
 }
 
 function InsightsMenu() {
   const latestArticle = articles[0];
-  return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
-    <MenuColumn label="按章節找">{INSIGHT_MENU_CHAPTERS.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} icon={<ChapterIcon chapter={chapter} />} />)}</MenuColumn>
-    <MenuColumn label="其他內容"><MenuLink href="/resources" title="補助與活動" desc="政府補助 + 現場紀錄" /><MenuLink href="/field-notes" title="現場紀錄" desc="活動、演講、媒體露出" /><MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具" external /><MenuLink href="/services/methodology" title="鹿飛方法論" /><MenuLink href="/insights" title="看所有文章" /></MenuColumn>
-    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">最新文章</p>{latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group"><div className="relative mb-2 aspect-video overflow-hidden"><Image src={getArticleImage(latestArticle)} alt={latestArticle.title} fill sizes="360px" className="object-cover" /></div><b className="block text-[14px] font-semibold leading-[1.5] group-hover:text-sky">{latestArticle.title}</b><span className="text-[12px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}</div>
-  </div>;
+
+  return <>
+    <MenuColumn label="按章節找">
+      {INSIGHT_MENU_CHAPTERS.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} desc={`${CHAPTER_ARTICLES[chapter].length} 篇`} marker={<ChapterIcon chapter={chapter} />} />)}
+    </MenuColumn>
+    <MenuColumn label="其他內容" bordered>
+      <MenuLink href="/resources" title="補助與活動" desc="政府補助＋現場紀錄" marker={<FileIcon />} />
+      <MenuLink href="/field-notes" title="現場紀錄" desc="活動、演講、媒體露出" marker={<PinIcon />} />
+      <MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具 ↗" desc="三分鐘查完目標市場關稅 ↗" marker={<TradeIcon />} external />
+      <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
+    </MenuColumn>
+    <MenuRail label="最新文章">
+      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block"><div className="relative mb-3 aspect-video overflow-hidden"><Image src={getArticleImage(latestArticle)} alt={latestArticle.title} fill sizes="268px" className="object-cover" /></div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
+    </MenuRail>
+  </>;
 }
 
 function AboutMenu() {
-  return <div className="grid grid-cols-[1fr_1fr_1.1fr] gap-6">
-    <MenuColumn label="認識鹿飛"><MenuLink href="/about#story" title="創辦故事" desc="我們為什麼做這件事" /><MenuLink href="/about#team" title="團隊組成" desc="台灣核心團隊 + 全球節點" /><MenuLink href="/about#how-we-work" title="我們怎麼合作" desc="你會得到什麼樣的陪跑" /></MenuColumn>
-    <MenuColumn label="立場與網絡"><MenuLink href="/about#network" title="合作夥伴網絡" desc="北美 / 東南亞 / 全球物流" /><MenuLink href="/about#philosophy" title="品牌理念" desc="我們相信的事" /><MenuLink href="/about#what-we-dont-do" title="我們不做什麼" desc="誠實的邊界" /></MenuColumn>
-    <div className="border-l border-bd pl-6"><p className="mb-[10px] text-[11.5px] font-bold tracking-[.02em] text-gold-d">創辦人</p><Link href="/about" className="group grid grid-cols-[52px_1fr] items-center gap-3"><span className="grid h-[52px] w-[52px] place-items-center bg-gold font-bold text-navy">AY</span><span><b className="block text-[14px] font-semibold group-hover:text-sky">Aaron Yu</b><small className="block text-[12px] text-gold-d">鹿飛 LUFÉ 創辦人</small><small className="block text-[12px] text-tx3">42 年國際物流實戰<br />500+ 出口案件 · 30+ 國家</small></span></Link></div>
-  </div>;
+  return <>
+    <MenuColumn label="認識鹿飛">
+      {ABOUT_MENU_ITEMS.slice(0, 3).map((item) => <AboutMenuLink key={item.num} {...item} />)}
+    </MenuColumn>
+    <MenuColumn label="立場與網絡" bordered>
+      {ABOUT_MENU_ITEMS.slice(3).map((item) => <AboutMenuLink key={item.num} {...item} />)}
+    </MenuColumn>
+    <MenuRail label="創辦人">
+      <Link href="/about" className="group grid grid-cols-[64px_minmax(0,1fr)] items-center gap-[14px]">
+        <Image src="/images/about/aaron-portrait.jpg" alt="" width={64} height={64} className="h-16 w-16 object-cover object-[center_18%]" />
+        <span className="min-w-0"><b className="block text-[16px] font-[650] transition-colors group-hover:text-sky">Aaron Yu</b><small className="mt-0.5 block text-[12.5px] font-semibold text-gold-d">鹿飛 LUFÉ 創辦人・來自躍馬企業</small></span>
+        <p className="col-span-full text-[12.5px] leading-[1.7] text-tx2">看了很多年貨櫃出去，決定去接貨到了之後的事。</p>
+      </Link>
+    </MenuRail>
+  </>;
+}
+
+function AboutMenuLink({ href, title, desc, num }: (typeof ABOUT_MENU_ITEMS)[number]) {
+  return <MenuLink href={href} title={title} desc={desc} marker={<span className="num text-[13px] font-bold">{num}</span>} />;
 }
 
 function MobileGroup({ item, open, onToggle, onClose }: { item: { key: MenuKey; label: string }; open: boolean; onToggle: () => void; onClose: () => void }) {
@@ -365,16 +514,37 @@ function MobileGroup({ item, open, onToggle, onClose }: { item: { key: MenuKey; 
   </div>;
 }
 
-function MobileSubLink({ href, title, icon, onClose }: { href: string; title: string; icon?: ReactNode; onClose: () => void }) {
-  return <Link href={href} onClick={onClose} className="flex items-center gap-2 border-b border-bd px-7 py-[10px] text-[14.5px] text-tx2 active:bg-black/[.07]">{icon && <span className="text-tx2">{icon}</span>}{title}</Link>;
+function MobileSubLink({ href, title, marker, external = false, onClose }: { href: string; title: string; marker?: ReactNode; external?: boolean; onClose: () => void }) {
+  const content = <>{marker && <MenuMarker>{marker}</MenuMarker>}<span>{title}</span></>;
+  const className = `group flex items-center ${marker ? "gap-2" : ""} border-b border-bd px-7 py-[10px] text-[14.5px] text-tx2 active:bg-black/[.07]`;
+  return external
+    ? <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClose} className={className}>{content}</a>
+    : <Link href={href} onClick={onClose} className={className}>{content}</Link>;
 }
 
 function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: () => void }) {
-  if (itemKey === "services") return <>{SERVICE_MENU_ITEMS.map((item) => <MobileSubLink key={item.href} href={item.href} title={item.title} onClose={onClose} />)}</>;
-  if (itemKey === "advanced") return <>{ADVANCED_MENU_ITEMS.map((item) => <MobileSubLink key={item.href} href={item.href} title={item.title} onClose={onClose} />)}</>;
-  if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={`${caseItem.num} ${caseItem.title}`} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例" onClose={onClose} /></>;
-  if (itemKey === "about") return <><MobileSubLink href="/about#story" title="創辦故事" onClose={onClose} /><MobileSubLink href="/about#team" title="團隊組成" onClose={onClose} /><MobileSubLink href="/about#how-we-work" title="我們怎麼合作" onClose={onClose} /><MobileSubLink href="/about#network" title="合作夥伴網絡" onClose={onClose} /><MobileSubLink href="/about#what-we-dont-do" title="我們不做什麼" onClose={onClose} /></>;
-  return <><MobileSubLink href="/insights" title="所有文章" onClose={onClose} />{INSIGHT_MENU_CHAPTERS.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} icon={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}<MobileSubLink href="/field-notes" title="現場紀錄" onClose={onClose} /><MobileSubLink href="/resources" title="補助與活動" onClose={onClose} /></>;
+  if (itemKey === "services") return <>
+    <MobileSubLink href="/services/product-testing" title="品測" marker={<CompassIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/consignment" title="寄賣" marker={<TrendIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/localization" title="公司落地" marker={<BuildingIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/call-center" title="海外客服" marker={<HeadsetIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/north-america" title="北美通路" marker={<span className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>} onClose={onClose} />
+    <MobileSubLink href="/services" title="四章總覽" marker={<ListIcon />} onClose={onClose} />
+  </>;
+  if (itemKey === "advanced") return <>
+    <MobileSubLink href="/services/optimize" title="運營優化" onClose={onClose} />
+    <MobileSubLink href="/services/methodology" title="鹿飛方法論" onClose={onClose} />
+    <MobileSubLink href="/assess" title="2 分鐘處境比對" onClose={onClose} />
+  </>;
+  if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={caseItem.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例 →" onClose={onClose} /></>;
+  if (itemKey === "about") return <>{ABOUT_MENU_ITEMS.map((item) => <MobileSubLink key={item.num} href={item.href} title={item.title} marker={<span className="num text-[13px] font-bold">{item.num}</span>} onClose={onClose} />)}</>;
+  return <>
+    {INSIGHT_MENU_CHAPTERS.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
+    <MobileSubLink href="/resources" title="補助與活動" marker={<FileIcon />} onClose={onClose} />
+    <MobileSubLink href="/field-notes" title="現場紀錄" marker={<PinIcon />} onClose={onClose} />
+    <MobileSubLink href="https://tradepiloter.com" title="TradePilot 關稅工具 ↗" marker={<TradeIcon />} external onClose={onClose} />
+    <MobileSubLink href="/insights" title="看所有文章 →" onClose={onClose} />
+  </>;
 }
 
 function MessageBoxTrigger({ className = "", onOpen }: { className?: string; onOpen?: () => void }) {
