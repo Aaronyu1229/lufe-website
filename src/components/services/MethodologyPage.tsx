@@ -178,7 +178,6 @@ export function MethodologyPage() {
             <span className="mx-2 text-white/30">/</span>
             <span className="text-white/75">方法論</span>
           </nav>
-          <p className="mb-2 text-[13px] font-semibold tracking-[0.06em] text-gold">鹿飛方法論</p>
           <h1 className="font-sans text-[clamp(34px,5vw,60px)] font-[650] leading-[1.12] tracking-normal text-white [text-wrap:balance]">
             我們怎麼判斷
             <br />
@@ -206,8 +205,7 @@ export function MethodologyPage() {
 
         <section id="framework" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
           <div className="mx-auto max-w-[900px]">
-            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">框架全貌</p>
-            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
               MBCPR 五維評分
             </h2>
             <p className="mt-4 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
@@ -245,8 +243,7 @@ export function MethodologyPage() {
 
         <section id="dimensions" className="scroll-mt-[126px] bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
           <div className="mx-auto max-w-[900px]">
-            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">每個維度詳解</p>
-            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
               具體評的是什麼
             </h2>
             <div className="mt-9">
@@ -296,8 +293,7 @@ export function MethodologyPage() {
 
         <section id="decision" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
           <div className="mx-auto max-w-[900px]">
-            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">決策樹</p>
-            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
               加權總分 → 決策
             </h2>
             <p className="mt-4 max-w-[680px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
@@ -326,8 +322,7 @@ export function MethodologyPage() {
 
         <section id="example" className="scroll-mt-[126px] bg-navy px-5 py-[80px] text-white md:px-10 md:py-[110px]">
           <div className="mx-auto max-w-[900px]">
-            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold">實戰範例</p>
-            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
+            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
               這套框架跑一次<span className="text-gold">長什麼樣</span>
             </h2>
             <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-white/70">
@@ -381,8 +376,7 @@ export function MethodologyPage() {
 
         <section id="why" className="scroll-mt-[126px] bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
           <div className="mx-auto max-w-[760px]">
-            <p className="text-[13px] font-semibold tracking-[0.06em] text-gold-d">為什麼要這樣做</p>
-            <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+            <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
               我們不靠直覺做決策
             </h2>
             <div className="mt-6 space-y-[18px] text-[16px] leading-[1.85] text-tx2">

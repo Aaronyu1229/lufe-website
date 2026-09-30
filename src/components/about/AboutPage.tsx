@@ -576,9 +576,6 @@ export function AboutPage() {
         </div>
 
         <div className="relative max-w-[900px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            品牌理念
-          </div>
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] tracking-[-0.4px] [text-wrap:balance] mb-10">
             我們相信的事
           </h2>

@@ -43,7 +43,6 @@ export function SubsidyMatcher() {
       />
       <div className="relative mx-auto max-w-[900px]">
         <div className="mb-10 md:mb-12">
-          <p className="eyebrow mb-4 text-gold">2 分鐘媒合器</p>
           <h2 className="h2 text-white">算算你能拿<span className="text-gold">多少補助</span></h2>
           <p className="lead mt-5 max-w-[560px] !text-white/70">
             回答 4 個問題，我們告訴你哪個補助最適合你的公司、
@@ -74,7 +73,6 @@ function ResultView({ result }: { readonly result: ReturnType<typeof matchSubsid
 
   return (
     <div className="max-w-[760px]">
-      <p className="eyebrow mb-3 text-gold">媒合結果</p>
       <h2 className="h2 text-white">{result.verdict}</h2>
 
       <div className={`mt-8 border-l-4 ${primaryBorder} bg-white/[.05] p-6 md:p-8`}>

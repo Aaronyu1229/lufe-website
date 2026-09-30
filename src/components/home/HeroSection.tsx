@@ -20,7 +20,6 @@ type Slide = {
   heavyOverlay?: boolean;
   chipLabel: string;
   chipHref: string;
-  eyebrow: string;
   titleLines: [string, string];
   subtitle: string;
   primary: { label: string; href: string; external?: boolean };
@@ -34,7 +33,6 @@ export const HOME_HERO_SLIDES: Slide[] = [
     heavyOverlay: true,
     chipLabel: "產品適配性",
     chipHref: "/services#pillar-fit",
-    eyebrow: "產品適配性",
     titleLines: ["協助台灣企業", "在北美與東南亞落地"],
     subtitle: "這個市場真的要你嗎？市場評估、產品測試、決策框架 — 先把勝率搞清楚。",
     primary: { label: "看真實案例", href: "/cases" },
@@ -57,7 +55,6 @@ export const HOME_HERO_SLIDES: Slide[] = [
     id: "pillar-channel",
     chipLabel: "通路銷售力",
     chipHref: "/services#pillar-channel",
-    eyebrow: "通路銷售力",
     titleLines: ["上得了架", "還要賣得動"],
     subtitle: "通路進入、展會佈局、數位集客 — 把產品放進對的通路，讓消費者找得到。",
     primary: { label: "看完整服務內容", href: "/services" },
@@ -79,7 +76,6 @@ export const HOME_HERO_SLIDES: Slide[] = [
     heavyOverlay: true,
     chipLabel: "基石 · 42 年國際物流",
     chipHref: "/about",
-    eyebrow: "躍馬企業 · 42 年實戰",
     titleLines: ["真的跑過船的人，", "才懂出海的眉角"],
     subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬企業 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通。",
     primary: { label: "認識躍馬企業", href: "https://jumping.group", external: true },
@@ -298,13 +294,6 @@ export function HeroSection() {
                 isActive ? "relative opacity-100" : "pointer-events-none absolute opacity-0"
               }`}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-5 h-px bg-gold/92" />
-                <span className="text-gold/92 text-[11px] font-semibold tracking-[0.05em]">
-                  {slide.eyebrow}
-                </span>
-              </div>
-
               <h2
                 className="display mb-6 text-white"
                 style={{

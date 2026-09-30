@@ -117,7 +117,6 @@ export function OptimizePage() {
             <span className="mx-2 text-white/30">/</span>
             <span className="text-white/75">進階優化</span>
           </nav>
-          <p className="mb-2 text-[13px] font-semibold tracking-[0.06em] text-ember">進階方案 · 已經在海外</p>
           <h1 className="font-sans text-[clamp(34px,5vw,60px)] font-[650] leading-[1.12] tracking-normal [text-wrap:balance]">
             已經跑起來了，
             <br />
@@ -132,8 +131,7 @@ export function OptimizePage() {
 
       <section className="bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
         <div className="mx-auto max-w-[1200px]">
-          <p className="text-[13px] font-semibold tracking-[0.06em] text-ember">常見的狀況</p>
-          <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
             你是不是也遇到<span className="text-ember">這些問題</span>？
           </h2>
           <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">
@@ -176,8 +174,7 @@ export function OptimizePage() {
 
       <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
         <div className="mx-auto max-w-[1200px]">
-          <p className="text-[13px] font-semibold tracking-[0.06em] text-ember">兩種切入方式</p>
-          <h2 className="mt-2 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
             診斷為先，<span className="text-ember">執行為後</span>
           </h2>
           <p className="mt-4 max-w-[620px] text-[clamp(17px,1.5vw,20px)] leading-[1.7] text-tx2">

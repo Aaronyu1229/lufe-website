@@ -292,9 +292,9 @@ function AssessWizardInner() {
 }
 
 export const assessQuestions: readonly MatcherFlowQuestion[] = [
-  { id: "stage", eyebrow: "階段", label: "你目前在出海這條路上的哪個位置？", options: STAGE_OPTIONS },
-  { id: "blocker", eyebrow: "卡點", label: "最讓你睡不著的是哪一件事？", options: BLOCKER_OPTIONS },
-  { id: "market", eyebrow: "市場", label: "你主要在看哪個市場？", options: MARKET_OPTIONS },
+  { id: "stage", label: "你目前在出海這條路上的哪個位置？", options: STAGE_OPTIONS },
+  { id: "blocker", label: "最讓你睡不著的是哪一件事？", options: BLOCKER_OPTIONS },
+  { id: "market", label: "你主要在看哪個市場？", options: MARKET_OPTIONS },
 ];
 
 /** Exported for SSR-copy tests; all questions remain mounted in MatcherFlow. */
@@ -366,15 +366,6 @@ export function EntryScreen({
             <span className="text-white/75">處境比對</span>
           )}
         </nav>
-
-        {/* Eyebrow */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="block w-8 h-px bg-gold" />
-          <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-            三題 · 兩分鐘 · 不問 email
-          </span>
-        </div>
-
         {/* Focus case strip (if arrived from a case page) */}
         {focusCase && (
           <div className="mb-6 flex items-center gap-4 border border-gold/20 bg-white/[0.04] px-5 py-4">
@@ -496,7 +487,6 @@ export function AssessQuestionStaticCopy() {
     <div className="sr-only">
       {assessQuestions.map((question) => (
         <section key={question.id}>
-          {question.eyebrow && <p>{question.eyebrow}</p>}
           <h2>{question.label}</h2>
           <ul>
             {question.options.map((option) => <li key={option.value}>{option.label}{option.hint ? ` ${option.hint}` : ""}</li>)}

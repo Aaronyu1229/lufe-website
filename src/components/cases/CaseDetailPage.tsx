@@ -77,13 +77,11 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
       <section className="bg-white px-5 py-[80px] md:px-10 md:py-[100px]">
         <div className="mx-auto grid max-w-[820px] gap-12">
           <div>
-            <p className="mb-3 text-[12px] font-semibold tracking-[0.12em] text-sky">01 挑戰</p>
             <h2 className="h3 mb-4 text-tx">起點：客戶遇到什麼問題？</h2>
             <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.challenge}</p>
           </div>
 
           <div>
-            <p className="mb-3 text-[12px] font-semibold tracking-[0.12em] text-gold-d">02 我們的做法</p>
             <h2 className="h3 mb-4 text-tx">怎麼切入這個問題？</h2>
             <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.approach}</p>
 
@@ -107,7 +105,6 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
           </div>
 
           <div>
-            <p className="mb-3 text-[12px] font-semibold tracking-[0.12em] text-ember">03 結果</p>
             <h2 className="h3 mb-4 text-tx">最後發生了什麼？</h2>
             <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.result}</p>
           </div>
@@ -117,7 +114,6 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
       {caseItem.keyDecisions.length > 0 && (
         <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[100px]">
           <div className="mx-auto max-w-[980px] min-w-0">
-            <p className="eyebrow mb-3">關鍵決策</p>
             <h2 className="h2 mb-4 text-tx">過程中<span className="text-gold-d">做過的判斷</span></h2>
             <p className="max-w-[720px] text-[17px] leading-[1.8] text-tx2">不只寫「發生了什麼」，把當時的選項和為什麼這樣選也攤出來——這才是經驗真正的價值。</p>
 
@@ -156,7 +152,6 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
       {caseItem.timeline.length > 0 && (
         <section className="overflow-hidden bg-white py-[80px] md:py-[100px]">
           <div className="mx-auto max-w-[980px] min-w-0 px-5 md:px-10">
-            <p className="eyebrow mb-3">時間軸</p>
             <h2 className="h2 text-tx">從啟動到收尾的<span className="text-gold-d">時間節奏</span></h2>
           </div>
 
@@ -205,7 +200,6 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
       {relatedCases.length > 0 && (
         <section className="border-t border-bd bg-white px-5 py-[72px] md:px-10 md:py-[96px]">
           <div className="mx-auto max-w-[1100px] min-w-0">
-            <p className="eyebrow mb-3">相關案例</p>
             <h2 className="h2 text-tx">更多成功的故事</h2>
 
             <div className="mt-10 grid min-w-0 grid-cols-1 gap-[18px] md:grid-cols-2">

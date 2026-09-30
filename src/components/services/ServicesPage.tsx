@@ -257,9 +257,6 @@ export function ServicesPage() {
 
       <section className="border-t border-bd/40 bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
         <div className="mx-auto max-w-[960px]">
-          <div className="mb-3 text-[11.5px] font-semibold tracking-[2px] text-gold-d">
-            你的狀況
-          </div>
           <h2 className="mb-4 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
             同一套方法論，<span className="text-gold-d">兩種走法</span>
           </h2>

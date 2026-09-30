@@ -6,7 +6,6 @@ import { draggable, useSpring } from "@/lib/motion";
 
 export type MatcherFlowQuestion = {
   readonly id: string;
-  readonly eyebrow?: string;
   readonly label: string;
   readonly sublabel?: string;
   readonly options: readonly {
@@ -149,7 +148,6 @@ export function MatcherFlow({
           {questions.map((question, questionIndex) => (
             <section key={question.id} className="w-full shrink-0 pr-px" aria-hidden={!complete && questionIndex !== step}>
               <div className="max-w-[760px]">
-                {question.eyebrow && <p className="eyebrow mb-4 text-gold">{question.eyebrow}</p>}
                 <h2 className="h2 max-w-[680px] text-white">{question.label}</h2>
                 {question.sublabel && <p className="mt-3 text-[15px] leading-[1.8] text-white/70">{question.sublabel}</p>}
                 <div className="mt-8 grid gap-3">
