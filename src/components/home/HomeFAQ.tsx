@@ -40,7 +40,6 @@ export function HomeFAQ() {
     <section className="bg-cream px-5 py-[62px] md:px-10 md:py-[96px] md:pb-[100px]">
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-y-[43px] md:grid-cols-12 md:gap-x-16 md:gap-y-0">
         <div className="self-start md:col-span-4 md:sticky md:top-[96px]">
-          <p className="mb-[14px] text-[13px] font-semibold tracking-[0.06em] text-[#7A5A1A]">FAQ</p>
           <h2 className="max-w-[360px] font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
             三個最常被問到的問題
           </h2>

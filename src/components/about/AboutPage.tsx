@@ -487,9 +487,6 @@ export function AboutPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-navy/75 via-navy/40 to-transparent flex items-center">
               <div className="pl-6 md:pl-10">
-                <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold mb-2">
-                  全球節點
-                </div>
                 <div className="text-white text-[17px] md:text-[21px] font-light tracking-[-0.3px] leading-tight">
                   30+ 國家 · 500+ 出口案件 · 10 年實戰
                 </div>
@@ -576,9 +573,6 @@ export function AboutPage() {
         </div>
 
         <div className="relative max-w-[900px] mx-auto">
-          <div className="text-[11.5px] font-semibold tracking-[2px] uppercase text-gold mb-3">
-            品牌理念
-          </div>
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] tracking-[-0.4px] [text-wrap:balance] mb-10">
             我們相信的事
           </h2>

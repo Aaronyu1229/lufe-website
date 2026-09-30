@@ -114,7 +114,6 @@ function CaseCard({ caseItem }: { caseItem: (typeof CASES)[number] }) {
 
           <div className="grid grid-cols-[minmax(0,1fr)_40px] gap-x-6 gap-y-4 p-6 md:gap-x-7 md:px-10 md:py-7">
             <div className="min-w-0">
-              <p className="mb-2 text-[12px] font-semibold tracking-[0.12em] text-tx3">客戶的原話</p>
               <h2 className="h3 text-tx">「{meta.painTitle}」</h2>
             </div>
             <span aria-hidden="true" className="grid h-10 w-10 place-items-center border border-bd text-[22px] leading-none text-tx2 group-hover:border-gold group-hover:text-gold-d">

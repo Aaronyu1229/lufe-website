@@ -9,9 +9,6 @@ export function PositioningBand() {
     <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[104px]">
       <div className="mx-auto max-w-[1200px]">
         <div className="mx-auto mb-12 max-w-[820px] text-center md:mb-16">
-          <p className="mb-[14px] text-[13px] font-semibold tracking-[0.06em] text-[#7A5A1A]">
-            躍馬企業 · 42 年實戰
-          </p>
           <h2 className="mb-5 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance] md:mb-6">
             真的跑過船的人，
             <br />

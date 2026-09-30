@@ -65,7 +65,6 @@ export function FieldNotesPage() {
 
       <section className="bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
         <div className="mx-auto max-w-[1200px]">
-          <p className="eyebrow mb-4">活動與演講</p>
           <h2 className="h2 max-w-[800px] text-tx">
             我們去過、
             <br />
@@ -110,7 +109,6 @@ export function FieldNotesPage() {
 
       <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
         <div className="mx-auto max-w-[1040px]">
-          <p className="eyebrow mb-4">現場筆記</p>
           <h2 className="h2 max-w-[800px] text-tx">
             飛回來之後，<span className="text-gold-d">馬上記下來的事</span>
           </h2>
@@ -138,7 +136,6 @@ export function FieldNotesPage() {
 
       <section className="bg-white px-5 py-[72px] md:px-10 md:py-[96px]">
         <div className="mx-auto max-w-[1040px]">
-          <p className="eyebrow mb-4">媒體露出</p>
           <h2 className="h2 text-tx">別人<span className="text-gold-d">怎麼說我們</span></h2>
 
           <div className="mt-10 border-t border-bd">
@@ -169,7 +166,6 @@ export function FieldNotesPage() {
 
       <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[96px]">
         <div className="mx-auto max-w-[1200px]">
-          <p className="eyebrow mb-4">合作單位</p>
           <h2 className="h2 text-tx">一起做事的<span className="text-gold-d">夥伴網絡</span></h2>
           <p className="lead mt-5 max-w-[620px]">商會、顧問、物流、通路、協會、政府——我們的路不是自己一個人走的。</p>
 

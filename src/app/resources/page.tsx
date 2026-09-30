@@ -28,13 +28,6 @@ export default function ResourcesPage() {
         />
 
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-[130px] md:pt-[170px] pb-[64px] md:pb-[88px] relative">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-5 h-px bg-gold/70" />
-            <span className="text-gold/80 text-[11px] font-medium tracking-[2.5px] uppercase">
-              Resources · 補助與活動
-            </span>
-          </div>
-
           <h1 className="h1 mb-7 max-w-[820px] text-white">
             正在開放的補助，
             <br />
@@ -63,11 +56,6 @@ export default function ResourcesPage() {
               aria-hidden="true"
               className="absolute top-0 left-0 right-0 h-[3px] bg-gold/70"
             />
-            <div className="flex items-center gap-2 mb-5">
-              <span className="text-[10.5px] font-semibold tracking-[2px] uppercase text-gold-d">
-                01 · Subsidies
-              </span>
-            </div>
             <h2 className="h2 mb-3 text-navy">
               2026 政府出海補助
             </h2>
@@ -112,11 +100,6 @@ export default function ResourcesPage() {
               aria-hidden="true"
               className="absolute top-0 left-0 right-0 h-[3px] bg-sky/70"
             />
-            <div className="flex items-center gap-2 mb-5">
-              <span className="text-[10.5px] font-semibold tracking-[2px] uppercase text-sky">
-                02 · Field Notes
-              </span>
-            </div>
             <h2 className="h2 mb-3 text-navy">
               活動 · 現場紀錄
             </h2>

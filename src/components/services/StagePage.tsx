@@ -41,7 +41,6 @@ export function StagePage({ stage }: Props) {
             <span aria-hidden="true">/</span>
             <span className="text-white/80">階段 {stage.num}</span>
           </nav>
-          <p className={`eyebrow mb-3 ${accent.text}`}>STAGE {stage.num} · {stage.timeline}</p>
           <h1 className="h1 font-sans text-white">{stage.title}</h1>
           <p className="lead mt-5 max-w-[720px] !text-white/70">{stage.subtitle}</p>
           <p className={`mt-8 max-w-[700px] text-[17px] leading-[1.8] md:text-[18px] ${accent.text}`}>

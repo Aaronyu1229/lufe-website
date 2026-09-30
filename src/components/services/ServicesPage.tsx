@@ -104,9 +104,6 @@ export function ServicesPage() {
             <span className="font-medium text-white">東南亞</span>落地。
             底下是躍馬企業 42 年的物流實戰當基礎。
           </p>
-          <p className="mb-4 text-[10.5px] font-semibold tracking-[2px] text-white/40">
-            三個支柱
-          </p>
 
           <div className="grid grid-cols-2 gap-5 border-t border-white/10 pt-7 md:grid-cols-4 md:gap-8">
             {[
@@ -195,9 +192,6 @@ export function ServicesPage() {
                   </div>
 
                   <div className="min-w-0">
-                    <div className="mb-5 text-[10.5px] font-semibold tracking-[2px] text-tx3">
-                      這個支柱底下能做的事
-                    </div>
                     <div className="space-y-3">
                       {pillar.services.map((service) => {
                         const content = (
@@ -257,9 +251,6 @@ export function ServicesPage() {
 
       <section className="border-t border-bd/40 bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
         <div className="mx-auto max-w-[960px]">
-          <div className="mb-3 text-[11.5px] font-semibold tracking-[2px] text-gold-d">
-            你的狀況
-          </div>
           <h2 className="mb-4 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
             同一套方法論，<span className="text-gold-d">兩種走法</span>
           </h2>
@@ -293,9 +284,6 @@ export function ServicesPage() {
                     />
                   </svg>
                 </div>
-                <div className="text-[10.5px] font-semibold tracking-[2px] text-sky">
-                  出海探路
-                </div>
               </div>
               <h3 className="mb-3 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3]">
                 還不確定能不能賣
@@ -320,17 +308,11 @@ export function ServicesPage() {
                 ))}
               </div>
               <div className="border-t border-bd/60 pt-4">
-                <div className="mb-1 text-[11px] font-semibold tracking-[1.5px] text-tx3">
-                  適合你如果
-                </div>
                 <p className="text-[13.5px] leading-[1.7] text-tx2">
                   有產品但還沒出過海，想先測試東南亞市場的反應再決定下一步。
                 </p>
               </div>
               <div className="mt-5 border-t border-bd/60 pt-4">
-                <div className="mb-1 text-[11px] font-semibold tracking-[1.5px] text-tx3">
-                  收費方式
-                </div>
                 <p className="text-[13.5px] leading-[1.7] text-tx2">
                   按階段固定費用，每一步花多少錢事前講清楚。
                 </p>
@@ -364,9 +346,6 @@ export function ServicesPage() {
                     />
                   </svg>
                 </div>
-                <div className="text-[10.5px] font-semibold tracking-[2px] text-gold-d">
-                  通路落地
-                </div>
               </div>
               <h3 className="mb-3 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3]">
                 產品準備好了，要進通路
@@ -391,17 +370,11 @@ export function ServicesPage() {
                 ))}
               </div>
               <div className="border-t border-bd/60 pt-4">
-                <div className="mb-1 text-[11px] font-semibold tracking-[1.5px] text-tx3">
-                  適合你如果
-                </div>
                 <p className="text-[13.5px] leading-[1.7] text-tx2">
                   產品已經成熟，想進 Costco、Walmart、Amazon 等北美主流通路。
                 </p>
               </div>
               <div className="mt-5 border-t border-bd/60 pt-4">
-                <div className="mb-1 text-[11px] font-semibold tracking-[1.5px] text-tx3">
-                  收費方式
-                </div>
                 <p className="text-[13.5px] leading-[1.7] text-tx2">
                   前期低服務費 + 成交抽成——我們幫你賣出去才真的賺錢。
                 </p>
@@ -450,9 +423,6 @@ export function ServicesPage() {
           >
             <div className="flex flex-col items-start gap-5">
               <div className="min-w-0 flex-1">
-                <div className="mb-3 text-[10.5px] font-semibold tracking-[2px] text-gold-d">
-                  決策框架
-                </div>
                 <h2 className="mb-3 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-navy">
                   想看我們怎麼判斷 Go / No-Go？
                 </h2>

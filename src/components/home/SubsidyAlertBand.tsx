@@ -31,9 +31,6 @@ export function SubsidyAlertBand() {
           <span className="inline-flex bg-gold/15 px-3 py-[5px] text-[12px] font-semibold tracking-[0.04em] text-gold">
             115 年度加碼
           </span>
-          <div className="mt-3 text-[11px] font-semibold tracking-[0.05em] text-gold/80">
-            Ministry of Economic Affairs · 115 年度
-          </div>
           <h2 className="mt-3 font-sans text-[clamp(22px,2.6vw,30px)] font-semibold leading-[1.35] tracking-normal [text-wrap:balance]">
             海外參展補助從 4 萬跳到{" "}
             <span className="text-gold">16 萬</span>——

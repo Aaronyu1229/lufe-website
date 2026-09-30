@@ -292,9 +292,9 @@ function AssessWizardInner() {
 }
 
 export const assessQuestions: readonly MatcherFlowQuestion[] = [
-  { id: "stage", eyebrow: "階段", label: "你目前在出海這條路上的哪個位置？", options: STAGE_OPTIONS },
-  { id: "blocker", eyebrow: "卡點", label: "最讓你睡不著的是哪一件事？", options: BLOCKER_OPTIONS },
-  { id: "market", eyebrow: "市場", label: "你主要在看哪個市場？", options: MARKET_OPTIONS },
+  { id: "stage", label: "你目前在出海這條路上的哪個位置？", options: STAGE_OPTIONS },
+  { id: "blocker", label: "最讓你睡不著的是哪一件事？", options: BLOCKER_OPTIONS },
+  { id: "market", label: "你主要在看哪個市場？", options: MARKET_OPTIONS },
 ];
 
 /** Exported for SSR-copy tests; all questions remain mounted in MatcherFlow. */
@@ -366,15 +366,6 @@ export function EntryScreen({
             <span className="text-white/75">處境比對</span>
           )}
         </nav>
-
-        {/* Eyebrow */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="block w-8 h-px bg-gold" />
-          <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-            三題 · 兩分鐘 · 不問 email
-          </span>
-        </div>
-
         {/* Focus case strip (if arrived from a case page) */}
         {focusCase && (
           <div className="mb-6 flex items-center gap-4 border border-gold/20 bg-white/[0.04] px-5 py-4">
@@ -461,9 +452,6 @@ export function EntryScreen({
 
         {/* People also viewed — horizontal case chips (P2) */}
         <div className="mt-14 pt-10 border-t border-white/10">
-          <div className="text-[10.5px] font-semibold tracking-[2px] uppercase text-white/40 mb-5">
-            看過的人也讀這些
-          </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {CASES.map((c) => (
               <Link
@@ -496,7 +484,6 @@ export function AssessQuestionStaticCopy() {
     <div className="sr-only">
       {assessQuestions.map((question) => (
         <section key={question.id}>
-          {question.eyebrow && <p>{question.eyebrow}</p>}
           <h2>{question.label}</h2>
           <ul>
             {question.options.map((option) => <li key={option.value}>{option.label}{option.hint ? ` ${option.hint}` : ""}</li>)}
@@ -556,13 +543,7 @@ function ResultScreen({
 
         <div className="relative max-w-[860px] mx-auto">
           {/* Top row */}
-          <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-            <div className="flex items-center gap-3">
-              <span className="block w-8 h-px bg-gold" />
-              <span className="text-[11.5px] font-semibold tracking-[2.5px] uppercase text-gold">
-                比對結果 · 吻合 {primary.score} / 3
-              </span>
-            </div>
+          <div className="flex items-center justify-end mb-8 flex-wrap gap-4">
             <button
               type="button"
               onClick={onReset}
@@ -646,9 +627,6 @@ function ResultScreen({
             {/* Hero blockquote — the money sentence */}
             {meta && (
               <div className="px-6 md:px-12 pt-10 md:pt-14 pb-10 md:pb-14 relative">
-                <div className="text-[11px] font-semibold tracking-[1.8px] uppercase text-tx3 mb-6">
-                  客戶當時的原話
-                </div>
                 <blockquote className="h3 relative text-tx leading-[1.45] mb-8">
                   <span
                     aria-hidden="true"
@@ -683,9 +661,6 @@ function ResultScreen({
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[10.5px] tracking-[1.5px] uppercase text-tx3 font-semibold">
-                      也值得一看
-                    </span>
                     <span className="text-[10.5px] tracking-[0.5px] text-gold-d font-semibold">
                       吻合 {alternative.score}/3
                     </span>

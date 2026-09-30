@@ -235,30 +235,18 @@ export function ContactPage() {
           {/* Business info strip — gives contact page a functional anchor */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 mb-12 pb-8 border-b border-bd text-[14.5px]">
             <div>
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
-                公司
-              </div>
               <div className="font-medium text-tx">鹿飛 LUFÉ</div>
               <div className="text-tx3 text-[13px] mt-0.5">Aaron Yu 創辦</div>
             </div>
             <div>
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
-                地點
-              </div>
               <div className="font-medium text-tx">台北市</div>
               <div className="text-tx3 text-[13px] mt-0.5">線上為主</div>
             </div>
             <div>
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
-                回覆時間
-              </div>
               <div className="font-medium text-tx">週一 – 週五</div>
               <div className="text-tx3 text-[13px] mt-0.5">09:00 – 18:00</div>
             </div>
             <div>
-              <div className="text-[11px] font-semibold tracking-[1.5px] uppercase text-gold-d mb-1.5">
-                一般回覆
-              </div>
               <div className="font-medium text-tx">1 個工作天內</div>
               <div className="text-tx3 text-[13px] mt-0.5">快速留言最快</div>
             </div>

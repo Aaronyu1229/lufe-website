@@ -17,7 +17,6 @@ describe("home page", () => {
 
     for (const slide of HOME_HERO_SLIDES) {
       expect(rendered).toContain(slide.chipLabel);
-      expect(rendered).toContain(slide.eyebrow);
       expect(rendered).toContain(slide.titleLines[0]);
       expect(rendered).toContain(slide.titleLines[1]);
       expect(rendered).toContain(slide.subtitle);

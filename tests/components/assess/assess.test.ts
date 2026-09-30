@@ -13,7 +13,6 @@ describe("AssessQuestionFlow", () => {
     for (const question of assessQuestions) {
       expect(markup).toContain(question.label);
       expect(entryMarkup).toContain(question.label);
-      if (question.eyebrow) expect(markup).toContain(question.eyebrow);
       for (const option of question.options) {
         expect(markup).toContain(option.label);
         expect(entryMarkup).toContain(option.label);
