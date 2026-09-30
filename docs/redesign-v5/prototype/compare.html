@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>鹿飛 Before／After</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#101B30;--gold:#D4A85C;--gold-d:#8F6A1F;--cream:#F5F2EC;--sky:#3A6B84;--ember:#A45A20;--tx:#1A1A2E;--tx2:#5A6070;--tx3:#6A6F80;--bd:rgba(26,26,46,.1);--bg:#EEF0F3;--panel:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--tx);height:100vh;display:grid;grid-template-columns:300px 1fr;overflow:hidden}
+aside{background:var(--navy);color:#fff;overflow-y:auto;display:flex;flex-direction:column}
+.brand{padding:22px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.brand b{display:block;font-size:17px}
+.brand span{font-size:12.5px;color:rgba(255,255,255,.55)}
+.tabsw{display:flex;gap:4px;margin:14px 16px 6px;background:rgba(255,255,255,.06);padding:3px}
+.tabsw button{flex:1;font:inherit;font-size:13px;padding:7px;border:0;background:none;color:rgba(255,255,255,.7);cursor:pointer}
+.tabsw button.on{background:var(--gold);color:var(--navy);font-weight:700}
+nav{padding:6px 10px 30px}
+.pg{margin-top:4px}
+.pg>button{width:100%;text-align:left;font:inherit;font-size:14.5px;font-weight:600;color:#fff;background:none;border:0;padding:10px 10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.pg>button small{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
+.pg>button:hover{background:rgba(255,255,255,.05)}
+.pg.open>button{color:var(--gold)}
+.pg ol{list-style:none;display:none;padding:0 0 8px 10px}
+.pg.open ol{display:block}
+.pg li button{width:100%;text-align:left;font:inherit;font-size:13px;color:rgba(255,255,255,.7);background:none;border:0;border-left:2px solid rgba(255,255,255,.1);padding:7px 10px;cursor:pointer;line-height:1.45}
+.pg li button:hover{color:#fff;border-left-color:rgba(255,255,255,.4)}
+.pg li button.on{color:#fff;border-left-color:var(--gold);background:rgba(212,168,92,.1)}
+.pg li button i{font-style:normal;color:var(--gold);font-size:11px;margin-right:6px;font-family:Inter}
+main{display:grid;grid-template-rows:auto auto 1fr;overflow:hidden}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 22px;background:var(--panel);border-bottom:1px solid var(--bd)}
+.top h1{font-size:18px;letter-spacing:-.01em}
+.top h1 small{font-size:13px;color:var(--tx3);font-weight:500;margin-left:8px}
+.ctrl{display:flex;gap:8px;align-items:center}
+.seg{display:flex;background:var(--bg);padding:3px}
+.seg button{font:inherit;font-size:13px;border:0;background:none;padding:6px 12px;cursor:pointer;color:var(--tx2)}
+.seg button.on{background:#fff;color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.ctrl a{font-size:13px;color:var(--sky);font-weight:600;text-decoration:none;padding:6px 8px}
+.notes{background:var(--panel);border-bottom:1px solid var(--bd);padding:16px 22px 18px;max-height:34vh;overflow:auto}
+.notes .hd{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.notes .hd b{font-size:16px}
+.notes .hd span{font-size:12.5px;color:var(--tx3)}
+.notes ul{list-style:none;display:grid;gap:7px}
+@media(min-width:1500px){.notes ul{grid-template-columns:1fr 1fr;column-gap:28px}}
+.notes li{font-size:13.5px;line-height:1.65;color:var(--tx2);padding-left:14px;position:relative}
+.notes li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--gold)}
+.notes li.dec::before{background:var(--ember)}
+.notes li em{font-style:normal;font-size:11px;color:var(--sky);font-weight:600;margin-left:6px;white-space:nowrap}
+.notes li b{color:var(--tx)}
+.stage{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;overflow:hidden;min-height:0}
+.col{display:flex;flex-direction:column;min-height:0}
+.col .lb{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:700;padding:0 2px 8px}
+.col .lb span{padding:3px 9px}
+.col.before .lb span{background:#DADDE3;color:var(--tx2)}
+.col.after .lb span{background:var(--gold);color:var(--navy)}
+.col .lb a{color:var(--tx3);font-weight:500;text-decoration:none}
+.frame{flex:1;position:relative;overflow:clip;background:#fff;box-shadow:0 10px 30px -18px rgba(16,27,48,.4);min-height:0}
+.frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;background:#fff}
+.frame.mobile{background:#dfe2e7;display:flex;justify-content:center}
+.dec{display:none;padding:22px;overflow:auto}
+body.showdec .stage{display:none}
+body.showdec .dec{display:block}
+body.showdec .notes{display:none}
+.dec h2{font-size:22px;margin-bottom:6px}
+.dec p.s{color:var(--tx2);margin-bottom:18px;font-size:14px}
+.dec table{width:100%;border-collapse:collapse;background:#fff;font-size:14px}
+.dec th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-size:13px}
+.dec td{padding:12px;border-bottom:1px solid var(--bd);vertical-align:top;line-height:1.7}
+.dec td:first-child{font-family:Inter;font-weight:700;color:var(--gold-d);white-space:nowrap}
+.dec td:nth-child(2){font-weight:600;width:26%}
+.principles{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.principles div{background:#fff;border:1px solid var(--bd);border-top:3px solid var(--gold);padding:14px 16px;font-size:13.5px;line-height:1.7;color:var(--tx2)}
+.principles b{display:block;color:var(--tx);font-size:14px;margin-bottom:4px}
+</style>
+</head>
+<body>
+<aside>
+  <div class="brand"><b>鹿飛 LUFÉ · Before／After</b><span>v4.1 → v5 Apple 設計調整 · 2026-09-30</span></div>
+  <div class="tabsw"><button class="on" data-v="cmp">逐頁逐層對照</button><button data-v="dec">決定清單</button></div>
+  <nav id="tree"></nav>
+</aside>
+<main>
+  <div class="top">
+    <h1 id="ttl">首頁<small id="sub"></small></h1>
+    <div class="ctrl">
+      <div class="seg" id="scrim" title="只作用在 After"><button data-m="full">遮罩：整片深色</button><button data-m="none">拿掉</button><button class="on" data-m="local">只在文字側（建議）</button></div>
+      <div class="seg" id="dev"><button class="on" data-d="desk">桌機 1440</button><button data-d="mob">手機 390</button></div>
+      <a id="openB" target="_blank">開 Before ↗</a><a id="openA" target="_blank">開 After ↗</a>
+    </div>
+  </div>
+  <div class="notes" id="notes"></div>
+  <div class="stage">
+    <div class="col before"><div class="lb"><span>BEFORE · v4.1</span></div><div class="frame" id="fB"><iframe id="B" title="Before"></iframe></div></div>
+    <div class="col after"><div class="lb"><span>AFTER · v5 Apple</span><a>可以直接在右邊操作：拖、點、展開</a></div><div class="frame" id="fA"><iframe id="A" title="After"></iframe></div></div>
+  </div>
+  <div class="dec" id="decView"></div>
+</main>
+<script>
+const INV = [{"id": "home", "name": "首頁", "sections": [{"sid": "home__1", "title": "協助台灣企業 在北美與東南亞落地", "cls": "hero", "feats": ["hero"], "dark": false}, {"sid": "home__2", "title": "很多品牌的出海故事， 都在貨到的那一天結束", "cls": "sec", "feats": ["opening"], "dark": false}, {"sid": "home__3", "title": "一家品牌在馬尼拉的第一年， 通常是這樣走的", "cls": "sec cream", "feats": ["kit", "plans", "timeline"], "dark": false}, {"sid": "home__4", "title": "四十二年， 看著貨櫃一個一個出去", "cls": "sec dark", "feats": ["jband"], "dark": true}, {"sid": "home__5", "title": "我們不是跟你賭夢想， 是有做過的事", "cls": "sec", "feats": ["cases", "roads"], "dark": false}, {"sid": "home__6", "title": "讀到一半想深入的， 這裡有", "cls": "sec cream reading", "feats": ["reading"], "dark": false}, {"sid": "home__7", "title": "一個窗口， 一條進度線", "cls": "sec cream", "feats": ["tbl", "week"], "dark": false}, {"sid": "home__8", "title": "你可能想先問的三件事", "cls": "sec", "feats": ["faq"], "dark": false}, {"sid": "home__9", "title": "想清楚了，就聊聊 還沒想清楚，也可以聊聊", "cls": "cta", "feats": ["cta"], "dark": false}]}, {"id": "services", "name": "服務總覽", "sections": [{"sid": "services__1", "title": "一家品牌在馬尼拉的第一年", "cls": "phero", "feats": ["phero"], "dark": false}, {"sid": "services__2", "title": "(區塊)", "cls": "sec chapters", "feats": ["svc"], "dark": false}, {"sid": "services__3", "title": "兩個故事： 菲律賓的第一年，北美的貨架", "cls": "sec cream", "feats": ["lines"], "dark": false}, {"sid": "services__4", "title": "(區塊)", "cls": "sec dark", "feats": [], "dark": true}, {"sid": "services__5", "title": "三個關鍵問題", "cls": "sec", "feats": ["faq"], "dark": false}, {"sid": "services__6", "title": "想知道你該從哪一章開始？", "cls": "cta", "feats": ["cta"], "dark": false}]}, {"id": "product-testing", "name": "品測", "sections": [{"sid": "product-testing__1", "title": "先讓馬尼拉的媽媽拿起來看看", "cls": "phero", "feats": ["phero"], "dark": false}, {"sid": "product-testing__2", "title": "章節列", "cls": "chapbar", "feats": ["chapbar"], "dark": false}, {"sid": "product-testing__3", "title": "你可能是這樣走到這裡的", "cls": "sec", "feats": ["trio"], "dark": false}, {"sid": "product-testing__4", "title": "品測那一天 會發生什麼", "cls": "sec cream", "feats": ["steps"], "dark": false}, {"sid": "product-testing__5", "title": "你會拿到一頁， 不是八十頁", "cls": "sec", "feats": ["paper"], "dark": false}, {"sid": "product-testing__6", "title": "(區塊)", "cls": "sec cream", "feats": ["pricecard"], "dark": false}, {"sid": "product-testing__7", "title": "常見問題", "cls": "sec", "feats": ["faq"], "dark": false}, {"sid": "product-testing__8", "title": "延伸閱讀", "cls": "sec cream reading", "feats": ["reading"], "dark": false}, {"sid": "product-testing__9", "title": "上架了，讓人先用過再說", "cls": "sec", "feats": ["nextch"], "dark": false}, {"sid": "product-testing__10", "title": "聊聊你的產品", "cls": "cta cta2", "feats": ["cta"], "dark": false}]}, {"id": "consignment", "name": "寄賣", "sections": [{"sid": "consignment__1", "title": "上架了，讓人先用過再說", "cls": "phero", "feats": ["phero"], "dark": false}, {"sid": "consignment__2", "title": "章節列", "cls": "chapbar", "feats": ["chapbar"], "dark": false}, {"sid": "consignment__3", "title": "你可能是這樣走到這裡的", "cls": "sec", "feats": ["trio"], "dark": false}, {"sid": "consignment__4", "title": "證在跑的 6～12 週， 我們在做什麼", "cls": "sec cream", "feats": ["tracks"], "dark": false}, {"sid": "consignment__5", "title": "寄賣包裡有什麼", "cls": "sec", "feats": ["got", "mini5"], "dark": false}, {"sid": "consignment__6", "title": "(區塊)", "cls": "sec cream", "feats": ["pricecard"], "dark": false}, {"sid": "consignment__7", "title": "常見問題", "cls": "sec", "feats": ["faq"], "dark": false}, {"sid": "consignment__8", "title": "延伸閱讀", "cls": "sec cream reading", "feats": ["reading"], "dark": false}, {"sid": "consignment__9", "title": "開始想要在當地有自己的人", "cls": "sec", "feats": ["nextch"], "dark": false}, {"sid": "consignment__10", "title": "看你的產品適不適合寄賣", "cls": "cta cta2", "feats": ["cta"], "dark": false}]}, {"id": "localization", "name": "公司落地", "sections": [{"sid": "localization__1", "title": "開始想要在當地有自己的人", "cls": "phero", "feats": ["phero"], "dark": false}, {"sid": "localization__2", "title": "章節列", "cls": "chapbar", "feats": ["chapbar"], "dark": false}, {"sid": "localization__3", "title": "你可能是這樣走到這裡的", "cls": "sec", "feats": ["trio"], "dark": false}, {"sid": "localization__4", "title": "落地的每一件事， 都要有人在當地", "cls": "sec cream", "feats": ["who"], "dark": false}, {"sid": "localization__5", "title": "我們跟合作夥伴 走過的三條路", "cls": "sec", "feats": ["roads", "roads3"], "dark": false}, {"sid": "localization__6", "title": "(區塊)", "cls": "sec cream", "feats": ["pricecard"], "dark": false}, {"sid": "localization__7", "title": "常見問題", "cls": "sec", "feats": ["faq"], "dark": false}, {"sid": "localization__8", "title": "延伸閱讀", "cls": "sec cream reading", "feats": ["reading"], "dark": false}, {"sid": "localization__9", "title": "星期五晚上十一點的那封信", "cls": "sec", "feats": ["nextch"], "dark": false}, {"sid": "localization__10", "title": "聊聊你想在菲律賓開什麼", "cls": "cta cta2", "feats": ["cta"], "dark": false}]}, {"id": "call-center", "name": "海外客服", "sections": [{"sid": "call-center__1", "title": "星期五晚上十一點的那封信", "cls": "phero night", "feats": ["phero"], "dark": false}, {"sid": "call-center__2", "title": "章節列", "cls": "chapbar", "feats": ["chapbar"], "dark": false}, {"sid": "call-center__3", "title": "你可能是這樣走到這裡的", "cls": "sec", "feats": ["trio"], "dark": false}, {"sid": "call-center__4", "title": "一封信進來之後", "cls": "sec cream", "feats": ["steps"], "dark": false}, {"sid": "call-center__5", "title": "為什麼是菲律賓、 為什麼是老師", "cls": "sec dark", "feats": [], "dark": true}, {"sid": "call-center__6", "title": "適合誰", "cls": "sec", "feats": ["got"], "dark": false}, {"sid": "call-center__7", "title": "2027 Q1 開放首批客戶", "cls": "sec cream", "feats": ["regcard"], "dark": false}, {"sid": "call-center__8", "title": "常見問題", "cls": "sec", "feats": ["faq"], "dark": false}, {"sid": "call-center__9", "title": "延伸閱讀", "cls": "sec cream reading", "feats": ["reading"], "dark": false}, {"sid": "call-center__10", "title": "先讓馬尼拉的媽媽拿起來看看", "cls": "sec", "feats": ["nextch"], "dark": false}, {"sid": "call-center__11", "title": "登記首批", "cls": "cta cta2", "feats": ["cta"], "dark": false}]}, {"id": "north-america", "name": "北美通路", "sections": [{"sid": "north-america__1", "title": "產品成熟了，要進 Costco、Walmart、Amazon", "cls": "phero", "feats": ["phero"], "dark": false}, {"sid": "north-america__2", "title": "說明列", "cls": "anotherline", "feats": ["anotherline"], "dark": false}, {"sid": "north-america__3", "title": "你可能是這樣走到這裡的", "cls": "sec", "feats": ["trio"], "dark": false}, {"sid": "north-america__4", "title": "北美這條路 怎麼走", "cls": "sec cream", "feats": ["steps"], "dark": false}, {"sid": "north-america__5", "title": "誰在做", "cls": "sec", "feats": [], "dark": false}, {"sid": "north-america__6", "title": "海外客服一樣用得到 →", "cls": "sec cream", "feats": ["nextch", "pricecard"], "dark": false}, {"sid": "north-america__7", "title": "延伸閱讀", "cls": "sec reading", "feats": ["reading"], "dark": false}, {"sid": "north-america__8", "title": "聊聊你的產品", "cls": "cta cta2", "feats": ["cta"], "dark": false}]}, {"id": "optimize", "name": "運營優化", "sections": [{"sid": "optimize__1", "title": "已經跑起來了，該讓每公里更省", "cls": "phero", "feats": ["phero"], "dark": false}, {"sid": "optimize__2", "title": "說明列", "cls": "anotherline", "feats": ["anotherline"], "dark": false}, {"sid": "optimize__3", "title": "你大概卡在 這五段之一", "cls": "sec", "feats": ["stuck5"], "dark": false}, {"sid": "optimize__4", "title": "省不下來： 先看你的物流帳單", "cls": "sec cream", "feats": ["split"], "dark": false}, {"sid": "optimize__5", "title": "賣得起伏： 廣告一停就沒單，通常不是廣告的問題", "cls": "sec", "feats": ["split"], "dark": false}, {"sid": "optimize__6", "title": "沒被找到： 客人在問 AI，AI 沒提到你", "cls": "sec cream", "feats": ["split"], "dark": false}, {"sid": "optimize__7", "title": "跑得卡卡： 事情都在人的腦子裡", "cls": "sec", "feats": ["steps"], "dark": false}, {"sid": "optimize__8", "title": "看不見： 每個月結束才知道賺沒賺", "cls": "sec dark", "feats": [], "dark": true}, {"sid": "optimize__9", "title": "兩種合作方式", "cls": "sec cream", "feats": ["lines"], "dark": false}, {"sid": "optimize__10", "title": "常見問題", "cls": "sec", "feats": ["faq"], "dark": false}, {"sid": "optimize__11", "title": "延伸閱讀", "cls": "sec cream reading", "feats": ["reading"], "dark": false}, {"sid": "optimize__12", "title": "聊聊你卡在哪一段", "cls": "cta cta2", "feats": ["cta"], "dark": false}]}, {"id": "methodology", "name": "方法論", "sections": [{"sid": "methodology__1", "title": "四個方案，是從這裡長出來的", "cls": "phero", "feats": ["phero"], "dark": false}, {"sid": "methodology__2", "title": "說明列", "cls": "anotherline", "feats": ["anotherline"], "dark": false}, {"sid": "methodology__3", "title": "為什麼要有一張表", "cls": "sec", "feats": [], "dark": false}, {"sid": "methodology__4", "title": "五個問題", "cls": "sec cream", "feats": ["dims"], "dark": false}, {"sid": "methodology__5", "title": "分數怎麼讀", "cls": "sec", "feats": ["scores"], "dark": false}, {"sid": "methodology__6", "title": "五個問題， 四章裡誰在回答", "cls": "sec cream", "feats": ["who"], "dark": false}, {"sid": "methodology__7", "title": "一個評分的例子： 保健品 → 北美 Costco", "cls": "sec", "feats": ["bars2", "example"], "dark": false}, {"sid": "methodology__8", "title": "五個問題背後， 是三件事", "cls": "sec cream", "feats": ["trio"], "dark": false}, {"sid": "methodology__9", "title": "常見問題", "cls": "sec", "feats": ["faq", "nextch"], "dark": false}, {"sid": "methodology__10", "title": "免費初步評估", "cls": "cta cta2", "feats": ["cta"], "dark": false}]}, {"id": "cases", "name": "案例", "sections": [{"sid": "cases__1", "title": "我們不是跟你賭夢想， 是有做過的事", "cls": "phero", "feats": ["phero"], "dark": false}, {"sid": "cases__2", "title": "從零開始", "cls": "sec", "feats": ["roads3"], "dark": false}, {"sid": "cases__3", "title": "不確定自己比較像哪一條？", "cls": "sec", "feats": ["bridge"], "dark": false}, {"sid": "cases__4", "title": "保健品怎麼從台灣走進北美 Costco？", "cls": "sec", "feats": ["casecards"], "dark": false}, {"sid": "cases__5", "title": "你的故事會是哪一條？", "cls": "cta cta2", "feats": ["cta"], "dark": false}]}, {"id": "insights", "name": "洞察", "sections": [{"sid": "insights__1", "title": "每一章讀到一半會想問的事， 這裡先寫好", "cls": "in-hero", "feats": ["hero", "in-feat", "in-hero"], "dark": false}, {"sid": "insights__2", "title": "看完文章，想聊聊你的狀況？", "cls": "sec", "feats": ["cta", "in-filter"], "dark": false}]}, {"id": "about", "name": "關於我們", "sections": [{"sid": "about__1", "title": "協助台灣企業 在 北美 與 東南亞 落地", "cls": "ab-hero", "feats": ["ab-hero", "hero"], "dark": false}, {"sid": "about__2", "title": "創辦故事", "cls": "sec dark ab-story", "feats": ["ab-cards"], "dark": true}, {"sid": "about__3", "title": "不是 Aaron 一個人， 是一個 小而精 的團隊 + 全球節點", "cls": "sec cream", "feats": ["ab-team"], "dark": false}, {"sid": "about__4", "title": "你會得到 什麼樣的陪跑", "cls": "sec", "feats": ["ab-steps", "steps"], "dark": false}, {"sid": "about__5", "title": "你不只是找到一家公司 而是接上一整個網絡", "cls": "sec", "feats": ["ab-banner", "ab-net"], "dark": false}, {"sid": "about__6", "title": "我們相信的事", "cls": "ab-phil", "feats": ["ab-beliefs", "ab-phil", "beliefs"], "dark": false}, {"sid": "about__7", "title": "誠實的邊界", "cls": "sec cream", "feats": ["ab-dont"], "dark": false}, {"sid": "about__8", "title": "想認識我們？聊聊你的跨境計畫", "cls": "ab-cta", "feats": ["ab-cta", "cta"], "dark": false}]}];
+const V = "?v=" + Date.now(); const BEFORE = "before.html" + V, AFTER = "after.html" + V;
+
+/* ---------- what changed, by component, with the skill section it comes from ---------- */
+const P = (t, ref) => ({ t, ref });
+const RULES = {
+  hero: [P("<b>開頁就是一整張圖</b>，導覽列透明浮在圖上（跟正式站一樣）；深色遮罩改只在文字側＋底部，照片右半部完整露出", "你的要求・§12"),
+         P("分頁籤變成 <b>10 秒倒數進度條</b>，看得到下一張什麼時候來；滑鼠停在大圖上就暫停", "§1 回應・§8 預告方向"),
+         P("換張時標題由下往上浮現、同時去模糊，不再整塊硬切", "§11 畫面平順"),
+         P("再點一次<b>目前這張</b>的分頁籤，會捲到它對應的區塊（四章、躍馬）", "v4 錨點"),
+         P("超大標題字距收緊 2.8%、行高 1.08：字越大越緊", "§15 字距依字級")],
+  phero: [P("<b>開頁就是一整張圖</b>（跟正式站首頁一樣）：大圖從最頂端開始、剛好一個畫面高，導覽列透明浮在圖上，往下捲過大圖才變毛玻璃；右下角有「往下」鈕", "你的要求"),
+          P("背景換成<b>對應內容的照片</b>（Pexels，可商用）；服務總覽維持原圖", "你的要求"),
+          P("深色遮罩改成<b>只在文字那一側</b>的漸層：照片右半部完整露出，文字區白字對比仍 ≥ 4.5:1", "§12・§14"),
+          P("大標 → 內文 → 按鈕依序浮現（間隔 80ms），進頁有層次", "§11"),
+          P("大標字距收緊 2.2%、行高 1.10", "§15"),
+          P("按鈕<b>按下瞬間</b>縮到 0.97；金色按鈕加內亮邊與柔光", "§1 按下就回饋・§12 材質")],
+  "ab-hero": [P("<b>開頁就是一整張圖</b>、導覽列浮在圖上，沿用原站照片；遮罩改只在文字側", "你的要求・§12"), P("大標依序浮現、字距收緊", "§15"), P("原站創辦人大照片、三個數字保留", "豐富度")],
+  "in-hero": [P("<b>開頁就是一整張圖</b>、導覽列浮在圖上，背景換成筆記本與咖啡的照片；遮罩只在文字側", "你的要求"), P("大標依序浮現、字距收緊；右側精選卡滑過浮起", "§15・§1")],
+  chapbar: [P("章節列改<b>毛玻璃材質</b>，捲動時內容從底下透過去", "§12 半透明表示層級"),
+            P("只有貼頂、底下有內容時才出現陰影，取代固定的分隔線", "§12 捲動邊緣效果"),
+            P("走過的章節連線用金色<b>由左往右填滿</b>，目前節點放大 1.15", "§8 預告方向"),
+            P("節點按下縮小回饋", "§1")],
+  anotherline: [P("硬分隔線改成極淡的內陰影", "§12 不用硬分隔線")],
+  faq: [P("問答改成<b>彈簧展開</b>：高度跟「＋ 轉成 ×」用同一條彈簧，同步到位", "§4 彈簧"),
+        P("展開到一半再點可以<b>立刻反向</b>，從當下位置接著收回、不會跳", "§3 可中斷"),
+        P("問題列按下有淡底回饋", "§1")],
+  reading: [P("文章卡滑過浮起 3px、按下 0.985", "§1"), P("卡片依序浮現（60ms 錯開）", "§11")],
+  plans: [P("四章卡片依序浮現；滑過浮起、按下回饋", "§1・§11"),
+          P("上方時間軸<b>跟著捲動填金色</b>，走到哪一章亮哪一點", "§8 預告方向"),
+          P("點時間軸的月份會捲到那張卡，並閃一下金框", "§16 找路")],
+  pricecard: [P("價格卡進場浮現", "§11")],
+  paper: [P("報告示意紙會<b>跟著滑鼠傾斜</b>，離開時帶一點回彈回正（damping 0.8）", "§2 直接操作・§4")],
+  tracks: [P("兩條時間軌依序浮現，灰軌（被動）先、金軌（主動）後", "§8")],
+  steps: [P("步驟卡依序浮現；桌機四欄、手機維持直線時間軸", "§11")],
+  "ab-cards": [P("故事卡可以<b>用滑鼠直接拖</b>：放開時依速度推算落點、吸附到最近一張", "§5 速度接力・§6 動量推算"),
+               P("拖到第一張或最後一張之外會有<b>橡皮筋阻力</b>，不是硬停", "§9 橡皮筋"),
+               P("加上 ← → 按鈕，一樣走彈簧", "§16 可預測")],
+  "ab-steps": [P("五步卡可拖曳、依速度吸附、邊緣橡皮筋；加 ← → 按鈕", "§5・§6・§9")],
+  "in-filter": [P("章節篩選改成 <b>iOS 分段控制</b>：白色底塊用兩條彈簧（位置、寬度分開）滑到新選項", "§3 二維拆成兩條彈簧"),
+                P("切換後文章卡依序淡入（35ms 錯開）", "§11"),
+                P("選項按下縮 0.96", "§1")],
+  bars2: [P("五條分數條進入畫面時<b>由左長出</b>，依序 90ms", "§8・§11")],
+  cta: [P("「聊聊」按鈕改開<b>底部抽屜表單</b>：從底部升起、往下拖就關，依放手速度判斷要不要關", "§7 同路進出・§6"),
+        P("抽屜往上拖有橡皮筋、背景遮罩跟著拖曳同步變淡", "§9・§12 變暗聚焦")],
+  regcard: [P("登記卡進場浮現；欄位聚焦時金色外框", "§11・§1")],
+  tbl: [P("對比表進場浮現", "§11")], who: [P("兩欄表進場浮現", "§11")],
+  svc: [P("四章列表滑過時淡金底並右移 10px，按下加深", "§1 回應")],
+  lines: [P("兩條線卡片滑過浮起", "§1")],
+  roads3: [P("三條路卡片依序浮現、滑過浮起", "§11・§1")], roads: [P("三條路依序浮現", "§11")],
+  stuck3: [P("三張卡依序浮現、滑過浮起、按下回饋", "§1")], stuck5: [P("五張卡依序浮現、滑過浮起、點了跳到對應段落", "§1・§16")],
+  dims: [P("五個問題依序浮現；滑過浮起", "§11")], scores: [P("四個分數區間依序浮現", "§11")],
+  casecards: [P("個案卡滑過浮起、底色漸層變淡露出照片", "§1")], bridge: [P("處境比對條浮現；按鈕打開聊聊抽屜", "§7")],
+  mini5: [P("五張小卡依序浮現", "§11")], trio: [P("三張卡依序浮現", "§11")],
+  nextch: [P("下一章卡滑過浮起、按下 0.985", "§1・§16 找路")],
+  opening: [P("場景文字最後三句加粗到 650，重點更清楚", "§15 用字重建層級")],
+  week: [P("星期一到四四格依序浮現", "§11")], kit: [P("起手包條浮現", "§11")],
+  "ab-net": [P("網絡卡依序浮現、滑過浮起並換成各自的顏色邊框", "§1")], "ab-team": [P("團隊卡依序浮現、滑過浮起", "§1")],
+  "ab-beliefs": [P("四條信念依序浮現", "§11")], "ab-dont": [P("邊界條目依序浮現", "§11")],
+  split: [P("圖文段標題與內文浮現", "§11")], got: [P("交付說明浮現", "§11")],
+  example: [P("評分例子卡浮現，分數條依序長出", "§8")],
+};
+const GENERIC = P("標題字距依字級收緊（大標 -1.6%）、進入畫面時淡入上浮", "§15・§11");
+const TITLE_FIX = { svc: "四章列表", pricecard: "價格卡", nextch: "下一章卡", casecards: "四篇個案", roads3: "三條路", "in-filter": "篩選＋文章列表" };
+const DEC_BY_SID = {
+  "home__2": ["拿掉「貨到了之後」獨立小標（見決定 D1）"],
+  "home__4": ["拿掉「來自躍馬企業」獨立小標（見決定 D1）"],
+  "insights__2": ["「越南市場進入指南」下架，文章數 11 → 10（見決定 D5）", "Go / No-Go 放第一個月、TradePilot 放第三個月、東南亞趨勢三篇只當標籤（見決定 D4）"],
+  "about__5": ["TradePilot 科技工具卡保留；橫幅用「42 年國際物流」（D6、D7）"],
+  "about__7": ["「不拿股權」「不賣課」保留（D6）"],
+  "methodology__7": ["Costco 評分例子保留、「首月超標 40%」不放（D8）"],
+  "cases__4": ["四篇個案照現況掛著（D9）"],
+};
+const PAGE_NOTES = [
+  P("導覽列改<b>深色毛玻璃</b>，捲動後內容從底下透過，只有捲動時才出現邊緣陰影", "§12 材質"),
+  P("下拉選單從觸發點<b>長出來</b>（縮放＋去模糊），離開後延遲 120ms 才收，斜著移過去不會誤關", "§7 從觸發點出現・§10"),
+  P("手機版底部多一條毛玻璃浮動列「第一次談不收費 · 聊聊你的產品」", "§12・§16"),
+  P("系統開了「減少動態」「降低透明度」「增加對比」都有對應版本", "§14 無障礙"),
+  P("所有標註用的黃色小框（待確認、設計說明）在 After 都拿掉了，決定寫在左側「決定清單」", "決定"),
+];
+const DECISIONS = [
+  ["D1", "獨立小標（貨到了之後、來自躍馬企業）", "拿掉。你今天才把全站小標刪掉，故事版不需要它們撐。<b>章節標籤（第一個月 · 品測…）保留</b>：它是故事主軸，也是章節列的導航。"],
+  ["D2", "四章用「月份」還是「第一步」", "用月份。畫面感強；首頁 FAQ 02 已經寫明時間不是承諾。"],
+  ["D3", "首頁常見問題標題", "定案「你可能想先問的三件事」。"],
+  ["D4", "舊文章怎麼分章", "Go / No-Go → 第一個月（講的是該不該去）；TradePilot → 第三個月（算到岸成本）；東南亞趨勢三篇只當標籤、不進主分類（照 v4.1）。"],
+  ["D5", "越南市場進入指南", "下架。v4 全站檢查要求「越南市場進入」0 筆。"],
+  ["D6", "關於：TradePilot 卡、不拿股權、不賣課", "都保留。原站真實內容、跟新立場不衝突，讓頁面更豐富。「不做行銷代操」維持拿掉（跟寄賣包衝突）。"],
+  ["D7", "網絡橫幅文字", "「30+ 國家 · 500+ 出口案件 · 42 年國際物流」，對齊全站 42 年。"],
+  ["D8", "方法論 Costco 評分例子", "保留（原站已公開）；「首月銷量超標 40%」先不放，等四篇個案一起確認。"],
+  ["D9", "v4.1 待答 6 題", "照文件預設：六個數據來源、一頁建議、客服工作台與月報、三條路的三句話都保留；四篇個案照現況掛著；8 篇文章你點題我出草稿；實景照列進 11 月出差清單。"],
+  ["D10", "進階頁待確認數字", "照建議：物流、AI 集客、新人上手改軟版；拿掉「40–60 頁」；30 分鐘免費評估保留。"],
+  ["D12", "各頁大圖照片", "品測：兩位女性在桌邊看資料（Pexels #8545635）；寄賣：倉庫走道（#4487383）；公司落地：夜裡的茶飲店（#21563946）；海外客服：亞洲客服團隊（#7709179）；北美通路：量販賣場（#11835349）；運營優化：拿平板的倉庫主管（#4484075）；方法論：地圖與指南針（#5302808）；案例：馬尼拉天際線（#10869666）；洞察：筆記本與咖啡（#5951549）。首頁、服務總覽、關於我們沿用原圖。全部 Pexels License 可商用；v4.1 說之後要換成菲律賓實景，這批是過渡。"],
+  ["D13", "大圖深色遮罩要不要拿掉", "<b>建議：不要整片拿掉，改成只在文字那一側加漸層。</b>我量了 13 張大圖在文字區的亮度：整片拿掉時，每一張都有 17%–82% 的面積白字對比低於 4.5:1（無障礙標準），品測、北美、運營優化、洞察最嚴重，字會糊進照片裡。改成「左側漸層＋底部淡漸層」後，12 張有 94% 以上面積過標，洞察 89%（白桌面偏亮），而照片右半部完全不加色。手機上文字在下方，所以漸層改成由下往上。上方可以切三種模式自己比。"],
+  ["D11", "要不要改成蘋果式圓角", "<b>不改</b>，維持方正直角。方正版是 9/29 才上線的品牌決定；這次只借蘋果的動態、材質、字距、回饋，不借外型。"],
+];
+const PRINCIPLES = [
+  ["§1 回應", "按下的瞬間就有回饋，不等放開"], ["§3 可中斷", "動到一半能被抓住、反向，從當下位置接著走"],
+  ["§4 彈簧", "用阻尼＋反應時間，不用固定秒數；一般 1.0 不回彈，只有甩出去的才 0.8"], ["§5／§6 速度與動量", "放手時接手指速度，用 Apple 的推算公式找落點"],
+  ["§7 空間一致", "從哪裡來就回哪裡去；選單從按鈕長出來"], ["§9 橡皮筋", "到邊界是越拉越緊，不是硬停"],
+  ["§12 材質", "毛玻璃導覽讓內容從底下透過；陰影只在需要的時候出現"], ["§14 無障礙", "減少動態、降低透明度、增加對比都有替代版"],
+  ["§15 字體", "字越大字距越緊、行高越小；用字重建層級"],
+];
+
+/* ---------- build ---------- */
+const tree = document.getElementById("tree");
+INV.forEach((pg, pi) => {
+  const d = document.createElement("div"); d.className = "pg";
+  d.innerHTML = `<button>${pg.name}<small>${pg.sections.length} 層</small></button><ol>${pg.sections.map((s, i) => {
+    const fix = Object.keys(TITLE_FIX).find(k => s.feats.includes(k) && !s.feats.includes("faq") && (s.title === "(區塊)" || k === "nextch" || k === "casecards" || k === "roads3"));
+    s.label = fix === "nextch" ? `下一章：${s.title}` : fix ? TITLE_FIX[fix] : s.title === "(區塊)" ? (s.dark ? "躍馬段落" : "內容區塊") : s.title;
+    return `<li><button data-p="${pi}" data-s="${i}"><i>${String(i + 1).padStart(2, "0")}</i>${s.label}</button></li>`; }).join("")}</ol>`;
+  d.firstElementChild.onclick = () => { const was = d.classList.contains("open"); document.querySelectorAll(".pg").forEach(x => x.classList.remove("open")); if (!was) d.classList.add("open"); go(pi, -1); };
+  tree.appendChild(d);
+});
+tree.addEventListener("click", e => { const b = e.target.closest("li button"); if (b) go(+b.dataset.p, +b.dataset.s); });
+
+let device = "desk", curP = 0, curS = -1;
+const B = document.getElementById("B"), A = document.getElementById("A");
+function notesFor(pg, si) {
+  if (si < 0) return { head: `${pg.name} · 整頁`, sub: `${pg.sections.length} 個區塊・點左側子項看每一層`, items: [...PAGE_NOTES] };
+  const s = pg.sections[si];
+  const items = [];
+  s.feats.forEach(f => (RULES[f] || []).forEach(r => items.push(r)));
+  if (!items.length || !s.feats.some(f => ["phero", "hero", "ab-hero", "in-hero"].includes(f))) items.push(GENERIC);
+  const dec = (DEC_BY_SID[s.sid] || []).map(t => ({ t, ref: "決定", dec: true }));
+  const seen = new Set();
+  return { head: `${pg.name} · 第 ${si + 1} 層：${s.label}`, sub: s.sid, items: [...dec, ...items.filter(x => !seen.has(x.t) && seen.add(x.t))] };
+}
+function go(pi, si) {
+  curP = pi; curS = si;
+  const pg = INV[pi], sid = si < 0 ? pg.id : pg.sections[si].sid;
+  document.querySelectorAll(".pg").forEach((x, i) => x.classList.toggle("open", i === pi));
+  document.querySelectorAll("li button").forEach(b => b.classList.toggle("on", +b.dataset.p === pi && +b.dataset.s === si));
+  const n = notesFor(pg, si);
+  document.getElementById("ttl").innerHTML = `${pg.name}<small>${si < 0 ? "整頁" : `第 ${si + 1} / ${pg.sections.length} 層`}</small>`;
+  document.getElementById("notes").innerHTML = `<div class="hd"><b>${n.head}</b><span>${n.sub}</span></div><ul>${n.items.map(x => `<li class="${x.dec ? "dec" : ""}">${x.t}<em>${x.ref}</em></li>`).join("")}</ul>`;
+  [[B, BEFORE], [A, AFTER]].forEach(([f, file]) => { const url = `${file}#${sid}`;
+    if (!f.dataset.file) { f.src = url; f.dataset.file = file; } else f.contentWindow.location.href = new URL(url, location.href).href; });
+  document.getElementById("openB").href = `${BEFORE}#${sid}`; document.getElementById("openA").href = `${AFTER}#${sid}`;
+  location.hash = `${pg.id}/${si + 1}`;
+  setTimeout(sendScrim, 80);
+}
+function fit() {
+  const w = device === "desk" ? 1440 : 390;
+  [["fB", B], ["fA", A]].forEach(([id, f]) => { const box = document.getElementById(id); box.classList.toggle("mobile", device !== "desk");
+    const sc = Math.min(1, box.clientWidth / w); f.style.width = w + "px"; f.style.height = box.clientHeight / sc + "px"; f.style.transform = `scale(${sc})`;
+    f.style.left = device === "desk" ? "0" : `${(box.clientWidth - w * sc) / 2}px`; });
+}
+let scrim = "local";
+const sendScrim = () => A.contentWindow && A.contentWindow.postMessage({ scrim, heroH: device === "desk" ? 900 : 844 }, "*");
+A.addEventListener("load", () => setTimeout(sendScrim, 50));
+document.getElementById("scrim").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
+  scrim = b.dataset.m; document.querySelectorAll("#scrim button").forEach(x => x.classList.toggle("on", x === b)); sendScrim(); });
+document.getElementById("dev").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
+  device = b.dataset.d; document.querySelectorAll("#dev button").forEach(x => x.classList.toggle("on", x === b)); fit(); sendScrim();
+  setTimeout(() => go(curP, curS), 120); });
+addEventListener("resize", fit);
+document.querySelector(".tabsw").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll(".tabsw button").forEach(x => x.classList.toggle("on", x === b)); document.body.classList.toggle("showdec", b.dataset.v === "dec"); });
+document.getElementById("decView").innerHTML = `<h2>我照判斷先定的事</h2><p class="s">你說「照你的判斷放上去」，以下是 After 裡已經套用的決定；哪一條要翻，跟我說編號就好。</p>
+  <table><thead><tr><th>#</th><th>問題</th><th>決定</th></tr></thead><tbody>${DECISIONS.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody></table>
+  <h2 style="margin-top:34px">這次用到的 apple-design 原則</h2><div class="principles">${PRINCIPLES.map(p => `<div><b>${p[0]}</b>${p[1]}</div>`).join("")}</div>`;
+
+const m = location.hash.slice(1).split("/"); const startP = Math.max(0, INV.findIndex(p => p.id === m[0]));
+fit(); go(startP, m[1] ? +m[1] - 1 : -1);
+</script>
+</body>
+</html>
