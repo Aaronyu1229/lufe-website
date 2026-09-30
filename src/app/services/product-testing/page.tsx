@@ -6,8 +6,8 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/services/product-testing",
-  title: "品測｜先讓馬尼拉的媽媽拿起來看看",
-  description: "你在台灣問了一百個人，還是不知道馬尼拉的媽媽會不會掏錢。品測就是把這個問題，拿去問她本人。",
+  title: "市場探查｜先讓馬尼拉的媽媽拿起來看看",
+  description: "你在台灣問了一百個人，還是不知道馬尼拉的媽媽會不會掏錢。市場探查就是把這個問題，拿去問她本人。",
 });
 
 export default function ProductTestingPage() {

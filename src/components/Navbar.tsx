@@ -47,14 +47,18 @@ const ABOUT_MENU_ITEMS = [
   { href: "/about#what-we-dont-do", title: "誠實的邊界", desc: "我們不做什麼", num: "06" },
 ] as const;
 
-function pathnameHasDarkHero(pathname: string): boolean {
+export function normalizePathname(pathname: string | null | undefined): string {
+  return !pathname || pathname === "/index" ? "/" : pathname;
+}
+
+export function pathnameHasDarkHero(pathname: string): boolean {
   if (["/", "/about", "/contact", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
   if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
   return pathname.startsWith("/services") || pathname.startsWith("/cases");
 }
 
 export function Navbar({ children }: { readonly children?: ReactNode }) {
-  const pathname = usePathname() ?? "";
+  const pathname = normalizePathname(usePathname());
   const { open: openMessageBox } = useMessageBox();
   const darkHero = pathnameHasDarkHero(pathname);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
@@ -390,7 +394,7 @@ function TradeIcon() {
 function ServicesMenu() {
   return <>
     <MenuColumn label="菲律賓 · 第一年四章">
-      <MenuLink href="/services/product-testing" title="品測" desc="第一個月 · 1～2 萬" marker={<CompassIcon />} />
+      <MenuLink href="/services/product-testing" title="市場探查" desc="第一個月 · 1～2 萬" marker={<CompassIcon />} />
       <MenuLink href="/services/consignment" title="寄賣" desc="第三個月 · 5～6 萬" marker={<TrendIcon />} />
       <MenuLink href="/services/localization" title="公司落地" desc="第九個月 · 按案報價" marker={<BuildingIcon />} />
       <MenuLink href="/services/call-center" title="海外客服" desc="之後的每一天 · 2027 Q1 首批" marker={<HeadsetIcon />} />
@@ -401,7 +405,7 @@ function ServicesMenu() {
       <MenuLink href="/services" title="四章總覽" desc="一家品牌在馬尼拉的第一年" marker={<ListIcon />} />
     </MenuColumn>
     <MenuRail label="從這裡開始">
-      <FeatureLink href="/services/product-testing" title="出海起手包" value="7 萬" desc={<>品測 1～2 萬＋寄賣包 5～6 萬。<br />沒過，錢到此為止。</>} action="看品測怎麼做 →" />
+      <FeatureLink href="/services/product-testing" title="出海起手包" value="7 萬" desc={<>市場探查 1～2 萬＋寄賣包 5～6 萬。<br />沒過，錢到此為止。</>} action="看市場探查怎麼做 →" />
     </MenuRail>
   </>;
 }
@@ -534,7 +538,7 @@ function MobileSubLink({ href, title, marker, external = false, onClose }: { hre
 
 function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: () => void }) {
   if (itemKey === "services") return <>
-    <MobileSubLink href="/services/product-testing" title="品測" marker={<CompassIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/product-testing" title="市場探查" marker={<CompassIcon />} onClose={onClose} />
     <MobileSubLink href="/services/consignment" title="寄賣" marker={<TrendIcon />} onClose={onClose} />
     <MobileSubLink href="/services/localization" title="公司落地" marker={<BuildingIcon />} onClose={onClose} />
     <MobileSubLink href="/services/call-center" title="海外客服" marker={<HeadsetIcon />} onClose={onClose} />

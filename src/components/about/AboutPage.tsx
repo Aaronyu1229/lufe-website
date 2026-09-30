@@ -111,7 +111,7 @@ const beliefs = [
   },
   {
     title: "",
-    desc: "我們不是跟你賭夢想，是有做過的事。",
+    desc: "我們不是跟你賭市場，是有做過的事。",
   },
 ];
 
@@ -132,7 +132,7 @@ const teamRoles = [
   {
     title: "菲律賓合作夥伴",
     scale: "",
-    desc: "在當地經營英語教育機構與連鎖餐飲多年，品測面板、落地執行、客服團隊都從這裡來。",
+    desc: "在當地經營英語教育機構與連鎖餐飲多年，市場探查面板、落地執行、客服團隊都從這裡來。",
     icon: (
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
         <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="1.5" />
@@ -241,7 +241,7 @@ export const thingsWeDontDo = [
   },
   {
     title: "我們不保證合規、不保證進通路。",
-    desc: "證幫你申請、坑幫你避，責任在品牌方；通路幫你談，賣不賣得動，品測會先告訴你。",
+    desc: "證幫你申請、坑幫你避，責任在品牌方；通路幫你談，賣不賣得動，市場探查會先告訴你。",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
         <path d="M3 11V13C3 13.5523 3.44772 14 4 14H6L11 18V6L6 10H4C3.44772 10 3 10.4477 3 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />

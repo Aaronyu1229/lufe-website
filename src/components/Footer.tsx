@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const serviceLinks = [
   { label: "四章總覽", href: "/services" },
-  { label: "品測", href: "/services/product-testing" },
+  { label: "市場探查", href: "/services/product-testing" },
   { label: "寄賣", href: "/services/consignment" },
   { label: "公司落地", href: "/services/localization" },
   { label: "海外客服", href: "/services/call-center" },
@@ -49,7 +49,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="text-[14px] max-w-[260px] leading-[1.8] font-normal mt-[14px] text-white/60">
-            貨到了之後，我們接著走。品測、寄賣、公司落地、海外客服，陪台灣品牌走完在菲律賓的第一年。底下是躍馬企業 42 年的國際物流。
+            貨到了之後，我們接著走。市場探查、寄賣、公司落地、海外客服，陪台灣品牌走完在菲律賓的第一年。底下是躍馬企業 42 年的國際物流。
           </p>
         </div>
 

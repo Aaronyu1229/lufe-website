@@ -73,11 +73,11 @@ export const WORKED_EXAMPLE = {
 export const METHODOLOGY_FAQS = [
   ["我一定要先被評分才能開始嗎？", "不用。第一次談我們會粗跑一遍，30 分鐘，不收費。多數人是談完才知道自己在哪一格。"],
   ["分數低就不能做嗎？", "60 分以下我們不接，這是對雙方的保護。但我們會寫清楚哪一題掉分、什麼條件改了可以再看。"],
-  ["分數是誰打的？", "我們打，依據是公開數據、你給的成本、和我們在當地的經驗。品測跑完，Market 和 Competition 兩題會用真實反應重打一次。"],
+  ["分數是誰打的？", "我們打，依據是公開數據、你給的成本、和我們在當地的經驗。市場探查跑完，Market 和 Competition 兩題會用真實反應重打一次。"],
 ] as const;
 
 const CHAPTER_ANSWERS = [
-  { question: "Market、Competition", href: "/services/product-testing", label: "第一個月的品測。", body: "一桌老師和家長拿起來看看，比報表準。" },
+  { question: "Market、Competition", href: "/services/product-testing", label: "第一個月的市場探查。", body: "一桌老師和家長拿起來看看，比報表準。" },
   { question: "Barrier、Profitability", href: "/services/consignment", label: "第三個月的寄賣。", body: "證要多久、到岸多少、平台抽多少，跑一輪就有真數字。" },
   { question: "Regulatory、Barrier", href: "/services/localization", label: "第九個月的公司落地。", body: "律師行、持證進口商、合規安排。" },
   { question: "海外客服", body: "不在五題裡。它不是「該不該去」的問題，是「去了之後」的問題。" },
@@ -155,7 +155,7 @@ export function MethodologyPage() {
         <div className="mx-auto max-w-[860px]">
           <h2 className="h2 text-tx">常見問題</h2>
           <div className="mt-6 border-b border-bd">{METHODOLOGY_FAQS.map(([question, answer], index) => <Disclosure key={question} id={`methodology-faq-${index + 1}`} defaultOpen={index === 0} summary={<span><span aria-hidden="true" className="mr-4 text-[13px] font-semibold text-gold-d">{String(index + 1).padStart(2, "0")}</span>{question}</span>}><p className="text-[15.5px] leading-[1.85] text-tx2">{answer}</p></Disclosure>)}</div>
-          <Link href="/services" className="mt-10 flex items-center justify-between gap-5 border border-bd bg-cream p-6 hover:border-gold"><div><p className="text-[14px] font-semibold text-sky">看完量尺，回去看路 →</p><h3 className="h3 mt-3 text-tx">一家品牌在馬尼拉的第一年：品測、寄賣、公司落地、海外客服</h3></div><span aria-hidden="true" className="text-[28px] text-gold-d">→</span></Link>
+          <Link href="/services" className="mt-10 flex items-center justify-between gap-5 border border-bd bg-cream p-6 hover:border-gold"><div><p className="text-[14px] font-semibold text-sky">看完量尺，回去看路 →</p><h3 className="h3 mt-3 text-tx">一家品牌在馬尼拉的第一年：市場探查、寄賣、公司落地、海外客服</h3></div><span aria-hidden="true" className="text-[28px] text-gold-d">→</span></Link>
         </div>
       </section>
 
