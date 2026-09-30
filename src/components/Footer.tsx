@@ -2,13 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 const serviceLinks = [
-  { label: "三支柱總覽", href: "/services" },
+  { label: "四章總覽", href: "/services" },
+  { label: "品測", href: "/services/product-testing" },
+  { label: "寄賣", href: "/services/consignment" },
+  { label: "公司落地", href: "/services/localization" },
+  { label: "海外客服", href: "/services/call-center" },
+  { label: "北美通路", href: "/services/north-america" },
+  { label: "運營優化", href: "/services/optimize" },
   { label: "鹿飛方法論", href: "/services/methodology" },
-  { label: "市場評估", href: "/services/market-assessment" },
-  { label: "產品測試", href: "/services/product-testing" },
-  { label: "通路進入", href: "/services/channel-entry" },
-  { label: "海外落地", href: "/services/localization" },
-  { label: "進階優化方案", href: "/services/optimize" },
 ];
 
 const resourceLinks = [
