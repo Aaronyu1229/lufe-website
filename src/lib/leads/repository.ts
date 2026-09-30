@@ -3,7 +3,7 @@ import "server-only";
 import postgres, { type Sql } from "postgres";
 
 export type LeadValues = {
-  form: "quick" | "contact";
+  form: "quick" | "contact" | "waitlist";
   name: string | null;
   contact: string | null;
   email: string | null;
@@ -12,6 +12,8 @@ export type LeadValues = {
   product: string | null;
   stage: string | null;
   message: string;
+  monthlyVolume: string | null;
+  currentHandler: string | null;
   page: string | null;
   userAgent: string | null;
 };
@@ -45,11 +47,12 @@ export const createLead = async (values: LeadValues): Promise<string | null> => 
 
   const rows = await sql<{ id: string }[]>`
     INSERT INTO lufe.leads (
-      form, name, contact, email, phone, company, product, stage, message, page, user_agent
+      form, name, contact, email, phone, company, product, stage, message, monthly_volume,
+      current_handler, page, user_agent
     ) VALUES (
       ${values.form}, ${values.name}, ${values.contact}, ${values.email}, ${values.phone},
-      ${values.company}, ${values.product}, ${values.stage}, ${values.message}, ${values.page},
-      ${values.userAgent}
+      ${values.company}, ${values.product}, ${values.stage}, ${values.message}, ${values.monthlyVolume},
+      ${values.currentHandler}, ${values.page}, ${values.userAgent}
     )
     RETURNING id
   `;
