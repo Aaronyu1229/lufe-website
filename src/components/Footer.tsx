@@ -16,8 +16,8 @@ const resourceLinks = [
   { label: "2 分鐘處境比對", href: "/assess" },
   { label: "政府補助整理", href: "/resources/subsidies" },
   { label: "全部資源", href: "/resources" },
-  { label: "TradePilot 工具 ↗", href: "https://tradepiloter.com", external: true },
-  { label: "躍馬企業官網 ↗", href: "https://jumping.group", external: true },
+  { label: "TradePilot - 線上報關工具", href: "https://tradepiloter.com", external: true },
+  { label: "躍馬企業 - 官網", href: "https://jumping.group", external: true },
 ];
 
 const insightLinks = [
@@ -34,7 +34,7 @@ const contactLinks: { label: string; href: string; external?: boolean }[] = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#0B1322] pb-[120px] pt-[72px] text-white/60">
+    <footer className="bg-navy pb-[120px] pt-[72px] text-white/70">
       <div className="lufe-container grid grid-cols-2 gap-x-9 gap-y-9 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div className="col-span-2 md:col-span-1">
           <Link href="/" className="flex items-center gap-2.5">
@@ -48,8 +48,8 @@ export function Footer() {
               鹿飛 LUF<span className="text-gold">É</span>
             </span>
           </Link>
-          <p className="text-[14px] max-w-[260px] leading-[1.8] font-normal mt-[14px] text-white/60">
-            貨到了之後，我們接著走。市場探查、寄賣、公司落地、海外客服，陪台灣品牌走完在菲律賓的第一年。底下是躍馬企業 42 年的國際物流。
+          <p className="text-[14px] max-w-[260px] leading-[1.8] font-normal mt-[14px] text-white/70">
+            協助台灣企業在北美與東南亞落地：市場探查、寄賣、公司落地到海外客服，一個窗口走完出海第一年。以躍馬企業 42 年國際物流為後盾
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[14px] text-white/60 hover:text-white transition-colors"
+                className="text-[14px] text-white/70 hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
@@ -79,7 +79,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[14px] text-white/60 hover:text-white transition-colors"
+                className="text-[14px] text-white/70 hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
@@ -94,11 +94,11 @@ export function Footer() {
           <div className="grid gap-[10px]">
             {resourceLinks.map((link) =>
               link.external ? (
-                <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="text-[14px] text-white/60 hover:text-white transition-colors">
-                  {link.label}
+                <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="text-[14px] text-white/70 hover:text-white transition-colors">
+                  {link.label}<span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span>
                 </a>
               ) : (
-                <Link key={link.label} href={link.href} className="text-[14px] text-white/60 hover:text-white transition-colors">
+                <Link key={link.label} href={link.href} className="text-[14px] text-white/70 hover:text-white transition-colors">
                   {link.label}
                 </Link>
               ),
@@ -111,22 +111,22 @@ export function Footer() {
             聯絡
           </h2>
           <div className="grid gap-[10px]">
-            <Link href="/about" className="text-[14px] text-white/60 hover:text-white transition-colors">關於我們</Link>
-            <Link href="/contact" className="text-[14px] text-white/60 hover:text-white transition-colors">聯絡我們</Link>
+            <Link href="/about" className="text-[14px] text-white/70 hover:text-white transition-colors">關於我們</Link>
+            <Link href="/contact" className="text-[14px] text-white/70 hover:text-white transition-colors">聯絡我們</Link>
             {contactLinks.map((link) =>
               link.href ? (
-                <a key={link.label} href={link.href} className="text-[14px] text-white/60 hover:text-white transition-colors">
+                <a key={link.label} href={link.href} className="text-[14px] text-white/70 hover:text-white transition-colors">
                   {link.label}
                 </a>
               ) : (
-                <span key={link.label} className="text-[14px] text-white/60">{link.label}</span>
+                <span key={link.label} className="text-[14px] text-white/70">{link.label}</span>
               ),
             )}
           </div>
         </div>
       </div>
 
-      <div className="lufe-container mt-14 border-t border-white/10 pt-6 text-[13px] font-normal text-white/60">
+      <div className="lufe-container mt-14 border-t border-white/10 pt-6 text-[13px] font-normal text-white/70">
         © 2026 鹿飛 LUFÉ — 版權所有
       </div>
     </footer>

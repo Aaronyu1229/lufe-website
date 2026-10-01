@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
+import { BuildingIcon, CompassIcon, HeadsetIcon, TrendIcon } from "@/components/icons/LineIcons";
+
 type Chapter = {
   readonly id?: string;
   readonly label: string;
@@ -10,37 +12,42 @@ type Chapter = {
   readonly subtitle: string;
   readonly href: string;
   readonly linkLabel: string;
+  readonly icon: typeof CompassIcon;
 };
 
 export const HOME_CHAPTERS: readonly Chapter[] = [
   {
     label: "第一個月",
     title: "市場探查",
-    subtitle: "在當地找真實消費者試用，確認誰會買、願意付多少。",
+    subtitle: "在當地找真實消費者試用，確認誰會買、願意付多少",
     href: "/services/product-testing",
     linkLabel: "看市場探查怎麼做 →",
+    icon: CompassIcon,
   },
   {
     id: "chapter-2",
     label: "第三個月",
     title: "試銷寄賣",
-    subtitle: "電商上架與產品證同步進行，用實際銷售驗證市場。",
+    subtitle: "電商上架與產品證同步進行，用實際銷售驗證市場",
     href: "/services/consignment",
     linkLabel: "看寄賣包內容 →",
+    icon: TrendIcon,
   },
   {
     label: "第九個月",
     title: "在地設立",
-    subtitle: "公司註冊、人員招聘、FDA 證照轉移，建立當地據點。",
+    subtitle: "公司註冊、人員招聘、FDA 證照轉移，建立當地據點",
     href: "/services/localization",
     linkLabel: "看落地怎麼做 →",
+    icon: BuildingIcon,
   },
   {
     label: "之後的每一天",
     title: "海外客服",
-    subtitle: "由菲律賓專業團隊接手英文客服，品質由台灣端管理。",
+    subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理",
     href: "/services/call-center",
     linkLabel: "登記首批 →",
+    icon: HeadsetIcon,
   },
 ];
 
@@ -101,7 +108,7 @@ export function ChaptersSection() {
             <span className="text-gold-d">通常是這樣走的</span>
           </h2>
           <p className="mx-auto max-w-[720px] text-[17px] font-normal leading-[1.8] text-tx2 md:text-[18px]">
-            四個章節，四個方案。可以只走第一章，也可以一路走完。每一章都有價，每一章結束你都可以決定要不要繼續。
+            四個章節，四個方案。可從第一章開始，也可一路走完；每一章獨立計價，每一章結束都能決定是否繼續
           </p>
         </div>
 
@@ -117,8 +124,14 @@ export function ChaptersSection() {
         </ol>
 
         <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-          {HOME_CHAPTERS.map((chapter, index) => (
-            <article ref={(element) => { cardsRef.current[index] = element; }} id={chapter.id} key={chapter.label} onPointerEnter={() => setHoveredIndex(index)} onPointerLeave={() => setHoveredIndex(null)} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} className={`lufe-card flex min-w-0 flex-col border border-bd bg-white p-6 md:p-8 ${flashIndex === index ? "lufe-home-chapter-flash" : ""}`}>
+          {HOME_CHAPTERS.map((chapter, index) => {
+            const Icon = chapter.icon;
+
+            return (
+            <article ref={(element) => { cardsRef.current[index] = element; }} id={chapter.id} key={chapter.label} onPointerEnter={() => setHoveredIndex(index)} onPointerLeave={() => setHoveredIndex(null)} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} className={`lufe-card group flex min-w-0 flex-col border border-bd bg-white p-6 md:p-8 ${flashIndex === index ? "lufe-home-chapter-flash" : ""}`}>
+              <span aria-hidden="true" className="mb-5 grid h-10 w-10 place-items-center border border-gold/25 bg-gold/10 text-gold-d transition-colors duration-200 [@media(hover:hover)]:group-hover:bg-gold/15">
+                <Icon size={20} className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-px" />
+              </span>
               <p className="mb-4 text-[13px] font-semibold text-gold-d">{chapter.label}</p>
               <h3 className="mb-5 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">{chapter.title}</h3>
               <p className="text-[15px] leading-[1.85] text-tx2">{chapter.subtitle}</p>
@@ -126,15 +139,14 @@ export function ChaptersSection() {
                 {chapter.linkLabel}
               </Link>
             </article>
-          ))}
+            );
+          })}
         </div>
 
-        <p className="mt-5 border-l-2 border-gold bg-white px-5 py-4 text-[15px] leading-[1.8] text-tx2">
-          出海起手包 <strong className="text-tx">7 萬</strong> ＝ 第一章市場探查 1～2 萬 ＋ 第二章寄賣包 5～6 萬。<br />
-          先付市場探查。沒過，錢到此為止；過了，這筆抵進寄賣包。前 10 家是實驗價。
-        </p>
-        <Link href="/services/north-america" className="mt-5 inline-flex text-[15px] font-semibold text-sky">
-          產品已具備規模、準備進入北美零售通路？了解北美市場拓展 →
+        <Link href="/services/north-america" className="group mt-8 flex items-center gap-4 border-y border-bd py-4">
+          <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em] text-gold-d">US</span>
+          <span className="text-[15px] text-tx transition-colors [@media(hover:hover)]:group-hover:text-sky">已具規模、準備進入北美零售通路</span>
+          <span className="ml-auto whitespace-nowrap text-[15px] font-semibold text-sky">北美市場拓展 <span aria-hidden="true" className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-[3px]">→</span></span>
         </Link>
       </div>
     </section>

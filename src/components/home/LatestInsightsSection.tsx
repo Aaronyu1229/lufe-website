@@ -8,9 +8,9 @@ export function LatestInsightsSection({ articles }: { articles: readonly Insight
     <section className="bg-cream py-[80px] md:py-[104px]">
       <div className="lufe-container">
         <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
-          讀到一半想深入的，
+          出海實務洞察，
           <br />
-          <span className="text-gold-d">這裡有</span>
+          <span className="text-gold-d">從市場、通路到法規</span>
         </h2>
         <div className="mt-9 grid gap-5 md:grid-cols-3">
           {articles.map((article) => (
