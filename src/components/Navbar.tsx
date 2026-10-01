@@ -55,7 +55,7 @@ export function normalizePathname(pathname: string | null | undefined): string {
 export function pathnameHasDarkHero(pathname: string): boolean {
   if (["/", "/about", "/contact", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
   if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
-  return pathname.startsWith("/services") || pathname.startsWith("/cases");
+  return pathname.startsWith("/services") || pathname.startsWith("/cases") || pathname.startsWith("/about/");
 }
 
 export function Navbar({ children }: { readonly children?: ReactNode }) {
