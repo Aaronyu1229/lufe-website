@@ -37,7 +37,7 @@ describe("ServicesPage", () => {
 
     expect(markup).toContain("我們不會先報價再問你需求。");
     expect(markup).toContain("第一次見面，我們想先聽你的產品在台灣怎麼賣、為什麼想出去。有時候聽完，我們會建議你再等等——那也是一種答案。");
-    expect(markup).toContain("菲律賓的第一年，北美的貨架");
+    expect(markup).toContain("兩條出海路徑：菲律賓在地落地，北美通路拓展");
     expect(markup).toContain("北美零售通路另由北美專責團隊規劃執行。");
 
     for (const [index] of SERVICE_FAQS.entries()) {
