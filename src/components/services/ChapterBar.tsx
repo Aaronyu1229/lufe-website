@@ -17,8 +17,8 @@ export function ChapterBar({ current }: { readonly current: PhilippinesChapterKe
   }, []);
 
   return (
-    <nav aria-label="菲律賓服務章節" className={`lufe-chapter-bar sticky top-[64px] z-20 px-5 py-3 md:px-10 ${atEdge ? "lufe-chapter-bar-edge" : ""}`}>
-      <div className="mx-auto flex max-w-[1100px] items-center gap-0 overflow-x-auto md:justify-between">
+    <nav aria-label="菲律賓服務章節" className={`lufe-chapter-bar sticky top-[64px] z-20 py-3 ${atEdge ? "lufe-chapter-bar-edge" : ""}`}>
+      <div className="lufe-container flex items-center gap-0 overflow-x-auto md:justify-between">
         {PHILIPPINES_CHAPTER_KEYS.map((key, index) => {
           const chapter = CHAPTERS[key];
           const isCurrent = key === current;

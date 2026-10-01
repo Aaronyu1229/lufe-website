@@ -283,7 +283,7 @@ export function AboutPage() {
       {/* ─── Founder Story (executive window hero) ─── */}
       <section
         id="story"
-        className="lufe-hero bg-navy px-5 text-white md:px-10 scroll-mt-[80px]"
+        className="lufe-hero bg-navy text-white scroll-mt-[80px]"
       >
         <HeroBackdrop src="/images/about/about-hero-executive.jpg" position="65% center" />
 
@@ -297,7 +297,7 @@ export function AboutPage() {
           }}
         />
 
-        <div className="lufe-hero-content mx-auto max-w-[1200px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
             <Link href="/" className="hover:text-gold">首頁</Link>
@@ -363,11 +363,11 @@ export function AboutPage() {
       </section>
 
       {/* ─── Story: 3 flickable cards ─── */}
-      <section className="bg-navy text-white py-[80px] md:py-[110px] px-5 md:px-10 border-t border-white/5 overflow-hidden">
-        <div className="max-w-[1100px] mx-auto">
+      <section className="overflow-hidden border-t border-white/5 bg-navy py-[80px] text-white md:py-[110px]">
+        <div className="lufe-container">
           <Carousel
             label="鹿飛的故事"
-            className="-mx-5 md:-mx-10"
+            className=""
             itemClassName="basis-[min(82vw,380px)] md:basis-[calc((100%-2rem)/2)]"
           >
             {storyCards.map((card) => (
@@ -396,9 +396,9 @@ export function AboutPage() {
       {/* ─── Team Structure ─── */}
       <section
         id="team"
-        className="bg-cream py-[72px] px-5 md:px-10 border-t border-b border-bd/40 scroll-mt-[80px]"
+        className="border-t border-b border-bd/40 bg-cream py-[72px] scroll-mt-[80px]"
       >
-        <div className="max-w-[900px] mx-auto">
+        <div className="lufe-container">
           <h2 className="h2">
             不是 Aaron 一個人，
             <br />
@@ -437,9 +437,9 @@ export function AboutPage() {
       {/* ─── How We Work ─── */}
       <section
         id="how-we-work"
-        className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[80px]"
+        className="bg-white py-[80px] scroll-mt-[80px]"
       >
-        <div className="max-w-[900px] mx-auto">
+        <div className="lufe-container">
           <h2 className="h2">
             你會得到<span className="text-gold-d font-[650]">什麼樣的陪跑</span>
           </h2>
@@ -449,7 +449,7 @@ export function AboutPage() {
 
           <Carousel
             label="合作流程"
-            className="mt-8 -mx-5 md:-mx-10"
+            className="mt-8"
             itemClassName="basis-[min(82vw,330px)] md:basis-[calc((100%-3rem)/3)]"
           >
             {howWeWorkSteps.map((step) => (
@@ -472,9 +472,9 @@ export function AboutPage() {
       {/* ─── Resource Network (with Saigon night overlay strip) ─── */}
       <section
         id="network"
-        className="bg-white py-[80px] px-5 md:px-10 scroll-mt-[80px] border-t border-bd/40"
+        className="border-t border-bd/40 bg-white py-[80px] scroll-mt-[80px]"
       >
-        <div className="max-w-[900px] mx-auto">
+        <div className="lufe-container">
           {/* Hero strip — Saigon Bitexco night cityscape as a wide banner */}
           <div className="relative w-full h-[160px] md:h-[200px] mb-10 overflow-hidden">
             <Image
@@ -528,7 +528,7 @@ export function AboutPage() {
       {/* ─── Brand Philosophy (with gold compass) ─── */}
       <section
         id="philosophy"
-        className="relative bg-navy text-white py-[80px] px-5 md:px-10 overflow-hidden scroll-mt-[80px]"
+        className="relative overflow-hidden bg-navy py-[80px] text-white scroll-mt-[80px]"
       >
         {/* Compass bg - rich gold focal on dark */}
         <div className="absolute inset-0">
@@ -542,7 +542,7 @@ export function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/65" />
         </div>
 
-        <div className="relative max-w-[900px] mx-auto">
+        <div className="lufe-container relative">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] tracking-[-0.4px] [text-wrap:balance] mb-10">
             我們相信的事
           </h2>
@@ -570,21 +570,21 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section id="what-we-dont-do" className="bg-cream py-[80px] px-5 md:px-10 scroll-mt-[80px]">
-        <div className="max-w-[900px] mx-auto">
+      <section id="what-we-dont-do" className="bg-cream py-[80px] scroll-mt-[80px]">
+        <div className="lufe-container">
           <h2 className="h2">誠實的邊界</h2>
           <p className="section-desc">專業分工比萬能重要。我們誠實告訴你哪些事不該找我們——這樣你才知道什麼時候該找我們。</p>
           <div className="mt-10">{thingsWeDontDo.map((item) => <article key={item.title} className="border-t border-bd border-l-4 border-red-500/45 py-[26px] pl-[18px] pr-6 last:border-b"><h3 className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold mb-2 text-tx">{item.title}</h3><p className="text-[14.5px] text-tx2 leading-[1.8] font-normal">{item.desc}</p></article>)}</div>
         </div>
       </section>
 
-      <section className="bg-navy px-5 py-[80px] text-white md:px-10 md:py-[96px]">
-        <div className="mx-auto max-w-[720px] text-center">
+      <section className="bg-navy py-[80px] text-white md:py-[96px]">
+        <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
           <div className="relative mx-auto mb-8 h-[180px] w-full max-w-[680px] overflow-hidden"><Image src="/images/about/aaron-teaching.jpg" alt="Aaron 在工作坊現場陪學員操作 — 陪跑的日常" fill sizes="(max-width: 680px) 100vw, 680px" className="object-cover object-[center_35%]" /><div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/20 to-navy/75" /></div>
           <h2 className="h2 text-white">想認識我們？聊聊你的跨境計畫</h2>
           <p className="mt-4 text-[15.5px] leading-[1.8] text-white/60">不確定該不該跨境？先聊聊，不收費、不承諾、不賣課。</p>
           <button onClick={open} className="mt-7 cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy hover:bg-gold-l">聊聊你的產品 →</button>
-        </div>
+        </div></div>
       </section>
     </>
   );

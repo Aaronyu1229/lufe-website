@@ -34,8 +34,8 @@ const contactLinks: { label: string; href: string; external?: boolean }[] = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#0B1322] text-white/60 pt-[72px] pb-[120px] px-5 md:px-10">
-      <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,1fr)] gap-x-9 gap-y-9">
+    <footer className="bg-[#0B1322] pb-[120px] pt-[72px] text-white/60">
+      <div className="lufe-container grid grid-cols-2 gap-x-9 gap-y-9 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div className="col-span-2 md:col-span-1">
           <Link href="/" className="flex items-center gap-2.5">
             <Image
@@ -126,7 +126,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto mt-14 pt-6 border-t border-white/10 text-[13px] font-normal text-white/60">
+      <div className="lufe-container mt-14 border-t border-white/10 pt-6 text-[13px] font-normal text-white/60">
         © 2026 鹿飛 LUFÉ — 版權所有
       </div>
     </footer>

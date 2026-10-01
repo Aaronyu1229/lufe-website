@@ -22,9 +22,9 @@ export default function ResourcesPage() {
       <BreadcrumbJsonLd items={[{ name: "首頁", path: "/" }, { name: "資源", path: "/resources" }]} />
       <div className="bg-white">
       {/* ───── Hero ───── */}
-      <section className="lufe-hero bg-navy px-5 text-white md:px-10 lg:px-16">
+      <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/hero/hero-compass.jpg" />
-        <div className="lufe-hero-content mx-auto max-w-[1200px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <h1 className="h1 mb-7 max-w-[820px] text-white">
             正在開放的補助，
             <br />
@@ -43,8 +43,8 @@ export default function ResourcesPage() {
       </section>
 
       {/* ───── Two-card hub ───── */}
-      <section className="px-5 md:px-10 lg:px-16 py-[60px] md:py-[88px]">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7">
+      <section className="py-[60px] md:py-[88px]">
+        <div className="lufe-container grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-7">
           {/* Card 1 — 補助 */}
           <Link
             href="/resources/subsidies"
@@ -134,7 +134,7 @@ export default function ResourcesPage() {
         </div>
 
         {/* Cross-discovery footnote */}
-        <div className="max-w-[1200px] mx-auto mt-14 md:mt-16 pt-8 border-t border-bd/60">
+        <div className="lufe-container mt-14 border-t border-bd/60 pt-8 md:mt-16">
           <p className="text-[14.5px] text-tx3 leading-[1.8] text-center">
             想看實際做過的案子？前往{" "}
             <Link

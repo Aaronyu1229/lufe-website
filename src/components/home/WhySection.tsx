@@ -23,8 +23,8 @@ export const HOME_CONTRACT_WEEKDAYS = [
 
 export function OneContractSection() {
   return (
-    <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[104px]">
-      <div className="mx-auto max-w-[1200px]">
+    <section className="bg-cream py-[80px] md:py-[104px]">
+      <div className="lufe-container">
         <div className="max-w-[760px]">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
             一個窗口，

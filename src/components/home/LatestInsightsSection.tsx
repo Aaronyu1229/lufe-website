@@ -5,8 +5,8 @@ import type { InsightCard } from "@/lib/articles/presentation";
 
 export function LatestInsightsSection({ articles }: { articles: readonly InsightCard[] }) {
   return (
-    <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[104px]">
-      <div className="mx-auto max-w-[1200px]">
+    <section className="bg-cream py-[80px] md:py-[104px]">
+      <div className="lufe-container">
         <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
           讀到一半想深入的，
           <br />

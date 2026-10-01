@@ -7,8 +7,8 @@ export { HOME_FAQ_ITEMS } from "@/data/homeFaq";
 
 export function HomeFAQ() {
   return (
-    <section className="px-5 py-[62px] md:px-10 md:py-[96px] md:pb-[100px]">
-      <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-y-[43px] md:grid-cols-12 md:gap-x-16 md:gap-y-0">
+    <section className="py-[62px] md:py-[96px] md:pb-[100px]">
+      <div className="lufe-container grid grid-cols-1 gap-y-[43px] md:grid-cols-12 md:gap-x-16 md:gap-y-0">
         <div className="self-start md:col-span-4 md:sticky md:top-[96px]">
           <h2 className="max-w-[360px] font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
             你可能想先問的三件事

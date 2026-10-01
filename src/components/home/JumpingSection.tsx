@@ -6,8 +6,8 @@ const JUMPING_STATS = [
 
 export function JumpingSection() {
   return (
-    <section id="jumping" className="bg-navy px-5 py-[80px] text-white md:px-10 md:py-[104px]">
-      <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1.1fr_.9fr] lg:gap-20">
+    <section id="jumping" className="bg-navy py-[80px] text-white md:py-[104px]">
+      <div className="lufe-container grid gap-12 lg:grid-cols-[1.1fr_.9fr] lg:gap-20">
         <div>
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
             四十二年，

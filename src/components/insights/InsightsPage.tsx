@@ -96,9 +96,9 @@ export function InsightsPageContent({
 
   return (
     <>
-      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+      <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/v5/insights-2400.webp" mobileSrc="/images/v5/insights-1600.webp" />
-        <div className="lufe-hero-content mx-auto grid max-w-[1200px] min-w-0 grid-cols-1 items-end gap-10 pb-[78px] pt-[148px] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14 md:pb-[112px] md:pt-[170px]">
+        <div className="lufe-container lufe-hero-content grid min-w-0 grid-cols-1 items-end gap-10 pb-[78px] pt-[148px] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14 md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0">
             <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">洞察</span></nav>
             <p className="mb-4 text-[14px] font-semibold text-gold">洞察</p>
@@ -111,8 +111,8 @@ export function InsightsPageContent({
         <ScrollCue />
       </section>
 
-      <section className="overflow-hidden bg-white px-5 pb-[80px] pt-[60px] md:px-10 md:pb-[110px] md:pt-[80px]">
-        <div className="mx-auto max-w-[1080px] min-w-0">
+      <section className="overflow-hidden bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
+        <div className="lufe-container min-w-0">
           <div className="mb-10 max-w-full overflow-x-auto pb-1"><Segmented label="洞察章節" value={active} onChange={(value) => { if (isValidCategory(value)) onCategoryChange(value); }} options={INSIGHT_CHAPTERS.map((chapter) => ({ value: chapter.key, label: <>{chapter.label}<span className="lufe-insight-count" aria-hidden="true">{chapterCounts.get(chapter.key) ?? 0}</span></> }))} className="max-w-none" /></div>
           <Reveal>
             <div ref={articleGridRef} className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
