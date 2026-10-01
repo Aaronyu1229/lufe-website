@@ -234,7 +234,7 @@ export function CasesSection() {
       <div className="lufe-container">
         <div className="max-w-[820px]">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
-            我們不是跟你賭夢想，
+            我們不是跟你賭市場，
             <br />
             <span className="text-gold-d">是有做過的事</span>
           </h2>

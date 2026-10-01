@@ -178,7 +178,7 @@ export function CasesPageContent({
             <span className="text-white/75">案例</span>
           </nav>
 
-          <h1 className="h1 mb-7 max-w-[880px] text-white">我們不是跟你賭夢想，<br /><span className="text-gold">是有做過的事</span></h1>
+          <h1 className="h1 mb-7 max-w-[880px] text-white">我們不是跟你賭市場，<br /><span className="text-gold">是有做過的事</span></h1>
           <p className="lead max-w-[600px] whitespace-pre-line text-white/70">在菲律賓，我們跟合作夥伴走過三條不一樣的路。{"\n"}底下是其中幾個決策的完整過程。</p>
         </div>
         <ScrollCue />

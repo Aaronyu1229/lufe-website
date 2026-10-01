@@ -6,7 +6,7 @@ vi.mock("next/navigation", () => ({
   usePathname: () => "/",
 }));
 
-import { Navbar } from "@/components/Navbar";
+import { Navbar, normalizePathname, pathnameHasDarkHero } from "@/components/Navbar";
 
 const renderNavbar = () => renderToStaticMarkup(createElement(Navbar));
 
@@ -36,5 +36,10 @@ describe("Navbar", () => {
     const markup = renderNavbar();
 
     expect(markup).not.toContain("0 篇");
+  });
+
+  it.each([null, "", "/index"])("normalizes %j to the homepage pathname", (pathname) => {
+    expect(normalizePathname(pathname)).toBe("/");
+    expect(pathnameHasDarkHero(normalizePathname(pathname))).toBe(true);
   });
 });

@@ -126,7 +126,7 @@ export const CHAPTER_ARTICLES = {
 } as const satisfies Record<ArticleChapterKey, readonly string[]>;
 
 export const CHAPTER_ARTICLE_TAGS = {
-  m1: "第一個月：市場與品測",
+  m1: "第一個月：市場探查",
   m3: "第三個月：通路與證",
   m9: "第九個月：落地與團隊",
   after: "之後的每一天：客服與營運",
@@ -143,9 +143,9 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
   m1: {
     key: "m1",
     path: "/services/product-testing",
-    label: "第一個月 · 品測",
+    label: "第一個月 · 市場探查",
     title: "先讓馬尼拉的媽媽拿起來看看",
-    scene: "你在台灣問了一百個人，還是不知道馬尼拉的媽媽會不會掏錢。\n品測就是把這個問題，拿去問她本人。",
+    scene: "你在台灣問了一百個人，還是不知道馬尼拉的媽媽會不會掏錢。\n市場探查就是把這個問題，拿去問她本人。",
     image: "/images/services/stage-02-product-test.jpg",
     imageAlt: "團隊檢視產品資料",
     heroAction: "聊聊你的產品 →",
@@ -153,7 +153,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     overview: {
       price: "1～2 萬",
       body: "你在台灣問一百個人，也不知道馬尼拉的媽媽會不會掏錢。\n我們把產品放進當地學校的老師與家長面板跑一輪，\n給你一頁：誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。\n前 10 家實驗價。沒過，到此為止；過了，抵進下一章。",
-      linkLabel: "品測怎麼做 →",
+      linkLabel: "市場探查怎麼做 →",
     },
     scenarios: [
       "有產品，聽說東南亞有機會，但不知道從哪裡開始。",
@@ -163,7 +163,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     sections: [
       {
         type: "steps",
-        heading: "品測那一天會發生什麼",
+        heading: "市場探查那一天會發生什麼",
         items: [
           { number: "01", title: "你寄三支產品到馬尼拉", body: "我們先幫你看：這三支在當地有沒有類似的、賣多少錢。" },
           { number: "02", title: "一桌老師和家長", body: "當地學校的老師（高收入的工薪階層）和家長（真正掏錢的人）圍著桌子。\n拿起來、聞一聞、翻價錢。有人皺眉，有人問哪裡買得到。" },
@@ -193,8 +193,8 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       },
     ],
     faqs: [
-      { question: "品測沒過會怎樣？", answer: "報告會寫清楚為什麼、什麼條件改了可以再試。這是 1～2 萬買到的最有價值的答案之一。" },
-      { question: "可以只做品測嗎？", answer: "可以。品測是獨立的，你拿著那一頁去做任何決定都行。" },
+      { question: "市場探查沒過會怎樣？", answer: "報告會寫清楚為什麼、什麼條件改了可以再試。這是 1～2 萬買到的最有價值的答案之一。" },
+      { question: "可以只做市場探查嗎？", answer: "可以。市場探查是獨立的，你拿著那一頁去做任何決定都行。" },
       { question: "為什麼是老師和家長？", answer: "老師是當地高收入的工薪階層，家長是真正掏錢買東西的人。這兩群人的反應，比問卷準。" },
     ],
     next: { label: "下一章 →", title: "第三個月 · 寄賣", heading: "上架了，讓人先用過再說", href: "/services/consignment" },
@@ -212,11 +212,11 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     showChapterBar: true,
     overview: {
       price: "5～6 萬",
-      body: "上架不難，難的是證還沒下來的那 6～12 週怎麼辦、上了架誰來推。\n我們做的：電商上架、產品證代持、學校家長活動、市場報告、網紅與活動配套。\n貨放合作夥伴的倉，賣多少算多少。跟品測合起來就是 7 萬起手包。",
+      body: "上架不難，難的是證還沒下來的那 6～12 週怎麼辦、上了架誰來推。\n我們做的：電商上架、產品證代持、學校家長活動、市場報告、網紅與活動配套。\n貨放合作夥伴的倉，賣多少算多少。跟市場探查合起來就是 7 萬起手包。",
       linkLabel: "寄賣包內容 →",
     },
     scenarios: [
-      "品測過了，想放貨去賣，但不知道證怎麼辦、貨放哪、誰來推。",
+      "市場探查過了，想放貨去賣，但不知道證怎麼辦、貨放哪、誰來推。",
       "自己上過東南亞平台，投了廣告，沒人看見。",
       "有代理商找上門，只想抽成，不管你賣不賣得動。",
     ],
@@ -228,7 +228,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         active: [
           { label: "第 1～2 週", body: "貨進合作夥伴的倉，商品頁、當地說明、價格帶定下來。" },
           { label: "第 3～6 週", body: "學校家長活動：先讓人用過。有人在社群裡問，有人拍了影片。" },
-          { label: "第 6～10 週", body: "網紅與活動配套排進去。市場報告從品測那一頁展開：價格帶、競品、通路。" },
+          { label: "第 6～10 週", body: "網紅與活動配套排進去。市場報告從市場探查那一頁展開：價格帶、競品、通路。" },
           { label: "證下來那天", body: "貨上架。架上已經有人在等。" },
         ],
       },
@@ -239,7 +239,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
           { title: "電商通路上架", body: "放進合作的菲律賓電商通路，貨放合作夥伴的倉，賣多少算多少。" },
           { title: "產品證代持", body: "化妝品、食品的證由持證進口商代辦代持，資料歸你。" },
           { title: "學校家長活動", body: "證還沒下來的那段時間，先在學校家長社群做試用與活動。" },
-          { title: "市場報告", body: "把品測那一頁展開，補價格帶、競品、通路。" },
+          { title: "市場報告", body: "把市場探查那一頁展開，補價格帶、競品、通路。" },
           { title: "網紅與活動配套", body: "只投廣告不夠，這部分跟你一起排。" },
         ],
       },
@@ -251,7 +251,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       {
         type: "price",
         title: "5～6 萬",
-        caption: "品測費可抵。跟第一個月合起來，就是 7 萬起手包。",
+        caption: "市場探查費可抵。跟第一個月合起來，就是 7 萬起手包。",
         details: ["產品證 6～12 週，證下來貨就上架；這段時間活動先跑。", "平台費用與抽成、產品到當地的包裝與說明調整另計，第一次談會先講。"],
       },
     ],
@@ -261,7 +261,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "證掛在誰名下？", answer: "持證進口商代持，合約寫清楚資料歸你、轉移配合。不綁任何一家通路。" },
     ],
     next: { label: "下一章 →", title: "第九個月 · 公司落地", heading: "開始想要在當地有自己的人", href: "/services/localization" },
-    cta: { title: "看你的產品適不適合寄賣", body: "沒做過品測也可以聊，我們會先問你在台灣賣得怎麼樣。", action: "聊聊你的產品 →" },
+    cta: { title: "看你的產品適不適合寄賣", body: "沒做過市場探查也可以聊，我們會先問你在台灣賣得怎麼樣。", action: "聊聊你的產品 →" },
   },
   m9: {
     key: "m9",
@@ -312,7 +312,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       },
     ],
     faqs: [
-      { question: "一定要先做品測跟寄賣嗎？", answer: "不一定。已經有菲律賓通路、確定要開公司的，可以直接談落地。" },
+      { question: "一定要先做市場探查跟寄賣嗎？", answer: "不一定。已經有菲律賓通路、確定要開公司的，可以直接談落地。" },
       { question: "你們負責合規嗎？", answer: "證幫你申請、坑幫你避，責任在品牌方。這是我們在「不做什麼」裡寫清楚的邊界。" },
       { question: "遠程團隊是什麼意思？", answer: "台灣公司在菲律賓聘人，人在當地、報告給台灣。菲律賓很流行這種做法，我們幫你把合規和招聘處理好。" },
     ],
@@ -371,7 +371,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "現在可以簽嗎？", answer: "現在是登記首批。2027 Q1 開始服務，登記的人優先。" },
       { question: "我的量很小也可以嗎？", answer: "可以先登記。首批我們想找的是量不大、但每一封都重要的品牌，正好一起把服務磨好。" },
     ],
-    next: { label: "故事從頭來 →", title: "第一個月 · 品測", heading: "先讓馬尼拉的媽媽拿起來看看", href: "/services/product-testing" },
+    next: { label: "故事從頭來 →", title: "第一個月 · 市場探查", heading: "先讓馬尼拉的媽媽拿起來看看", href: "/services/product-testing" },
     cta: { title: "登記首批", body: "留下你的品牌、大概的訊息量、現在誰在接。開放時我們先找你。", action: "登記首批 →", href: "#waitlist" },
   },
   na: {

@@ -1,4 +1,4 @@
-export const HOME_CONTRACT_COLUMNS = ["品測與寄賣", "落地與客服", "國際物流"] as const;
+export const HOME_CONTRACT_COLUMNS = ["市場探查與寄賣", "落地與客服", "國際物流"] as const;
 
 type ContractRow = {
   readonly label: string;
@@ -43,25 +43,25 @@ export function OneContractSection() {
           ))}
         </div>
 
-        <p className="mt-6 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">老闆自己變成了中央窗口——每一家做完一件事，就交給下一家。{"\n\n"}鹿飛把品測、寄賣、落地、客服，加上物流，放在同一份合約裡。{"\n"}你開一次會，其他人我們去對。</p>
+        <p className="mt-6 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">老闆自己變成了中央窗口——每一家做完一件事，就交給下一家。{"\n\n"}鹿飛把市場探查、寄賣、落地、客服，加上物流，放在同一份合約裡。{"\n"}你開一次會，其他人我們去對。</p>
 
         <div className="mt-10 overflow-x-auto border border-bd bg-white">
           <table className="w-full min-w-[620px] table-fixed border-collapse">
             <thead>
-              <tr className="border-b border-bd bg-cream">
-                <th scope="col" className="w-[42%] px-3 py-4 text-left text-[13px] font-medium text-tx2 md:px-5">類型</th>
+              <tr className="border-b border-bd">
+                <th scope="col" className="w-[40%] px-3 py-5 text-left text-[13px] font-medium text-tx3 md:px-5">類型</th>
                 {HOME_CONTRACT_COLUMNS.map((column) => (
-                  <th key={column} scope="col" className="px-2 py-4 text-center text-[12px] font-medium text-tx2 md:text-[13px]">{column}</th>
+                  <th key={column} scope="col" className="px-2 py-5 text-center text-[12px] font-medium text-tx3 md:text-[13px]">{column}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {HOME_CONTRACT_ROWS.map((row) => (
-                <tr key={row.label} data-lufe-sweep={row.isLufe ? "" : undefined} className={`lufe-contract-row border-t border-bd ${row.isLufe ? "bg-gold/10" : ""}`}>
-                  <th scope="row" className={`px-3 py-4 text-left text-[14px] font-medium md:px-5 ${row.isLufe ? "text-gold-d" : "text-tx"}`}>{row.label}</th>
+                <tr key={row.label} className={`border-t border-bd ${row.isLufe ? "bg-gold/10 font-semibold" : ""}`}>
+                  <th scope="row" className={`px-3 py-5 text-left text-[14px] md:px-5 ${row.isLufe ? "border-l-[3px] border-gold font-semibold text-gold-d" : "font-medium text-tx"}`}>{row.label}</th>
                   {row.pillars.map((covered, index) => (
-                    <td key={HOME_CONTRACT_COLUMNS[index]} aria-label={covered ? `${row.label}涵蓋${HOME_CONTRACT_COLUMNS[index]}` : `${row.label}不涵蓋${HOME_CONTRACT_COLUMNS[index]}`} className={`px-2 py-4 text-center text-[14px] ${covered ? (row.isLufe ? "text-gold-d" : "text-tx2") : "text-tx3"}`}>
-                      <span aria-hidden="true">{covered ? "●" : "—"}</span>
+                    <td key={HOME_CONTRACT_COLUMNS[index]} aria-label={covered ? `${row.label}涵蓋${HOME_CONTRACT_COLUMNS[index]}` : `${row.label}不涵蓋${HOME_CONTRACT_COLUMNS[index]}`} className={`px-2 py-5 text-center ${covered ? "text-gold-d" : "text-tx3/50"}`}>
+                      {covered ? <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="inline-block align-middle"><path d="m3 8 3 3 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" /></svg> : <span aria-hidden="true" className="inline-block text-[18px] leading-none">—</span>}
                     </td>
                   ))}
                 </tr>

@@ -70,9 +70,6 @@ export function DelightLayer() {
     heroBackdrops.forEach((backdrop) => backdrop.setAttribute("data-lufe-hero-photo", ""));
     if (!reduced) onView(heroBackdrops, (element) => { element.dataset.lufeHeroSettled = ""; });
 
-    const sweepRows = Array.from(root.querySelectorAll<HTMLElement>("[data-lufe-sweep]"));
-    if (!reduced) onView(sweepRows, (element) => { element.dataset.lufeSweep = ""; });
-
     const beliefs = Array.from(root.querySelectorAll<HTMLElement>("[data-lufe-belief]"));
     if (reduced) beliefs.forEach((belief) => { belief.dataset.lufeBeliefLit = ""; });
     else onView(beliefs, (belief) => { belief.dataset.lufeBeliefLit = ""; });

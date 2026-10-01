@@ -23,8 +23,8 @@ const lightTagStyles: Record<string, string> = {
 };
 
 const CASE_STAGE_LINKS = {
-  "market-assessment": { label: "第一個月", title: "品測", href: "/services/product-testing" },
-  "product-testing": { label: "第一個月", title: "品測", href: "/services/product-testing" },
+  "market-assessment": { label: "第一個月", title: "市場探查", href: "/services/product-testing" },
+  "product-testing": { label: "第一個月", title: "市場探查", href: "/services/product-testing" },
   "channel-entry": { label: "北美", title: "北美通路", href: "/services/north-america" },
   localization: { label: "第九個月", title: "公司落地", href: "/services/localization" },
 } as const;
