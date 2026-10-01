@@ -50,7 +50,7 @@
 ## 每月任務（每月 1 號 10:00）
 
 1. DataForSEO：對所有已發布文章的主攻字查台灣 SERP（前 30 名），記下 lufe.world 的名次。
-2. 若 Google Search Console 有權限（`docs/blog-autopilot/` 內若有 GSC 說明再用），抓上月曝光／點擊；沒有就跳過並註明。
+2. Google Search Console（服務帳號已有「限制」權限，2026-10-01 開通）：`python3 ~/dev/lufe-autopilot/gsc.py sc-domain:lufe.world <上月1號> <上月最後一天> query 100` 與 `... page 100`，取上月各查詢字與各頁的點擊、曝光、平均名次；與上月比較。
 3. 依結果補 QUEUE：
    - 排名 11～30 名的文章 → 列為「本月更新」：補一節搜尋者在問、我們沒寫的內容（看 SERP 的「其他人也問了」），更新 `updated` 與 `lastVerified`。每月最多更新 3 篇，併入當月第一個週日任務。
    - 用 DataForSEO `keywords_for_keywords` 找 5 個新題目（月量 ≥ 50、和鹿飛／躍馬專業相關、不是旅遊或消費者購物意圖），加到自動產線尾端。
