@@ -25,6 +25,7 @@
    - 單次花費上限：每週 US$1；餘額低於 US$5 時停用 DataForSEO 並記在 LOG。
 5. **寫作**（照現有 13 篇的格式與 `src/data/articles.ts` 的欄位）
    - 骨架：先說答案（≤60 字，第一句自然帶主攻字）→「情境：……」（200～350 字，明確是情境）→ 判斷步驟／比較表 → 什麼情況不建議 → 常見問題 3 題（至少一題用搜尋者原句）→ 一個最小下一步（市場探查 1～2 萬做完可以停，或 LINE 問一句）。
+   - 新文章加在 `src/data/articles.ts` 的 `articles` 陣列**尾端**（測試會取 `articles[0]` 當已發布文章；列表依日期排序）。只連結已發布、或 publishAt 早於本篇的文章。
    - 正文 1,400～2,200 字；sources 陣列＋內文 [n] 註腳；`lastVerified` 當天；`date` 與 `publishAt` 用分配到的時段；作者同其他文章。
    - 封面圖：用 `public/images/**` 已有 WebP 分級、且**沒被其他文章用過**的圖；沒有合適的才用 free-assets（Pexels／Pixabay，可商用）下載，跑 `npm run images:build`。
    - 文中適當連到相關服務頁與 1～2 篇既有文章；在相關的既有文章「延伸閱讀」加回連（`src/data/chapters.ts`）。
