@@ -159,6 +159,8 @@ Incoterms 是國際商會（ICC）訂的貿易條件，現行版本是 Incoterms
 | **DAP** 目的地交貨 | 運到買方指定地點、在車上準備卸貨，辦出口與過境報關 [5] | 貨到指定地點、準備卸貨時 [5] | 賣方 | 買方 [5] | 任何方式 |
 | **DDP** 完稅後交貨 | 同 DAP，再加辦進口報關、付進口關稅與稅 [5] | 貨到指定地點、準備卸貨時 [5] | 賣方 | 賣方 [5] | 任何方式 |
 
+FOB 的責任劃分，以及進口端在目的地港口常見的額外費用，躍馬企業另有一篇[〈FOB 是什麼意思〉](https://jumping.group/insights/fob-destination-port-pitfalls)寫得更細，這篇專講第一次報價怎麼選。
+
 回到情境裡那封信。「FOB Kaohsiung」的意思是：你把貨送到高雄港、裝上他指定的船、辦好台灣這邊的出口報關，報價就到這裡為止 [3]。高雄到新加坡的運費是他找船公司付，保險他自己決定買不買，新加坡那邊的進口報關與稅也是他的事。你的報價單上該有的是：出廠價、出口包裝、送到高雄港的內陸運費、港口費用與出口報關費。
 
 ## 第一次出口報價怎麼選
@@ -191,8 +193,8 @@ Incoterms 是國際商會（ICC）訂的貿易條件，現行版本是 Incoterms
 
 ## 常見問題
 
-**FOB 意思是什麼？**
-賣方把貨送上出口港、買方指定的船，辦好出口報關；貨一上船，風險與之後的費用轉給買方 [3]。它不是含運費。
+**第一次報價該報 FOB 還是 EXW？**
+多數第一次出口比較適合報 FOB（貨櫃貨可考慮 FCA），不建議 EXW：EXW 主要適合國內交易，買方未必能在台灣辦出口報關 [2]；報 FOB 由你辦好出口報關，貨上船後風險轉給買方 [3]。
 
 **CIF 和 FOB 差別在哪？**
 風險轉移點一樣，都是貨上船。差別是 CIF 賣方多付到目的港的運費與最低保險 [4]，所以 CIF 價高於 FOB 價；關稅都是買方付。
@@ -205,7 +207,7 @@ Incoterms 是國際商會（ICC）訂的貿易條件，現行版本是 Incoterms
 回那封信之前，做兩件事：用 [TradePilot](https://tradepiloter.com) 查一次你的產品到對方國家的關稅，知道買方在 FOB 之外還要付多少，報價才不會談到一半被嚇退；然後找一家貨代把「送到高雄港、裝船、出口報關」這一段的費用問出來，FOB 價就有了。兩件都卡住，用 LINE 問我們一句。
 
 本文依 ICC 官方 Incoterms 2020 說明整理，不含運費與稅率數字。最後查證：2026-10-01。`],
-    faq: [{"q":"FOB 意思是什麼？","a":"FOB（Free On Board）是 Incoterms 2020 的海運條件之一：賣方把貨送上買方指定、在出口港的船上，並辦好出口報關；貨一上船，風險與之後的費用就轉給買方。它不是「含運費」，國際運費是買方自己找船公司付的。"},{"q":"CIF 和 FOB 差別在哪？","a":"風險轉移點一樣，都是貨上船那一刻。差別在錢：CIF 是賣方多付國際運費和保險到目的港，所以 CIF 價比 FOB 價高；但 CIF 的保險只要求最低等級（ICC C 條款），進口報關與關稅仍然是買方的。"},{"q":"DDP 意思是不是含稅到門？我可以報 DDP 嗎？","a":"是，DDP 是賣方包到買方指定地點，連進口報關、關稅與稅都由賣方付。但 DDP 要求賣方能在對方國家辦進口報關，有些國家的海關要求由當地進口人自己辦，這時 ICC 建議改用 DAP。第一次出口不建議報 DDP。"}],
+    faq: [{"q":"第一次報價該報 FOB 還是 EXW？","a":"多數第一次出口的台灣廠商比較適合報 FOB（貨櫃貨可考慮 FCA），不建議 EXW：ICC 說明 EXW 主要適合國內交易，買方未必能在台灣辦出口報關；報 FOB 時由你辦好出口報關，貨上船後風險轉給買方，責任界線清楚。FOB 本身的責任劃分與目的港常見費用，可參考躍馬企業的〈FOB 是什麼意思〉。"},{"q":"CIF 和 FOB 差別在哪？","a":"風險轉移點一樣，都是貨上船那一刻。差別在錢：CIF 是賣方多付國際運費和保險到目的港，所以 CIF 價比 FOB 價高；但 CIF 的保險只要求最低等級（ICC C 條款），進口報關與關稅仍然是買方的。"},{"q":"DDP 意思是不是含稅到門？我可以報 DDP 嗎？","a":"是，DDP 是賣方包到買方指定地點，連進口報關、關稅與稅都由賣方付。但 DDP 要求賣方能在對方國家辦進口報關，有些國家的海關要求由當地進口人自己辦，這時 ICC 建議改用 DAP。第一次出口不建議報 DDP。"}],
     sources: [{"id":1,"title":"Incoterms 2020","publisher":"國際商會 ICC","url":"https://iccwbo.org/business-solutions/incoterms-rules/incoterms-2020/","note":"Incoterms 2020 共 11 條；CIF 的預設保險等級維持 Institute Cargo Clauses (C)，CIP 提高到 (A)；各條件的費用整理在 A9/B9。"},{"id":2,"title":"Incoterms 2020 Checklist and Flowcharts（2024 更新版）","publisher":"國際商會 ICC","url":"https://library.iccwbo.org/content/clp/Others/incoterms_2020_checklist_2024-update.pdf","note":"EXW 主要適合國內交易；FAS、FOB 只用於海運，貨櫃或多式聯運應選 FCA；CIF 賣方保險義務僅限最低保障（C 條款）；DDP 含進口報關，實務上賣方可能無法辦理，選用要謹慎；DAP 的進口報關與關稅由買方負擔。"},{"id":3,"title":"FCA & FOB Incoterms 2020 explained：Key differences","publisher":"國際商會 ICC Academy","url":"https://academy.iccwbo.org/incoterms/article/incoterms-2020-fca-or-fob/","note":"FOB 賣方在指定出口港把貨送上船時完成交付並轉移風險，賣方負責出口報關；買方自己委託的船公司運貨、買方辦進口；FOB 只適用海運或內河運輸。"},{"id":4,"title":"CIF & CIP Incoterms 2020 explained：Key differences","publisher":"國際商會 ICC Academy","url":"https://academy.iccwbo.org/incoterms/article/incoterms-2020-cip-or-cif/","note":"CIF 風險在出口港貨上船時轉給買方；賣方安排並支付到目的港的運費與保險，保險只需符合 C 條款最低保障；買方辦進口手續；僅限海運或內河。"},{"id":5,"title":"DAP & DDP Incoterms 2020 explained：Key differences","publisher":"國際商會 ICC Academy","url":"https://academy.iccwbo.org/incoterms/article/incoterms-2020-dap-or-ddp/","note":"DAP 買方負責進口報關與關稅；DDP 賣方負責出口、過境、進口所有報關與費用；部分國家海關要求由當地進口人自行辦理進口報關，此時應改用 DAP。"},{"id":6,"title":"DDP & EXW Incoterms 2020 explained：Key differences","publisher":"國際商會 ICC Academy","url":"https://academy.iccwbo.org/incoterms/article/incoterms-2020-exw-or-ddp/","note":"EXW 買方承擔裝車、運輸、出口與進口報關的全部費用與風險；買方若無法在賣方國家辦出口手續應改用 FCA；EXW 用於出口可能有會計或稅務上的複雜性。"},{"id":7,"title":"Know Your Incoterms","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/know-your-incoterms","note":"Incoterms 2020 中 7 條適用任何運輸方式（含 EXW、DAP、DDP），4 條僅限海運與內河（含 FOB、CIF）。"}],
     lastVerified: "2026-10-01",
     updated: "2026-10-01",
