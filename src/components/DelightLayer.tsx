@@ -21,14 +21,14 @@ export function DelightLayer() {
     const reduced = isReducedMotion();
     const observers: IntersectionObserver[] = [];
     const cleanups: Array<() => void> = [];
-    const onView = (elements: readonly Element[], callback: (element: HTMLElement) => void) => {
+    const onView = (elements: readonly Element[], callback: (element: HTMLElement) => void, options?: IntersectionObserverInit) => {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           callback(entry.target as HTMLElement);
           observer.unobserve(entry.target);
         });
-      }, { rootMargin: "0px 0px -12% 0px" });
+      }, options ?? { rootMargin: "0px 0px -12% 0px" });
       elements.forEach((element) => observer.observe(element));
       observers.push(observer);
     };
@@ -49,22 +49,42 @@ export function DelightLayer() {
       .filter((element) => !element.closest(".lufe-scorecard") && element.tagName !== "OUTPUT"
         && !/^0\d/.test((element.textContent ?? "").trim()) && !element.dataset.lufeCounterReady);
     counters.forEach((element) => { element.dataset.lufeCounterReady = ""; });
-    onView(counters, (element) => {
+    const counterValues = new Map<HTMLElement, { prefix: string; value: string; suffix: string; target: number }>();
+    counters.forEach((element) => {
       const match = (element.textContent ?? "").trim().match(numberPattern);
-      if (!match || reduced) return;
+      if (!match) return;
+
       const [, prefix, value, suffix] = match;
       const target = Number(value.replace(/,/g, ""));
       if (!Number.isFinite(target)) return;
+
+      element.style.fontVariantNumeric = "tabular-nums";
+      element.style.minWidth = `${element.getBoundingClientRect().width}px`;
+      counterValues.set(element, { prefix, value, suffix, target });
+      element.textContent = `${prefix}0${suffix}`;
+    });
+    if (reduced) {
+      counterValues.forEach(({ prefix, value, suffix }, element) => {
+        element.textContent = `${prefix}${value}${suffix}`;
+        element.dataset.lufeCounted = "";
+      });
+    } else onView([...counterValues.keys()], (element) => {
+      const counter = counterValues.get(element);
+      if (!counter) return;
+
       const started = performance.now();
-      const duration = 900 + Math.min(Math.abs(target), 600);
       const tick = (now: number) => {
-        const progress = Math.min(1, (now - started) / duration);
+        const progress = Math.min(1, (now - started) / 1600);
         const eased = 1 - (1 - progress) ** 4;
-        element.textContent = `${prefix}${Math.round(target * eased).toLocaleString()}${suffix}`;
+        element.textContent = `${counter.prefix}${Math.round(counter.target * eased).toLocaleString()}${counter.suffix}`;
         if (progress < 1) requestAnimationFrame(tick);
+        else {
+          element.textContent = `${counter.prefix}${counter.value}${counter.suffix}`;
+          element.dataset.lufeCounted = "";
+        }
       };
       requestAnimationFrame(tick);
-    });
+    }, { threshold: 0.4 });
 
     const heroBackdrops = pathname === "/" ? [] : Array.from(root.querySelectorAll<HTMLElement>(".lufe-hero-backdrop"));
     heroBackdrops.forEach((backdrop) => backdrop.setAttribute("data-lufe-hero-photo", ""));

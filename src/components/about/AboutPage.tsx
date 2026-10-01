@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
@@ -288,7 +289,7 @@ export function AboutPage() {
         id="story"
         className="lufe-hero bg-navy text-white scroll-mt-[80px]"
       >
-        <HeroBackdrop src="/images/about/about-hero-executive-1600.webp" position="65% center" />
+        <HeroBackdrop src="/images/about/about-hero-executive-1600.webp" position="65% center" video={HERO_VIDEOS.about} />
 
         {/* Soft gold glow — with pulse */}
         <div

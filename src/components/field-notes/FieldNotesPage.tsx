@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
@@ -27,7 +28,7 @@ export function FieldNotesPage() {
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/field-notes/activity-forum-1600.webp" />
+        <HeroBackdrop src="/images/field-notes/activity-forum-1600.webp" video={HERO_VIDEOS.fieldNotes} />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
