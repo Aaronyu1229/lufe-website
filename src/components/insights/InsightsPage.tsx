@@ -7,17 +7,12 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
+import { InsightArticleCard } from "@/components/insights/InsightArticleCard";
 import { Segmented, flip } from "@/components/ui";
 import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
 import type { InsightCard } from "@/lib/articles/presentation";
 
 import { useMessageBox } from "../MessageBox";
-
-const colorMap: Record<string, string> = {
-  sky: "bg-[rgba(91,143,168,0.08)] text-sky",
-  gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
-  ember: "bg-[rgba(217,139,74,0.08)] text-ember",
-};
 
 export const INSIGHT_CHAPTERS = [
   { key: "all", label: "全部" },
@@ -120,7 +115,7 @@ export function InsightsPageContent({
               const chapter = chapterForArticle(article.slug, chapterBySlug);
               const isMatch = active === "all" || chapter === active;
               const primaryLabel = chapterLabel(chapter, article.category);
-              return <Link key={`${article.slug}-${active}`} data-key={article.slug} href={`/insights/${article.slug}`} style={{ animationDelay: `${index * 35}ms` }} className={`lufe-card lufe-insight-card group min-w-0 overflow-hidden border border-bd bg-white hover:border-gold/60 ${isMatch ? "" : "hidden"}`}><div className="relative aspect-[16/10] overflow-hidden"><CoverImage article={article} sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 360px" /></div><div className="min-w-0 p-5 md:p-6"><div className="mb-3 flex flex-wrap items-center gap-2"><span className={`px-2.5 py-[3px] text-[11px] font-medium ${colorMap[article.color]}`}>{primaryLabel}</span>{chapter && article.category !== primaryLabel ? <span className="border border-bd px-2 py-[2px] text-[10px] text-tx3">{article.category}</span> : null}<span className="text-[11px] text-tx3">{article.readTime}</span></div><h2 className="h3 mb-2 text-tx group-hover:text-gold-d">{article.title}</h2><p className="line-clamp-3 text-[14.5px] leading-[1.8] text-tx2">{article.summary}</p><div className="mt-4 flex items-center justify-between gap-3 text-[13px] text-tx3"><span>{article.date}</span><span className="shrink-0 font-medium text-gold-d">閱讀更多 →</span></div></div></Link>;
+              return <div key={`${article.slug}-${active}`} data-key={article.slug} className={isMatch ? "" : "hidden"}><InsightArticleCard article={article} primaryCategory={primaryLabel} showSecondaryCategory={Boolean(chapter)} animationDelay={`${index * 35}ms`} /></div>;
               })}
             </div>
           </Reveal>

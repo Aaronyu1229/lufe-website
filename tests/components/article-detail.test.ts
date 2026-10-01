@@ -59,4 +59,15 @@ describe("ArticleDetail", () => {
 
     expect(markup).not.toMatch(/\brounded-(?!full\b)/);
   });
+
+  it("renders Aaron's byline and author card with links to the author page", () => {
+    const markup = renderToStaticMarkup(
+      createElement(ArticleDetail, { article: articles[0], image: getArticleImage(articles[0]) }),
+    );
+
+    expect(markup).toContain('href="/about/aaron-yu"');
+    expect(markup).toContain("Aaron Yu・鹿飛 LUFÉ 創辦人");
+    expect(markup).toContain("鹿飛 LUFÉ 創辦人・來自躍馬企業");
+    expect(markup).toContain("看更多 Aaron 的文章 →");
+  });
 });

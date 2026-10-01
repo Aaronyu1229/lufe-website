@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Reveal } from "@/components/Reveal";
@@ -324,16 +323,6 @@ export function AboutPage() {
 
           {/* Founder block — larger, with stats row */}
           <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 mb-10 border-l-[3px] border-gold pl-6 md:pl-8 py-3 max-w-[780px]">
-            <div className="relative w-[128px] h-[128px] md:w-[148px] md:h-[148px] overflow-hidden shrink-0 shadow-xl shadow-gold/25 ring-[1.5px] ring-gold/60">
-              <Image
-                src="/images/about/aaron-portrait.jpg"
-                alt="Aaron Yu — 鹿飛 LUFÉ 創辦人"
-                fill
-                sizes="148px"
-                className="object-cover object-[center_18%]"
-                priority
-              />
-            </div>
             <div className="flex-1">
               <div className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold">Aaron Yu</div>
               <div className="text-[15.5px] md:text-[16.5px] text-gold font-medium mt-1">
@@ -342,6 +331,7 @@ export function AboutPage() {
               <p className="text-[14.5px] md:text-[15px] text-white/55 font-normal mt-3 leading-[1.8] max-w-[480px]">
                 看了很多年貨櫃出去，決定去接貨到了之後的事。
               </p>
+              <Link href="/about/aaron-yu" className="mt-4 inline-flex border-b border-gold pb-1 text-[14.5px] font-medium text-gold hover:text-gold-l">看 Aaron 的文章 →</Link>
             </div>
           </div>
 

@@ -82,6 +82,13 @@ export function ArticleDetail({ article, image }: Props) {
           </div>
 
           <h1 className="h1 mb-6 font-sans text-tx">{article.title}</h1>
+          <div className="mb-6 flex items-center gap-3">
+            <TieredImage src="/images/about/aaron-portrait-studio-640.webp" alt="" maxTierWidth={640} sizes="32px" loading="eager" className="h-8 w-8 rounded-full object-cover object-[center_18%]" />
+            <div className="text-[13px] leading-[1.55] text-tx3">
+              <Link href="/about/aaron-yu" className="font-medium text-tx2 hover:text-navy">Aaron Yu・鹿飛 LUFÉ 創辦人</Link>
+              <p>發布：<time dateTime={article.date}>{article.date}</time></p>
+            </div>
+          </div>
           <p className="border-l-2 border-gold pl-4 text-[17px] leading-[1.8] text-tx2">{article.summary}</p>
         </header>
 
@@ -106,6 +113,21 @@ export function ArticleDetail({ article, image }: Props) {
         <ArticleFaq faq={staticFaq} />
 
         <div className="my-10 h-px w-full bg-bd md:my-14" />
+
+        <section aria-labelledby="article-author" className="mb-10 border border-bd bg-cream p-5 md:mb-14 md:p-7">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <TieredImage src="/images/about/aaron-portrait-studio-1080.webp" alt="Aaron Yu" sizes="96px" className="h-24 w-24 shrink-0 rounded-full object-cover object-[center_18%]" />
+            <div>
+              <h2 id="article-author" className="h3 mb-1 text-tx"><Link href="/about/aaron-yu" className="hover:text-gold-d">Aaron Yu</Link></h2>
+              <p className="mb-3 text-[14.5px] font-medium text-gold-d">鹿飛 LUFÉ 創辦人・來自躍馬企業</p>
+              <p className="mb-4 max-w-[520px] text-[15px] leading-[1.8] text-tx2">看了很多年貨櫃出去，決定去接貨到了之後的事。</p>
+              <div className="flex flex-wrap gap-x-5 gap-y-3 text-[14.5px] font-medium">
+                <a href="https://www.linkedin.com/in/wibp/" target="_blank" rel="me noopener" className="border-b border-tx3/40 pb-0.5 text-tx2 hover:text-navy">LinkedIn ↗</a>
+                <Link href="/about/aaron-yu" className="border-b border-gold pb-0.5 text-gold-d hover:text-navy">看更多 Aaron 的文章 →</Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <div className="border border-bd bg-cream px-5 py-8 text-center md:px-8">
           <h2 className="h3 mb-2 text-tx">看完文章，想聊聊你的狀況？</h2>
