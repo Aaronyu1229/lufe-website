@@ -319,7 +319,7 @@ function MegaPane({ itemKey, active, onMessageOpen, insightsNavigation, setRef }
       {itemKey === "services" && <ServicesMenu />}
       {itemKey === "advanced" && <AdvancedMenu onMessageOpen={onMessageOpen} />}
       {itemKey === "cases" && <CasesMenu />}
-      {itemKey === "insights" && <InsightsMenu {...insightsNavigation} />}
+      {itemKey === "insights" && <InsightsMenu {...insightsNavigation} active={active} />}
       {itemKey === "about" && <AboutMenu />}
     </div>
   );
@@ -477,7 +477,7 @@ function ChapterIcon({ chapter }: { chapter: (typeof INSIGHT_MENU_CHAPTERS)[numb
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{CHAPTER_ICON_PATHS[chapter]}</svg>;
 }
 
-function InsightsMenu({ latestArticle, publishedArticleSlugs }: InsightsNavigation) {
+function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: InsightsNavigation & { active: boolean }) {
   const publishedArticleSlugSet = new Set(publishedArticleSlugs);
   const visibleInsightChapters = INSIGHT_MENU_CHAPTERS.filter((chapter) =>
     CHAPTER_ARTICLES[chapter].some((slug) => publishedArticleSlugSet.has(slug)),
@@ -494,7 +494,7 @@ function InsightsMenu({ latestArticle, publishedArticleSlugs }: InsightsNavigati
       <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
     </MenuColumn>
     <MenuRail>
-      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block"><div className="relative mb-3 aspect-video overflow-hidden"><TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" /></div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
+      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block">{active && <div className="relative mb-3 aspect-video overflow-hidden"><TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" /></div>}<b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
     </MenuRail>
   </>;
 }

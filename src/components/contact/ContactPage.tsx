@@ -240,7 +240,7 @@ export function ContactPage() {
                 </div>
                 <div>
                   <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">你想問什麼？ *</label>
-                  <textarea name="message" rows={4} required aria-required="true" value={formState.message} onChange={handleChange} onBlur={handleBlur} className={`${inputClass("message")} resize-none`} placeholder="任何問題都可以，不確定也沒關係。" />
+                  <textarea name="message" rows={4} required aria-required="true" value={formState.message} onChange={handleChange} onBlur={handleBlur} className={`${inputClass("message")} resize-none`} placeholder="任何問題都可以，不確定也沒關係" />
                   {errors.message && touched.message && <p className="mt-1 text-[13px] text-red-500">{errors.message}</p>}
                 </div>
                 <input type="text" name="website" value={formState.website} onChange={handleChange} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />

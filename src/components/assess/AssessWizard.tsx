@@ -135,29 +135,29 @@ function buildNarrative(result: MatchResult, answers: Answers) {
       label: "階段",
       matched: answers.stage === signature.stage,
       sentence: answers.stage === signature.stage
-        ? `你和他們都在${STAGE_SHORT[answers.stage]} — 同樣的壓力點。`
-        : `你在${STAGE_SHORT[answers.stage]}，他們當時在${STAGE_SHORT[signature.stage]} — 節奏不同。`,
+        ? `你和他們都在${STAGE_SHORT[answers.stage]} — 同樣的壓力點`
+        : `你在${STAGE_SHORT[answers.stage]}，他們當時在${STAGE_SHORT[signature.stage]} — 節奏不同`,
     },
     {
       label: "卡點",
       matched: answers.blocker === signature.blocker,
       sentence: answers.blocker === signature.blocker
-        ? `都卡在「${BLOCKER_SHORT[answers.blocker]}」這件事上。`
-        : `你卡在「${BLOCKER_SHORT[answers.blocker]}」，他們當時卡在「${BLOCKER_SHORT[signature.blocker]}」 — 不同的戰場。`,
+        ? `都卡在「${BLOCKER_SHORT[answers.blocker]}」這件事上`
+        : `你卡在「${BLOCKER_SHORT[answers.blocker]}」，他們當時卡在「${BLOCKER_SHORT[signature.blocker]}」 — 不同的戰場`,
     },
     {
       label: "市場",
       matched: answers.market === signature.market,
       sentence: answers.market === signature.market
-        ? `目標市場一致：${MARKET_SHORT[answers.market]}。`
-        : `你看${MARKET_SHORT[answers.market]}，他們做的是${MARKET_SHORT[signature.market]}。`,
+        ? `目標市場一致：${MARKET_SHORT[answers.market]}`
+        : `你看${MARKET_SHORT[answers.market]}，他們做的是${MARKET_SHORT[signature.market]}`,
     },
   ];
 
-  if (result.score === 3) return { headline: "你的處境，幾乎就是他們當時遇到的事", pieces, closing: "這份案例就是為你寫的。他們的判斷邏輯跟具體做法，都能直接放到你身上。讀到最後一個字。" };
-  if (result.score === 2) return { headline: "兩項對齊 — 同路但不同戰場", pieces, closing: "他們的判斷邏輯可以直接用，但具體做法要換成你的版本。這份案例值得讀到最後 — 學怎麼想，換怎麼做。" };
-  if (result.score === 1) return { headline: "一項對齊 — 可以當參考方向", pieces, closing: "學他們怎麼想事情、怎麼做決定，不要照抄他們做的事。如果你想看更貼近的案例，我們手上還有幾個沒放上網的。" };
-  return { headline: "三個維度都不同 — 但方法仍然能用", pieces, closing: "顧問的價值不是模板，是判斷方法。這份案例你可以快速瀏覽 — 看他們當時的判斷邏輯，這部分對你仍然有用。想直接聊更貼近的狀況，我們這邊隨時可以安排。" };
+  if (result.score === 3) return { headline: "你的處境，幾乎就是他們當時遇到的事", pieces, closing: "這份案例就是為你寫的。他們的判斷邏輯跟具體做法，都能直接放到你身上。讀到最後一個字" };
+  if (result.score === 2) return { headline: "兩項對齊 — 同路但不同戰場", pieces, closing: "他們的判斷邏輯可以直接用，但具體做法要換成你的版本。這份案例值得讀到最後 — 學怎麼想，換怎麼做" };
+  if (result.score === 1) return { headline: "一項對齊 — 可以當參考方向", pieces, closing: "學他們怎麼想事情、怎麼做決定，不要照抄他們做的事。如果你想看更貼近的案例，鹿飛還有幾個沒放上網的" };
+  return { headline: "三個維度都不同 — 但方法仍然能用", pieces, closing: "顧問的價值不是模板，是判斷方法。這份案例你可以快速瀏覽 — 看他們當時的判斷邏輯，這部分對你仍然有用。想直接聊更貼近的狀況，鹿飛隨時可以安排" };
 }
 
 export function AssessFallback() {

@@ -83,7 +83,7 @@ export const ACTIVITIES: readonly Activity[] = [
     title: "東南亞出海論壇主持 · 40 家中小企業現場",
     location: "台北",
     date: "2026 Q1",
-    summary: "受邀主持東南亞出海主題論壇，帶 40+ 家台灣中小企業主現場用 MBCPR 框架做自我評估。",
+    summary: "受邀主持東南亞出海主題論壇，帶 40+ 家台灣中小企業主現場用五維評分框架做自我評估。",
     image: "/images/field-notes/activity-forum-1600.webp",
     tbd: false,
   },
@@ -93,7 +93,7 @@ export const ACTIVITIES: readonly Activity[] = [
     title: "待補 · 中小企業出海工作坊",
     location: "高雄",
     date: "2026 Q1",
-    summary: "3 小時工作坊，用 MBCPR 框架帶領 25 位創辦人自我評估出海條件。",
+    summary: "3 小時工作坊，用五維評分框架帶領 25 位創辦人自我評估出海條件。",
     tbd: true,
   },
   {
