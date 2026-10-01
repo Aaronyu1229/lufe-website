@@ -12,6 +12,8 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
+  // Accent face only; never in the first screen, so it must not compete with LCP.
+  preload: false,
 });
 
 const inter = Inter({
