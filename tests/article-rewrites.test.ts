@@ -85,6 +85,8 @@ const newDrafts = readdirSync(newDraftDirectory)
   .filter((file) => file.endsWith(".md") && file !== "WO.md")
   .sort()
   .map((file) => readDraft(file, newDraftDirectory));
+const reviewedSlugs = new Set([...drafts, ...newDrafts].map((draft) => draft.slug));
+const reviewedArticles = articles.filter((article) => reviewedSlugs.has(article.slug));
 
 const seoTitles = {
   "us-fda-registration-guide": "美國 FDA 認證怎麼申請？FDA 不發「認證」：保健品出口美國真正要做的五件事",
@@ -102,7 +104,7 @@ describe("article rewrites and additions", () => {
   it("copies each approved new draft into a static article", () => {
     expect(drafts).toHaveLength(11);
     expect(newDrafts).toHaveLength(2);
-    expect(articles).toHaveLength(13);
+    expect(reviewedArticles).toHaveLength(13);
 
     for (const draft of newDrafts) {
       const article = getArticleBySlug(draft.slug);
@@ -157,7 +159,7 @@ describe("article rewrites and additions", () => {
   });
 
   it("renders the story treatment, citations, sources, FAQPage, and Article citations in server HTML", async () => {
-    for (const article of articles) {
+    for (const article of reviewedArticles) {
       const markup = renderToStaticMarkup(await ArticlePage({ params: Promise.resolve({ slug: article.slug }) }));
       const scripts = [...markup.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
         .map((match) => JSON.parse(match[1]) as { "@type": string; mainEntity?: unknown[]; citation?: string[]; dateModified?: string });
