@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import { TieredImage } from "@/components/TieredImage";
 import type { InsightCard } from "@/lib/articles/presentation";
 
 export function LatestInsightsSection({ articles }: { articles: readonly InsightCard[] }) {
@@ -16,7 +16,7 @@ export function LatestInsightsSection({ articles }: { articles: readonly Insight
           {articles.map((article) => (
             <Link key={article.slug} href={`/insights/${article.slug}`} className="lufe-card lufe-insight-card group border border-bd bg-white">
               <div className="relative aspect-[16/9] overflow-hidden">
-                <Image src={article.image} alt={article.title} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+                <TieredImage src={article.image} alt={article.title} sizes="(min-width: 768px) 33vw, 100vw" className="absolute inset-0 h-full w-full object-cover" />
               </div>
               <div className="p-5 md:p-6">
                 <p className="text-[12px] font-medium text-gold-d">{article.category}</p>

@@ -70,7 +70,7 @@ const costcoHealth: CaseStudy = {
   title: "保健品怎麼從台灣走進北美 Costco？",
   summary:
     "從 FDA 註冊到通路談判，6 個月打進全球最大會員制零售通路。完整走過評估、測試、通路進入的每一步。",
-  heroImage: "/images/cases/detail/costco-health-hero.jpg",
+  heroImage: "/images/cases/detail/costco-health-hero-1600.webp",
   listImage: "/case-costco.jpg",
   stats: [
     { label: "上架時間", value: "6 個月" },
@@ -171,7 +171,7 @@ const electronicsTariff: CaseStudy = {
   num: "-15%",
   title: "電子大廠怎麼靠產地轉移省下關稅？",
   summary: "從大陸轉越南出貨，找到中美關稅戰中的最優路徑。年省 200 萬美金。",
-  heroImage: "/images/cases/detail/electronics-tariff-hero.jpg",
+  heroImage: "/images/cases/detail/electronics-tariff-hero-1600.webp",
   listImage: "/case-electronics.jpg",
   stats: [
     { label: "關稅降低", value: "-15%" },
@@ -247,7 +247,7 @@ const shoeBrand: CaseStudy = {
   num: "3x",
   title: "知名皮鞋品牌為什麼改賣襪子大賺？",
   summary: "分析亞馬遜數據後調整品類策略，找到高毛利藍海品項。三個月做到三倍營收。",
-  heroImage: "/images/cases/detail/shoe-brand-hero.jpg",
+  heroImage: "/images/cases/detail/shoe-brand-hero-1600.webp",
   listImage: "/case-shoes.jpg",
   stats: [
     { label: "營收成長", value: "3x" },
@@ -323,7 +323,7 @@ const bubbleTea: CaseStudy = {
   num: "10 家",
   title: "珍珠奶茶品牌怎麼在菲律賓成功落地？",
   summary: "從市場探索到門市營運，一年開設 10 家門市，建立穩定營收基地。",
-  heroImage: "/images/cases/detail/bubbletea-manila-hero.jpg",
+  heroImage: "/images/cases/detail/bubbletea-manila-hero-1080.webp",
   listImage: "/case-bubbletea.jpg",
   stats: [
     { label: "門市數", value: "10 家" },

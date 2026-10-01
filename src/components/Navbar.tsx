@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 
 import { useMessageBox } from "./MessageBox";
 import { DelightLayer } from "./DelightLayer";
+import { TieredImage } from "./TieredImage";
 import { useSpring } from "@/lib/motion";
 import { articles, getArticleImage } from "@/data/articles";
 import { CASES } from "@/data/cases";
@@ -485,7 +486,7 @@ function InsightsMenu() {
       <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
     </MenuColumn>
     <MenuRail label="最新文章">
-      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block"><div className="relative mb-3 aspect-video overflow-hidden"><Image src={getArticleImage(latestArticle)} alt={latestArticle.title} fill sizes="268px" className="object-cover" /></div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
+      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block"><div className="relative mb-3 aspect-video overflow-hidden"><TieredImage src={getArticleImage(latestArticle)} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" /></div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
     </MenuRail>
   </>;
 }

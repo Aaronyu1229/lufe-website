@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
+import { TieredImage } from "@/components/TieredImage";
 import { Disclosure } from "@/components/ui";
 
 import { ContactButton } from "./ContactButton";
@@ -76,7 +76,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/v5/optimize-2400.webp" mobileSrc="/images/v5/optimize-1600.webp" position="70% 30%" />
+        <HeroBackdrop src="/images/v5/optimize-1600.webp" srcSet="/images/v5/optimize-1600.webp 1600w, /images/v5/optimize-2400.webp 2400w" position="70% 30%" />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55">
             <Link href="/" className="hover:text-white">首頁</Link>
@@ -114,7 +114,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
 
       <section id="opt-cost" className="scroll-mt-[90px] bg-cream py-[72px] md:py-[88px]">
         <div className="lufe-container grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
-          <div className="relative min-h-[260px] overflow-hidden border border-bd md:order-2"><Image src="/images/services/services-optimize-whiteboard.jpg" alt="檢視物流與營運資料" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" /></div>
+          <div className="relative min-h-[260px] overflow-hidden border border-bd md:order-2"><TieredImage src="/images/services/services-optimize-whiteboard-1600.webp" alt="檢視物流與營運資料" sizes="(max-width: 767px) 100vw, 50vw" className="absolute inset-0 h-full w-full object-cover" /></div>
           <div className="md:order-1">
             <p className="text-[14px] font-semibold text-gold-d">01</p>
             <SectionHeading>省不下來：<span className="text-gold-d">先看你的物流帳單</span></SectionHeading>
@@ -137,7 +137,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
 
       <section id="opt-find" className="scroll-mt-[90px] bg-cream py-[72px] md:py-[88px]">
         <div className="lufe-container grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
-          <div className="relative min-h-[260px] overflow-hidden border border-bd md:order-2"><Image src="/images/insights/amazon-category.jpg" alt="線上通路與搜尋資料" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" /></div>
+          <div className="relative min-h-[260px] overflow-hidden border border-bd md:order-2"><TieredImage src="/images/insights/amazon-category-1600.webp" alt="線上通路與搜尋資料" sizes="(max-width: 767px) 100vw, 50vw" className="absolute inset-0 h-full w-full object-cover" /></div>
           <div className="md:order-1">
             <p className="text-[14px] font-semibold text-gold-d">03</p>
             <SectionHeading>沒被找到：<span className="text-gold-d">客人在問 AI，AI 沒提到你</span></SectionHeading>

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { TieredImage } from "@/components/TieredImage";
 
 import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, type ChapterKey } from "@/data/chapters";
 import { articles } from "@/data/articles";
@@ -24,7 +24,7 @@ export function RelatedReadingContent({ articles: reading }: { readonly articles
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={article.image} alt={article.title} className="absolute inset-0 h-full w-full object-cover" />
                 ) : (
-                  <Image src={article.image} alt={article.title} fill sizes="(max-width: 767px) 100vw, 33vw" className="object-cover" />
+                  <TieredImage src={article.image} alt={article.title} sizes="(max-width: 767px) 100vw, 33vw" className="absolute inset-0 h-full w-full object-cover" />
                 )}
               </div>
               <div className="p-5">

@@ -64,7 +64,7 @@ export const ACTIVITIES: readonly Activity[] = [
     location: "台北",
     date: "2026 Q2",
     summary: "我們在加盟展為 3 家台灣手搖與食品品牌媒合菲律賓和越南的連鎖通路，現場促成 2 次深度洽談。",
-    image: "/images/field-notes/activity-expo.jpg",
+    image: "/images/field-notes/activity-expo-1600.webp",
     tbd: false,
   },
   {
@@ -74,7 +74,7 @@ export const ACTIVITIES: readonly Activity[] = [
     location: "馬尼拉",
     date: "2026 Q1",
     summary: "與菲律賓當地台商會的季度交流，討論台灣品牌進入菲律賓零售的三條可行路徑與常見地雷。",
-    image: "/images/field-notes/activity-chamber.jpg",
+    image: "/images/field-notes/activity-chamber-1600.webp",
     tbd: false,
   },
   {
@@ -84,7 +84,7 @@ export const ACTIVITIES: readonly Activity[] = [
     location: "台北",
     date: "2026 Q1",
     summary: "受邀主持東南亞出海主題論壇，帶 40+ 家台灣中小企業主現場用 MBCPR 框架做自我評估。",
-    image: "/images/field-notes/activity-forum.jpg",
+    image: "/images/field-notes/activity-forum-1600.webp",
     tbd: false,
   },
   {

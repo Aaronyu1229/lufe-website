@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import { Carousel } from "@/components/ui";
+import { TieredImage } from "@/components/TieredImage";
 import { getRelatedCases, type CaseStudy } from "@/data/cases";
 
 import { useMessageBox } from "../MessageBox";
@@ -46,13 +46,13 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
     <>
       <section className="relative overflow-hidden bg-navy pb-[60px] pt-[130px] text-white md:pb-[80px] md:pt-[170px]">
         <div className="absolute inset-0" aria-hidden="true">
-          <Image
+          <TieredImage
             src={caseItem.heroImage}
             alt=""
-            fill
-            priority
             sizes="100vw"
-            className="object-cover opacity-[0.25]"
+            loading="eager"
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.25]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/60 to-navy" />
         </div>
@@ -222,7 +222,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
               {relatedCases.map((relatedCase) => (
                 <Link key={relatedCase.slug} href={`/cases/${relatedCase.slug}`} className="group min-w-0 overflow-hidden bg-cream hover:bg-white">
                   <div className="relative h-[180px] overflow-hidden bg-navy">
-                    <Image src={relatedCase.heroImage} alt={relatedCase.title} fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" />
+                    <TieredImage src={relatedCase.heroImage} alt={relatedCase.title} sizes="(max-width: 767px) 100vw, 50vw" className="absolute inset-0 h-full w-full object-cover" />
                   </div>
                   <div className="min-w-0 p-6 md:p-7">
                     <div className="mb-3 flex flex-wrap gap-1.5">

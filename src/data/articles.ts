@@ -347,18 +347,18 @@ export function getArticleBySlug(slug: string): Article | undefined {
  * Fallback order: exact slug match → title keyword match → generic.
  */
 const SLUG_IMAGE_MAP: Record<string, string> = {
-  "southeast-asia-ecommerce-2026": "/images/insights/southeast-asia-ecommerce.jpg",
-  "first-time-export-checklist": "/images/insights/first-time-export-checklist.jpg",
-  "us-fda-registration-guide": "/images/insights/us-fda-registration.jpg",
-  "tradepilot-tariff-tutorial": "/images/insights/tradepilot-tariff.jpg",
-  "china-tariff-relocation-strategy": "/images/insights/china-relocation.jpg",
-  "amazon-category-analysis": "/images/insights/amazon-category.jpg",
+  "southeast-asia-ecommerce-2026": "/images/insights/southeast-asia-ecommerce-1600.webp",
+  "first-time-export-checklist": "/images/insights/first-time-export-checklist-1600.webp",
+  "us-fda-registration-guide": "/images/insights/us-fda-registration-1600.webp",
+  "tradepilot-tariff-tutorial": "/images/insights/tradepilot-tariff-1600.webp",
+  "china-tariff-relocation-strategy": "/images/insights/china-relocation-1600.webp",
+  "amazon-category-analysis": "/images/insights/amazon-category-1600.webp",
   // New articles — fallback to existing imagery until bespoke covers are ready
-  "overseas-exhibition-subsidy-115-upgrade": "/images/insights/tradepilot-tariff.jpg",
-  "go-no-go-framework": "/images/insights/first-time-export-checklist.jpg",
-  "vietnam-market-entry-guide": "/images/insights/southeast-asia-ecommerce.jpg",
-  "product-testing-best-practices": "/images/insights/amazon-category.jpg",
-  "manila-beverage-first-store-90-days": "/images/cases/detail/bubbletea-manila-hero.jpg",
+  "overseas-exhibition-subsidy-115-upgrade": "/images/insights/tradepilot-tariff-1600.webp",
+  "go-no-go-framework": "/images/insights/first-time-export-checklist-1600.webp",
+  "vietnam-market-entry-guide": "/images/insights/southeast-asia-ecommerce-1600.webp",
+  "product-testing-best-practices": "/images/insights/amazon-category-1600.webp",
+  "manila-beverage-first-store-90-days": "/images/cases/detail/bubbletea-manila-hero-1080.webp",
 };
 
 export function getArticleImage(article: Article): string {

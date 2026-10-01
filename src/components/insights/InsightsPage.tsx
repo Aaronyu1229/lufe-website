@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState, type RefObject } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
+import { TieredImage } from "@/components/TieredImage";
 import { Segmented, flip } from "@/components/ui";
 import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
 import type { InsightCard } from "@/lib/articles/presentation";
@@ -64,7 +64,7 @@ function CoverImage({ article, sizes }: { article: InsightCard; sizes?: string }
       // eslint-disable-next-line @next/next/no-img-element
       <img src={article.image} alt={article.title} className="absolute inset-0 h-full w-full object-cover" />
     )
-    : <Image src={article.image} alt={article.title} fill sizes={sizes} className="object-cover" />;
+    : <TieredImage src={article.image} alt={article.title} sizes={sizes ?? "100vw"} className="absolute inset-0 h-full w-full object-cover" />;
 }
 
 function chapterForArticle(slug: string, chapterBySlug: Readonly<Record<string, ArticleChapterKey>>): ArticleChapterKey | undefined {
@@ -97,7 +97,7 @@ export function InsightsPageContent({
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/v5/insights-2400.webp" mobileSrc="/images/v5/insights-1600.webp" />
+        <HeroBackdrop src="/images/v5/insights-1600.webp" srcSet="/images/v5/insights-1600.webp 1600w, /images/v5/insights-2400.webp 2400w" />
         <div className="lufe-container lufe-hero-content grid min-w-0 grid-cols-1 items-end gap-10 pb-[78px] pt-[148px] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14 md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0">
             <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">洞察</span></nav>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
+import { TieredImage } from "@/components/TieredImage";
 import { Carousel } from "@/components/ui/Carousel";
 import { useMessageBox } from "../MessageBox";
 
@@ -12,7 +13,8 @@ export const storyCards = [
   {
     num: "01",
     title: "看到的問題",
-    image: "/images/about/aaron-workshop.jpg",
+    image: "/images/about/aaron-workshop-1600.webp",
+    maxTierWidth: 2400,
     alt: "Aaron 在工作坊上分享跨境實戰觀察",
     imageClassName: "object-cover object-[center_30%]",
     copy: <>我在躍馬企業看了很多年。<br /><br />躍馬做的是把貨送出去——42 年，500 多個出口案件，30 多個國家。<br />我在裡面看的不是報表，是貨櫃出去以後的事。<br />有的品牌在當地開了第二家店。<br />更多的是幾個月後貨退回來，或者就沒有下文了。</>,
@@ -20,7 +22,8 @@ export const storyCards = [
   {
     num: "02",
     title: "想通的事",
-    image: "/images/about/story-belief-compass.jpg",
+    image: "/images/about/story-belief-compass-1600.webp",
+    maxTierWidth: 1600,
     alt: "羅盤放在世界地圖上 — 有計畫的探索",
     imageClassName: "object-cover",
     copy: <>我後來想通一件事：差別從來不在物流，貨都有送到。<br />差別在到了之後，有沒有人接著走。<br />證有沒有人辦、架上有沒有人推、第一封英文客訴信有沒有人回。</>,
@@ -28,7 +31,8 @@ export const storyCards = [
   {
     num: "03",
     title: "做了什麼",
-    image: "/images/about/aaron-news-interview.jpg",
+    image: "/images/about/aaron-news-interview-1080.webp",
+    maxTierWidth: 1080,
     alt: "台視新聞訪問躍馬企業市場經理 — 真實業界背書",
     imageClassName: "object-cover object-[42%_center]",
     copy: <>台灣市場不夠大，這件事做生意的人都知道。出去有難度，但出得去。<br />鹿飛做的，是把貨到了之後最難的四件事做成四個方案，<br />讓第一步小到你敢踏，後面的每一步都有人在。</>,
@@ -285,7 +289,7 @@ export function AboutPage() {
         id="story"
         className="lufe-hero bg-navy text-white scroll-mt-[80px]"
       >
-        <HeroBackdrop src="/images/about/about-hero-executive.jpg" position="65% center" />
+        <HeroBackdrop src="/images/about/about-hero-executive-1600.webp" position="65% center" />
 
         {/* Soft gold glow — with pulse */}
         <div
@@ -373,12 +377,12 @@ export function AboutPage() {
             {storyCards.map((card) => (
               <article key={card.num} className="overflow-hidden border border-white/15 bg-white/[0.04]">
                 <div className="relative aspect-[4/5] overflow-hidden">
-                  <Image
-                    src={card.image}
-                    alt={card.alt}
-                    fill
-                    sizes="(max-width: 768px) 82vw, 48vw"
-                    className={card.imageClassName}
+              <TieredImage
+                src={card.image}
+                alt={card.alt}
+                sizes="(max-width: 768px) 82vw, 48vw"
+                maxTierWidth={card.maxTierWidth}
+                className={`absolute inset-0 h-full w-full ${card.imageClassName}`}
                   />
                   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50" />
                 </div>
@@ -477,12 +481,11 @@ export function AboutPage() {
         <div className="lufe-container">
           {/* Hero strip — Saigon Bitexco night cityscape as a wide banner */}
           <div className="relative w-full h-[160px] md:h-[200px] mb-10 overflow-hidden">
-            <Image
-              src="/images/about/network-saigon-night.jpg"
+            <TieredImage
+              src="/images/about/network-saigon-night-1600.webp"
               alt="西貢金融塔 Bitexco 夜景 — LUFÉ 東南亞網絡的象徵"
-              fill
               sizes="(max-width: 900px) 100vw, 900px"
-              className="object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-navy/75 via-navy/40 to-transparent flex items-center">
               <div className="pl-6 md:pl-10">
@@ -532,12 +535,11 @@ export function AboutPage() {
       >
         {/* Compass bg - rich gold focal on dark */}
         <div className="absolute inset-0">
-          <Image
-            src="/images/about/philosophy-compass.jpg"
+          <TieredImage
+            src="/images/about/philosophy-compass-1600.webp"
             alt=""
-            fill
             sizes="100vw"
-            className="object-cover opacity-[0.22]"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.22]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/65" />
         </div>
@@ -580,7 +582,7 @@ export function AboutPage() {
 
       <section className="bg-navy py-[80px] text-white md:py-[96px]">
         <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
-          <div className="relative mx-auto mb-8 h-[180px] w-full max-w-[680px] overflow-hidden"><Image src="/images/about/aaron-teaching.jpg" alt="Aaron 在工作坊現場陪學員操作 — 陪跑的日常" fill sizes="(max-width: 680px) 100vw, 680px" className="object-cover object-[center_35%]" /><div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/20 to-navy/75" /></div>
+          <div className="relative mx-auto mb-8 h-[180px] w-full max-w-[680px] overflow-hidden"><TieredImage src="/images/about/aaron-teaching-1600.webp" alt="Aaron 在工作坊現場陪學員操作 — 陪跑的日常" sizes="(max-width: 680px) 100vw, 680px" className="absolute inset-0 h-full w-full object-cover object-[center_35%]" /><div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/20 to-navy/75" /></div>
           <h2 className="h2 text-white">想認識我們？聊聊你的跨境計畫</h2>
           <p className="mt-4 text-[15.5px] leading-[1.8] text-white/60">不確定該不該跨境？先聊聊，不收費、不承諾、不賣課。</p>
           <button onClick={open} className="mt-7 cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy hover:bg-gold-l">聊聊你的產品 →</button>
