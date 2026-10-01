@@ -15,12 +15,12 @@ export function CTASection() {
     <section className="bg-navy py-[80px]">
       <div className="lufe-container text-center">
         <h2 className="mb-[18px] font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-white [text-wrap:balance]">
-          想清楚了，就聊聊
+          從一次評估開始，
           <br />
-          還沒想清楚，也可以聊聊
+          看清楚出海的下一步
         </h2>
-        <p className="text-[17px] text-white/55 max-w-[520px] mx-auto leading-[1.7] mb-9 font-normal">
-          我們想找的，是想把事業做大、也願意先走一小步的人。送出後 24 小時內由 Aaron 本人回覆，第一次談就把費用跟時間講清楚。
+        <p className="mx-auto mb-9 max-w-[520px] text-[17px] font-normal leading-[1.7] text-white/70">
+          提交需求後，24 小時內由鹿飛顧問團隊回覆；首次諮詢即說明費用與時程
         </p>
         <div className="flex justify-center items-center gap-3 flex-wrap">
           <button

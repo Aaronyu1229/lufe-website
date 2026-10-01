@@ -36,10 +36,10 @@ export function SubsidyAlertBand() {
             海外參展補助從 4 萬跳到{" "}
             <span className="text-gold">16 萬</span>——
             <br className="hidden md:block" />
-            歷年最優，經費用罄即止。
+            歷年最優，經費用罄即止
           </h2>
           <p className="mt-2 max-w-[620px] text-[15px] leading-[1.75] text-white/70">
-            執行期至 12 月底。下一次公告時程以國際貿易署最新公告為準。
+            執行期至 12 月底。下一次公告時程以國際貿易署最新公告為準
           </p>
           <div className="mt-2 text-[12px] font-semibold tracking-[0.05em] text-gold/80">
             資料確認：{verifiedOn}

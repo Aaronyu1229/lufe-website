@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { PackageIcon, SlidersIcon, SproutIcon } from "@/components/icons/LineIcons";
 import { Carousel, ExpandCard } from "@/components/ui";
 
 type Industry = "food" | "electronics" | "apparel" | "fnb";
@@ -39,9 +40,9 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
     scalePrefix: "年營收 8,000 萬的台灣保健品廠",
     title: "怎麼從零打進北美 Costco 120+ 門市？",
     painLine:
-      "找過貿易商只管物流、找過顧問只丟 80 頁報告，沒人真的把品牌帶進通路。",
+      "找過貿易商只管物流、找過顧問只丟 80 頁報告，沒人真的把品牌帶進通路",
     solutionLine:
-      "從消費者口感倒推配方、合約付款期硬談進 45 天、首月銷量超標 40%，直接進入第二批訂單談判。",
+      "從消費者口感倒推配方、合約付款期硬談進 45 天、首月銷量超標 40%，直接進入第二批訂單談判",
     route: { from: "台灣", to: "Costco 北美" },
     trustSignal: "客戶授權公開",
     image: "/images/cases/case-1-costco-1600.webp",
@@ -60,9 +61,9 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
     scalePrefix: "年出口 3,000 萬美金的電子組裝廠",
     title: "中美關稅戰下，怎麼把毛利搶回來？",
     painLine:
-      "工廠在大陸、客戶在美國，25% 額外關稅把毛利打到負數，客戶降價要求已經在信箱裡。",
+      "工廠在大陸、客戶在美國，25% 額外關稅把毛利打到負數，客戶降價要求已經在信箱裡",
     solutionLine:
-      "四地產地打分後選越南，雙線並行 6 個月當保險，物流時效反而縮短 3 天，一年省下 200 萬美金。",
+      "四地產地打分後選越南，雙線並行 6 個月當保險，物流時效反而縮短 3 天，一年省下 200 萬美金",
     route: { from: "大陸廣東", to: "越南胡志明" },
     trustSignal: "已簽 NDA · 經營層審閱",
     image: "/images/cases/case-2-tariff-1600.webp",
@@ -81,9 +82,9 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
     scalePrefix: "成立 30 年的台灣皮鞋品牌",
     title: "200 萬行銷砸下去，半年只回 50 萬，怎麼救？",
     painLine:
-      "上亞馬遜前 20 名全是國際品牌、退貨率 30%，品牌方堅持「我們叫鞋業，不能賣襪子」。",
+      "上亞馬遜前 20 名全是國際品牌、退貨率 30%，品牌方堅持「我們叫鞋業，不能賣襪子」",
     solutionLine:
-      "兩小時把 CAC 與 LTV 攤上桌，用襪子當進場票，3 個月做到品類 3 倍、4.7 星，反推皮鞋銷量 +120%。",
+      "兩小時把 CAC 與 LTV 攤上桌，用襪子當進場票，3 個月做到品類 3 倍、4.7 星，反推皮鞋銷量 +120%",
     route: { from: "台灣品牌", to: "Amazon US" },
     trustSignal: "客戶授權公開",
     image: "/images/cases/case-3-pivot-1600.webp",
@@ -102,9 +103,9 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
     scalePrefix: "在台灣有 80 家門市的珍奶連鎖",
     title: "兩次失敗後，第三次怎麼把馬尼拉做成功？",
     painLine:
-      "市場已被日出茶太、COCO、Tiger Sugar 佔住，前兩次一次被拿走配方、一次選錯區。",
+      "市場已被日出茶太、COCO、Tiger Sugar 佔住，前兩次一次被拿走配方、一次選錯區",
     solutionLine:
-      "鎖定 P150–200 中高端、第一家開在 BGC 當行銷投資、混合直營與加盟，單店月營收做到台灣母店 1.2 倍。",
+      "鎖定 P150–200 中高端、第一家開在 BGC 當行銷投資、混合直營與加盟，單店月營收做到台灣母店 1.2 倍",
     route: { from: "台灣母店", to: "馬尼拉 BGC" },
     trustSignal: "已簽 NDA · 經營層審閱",
     image: "/images/cases/case-4-manila-1080.webp",
@@ -114,18 +115,21 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
 export const HOME_CASE_ROADS = [
   {
     label: "第一條",
-    title: "從零開始。",
-    detail: "在當地蓋一間英語教育機構——找老師、找場地、招第一個學生；\n後來用同樣的方法，做了一個連鎖手搖飲品牌。",
+    title: "從零開始",
+    detail: "在當地蓋一間英語教育機構——找老師、找場地、招第一個學生；\n後來用同樣的方法，做了一個連鎖手搖飲品牌",
+    icon: SproutIcon,
   },
   {
     label: "第二條",
-    title: "改了再帶過去。",
-    detail: "台灣的產品到了當地，改配方、改價格、改包裝，\n變成當地人願意掏錢的樣子。",
+    title: "改了再帶過去",
+    detail: "台灣的產品到了當地，改配方、改價格、改包裝，\n變成當地人願意掏錢的樣子",
+    icon: SlidersIcon,
   },
   {
     label: "第三條",
-    title: "原封不動帶過去。",
-    detail: "一個台灣的美業品牌，什麼都不改，只做當地的行銷，看它站不站得住。",
+    title: "原封不動帶過去",
+    detail: "一個台灣的美業品牌，什麼都不改，只做當地的行銷，看它站不站得住",
+    icon: PackageIcon,
   },
 ] as const;
 
@@ -234,22 +238,29 @@ export function CasesSection() {
       <div className="lufe-container">
         <div className="max-w-[820px]">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
-            我們不是跟你賭市場，
+            用數據判斷方向，
             <br />
-            <span className="text-gold-d">是有做過的事</span>
+            <span className="text-gold-d">用實戰調整做法</span>
           </h2>
-          <p className="mt-5 text-[17px] leading-[1.8] text-tx2">在菲律賓，我們跟合作夥伴走過三條不一樣的路。</p>
+          <p className="mt-5 text-[17px] leading-[1.8] text-tx2">在菲律賓，鹿飛與合作夥伴走過三條不一樣的路；每一條都先小規模驗證，再依數據調整、放大</p>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {HOME_CASE_ROADS.map((road) => (
-            <article key={road.label} className="lufe-card border border-bd bg-cream p-6 md:p-7">
+          {HOME_CASE_ROADS.map((road) => {
+            const Icon = road.icon;
+
+            return (
+            <article key={road.label} className="lufe-card group border border-bd bg-cream p-6 md:p-7">
+              <span aria-hidden="true" className="mb-5 grid h-10 w-10 place-items-center border border-gold/25 bg-gold/10 text-gold-d transition-colors duration-200 [@media(hover:hover)]:group-hover:bg-gold/15">
+                <Icon size={20} className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-px" />
+              </span>
               <p className="text-[13px] font-semibold text-gold-d">{road.label}</p>
               <h3 className="mt-3 font-sans text-[22px] font-semibold leading-[1.35] text-tx">{road.title}</h3>
               <p className="mt-4 whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{road.detail}</p>
             </article>
-          ))}
+            );
+          })}
         </div>
-        <p className="mt-6 max-w-[720px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">三條路的成本、坑、時間都不一樣。{"\n"}第一次談，我們會先問你比較像哪一條。</p>
+        <p className="mt-6 max-w-[720px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">三條路的成本、坑、時間都不一樣。{"\n"}第一次談，鹿飛會先確認企業比較像哪一條</p>
       </div>
 
       <div className="lufe-container">
