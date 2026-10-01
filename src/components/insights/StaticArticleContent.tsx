@@ -12,7 +12,7 @@ type StaticContentBlock =
 const TABLE_DIVIDER = /^\|(?:\s*:?-{3,}:?\s*\|)+\s*$/;
 const ORDERED_LIST_ITEM = /^\d+\.\s+(.*)$/;
 const UNORDERED_LIST_ITEM = /^-\s+(.*)$/;
-const INLINE_MARKDOWN = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[A-Za-z0-9./?=&_%#~:+=-]+)/g;
+const INLINE_MARKDOWN = /(\*\*[^*]+\*\*|\[\d+\]|\[[^\]]+\]\([^)]+\)|https?:\/\/[A-Za-z0-9./?=&_%#~:+=-]+)/g;
 
 function parseTableRow(line: string): readonly string[] {
   return line.trim().replace(/^\||\|$/g, "").split("|").map((cell) => cell.trim());
@@ -112,6 +112,23 @@ export function renderInlineMarkdown(text: string): ReactNode {
       return <strong key={index} className="text-tx font-semibold">{part.slice(2, -2)}</strong>;
     }
 
+    const sourceReference = /^\[(\d+)\]$/.exec(part);
+    if (sourceReference) {
+      const [, sourceId] = sourceReference;
+      return (
+        <sup key={index}>
+          <a
+            href={`#source-${sourceId}`}
+            data-source-id={`source-${sourceId}`}
+            aria-label={`查看出處 ${sourceId}`}
+            className="ml-0.5 text-[0.75em] text-gold-d underline decoration-gold/50 underline-offset-2 hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+          >
+            {sourceId}
+          </a>
+        </sup>
+      );
+    }
+
     const link = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
     if (link) {
       const [, label, href] = link;
@@ -133,7 +150,7 @@ export function StaticArticleContent({ content }: { readonly content: readonly s
         switch (block.type) {
           case "heading":
             return block.level === 2
-              ? <h2 key={index} className="mb-3 mt-10 font-sans text-[26px] font-[650] leading-[1.35] text-tx">{renderInlineMarkdown(block.text)}</h2>
+              ? <h2 key={index} className={block.text.startsWith("情境：") ? "mb-6 mt-10 border-l-[3px] border-gold bg-cream px-5 py-4 font-sans text-[26px] font-[650] leading-[1.35] text-tx" : "mb-3 mt-10 font-sans text-[26px] font-[650] leading-[1.35] text-tx"}>{renderInlineMarkdown(block.text)}</h2>
               : <h3 key={index} className="mb-3 mt-8 font-sans text-[21px] font-[650] leading-[1.45] text-tx">{renderInlineMarkdown(block.text)}</h3>;
           case "paragraph":
             return <p key={index} className={index === 0 ? "" : "mt-5"}>{renderInlineMarkdown(block.text)}</p>;

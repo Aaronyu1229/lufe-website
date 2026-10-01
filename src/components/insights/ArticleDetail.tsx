@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, type MouseEvent, type ReactNode } from "react";
 import Link from "next/link";
 import { TieredImage } from "@/components/TieredImage";
 import { ArticleFaq } from "@/components/insights/ArticleFaq";
@@ -27,6 +27,38 @@ function isDatabaseArticle(article: Article | DatabaseInsight): article is Datab
 
 export function renderStaticBoldMarkup(text: string): ReactNode {
   return renderInlineMarkdown(text);
+}
+
+function withoutUrls(note: string | undefined): string | undefined {
+  const cleaned = note?.replace(/\s*https?:\/\/\S+/g, "").trim();
+  return cleaned || undefined;
+}
+
+function ArticleSources({ sources, lastVerified }: Pick<Article, "sources" | "lastVerified">) {
+  if (!sources?.length || !lastVerified) return null;
+
+  return (
+    <section className="mt-12" aria-labelledby="article-sources-heading">
+      <details id="article-sources" className="border-y border-bd py-4">
+        <summary id="article-sources-heading" className="cursor-pointer font-sans text-[18px] font-[650] text-tx marker:text-gold-d">
+          出處與查證（{sources.length} 筆）・最後查證 {lastVerified}
+        </summary>
+        <ol className="mt-5 space-y-3">
+          {sources.map((source) => {
+            const note = withoutUrls(source.note);
+            return (
+              <li key={source.id} id={`source-${source.id}`} className="scroll-mt-24">
+                <a href={source.url} target="_blank" rel="noopener" className="group block border-l-2 border-transparent py-1 pl-3 text-[15px] leading-[1.7] text-tx2 hover:border-gold hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+                  <span className="font-medium text-tx group-hover:text-navy">[{source.id}] {source.title}・{source.publisher}</span>
+                  {note ? <span className="mt-1 block text-[13px] leading-[1.6] text-tx3">{note}</span> : null}
+                </a>
+              </li>
+            );
+          })}
+        </ol>
+      </details>
+    </section>
+  );
 }
 
 function ReadingProgress() {
@@ -61,8 +93,26 @@ export function ArticleDetail({ article, image }: Props) {
   const databaseContent = isDatabaseArticle(article) ? article.content : null;
   const staticContent: readonly string[] = databaseContent ? [] : article.content as readonly string[];
   const staticFaq = isDatabaseArticle(article) ? undefined : article.faq;
+  const staticSources = isDatabaseArticle(article) ? undefined : article.sources;
+  const staticLastVerified = isDatabaseArticle(article) ? undefined : article.lastVerified;
   const hasInlineImage = Boolean(databaseContent && /<img\b/i.test(databaseContent.html));
   const externalImage = /^https?:\/\//.test(image);
+
+  const handleSourceReference = (event: MouseEvent<HTMLDivElement>) => {
+    if (!(event.target instanceof Element)) return;
+
+    const sourceLink = event.target.closest<HTMLAnchorElement>("a[data-source-id]");
+    const sourceId = sourceLink?.dataset.sourceId;
+    if (!sourceId) return;
+
+    const source = document.getElementById(sourceId);
+    const sourceDetails = document.getElementById("article-sources");
+    if (!source || !(sourceDetails instanceof HTMLDetailsElement)) return;
+
+    event.preventDefault();
+    sourceDetails.open = true;
+    requestAnimationFrame(() => source.scrollIntoView({ behavior: "smooth", block: "center" }));
+  };
 
   return (
     <article className="min-h-screen bg-white pb-[80px] pt-[126px] md:pb-[110px] md:pt-[148px]">
@@ -109,8 +159,9 @@ export function ArticleDetail({ article, image }: Props) {
             className="text-[17px] leading-[1.95] text-tx [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:font-sans [&_h2]:text-[26px] [&_h2]:font-[650] [&_img]:h-auto [&_img]:max-w-full [&_p+_p]:mt-5"
             dangerouslySetInnerHTML={{ __html: databaseContent.html }}
           />
-        ) : <StaticArticleContent content={staticContent} />}
+        ) : <div onClick={handleSourceReference}><StaticArticleContent content={staticContent} /></div>}
         <ArticleFaq faq={staticFaq} />
+        <ArticleSources sources={staticSources} lastVerified={staticLastVerified} />
 
         <div className="my-10 h-px w-full bg-bd md:my-14" />
 

@@ -1,6 +1,5 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
@@ -10,89 +9,130 @@ vi.mock("@/lib/articles/repository", () => ({
 }));
 
 import ArticlePage from "@/app/insights/[slug]/page";
-import { getArticleBySlug } from "@/data/articles";
-import nextConfig from "../next.config";
+import { articles, getArticleBySlug } from "@/data/articles";
 
-const rewrites = [
-  ["vietnam-market-entry-guide", "why-philippines-first", "why-philippines-first.md"],
-  ["southeast-asia-ecommerce-2026", "philippines-ecommerce-first-year", "philippines-ecommerce-first-year.md"],
-  ["china-tariff-relocation-strategy", "landed-cost-before-export", "landed-cost-before-export.md"],
-  ["amazon-category-analysis", "amazon-us-three-decisions", "amazon-us-three-decisions.md"],
-] as const;
+type DraftSource = {
+  readonly id: number;
+  readonly title: string;
+  readonly publisher: string;
+  readonly url: string;
+  readonly note?: string;
+};
 
-function sourceFiles(directory: string): string[] {
-  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const file = join(directory, entry.name);
-    return entry.isDirectory() ? sourceFiles(file) : statSync(file).isFile() ? [file] : [];
-  });
+type Draft = {
+  readonly file: string;
+  readonly slug: string;
+  readonly title: string;
+  readonly excerpt: string;
+  readonly category: string;
+  readonly faq: readonly { readonly q: string; readonly a: string }[];
+  readonly sources: readonly DraftSource[];
+  readonly lastVerified: string;
+  readonly body: string;
+};
+
+const draftDirectory = "docs/proposals/blog-story-2026-10-01";
+
+function scalar(value: string): string {
+  return value.startsWith('"') ? JSON.parse(value) as string : value;
 }
 
-function cleanedDraftBody(file: string): string {
-  const input = readFileSync("docs/proposals/blog-rewrites-2026-10-01/" + file, "utf8");
-  const match = input.match(/^---\n[\s\S]*?\n---\n([\s\S]*)$/);
-  if (!match) throw new Error("Missing body in " + file);
-
-  let body = match[1].replace(/^\s*# .*\n+/, "");
-  for (const heading of ["我們在現場看到的", "常見問題", "要問 Aaron 的追問（發文前）"]) {
-    body = body.replace(new RegExp("^## " + heading + "\\n[\\s\\S]*?(?=^## )", "m"), "");
-  }
-  return body.trim();
+function frontMatterValue(frontMatter: string, key: string): string {
+  const match = frontMatter.match(new RegExp(`^${key}: (.+)$`, "m"));
+  if (!match) throw new Error(`Missing ${key}`);
+  return scalar(match[1]);
 }
 
-describe("four article rewrites", () => {
-  it("publishes each new slug without draft-only text", () => {
-    for (const [, slug] of rewrites) {
-      const article = getArticleBySlug(slug);
-      expect(article).toBeDefined();
-      expect(article?.faq).toHaveLength(3);
-      expect(article?.updated).toBe("2026-10-01");
-      expect(article?.content.join("\n")).not.toContain("待 Aaron 確認");
-      expect(article?.content.join("\n")).not.toContain("要問 Aaron");
-    }
-  });
+function readDraft(file: string): Draft {
+  const input = readFileSync(join(draftDirectory, file), "utf8");
+  const match = input.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!match) throw new Error(`Missing front matter in ${file}`);
 
-  it("keeps every non-draft line identical to its approved rewrite", () => {
-    for (const [, slug, draft] of rewrites) {
-      expect(getArticleBySlug(slug)?.content.map((content) => content.trim())).toEqual([cleanedDraftBody(draft)]);
-    }
-  });
+  const [, frontMatter, body] = match;
+  const faq = [...frontMatter.matchAll(/^  - q: (.+)\n    a: (.+)$/gm)].map((item) => ({
+    q: scalar(item[1]),
+    a: scalar(item[2]),
+  }));
+  const sources = [...frontMatter.matchAll(/^  - id: (\d+)\n    title: (.+)\n    publisher: (.+)\n    url: (.+)(?:\n    note: (.+))?(?=\n  - id:|\nlastVerified:|$)/gm)].map((item) => ({
+    id: Number(item[1]),
+    title: scalar(item[2]),
+    publisher: scalar(item[3]),
+    url: scalar(item[4]),
+    ...(item[5] ? { note: scalar(item[5]) } : {}),
+  }));
 
-  it("configures permanent redirects for every old slug", async () => {
-    const redirects = await nextConfig.redirects?.();
+  return {
+    file,
+    slug: frontMatterValue(frontMatter, "slug"),
+    title: frontMatterValue(frontMatter, "title"),
+    excerpt: frontMatterValue(frontMatter, "excerpt"),
+    category: frontMatterValue(frontMatter, "category"),
+    faq,
+    sources,
+    lastVerified: frontMatterValue(frontMatter, "lastVerified"),
+    body: body.trim(),
+  };
+}
 
-    for (const [oldSlug, newSlug] of rewrites) {
-      expect(redirects).toContainEqual({
-        source: "/insights/" + oldSlug,
-        destination: "/insights/" + newSlug,
-        permanent: true,
+const drafts = readdirSync(draftDirectory)
+  .filter((file) => file.endsWith(".md") && file !== "WO.md")
+  .sort()
+  .map(readDraft);
+
+describe("eleven story article rewrites", () => {
+  it("copies every approved draft into its matching static article", () => {
+    expect(drafts).toHaveLength(11);
+    expect(articles).toHaveLength(11);
+
+    for (const draft of drafts) {
+      const article = getArticleBySlug(draft.slug);
+      expect(article).toMatchObject({
+        slug: draft.slug,
+        title: draft.title,
+        summary: draft.excerpt,
+        category: draft.category,
+        content: [draft.body],
+        faq: draft.faq,
+        sources: draft.sources,
+        lastVerified: draft.lastVerified,
+        updated: "2026-10-01",
       });
     }
   });
 
-  it("removes the old slugs from source code", () => {
-    const source = sourceFiles("src").map((file) => readFileSync(file, "utf8")).join("\n");
+  it("keeps every citation valid and every approved source cited", () => {
+    for (const article of articles) {
+      const body = article.content.join("\n");
+      const citedIds = new Set([...body.matchAll(/\[(\d+)\]/g)].map((match) => Number(match[1])));
+      const sourceIds = new Set((article.sources ?? []).map((source) => source.id));
 
-    for (const [oldSlug] of rewrites) expect(source).not.toContain(oldSlug);
+      expect(article.faq).toHaveLength(3);
+      expect(article.sources?.length).toBeGreaterThan(0);
+      expect(body).toMatch(/^## 情境：/m);
+      expect(body).not.toContain("待 Aaron");
+      expect([...citedIds].every((id) => sourceIds.has(id))).toBe(true);
+      expect([...sourceIds].every((id) => citedIds.has(id))).toBe(true);
+    }
   });
 
-  it("renders three FAQPage entries and the updated date for every rewritten article", async () => {
-    for (const [, slug] of rewrites) {
-      const article = getArticleBySlug(slug);
-      if (!article) throw new Error("Expected rewritten article");
-
-      const markup = renderToStaticMarkup(await ArticlePage({ params: Promise.resolve({ slug }) }));
+  it("renders the story treatment, citations, sources, FAQPage, and Article citations in server HTML", async () => {
+    for (const article of articles) {
+      const markup = renderToStaticMarkup(await ArticlePage({ params: Promise.resolve({ slug: article.slug }) }));
       const scripts = [...markup.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
-        .map((match) => JSON.parse(match[1]) as { "@type": string; mainEntity?: unknown[]; dateModified?: string });
+        .map((match) => JSON.parse(match[1]) as { "@type": string; mainEntity?: unknown[]; citation?: string[]; dateModified?: string });
       const faqPage = scripts.find((script) => script["@type"] === "FAQPage");
       const articleJsonLd = scripts.find((script) => script["@type"] === "Article");
 
-      expect(faqPage?.mainEntity).toHaveLength(3);
-      expect(articleJsonLd?.dateModified).toBe("2026-10-01T00:00:00+08:00");
+      expect(markup).toContain("bg-cream");
+      expect(markup).toContain('href="#source-1"');
+      expect(markup).toContain('id="article-sources"');
+      expect(markup).toContain('id="source-1"');
+      expect(markup).toContain("出處與查證（");
       expect(markup).toContain("常見問題");
-      for (const item of article.faq ?? []) {
-        expect(markup).toContain(item.q);
-        expect(markup).toContain(item.a);
-      }
+      expect(markup).not.toMatch(/>https?:\/\//);
+      expect(faqPage?.mainEntity).toHaveLength(3);
+      expect(articleJsonLd?.citation).toEqual(article.sources?.map((source) => source.url));
+      expect(articleJsonLd?.dateModified).toBe("2026-10-01T00:00:00+08:00");
     }
   });
 });

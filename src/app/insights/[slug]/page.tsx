@@ -75,6 +75,7 @@ export default async function ArticlePage({ params }: Props) {
         datePublished={publishedTime}
         dateModified={modifiedTime}
         canonical={canonical}
+        citation={staticArticle.sources?.map((source) => source.url)}
       />
       {staticArticle.faq ? <FaqJsonLd items={staticArticle.faq.map(({ q, a }) => ({ question: q, answer: a }))} /> : null}
       <ArticleDetail article={staticArticle} image={image} />

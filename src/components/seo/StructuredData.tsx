@@ -18,6 +18,7 @@ type ArticleStructuredData = {
   readonly datePublished: string;
   readonly dateModified: string;
   readonly canonical: string;
+  readonly citation?: readonly string[];
 };
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
@@ -129,6 +130,7 @@ export function ArticleJsonLd({
   datePublished,
   dateModified,
   canonical,
+  citation,
 }: ArticleStructuredData) {
   return (
     <JsonLd
@@ -140,6 +142,7 @@ export function ArticleJsonLd({
         image: toAbsoluteUrl(image),
         datePublished,
         dateModified,
+        ...(citation?.length ? { citation } : {}),
         author: {
           "@type": "Person",
           "@id": PERSON_ID,

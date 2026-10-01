@@ -38,7 +38,7 @@ describe("ArticleDetail", () => {
   });
 
   it("renders tables, lists, quotes, and safe links from rewritten article Markdown", () => {
-    const article = getArticleBySlug("philippines-ecommerce-first-year");
+    const article = getArticleBySlug("landed-cost-before-export");
     if (!article) throw new Error("Expected rewritten article");
 
     const markup = renderToStaticMarkup(createElement(StaticArticleContent, { content: article.content }));
@@ -47,7 +47,7 @@ describe("ArticleDetail", () => {
     expect(markup).toContain("<blockquote");
     expect(markup).toContain("<ul");
     expect(markup).toContain('href="/services/product-testing"');
-    expect(markup).toContain('href="https://www.lawphil.net/statutes/repacts/ra2023/ra_11967_2023.html"');
+    expect(markup).toContain('href="https://tradepiloter.com"');
     expect(markup).toContain('target="_blank"');
     expect(markup).toContain('rel="noopener"');
   });
