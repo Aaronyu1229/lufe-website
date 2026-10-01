@@ -2,12 +2,12 @@ import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { InsightArticleCard } from "@/components/insights/InsightArticleCard";
-import { articles } from "@/data/articles";
 import { toInsightCard } from "@/lib/articles/presentation";
-
-const authorArticles = articles.map(toInsightCard);
+import { getPublishedArticles } from "@/lib/articles/published";
 
 export function AaronAuthorPage() {
+  const authorArticles = getPublishedArticles().map(toInsightCard);
+
   return (
     <>
       <section className="lufe-hero bg-navy text-white">

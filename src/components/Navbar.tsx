@@ -15,8 +15,8 @@ import { useMessageBox } from "./MessageBox";
 import { DelightLayer } from "./DelightLayer";
 import { TieredImage } from "./TieredImage";
 import { useSpring } from "@/lib/motion";
-import { articles, getArticleImage } from "@/data/articles";
 import { CASES } from "@/data/cases";
+import type { InsightCard } from "@/lib/articles/presentation";
 import {
   CHAPTER_ARTICLES,
   CHAPTER_ARTICLE_TAGS,
@@ -37,8 +37,6 @@ const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
 
 const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
 // Chapters without articles stay out of the menu (a "0 篇" row reads as an empty site); they appear once an article is mapped.
-const VISIBLE_INSIGHT_CHAPTERS = INSIGHT_MENU_CHAPTERS.filter((chapter) => CHAPTER_ARTICLES[chapter].length > 0);
-
 const ABOUT_MENU_ITEMS = [
   { href: "/about#story", title: "創辦故事", desc: "我們為什麼做這件事", num: "01" },
   { href: "/about#team", title: "團隊組成", desc: "台灣核心＋全球節點", num: "02" },
@@ -58,7 +56,20 @@ export function pathnameHasDarkHero(pathname: string): boolean {
   return pathname.startsWith("/services") || pathname.startsWith("/cases") || pathname.startsWith("/about/");
 }
 
-export function Navbar({ children }: { readonly children?: ReactNode }) {
+type InsightsNavigation = {
+  readonly latestArticle?: InsightCard;
+  readonly publishedArticleSlugs: readonly string[];
+};
+
+export function Navbar({
+  children,
+  latestArticle,
+  publishedArticleSlugs = [],
+}: {
+  readonly children?: ReactNode;
+  readonly latestArticle?: InsightCard;
+  readonly publishedArticleSlugs?: readonly string[];
+}) {
   const pathname = normalizePathname(usePathname());
   const { open: openMessageBox } = useMessageBox();
   const darkHero = pathnameHasDarkHero(pathname);
@@ -247,7 +258,7 @@ export function Navbar({ children }: { readonly children?: ReactNode }) {
         }}
       >
         {navItems.map((item) => (
-          <MobileGroup key={item.key} item={item} open={mobileGroup === item.key} onToggle={() => setMobileGroup((current) => current === item.key ? null : item.key)} onClose={closeMobile} />
+          <MobileGroup key={item.key} item={item} open={mobileGroup === item.key} onToggle={() => setMobileGroup((current) => current === item.key ? null : item.key)} onClose={closeMobile} insightsNavigation={{ latestArticle, publishedArticleSlugs }} />
         ))}
         <MessageBoxTrigger className="m-3 flex w-[calc(100%-24px)] justify-center" onOpen={closeMobile} />
       </div>
@@ -284,6 +295,7 @@ export function Navbar({ children }: { readonly children?: ReactNode }) {
             itemKey={item.key}
             active={activeMenu === item.key && megaOpen}
             onMessageOpen={openMessageBox}
+            insightsNavigation={{ latestArticle, publishedArticleSlugs }}
             setRef={(node) => {
               if (node) panelRefs.current[item.key] = node;
             }}
@@ -294,13 +306,13 @@ export function Navbar({ children }: { readonly children?: ReactNode }) {
   );
 }
 
-function MegaPane({ itemKey, active, onMessageOpen, setRef }: { itemKey: MenuKey; active: boolean; onMessageOpen: () => void; setRef: (node: HTMLDivElement | null) => void }) {
+function MegaPane({ itemKey, active, onMessageOpen, insightsNavigation, setRef }: { itemKey: MenuKey; active: boolean; onMessageOpen: () => void; insightsNavigation: InsightsNavigation; setRef: (node: HTMLDivElement | null) => void }) {
   return (
     <div ref={setRef} aria-hidden={!active} className={`${active ? "relative pointer-events-auto opacity-100 delay-[60ms]" : "absolute pointer-events-none opacity-0"} inset-x-0 top-0 grid min-h-[300px] grid-cols-[1fr_1fr_320px] transition-opacity duration-[180ms]`}>
       {itemKey === "services" && <ServicesMenu />}
       {itemKey === "advanced" && <AdvancedMenu onMessageOpen={onMessageOpen} />}
       {itemKey === "cases" && <CasesMenu />}
-      {itemKey === "insights" && <InsightsMenu />}
+      {itemKey === "insights" && <InsightsMenu {...insightsNavigation} />}
       {itemKey === "about" && <AboutMenu />}
     </div>
   );
@@ -472,12 +484,15 @@ function ChapterIcon({ chapter }: { chapter: (typeof INSIGHT_MENU_CHAPTERS)[numb
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{CHAPTER_ICON_PATHS[chapter]}</svg>;
 }
 
-function InsightsMenu() {
-  const latestArticle = articles[0];
+function InsightsMenu({ latestArticle, publishedArticleSlugs }: InsightsNavigation) {
+  const publishedArticleSlugSet = new Set(publishedArticleSlugs);
+  const visibleInsightChapters = INSIGHT_MENU_CHAPTERS.filter((chapter) =>
+    CHAPTER_ARTICLES[chapter].some((slug) => publishedArticleSlugSet.has(slug)),
+  );
 
   return <>
     <MenuColumn label="按章節找">
-      {VISIBLE_INSIGHT_CHAPTERS.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} desc={`${CHAPTER_ARTICLES[chapter].length} 篇`} marker={<ChapterIcon chapter={chapter} />} />)}
+      {visibleInsightChapters.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} desc={`${CHAPTER_ARTICLES[chapter].filter((slug) => publishedArticleSlugSet.has(slug)).length} 篇`} marker={<ChapterIcon chapter={chapter} />} />)}
     </MenuColumn>
     <MenuColumn label="其他內容" bordered>
       <MenuLink href="/resources" title="補助與活動" desc="政府補助＋現場紀錄" marker={<FileIcon />} />
@@ -486,7 +501,7 @@ function InsightsMenu() {
       <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
     </MenuColumn>
     <MenuRail label="最新文章">
-      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block"><div className="relative mb-3 aspect-video overflow-hidden"><TieredImage src={getArticleImage(latestArticle)} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" /></div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
+      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block"><div className="relative mb-3 aspect-video overflow-hidden"><TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" /></div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
     </MenuRail>
   </>;
 }
@@ -512,7 +527,7 @@ function AboutMenuLink({ href, title, desc, num }: (typeof ABOUT_MENU_ITEMS)[num
   return <MenuLink href={href} title={title} desc={desc} marker={<span className="num text-[13px] font-bold">{num}</span>} />;
 }
 
-function MobileGroup({ item, open, onToggle, onClose }: { item: { key: MenuKey; label: string }; open: boolean; onToggle: () => void; onClose: () => void }) {
+function MobileGroup({ item, open, onToggle, onClose, insightsNavigation }: { item: { key: MenuKey; label: string }; open: boolean; onToggle: () => void; onClose: () => void; insightsNavigation: InsightsNavigation }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const height = useSpring(0);
 
@@ -524,7 +539,7 @@ function MobileGroup({ item, open, onToggle, onClose }: { item: { key: MenuKey; 
     <button type="button" onClick={onToggle} aria-expanded={open} aria-controls={`mobile-${item.key}`} className="flex w-full cursor-pointer items-center justify-between px-4 py-[14px] text-left text-[16px] font-semibold">
       {item.label}<svg className={`transition-transform duration-150 ${open ? "rotate-180" : ""}`} width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" /></svg>
     </button>
-    <div id={`mobile-${item.key}`} style={{ height: height.value }} className="overflow-hidden"><div ref={contentRef}><MobileMenuContent itemKey={item.key} onClose={onClose} /></div></div>
+    <div id={`mobile-${item.key}`} style={{ height: height.value }} className="overflow-hidden"><div ref={contentRef}><MobileMenuContent itemKey={item.key} onClose={onClose} insightsNavigation={insightsNavigation} /></div></div>
   </div>;
 }
 
@@ -536,7 +551,7 @@ function MobileSubLink({ href, title, marker, external = false, onClose }: { hre
     : <Link href={href} onClick={onClose} className={className}>{content}</Link>;
 }
 
-function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: () => void }) {
+function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: MenuKey; onClose: () => void; insightsNavigation: InsightsNavigation }) {
   if (itemKey === "services") return <>
     <MobileSubLink href="/services/product-testing" title="市場探查" marker={<CompassIcon />} onClose={onClose} />
     <MobileSubLink href="/services/consignment" title="寄賣" marker={<TrendIcon />} onClose={onClose} />
@@ -552,8 +567,12 @@ function MobileMenuContent({ itemKey, onClose }: { itemKey: MenuKey; onClose: ()
   </>;
   if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={caseItem.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例 →" onClose={onClose} /></>;
   if (itemKey === "about") return <>{ABOUT_MENU_ITEMS.map((item) => <MobileSubLink key={item.num} href={item.href} title={item.title} marker={<span className="num text-[13px] font-bold">{item.num}</span>} onClose={onClose} />)}</>;
+  const publishedArticleSlugSet = new Set(insightsNavigation.publishedArticleSlugs);
+  const visibleInsightChapters = INSIGHT_MENU_CHAPTERS.filter((chapter) =>
+    CHAPTER_ARTICLES[chapter].some((slug) => publishedArticleSlugSet.has(slug)),
+  );
   return <>
-    {VISIBLE_INSIGHT_CHAPTERS.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
+    {visibleInsightChapters.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
     <MobileSubLink href="/resources" title="補助與活動" marker={<FileIcon />} onClose={onClose} />
     <MobileSubLink href="/field-notes" title="現場紀錄" marker={<PinIcon />} onClose={onClose} />
     <MobileSubLink href="https://tradepiloter.com" title="TradePilot 關稅工具 ↗" marker={<TradeIcon />} external onClose={onClose} />

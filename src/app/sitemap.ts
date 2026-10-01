@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { CASES } from "@/data/cases";
-import { articles } from "@/data/articles";
 import { listPublishedArticles } from "@/lib/articles/repository";
+import { getPublishedArticles } from "@/lib/articles/published";
 import { SITE_URL } from "@/lib/site";
 
 export const revalidate = 300;
@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const articleEntries: MetadataRoute.Sitemap = articles
+  const articleEntries: MetadataRoute.Sitemap = getPublishedArticles()
     .map((a) => ({
     url: `${SITE_URL}/insights/${a.slug}`,
     lastModified: now,

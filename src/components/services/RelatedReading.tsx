@@ -2,8 +2,8 @@ import Link from "next/link";
 import { TieredImage } from "@/components/TieredImage";
 
 import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, type ChapterKey } from "@/data/chapters";
-import { articles } from "@/data/articles";
 import { toDatabaseInsightCard, toInsightCard, type InsightCard } from "@/lib/articles/presentation";
+import { getPublishedArticles } from "@/lib/articles/published";
 import { listPublishedArticles } from "@/lib/articles/repository";
 
 const isExternalImage = (image: string): boolean => /^https?:\/\//.test(image);
@@ -41,7 +41,7 @@ export function RelatedReadingContent({ articles: reading }: { readonly articles
 
 export async function RelatedReading({ chapter }: { readonly chapter: ChapterKey }) {
   const staticSlugs: ReadonlySet<string> = new Set(CHAPTER_ARTICLES[chapter]);
-  const staticCards = articles
+  const staticCards = getPublishedArticles()
     .filter((article) => staticSlugs.has(article.slug))
     .map(toInsightCard);
 

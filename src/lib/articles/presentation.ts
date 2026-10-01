@@ -1,5 +1,6 @@
 import type { Article, ArticleColor, Category } from "@/data/articles";
 import { getArticleImage } from "@/data/articles";
+import { getArticlePublishedDate } from "@/lib/articles/published";
 
 import type { DatabaseArticle } from "./repository";
 
@@ -88,7 +89,7 @@ const articleProjection = (article: DatabaseArticle) => ({
 export const toInsightCard = (article: Article): InsightCard => ({
   slug: article.slug,
   category: article.category,
-  date: article.date,
+  date: getArticlePublishedDate(article),
   title: article.title,
   summary: article.summary,
   readTime: article.readTime,

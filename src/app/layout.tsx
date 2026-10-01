@@ -6,6 +6,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
 import { SiteStructuredData } from "@/components/seo/StructuredData";
+import { toInsightCard } from "@/lib/articles/presentation";
+import { getPublishedArticles } from "@/lib/articles/published";
 import { SITE_URL, SITE_NAME, SITE_LOCALE } from "@/lib/site";
 
 const playfair = Playfair_Display({
@@ -54,6 +56,8 @@ const notoSansTC = localFont({
 const DEFAULT_TITLE = "鹿飛 LUFÉ — 貨到了之後，我們接著走｜台灣品牌進菲律賓";
 const DEFAULT_DESCRIPTION = "貨代把貨送到，故事才開始。鹿飛陪台灣品牌走完在菲律賓的第一年：市場探查、寄賣、公司落地、海外客服，四個方案各有價，先花 1～2 萬看市場反應。創辦人來自躍馬企業，底下是 42 年的國際物流。";
 const DEFAULT_KEYWORDS = "台灣企業出海,菲律賓落地,菲律賓市場探查,菲律賓寄賣,菲律賓公司落地,海外客服外包,菲律賓 call center,出海起手包,連鎖餐飲出海,美妝出海菲律賓,北美通路,Costco 上架,鹿飛,LUFÉ";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -126,6 +130,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const publishedArticles = getPublishedArticles();
+  const latestArticle = publishedArticles[0] ? toInsightCard(publishedArticles[0]) : undefined;
+
   return (
     <html
       lang="zh-Hant"
@@ -134,7 +141,7 @@ export default function RootLayout({
       <body>
         <MessageBoxProvider>
           <SiteStructuredData />
-          <Navbar>
+          <Navbar latestArticle={latestArticle} publishedArticleSlugs={publishedArticles.map((article) => article.slug)}>
             <main id="main-content">{children}</main>
           </Navbar>
           <Footer />

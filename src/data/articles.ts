@@ -12,6 +12,8 @@ export interface Article {
   readonly slug: string;
   readonly category: Category;
   readonly date: string;
+  /** ISO 8601 publish time with a timezone, when publication is scheduled. */
+  readonly publishAt?: string;
   readonly title: string;
   readonly summary: string;
   readonly readTime: string;
