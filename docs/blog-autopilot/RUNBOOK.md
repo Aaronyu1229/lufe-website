@@ -17,7 +17,7 @@
    - `npm ci`
    - `node scripts/blog-schedule.mjs --json` 取得下 3 個空檔。若空檔都已被佔用（已有排程文章），本週不產文，直接到第 9 步寫紀錄。
 2. **檢查上週**：對已過 publishAt 的文章，`curl -s -o /dev/null -w "%{http_code}" https://lufe.world/insights/<slug>` 必須 200；sitemap 要含該網址。不對就記到 LOG 的「異常」。
-3. **選題**：從 `docs/blog-autopilot/QUEUE.md` 的「自動產線」區，由上往下取 3 個未勾選題目。「訪談佇列」的題目**不准自動寫**。
+3. **選題**：先抓 `https://jumping.group/sitemap.xml` 的 `/insights/` 清單——躍馬官網（同一位老闆）已寫或屬於物流／報關／關稅本業的題目，鹿飛**不寫**，改在相關文章裡連到躍馬那篇。然後從 `docs/blog-autopilot/QUEUE.md` 的「自動產線」區，由上往下取 3 個未勾選題目。「訪談佇列」的題目**不准自動寫**。
 4. **研究**（每題）
    - DataForSEO 查主攻字與 3～5 個變體的台灣月搜尋量（帳密：`security find-generic-password -s dataforseo-api -w`，帳號 aaron.yu@reborn.in；端點 `keywords_data/google_ads/search_volume/live`，`location_code: 2158`、`language_name: "Chinese (Traditional)"`）。選量最大且符合意圖的當主攻字。
    - 查該主攻字的 Google 首頁（`serp/google/organic/live/advanced`，台灣、`language_code: "zh-TW"`），看前 5 名在寫什麼，找出**他們沒寫的**（資訊增益）。
