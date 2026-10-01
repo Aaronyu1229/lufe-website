@@ -3,6 +3,8 @@
 import { useEffect, type ReactNode } from "react";
 import Link from "next/link";
 import { TieredImage } from "@/components/TieredImage";
+import { ArticleFaq } from "@/components/insights/ArticleFaq";
+import { StaticArticleContent, renderInlineMarkdown } from "@/components/insights/StaticArticleContent";
 import { useSpring } from "@/lib/motion";
 import type { Article } from "@/data/articles";
 import type { DatabaseInsight } from "@/lib/articles/presentation";
@@ -24,36 +26,7 @@ function isDatabaseArticle(article: Article | DatabaseInsight): article is Datab
 }
 
 export function renderStaticBoldMarkup(text: string): ReactNode {
-  if (!text.includes("**")) return text;
-
-  const nodes: ReactNode[] = [];
-  let currentIndex = 0;
-  let boldIndex = 0;
-
-  while (currentIndex < text.length) {
-    const openingIndex = text.indexOf("**", currentIndex);
-    if (openingIndex === -1) {
-      nodes.push(text.slice(currentIndex));
-      break;
-    }
-
-    const closingIndex = text.indexOf("**", openingIndex + 2);
-    if (closingIndex === -1) {
-      nodes.push(text.slice(currentIndex));
-      break;
-    }
-
-    if (openingIndex > currentIndex) nodes.push(text.slice(currentIndex, openingIndex));
-    nodes.push(
-      <strong key={boldIndex} className="text-tx font-semibold">
-        {text.slice(openingIndex + 2, closingIndex)}
-      </strong>,
-    );
-    boldIndex += 1;
-    currentIndex = closingIndex + 2;
-  }
-
-  return nodes;
+  return renderInlineMarkdown(text);
 }
 
 function ReadingProgress() {
@@ -87,6 +60,7 @@ export function ArticleDetail({ article, image }: Props) {
   const { open } = useMessageBox();
   const databaseContent = isDatabaseArticle(article) ? article.content : null;
   const staticContent: readonly string[] = databaseContent ? [] : article.content as readonly string[];
+  const staticFaq = isDatabaseArticle(article) ? undefined : article.faq;
   const hasInlineImage = Boolean(databaseContent && /<img\b/i.test(databaseContent.html));
   const externalImage = /^https?:\/\//.test(image);
 
@@ -128,21 +102,8 @@ export function ArticleDetail({ article, image }: Props) {
             className="text-[17px] leading-[1.95] text-tx [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:font-sans [&_h2]:text-[26px] [&_h2]:font-[650] [&_img]:h-auto [&_img]:max-w-full [&_p+_p]:mt-5"
             dangerouslySetInnerHTML={{ __html: databaseContent.html }}
           />
-        ) : (
-          <div className="text-[17px] leading-[1.95] text-tx">
-            {staticContent.map((paragraph, index) =>
-              paragraph.startsWith("## ") ? (
-                <h2 key={index} className="mb-3 mt-10 font-sans text-[26px] font-[650] leading-[1.35] text-tx">
-                  {renderStaticBoldMarkup(paragraph.slice(3))}
-                </h2>
-              ) : (
-                <p key={index} className={index === 0 ? "" : "mt-5"}>
-                  {renderStaticBoldMarkup(paragraph)}
-                </p>
-              ),
-            )}
-          </div>
-        )}
+        ) : <StaticArticleContent content={staticContent} />}
+        <ArticleFaq faq={staticFaq} />
 
         <div className="my-10 h-px w-full bg-bd md:my-14" />
 

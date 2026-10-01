@@ -84,7 +84,7 @@ export function InsightsPageContent({
   onMessageOpen = () => {},
   articleGridRef,
 }: InsightsPageContentProps) {
-  const listedArticles = articles.filter((article) => article.slug !== "vietnam-market-entry-guide");
+  const listedArticles = articles;
   const featured = listedArticles[0];
   const hasMatches = active === "all" || listedArticles.some((article) => chapterForArticle(article.slug, chapterBySlug) === active);
   const chapterCounts = new Map<InsightFilter, number>(INSIGHT_CHAPTERS.map((chapter) => [chapter.key, 0]));

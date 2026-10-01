@@ -117,11 +117,12 @@ export const CHAPTER_ARTICLES = {
     "go-no-go-framework",
     "first-time-export-checklist",
     "product-testing-best-practices",
+    "why-philippines-first",
   ],
-  m3: ["tradepilot-tariff-tutorial"],
+  m3: ["tradepilot-tariff-tutorial", "philippines-ecommerce-first-year", "landed-cost-before-export"],
   m9: ["manila-beverage-first-store-90-days"],
   after: [],
-  na: ["us-fda-registration-guide", "amazon-category-analysis"],
+  na: ["us-fda-registration-guide", "amazon-us-three-decisions"],
   sub: ["overseas-exhibition-subsidy-115-upgrade"],
 } as const satisfies Record<ArticleChapterKey, readonly string[]>;
 
@@ -134,10 +135,7 @@ export const CHAPTER_ARTICLE_TAGS = {
   sub: "補助與活動",
 } as const satisfies Record<ArticleChapterKey, string>;
 
-export const TAG_ONLY_ARTICLE_SLUGS = [
-  "southeast-asia-ecommerce-2026",
-  "china-tariff-relocation-strategy",
-] as const;
+export const TAG_ONLY_ARTICLE_SLUGS = [] as const;
 
 export const CHAPTERS: Record<ChapterKey, Chapter> = {
   m1: {

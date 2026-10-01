@@ -35,7 +35,6 @@ export default async function Insights() {
     ...articles.map(toInsightCard),
     ...databaseArticles.map(toDatabaseInsightCard),
   ]
-    .filter((article) => article.slug !== "vietnam-market-entry-guide")
     .sort((left, right) => right.date.localeCompare(left.date));
 
   return <>

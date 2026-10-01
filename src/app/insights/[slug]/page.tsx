@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { articles, getArticleBySlug, getArticleImage } from "@/data/articles";
 import { ArticleDetail } from "@/components/insights/ArticleDetail";
-import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/StructuredData";
 import { toDatabaseInsight } from "@/lib/articles/presentation";
 import { getPublishedArticleBySlug } from "@/lib/articles/repository";
 import { SITE_URL } from "@/lib/site";
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: staticArticle.summary,
       image: getArticleImage(staticArticle),
       publishedTime: toIsoDate(staticArticle.date),
-      modifiedTime: toIsoDate(staticArticle.date),
+      modifiedTime: toIsoDate(staticArticle.updated ?? staticArticle.date),
     });
   }
 
@@ -62,6 +62,7 @@ export default async function ArticlePage({ params }: Props) {
     const image = getArticleImage(staticArticle);
     const canonical = toAbsoluteUrl(`/insights/${staticArticle.slug}`);
     const publishedTime = toIsoDate(staticArticle.date);
+    const modifiedTime = toIsoDate(staticArticle.updated ?? staticArticle.date);
     return <>
       <BreadcrumbJsonLd items={[
         { name: "洞察與資源", path: "/insights" },
@@ -72,9 +73,10 @@ export default async function ArticlePage({ params }: Props) {
         description={staticArticle.summary}
         image={image}
         datePublished={publishedTime}
-        dateModified={publishedTime}
+        dateModified={modifiedTime}
         canonical={canonical}
       />
+      {staticArticle.faq ? <FaqJsonLd items={staticArticle.faq.map(({ q, a }) => ({ question: q, answer: a }))} /> : null}
       <ArticleDetail article={staticArticle} image={image} />
     </>;
   }

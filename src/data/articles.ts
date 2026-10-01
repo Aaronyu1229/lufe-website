@@ -17,6 +17,8 @@ export interface Article {
   readonly readTime: string;
   readonly color: ArticleColor;
   readonly content: readonly string[];
+  readonly faq?: readonly { readonly q: string; readonly a: string }[];
+  readonly updated?: string;
 }
 
 export const categories = [
@@ -128,26 +130,98 @@ export const articles: readonly Article[] = [
     ],
   },
   {
-    slug: "southeast-asia-ecommerce-2026",
-    category: "東南亞趨勢",
+    slug: "philippines-ecommerce-first-year",
+    category: "菲律賓",
     date: "2026-03-28",
-    title: "2026 東南亞電商市場：台灣品牌的三大機會",
-    summary:
-      "東南亞電商市場預計在 2026 年突破 2,000 億美元。我們分析了菲律賓、越南、泰國三個市場，找到台灣品牌最有機會切入的品類和通路。",
-    readTime: "8 分鐘",
+    title: "菲律賓電商第一年：Shopee、Lazada、TikTok Shop 先走哪一個？",
+    summary: "第一年的問題不是哪個平台最大，是「店開在誰名下、貨放哪、誰回訊息」。三個平台的開店門檻、跨境與本地店的差別，以及先走哪一個的判斷。",
+    readTime: "11 分鐘",
     color: "sky",
-    content: [
-      "東南亞電商市場正在經歷前所未有的高速成長。根據 Google、Temasek 與 Bain 聯合發布的 e-Conomy SEA 報告，2026 年東南亞數位經濟總規模預計突破 2,000 億美元，其中電商佔比超過六成。",
-      "對台灣品牌來說，這不只是一個數字，而是一個正在打開的窗口。",
-      "## 機會一：菲律賓——社群電商的爆發期",
-      "菲律賓擁有超過 8,000 萬社群媒體用戶，TikTok Shop 和 Shopee Live 的成長率在東南亞名列前茅。台灣的美妝、保健品和小家電品類，特別適合透過直播和短影片觸及菲律賓消費者。",
-      "## 機會二：越南——製造與消費的雙重紅利",
-      "越南不只是生產基地，更是快速崛起的消費市場。中產階級人口預計在 2026 年達到 4,400 萬，對品質和品牌的需求正在升級。台灣的食品加工、機能服飾品牌在越南有明確的定位優勢。",
-      "## 機會三：泰國——高端消費的切入點",
-      "泰國消費者對品質的敏感度高於價格，這讓台灣品牌能以「質感」而非「低價」作為競爭策略。特別是在保健品、有機食品和智慧家居領域，台灣品牌的技術優勢可以直接轉化為市場溢價。",
-      "## 你該怎麼開始？",
-      "選擇目標市場只是第一步。你需要了解當地的法規、物流成本、通路結構和消費者偏好。鹿飛的免費出海評估可以幫你在兩分鐘內釐清你的產品最適合哪個市場。",
+    content: [String.raw`
+> **先說答案：** 第一年先開一間店，不是三間。選哪一個平台之前，先回答三件事：店開在誰名下（你的台灣公司、菲律賓公司、還是合作夥伴）、貨放哪、誰回訊息。這三件事定了，平台的選擇通常就很明顯。
+
+這篇改寫自我們 2026 年 3 月的〈2026 東南亞電商市場：台灣品牌的三大機會〉。那篇引用了三國的市場規模與社群用戶數，但那些數字出處不一，而且對一個要開第一間店的品牌沒有幫助。這次只講一件事：**台灣品牌在菲律賓的第一年，電商該怎麼開始。**
+
+## 這篇適合誰、不適合誰
+
+- **適合：** 市場探查過了、準備上架的品牌；或自己上過東南亞平台、投了廣告、沒人看見的品牌。
+- **不適合：** 還不知道產品在菲律賓賣不賣得動的品牌。平台選得再對，沒人買也是沒人買，先做[市場探查](/services/product-testing)。
+
+## 先定三件事，再選平台
+
+### 第一件：店開在誰名下
+
+菲律賓三大平台對「誰可以開店」的規定不一樣，這是最先要搞清楚的：
+
+| | 本地店（菲律賓公司或公民）| 跨境店（台灣公司直接開）|
+|---|---|---|
+| Shopee 菲律賓 | 需 DTI 或 SEC 登記、BIR 稅籍登記（Form 2303）[1] | 有跨境機制（SIP），由 Shopee 邀請加入、不能主動申請；台灣站賣家可開到哪些站點，官方頁面需登入才能看，本文未能查證 [2] |
+| Lazada 菲律賓 | 同上 | LazGlobal 接受台灣公司登記證申請（第三方整理）[3] |
+| TikTok Shop 菲律賓 | 官方規定只接受菲律賓境內註冊的公司，個人賣家須為菲律賓公民 [4] | 不開放 [4] |
+
+兩個跨平台的共同規則：
+
+- **2025-06-20 起《網路交易法》（RA 11967）全面施行**，線上商家須向 DTI 電商局登記並公開公司名稱、地址、聯絡方式 [5]。
+- **食品、保健品、化妝品不管在哪個平台賣，都要有菲律賓 FDA 的證。** FDA 持續與 Shopee、Lazada 等平台合作下架未登錄產品 [6]。跨境店不會免掉這一關，而證只能掛在菲律賓的持證公司名下——這就是為什麼「店開在誰名下」要先想。
+
+實務上第一年有三條路：自己設菲律賓公司（純線上零售的外資公司一樣適用最低實收資本 2,500 萬披索的規定 [7]）、走平台跨境機制（證的問題仍在）、或**把貨放在合作夥伴的倉、店掛在持證進口商名下**。第三條就是我們[寄賣包](/services/consignment)的做法：證由持證進口商代辦代持，合約寫明資料歸你、換人只換一張合約。
+
+### 第二件：貨放哪
+
+跨境店的貨從台灣寄，消費者看到的是「海外賣家」、等貨時間長；本地店的貨在菲律賓倉，出貨快但你要先把貨運進去、清關、繳稅（12% 加值稅與關稅在進口時就要付 [8]）。第一年量小，我們通常建議貨先進合作夥伴的倉、賣多少算多少，不要為了省倉儲而讓第一批消費者等兩週。
+
+### 第三件：誰回訊息
+
+菲律賓消費者習慣在下單前用平台聊天室問問題，英文或 Taglish 都有。平台也把回覆速度算進店鋪表現。這題沒有「等有訂單再說」的選項——沒人回，就不會有訂單。
+
+## 那先走哪一個平台？
+
+把三件事定了之後，我們的一般判斷是：
+
+- **第一年先開一間，通常是 Shopee 或 Lazada 其中一個。** 兩者都接受本地店與跨境機制，商品頁、價格、回覆流程先在一個平台跑順。
+- **TikTok Shop 放第二年或有在地團隊之後。** 它要菲律賓公司，而且吃的是直播與短影片，沒有人在當地做內容，開了也是空的。
+- **三個都開的時機，是你已經知道誰會買、多少錢會買。** 這時候加平台是放大，不是測試。
+
+## 什麼情況不建議現在上電商
+
+- **產品證還沒開始辦，也沒有持證進口商。** 先把證的路線定下來，不然店開了也只能下架。
+- **沒有人能在菲律賓時間回訊息。** 台灣跟菲律賓同時區，這點比去北美好；但「同時區」不等於「有人回」。
+- **只想在平台上「放著看看」。** 平台看回覆率、出貨速度、評價。放著不管的店，演算法會把它放到沒人看得到的地方。
+- **價格在台灣就已經很薄。** 平台抽成、金流、運費、12% 加值稅加上去之後，第一年的毛利可能撐不住。這題在[到岸成本](/insights/landed-cost-before-export)那篇展開。
+
+## 出處與查證日期
+
+最後查證：2026-10-01。平台規則改得比法規快，發文前請再對一次各平台的賣家中心。
+
+1. Shopee 菲律賓賣家登記所需文件（DTI／SEC、BIR Form 2303、身分證件），第三方整理：https://storestarter.co/ph-en/how-to-start-ecommerce-business/shopee-seller-registration-philippines/ ；菲律賓線上賣家 BIR 登記義務（RMC 38-2026 BIR 登記徽章）：https://www.paymongo.com/blog/how-to-register-online-business-philippines
+2. Shopee International Platform（SIP）：由 Shopee 預選邀請，賣家不能主動申請（第三方整理）：https://www.ecomcrew.com/how-to-become-a-cross-border-shopee-seller/ 。Shopee 菲律賓賣家中心 SIP FAQ（https://seller.shopee.ph/edu/article/19351）與蝦皮台灣跨境說明頁（需登入）本次無法讀取，**台灣站賣家可開通的站點未查證**。
+3. Lazada LazGlobal 跨境賣家：非東協國家（含台灣）需提供公司登記證、不接受個人（第三方整理）：https://www.worldfirst.com/nz/blog/ecommerce-seller-resources/selling-on-lazada/
+4. TikTok Shop Philippines Seller Registration Guidelines（官方）：企業賣家須為菲律賓境內註冊之公司，個人賣家須為菲律賓公民：https://seller-ph.tiktok.com/university/essay?knowledge_id=7654200041719553&lang=en
+5. Republic Act No. 11967《Internet Transactions Act of 2023》全文：https://www.lawphil.net/statutes/repacts/ra2023/ra_11967_2023.html ；DTI 自 2025-06-20 全面施行：https://www.pna.gov.ph/articles/1252762
+6. 菲律賓 FDA 對線上販售未登錄化妝品的公告（FDA Advisory No. 2023-2205），並表明與 Shopee、Lazada 等平台協調下架：https://www.fda.gov.ph/fda-advisory-no-2023-2205-public-health-warning-against-the-sale-offer-for-sale-and-purchase-of-unnotified-cosmetic-products/
+7. Republic Act No. 11595（零售業自由化法修正，2022-01-21 生效）：外資零售企業最低實收資本 2,500 萬披索，純線上零售亦適用：https://www.dfdl.com/insights/legal-and-tax-updates/philippines-republic-act-no-11595-reduces-the-required-paid-up-capital-for-foreign-retail-enterprises-to-twenty-five-million-philippine-pesos/
+8. 菲律賓進口加值稅 12% 與關稅課徵基礎（CMTA, RA 10863 第 701 條交易價格）：https://lawphil.net/statutes/repacts/ra2016/ra_10863_2016.html
+9. DTI-DA-DENR-IPOPHL-NPC Joint Administrative Order No. 22-01（線上商家指引，2022）：https://ecommerce.dti.gov.ph/joint-administrative-order-no-22-01/
+
+## 一個最小的下一步
+
+市場探查過了的話，[寄賣包](/services/consignment)（5～6 萬，市場探查費可抵）就是「店掛持證進口商、貨放合作夥伴的倉、有人顧店」這三件事一次處理。還沒做市場探查，就先做那一步。
+
+---
+
+## 寧可不寫而刪掉的內容
+
+- 舊文的「東南亞數位經濟 2,000 億美元」「菲律賓 8,000 萬社群用戶」「越南中產 4,400 萬」：出處不一、年份不明，全部拿掉。
+- 各平台的抽成百分比、金流費率：平台每年調整，且各類目不同；文章只說「有抽成」，數字第一次談再給。
+- Shopee 跨境（SIP）「台灣賣家可開到菲律賓」：第三方文章有寫，官方頁面需登入無法驗證，不當事實寫。
+- 「TikTok Shop 有跨境通道可以不設菲律賓公司」：只有一篇第三方文章這麼說，與官方登記規定相反，不採用。
+`],
+    faq: [
+      { q: "可以不在菲律賓設公司，直接從台灣跨境賣到菲律賓嗎？", a: "Shopee 與 Lazada 有跨境賣家機制，TikTok Shop 菲律賓依官方規定只接受菲律賓境內註冊的公司或菲律賓公民。但食品、保健品、化妝品不管從哪裡賣，在菲律賓上架都要有當地 FDA 的證，跨境店不會免掉這一關。" },
+      { q: "第一年是不是三個平台都該開？", a: "不建議。第一年只有一個目標：確認有人買、賣多少錢。先開一間店、把商品頁、價格、回覆流程跑順，三個月看數字，再決定要不要加第二個平台。" },
+      { q: "上架之後誰回訊息？", a: "這是第一年最常被忽略的一題。菲律賓消費者會用英文或 Taglish 問問題，平台也看回覆速度。寄賣包裡貨放合作夥伴的倉、由合作夥伴的團隊顧店；要自己顧的話，先確定有人能在當地時間回。" },
     ],
+    updated: "2026-10-01",
   },
   {
     slug: "first-time-export-checklist",
@@ -220,25 +294,103 @@ export const articles: readonly Article[] = [
     ],
   },
   {
-    slug: "china-tariff-relocation-strategy",
-    category: "東南亞趨勢",
+    slug: "landed-cost-before-export",
+    category: "出海實戰",
     date: "2026-02-10",
-    title: "中美關稅戰下的產地轉移策略：越南還是印度？",
-    summary:
-      "越來越多企業考慮將產線從中國轉移。我們比較了越南和印度在成本、效率、法規上的優劣，幫你選對下一個生產基地。",
-    readTime: "9 分鐘",
+    title: "關稅一直變，台灣品牌出海前怎麼先估到岸成本？",
+    summary: "關稅只是到岸成本的一塊。從躍馬 42 年的物流現場看，到岸成本由哪幾塊組成、每一塊誰能幫你估、哪一塊最常被漏掉，以及為什麼我們不在文章裡放稅率。",
+    readTime: "13 分鐘",
     color: "sky",
-    content: [
-      "中美貿易摩擦持續升級，越來越多依賴中國生產的台灣企業開始思考產地轉移。但轉移到哪裡？越南和印度是最常被討論的兩個選項。",
-      "## 越南：成熟的替代選擇",
-      "越南在過去五年已經成為全球製造業轉移的首選目的地。優勢包括：地理位置接近中國、勞動力成本約為中國的 60%、與多國簽有自由貿易協定（包括 CPTPP 和 EVFTA）、以及相對成熟的供應鏈基礎設施。",
-      "但越南也有其限制：工業用地成本快速上漲、技術人才短缺、以及部分產業的供應鏈深度不足。",
-      "## 印度：長期潛力的賭注",
-      "印度擁有全球最年輕的勞動力人口和龐大的內需市場。莫迪政府的 Make in India 政策提供了大量的投資優惠。但進入印度的挑戰也很明顯：基礎設施不完善、官僚體系複雜、土地取得困難。",
-      "## 我們的建議",
-      "沒有一個答案適合所有企業。選擇的關鍵在於：你的產業特性、目標市場、預算規模、以及時間壓力。如果你需要快速轉移且目標是歐美市場，越南通常是更務實的選擇。如果你看的是長期佈局和印度內需市場，那麼提早進入印度可能有先行者優勢。",
-      "無論選擇哪裡，都建議先做小規模試產，驗證品質和交期後再擴大產能。",
+    content: [String.raw`
+> **先說答案：** 關稅只是到岸成本的一塊，而且是變最快的那一塊。先把其他幾塊（出廠價、國際運費、保險、目的國關稅與加值稅、報關與當地運送、倉儲與平台費）的結構算出來，關稅那一格用查證日的稅率填。結構對了，稅率變只需要換一格。
+
+這篇改寫自我們 2026 年 2 月的〈中美關稅戰下的產地轉移策略〉。那篇在比越南與印度哪裡適合設廠，但我們的讀者多數不是要搬工廠的製造業，而是要把台灣做好的產品賣出去的品牌。品牌真正該問的不是「產線搬去哪」，而是**「我的東西運到那邊，賣這個價錢還有沒有賺」**。這一題的答案叫到岸成本。
+
+## 這篇適合誰、不適合誰
+
+- **適合：** 第一次報價給海外買家或平台、不確定該怎麼算成本的品牌；或要在簡報上回答老闆「去了之後毛利還剩多少」的經理。
+- **不適合：** 已經有固定貨代、每月出貨、成本表早就建好的出口商。你需要的是更新稅率，不是這篇。
+
+## 到岸成本由哪幾塊組成
+
+到岸成本（landed cost）是「貨到目的地倉庫、可以開始賣」那一刻的總成本。我們習慣拆成七塊，每一塊都標出誰能幫你估：
+
+| # | 這一塊是什麼 | 誰能幫你估 | 最常漏掉的地方 |
+|---|---|---|---|
+| 1 | **出廠價** | 你自己 | 出口包裝、外箱、棧板、當地要求的標籤改版，常沒算進去 |
+| 2 | **國際運費** | 貨代（躍馬做這個） | 海運與空運、整櫃與併櫃差很多；起運港費用、文件費、旺季附加費 |
+| 3 | **保險** | 貨代或保險公司 | 多數目的國用「貨價＋運費＋保險」當完稅價格基礎，保險不只是保險 |
+| 4 | **目的國關稅** | TradePilot、目的國官方查詢工具 | HS Code 歸錯、以為有 FTA 優惠但台灣沒有 |
+| 5 | **目的國加值稅／貨物稅** | 目的國稅法、報關行 | 進口時就要繳，不是賣出才繳；特定品類另有貨物稅 |
+| 6 | **報關與當地運送** | 目的國報關行、持證進口商 | 進口商要有海關登記；FDA 管制品要有證才放行 |
+| 7 | **倉儲、平台抽成、退貨** | 平台費率表、合作倉 | 第一年量小，固定費用攤不開 |
+
+幾件事要先講清楚：
+
+**關稅算在哪個價格上，看 Incoterms。** 你跟買家談的是 EXW、FOB、CIF 還是 DDP，決定了誰付運費、誰付進口關稅。EXW、FOB、CIF 都是買方付進口關稅與稅金；DDP 是賣方全包 [1]。報價單上沒寫 Incoterms，等於沒報價。
+
+**以菲律賓為例，稅是怎麼疊的。** 關稅以交易價格（貨價，實務上加運費與保險）為基礎 [2]；關稅之上再課 12% 加值稅，稅基是「完稅價格＋關稅」[3]；含糖飲料另有每公升 6 或 12 披索的貨物稅，進口完成品要在海關放行前繳 [4]。單票 FOB 價值 1 萬披索以下免稅 [2]——但這是給個人小包裹用的，不是讓你拆單避稅的。
+
+**台灣跟東協各國都沒有 FTA。** 去菲律賓、越南、泰國、印尼都走 MFN 稅率 [5]。看到「東協內部零關稅」的資訊，那是東協成員國之間的事，跟台灣出口無關。
+
+## 為什麼我們不在文章裡放稅率
+
+因為過去 18 個月，光是美國的關稅法源就換了三次：
+
+- 2025-04-02：美國依 IEEPA 對各國加徵「對等關稅」（EO 14257）[6]
+- 2025-08-29：美國暫停所有國家 800 美元以下小包裹免稅（EO 14324），2026 年 6 月改為無限期 [7]
+- 2026-02-20：美國最高法院判決 IEEPA 不授權總統課徵關稅（Learning Resources v. Trump）[8]
+- 2026-02-24：改依 Trade Act Section 122 課徵臨時關稅，法定最長 150 天 [9]
+- 2026-07-24：Section 122 到期；7 月 25 日起改依 Section 301 對 60 個經濟體課稅，台灣貨物 MFN 加 301 合計以 10% 為底 [10]
+
+這還只是美國。文章裡放任何一個稅率，三個月後就是錯的。所以我們的做法是：**結構寫在文章裡，稅率用工具查當天的。**
+
+- 美國、日本、東南亞等 30 多個市場：[TradePilot](https://tradepiloter.com)，輸入產品類別與目的國，查關稅並估算到岸成本的骨架。
+- 菲律賓：關稅委員會的 [Philippine Tariff Finder](https://finder.tariffcommission.gov.ph/)，MFN 與各 FTA 稅率都在裡面，AHTN 2022 版 [11]。
+- 美國：USITC 的 HTS 查詢，加上當期的 Section 301／232 公告。
+
+## 什麼情況不建議現在估
+
+- **還不知道產品會用什麼方式進去。** 寄賣、代理、自己設公司，進口商不同、稅基不同、誰付稅也不同。先定模式，再估成本。
+- **還不知道賣多少錢有人買。** 到岸成本是分母，售價是分子；分子不知道，算分母沒有意義。這就是[市場探查](/services/product-testing)要先做的原因——一頁報告裡有台菲兩地的價差對比。
+- **產品是 FDA 管制品但證還沒開始辦。** 證的費用與時間會進到岸成本，而菲律賓 FDA 的收費辦法 2025 年起暫停實施、以查證日現況為準；這一塊第一次談再給。
+
+## 出處與查證日期
+
+最後查證：2026-10-01。關稅法源變動頻繁，本文的時間軸只記錄到查證日。
+
+1. ICC Incoterms® 2020 規則中 EXW／FOB／CIF／DDP 的進口關稅責任分配（第三方整理）：https://www.kvk.nl/en/international/incoterms-2020-everything-you-need-to-know/
+2. Republic Act No. 10863《Customs Modernization and Tariff Act》第 423 條（FOB／FCA 1 萬披索以下免稅）、第 701 條（交易價格為課稅基礎）：https://lawphil.net/statutes/repacts/ra2016/ra_10863_2016.html
+3. 菲律賓進口加值稅 12%，稅基為完稅價格加關稅（第三方整理）：https://www.respicio.ph/commentaries/how-to-compute-import-duties-vat-and-taxes-philippines
+4. BIR Revenue Regulations No. 20-2018（TRAIN 法含糖飲料貨物稅：每公升 6 披索／高果糖糖漿 12 披索；進口完成品放行前繳納）：https://bir-cdn.bir.gov.ph/local/pdf/RR%2020-2018.pdf
+5. 台灣現有 FTA 僅新加坡與紐西蘭：https://english.president.gov.tw/NEWS/4289 ；https://www.loc.gov/item/global-legal-monitor/2013-07-18/new-zealand-taiwan-free-trade-agreement-signed/
+6. USTR Fact Sheet on U.S.-Taiwan Agreement on Reciprocal Trade（2026-02，引用 EO 14257 與 EO 14346）：https://ustr.gov/about/policy-offices/press-office/fact-sheets/2026/february/fact-sheet-us-taiwan-agreement-reciprocal-trade
+7. Federal Register：EO 14324 暫停所有國家小額免稅（2025-08-29 生效）https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis ；2026-06-24 郵政小包無限期暫停 https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry
+8. 美國國會研究處對 Learning Resources, Inc. v. Trump（2026-02-20）判決的摘要：https://www.congress.gov/crs-product/LSB11398
+9. Wiley 法律事務所：Section 122 臨時關稅 2026-02-24 生效、法定最長 150 天：https://www.wiley.law/alert-Trump-Imposes-Section-122-Tariffs-After-Halting-IEEPA-Tariffs-Previews-New-Section-301-Investigations
+10. 中央社 Focus Taiwan（2026-07-24）：Section 301 關稅 7 月 25 日生效，台灣貨物 MFN 加 301 合計以 10% 為底：https://focustaiwan.tw/politics/202607240007 ；Morgan Lewis 整理：https://www.morganlewis.com/pubs/2026/07/us-administration-rebuilds-global-tariff-program-under-section-301
+11. Philippine Tariff Finder（菲律賓關稅委員會）：https://finder.tariffcommission.gov.ph/about
+12. 菲律賓海關進口商登記（CPRS、BOC 認證）第三方整理：https://www.tripleiconsulting.com/import-permit-philippines-secure-boc-accreditation-this-guide/
+
+## 一個最小的下一步
+
+先用 [TradePilot](https://tradepiloter.com) 把你的產品類別與目的國查一次，拿到關稅那一格；其他六格照上面的表填，填不出來的那幾格，就是第一次談的時候要問我們的。
+
+---
+
+## 寧可不寫而刪掉的內容
+
+- 舊文的「越南勞動成本約中國 60%」「CPTPP／EVFTA」「印度 Make in India」：與品牌出海無關，整段拿掉。
+- 任何關稅稅率、運費區間、到岸成本範例數字：全部不放，改為工具連結。
+- 美國對台「對等貿易協定」的 15% 條款：該協定依據的 IEEPA 關稅已被判無效，後續法源又換了兩次，現況我無法從官方來源確認，只列事件不解讀。
+- Section 122 的稅率（來源間有 10%／15% 之別）：只寫「臨時關稅、法定最長 150 天」，不寫稅率。
+`],
+    faq: [
+      { q: "關稅一直在變，現在估的到岸成本還有意義嗎？", a: "有。關稅只是到岸成本的其中一塊，其他幾塊（運費、保險、當地加值稅、報關、倉儲、平台抽成）變動沒那麼大。把結構先算出來，關稅那一格用查證日的稅率填，稅率變了只換那一格。" },
+      { q: "到岸成本我可以自己估嗎？", a: "可以估個骨架。關稅用 TradePilot 或目的國的官方查詢工具，運費問貨代報價，當地稅看目的國的稅法。但「用哪個 HS Code 報」「哪些費用算進完稅價格」這兩件事常常估錯，第一次還是找做過的人對一次。" },
+      { q: "為什麼文章裡不放估算數字？", a: "因為同一支產品、同一個市場，走海運或空運、FOB 或 DDP、整櫃或併櫃，到岸成本可以差很多。放一個數字只會讓人拿錯的數字做決定。" },
     ],
+    updated: "2026-10-01",
   },
   {
     slug: "go-no-go-framework",
@@ -268,29 +420,88 @@ export const articles: readonly Article[] = [
     ],
   },
   {
-    slug: "vietnam-market-entry-guide",
-    category: "東南亞趨勢",
+    slug: "why-philippines-first",
+    category: "菲律賓",
     date: "2026-03-20",
-    title: "越南市場進入指南：台灣品牌該知道的 5 個關鍵",
-    summary:
-      "越南是東南亞經濟成長最快的市場之一，但多數台灣品牌進去後才發現通路結構、消費習慣、物流生態都跟台灣完全不同。這篇整理你該先知道的 5 件事。",
-    readTime: "9 分鐘",
+    title: "東南亞先去哪一國？為什麼我們建議台灣品牌先從菲律賓開始",
+    summary: "不是菲律賓最大，是它最適合「先花小錢確認」。用五題評分的邏輯比較菲、越、泰、印尼，並誠實寫出哪些品類不一定該先去菲律賓。",
+    readTime: "11 分鐘",
     color: "sky",
-    content: [
-      "越南的中產階級人口預計在 2026 年達到 4,400 萬，比台灣總人口還多一倍。對台灣品牌來說，越南既是生產基地也是消費市場——這個雙重身份讓它成為跨境佈局最值得評估的選項之一。但我們過去幾年陪客戶進越南的經驗告訴我們：進去之前你必須先搞清楚 5 件事。",
-      "## 1. 電商通路比你想像的分散",
-      "Shopee、Lazada 是主力，但 TikTok Shop 在越南的成長速度超乎想像——尤其是年輕族群的消費行為已經從「先搜尋再購買」轉變成「在直播間衝動下單」。單一通路的策略在越南行不通，你至少要同時經營 2–3 個通路才能觸及不同世代。",
-      "## 2. 地理分布造成的兩個市場",
-      "胡志明市（南越）與河內（北越）幾乎是兩個完全不同的市場。南越消費力較強、對進口品牌接受度高、價格敏感度相對低；北越更保守、對品質要求更嚴、更看品牌信譽。一個行銷策略打全越南通常兩邊都打不好。",
-      "## 3. 通路商的帳期普遍比台灣長",
-      "越南的通路商付款週期通常 60–90 天，部分大型通路甚至到 120 天。台灣品牌如果沒準備足夠的週轉金，進去之後容易被現金流壓垮——這是我們看過最多案例中招的地方。",
-      "## 4. 物流成本可能比你預期高",
-      "越南的路況和倉儲基礎設施還在發展中，到最後一哩的物流成本常常超過品牌預估。尤其是從胡志明市配送到南部其他省份，運費可能是台灣宅配的 3–4 倍。建議在定價時把物流成本「預算 × 1.3」當做安全係數。",
-      "## 5. 在地合作夥伴的品質落差極大",
-      "越南的顧問公司和代理商品質落差極大，從「世界級專業」到「收了錢就消失」都有。我們的建議是：不要光靠 Google 或 LinkedIn 找，一定要透過既有人脈介紹，而且至少見面談過 2–3 次才能確認對方的可靠度。",
-      "## 總結",
-      "越南是個值得進的市場，但它不是「東南亞版的台灣」。你的心態要調整成「這是一個完全不同的地方」而不是「這是一個便宜版的市場」。",
+    content: [String.raw`
+> **先說答案：** 不是菲律賓市場最大，是它最適合「第一次、小預算、做完可以停」的驗證。英文能通、法規文件是英文、電商平台開放，所以第一年可以用 1～2 萬先確認有沒有人買，再決定要不要投更多。
+
+這篇改寫自我們 2026 年 3 月的〈越南市場進入指南〉。那篇寫的是越南的通路、帳期、物流，但沒有回答大多數老闆真正在問的那一題：**東南亞這麼多國，我到底該先去哪一國試？** 這篇只回答這一題。
+
+## 這篇適合誰、不適合誰
+
+- **適合：** 產品在台灣賣得穩、想出海但還沒有任何海外線索的食品、保健、美妝品牌；或被老闆指派「評估東南亞」、簡報上不能只寫「看個案」的經理。
+- **不適合：** 已經有某一國的代理、買家或展會訂單在手上的品牌。有線索就從有線索的地方開始，不用繞到菲律賓。
+
+## 我們怎麼比：用五題評分的「門檻」與「法規」兩題
+
+我們判斷「該不該去」用的是[五題評分](/services/methodology)：市場、門檻、競爭、獲利、法規。其中市場與競爭兩題，要等[市場探查](/services/product-testing)把產品放到當地人面前才會有真實分數；**但門檻與法規兩題，在出發前就能從公開法規比出高低。** 第一次出海，我們看的就是這兩題：哪一國第一步的門檻最低、法規最不會讓你還沒開始就卡住。
+
+下面這張表只放查證過的法規事實，不放市場規模數字（那些數字出處不一、且不會告訴你第一步該怎麼走）。
+
+| 第一步會碰到的事 | 菲律賓 | 越南 | 泰國 | 印尼 |
+|---|---|---|---|---|
+| 官方語言／法規文件 | 菲律賓文與英文並列官方語言（憲法第十四條第七節）[1] | 越南文 | 泰文 | 印尼文 |
+| 食品標籤語言 | 英文或菲律賓文皆可；外文標籤需附英文翻譯 [2] | 必須有越南文，進口品可貼越南文副標籤 [3] | 必須有泰文（品牌名可保留原文）[4] | 必須有印尼文標籤 [5] |
+| 產品證要掛在誰名下 | 當地持證進口商（LTO 持有者）名下，品牌方不能直接持有 [6] | 由越南境內企業申報（多數加工食品走自我申報，保健食品要登錄）[7] | 由泰國進口商登錄 [4] | 由印尼境內公司向 BPOM 登錄（ML 證）[5] |
+| 2026 年新增的硬門檻 | FDA 收費與登錄系統在改版中，費率以查證日為準 [6] | — | — | **2026-10-17 起進口食品、保健品、化妝品須有清真認證**（PP 42/2024）[8] |
+| 台灣有無 FTA | 無，走 MFN 稅率 [9] | 無，走 MFN | 無，走 MFN | 無，走 MFN |
+
+幾個從表裡讀出來的判斷：
+
+1. **菲律賓是四國中唯一可以全程用英文做事的市場。** 面板訪談、進口商合約、FDA 文件、電商後台，都不用先找翻譯。對第一次出海的品牌，這省掉的不只是翻譯費，是「我看得懂對方在跟我說什麼」。
+2. **四國都要靠當地持證進口商。** 這點菲律賓沒有比較好，但也沒有比較差；差別在你跟這個進口商溝通用什麼語言、合約你看不看得懂。
+3. **印尼在 2026 年 10 月之後多了一道清真認證的硬門檻。** 食品、保健品、化妝品沒有認證就進不去。這不代表印尼不能做，而是它不適合當「第一次小預算驗證」的市場。
+4. **關稅上菲律賓並不吃虧。** 台灣跟四國都沒有 FTA，大家都是 MFN。稅率請用 [TradePilot](https://tradepiloter.com) 或菲律賓關稅委員會的 [Tariff Finder](https://finder.tariffcommission.gov.ph/) 查，我們不在文章裡放會過期的數字。
+
+## 什麼情況我們不建議先去菲律賓
+
+誠實講，下面這幾種品牌，菲律賓不一定是第一站：
+
+- **主打穆斯林市場的食品或美妝。** 印尼、馬來西亞的清真認證雖然是門檻，但也是你的賣點所在；菲律賓的穆斯林人口比例低得多，驗證結果對你去印尼沒有參考價值。
+- **高單價、靠「質感溢價」賣的產品。** 菲律賓的價格帶敏感，市場探查很可能給你「喜歡但不買」的答案。這個答案有用，但如果你本來就打算走高端通路，泰國或新加坡的反應可能更貼近你的目標客群。
+- **產品本身需要冷鏈、或保存期短。** 四國都難，但菲律賓是群島，島際配送比陸路國家更複雜。這類產品我們會先問你有沒有辦法在當地生產。
+- **已經有其他國家的訂單或代理。** 前面說過：有線索就跟著線索走。
+
+另外，菲律賓的 FDA 制度在 2025～2026 年持續改版（收費辦法暫停實施、食品登錄換新系統）[6]。這不影響「先做市場探查」，但影響第三個月的證要多久、多少錢。第一次談我們會用查證日的現況跟你說，不會引用舊數字。
+
+## 出處與查證日期
+
+最後查證：2026-10-01。法規會變，發文後每季回頭對一次。
+
+1. 1987 年菲律賓憲法第十四條第七節：官方語言為菲律賓文及英文。https://www.officialgazette.gov.ph/constitutions/1987-constitution/
+2. 菲律賓 DOH Administrative Order No. 2014-0030（預包裝食品標籤規則）：標籤須為英文或菲律賓文，外文標籤須附英文翻譯。FAOLEX 收錄：https://www.fao.org/faolex/results/details/en/c/LEX-FAOC174223/
+3. 越南 Decree 43/2017/ND-CP（商品標籤）：標籤須為越南文，進口品可用越南文副標籤。整理自 USDA FAS FAIRS Vietnam 報告與 ChemLinked：https://food.chemlinked.com/foodpedia/vietnam-food-labeling-regulation
+4. USDA FAS FAIRS Country Report Thailand TH2024-0036：泰文標籤為基本要求，特定管制食品須由進口商先登錄。https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Bangkok_Thailand_TH2024-0036
+5. 印尼 BPOM 進口食品 ML 登錄須由印尼境內公司申請，並附印尼文標籤（第三方整理）：https://food.chemlinked.com/foodpedia/indonesia-processed-food-regulation
+6. 菲律賓 FDA 制度現況（LTO／CPR／CPN 掛在持證公司名下；AO 2024-0016 收費辦法暫停；FDA Circular 2026-0002 食品登錄新系統）：見本站〈LTO、CPR、CPN 到底差在哪〉一文的來源清單；原始文件 https://rrdportal.fda.gov.ph/docs/AO2024-0016.pdf 與 https://www.fda.gov.ph/fda-circular-no-2026-0002/
+7. 越南 Decree 15/2018/ND-CP：多數預包裝加工食品走自我申報，保健食品等四類須向主管機關登錄（第三方整理）：https://www.cirs-group.com/en/food/health-supplement-registration-in-vietnam-know-how-and-what-to-do
+8. 印尼 Government Regulation 42/2024 與 BPJPH：進口食品、飲料、保健品、化妝品等自 2026-10-17 起須持清真認證（第三方整理，USDA GAIN ID2026-0034 原檔無法直接讀取）：https://emerhub.com/indonesia/halal-certification-in-indonesia/
+9. 台灣現有 FTA 僅新加坡（ASTEP，2013）與紐西蘭（ANZTEC，2013）：https://english.president.gov.tw/NEWS/4289 ；https://www.loc.gov/item/global-legal-monitor/2013-07-18/new-zealand-taiwan-free-trade-agreement-signed/
+10. 菲律賓關稅委員會 Philippine Tariff Finder（MFN 與各 FTA 稅率，AHTN 2022）：https://finder.tariffcommission.gov.ph/about
+
+## 一個最小的下一步
+
+先花 1～2 萬做一次[市場探查](/services/product-testing)：三支產品寄到馬尼拉，一桌老師和家長拿起來看，一頁報告告訴你誰會買、多少錢會買、為什麼不買。沒過，故事在這裡停；過了，這筆錢抵進下一章。
+
+---
+
+## 寧可不寫而刪掉的內容
+
+- 舊文的「越南中產階級 4,400 萬」「物流成本預算 × 1.3」「帳期 60～90 天」：查不到可引用的出處，全部拿掉。
+- 四國的電商滲透率、社群用戶數、市場規模：各家研究機構數字不一且與「第一步該怎麼走」無關，不放。
+- 菲律賓英語能力排名（EF EPI 之類）：第三方商業排名，不當證據用；只引憲法條文。
+`],
+    faq: [
+      { q: "菲律賓市場比越南、泰國、印尼小，為什麼還建議先去？", a: "我們建議的不是「最大的市場」，是「最容易先確認的市場」。菲律賓用英文就能做市場探查、法規文件與電商溝通，第一年可以花 1～2 萬先驗證，沒過就停；其他三國在語言與證照上第一步就要投入更多，不適合拿來當第一次驗證。" },
+      { q: "我的產品在越南或泰國已經有代理找上門，還要先去菲律賓嗎？", a: "不用。有具體通路或買家的市場，就從那個市場開始。這篇文章回答的是「還沒有任何線索時先去哪裡試」，不是「所有品牌都該先去菲律賓」。" },
+      { q: "台灣跟菲律賓有自由貿易協定嗎？關稅會不會比別國高？", a: "台灣目前與東協任何一國都沒有自由貿易協定（只有新加坡與紐西蘭），所以去菲律賓、越南、泰國、印尼都是走最惠國（MFN）稅率，菲律賓並不特別吃虧。實際稅率可在菲律賓關稅委員會的 Tariff Finder 或 TradePilot 查。" },
     ],
+    updated: "2026-10-01",
   },
   {
     slug: "product-testing-best-practices",
@@ -316,25 +527,94 @@ export const articles: readonly Article[] = [
     ],
   },
   {
-    slug: "amazon-category-analysis",
+    slug: "amazon-us-three-decisions",
     category: "北美市場",
     date: "2026-01-25",
-    title: "亞馬遜品類分析：如何找到你的藍海品項",
-    summary:
-      "在亞馬遜上賣什麼比怎麼賣更重要。這篇分享我們幫客戶做品類分析的方法論，以及如何用數據找到高毛利、低競爭的品項。",
+    title: "產品在台灣站穩了，要不要上 Amazon 美國？先做這三個判斷",
+    summary: "上 Amazon 美國不是選品題，是決策題。三個判斷：法規與平台門檻你跨不跨得過、到岸之後毛利還在不在、客訴與退貨誰接。三題都過再談選品。",
     readTime: "11 分鐘",
     color: "gold",
-    content: [
-      "在亞馬遜上，選品決定了 80% 的成敗。我們見過太多台灣品牌把精力花在優化 listing 和投放廣告上，卻忽略了最根本的問題：你賣的東西，市場真的需要嗎？",
-      "## 品類分析的四個維度",
-      "我們在幫客戶做品類分析時，會從四個維度來評估：市場規模（這個品類的月搜尋量和銷售額）、競爭強度（前 20 名賣家的評論數和品牌集中度）、利潤空間（平均售價減去成本後的毛利率）、以及進入門檻（是否需要特殊認證或高額初期投入）。",
-      "## 如何用數據找藍海",
-      "藍海品項的特徵是：月搜尋量在 3,000-30,000 之間、前 10 名賣家的平均評論數低於 500、平均售價在 $20-$80 之間、且沒有明顯的品牌壟斷。",
-      "## 台灣品牌的三個優勢品類",
-      "根據我們的數據分析，台灣品牌在亞馬遜上最有競爭力的三個品類是：機能保健品（特別是益生菌和膠原蛋白）、智慧小家電（特別是具有獨特設計的產品）、以及高品質配件（如手機殼、行李箱配件等）。",
-      "## 避免的常見錯誤",
-      "最常見的錯誤包括：只看市場規模不看競爭、低估合規和物流成本、以及用台灣市場的思維來定位美國消費者。選品是一門需要數據支持的科學，而不是靠直覺的藝術。",
+    content: [String.raw`
+> **先說答案：** 上 Amazon 美國之前，先做三個判斷：① 法規與平台的門檻你跨不跨得過（FDA、FSVP、Amazon 的品類要求）；② 到岸、抽成、倉儲都扣掉之後，毛利還在不在；③ 美國的客訴、退貨、評價誰接。三題都有答案，再談選什麼品。
+
+這篇改寫自我們 2026 年 1 月的〈亞馬遜品類分析：如何找到你的藍海品項〉。那篇寫的是「怎麼用數據找品項」，但我們後來發現，找上我們的品牌幾乎都已經有產品、在台灣賣得不錯，他們的問題不是選品，是**「我這支要不要上 Amazon 美國」**。這篇把它改成決策題。
+
+## 這篇適合誰、不適合誰
+
+- **適合：** 食品、保健、美妝、生活用品在台灣已經有穩定銷量，正在考慮北美的品牌；或參過展、發過樣品、沒有下文的品牌。
+- **不適合：** 還在找產品、想做純貿易套利的賣家。那是另一種生意，我們沒做過，不裝懂。
+
+## 判斷一：法規與平台門檻，你跨不跨得過
+
+Amazon 不是把商品頁翻成英文就能賣。每個品類在上架前都有美國聯邦法規與 Amazon 自己的規則兩層門檻：
+
+| 品類 | 美國法規這層 | Amazon 這層 |
+|---|---|---|
+| 食品、保健品 | 製造、儲存設施須向 FDA 登記；每批進口須事前通報（Prior Notice）；進口商須有 FSVP 計畫 [1] | 膳食補充品自 2024-04 起須經第三方檢測認證（TIC）機構驗證；2026 年起所有膳食補充品須有第三方 cGMP 驗證 [2] |
+| 化妝品 | MoCRA：製造設施須登記、產品須列名，境外設施須指定美國代理人 [3] | 依品類另有文件要求 |
+| 所有品類 | 進口商（importer of record）須為你或你的服務商，Amazon 不擔任 [4] | 要用品牌名賣、要開品牌頁，需在美國專利商標局有註冊或申請中的商標（Brand Registry）[5] |
+
+這一題的紅線很清楚：**如果你的產品是保健品，但工廠拿不出 Amazon 接受的第三方 cGMP 文件，這條路現在走不通。** 不是行銷問題，是文件問題。先回頭問工廠。
+
+另外一條以前常被拿來繞過法規的路——從台灣直郵小包裹——已經關了。2025-08-29 起美國暫停所有國家 800 美元以下的免稅待遇，2026-06 改為無限期 [6]。每一件都要繳稅、都要報關。
+
+## 判斷二：到岸之後，毛利還在不在
+
+把售價倒推回來，中間要扣的東西比在台灣多很多：
+
+1. **Amazon 的費用**：專業賣家方案月費、依品類計算的成交抽成（多數品類為 15%）、FBA 的倉儲與配送費 [7]。
+2. **到岸成本**：出廠價、國際運費、保險、美國關稅、報關與內陸運送。美國關稅的法源在 2025～2026 年換了三次，稅率請用 [TradePilot](https://tradepiloter.com) 查當天的，不要用文章裡的數字（我們在[到岸成本](/insights/landed-cost-before-export)那篇解釋了原因）。
+3. **合規成本**：FDA 登記、美國代理人、第三方檢測、商標申請。這些是固定成本，量小就攤不開。
+4. **退貨與滯銷**：美國消費者的退貨習慣跟台灣不同；FBA 的長期倉儲費會吃掉賣不動的庫存。
+
+五題評分裡的獲利那題，紅線是「悲觀情境淨利率低於 5% 建議調整」。這一題請用悲觀情境算：匯率不利、廣告要投、第一批有退貨。算完還在，再往下。
+
+## 判斷三：客訴、退貨、評價，誰接
+
+這題最常被跳過。Amazon 的評價與客服回覆直接影響排名；美國消費者用英文寫信，而且時差跟台灣剛好相反——他們的下午是你的半夜。
+
+三個選項：自己的人半夜回、找美國的客服外包、或用在菲律賓的英文客服團隊（北美很多品牌的客服本來就在菲律賓）。我們的[海外客服](/services/call-center)2027 年第一季開首批，就是為了這一題；但不管用誰，**上架前就要有人**，不是等第一封信來再找。
+
+## 什麼情況我們不建議現在上 Amazon 美國
+
+- **保健品、但工廠沒有 Amazon 接受的第三方 cGMP 驗證。** 先解決文件，不然上架申請會卡住。
+- **還沒有美國商標、也沒打算申請。** 沒有 Brand Registry，商品頁容易被跟賣，品牌保護幾乎為零。
+- **毛利在台灣就已經薄。** 抽成、FBA、關稅、退貨扣完，悲觀情境過不了 5%。
+- **沒有人能用英文接客訴。** 不是「英文好不好」，是「有沒有人在那個時間回」。
+- **想拿 Amazon 當「測美國市場」的工具。** Amazon 的排名與廣告機制讓新品很難自然被看見；沒有行銷預算的「放上去看看」，通常得到的是「沒人看」，而不是「美國人不喜歡」。要測，先用小量、有人帶的方式測，再決定要不要上。
+
+## 出處與查證日期
+
+最後查證：2026-10-01。Amazon 的品類政策改得比法規快，上架前請再對一次賣家中心的當期頁面。
+
+1. U.S. FDA：Importing Food Products into the United States（設施登記、Prior Notice、FSVP、標示；頁面更新 2024-12-11）：https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states ；FSVP 最終規則：https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-final-rule-foreign-supplier-verification-programs-fsvp-importers-food-humans-and-animals
+2. Amazon 賣家中心 Dietary Supplements 政策頁（需登入）：https://sellercentral.amazon.com/help/hub/reference/G201829010 ；2024-04 起第三方 TIC 驗證要求（賣家論壇公告）：https://sellercentral.amazon.com/seller-forums/discussions/t/c23c51e6-159c-4d01-b297-9836d7d16419 ；2026 年起擴大至所有膳食補充品的第三方 cGMP 驗證（產業媒體報導）：https://www.nutraingredients.com/Article/2025/12/22/amazon-expands-tic-cgmp-requirement-to-all-supplement-products/
+3. U.S. FDA：Modernization of Cosmetics Regulation Act of 2022（MoCRA；頁面更新 2026-08-10）：https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra
+4. Amazon 官方：Sell in the U.S. from another country——「你或你的服務商必須擔任出口商與進口商，Amazon 不負責 FBA 庫存的關稅與稅金」：https://sell.amazon.com/global-selling/international-to-usa
+5. Amazon Brand Registry 官方頁（需已註冊或申請中的商標）：https://sell.amazon.com/brand-registry
+6. Federal Register：EO 14324 暫停所有國家小額免稅（2025-08-29）https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis ；2026-06-24 郵政小包無限期暫停：https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry
+7. Amazon 美國賣家費用（專業方案月費 39.99 美元、多數品類成交抽成 15%；第三方依賣家中心費率表整理，2026）：https://feedvisor.com/university/referral-fee/ 。實際費率以賣家中心當期費率表為準。
+8. 本站〈美國 FDA 註冊全攻略〉與方法論頁的五題評分（獲利紅線：悲觀情境淨利率低於 5%）：/insights/us-fda-registration-guide ；/services/methodology
+
+## 一個最小的下一步
+
+把你的產品拿三個判斷各問一次，哪一題答不出來，就是第一次談要帶來的問題。北美這條線我們是「前期低服務費＋成交抽成」，第一次談給明確數字；沒有要你先砸行銷。
+
+---
+
+## 寧可不寫而刪掉的內容
+
+- 舊文的「選品決定 80% 成敗」「月搜尋量 3,000～30,000」「前 10 名評論數低於 500」「售價 20～80 美元」「台灣品牌三個優勢品類」：全是沒有出處的經驗數字，整段拿掉。
+- 美國關稅稅率與 FBA 具體費用：不放，改連結到工具與費率表。
+- 「美國保健品市場 600 億美元」（舊 FDA 文的開場）：本篇不引用。
+- Amazon 接受的 cGMP 認證機構清單：來源之間不一致（有的寫 3 家、有的寫 7 家、有的寫更多），只寫「以 Amazon 當期清單為準」。
+`],
+    faq: [
+      { q: "從台灣直接寄小包裹到美國消費者手上，不就不用管進口的事了？", a: "2025 年 8 月 29 日起美國已暫停所有國家 800 美元以下小包裹的免稅待遇，2026 年 6 月改為無限期。直郵現在一樣要繳關稅，而且每一件都要。這條路已經不是「省事」的選項。" },
+      { q: "Amazon 會幫我當進口商嗎？", a: "不會。Amazon 官方寫明：你或你的服務商必須擔任出口商與進口商（importer of record），Amazon 不負責任何關稅與稅金。食品的話，進口商還要負責 FSVP（外國供應商驗證）。" },
+      { q: "保健品在 Amazon 美國要什麼文件？", a: "除了美國 FDA 的設施登記與標示合規，Amazon 自 2024 年起要求膳食補充品經第三方檢測認證機構驗證，2026 年起更要求所有膳食補充品提供第三方 cGMP 驗證。沒有這些，上不了架。" },
     ],
+    updated: "2026-10-01",
   },
 ] as const;
 
@@ -347,16 +627,16 @@ export function getArticleBySlug(slug: string): Article | undefined {
  * Fallback order: exact slug match → title keyword match → generic.
  */
 const SLUG_IMAGE_MAP: Record<string, string> = {
-  "southeast-asia-ecommerce-2026": "/images/insights/southeast-asia-ecommerce-1600.webp",
+  "philippines-ecommerce-first-year": "/images/insights/southeast-asia-ecommerce-1600.webp",
   "first-time-export-checklist": "/images/insights/first-time-export-checklist-1600.webp",
   "us-fda-registration-guide": "/images/insights/us-fda-registration-1600.webp",
   "tradepilot-tariff-tutorial": "/images/insights/tradepilot-tariff-1600.webp",
-  "china-tariff-relocation-strategy": "/images/insights/china-relocation-1600.webp",
-  "amazon-category-analysis": "/images/insights/amazon-category-1600.webp",
+  "landed-cost-before-export": "/images/insights/china-relocation-1600.webp",
+  "amazon-us-three-decisions": "/images/insights/amazon-category-1600.webp",
   // New articles — fallback to existing imagery until bespoke covers are ready
   "overseas-exhibition-subsidy-115-upgrade": "/images/insights/tradepilot-tariff-1600.webp",
   "go-no-go-framework": "/images/insights/first-time-export-checklist-1600.webp",
-  "vietnam-market-entry-guide": "/images/insights/southeast-asia-ecommerce-1600.webp",
+  "why-philippines-first": "/images/insights/southeast-asia-ecommerce-1600.webp",
   "product-testing-best-practices": "/images/insights/amazon-category-1600.webp",
   "manila-beverage-first-store-90-days": "/images/cases/detail/bubbletea-manila-hero-1080.webp",
 };
