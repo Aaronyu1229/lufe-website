@@ -56,12 +56,12 @@ export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
       <p className="mt-5 text-[15.5px] leading-[1.8] text-tx2">{subsidy.oneLiner}</p>
 
       <div className="mt-6 border-b border-bd2">
-        <Disclosure summary={`適合（${subsidy.whoFor.length} 項）`} id={`${subsidy.slug}-fit`}>
+        <Disclosure summary={`適合（${subsidy.whoFor.length} 項）`} id={`${subsidy.slug}-fit`} defaultOpen>
           <ul className="grid gap-2">
             {subsidy.whoFor.map((item) => <li key={item} className="flex gap-2 text-[14px] leading-[1.7]"><span className={`mt-[.55em] h-1 w-1 shrink-0 ${accent.bar}`} />{item}</li>)}
           </ul>
         </Disclosure>
-        <Disclosure summary={`補助涵蓋（${subsidy.covers.length} 項）`} id={`${subsidy.slug}-covers`}>
+        <Disclosure summary={`補助涵蓋（${subsidy.covers.length} 項）`} id={`${subsidy.slug}-covers`} defaultOpen>
           <div className="flex flex-wrap gap-2">
             {subsidy.covers.map((item) => <span key={item} className="bg-cream px-2.5 py-1 text-[12px] text-tx2">{item}</span>)}
           </div>

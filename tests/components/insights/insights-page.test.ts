@@ -25,7 +25,7 @@ describe("InsightsPageContent", () => {
   it("renders the empty chapter state", () => {
     const markup = renderToStaticMarkup(createElement(InsightsPageContent, { articles: insightCards, active: "after" }));
 
-    expect(markup).toContain("這個分類暫時還沒有文章，敬請期待！");
+    expect(markup).toContain("這個分類暫時還沒有文章");
   });
 
   it("does not render rounded utility classes", () => {
@@ -37,5 +37,15 @@ describe("InsightsPageContent", () => {
     const markup = renderToStaticMarkup(createElement(InsightsPageContent, { articles: [articleWithoutImage], active: "all" }));
 
     expect(markup).toContain("bg-black/[.06]");
+  });
+
+  it("keeps the featured card out of the hero and renders the shared CTA in the list", () => {
+    const markup = renderPage();
+    const heroMarkup = markup.slice(0, markup.indexOf('aria-label="洞察章節"'));
+
+    expect(heroMarkup).not.toContain("精選");
+    expect(markup).toContain("精選");
+    expect(markup).toContain("把文章裡的方法，");
+    expect(markup).toContain("聊聊你的產品");
   });
 });

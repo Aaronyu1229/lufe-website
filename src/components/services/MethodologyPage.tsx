@@ -16,44 +16,44 @@ export const METHODOLOGY_DIMENSIONS = [
     name: "Market 市場",
     question: "這個市場夠大嗎？",
     weight: "20%",
-    criteria: "可觸達的市場規模、成長率、消費者願意付多少、市場在哪個階段。",
-    redAt: "可觸達市場不到你預估年營收的 20 倍，建議換市場。",
+    criteria: "可觸達的市場規模、成長率、消費者願意付多少、市場在哪個階段",
+    redAt: "可觸達市場不到你預估年營收的 20 倍，建議換市場",
   },
   {
     name: "Barrier 門檻",
     question: "進去要花多少力氣？",
     weight: "20%",
-    criteria: "認證要求與成本、通路進入難度、在地化改造（包裝、配方、標示）、合規灰色地帶。",
-    redAt: "合規認證成本超過首年毛利的一半，直接 No-Go。",
+    criteria: "認證要求與成本、通路進入難度、在地化改造（包裝、配方、標示）、合規灰色地帶",
+    redAt: "合規認證成本超過首年毛利的一半，直接 No-Go",
   },
   {
     name: "Competition 競爭",
     question: "你打得過嗎？",
     weight: "20%",
-    criteria: "前十大品牌市佔集中度、競品護城河、競品弱點、會不會打價格戰。",
-    redAt: "前三名市佔加起來超過 70%，不做正面競爭。",
+    criteria: "前十大品牌市佔集中度、競品護城河、競品弱點、會不會打價格戰",
+    redAt: "前三名市佔加起來超過 70%，不做正面競爭",
   },
   {
     name: "Profitability 獲利",
     question: "做得動嗎？",
     weight: "25%",
-    criteria: "到岸成本（FOB＋關稅＋物流＋保險）、通路佣金與行銷攤提、退換貨預估、匯率風險。",
-    redAt: "悲觀情境淨利率低於 5%，建議調整。",
+    criteria: "到岸成本（FOB＋關稅＋物流＋保險）、通路佣金與行銷攤提、退換貨預估、匯率風險",
+    redAt: "悲觀情境淨利率低於 5%，建議調整",
   },
   {
     name: "Regulatory 法規",
     question: "法規會不會突然變？",
     weight: "15%",
-    criteria: "當地貿易政策穩定度、產品類別法規變動歷史、政治風險、退出成本。",
-    redAt: "過去三年曾被禁或大幅加稅，風險加權。",
+    criteria: "當地貿易政策穩定度、產品類別法規變動歷史、政治風險、退出成本",
+    redAt: "過去三年曾被禁或大幅加稅，風險加權",
   },
 ] as const;
 
 export const METHODOLOGY_DECISIONS = [
-  { score: "≥ 75", verdict: "Go", advice: "可以進，照四章正常走。", color: "border-emerald-500" },
-  { score: "60–74", verdict: "Conditional Go", advice: "可以進，先解決一到兩個弱項。", color: "border-amber-500" },
-  { score: "45–59", verdict: "Hold", advice: "建議暫緩 6–12 個月，等關鍵變化。", color: "border-ember" },
-  { score: "< 45", verdict: "No-Go", advice: "不建議，我們會寫清楚什麼條件改了可以再看。", color: "border-red-500" },
+  { score: "≥ 75", verdict: "Go", advice: "可以進，照四章正常走", color: "border-emerald-500" },
+  { score: "60–74", verdict: "Conditional Go", advice: "可以進，先解決一到兩個弱項", color: "border-amber-500" },
+  { score: "45–59", verdict: "Hold", advice: "建議暫緩 6–12 個月，等關鍵變化", color: "border-ember" },
+  { score: "< 45", verdict: "No-Go", advice: "不建議，我們會寫清楚什麼條件改了可以再看", color: "border-red-500" },
 ] as const;
 
 export const WORKED_EXAMPLE = {
@@ -67,8 +67,8 @@ export const WORKED_EXAMPLE = {
   ],
   weighted: 74,
   verdict: "Conditional Go",
-  condition: "配方微調符合北美口感。",
-  outcome: "實際結果：6 個月上架，首月銷量超標 40%。",
+  condition: "配方微調符合北美口感",
+  outcome: "實際結果：6 個月上架，首月銷量超標 40%",
 } as const;
 
 export const METHODOLOGY_FAQS = [
@@ -78,10 +78,10 @@ export const METHODOLOGY_FAQS = [
 ] as const;
 
 const CHAPTER_ANSWERS = [
-  { question: "Market、Competition", href: "/services/product-testing", label: "第一個月的市場探查。", body: "一桌老師和家長拿起來看看，比報表準。" },
-  { question: "Barrier、Profitability", href: "/services/consignment", label: "第三個月的寄賣。", body: "證要多久、到岸多少、平台抽多少，跑一輪就有真數字。" },
-  { question: "Regulatory、Barrier", href: "/services/localization", label: "第九個月的公司落地。", body: "律師行、持證進口商、合規安排。" },
-  { question: "海外客服", body: "不在五題裡。它不是「該不該去」的問題，是「去了之後」的問題。" },
+  { question: "Market、Competition", href: "/services/product-testing", label: "第一個月的市場探查", body: "一桌老師和家長拿起來看看，比報表準" },
+  { question: "Barrier、Profitability", href: "/services/consignment", label: "第三個月的寄賣", body: "證要多久、到岸多少、平台抽多少，跑一輪就有真數字" },
+  { question: "Regulatory、Barrier", href: "/services/localization", label: "第九個月的公司落地", body: "律師行、持證進口商、合規安排" },
+  { question: "海外客服", body: "不在五題裡。它不是「該不該去」的問題，是「去了之後」的問題" },
 ] as const;
 
 export function MethodologyPage() {
@@ -93,18 +93,18 @@ export function MethodologyPage() {
           <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55"><Link href="/" className="hover:text-white">首頁</Link><span className="mx-2 text-white/30">/</span><Link href="/services" className="hover:text-white">服務</Link><span className="mx-2 text-white/30">/</span><span className="text-white/80">方法論</span></nav>
           <p className="mb-4 text-[14px] font-semibold text-gold">方法論</p>
           <h1 className="h1 max-w-[760px] text-white">四個方案，是從這裡長出來的</h1>
-          <p className="lead mt-5 max-w-[680px] whitespace-pre-line !text-white/75">這一頁是我們判斷「該不該去、該從哪一章開始」的底層。{"\n"}你不需要讀完才能開始；但如果你想知道我們怎麼想，都在這裡。</p>
+          <p className="lead mt-5 max-w-[680px] whitespace-pre-line !text-white/75">這一頁是我們判斷「該不該去、該從哪一章開始」的底層。{"\n"}你不需要讀完才能開始；但如果你想知道我們怎麼想，都在這裡</p>
         </div>
         <ScrollCue />
       </section>
 
-      <div className="border-b border-bd bg-cream py-4 text-[14px] leading-[1.8] text-tx2"><p className="lufe-container"><strong className="text-tx">不是第五章 ·</strong> 這不是第五章。這是我們第一次談的時候，腦子裡跑的那張表。</p></div>
+      <div className="border-b border-bd bg-cream py-4 text-[14px] leading-[1.8] text-tx2"><p className="lufe-container"><strong className="text-tx">不是第五章 ·</strong> 這不是第五章。這是我們第一次談的時候，腦子裡跑的那張表</p></div>
 
       <section className="bg-white py-[72px] md:py-[88px]">
         <div className="lufe-container">
           <h2 className="h2 text-tx">為什麼要有一張表</h2>
-          <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">出海的決定太常靠感覺：朋友說好、展會上人很多、對方老闆很熱情。{"\n"}我們把它換成五個問題，每個問題有分數、有紅線。{"\n"}分數不是為了好看，是為了在花錢之前，先知道哪一題會出事。</p>
-          <p className="mt-7 border-l-4 border-gold bg-cream px-5 py-5 text-[18px] font-semibold leading-[1.7] text-tx">我們自己的規矩：總分不到 60 分，我們不接。</p>
+          <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">出海的決定太常靠感覺：朋友說好、展會上人很多、對方老闆很熱情。{"\n"}我們把它換成五個問題，每個問題有分數、有紅線。{"\n"}分數不是為了好看，是為了在花錢之前，先知道哪一題會出事</p>
+          <p className="mt-7 border-l-4 border-gold bg-cream px-5 py-5 text-[18px] font-semibold leading-[1.7] text-tx">我們自己的規矩：總分不到 60 分，我們不接</p>
         </div>
       </section>
 
@@ -147,7 +147,7 @@ export function MethodologyPage() {
       <section className="bg-cream py-[72px] md:py-[88px]">
         <div className="lufe-container">
           <h2 className="h2 text-tx">五個問題背後，<span className="text-gold-d">是三件事</span></h2>
-          <p className="mt-5 max-w-[760px] text-[16px] leading-[1.9] text-tx2">產品適配性（這個市場真的要你嗎）、通路銷售力（上得了架，還要賣得動）、團隊體質（進得去，還要留得下）。<br />五個問題是量尺，三件事是量的東西。</p>
+          <p className="mt-5 max-w-[760px] text-[16px] leading-[1.9] text-tx2">產品適配性（這個市場真的要你嗎）、通路銷售力（上得了架，還要賣得動）、團隊體質（進得去，還要留得下）。<br />五個問題是量尺，三件事是量的東西</p>
           <div className="mt-8 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">{Object.values(PILLARS).map((pillar) => <article key={pillar.slug} className="border border-bd bg-white p-6"><h3 className="h3 text-tx">{pillar.title}</h3><p className="mt-3 text-[15px] font-medium text-sky">{pillar.tagline}</p><p className="mt-5 text-[14px] leading-[1.8] text-tx2">{pillar.description}</p></article>)}</div>
         </div>
       </section>
@@ -160,7 +160,7 @@ export function MethodologyPage() {
         </div>
       </section>
 
-      <section className="bg-navy py-[78px] text-white md:py-[96px]"><div className="lufe-container"><div className="mx-auto max-w-[720px] text-center"><h2 className="h2 text-white">免費初步評估</h2><p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，粗跑五個問題，不收費。談完你會知道自己在哪一格、該從哪一章開始。</p><ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">預約 30 分鐘 →</ContactButton></div></div></section>
+      <section className="bg-navy py-[78px] text-white md:py-[96px]"><div className="lufe-container"><div className="mx-auto max-w-[720px] text-center"><h2 className="h2 text-white">免費初步評估</h2><p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，粗跑五個問題，不收費。談完你會知道自己在哪一格、該從哪一章開始</p><ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">預約 30 分鐘 →</ContactButton></div></div></section>
     </>
   );
 }

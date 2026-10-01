@@ -43,7 +43,7 @@ describe("MethodologyPage", () => {
   });
 
   it("includes the D8 Costco outcome", () => {
-    expect(renderPage()).toContain("實際結果：6 個月上架，首月銷量超標 40%。");
+    expect(renderPage()).toContain("實際結果：6 個月上架，首月銷量超標 40%");
   });
 
   it("keeps the interactive scorecard's default result fully in server markup", () => {
