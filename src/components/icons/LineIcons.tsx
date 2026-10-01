@@ -81,3 +81,43 @@ export function ArrowRightIcon({ size = 20, className }: { size?: number; classN
 export function PlusIcon({ size = 20, className }: { size?: number; className?: string }) {
   return <Icon size={size} className={className}><path d="M5 12h14" /><path d="M12 5v14" /></Icon>;
 }
+
+export function UsersIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></Icon>;
+}
+
+export function InboxIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" /></Icon>;
+}
+
+export function BadgeCheckIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m16 9-5.5 5.5L8 12" /></Icon>;
+}
+
+export function ListChecksIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="M13 5h8" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="m3 17 2 2 4-4" /><path d="m3 7 2 2 4-4" /></Icon>;
+}
+
+export function ChartColumnIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></Icon>;
+}
+
+export function SearchIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></Icon>;
+}
+
+export function PresentationIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></Icon>;
+}
+
+export function HandshakeIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="m11 17 2 2a1 1 0 1 0 3-3" /><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path d="m21 3 1 11h-2" /><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /><path d="M3 4h8" /></Icon>;
+}
+
+export function StoreIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></Icon>;
+}
+
+export function CheckIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return <Icon size={size} className={className}><path d="M20 6 9 17l-5-5" /></Icon>;
+}
