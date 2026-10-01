@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
+import { TieredImage } from "@/components/TieredImage";
 import { useMessageBox } from "../MessageBox";
 import { ACTIVITIES, FIELD_NOTES, MEDIA_MENTIONS, PARTNER_LOGOS } from "@/data/fieldNotes";
 
@@ -27,7 +27,7 @@ export function FieldNotesPage() {
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/field-notes/activity-forum.jpg" />
+        <HeroBackdrop src="/images/field-notes/activity-forum-1600.webp" />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
@@ -77,12 +77,11 @@ export function FieldNotesPage() {
               <article key={activity.id} className="lufe-card min-w-0 overflow-hidden border border-bd bg-white hover:border-gold/60">
                 <div className="relative aspect-[16/10] overflow-hidden bg-navy text-gold">
                   {activity.image && !activity.tbd ? (
-                    <Image
+                    <TieredImage
                       src={activity.image}
                       alt={activity.title}
-                      fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
-                      className="object-cover"
+                      className="absolute inset-0 h-full w-full object-cover"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">

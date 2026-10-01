@@ -44,7 +44,7 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
       "從消費者口感倒推配方、合約付款期硬談進 45 天、首月銷量超標 40%，直接進入第二批訂單談判。",
     route: { from: "台灣", to: "Costco 北美" },
     trustSignal: "客戶授權公開",
-    image: "/images/cases/case-1-costco.jpg",
+    image: "/images/cases/case-1-costco-1600.webp",
   },
   {
     slug: "electronics-tariff",
@@ -65,7 +65,7 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
       "四地產地打分後選越南，雙線並行 6 個月當保險，物流時效反而縮短 3 天，一年省下 200 萬美金。",
     route: { from: "大陸廣東", to: "越南胡志明" },
     trustSignal: "已簽 NDA · 經營層審閱",
-    image: "/images/cases/case-2-tariff.jpg",
+    image: "/images/cases/case-2-tariff-1600.webp",
   },
   {
     slug: "shoe-brand",
@@ -86,7 +86,7 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
       "兩小時把 CAC 與 LTV 攤上桌，用襪子當進場票，3 個月做到品類 3 倍、4.7 星，反推皮鞋銷量 +120%。",
     route: { from: "台灣品牌", to: "Amazon US" },
     trustSignal: "客戶授權公開",
-    image: "/images/cases/case-3-pivot.jpg",
+    image: "/images/cases/case-3-pivot-1600.webp",
   },
   {
     slug: "bubble-tea",
@@ -107,7 +107,7 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
       "鎖定 P150–200 中高端、第一家開在 BGC 當行銷投資、混合直營與加盟，單店月營收做到台灣母店 1.2 倍。",
     route: { from: "台灣母店", to: "馬尼拉 BGC" },
     trustSignal: "已簽 NDA · 經營層審閱",
-    image: "/images/cases/case-4-manila.jpg",
+    image: "/images/cases/case-4-manila-1080.webp",
   },
 ];
 

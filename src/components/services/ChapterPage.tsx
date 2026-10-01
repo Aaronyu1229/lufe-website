@@ -19,11 +19,11 @@ function ChatAction({ children, className }: { readonly children: string; readon
 }
 
 const CHAPTER_HERO_IMAGES = {
-  m1: { src: "/images/v5/product-testing-2400.webp", mobileSrc: "/images/v5/product-testing-1600.webp", position: "center 35%" },
-  m3: { src: "/images/v5/consignment-2400.webp", mobileSrc: "/images/v5/consignment-1600.webp" },
-  m9: { src: "/images/v5/localization-2400.webp", mobileSrc: "/images/v5/localization-1600.webp", position: "center 40%" },
-  after: { src: "/images/v5/call-center-2400.webp", mobileSrc: "/images/v5/call-center-1600.webp", position: "right center", night: true },
-  na: { src: "/images/v5/north-america-2400.webp", mobileSrc: "/images/v5/north-america-1600.webp" },
+  m1: { src: "/images/v5/product-testing-1600.webp", srcSet: "/images/v5/product-testing-1600.webp 1600w, /images/v5/product-testing-2400.webp 2400w", position: "center 35%" },
+  m3: { src: "/images/v5/consignment-1600.webp", srcSet: "/images/v5/consignment-1600.webp 1600w, /images/v5/consignment-2400.webp 2400w" },
+  m9: { src: "/images/v5/localization-1600.webp", srcSet: "/images/v5/localization-1600.webp 1600w, /images/v5/localization-2400.webp 2400w", position: "center 40%" },
+  after: { src: "/images/v5/call-center-1600.webp", srcSet: "/images/v5/call-center-1600.webp 1600w, /images/v5/call-center-2400.webp 2400w", position: "right center", night: true },
+  na: { src: "/images/v5/north-america-1600.webp", srcSet: "/images/v5/north-america-1600.webp 1600w, /images/v5/north-america-2400.webp 2400w" },
 } as const;
 
 function ChapterHero({ chapter }: { readonly chapter: Chapter }) {

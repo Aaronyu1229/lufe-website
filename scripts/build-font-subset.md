@@ -15,12 +15,14 @@ pip3 install fonttools brotli
 npm run font:rebuild
 ```
 
-它會讀取網站原始碼，以及已經存在的建置頁面（如果有），並重建較小的中文字型。
+它會讀取網站原始碼，以及已經存在的建置頁面（如果有），並重建全站中文字型；另外會從首頁 Hero 與導航列原始碼自動抽取首屏字元，重建預載的 critical 字型。
 第一次執行時會下載原始字型到 `.font-cache/`；這是本機快取，不會進版控。
 
-跑完請一起 commit 這兩個檔案，不能只放其中一個：
+跑完請一起 commit 這四個檔案，不能只放其中一個：
 
 - `src/app/fonts/NotoSansTC-subset.woff2`
 - `src/app/fonts/subset-charset.txt`
+- `src/app/fonts/NotoSansTC-critical.woff2`
+- `src/app/fonts/critical-charset.txt`
 
 `OFL.txt` 是字型授權檔，請保留在同一個資料夾，不需要每次重建都修改它。

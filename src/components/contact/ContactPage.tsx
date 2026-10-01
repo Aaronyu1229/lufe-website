@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
+import { TieredImage } from "@/components/TieredImage";
 import { ChoiceGroup } from "@/components/ui/ChoiceGroup";
 import { useMessageBox } from "../MessageBox";
 
@@ -226,7 +226,7 @@ export function ContactPage() {
     <>
       {/* ─── Hero + Channel Cards ─── */}
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/contact/hero-handshake.jpg" />
+        <HeroBackdrop src="/images/contact/hero-handshake-1600.webp" />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <h1 className="h1 text-white">
             選一個你最方便的方式
@@ -330,12 +330,11 @@ export function ContactPage() {
       >
         {/* Handshake bg — subtle, conveys partnership */}
         <div className="absolute inset-0 overflow-hidden">
-          <Image
-            src="/images/contact/partners-handshake.jpg"
+          <TieredImage
+            src="/images/contact/partners-handshake-1600.webp"
             alt=""
-            fill
             sizes="100vw"
-            className="object-cover object-[70%_center] opacity-[0.14]"
+            className="absolute inset-0 h-full w-full object-cover object-[70%_center] opacity-[0.14]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/60" />
         </div>
@@ -403,12 +402,11 @@ export function ContactPage() {
       {/* ─── Full Form (with subtle conversation bg) ─── */}
       <section className="relative overflow-hidden bg-cream py-[80px]">
         <div className="absolute inset-0">
-          <Image
-            src="/images/contact/form-bg-conversation.jpg"
+          <TieredImage
+            src="/images/contact/form-bg-conversation-1600.webp"
             alt=""
-            fill
             sizes="100vw"
-            className="object-cover opacity-[0.06]"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.06]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-cream via-cream/92 to-cream" />
         </div>

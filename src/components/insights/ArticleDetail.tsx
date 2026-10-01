@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { TieredImage } from "@/components/TieredImage";
 import { useSpring } from "@/lib/motion";
 import type { Article } from "@/data/articles";
 import type { DatabaseInsight } from "@/lib/articles/presentation";
@@ -114,9 +114,11 @@ export function ArticleDetail({ article, image }: Props) {
         {!hasInlineImage ? (
           <figure className="relative mb-10 h-[240px] w-full overflow-hidden md:h-[360px]">
             {externalImage ? (
+              // Database article images are not known to Next's static image configuration.
+              // eslint-disable-next-line @next/next/no-img-element
               <img src={image} alt={article.title} className="h-full w-full object-cover" />
             ) : (
-              <Image src={image} alt={article.title} fill className="object-cover" />
+              <TieredImage src={image} alt={article.title} sizes="100vw" className="absolute inset-0 h-full w-full object-cover" />
             )}
           </figure>
         ) : null}

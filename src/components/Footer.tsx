@@ -40,7 +40,7 @@ export function Footer() {
           <Link href="/" className="flex items-center gap-2.5">
             <Image
               src="/images/logo/logo-mark-white.png"
-              alt="鹿飛 LUFÉ"
+              alt=""
               width={26}
               height={26}
             />

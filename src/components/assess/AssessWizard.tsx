@@ -20,9 +20,9 @@
 
 import { Suspense, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { TieredImage } from "@/components/TieredImage";
 import { useMessageBox } from "../MessageBox";
 import { CASES, CASE_CARD_META, getCase, type CaseStudy } from "@/data/cases";
 import { MatcherFlow, type MatcherFlowQuestion } from "./MatcherFlow";
@@ -335,7 +335,7 @@ export function EntryScreen({
 }) {
   return (
     <section className="lufe-hero bg-navy text-white">
-      <HeroBackdrop src="/images/cases/cases-hero-collab.jpg" />
+      <HeroBackdrop src="/images/cases/cases-hero-collab-1600.webp" />
       {/* Animated gold glow */}
       <div
         aria-hidden="true"
@@ -372,12 +372,11 @@ export function EntryScreen({
         {focusCase && (
           <div className="mb-6 flex items-center gap-4 border border-gold/20 bg-white/[0.04] px-5 py-4">
             <div className="relative w-[68px] h-[50px] flex-shrink-0 overflow-hidden">
-              <Image
+              <TieredImage
                 src={focusCase.heroImage}
                 alt=""
-                fill
                 sizes="68px"
-                className="object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
             <div className="flex-1 min-w-0">
@@ -598,12 +597,11 @@ function ResultScreen({
           {/* Primary case card */}
           <article className="bg-white border border-gold/30 shadow-[0_12px_40px_rgba(18,38,63,0.08)] mb-8">
             <div className="relative h-[240px] md:h-[320px] overflow-hidden">
-              <Image
+              <TieredImage
                 src={primaryCase.heroImage}
                 alt={primaryCase.title}
-                fill
                 sizes="(max-width: 860px) 100vw, 860px"
-                className="object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/92 via-navy/40 to-transparent" />
 
@@ -653,12 +651,11 @@ function ResultScreen({
             <div className="bg-white border border-bd px-6 md:px-8 py-6 md:py-7 mb-10 md:mb-12">
               <div className="flex items-start gap-5">
                 <div className="relative w-[88px] h-[66px] md:w-[120px] md:h-[88px] flex-shrink-0 overflow-hidden">
-                  <Image
+                  <TieredImage
                     src={altCase.heroImage}
                     alt=""
-                    fill
                     sizes="120px"
-                    className="object-cover"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
                 <div className="flex-1 min-w-0">

@@ -7,9 +7,9 @@
   /* Base gold for navy / dark backgrounds (original brand tone). */
   --color-gold: #D4A85C;
   /* Darker gold variant — for gold text on WHITE / CREAM backgrounds.
-     Passes WCAG AA (≈4.6:1) on #FFFFFF while keeping the warm hue.
+     Passes WCAG AA (5.43:1) on #FFFFFF while keeping the warm hue.
      Use via `text-gold-d` / `border-gold-d` on light surfaces. */
-  --color-gold-d: #8F6A1F;
+  --color-gold-d: #87641C;
   --color-gold-l: #EDD9AE;
   --color-cream: #F5F2EC;
   --color-cream-d: #E8E3DA;
@@ -30,9 +30,9 @@
      JhengHei on Windows — and the same heading looked different per device.
      Latin and digits still resolve to Playfair / Inter: font fallback is
      per-character, and those faces come first. */
-  --font-heading: var(--font-playfair), var(--font-noto-sans-tc), sans-serif;
-  --font-sans: var(--font-inter), var(--font-noto-sans-tc), sans-serif;
-  --font-zh: var(--font-noto-sans-tc);
+  --font-heading: var(--font-playfair), var(--font-zh);
+  --font-sans: var(--font-inter), var(--font-zh);
+  --font-zh: var(--font-noto-sans-tc-critical), var(--font-noto-sans-tc), "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", sans-serif;
   --font-accent: var(--font-playfair);
 }
 

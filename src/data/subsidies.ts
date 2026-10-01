@@ -378,8 +378,8 @@ export const SUBSIDIES: readonly Subsidy[] = [
 /** 卡片顯示的 hook 文案。大部分頁面走預設；子頁透過 CONTEXTUAL_COPY 覆寫。 */
 export const SUBSIDY_CARD_COPY = {
   dismissAria: "關閉補助通知",
-  image: "/images/subsidies/card-skyline.jpg",
-  hero: "/images/subsidies/hero-handshake.jpg",
+  image: "/images/subsidies/card-skyline-1600.webp",
+  hero: "/images/subsidies/hero-handshake-1600.webp",
   /** Link target — always goes to the matcher section for maximum engagement */
   href: "/resources/subsidies#match",
 } as const;

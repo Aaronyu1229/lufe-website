@@ -10,9 +10,9 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
-import Image from "next/image";
 import { createPortal } from "react-dom";
 
+import { TieredImage } from "@/components/TieredImage";
 import { clamp, draggable, project, rubberband, useSpring } from "@/lib/motion";
 
 interface PanelRect {
@@ -267,7 +267,7 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
           >
             <div ref={mediaRef} className={`relative shrink-0 touch-none cursor-grab overflow-hidden bg-black/[.06] active:cursor-grabbing ${image ? "aspect-[16/10] max-h-[44vh]" : "h-14"}`}>
               {image && imageRequested && (
-                <Image src={image.src} alt={image.alt} fill sizes="(max-width: 700px) 100vw, 760px" className="object-cover" draggable={false} />
+                <TieredImage src={image.src} alt={image.alt} sizes="(max-width: 700px) 100vw, 760px" className="absolute inset-0 h-full w-full object-cover" draggable={false} />
               )}
               <span aria-hidden="true" className="absolute left-1/2 top-2 block h-[5px] w-10 -translate-x-1/2 bg-white/75 shadow-[0_1px_4px_rgba(0,0,0,.3)]" />
             </div>

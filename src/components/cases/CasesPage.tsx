@@ -1,12 +1,12 @@
 "use client";
 
 import { useRef, useState, type RefObject } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
+import { TieredImage } from "@/components/TieredImage";
 import { ExpandCard, Segmented, flip } from "@/components/ui";
 import {
   CASES,
@@ -116,12 +116,11 @@ function CaseCard({ caseItem }: { caseItem: (typeof CASES)[number] }) {
       card={
         <article className="lufe-card group overflow-hidden border border-bd bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:border-gold/60">
           <div className="relative h-[clamp(250px,35vw,340px)] overflow-hidden bg-navy">
-            <Image
+            <TieredImage
               src={caseItem.heroImage}
               alt={caseItem.title}
-              fill
               sizes="(max-width: 1080px) 100vw, 1080px"
-              className="lufe-case-cover object-cover"
+              className="lufe-case-cover absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/30 to-transparent" />
 
@@ -170,7 +169,7 @@ export function CasesPageContent({
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/v5/cases-2400.webp" mobileSrc="/images/v5/cases-1600.webp" position="center 60%" />
+        <HeroBackdrop src="/images/v5/cases-1600.webp" srcSet="/images/v5/cases-1600.webp 1600w, /images/v5/cases-2400.webp 2400w" position="center 60%" />
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>

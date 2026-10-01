@@ -103,9 +103,10 @@ export function HeroSection() {
   const [paused, setPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [readyMap, setReadyMap] = useState<Record<number, boolean>>({});
-  // Only mount videos as they approach being active — keeps initial page load lean.
-  // Slide 0 mounts immediately (LCP); others mount when they become the active index.
-  const [mountedMap, setMountedMap] = useState<Record<number, boolean>>({ 0: true });
+  // Keep every <video> out of the server HTML. The poster owns the first paint;
+  // videos become eligible only once window.load has finished the page's critical work.
+  const [canMountVideos, setCanMountVideos] = useState(false);
+  const [mountedMap, setMountedMap] = useState<Record<number, boolean>>({});
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
 
   // Detect portrait orientation
@@ -136,6 +137,24 @@ export function HeroSection() {
     return () => mql.removeEventListener("change", update);
   }, []);
 
+  // Do not compete with the LCP font, poster, or other load-critical assets.
+  // When hydration happens after load, mount straight away; reduced-motion keeps
+  // the poster-only behavior and never adds a video element.
+  useEffect(() => {
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const enableVideoMounting = () => {
+      if (!mql.matches) setCanMountVideos(true);
+    };
+
+    if (document.readyState === "complete") {
+      enableVideoMounting();
+      return;
+    }
+
+    window.addEventListener("load", enableVideoMounting, { once: true });
+    return () => window.removeEventListener("load", enableVideoMounting);
+  }, []);
+
   // Autoplay carousel
   useEffect(() => {
     if (paused || prefersReducedMotion) return;
@@ -145,22 +164,20 @@ export function HeroSection() {
     return () => window.clearTimeout(timer);
   }, [activeIndex, paused, prefersReducedMotion]);
 
-  // Mount the active slide and warm up the next one so its video is ready before
-  // the cross-fade. Never un-mounts to avoid re-downloading once seen.
+  // Mount the active slide only after window.load. Never un-mounts to avoid
+  // re-downloading once seen.
   useEffect(() => {
-    const nextIndex = (activeIndex + 1) % HOME_HERO_SLIDES.length;
     // mountedMap is cumulative memory ("mounted once, never unmount"), so it
-    // cannot be derived from activeIndex during render. Moving it into the event
-    // handlers would leave no trigger for the initial warm-up, forcing an initial
-    // value of {0:true, 1:true} — which would put slide 1's <video
-    // preload="metadata"> into the SSR HTML and start a fetch before hydration.
+    // cannot be derived from activeIndex during render. Keeping it here lets a
+    // direct chip jump mount its target without reintroducing SSR video fetches.
     // See PR #5 (mount race).
+    if (!canMountVideos) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- cumulative memory
     setMountedMap((prev) => {
-      if (prev[activeIndex] && prev[nextIndex]) return prev;
-      return { ...prev, [activeIndex]: true, [nextIndex]: true };
+      if (prev[activeIndex]) return prev;
+      return { ...prev, [activeIndex]: true };
     });
-  }, [activeIndex]);
+  }, [activeIndex, canMountVideos]);
 
   // Play the active slide's video; pause the others. Apply per-slide playbackRate.
   useEffect(() => {
@@ -192,6 +209,15 @@ export function HeroSection() {
 
   const handleCanPlay = (index: number) => {
     setReadyMap((prev) => (prev[index] ? prev : { ...prev, [index]: true }));
+    if (index !== activeIndex) return;
+
+    // Warm only after the current video can play, so it never competes with the
+    // first video (or first-paint assets) during hydration.
+    const nextIndex = (index + 1) % HOME_HERO_SLIDES.length;
+    setMountedMap((prev) => {
+      if (prev[nextIndex]) return prev;
+      return { ...prev, [nextIndex]: true };
+    });
   };
 
   const active = HOME_HERO_SLIDES[activeIndex];
@@ -232,6 +258,8 @@ export function HeroSection() {
               srcSet={slide.media.posterSrcSet}
               sizes="100vw"
               alt=""
+              loading={i === 0 ? "eager" : "lazy"}
+              fetchPriority={i === 0 ? "high" : "low"}
               className="absolute inset-0 w-full h-full object-cover"
             />
             {mounted && (
