@@ -46,4 +46,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+docs/redesign-v6/review/site/
 public/images/about/.aaron-news-interview-original.jpg
