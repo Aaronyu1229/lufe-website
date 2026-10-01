@@ -232,7 +232,14 @@ class ReviewHandler(BaseHTTPRequestHandler):
             self.send_bytes(render_all_notes(self.server.site_dir, self.server.notes_path), HTTPStatus.OK, "text/html; charset=utf-8")
             return
 
-        resolved, status = route_file(self.server.site_dir, parsed.path)
+        request_path = parsed.path
+        if request_path == "/_next/image":
+            # The frozen snapshot has no image optimizer; serve the original file instead.
+            request_path = parse_qs(parsed.query).get("url", [""])[0]
+            if not request_path.startswith("/"):
+                self.send_error(HTTPStatus.NOT_FOUND)
+                return
+        resolved, status = route_file(self.server.site_dir, request_path)
         if status == HTTPStatus.FORBIDDEN:
             self.send_error(HTTPStatus.FORBIDDEN)
             return

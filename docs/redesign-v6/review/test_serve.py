@@ -86,6 +86,14 @@ class ReviewServerTests(unittest.TestCase):
                 status, _ = self.request(path)
                 self.assertEqual(status, 403)
 
+    def test_next_image_requests_serve_the_original_file(self) -> None:
+        status, body = self.request("/_next/image?url=%2Fplain.txt&w=64&q=75")
+        self.assertEqual(status, 200)
+        self.assertEqual(body, b"plain text")
+
+        status, _ = self.request("/_next/image?url=%2F..%2Fpackage.json&w=64")
+        self.assertEqual(status, 403)
+
     def test_html_injection_is_not_applied_to_non_html_files(self) -> None:
         status, html_body = self.request("/about")
         self.assertEqual(status, 200)
