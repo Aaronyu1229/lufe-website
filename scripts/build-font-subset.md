@@ -15,10 +15,10 @@ pip3 install fonttools brotli
 npm run font:rebuild
 ```
 
-它會讀取網站原始碼，以及已經存在的建置頁面（如果有），並重建全站中文字型；另外會從首頁 Hero 與導航列原始碼自動抽取首屏字元，重建預載的 critical 字型。
+它會讀取網站原始碼，以及已經存在的建置頁面（如果有），並重建全站中文字型；另外會從各路由的首屏 hero、首頁 Hero、導航列和服務章節資料自動抽取字元，重建預載的 critical 字型。critical 與全站檔的字元互斥；指令也會更新 `src/app/layout.tsx` 中全站檔的 `unicode-range`，兩者必須一起保留。
 第一次執行時會下載原始字型到 `.font-cache/`；這是本機快取，不會進版控。
 
-跑完請一起 commit 這四個檔案，不能只放其中一個：
+跑完請一起 commit 這四個檔案以及更新過的 `src/app/layout.tsx`，不能只放其中一個：
 
 - `src/app/fonts/NotoSansTC-subset.woff2`
 - `src/app/fonts/subset-charset.txt`
