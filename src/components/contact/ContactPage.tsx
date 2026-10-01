@@ -225,9 +225,9 @@ export function ContactPage() {
   return (
     <>
       {/* ─── Hero + Channel Cards ─── */}
-      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+      <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/contact/hero-handshake.jpg" />
-        <div className="lufe-hero-content mx-auto w-full max-w-[1000px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <h1 className="h1 text-white">
             選一個你最方便的方式
           </h1>
@@ -238,8 +238,8 @@ export function ContactPage() {
         <ScrollCue />
       </section>
 
-      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="max-w-[1000px] mx-auto">
+      <section className="bg-white py-[72px] md:py-[88px]">
+        <div className="lufe-container">
 
           {/* Business info strip — gives contact page a functional anchor */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 mb-12 pb-8 border-b border-bd text-[14.5px]">
@@ -326,7 +326,7 @@ export function ContactPage() {
       {/* ─── Partners entry ─── */}
       <section
         id="partners"
-        className="relative bg-navy py-[72px] md:py-[88px] px-5 md:px-10 scroll-mt-[100px] border-t border-b border-white/5 overflow-hidden"
+        className="relative overflow-hidden border-t border-b border-white/5 bg-navy py-[72px] scroll-mt-[100px] md:py-[88px]"
       >
         {/* Handshake bg — subtle, conveys partnership */}
         <div className="absolute inset-0 overflow-hidden">
@@ -350,7 +350,7 @@ export function ContactPage() {
           }}
         />
 
-        <div className="relative max-w-[900px] mx-auto">
+        <div className="lufe-container relative">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] leading-[1.14] font-[650] tracking-[-0.4px] [text-wrap:balance] text-white mb-5">
             商會、顧問、服務商，
             <br />
@@ -401,7 +401,7 @@ export function ContactPage() {
       </section>
 
       {/* ─── Full Form (with subtle conversation bg) ─── */}
-      <section className="relative bg-cream py-[80px] px-5 md:px-10 overflow-hidden">
+      <section className="relative overflow-hidden bg-cream py-[80px]">
         <div className="absolute inset-0">
           <Image
             src="/images/contact/form-bg-conversation.jpg"
@@ -412,7 +412,7 @@ export function ContactPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-cream via-cream/92 to-cream" />
         </div>
-        <div className="relative max-w-[640px] mx-auto">
+        <div className="lufe-container"><div className="relative mx-auto max-w-[640px]">
           <div className="section-label text-center">完整表單</div>
           <h2 className="h2 text-center">
             想一次講完所有細節？
@@ -591,7 +591,7 @@ export function ContactPage() {
               </p>
             </form>
           )}
-        </div>
+        </div></div>
       </section>
     </>
   );

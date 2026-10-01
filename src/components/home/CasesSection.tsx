@@ -231,7 +231,7 @@ function CaseCard({ item }: { item: CaseCardData }) {
 export function CasesSection() {
   return (
     <section className="overflow-hidden py-[80px]">
-      <div className="mx-auto max-w-[1200px] px-5 md:px-10">
+      <div className="lufe-container">
         <div className="max-w-[820px]">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
             我們不是跟你賭市場，
@@ -252,15 +252,17 @@ export function CasesSection() {
         <p className="mt-6 max-w-[720px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">三條路的成本、坑、時間都不一樣。{"\n"}第一次談，我們會先問你比較像哪一條。</p>
       </div>
 
-      <Carousel
-        label="案例"
-        className="mx-auto mt-8 max-w-[1400px] overflow-hidden"
-        itemClassName="basis-[82vw] max-w-[520px] md:basis-[380px]"
-      >
-        {HOME_CASE_CARDS.map((item) => <CaseCard key={item.slug} item={item} />)}
-      </Carousel>
+      <div className="lufe-container">
+        <Carousel
+          label="案例"
+          className="mt-8 overflow-hidden"
+          itemClassName="basis-[82vw] max-w-[520px] md:basis-[380px]"
+        >
+          {HOME_CASE_CARDS.map((item) => <CaseCard key={item.slug} item={item} />)}
+        </Carousel>
+      </div>
 
-      <div className="mx-auto mt-4 max-w-[1200px] px-5 md:px-10">
+      <div className="lufe-container mt-4">
         <Link href="/cases" className="inline-flex text-[16px] font-semibold text-sky">
           全部案例 →
         </Link>

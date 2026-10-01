@@ -12,7 +12,7 @@ export function SubsidiesCTASection() {
   const { open } = useMessageBox();
 
   return (
-    <section className="py-[72px] md:py-[100px] px-5 md:px-10 lg:px-16 bg-navy text-white relative overflow-hidden">
+    <section className="relative overflow-hidden bg-navy py-[72px] text-white md:py-[100px]">
       <div
         aria-hidden="true"
         className="absolute inset-0 opacity-[0.06] pointer-events-none"
@@ -21,7 +21,7 @@ export function SubsidiesCTASection() {
             "radial-gradient(circle at 70% 50%, #D4A85C 0%, transparent 50%)",
         }}
       />
-      <div className="max-w-[900px] mx-auto text-center relative">
+      <div className="lufe-container relative"><div className="mx-auto max-w-[900px] text-center">
         <h2
           className="h2 mb-6 text-white"
         >
@@ -52,7 +52,7 @@ export function SubsidiesCTASection() {
             </span>
           </Link>
         </div>
-      </div>
+      </div></div>
     </section>
   );
 }

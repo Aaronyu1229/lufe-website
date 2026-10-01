@@ -169,9 +169,9 @@ export function CasesPageContent({
 
   return (
     <>
-      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+      <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/v5/cases-2400.webp" mobileSrc="/images/v5/cases-1600.webp" position="center 60%" />
-        <div className="lufe-hero-content mx-auto max-w-[1100px] min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+        <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
@@ -184,20 +184,20 @@ export function CasesPageContent({
         <ScrollCue />
       </section>
 
-      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[88px]">
-        <div className="mx-auto max-w-[1080px]">
+      <section className="bg-white py-[72px] md:py-[88px]">
+        <div className="lufe-container">
           <Reveal className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">
             {CASE_ROADS.map((road) => <article key={road.label} className="lufe-card border border-bd bg-cream p-6"><p className="text-[14px] font-semibold text-gold-d">{road.label}</p><h2 className="h3 mt-3 text-tx">{road.title}</h2><p className="mt-4 text-[15px] leading-[1.8] text-tx2">{road.body}</p><div className="mt-6 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="block text-tx">這條路教我們的事</strong>{road.lesson}</div></article>)}
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-white px-5 pb-0 md:px-10">
-        <div className="mx-auto max-w-[1080px]"><div className="flex flex-col items-start justify-between gap-6 border border-bd bg-cream p-6 md:flex-row md:items-center md:p-8"><div><h2 className="h3 text-tx">不確定自己比較像哪一條？</h2><p className="mt-2 text-[15px] leading-[1.8] text-tx2">先做 2 分鐘處境比對，我們告訴你最像哪一個案例。</p></div><Link href="/assess" className="shrink-0 bg-gold px-6 py-3.5 text-[15px] font-semibold text-navy hover:bg-gold-l">先做 2 分鐘處境比對 →</Link></div></div>
+      <section className="bg-white pb-0">
+        <div className="lufe-container"><div className="flex flex-col items-start justify-between gap-6 border border-bd bg-cream p-6 md:flex-row md:items-center md:p-8"><div><h2 className="h3 text-tx">不確定自己比較像哪一條？</h2><p className="mt-2 text-[15px] leading-[1.8] text-tx2">先做 2 分鐘處境比對，我們告訴你最像哪一個案例。</p></div><Link href="/assess" className="shrink-0 bg-gold px-6 py-3.5 text-[15px] font-semibold text-navy hover:bg-gold-l">先做 2 分鐘處境比對 →</Link></div></div>
       </section>
 
-      <section className="overflow-hidden bg-white px-5 pb-[80px] pt-[60px] md:px-10 md:pb-[110px] md:pt-[80px]">
-        <div className="mx-auto max-w-[1080px] min-w-0">
+      <section className="overflow-hidden bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
+        <div className="lufe-container min-w-0">
           <div className="mb-10 flex flex-wrap items-center gap-x-7 gap-y-5 md:mb-11">
             <div className="min-w-0">
               <p className="mb-2 text-[13px] font-semibold text-tx3">產業</p>

@@ -35,13 +35,13 @@ const matcherQuestions: readonly MatcherFlowQuestion[] = MATCHER_QUESTIONS;
 /** The same spring-driven question system used by /assess. */
 export function SubsidyMatcher() {
   return (
-    <section id="match" className="relative overflow-hidden bg-navy px-5 py-[80px] text-white scroll-mt-[80px] md:px-10 md:py-[104px] lg:px-16">
+    <section id="match" className="relative overflow-hidden bg-navy py-[80px] text-white scroll-mt-[80px] md:py-[104px]">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{ background: "radial-gradient(ellipse 60% 50% at 50% 30%, rgba(212,168,92,0.09) 0%, transparent 70%)" }}
       />
-      <div className="relative mx-auto max-w-[900px]">
+      <div className="lufe-container relative">
         <div className="mb-10 md:mb-12">
           <h2 className="h2 text-white">算算你能拿<span className="text-gold">多少補助</span></h2>
           <p className="lead mt-5 max-w-[560px] !text-white/70">

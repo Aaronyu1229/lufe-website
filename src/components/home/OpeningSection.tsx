@@ -1,7 +1,7 @@
 export function OpeningSection() {
   return (
-    <section className="px-5 py-[80px] md:px-10 md:py-[104px]">
-      <div className="mx-auto grid max-w-[1200px] gap-8 md:grid-cols-[.9fr_1.1fr] md:gap-16">
+    <section className="py-[80px] md:py-[104px]">
+      <div className="lufe-container grid gap-8 md:grid-cols-[.9fr_1.1fr] md:gap-16">
         <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
           很多品牌的出海故事，
           <br />

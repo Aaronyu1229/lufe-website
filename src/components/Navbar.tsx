@@ -197,7 +197,7 @@ export function Navbar({ children }: { readonly children?: ReactNode }) {
       </a>
 
       <nav className={`relative transition-colors duration-300 ${transparentOverHero ? "navbar-over-hero" : lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark navbar-scrolled text-white"}`} aria-label="主要導航">
-        <div className="relative mx-auto flex h-[64px] max-w-[1200px] items-center justify-between gap-4 px-5 md:px-10">
+        <div className="lufe-container relative flex h-[64px] items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2.5 text-[17px] font-semibold">
             <Image src={lightGlass ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"} alt="鹿飛 LUFÉ" width={26} height={26} priority />
             <span>鹿飛 LUF<span className={lightGlass ? "text-gold-d" : "text-gold"}>É</span></span>

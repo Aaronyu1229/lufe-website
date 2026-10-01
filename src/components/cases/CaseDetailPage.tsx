@@ -44,7 +44,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy px-5 pb-[60px] pt-[130px] text-white md:px-10 md:pb-[80px] md:pt-[170px]">
+      <section className="relative overflow-hidden bg-navy pb-[60px] pt-[130px] text-white md:pb-[80px] md:pt-[170px]">
         <div className="absolute inset-0" aria-hidden="true">
           <Image
             src={caseItem.heroImage}
@@ -57,7 +57,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
           <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/60 to-navy" />
         </div>
 
-        <div className="relative mx-auto max-w-[1000px] min-w-0">
+        <div className="lufe-container relative min-w-0">
           <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/cases" className="hover:text-white">案例</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
@@ -86,8 +86,9 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
         </div>
       </section>
 
-      <section className="bg-white px-5 py-[80px] md:px-10 md:py-[100px]">
-        <div className="mx-auto grid max-w-[820px] gap-12">
+      <section className="bg-white py-[80px] md:py-[100px]">
+        <div className="lufe-container">
+          <div className="grid max-w-[820px] gap-12">
           <div>
             <h2 className="h3 mb-4 text-tx">起點：客戶遇到什麼問題？</h2>
             <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.challenge}</p>
@@ -118,12 +119,14 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
             <h2 className="h3 mb-4 text-tx">最後發生了什麼？</h2>
             <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.result}</p>
           </div>
+          </div>
         </div>
       </section>
 
       {caseItem.keyDecisions.length > 0 && (
-        <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[100px]">
-          <div className="mx-auto max-w-[980px] min-w-0">
+        <section className="bg-cream py-[80px] md:py-[100px]">
+          <div className="lufe-container">
+            <div className="max-w-[980px] min-w-0">
             <h2 className="h2 mb-4 text-tx">過程中<span className="text-gold-d">做過的判斷</span></h2>
             <p className="max-w-[720px] text-[17px] leading-[1.8] text-tx2">不只寫「發生了什麼」，把當時的選項和為什麼這樣選也攤出來——這才是經驗真正的價值。</p>
 
@@ -153,44 +156,49 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
                 </article>
               ))}
             </div>
+            </div>
           </div>
         </section>
       )}
 
       {caseItem.timeline.length > 0 && (
         <section className="overflow-hidden bg-white py-[80px] md:py-[100px]">
-          <div className="mx-auto max-w-[980px] min-w-0 px-5 md:px-10">
-            <h2 className="h2 text-tx">從啟動到收尾的<span className="text-gold-d">時間節奏</span></h2>
+          <div className="lufe-container">
+            <div className="max-w-[980px] min-w-0">
+              <h2 className="h2 text-tx">從啟動到收尾的<span className="text-gold-d">時間節奏</span></h2>
+            </div>
           </div>
 
-          <Carousel
-            label="時間軸"
-            className="mx-auto mt-8 max-w-[1140px] overflow-hidden"
-            itemClassName="basis-[min(78vw,330px)]"
-          >
-            {caseItem.timeline.map((item, index) => (
-              <article key={`${item.when}-${item.title}`} className="flex min-h-[260px] min-w-0 flex-col border border-bd bg-cream p-7">
-                <span className="num mb-5 grid h-10 w-10 place-items-center bg-gold text-[15px] leading-none text-navy">{index + 1}</span>
-                <p className="mb-2 text-[13px] font-semibold text-gold-d">{item.when}</p>
-                <h3 className="h3 mb-2 text-tx">{item.title}</h3>
-                <p className="text-[15px] leading-[1.75] text-tx2">{item.desc}</p>
-              </article>
-            ))}
-          </Carousel>
+          <div className="lufe-container">
+            <Carousel
+              label="時間軸"
+              className="mt-8 overflow-hidden"
+              itemClassName="basis-[min(78vw,330px)]"
+            >
+              {caseItem.timeline.map((item, index) => (
+                <article key={`${item.when}-${item.title}`} className="flex min-h-[260px] min-w-0 flex-col border border-bd bg-cream p-7">
+                  <span className="num mb-5 grid h-10 w-10 place-items-center bg-gold text-[15px] leading-none text-navy">{index + 1}</span>
+                  <p className="mb-2 text-[13px] font-semibold text-gold-d">{item.when}</p>
+                  <h3 className="h3 mb-2 text-tx">{item.title}</h3>
+                  <p className="text-[15px] leading-[1.75] text-tx2">{item.desc}</p>
+                </article>
+              ))}
+            </Carousel>
+          </div>
         </section>
       )}
 
       {caseItem.quote && (
-        <section className="bg-navy px-5 py-[72px] text-white md:px-10 md:py-[96px]">
-          <blockquote className="mx-auto max-w-[760px]">
-            <q className="block font-sans text-[clamp(24px,3vw,34px)] font-medium leading-[1.6] text-white/90">{caseItem.quote.text}</q>
-            <cite className="mt-5 block text-[15px] font-medium not-italic text-gold">— {caseItem.quote.attribution}</cite>
-          </blockquote>
+        <section className="bg-navy py-[72px] text-white md:py-[96px]">
+          <div className="lufe-container"><blockquote className="mx-auto max-w-[760px]">
+              <q className="block font-sans text-[clamp(24px,3vw,34px)] font-medium leading-[1.6] text-white/90">{caseItem.quote.text}</q>
+              <cite className="mt-5 block text-[15px] font-medium not-italic text-gold">— {caseItem.quote.attribution}</cite>
+            </blockquote></div>
         </section>
       )}
 
-      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[96px]">
-        <div className="mx-auto max-w-[720px] text-center">
+      <section className="bg-cream py-[72px] md:py-[96px]">
+        <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
           <h2 className="h2 mb-4 text-tx">你的產品也有<span className="text-gold-d">類似的機會</span>嗎？</h2>
           <p className="mx-auto mb-10 max-w-[520px] text-[16.5px] leading-[1.8] text-tx2">每個案子的起點都是一場對話。聊聊你的狀況，我們會告訴你這個故事裡哪一段跟你最相關。</p>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
@@ -202,12 +210,12 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
               <span aria-hidden="true">→</span>
             </Link>
           </div>
-        </div>
+        </div></div>
       </section>
 
       {relatedCases.length > 0 && (
-        <section className="border-t border-bd bg-white px-5 py-[72px] md:px-10 md:py-[96px]">
-          <div className="mx-auto max-w-[1100px] min-w-0">
+        <section className="border-t border-bd bg-white py-[72px] md:py-[96px]">
+          <div className="lufe-container"><div className="max-w-[1100px] min-w-0">
             <h2 className="h2 text-tx">更多成功的故事</h2>
 
             <div className="mt-10 grid min-w-0 grid-cols-1 gap-[18px] md:grid-cols-2">
@@ -237,7 +245,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
                 <span className="border-b border-tx3/40 pb-0.5">回到所有案例</span>
               </Link>
             </div>
-          </div>
+          </div></div>
         </section>
       )}
     </>

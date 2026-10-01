@@ -26,9 +26,9 @@ export function FieldNotesPage() {
 
   return (
     <>
-      <section className="lufe-hero bg-navy px-5 text-white md:px-10">
+      <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/field-notes/activity-forum.jpg" />
-        <div className="lufe-hero-content mx-auto max-w-[1200px] pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
@@ -63,8 +63,8 @@ export function FieldNotesPage() {
         <ScrollCue />
       </section>
 
-      <section className="bg-white px-5 py-[80px] md:px-10 md:py-[110px]">
-        <div className="mx-auto max-w-[1200px]">
+      <section className="bg-white py-[80px] md:py-[110px]">
+        <div className="lufe-container">
           <h2 className="h2 max-w-[800px] text-tx">
             我們去過、
             <br />
@@ -107,8 +107,8 @@ export function FieldNotesPage() {
         </div>
       </section>
 
-      <section className="bg-cream px-5 py-[80px] md:px-10 md:py-[110px]">
-        <div className="mx-auto max-w-[1040px]">
+      <section className="bg-cream py-[80px] md:py-[110px]">
+        <div className="lufe-container">
           <h2 className="h2 max-w-[800px] text-tx">
             飛回來之後，<span className="text-gold-d">馬上記下來的事</span>
           </h2>
@@ -134,8 +134,8 @@ export function FieldNotesPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-[72px] md:px-10 md:py-[96px]">
-        <div className="mx-auto max-w-[1040px]">
+      <section className="bg-white py-[72px] md:py-[96px]">
+        <div className="lufe-container">
           <h2 className="h2 text-tx">別人<span className="text-gold-d">怎麼說我們</span></h2>
 
           <div className="mt-10 border-t border-bd">
@@ -164,8 +164,8 @@ export function FieldNotesPage() {
         </div>
       </section>
 
-      <section className="bg-cream px-5 py-[72px] md:px-10 md:py-[96px]">
-        <div className="mx-auto max-w-[1200px]">
+      <section className="bg-cream py-[72px] md:py-[96px]">
+        <div className="lufe-container">
           <h2 className="h2 text-tx">一起做事的<span className="text-gold-d">夥伴網絡</span></h2>
           <p className="lead mt-5 max-w-[620px]">商會、顧問、物流、通路、協會、政府——我們的路不是自己一個人走的。</p>
 
@@ -181,8 +181,8 @@ export function FieldNotesPage() {
         </div>
       </section>
 
-      <section className="bg-navy px-5 py-[72px] text-white md:px-10 md:py-[96px]">
-        <div className="mx-auto max-w-[720px] text-center">
+      <section className="bg-navy py-[72px] text-white md:py-[96px]">
+        <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
           <h2 className="h2 mb-4 text-white">想知道我們下個月在哪？</h2>
           <p className="lead mx-auto mb-10 max-w-[520px] text-white/70">如果你在考慮北美或東南亞、剛好碰上我們的行程，可以約一杯咖啡。</p>
           <div className="flex flex-wrap items-center justify-center gap-6">
@@ -194,7 +194,7 @@ export function FieldNotesPage() {
               <span aria-hidden="true">→</span>
             </Link>
           </div>
-        </div>
+        </div></div>
       </section>
     </>
   );

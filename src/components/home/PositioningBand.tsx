@@ -104,8 +104,8 @@ export function ChaptersSection() {
   }
 
   return (
-    <section id="chapters" className="bg-cream px-5 py-[80px] md:px-10 md:py-[104px]">
-      <div className="mx-auto max-w-[1200px]">
+    <section id="chapters" className="bg-cream py-[80px] md:py-[104px]">
+      <div className="lufe-container">
         <div className="mx-auto mb-12 max-w-[820px] text-center md:mb-16">
           <h2 className="mb-5 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance] md:mb-6">
             一家品牌在馬尼拉的第一年，
