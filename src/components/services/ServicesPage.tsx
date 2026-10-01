@@ -29,7 +29,7 @@ export function ServicesPage() {
           <div className="min-w-0 max-w-[760px]">
             <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55"><Link href="/" className="hover:text-white">首頁</Link><span className="mx-2 text-white/30">/</span><span className="text-white/80">服務</span></nav>
             <h1 className="h1 max-w-[760px] text-white">一家品牌在馬尼拉的第一年</h1>
-            <p className="lead mt-5 max-w-[720px] !text-white/75">市場探查、寄賣、公司落地、海外客服——同一家公司在不同月份會遇到的四件事，我們做成四個方案。可以只走第一章，也可以一路走完。北美通路是另一個故事，由北美團隊執行。底下是躍馬企業 42 年的物流，貨怎麼過去不用另外找人。</p>
+            <p className="lead mt-5 max-w-[720px] !text-white/75">市場探查、寄賣、公司落地、海外客服——同一家公司在不同月份會遇到的四件事，我們做成四個方案。可以只走第一章，也可以一路走完。北美零售通路另由北美專責團隊規劃執行。底下是躍馬企業 42 年的物流，貨怎麼過去不用另外找人。</p>
             <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-6 border-t border-white/15 pt-6 md:grid-cols-4">
               {heroStats.map((stat) => <div key={stat.label}><p className="num text-[30px] leading-none text-gold">{stat.value}</p><p className="mt-2 text-[12px] leading-[1.5] text-white/55">{stat.label}</p></div>)}
             </div>

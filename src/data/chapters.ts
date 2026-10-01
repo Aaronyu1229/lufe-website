@@ -377,7 +377,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
   na: {
     key: "na",
     path: "/services/north-america",
-    label: "另一個故事 · 北美貨架",
+    label: "北美市場拓展",
     title: "產品成熟了，要進 Costco、Walmart、Amazon",
     scene: "參過展、發過樣品、沒有下文——很多品牌的北美故事停在這裡。",
     image: "/images/services/pillar-channel-aisle.jpg",
