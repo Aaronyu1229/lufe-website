@@ -3,8 +3,10 @@
 import Link from "next/link";
 
 import { Carousel } from "@/components/ui";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { TieredImage } from "@/components/TieredImage";
 import { getRelatedCases, type CaseStudy } from "@/data/cases";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 
 import { useMessageBox } from "../MessageBox";
 
@@ -35,6 +37,7 @@ interface CaseDetailPageContentProps extends Props {
 
 export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: CaseDetailPageContentProps) {
   const relatedCases = getRelatedCases(caseItem.slug);
+  const heroVideo = HERO_VIDEOS[`case:${caseItem.slug}` as keyof typeof HERO_VIDEOS];
   const stageLinks = Array.from(
     new Map(caseItem.stagesUsed.map((stageSlug) => {
       const stage = CASE_STAGE_LINKS[stageSlug];
@@ -44,20 +47,9 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy pb-[60px] pt-[130px] text-white md:pb-[80px] md:pt-[170px]">
-        <div className="absolute inset-0" aria-hidden="true">
-          <TieredImage
-            src={caseItem.heroImage}
-            alt=""
-            sizes="100vw"
-            loading="eager"
-            fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.25]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/60 to-navy" />
-        </div>
-
-        <div className="lufe-container relative min-w-0">
+      <section className="lufe-hero bg-navy text-white">
+        <HeroBackdrop src={caseItem.heroImage} video={heroVideo} />
+        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/cases" className="hover:text-white">案例</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
@@ -73,12 +65,12 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
           </div>
 
           <h1 className="h1 mb-6 max-w-[840px] text-white">{caseItem.title}</h1>
-          <p className="lead max-w-[720px] text-white/70">{caseItem.summary}</p>
+          <p className="lead max-w-[720px] !text-white/75">{caseItem.summary}</p>
 
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-6 md:gap-x-12">
             {caseItem.stats.map((stat) => (
               <div key={stat.label} className="min-w-0">
-                <div className="num text-[clamp(35px,4vw,44px)] leading-none text-gold">{stat.value}</div>
+                <div data-lufe-counter className="num text-[clamp(35px,4vw,44px)] leading-none text-gold">{stat.value}</div>
                 <p className="mt-2 text-[11px] tracking-wide text-white/65 md:text-[13px]">{stat.label}</p>
               </div>
             ))}
@@ -88,78 +80,46 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
       <section className="bg-white py-[80px] md:py-[100px]">
         <div className="lufe-container">
-          <div className="grid max-w-[820px] gap-12">
-          <div>
-            <h2 className="h3 mb-4 text-tx">起點：客戶遇到什麼問題？</h2>
-            <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.challenge}</p>
-          </div>
+          {caseItem.story.map((chapter, chapterIndex) => (
+            <article key={chapter.heading} className={chapterIndex === 0 ? "" : "mt-16"}>
+              <div className="mx-auto max-w-[680px]">
+                <span className="num text-[13px] text-gold-d">{String(chapterIndex + 1).padStart(2, "0")}</span>
+                <h2 className="h3 mt-2 text-tx">{chapter.heading}</h2>
+                {chapter.paragraphs.map((paragraph, paragraphIndex) => (
+                  <p key={paragraph} className={`${paragraphIndex === 0 ? "mt-6" : "mt-5"} text-[17px] leading-[1.95] text-tx2`}>{paragraph}</p>
+                ))}
 
-          <div>
-            <h2 className="h3 mb-4 text-tx">怎麼切入這個問題？</h2>
-            <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.approach}</p>
-
-            {stageLinks.length > 0 && (
-              <div className="mt-6 border-t border-bd pt-6">
-                <div className="flex flex-wrap gap-2">
-                  {stageLinks.map((stage) => {
-                    return (
-                      <Link key={stage.href} href={stage.href} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
-                        <span className="num text-gold-d">{stage.label}</span>
-                        <span>{stage.title}</span>
-                        <span aria-hidden="true" className="text-tx3">→</span>
-                      </Link>
-                    );
-                  })}
-                </div>
+                {chapter.showStageLinks && stageLinks.length > 0 && (
+                  <div className="mt-6 border-t border-bd pt-6">
+                    <div className="flex flex-wrap gap-2">
+                      {stageLinks.map((stage) => (
+                        <Link key={stage.href} href={stage.href} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
+                          <span className="num text-gold-d">{stage.label}</span>
+                          <span>{stage.title}</span>
+                          <span aria-hidden="true" className="text-tx3">→</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          <div>
-            <h2 className="h3 mb-4 text-tx">最後發生了什麼？</h2>
-            <p className="text-[17px] leading-[1.9] text-tx2">{caseItem.result}</p>
-          </div>
-          </div>
+              {chapter.image && (
+                <figure className="mx-auto my-12 max-w-[980px]">
+                  <TieredImage
+                    src={chapter.image.src}
+                    alt={chapter.image.alt}
+                    sizes="(max-width: 1024px) 100vw, 980px"
+                    className="aspect-[3/2] w-full object-cover"
+                    style={chapter.image.position ? { objectPosition: chapter.image.position } : undefined}
+                  />
+                  <figcaption className="mt-3 text-[13px] text-tx3">{chapter.image.alt}</figcaption>
+                </figure>
+              )}
+            </article>
+          ))}
         </div>
       </section>
-
-      {caseItem.keyDecisions.length > 0 && (
-        <section className="bg-cream py-[80px] md:py-[100px]">
-          <div className="lufe-container">
-            <div className="max-w-[980px] min-w-0">
-            <h2 className="h2 mb-4 text-tx">過程中<span className="text-gold-d">做過的判斷</span></h2>
-            <p className="max-w-[720px] text-[17px] leading-[1.8] text-tx2">不只寫「發生了什麼」，把當時的選項和為什麼這樣選也攤出來——這才是經驗真正的價值。</p>
-
-            <div className="mt-10 grid gap-5">
-              {caseItem.keyDecisions.map((decision) => (
-                <article key={decision.moment} className="border-l-4 border-gold bg-white p-6 md:p-8">
-                  <h3 className="h3 mb-5 text-tx">{decision.moment}</h3>
-
-                  <div className="mb-5">
-                    <ul className="grid gap-1.5">
-                      {decision.options.map((option) => {
-                        const isChoice = option === decision.choice || decision.choice.includes(option.split("（")[0]?.trim() ?? option);
-                        return (
-                          <li key={option} className={`flex items-start gap-2.5 text-[15px] leading-[1.8] ${isChoice ? "font-medium text-tx" : "text-tx3"}`}>
-                            <span aria-hidden="true" className={`mt-[7px] h-3 w-3 shrink-0 rounded-full border-2 ${isChoice ? "border-gold bg-gold" : "border-bd"}`} />
-                            {option}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-
-                  <div className="border-t border-bd pt-4">
-                    <p className="mb-2 text-[11px] font-semibold tracking-[0.08em] text-gold-d">我們選了：{decision.choice}</p>
-                    <p className="text-[15px] leading-[1.8] text-tx2"><span className="font-medium text-tx">理由：</span>{decision.reasoning}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {caseItem.timeline.length > 0 && (
         <section className="overflow-hidden bg-white py-[80px] md:py-[100px]">
@@ -200,7 +160,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
       <section className="bg-cream py-[72px] md:py-[96px]">
         <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
           <h2 className="h2 mb-4 text-tx">你的產品也有<span className="text-gold-d">類似的機會</span>嗎？</h2>
-          <p className="mx-auto mb-10 max-w-[520px] text-[16.5px] leading-[1.8] text-tx2">每個案子的起點都是一場對話。聊聊你的狀況，我們會告訴你這個故事裡哪一段跟你最相關。</p>
+          <p className="mx-auto mb-10 max-w-[520px] text-[16.5px] leading-[1.8] text-tx2">每個案子的起點都是一場對話。聊聊你的狀況，鹿飛會說明這個故事裡哪一段跟你最相關</p>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
             <button onClick={onMessageOpen} className="cursor-pointer bg-gold px-9 py-[15px] text-[15.5px] font-semibold tracking-[0.5px] text-navy hover:bg-gold-l">
               聊聊你的產品 →

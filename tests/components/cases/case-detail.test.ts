@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
@@ -6,30 +8,35 @@ import { CaseDetailPageContent } from "@/components/cases/CaseDetailPage";
 import { CASES } from "@/data/cases";
 
 describe("CaseDetailPageContent", () => {
-  it("keeps every timeline carousel card and detail panel text in server markup", () => {
+  it("renders every prescribed story chapter and image in server markup", () => {
     for (const caseItem of CASES) {
       const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem }));
 
       expect(markup).toContain(caseItem.title);
       expect(markup).toContain(caseItem.summary);
-      expect(markup).toContain(caseItem.challenge);
-      expect(markup).toContain(caseItem.approach);
-      expect(markup).toContain(caseItem.result);
+      expect(markup).toContain("<img");
+      expect(markup).not.toContain("<video");
+      expect(markup).not.toContain("過程中");
 
       for (const stat of caseItem.stats) {
         expect(markup).toContain(stat.label);
         expect(markup).toContain(stat.value);
       }
+      for (const chapter of caseItem.story) {
+        expect(markup).toContain(chapter.heading);
+        for (const paragraph of chapter.paragraphs) expect(markup).toContain(paragraph);
+        if (chapter.image) {
+          expect(markup).toContain(chapter.image.alt);
+          expect(existsSync(join(process.cwd(), "public", chapter.image.src))).toBe(true);
+          for (const width of [640, 1080, 1600]) {
+            expect(existsSync(join(process.cwd(), "public", chapter.image.src.replace("-1600.webp", `-${width}.webp`)))).toBe(true);
+          }
+        }
+      }
       for (const event of caseItem.timeline) {
         expect(markup).toContain(event.when);
         expect(markup).toContain(event.title);
         expect(markup).toContain(event.desc);
-      }
-      for (const decision of caseItem.keyDecisions) {
-        expect(markup).toContain(decision.moment);
-        expect(markup).toContain(decision.choice);
-        expect(markup).toContain(decision.reasoning);
-        for (const option of decision.options) expect(markup).toContain(option);
       }
       if (caseItem.quote) {
         expect(markup).toContain(caseItem.quote.text);
@@ -38,11 +45,21 @@ describe("CaseDetailPageContent", () => {
     }
   });
 
-  it("uses rounded-full only for the decision option dots", () => {
+  it("keeps every case statistic grounded in its story text", () => {
+    for (const caseItem of CASES) {
+      const storyText = caseItem.story.flatMap((chapter) => [chapter.heading, ...chapter.paragraphs]).join(" ");
+      for (const stat of caseItem.stats) {
+        const number = stat.value.match(/\d+(?:\.\d+)?/)?.[0];
+        expect(number).toBeDefined();
+        expect(storyText).toContain(number);
+      }
+    }
+  });
+
+  it("does not render rounded utility classes", () => {
     const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: CASES[0] }));
 
-    expect(markup).not.toMatch(/\brounded-(?!full\b)/);
-    expect(markup).toContain("rounded-full");
+    expect(markup).not.toMatch(/\brounded-/);
   });
 
   it("maps legacy stages to the new service routes without duplicate links", () => {
