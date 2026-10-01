@@ -323,16 +323,6 @@ export function AboutPage() {
 
           {/* Founder block — larger, with stats row */}
           <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 mb-10 border-l-[3px] border-gold pl-6 md:pl-8 py-3 max-w-[780px]">
-            <div className="relative w-[128px] h-[128px] md:w-[148px] md:h-[148px] overflow-hidden shrink-0 shadow-xl shadow-gold/25 ring-[1.5px] ring-gold/60">
-              <TieredImage
-                src="/images/about/aaron-portrait-studio-1080.webp"
-                alt="Aaron Yu — 鹿飛 LUFÉ 創辦人"
-                sizes="148px"
-                loading="eager"
-                fetchPriority="high"
-                className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
-              />
-            </div>
             <div className="flex-1">
               <div className="font-sans text-[clamp(21px,2.2vw,26px)] leading-[1.3] font-semibold">Aaron Yu</div>
               <div className="text-[15.5px] md:text-[16.5px] text-gold font-medium mt-1">

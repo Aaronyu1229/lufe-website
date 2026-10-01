@@ -12,9 +12,9 @@ export function AaronAuthorPage() {
     <>
       <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop
-          src="/images/about/aaron-portrait-studio-1600.webp"
-          srcSet="/images/about/aaron-portrait-studio-640.webp 640w, /images/about/aaron-portrait-studio-1080.webp 1080w, /images/about/aaron-portrait-studio-1600.webp 1600w"
-          position="72% 18%"
+          src="/images/about/author-hero-port-1600.webp"
+          srcSet="/images/about/author-hero-port-640.webp 640w, /images/about/author-hero-port-1080.webp 1080w, /images/about/author-hero-port-1600.webp 1600w, /images/about/author-hero-port-2400.webp 2400w"
+          position="60% 50%"
         />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
