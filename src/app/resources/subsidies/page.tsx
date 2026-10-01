@@ -10,13 +10,13 @@ import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/StructuredData";
 import { SubsidiesCTASection } from "@/components/subsidy/SubsidiesCTASection";
 import { SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
 import { SubsidyComparison, SubsidyPlanCard } from "@/components/subsidy/SubsidyPlanCard";
-import { STAGE_LABELS, SUBSIDIES, SUBSIDY_CARD_COPY } from "@/data/subsidies";
+import { getActiveSubsidyCount, STAGE_LABELS, SUBSIDIES, SUBSIDY_CARD_COPY } from "@/data/subsidies";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/resources/subsidies",
   title: "2026 政府出海補助",
-  description: "貿易署、經濟部、中企署——四個正在開放的計畫，幫台灣企業降低出海成本。鹿飛整理的實戰版本，直接告訴你哪個適合你。",
+  description: "貿易署、經濟部、外貿協會——四個和出海直接相關的計畫，幫台灣企業降低出海成本。鹿飛整理的實戰版本，直接告訴你哪個適合你。",
 });
 
 export const SUBSIDY_FAQS = [
@@ -28,6 +28,9 @@ export const SUBSIDY_FAQS = [
 ] as const;
 
 export default function SubsidiesPage() {
+  const now = new Date();
+  const activeSubsidyCount = getActiveSubsidyCount(now);
+
   return (
     <>
       <BreadcrumbJsonLd items={[
@@ -44,10 +47,10 @@ export default function SubsidiesPage() {
           <p className="lead mb-12 max-w-[700px] !text-white/[.72]">
             貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入<span className="font-medium text-white">北美</span>和<span className="font-medium text-white">東南亞</span>兩個主戰場。
             但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫
-            我們替你整理了 <span className="font-medium text-white">4 個正在開放、而且和鹿飛三支柱方法論對齊</span> 的計畫
+            我們替你整理了 <span className="font-medium text-white">4 個和鹿飛三支柱方法論對齊</span> 的計畫
           </p>
           <div className="grid grid-cols-2 gap-6 border-t border-white/10 pt-10 md:grid-cols-4 md:gap-10">
-            <Stat num="4" label="當期開放計畫" /><Stat num="1,000萬" label="單筆最高補助額" /><Stat num="3" label="主管機關" /><Stat num="100%" label="和鹿飛服務對齊" />
+            <Stat num={String(activeSubsidyCount)} label="當期開放計畫" /><Stat num="2,000萬" label="聯合申請最高補助" /><Stat num="3" label="主管機關" /><Stat num="100%" label="和鹿飛服務對齊" />
           </div>
         </div>
         <ScrollCue />
@@ -57,7 +60,7 @@ export default function SubsidiesPage() {
         <div className="lufe-container flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
           <p className="eyebrow shrink-0 text-gold">主管機關</p>
           <div className="flex flex-1 flex-wrap items-center gap-x-8 gap-y-2"><AgencyBadge name="國際貿易署" sub="TITA · 貿易署" /><span className="hidden h-5 w-px bg-bd md:block" /><AgencyBadge name="經濟部" sub="MOEA" /><span className="hidden h-5 w-px bg-bd md:block" /><AgencyBadge name="中小及新創企業署" sub="SMEA · 中企署" /></div>
-          <p className="shrink-0 text-[11.5px] text-tx3 md:text-right">最後更新 2026.04</p>
+          <p className="shrink-0 text-[11.5px] text-tx3 md:text-right">最後更新 2026.10</p>
         </div>
       </section>
 
@@ -78,10 +81,10 @@ export default function SubsidiesPage() {
         <div className="lufe-container">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <h2 className="h2 max-w-[780px] text-tx">4 個計畫，對應你出海的<span className="text-gold">不同階段</span></h2>
-            <p className="text-[14.5px] text-tx3 md:text-right">資料最後確認 <span className="font-medium text-tx">2026.04.23</span><br />名額有限 · 部分計畫經費用罄即止</p>
+            <p className="text-[14.5px] text-tx3 md:text-right">資料最後確認 <span className="font-medium text-tx">2026.10.02</span><br />名額有限 · 部分計畫經費用罄即止</p>
           </div>
-          <SubsidyComparison subsidies={SUBSIDIES} />
-          <div className="mx-auto grid max-w-[1120px] min-w-0 gap-5 md:gap-6">{SUBSIDIES.map((subsidy) => <SubsidyPlanCard key={subsidy.slug} subsidy={subsidy} />)}</div>
+          <SubsidyComparison subsidies={SUBSIDIES} now={now} />
+          <div className="mx-auto grid max-w-[1120px] min-w-0 gap-5 md:gap-6">{SUBSIDIES.map((subsidy) => <SubsidyPlanCard key={subsidy.slug} subsidy={subsidy} now={now} />)}</div>
         </div>
       </section>
 
