@@ -63,3 +63,26 @@
 - 無障礙不低於 main。
 - 字形外觀不變（1440／390 截圖）。
 把對照表貼進 PR 描述（更新原本的表）。commit、push 到同一分支，不要開新 PR，不准合併。
+
+---
+## 第三輪（主控，2026-10-01）——換方向
+感謝第二輪照實停下來。主控查到內頁慢的真正大頭不是字型：
+
+`/services` 在 main 的網路紀錄：`images/services/services-hero-dhl.jpg` **2,023KB 原檔直送**，LCP 16s。`public/images/**` 裡有約 30 張 1–4MB 的 JPG（stage-*.jpg、case-*.jpg、cases-hero-collab.jpg、story-action-conversation.jpg…），全站大圖、卡片圖都在用原檔。首頁大圖早就用了 WebP 分級（`hero-poster-828/1600/1920.webp` + srcSet），內頁沒有。
+
+### 要做的
+1. **字型回到第一輪做法**：`git revert 5c0684a`（第二輪擴大 critical＋unicode-range 讓首頁從 89 掉到 85）。保留第一輪＋主控的 Playfair 不預載（a383574）。
+2. **圖片分級**：寫 `scripts/build-image-tiers.mjs`（用專案已有的 `sharp`），把 `src/**` 實際引用到的 `public/images/**/*.jpg|png` 中寬度 > 900px 的，產出 WebP 分級：`<name>-640.webp`、`-1080.webp`、`-1600.webp`、`-2400.webp`（不放大，原圖不夠寬就少產幾級），品質 72。產物 commit 進 repo（不要用 next/image 的線上轉檔，會計費）。加 `npm run images:build`。說明寫進 `scripts/build-image-tiers.md`。
+3. **改引用**：
+   - `HeroBackdrop`（與所有 `.lufe-hero-backdrop` 的 `<img>`）：輸出 `srcSet` 用 WebP 分級、`sizes="100vw"`、`fetchPriority="high"`、不要 lazy；`src` 指向 1600 那級。
+   - 其他 `<img>`／CSS background 用到大 JPG 的（案例卡、文章封面、章節卡片圖等）：`srcSet`＋合理 `sizes`＋`loading="lazy"`＋`decoding="async"`。CSS `background-image` 若難以 srcset，改用 `image-set()` 或改成 `<img>`（只在不影響版面時）。
+   - 原 JPG 檔保留不刪（OG 圖、外部引用可能用到），只是頁面不再引用。
+   - 寫一個測試：掃 `src/**`，除了 `opengraph`／`metadata` 用途，不得再直接引用 `public/images` 下 > 500KB 的檔案。
+4. 首頁的 HeroSection 已經有分級，不用改（第一輪的影片延後保留）。
+
+### 合併門檻（同機同條件、Lighthouse 12 手機、各 2 次平均，基準＝ http://localhost:3122 的 main，不要關它）
+- `/` ≥ 88。
+- `/services`、`/about`、`/services/product-testing`、`/cases`、`/insights`、`/contact` 效能都 **≥ main**，且 LCP 明顯下降。
+- 無障礙 ≥ main。
+- 1440／390 截圖：大圖畫質肉眼無明顯劣化、構圖位置（object-position）不變。
+更新 PR #70 描述的對照表（整張重寫成最終版），同一分支 commit／push，不准合併。若某頁仍低於 main，照實寫出並附 trace 摘要。
