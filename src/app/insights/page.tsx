@@ -1,8 +1,8 @@
 import { InsightsPage } from "@/components/insights/InsightsPage";
 import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
-import { articles } from "@/data/articles";
 import { CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
 import { toDatabaseInsightCard, toInsightCard } from "@/lib/articles/presentation";
+import { getPublishedArticles } from "@/lib/articles/published";
 import { listPublishedArticles } from "@/lib/articles/repository";
 import type { DatabaseArticle } from "@/lib/articles/repository";
 import { createPageMetadata } from "@/lib/seo";
@@ -32,7 +32,7 @@ export default async function Insights() {
   }
 
   const insightCards = [
-    ...articles.map(toInsightCard),
+    ...getPublishedArticles().map(toInsightCard),
     ...databaseArticles.map(toDatabaseInsightCard),
   ]
     .sort((left, right) => right.date.localeCompare(left.date));

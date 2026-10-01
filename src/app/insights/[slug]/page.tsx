@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { articles, getArticleBySlug, getArticleImage } from "@/data/articles";
+import { getArticleBySlug, getArticleImage } from "@/data/articles";
 import { ArticleDetail } from "@/components/insights/ArticleDetail";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/StructuredData";
 import { toDatabaseInsight } from "@/lib/articles/presentation";
+import { getArticlePublishedDate, getPublishedArticles, isPublished } from "@/lib/articles/published";
 import { getPublishedArticleBySlug } from "@/lib/articles/repository";
 import { SITE_URL } from "@/lib/site";
 import { createArticleMetadata, toAbsoluteUrl, toIsoDate, withoutSiteName } from "@/lib/seo";
@@ -16,7 +17,7 @@ export const dynamicParams = true;
 export const revalidate = 300;
 
 export async function generateStaticParams() {
-  return articles.map((article) => ({
+  return getPublishedArticles().map((article) => ({
     slug: article.slug,
   }));
 }
@@ -25,12 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const staticArticle = getArticleBySlug(slug);
   if (staticArticle) {
+    if (!isPublished(staticArticle)) return { title: "文章未找到" };
+
     return createArticleMetadata({
       path: `/insights/${staticArticle.slug}`,
-    title: withoutSiteName(staticArticle.title),
+      title: withoutSiteName(staticArticle.title),
       description: staticArticle.summary,
       image: getArticleImage(staticArticle),
-      publishedTime: toIsoDate(staticArticle.date),
+      publishedTime: staticArticle.publishAt ?? toIsoDate(staticArticle.date),
       modifiedTime: toIsoDate(staticArticle.updated ?? staticArticle.date),
     });
   }
@@ -59,26 +62,29 @@ export default async function ArticlePage({ params }: Props) {
   const staticArticle = getArticleBySlug(slug);
 
   if (staticArticle) {
-    const image = getArticleImage(staticArticle);
-    const canonical = toAbsoluteUrl(`/insights/${staticArticle.slug}`);
-    const publishedTime = toIsoDate(staticArticle.date);
+    if (!isPublished(staticArticle)) notFound();
+
+    const article = { ...staticArticle, date: getArticlePublishedDate(staticArticle) };
+    const image = getArticleImage(article);
+    const canonical = toAbsoluteUrl(`/insights/${article.slug}`);
+    const publishedTime = staticArticle.publishAt ?? toIsoDate(staticArticle.date);
     const modifiedTime = toIsoDate(staticArticle.updated ?? staticArticle.date);
     return <>
       <BreadcrumbJsonLd items={[
         { name: "洞察與資源", path: "/insights" },
-        { name: staticArticle.category, path: `/insights/${staticArticle.slug}` },
+        { name: article.category, path: `/insights/${article.slug}` },
       ]} />
       <ArticleJsonLd
-        headline={staticArticle.title}
-        description={staticArticle.summary}
+        headline={article.title}
+        description={article.summary}
         image={image}
         datePublished={publishedTime}
         dateModified={modifiedTime}
         canonical={canonical}
-        citation={staticArticle.sources?.map((source) => source.url)}
+        citation={article.sources?.map((source) => source.url)}
       />
-      {staticArticle.faq ? <FaqJsonLd items={staticArticle.faq.map(({ q, a }) => ({ question: q, answer: a }))} /> : null}
-      <ArticleDetail article={staticArticle} image={image} />
+      {article.faq ? <FaqJsonLd items={article.faq.map(({ q, a }) => ({ question: q, answer: a }))} /> : null}
+      <ArticleDetail article={article} image={image} />
     </>;
   }
 

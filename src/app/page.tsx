@@ -8,9 +8,9 @@ import { OneContractSection } from "@/components/home/WhySection";
 import { HomeFAQ } from "@/components/home/HomeFAQ";
 import { FaqJsonLd } from "@/components/seo/StructuredData";
 import { CTASection } from "@/components/home/CTASection";
-import { articles } from "@/data/articles";
 import { HOME_FAQ_ITEMS } from "@/data/homeFaq";
 import { toDatabaseInsightCard, toInsightCard } from "@/lib/articles/presentation";
+import { getPublishedArticles } from "@/lib/articles/published";
 import { listPublishedArticles } from "@/lib/articles/repository";
 import type { DatabaseArticle } from "@/lib/articles/repository";
 import { createPageMetadata } from "@/lib/seo";
@@ -29,7 +29,7 @@ export default async function Home() {
   }
 
   const latestArticles = [
-    ...articles.map(toInsightCard),
+    ...getPublishedArticles().map(toInsightCard),
     ...databaseArticles.map(toDatabaseInsightCard),
   ]
     .sort((left, right) => right.date.localeCompare(left.date))
