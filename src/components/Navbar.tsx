@@ -341,11 +341,12 @@ type MenuLinkProps = {
   href: string;
   title: ReactNode;
   marker: ReactNode;
+  desc?: string;
   external?: boolean;
 };
 
-function MenuLink({ href, title, marker, external = false }: MenuLinkProps) {
-  const content = <><MenuMarker>{marker}</MenuMarker><span className="min-w-0"><b className="block text-[15.5px] font-[650] tracking-[-.005em] transition-colors [@media(hover:hover)]:group-hover:text-sky">{title}</b></span></>;
+function MenuLink({ href, title, marker, desc, external = false }: MenuLinkProps) {
+  const content = <><MenuMarker>{marker}</MenuMarker><span className="min-w-0"><b className="block text-[15.5px] font-[650] tracking-[-.005em] transition-colors [@media(hover:hover)]:group-hover:text-sky">{title}</b>{desc && <span className="mt-0.5 block truncate text-[12.5px] text-tx2">{desc}</span>}</span></>;
   const className = "group -mx-3 grid grid-cols-[28px_minmax(0,1fr)] items-center gap-3 px-3 py-3 transition-[background-color,transform] duration-150 [@media(hover:hover)]:hover:bg-[rgba(58,107,132,.07)] active:scale-[.985]";
 
   return external
@@ -422,7 +423,7 @@ function AdvancedMenu({ onMessageOpen }: { onMessageOpen: () => void }) {
       <MenuLink href="/services/optimize" title="運營優化" marker={<TrendIcon size={18} />} />
     </MenuColumn>
     <MenuColumn bordered>
-      <MenuLink href="/services/methodology" title="鹿飛方法論" marker={<BarsIcon />} />
+      <MenuLink href="/services/methodology" title="鹿飛方法論" desc="小步出海法 · 先問市場，再投錢" marker={<BarsIcon />} />
       <MenuLink href="/assess" title="2 分鐘處境比對" marker={<ClockIcon size={18} />} />
     </MenuColumn>
     <MenuRail>
