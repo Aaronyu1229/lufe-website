@@ -22,6 +22,8 @@ type ArticleStructuredData = {
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const PERSON_ID = `${SITE_URL}/#aaron-yu`;
+const AARON_PROFILE_PATH = "/about/aaron-yu";
+const AARON_IMAGE_PATH = "/images/about/aaron-portrait-studio-1080.webp";
 
 function JsonLd({ data }: { readonly data: unknown }) {
   return (
@@ -62,9 +64,23 @@ export function SiteStructuredData() {
             jobTitle: "鹿飛 LUFÉ 創辦人",
             worksFor: { "@id": ORGANIZATION_ID },
             description: "看了很多年貨櫃出去，決定去接貨到了之後的事。",
+            url: toAbsoluteUrl(AARON_PROFILE_PATH),
+            image: toAbsoluteUrl(AARON_IMAGE_PATH),
             sameAs: ["https://www.linkedin.com/in/wibp/"],
           },
         ],
+      }}
+    />
+  );
+}
+
+export function ProfilePageJsonLd() {
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        mainEntity: { "@id": PERSON_ID },
       }}
     />
   );
@@ -128,6 +144,7 @@ export function ArticleJsonLd({
           "@type": "Person",
           "@id": PERSON_ID,
           name: "Aaron Yu",
+          url: toAbsoluteUrl(AARON_PROFILE_PATH),
         },
         publisher: {
           "@type": "Organization",
