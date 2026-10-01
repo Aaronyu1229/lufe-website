@@ -35,3 +35,31 @@
 3. `next start -p 3120` 後跑 `npx -y lighthouse@12 http://localhost:3120/ --chrome-flags="--headless=new"`（手機預設）與 `--preset=desktop` 各 3 次，貼中位數的四項分數與 LCP／TBT／CLS。另外對 `/services`、`/about` 各跑一次手機版，確認沒有變差。
 4. agent-browser 1440 與 390 截首頁首屏，確認中文字形看起來跟現在一樣（沒有掉回系統字或缺字）、影片仍會播放、輪播換張時下一張影片正常。截圖放 `docs/proposals/perf1001/` 一起 commit。
 5. commit 結尾 `Co-Authored-By: Codex <noreply@openai.com>`；`git push -u origin perf/mobile-lcp`；`gh pr create --base main --title "perf: 首頁手機 LCP（字型拆檔、影片延後、對比）"`。**不准合併。**
+
+---
+## 第二輪（主控審查後，2026-10-01）
+主控已在本分支加一個 commit：Playfair 不預載（首頁手機 86→89）。
+
+### 審查發現：內頁變差，不能合併
+同一台機器、本機 `next start`、Lighthouse 12 手機、各跑 2 次，「main 現況」vs「本分支」：
+
+| 頁 | main 效能 / LCP / TBT | 本分支 效能 / LCP / TBT |
+|---|---|---|
+| `/` | 77–79 / 5.7s / ~30ms | 89 / 3.8s / ~30ms |
+| `/services` | 61–62 / 15.9s / ~525ms | 50–51 / 13.7s / ~1,300ms |
+| `/about` | 75 / 11.9s / ~60ms | 50–59 / 9.3s / 630–1,280ms |
+
+內頁 LCP 有改善，但 TBT（主執行緒卡住時間）暴增。主控推測：內頁首屏的字不在 critical 檔，兩個字型檔先後到達，整頁中文要用兩個字型面比對、重排兩次。**這是推測，請先驗證再修。**
+
+### 要做的（依序試，每一步都要量）
+1. 先驗證 TBT 來源：用 Chrome performance trace（或 Lighthouse 的 `mainthread-work-breakdown`、`long-tasks` 稽核）找出 `/services`、`/about` 多出來的長任務是什麼（Layout？Recalc style？字型？JS？）。結果寫進 PR。
+2. 把 critical 字集擴大成「**每一頁**的首屏」：導覽列＋每個路由的大圖 h1／引言／按鈕／麵包屑（從原始碼自動抽：各頁 hero 元件與 `src/data/chapters.ts`、`src/lib/seo` 用到的標題等）。目標 critical < 120KB。
+3. 全站檔用 next/font/local 的 `declarations` 加 `unicode-range`，**排除** critical 已有的字，讓每個字只屬於一個字型面（避免同一字在兩個面重複比對）。check-font-subset 守門要跟著改：兩個檔合起來涵蓋全站。
+4. 若 2＋3 之後 TBT 仍明顯高於 main，回報原因並提出替代方案，不要硬上。
+
+### 合併門檻（全部要達成）
+- `/` 手機效能 ≥ 88。
+- `/services`、`/about`、`/services/product-testing`、`/cases` 手機效能**都不低於 main**（同機同條件各跑 2 次取平均，main 可在另一個 worktree `~/dev/lufe-copy2` 跑 `npx next start -p 3122` 當基準——那邊已建置好，不要改它的檔案）。
+- 無障礙不低於 main。
+- 字形外觀不變（1440／390 截圖）。
+把對照表貼進 PR 描述（更新原本的表）。commit、push 到同一分支，不要開新 PR，不准合併。
