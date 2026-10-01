@@ -268,7 +268,7 @@ export function HeroSection() {
                   videoRefs.current[i] = el;
                 }}
                 key={`${slide.id}-${rotationKey}`}
-                className="bg-video"
+                className="bg-video lufe-hero-video" {...(ready ? { "data-ready": "" } : {})}
                 style={{
                   opacity: ready ? 1 : 0,
                   transition: "opacity 800ms ease-out",
