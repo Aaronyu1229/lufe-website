@@ -83,7 +83,22 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/insights/vietnam-market-entry-guide",
-        destination: "/insights/southeast-asia-ecommerce-2026",
+        destination: "/insights/why-philippines-first",
+        permanent: true,
+      },
+      {
+        source: "/insights/southeast-asia-ecommerce-2026",
+        destination: "/insights/philippines-ecommerce-first-year",
+        permanent: true,
+      },
+      {
+        source: "/insights/china-tariff-relocation-strategy",
+        destination: "/insights/landed-cost-before-export",
+        permanent: true,
+      },
+      {
+        source: "/insights/amazon-category-analysis",
+        destination: "/insights/amazon-us-three-decisions",
         permanent: true,
       },
       {

@@ -3,7 +3,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { ArticleDetail, renderStaticBoldMarkup } from "@/components/insights/ArticleDetail";
-import { articles, getArticleImage } from "@/data/articles";
+import { StaticArticleContent } from "@/components/insights/StaticArticleContent";
+import { articles, getArticleBySlug, getArticleImage } from "@/data/articles";
 
 const renderMarkup = (text: string) =>
   renderToStaticMarkup(createElement(Fragment, null, renderStaticBoldMarkup(text)));
@@ -23,7 +24,7 @@ describe("renderStaticBoldMarkup", () => {
 });
 
 describe("ArticleDetail", () => {
-  it("keeps every static article heading and body paragraph in the server markup", () => {
+  it("keeps every static article's metadata in the server markup", () => {
     for (const article of articles) {
       const markup = renderToStaticMarkup(createElement(ArticleDetail, { article, image: getArticleImage(article) }));
 
@@ -33,10 +34,22 @@ describe("ArticleDetail", () => {
       expect(markup).toContain(article.date);
       expect(markup).toContain(article.readTime);
 
-      for (const paragraph of article.content) {
-        expect(markup).toContain(renderMarkup(paragraph.replace(/^## /, "")));
-      }
     }
+  });
+
+  it("renders tables, lists, quotes, and safe links from rewritten article Markdown", () => {
+    const article = getArticleBySlug("landed-cost-before-export");
+    if (!article) throw new Error("Expected rewritten article");
+
+    const markup = renderToStaticMarkup(createElement(StaticArticleContent, { content: article.content }));
+
+    expect(markup).toContain("<table");
+    expect(markup).toContain("<blockquote");
+    expect(markup).toContain("<ul");
+    expect(markup).toContain('href="/services/product-testing"');
+    expect(markup).toContain('href="https://tradepiloter.com"');
+    expect(markup).toContain('target="_blank"');
+    expect(markup).toContain('rel="noopener"');
   });
 
   it("does not render rounded utility classes", () => {

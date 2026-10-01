@@ -51,7 +51,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const articleEntries: MetadataRoute.Sitemap = articles
-    .filter((article) => article.slug !== "vietnam-market-entry-guide")
     .map((a) => ({
     url: `${SITE_URL}/insights/${a.slug}`,
     lastModified: now,
@@ -63,7 +62,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const databaseArticles = await listPublishedArticles();
     databaseEntries = databaseArticles
-      .filter((article) => article.slug !== "vietnam-market-entry-guide")
       .map((article) => ({
       url: `${SITE_URL}/insights/${article.slug}`,
       lastModified: article.updatedAt,

@@ -10,17 +10,16 @@ const insightCards = articles.map(toInsightCard);
 const renderPage = () => renderToStaticMarkup(createElement(InsightsPageContent, { articles: insightCards, active: "all" }));
 
 describe("InsightsPageContent", () => {
-  it("keeps every chapter filter and non-Vietnam article card in the server markup", () => {
+  it("keeps every chapter filter and article card in the server markup", () => {
     const markup = renderPage();
 
     for (const chapter of INSIGHT_CHAPTERS) expect(markup).toContain(chapter.label);
-    for (const article of articles.filter((article) => article.slug !== "vietnam-market-entry-guide")) {
+    for (const article of articles) {
       expect(markup).toContain(article.title);
       expect(markup).toContain(article.summary);
       expect(markup).toContain(article.date);
       expect(markup).toContain(article.readTime);
     }
-    expect(markup).not.toContain("越南市場進入指南");
   });
 
   it("renders the empty chapter state", () => {
