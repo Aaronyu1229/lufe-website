@@ -19,6 +19,7 @@
 2. **檢查上週**：對已過 publishAt 的文章，`curl -s -o /dev/null -w "%{http_code}" https://lufe.world/insights/<slug>` 必須 200；sitemap 要含該網址。不對就記到 LOG 的「異常」。
 3. **選題**：先抓 `https://jumping.group/sitemap.xml` 的 `/insights/` 清單——躍馬官網（同一位老闆）已寫或屬於物流／報關／關稅本業的題目，鹿飛**不寫**，改在相關文章裡連到躍馬那篇。然後從 `docs/blog-autopilot/QUEUE.md` 的「自動產線」區，由上往下取 3 個未勾選題目。「訪談佇列」的題目**不准自動寫**。
 4. **研究**（每題）
+   - 先查 `docs/blog-autopilot/firsthand-material.md`：有對應題目的公開第一手素材就引用，照文末「素材使用規則」標明出處（例如「躍馬在其頻道對該報導的說明中寫道…」），不得改寫成無出處的「我們常看到」。鹿飛 `/cases` 的數字在 Aaron 確認「真實且已授權」之前，只能寫成「案例頁所載」。
    - DataForSEO 查主攻字與 3～5 個變體的台灣月搜尋量（帳密：`security find-generic-password -s dataforseo-api -w`，帳號 aaron.yu@reborn.in；端點 `keywords_data/google_ads/search_volume/live`，`location_code: 2158`、`language_name: "Chinese (Traditional)"`）。選量最大且符合意圖的當主攻字。
    - 查該主攻字的 Google 首頁（`serp/google/organic/live/advanced`，台灣、`language_code: "zh-TW"`），看前 5 名在寫什麼，找出**他們沒寫的**（資訊增益）。
    - 事實一律查官方或權威來源（政府、法規原文、平台官方說明、國際組織）。查不到就不寫。
