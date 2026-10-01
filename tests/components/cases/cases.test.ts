@@ -13,6 +13,12 @@ describe("CasesPageContent", () => {
   it("keeps every filter, case card, and expanded panel summary in server markup", () => {
     const markup = renderCasesPage();
 
+    expect(markup).toContain("每一個判斷，");
+    expect(markup).toContain("都有案例可以對照");
+    const roadIconMarkup = markup.split("data-case-road-icon=").slice(1);
+    expect(roadIconMarkup).toHaveLength(3);
+    for (const iconMarkup of roadIconMarkup) expect(iconMarkup).toContain("<svg");
+
     for (const option of [...INDUSTRIES, ...MARKETS]) {
       expect(markup).toContain(option.label);
     }

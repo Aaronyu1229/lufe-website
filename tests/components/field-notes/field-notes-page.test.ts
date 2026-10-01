@@ -3,12 +3,12 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { FieldNotesPage } from "@/components/field-notes/FieldNotesPage";
-import { ACTIVITIES, FIELD_NOTES, MEDIA_MENTIONS, PARTNER_LOGOS } from "@/data/fieldNotes";
+import { ACTIVITIES, FIELD_NOTES } from "@/data/fieldNotes";
 
 const renderPage = () => renderToStaticMarkup(createElement(FieldNotesPage));
 
 describe("FieldNotesPage", () => {
-  it("keeps every activity, note, mention, and partner in the server markup", () => {
+  it("keeps every activity and note in the server markup", () => {
     const markup = renderPage();
 
     for (const activity of ACTIVITIES) {
@@ -26,16 +26,11 @@ describe("FieldNotesPage", () => {
       expect(markup).toContain(note.body);
     }
 
-    for (const mention of MEDIA_MENTIONS) {
-      expect(markup).toContain(mention.outlet);
-      expect(markup).toContain(mention.title);
-      expect(markup).toContain(mention.date);
-    }
-
-    for (const partner of PARTNER_LOGOS) {
-      expect(markup).toContain(partner.name);
-      expect(markup).toContain(partner.type);
-    }
+    const pageText = markup.replace(/<[^>]+>/g, "");
+    expect(pageText).not.toContain("別人怎麼說我們");
+    expect(pageText).not.toContain("一起做事的夥伴網絡");
+    expect(pageText).not.toContain("次媒體露出");
+    expect(pageText).not.toContain("個合作單位");
   });
 
   it("does not turn field notes into links or render rounded utility classes", () => {

@@ -5,10 +5,10 @@ import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { HERO_VIDEOS } from "@/data/heroVideos";
-import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
 import { ExpandCard, Segmented, flip } from "@/components/ui";
+import { PackageIcon, SlidersIcon, SproutIcon } from "@/components/icons/LineIcons";
 import {
   CASES,
   CASE_CARD_META,
@@ -26,20 +26,23 @@ export const CASE_ROADS = [
   {
     label: "第一條",
     title: "從零開始",
-    body: "在當地蓋一間英語教育機構，後來用同樣的方法做了一個連鎖手搖飲品牌。",
-    lesson: "找人比找店面難，第一批人決定後面所有事。",
+    body: "在當地蓋一間英語教育機構，後來用同樣的方法做了一個連鎖手搖飲品牌",
+    lesson: "找人比找店面難，第一批人決定後面所有事",
+    icon: SproutIcon,
   },
   {
     label: "第二條",
     title: "改了再帶過去",
-    body: "台灣的產品到了當地，改配方、改價格、改包裝。",
-    lesson: "台灣的「好」不一定是當地的「好」，先讓當地人拿起來看看。",
+    body: "台灣的產品到了當地，改配方、改價格、改包裝",
+    lesson: "台灣的「好」不一定是當地的「好」，先讓當地人拿起來看看",
+    icon: SlidersIcon,
   },
   {
     label: "第三條",
     title: "原封不動帶過去",
-    body: "一個台灣的美業品牌，什麼都不改，只做當地行銷。",
-    lesson: "品牌可以不改，但講故事的方式一定要改。",
+    body: "一個台灣的美業品牌，什麼都不改，只做當地行銷",
+    lesson: "品牌可以不改，但講故事的方式一定要改",
+    icon: PackageIcon,
   },
 ] as const;
 
@@ -178,22 +181,25 @@ export function CasesPageContent({
             <span className="text-white/75">案例</span>
           </nav>
 
-          <h1 className="h1 mb-7 max-w-[880px] text-white">我們不是跟你賭市場，<br /><span className="text-gold">是有做過的事</span></h1>
-          <p className="lead max-w-[600px] whitespace-pre-line text-white/70">在菲律賓，我們跟合作夥伴走過三條不一樣的路。{"\n"}底下是其中幾個決策的完整過程。</p>
+          <h1 className="h1 mb-7 max-w-[880px] text-white">每一個判斷，<br /><span className="text-gold">都有案例可以對照</span></h1>
+          <p className="lead max-w-[600px] whitespace-pre-line text-white/70">在菲律賓與北美，鹿飛走過三條不一樣的出海路徑{"\n"}以下是其中幾個關鍵決策的完整過程</p>
         </div>
         <ScrollCue />
       </section>
 
       <section className="bg-white py-[72px] md:py-[88px]">
         <div className="lufe-container">
-          <Reveal className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">
-            {CASE_ROADS.map((road) => <article key={road.label} className="lufe-card border border-bd bg-cream p-6"><p className="text-[14px] font-semibold text-gold-d">{road.label}</p><h2 className="h3 mt-3 text-tx">{road.title}</h2><p className="mt-4 text-[15px] leading-[1.8] text-tx2">{road.body}</p><div className="mt-6 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="block text-tx">這條路教我們的事</strong>{road.lesson}</div></article>)}
-          </Reveal>
+          <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">
+            {CASE_ROADS.map((road) => {
+              const Icon = road.icon;
+              return <article key={road.label} className="group lufe-card border border-bd bg-cream p-6"><div data-case-road-icon="" className="grid h-10 w-10 place-items-center border border-gold/25 bg-gold/10 text-gold-d [@media(hover:hover)]:group-hover:bg-gold/15"><Icon size={20} /></div><p className="mt-4 text-[14px] font-semibold text-gold-d">{road.label}</p><h2 className="h3 mt-3 text-tx">{road.title}</h2><p className="mt-4 text-[15px] leading-[1.8] text-tx2">{road.body}</p><div className="mt-6 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="block text-tx">這條路教我們的事</strong>{road.lesson}</div></article>;
+            })}
+          </div>
         </div>
       </section>
 
       <section className="bg-white pb-0">
-        <div className="lufe-container"><div className="flex flex-col items-start justify-between gap-6 border border-bd bg-cream p-6 md:flex-row md:items-center md:p-8"><div><h2 className="h3 text-tx">不確定自己比較像哪一條？</h2><p className="mt-2 text-[15px] leading-[1.8] text-tx2">先做 2 分鐘處境比對，我們告訴你最像哪一個案例。</p></div><Link href="/assess" className="shrink-0 bg-gold px-6 py-3.5 text-[15px] font-semibold text-navy hover:bg-gold-l">先做 2 分鐘處境比對 →</Link></div></div>
+        <div className="lufe-container"><div className="flex flex-col items-start justify-between gap-6 border border-bd bg-cream p-6 md:flex-row md:items-center md:p-8"><div><h2 className="h3 text-tx">不確定自己比較像哪一條？</h2><p className="mt-2 text-[15px] leading-[1.8] text-tx2">先做 2 分鐘處境比對，鹿飛告訴你最像哪一個案例</p></div><Link href="/assess" className="shrink-0 bg-gold px-6 py-3.5 text-[15px] font-semibold text-navy hover:bg-gold-l">先做 2 分鐘處境比對 →</Link></div></div>
       </section>
 
       <section className="overflow-hidden bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
@@ -244,12 +250,12 @@ export function CasesPageContent({
           </div>
 
           <div className={`border border-bd bg-cream px-6 py-20 text-center text-[15.5px] text-tx3 ${hasMatches ? "hidden" : ""}`}>
-            這個組合暫時沒有案例。試試調整篩選條件。
+            這個組合暫時沒有案例。試試調整篩選條件
           </div>
 
           <div className="mt-20 border-t border-bd pt-14 text-center">
             <h2 className="h2 text-tx">你的故事會是哪一條？</h2>
-            <p className="mx-auto mt-3 max-w-[440px] text-[15px] leading-[1.8] text-tx2">聊聊你的產品，我們先幫你看比較像哪一條路。</p>
+            <p className="mx-auto mt-3 max-w-[440px] text-[15px] leading-[1.8] text-tx2">聊聊你的產品，鹿飛先幫你看比較像哪一條路</p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-6">
               <button onClick={onMessageOpen} className="cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy hover:bg-gold-l">
                 聊聊你的產品 →
