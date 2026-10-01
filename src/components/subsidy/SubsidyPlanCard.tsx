@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Disclosure } from "@/components/ui";
-import { STAGE_LABELS, type Subsidy } from "@/data/subsidies";
+import { getSubsidyDeadlineLabel, isSubsidyActive, STAGE_LABELS, type Subsidy } from "@/data/subsidies";
 import { SubsidyIcon } from "./SubsidyIcons";
 
 const accentMap: Record<Subsidy["accent"], { num: string; bar: string; iconBg: string }> = {
@@ -10,9 +10,11 @@ const accentMap: Record<Subsidy["accent"], { num: string; bar: string; iconBg: s
   ember: { num: "text-ember", bar: "bg-ember", iconBg: "bg-[rgba(217,139,74,0.08)] text-ember" },
 };
 
-export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
+export function SubsidyPlanCard({ subsidy, now = new Date() }: { readonly subsidy: Subsidy; readonly now?: Date }) {
   const accent = accentMap[subsidy.accent];
   const stage = STAGE_LABELS[subsidy.stage];
+  const isExpiredMarketExpansion = subsidy.slug === "market-expansion" && !isSubsidyActive(subsidy, now);
+  const deadline = getSubsidyDeadlineLabel(subsidy, now);
 
   return (
     <article id={subsidy.slug} className="relative min-w-0 border border-bd bg-white p-6 scroll-mt-[100px] md:p-8">
@@ -48,8 +50,8 @@ export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
           {subsidy.amountNote && <p className="mt-1 text-[11.5px] leading-[1.65] text-tx3">{subsidy.amountNote}</p>}
         </div>
         <div className="min-w-0 sm:text-right">
-          <p className="text-[15.5px] font-medium text-tx">{subsidy.deadline}</p>
-          <p className="mt-1 text-[11.5px] leading-[1.65] text-tx3">{subsidy.applicationNote}</p>
+          <p className="text-[15.5px] font-medium text-tx">{deadline}</p>
+          <p className="mt-1 text-[11.5px] leading-[1.65] text-tx3">{isExpiredMarketExpansion ? "後續以經濟部公告為準" : subsidy.applicationNote}</p>
         </div>
       </div>
 
@@ -119,7 +121,7 @@ export function SubsidyPlanCard({ subsidy }: { readonly subsidy: Subsidy }) {
   );
 }
 
-export function SubsidyComparison({ subsidies }: { readonly subsidies: readonly Subsidy[] }) {
+export function SubsidyComparison({ subsidies, now = new Date() }: { readonly subsidies: readonly Subsidy[]; readonly now?: Date }) {
   return (
     <section className="mb-12 border-y border-bd bg-cream/60 py-7 md:py-8">
       <div className="px-5 md:px-8">
@@ -129,7 +131,7 @@ export function SubsidyComparison({ subsidies }: { readonly subsidies: readonly 
               <span className="num text-[14px] text-gold-d">{subsidy.num}</span>
               <strong className="mt-2 block text-[15px] leading-[1.45] text-tx">{subsidy.shortTitle}</strong>
               <span className="num mt-4 block text-[14px] text-tx">{subsidy.amount}</span>
-              <span className="mt-1 block text-[12px] leading-[1.6] text-tx3">{subsidy.deadline}</span>
+              <span className="mt-1 block text-[12px] leading-[1.6] text-tx3">{getSubsidyDeadlineLabel(subsidy, now)}</span>
             </Link>
           ))}
         </div>

@@ -60,6 +60,18 @@ describe("subsidy SSR content", () => {
     expect(markup).not.toContain("rounded-");
   });
 
+  it("shows the next-year pending status after the market-expansion deadline", () => {
+    const marketExpansion = SUBSIDIES.find((subsidy) => subsidy.slug === "market-expansion")!;
+    const markup = renderToStaticMarkup(createElement(SubsidyPlanCard, {
+      subsidy: marketExpansion,
+      now: new Date("2026-10-30T18:00:01+08:00"),
+    }));
+
+    expect(markup).toContain("116 年度待公告");
+    expect(markup).toContain("後續以經濟部公告為準");
+    expect(markup).not.toContain(marketExpansion.deadline);
+  });
+
   it("renders the stacking label in the completed result view", () => {
     const result = matchSubsidies({ size: "medium", stage: "planning", industry: "food", problem: "need-channel" });
     const markup = renderToStaticMarkup(createElement(ResultView, { result, onRestart: () => {} }));
