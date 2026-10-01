@@ -20,9 +20,19 @@ const inter = Inter({
   display: "swap",
 });
 
-// Self-hosted subset: the Google-hosted variable font is split into 116
-// unicode-range chunks, and Chinese text scatters across them, so the page
-// pulled 22 chunks / 1,331 KB to draw ~1,300 glyphs. One subset file is 429 KB.
+const notoSansTCCritical = localFont({
+  src: "./fonts/NotoSansTC-critical.woff2",
+  variable: "--font-noto-sans-tc-critical",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+  preload: true,
+  fallback: ["PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", "sans-serif"],
+  adjustFontFallback: false,
+});
+
+// The full site subset stays available as a non-blocking fallback after the
+// homepage's much smaller critical subset has rendered.
 const notoSansTC = localFont({
   src: "./fonts/NotoSansTC-subset.woff2",
   variable: "--font-noto-sans-tc",
@@ -30,6 +40,7 @@ const notoSansTC = localFont({
   weight: "100 900",
   style: "normal",
   display: "swap",
+  preload: false,
   // The subset covers every character on the site today. Anything added later
   // falls through to a real system Chinese face, never to a Latin default.
   fallback: ["PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", "sans-serif"],
@@ -116,7 +127,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-Hant"
-      className={`${playfair.variable} ${inter.variable} ${notoSansTC.variable}`}
+      className={`${playfair.variable} ${inter.variable} ${notoSansTCCritical.variable} ${notoSansTC.variable}`}
     >
       <body>
         <MessageBoxProvider>
