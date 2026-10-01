@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
 import { ChoiceGroup } from "@/components/ui/ChoiceGroup";
@@ -226,7 +227,7 @@ export function ContactPage() {
     <>
       {/* ─── Hero + Channel Cards ─── */}
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/contact/hero-handshake-1600.webp" />
+        <HeroBackdrop src="/images/contact/hero-handshake-1600.webp" video={HERO_VIDEOS.contact} />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <h1 className="h1 text-white">
             選一個你最方便的方式

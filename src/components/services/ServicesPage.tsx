@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
 import { Disclosure } from "@/components/ui";
@@ -24,7 +25,7 @@ export function ServicesPage() {
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/services/services-hero-dhl-1600.webp" position="center" />
+        <HeroBackdrop src="/images/services/services-hero-dhl-1600.webp" position="center" video={HERO_VIDEOS.services} />
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0 max-w-[760px]">
             <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55"><Link href="/" className="hover:text-white">首頁</Link><span className="mx-2 text-white/30">/</span><span className="text-white/80">服務</span></nav>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { ScrollCue } from "@/components/ScrollCue";
 import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { SUBSIDIES } from "@/data/subsidies";
@@ -23,7 +24,7 @@ export default function ResourcesPage() {
       <div className="bg-white">
       {/* ───── Hero ───── */}
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/hero/hero-compass-1600.webp" />
+        <HeroBackdrop src="/images/hero/hero-compass-1600.webp" video={HERO_VIDEOS.resources} />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <h1 className="h1 mb-7 max-w-[820px] text-white">
             正在開放的補助，

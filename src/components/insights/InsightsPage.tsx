@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
@@ -92,7 +93,7 @@ export function InsightsPageContent({
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/v5/insights-1600.webp" srcSet="/images/v5/insights-1600.webp 1600w, /images/v5/insights-2400.webp 2400w" />
+        <HeroBackdrop src="/images/v5/insights-1600.webp" srcSet="/images/v5/insights-1600.webp 1600w, /images/v5/insights-2400.webp 2400w" video={HERO_VIDEOS.insights} />
         <div className="lufe-container lufe-hero-content grid min-w-0 grid-cols-1 items-end gap-10 pb-[78px] pt-[148px] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14 md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0">
             <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">洞察</span></nav>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { Reveal } from "@/components/Reveal";
 import { ScoreBars } from "@/components/ScoreBars";
 import { ScrollCue } from "@/components/ScrollCue";
@@ -87,7 +88,7 @@ export function MethodologyPage() {
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/v5/methodology-1600.webp" srcSet="/images/v5/methodology-1600.webp 1600w, /images/v5/methodology-2400.webp 2400w" />
+        <HeroBackdrop src="/images/v5/methodology-1600.webp" srcSet="/images/v5/methodology-1600.webp 1600w, /images/v5/methodology-2400.webp 2400w" video={HERO_VIDEOS.methodology} />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55"><Link href="/" className="hover:text-white">首頁</Link><span className="mx-2 text-white/30">/</span><Link href="/services" className="hover:text-white">服務</Link><span className="mx-2 text-white/30">/</span><span className="text-white/80">方法論</span></nav>
           <p className="mb-4 text-[14px] font-semibold text-gold">方法論</p>

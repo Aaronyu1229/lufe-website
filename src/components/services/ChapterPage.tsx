@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { MailPreview } from "@/components/MailPreview";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
@@ -33,7 +34,7 @@ function ChapterHero({ chapter }: { readonly chapter: Chapter }) {
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop {...image} />
+        <HeroBackdrop {...image} video={HERO_VIDEOS[`chapter:${chapter.key}`]} />
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0 max-w-[760px]">
             <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55">

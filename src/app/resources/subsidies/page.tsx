@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 import { ScrollCue } from "@/components/ScrollCue";
 import { Disclosure } from "@/components/ui";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/StructuredData";
@@ -37,7 +38,7 @@ export default function SubsidiesPage() {
       <FaqJsonLd items={SUBSIDY_FAQS} />
       <div className="overflow-hidden bg-white">
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src={SUBSIDY_CARD_COPY.hero} />
+        <HeroBackdrop src={SUBSIDY_CARD_COPY.hero} video={HERO_VIDEOS.subsidies} />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <h1 className="h1 mb-8 max-w-[900px] text-white">政府在幫你出海，<br /><span className="text-gold/90">你知道怎麼拿嗎？</span></h1>
           <p className="lead mb-12 max-w-[700px] !text-white/[.72]">
