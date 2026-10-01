@@ -4,17 +4,22 @@ const JUMPING_STATS = [
   ["30+", "國家與地區覆蓋"],
 ] as const;
 
+export const JUMPING_COPY = {
+  title: ["一只貨櫃的", "後半段旅程"],
+  body: "一只貨櫃離開台灣，躍馬企業負責把它準時送達——\n這件事，已經做了 42 年、500 多個案件、30 多個國家。\n\n抵達之後，它的故事才開始分岔：\n有的品牌在當地開了第二家店；\n更多的，幾個月後原封不動地退回，或從此沒有下文。\n\n運輸從來不是分水嶺，貨都送到了。\n分水嶺在於，抵達之後有沒有人接手。\n\n鹿飛，是為了這後半段旅程而成立的。",
+} as const;
+
 export function JumpingSection() {
   return (
     <section id="jumping" className="bg-navy py-[80px] text-white md:py-[104px]">
       <div className="lufe-container grid gap-12 lg:grid-cols-[1.1fr_.9fr] lg:gap-20">
         <div>
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
-            四十二年，
+            {JUMPING_COPY.title[0]}
             <br />
-            <span className="text-gold">看著貨櫃一個一個出去</span>
+            <span className="text-gold">{JUMPING_COPY.title[1]}</span>
           </h2>
-          <p className="mt-6 max-w-[660px] whitespace-pre-line text-[16px] leading-[1.9] text-white/70 md:text-[17px]">躍馬企業做國際物流 42 年，500 多個出口案件，30 多個國家。{"\n"}我在裡面看的不是報表，是貨櫃出去以後，後面的故事。{"\n\n"}有的品牌在當地開了第二家店。{"\n"}更多的，是幾個月後貨退回來，或者就沒有下文了。{"\n"}差別從來不在物流——貨都有送到。{"\n"}差別在到了之後，有沒有人接。{"\n\n"}鹿飛就是從這個觀察長出來的。</p>
+          <p className="mt-6 max-w-[660px] whitespace-pre-line text-[16px] leading-[1.9] text-white/70 md:text-[17px]">{JUMPING_COPY.body}</p>
         </div>
         <div className="self-end">
           <div className="grid grid-cols-3 gap-4 border-y border-white/15 py-6 md:gap-7">
