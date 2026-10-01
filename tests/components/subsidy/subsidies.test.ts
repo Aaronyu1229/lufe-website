@@ -2,9 +2,9 @@ import { createElement, Fragment } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
-import { SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
+import { ResultView, SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
 import { SubsidyComparison, SubsidyPlanCard } from "@/components/subsidy/SubsidyPlanCard";
-import { MATCHER_QUESTIONS, SUBSIDIES } from "@/data/subsidies";
+import { MATCHER_QUESTIONS, SUBSIDIES, matchSubsidies } from "@/data/subsidies";
 
 const expectText = (markup: string, value: string) =>
   expect(markup).toContain(renderToStaticMarkup(createElement(Fragment, null, value)));
@@ -56,6 +56,15 @@ describe("subsidy SSR content", () => {
       for (const item of subsidy.importantNotes ?? []) expectText(markup, item);
     }
 
+    expect(markup).toContain('aria-expanded="true"');
     expect(markup).not.toContain("rounded-");
+  });
+
+  it("renders the stacking label in the completed result view", () => {
+    const result = matchSubsidies({ size: "medium", stage: "planning", industry: "food", problem: "need-channel" });
+    const markup = renderToStaticMarkup(createElement(ResultView, { result, onRestart: () => {} }));
+
+    expect(markup).toContain("同時可以疊加申請");
+    expect(markup).toContain("重新測試");
   });
 });

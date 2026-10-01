@@ -31,7 +31,7 @@ export function SubsidiesCTASection() {
         </h2>
         <p className="text-[17px] text-white/70 max-w-[600px] mx-auto mb-10 leading-[1.8]">
           告訴我們你的產品、市場目標和現在卡在哪一步，
-          我們會告訴你哪個補助最適合、下一步怎麼走。
+          我們會告訴你哪個補助最適合、下一步怎麼走
         </p>
         <div className="flex items-center justify-center gap-6 md:gap-8 flex-wrap">
           <button

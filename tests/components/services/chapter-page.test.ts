@@ -47,7 +47,7 @@ describe("ChapterPage", () => {
   it("does not render the Philippines chapter bar on the North America page", async () => {
     const markup = await renderChapter("na");
 
-    expect(markup).toContain("北美市場拓展。</strong> 本頁服務與菲律賓四章各自獨立，由北美專責團隊規劃執行，鹿飛負責合約與進度。");
+    expect(markup).toContain("北美市場拓展</strong> 本頁服務與菲律賓四章各自獨立，由北美專責團隊規劃執行，鹿飛負責合約與進度");
     expect(markup).not.toContain('aria-label="菲律賓服務章節"');
     expect(markup).toContain("步 01");
   });

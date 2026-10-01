@@ -43,8 +43,8 @@ export default function SubsidiesPage() {
           <h1 className="h1 mb-8 max-w-[900px] text-white">政府在幫你出海，<br /><span className="text-gold/90">你知道怎麼拿嗎？</span></h1>
           <p className="lead mb-12 max-w-[700px] !text-white/[.72]">
             貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入<span className="font-medium text-white">北美</span>和<span className="font-medium text-white">東南亞</span>兩個主戰場。
-            但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫。
-            我們替你整理了 <span className="font-medium text-white">4 個正在開放、而且和鹿飛三支柱方法論對齊</span> 的計畫。
+            但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫
+            我們替你整理了 <span className="font-medium text-white">4 個正在開放、而且和鹿飛三支柱方法論對齊</span> 的計畫
           </p>
           <div className="grid grid-cols-2 gap-6 border-t border-white/10 pt-10 md:grid-cols-4 md:gap-10">
             <Stat num="4" label="當期開放計畫" /><Stat num="1,000萬" label="單筆最高補助額" /><Stat num="3" label="主管機關" /><Stat num="100%" label="和鹿飛服務對齊" />
@@ -65,9 +65,9 @@ export default function SubsidiesPage() {
         <div className="lufe-container">
           <h2 className="h2 mb-10 max-w-[780px] text-tx">補助不是額外收入，是<span className="text-gold">降低你出海的實際成本</span></h2>
           <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-            <Pillar num="01" title="錢是真的" desc="每年數億元的預算由貿易署、經濟部執行，不是畫大餅。重點是知道怎麼申請、寫對計畫書。" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" /><path d="M9 9C9 9 9.5 8 12 8C14.5 8 15 9.5 15 10.2C15 11.1 14 11.6 12 12.2C10 12.8 9 13.5 9 14.5C9 15.5 10 16 12 16C14 16 15 15 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M12 6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
-            <Pillar num="02" title="不只是申請表" desc="計畫書要和你的商業目標對齊，執行過程要有產出與報告。鹿飛的服務本身就符合大多數結案標準。" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M10 13L12 15L16 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
-            <Pillar num="03" title="可以疊加使用" desc="同一家公司可以同時申請不同計畫——例如用展覽補助去美國展，用市場布建補助建立當地通路。" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="9" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="8" y="6" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="13" y="3" width="8" height="8" stroke="currentColor" strokeWidth="1.5" /></svg>} />
+            <Pillar num="01" title="錢是真的" desc="每年數億元的預算由貿易署、經濟部執行，不是畫大餅。重點是知道怎麼申請、寫對計畫書" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" /><path d="M9 9C9 9 9.5 8 12 8C14.5 8 15 9.5 15 10.2C15 11.1 14 11.6 12 12.2C10 12.8 9 13.5 9 14.5C9 15.5 10 16 12 16C14 16 15 15 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M12 6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
+            <Pillar num="02" title="不只是申請表" desc="計畫書要和你的商業目標對齊，執行過程要有產出與報告。鹿飛的服務本身就符合大多數結案標準" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M10 13L12 15L16 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
+            <Pillar num="03" title="可以疊加使用" desc="同一家公司可以同時申請不同計畫——例如用展覽補助去美國展，用市場布建補助建立當地通路" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="9" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="8" y="6" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="13" y="3" width="8" height="8" stroke="currentColor" strokeWidth="1.5" /></svg>} />
           </div>
         </div>
       </section>
@@ -92,7 +92,7 @@ export default function SubsidiesPage() {
             {(["assess", "enter", "optimize"] as const).map((stageKey) => {
               const stage = STAGE_LABELS[stageKey];
               const relevant = SUBSIDIES.filter((subsidy) => subsidy.stage === stageKey);
-              return <div key={stageKey} className="min-w-0 border border-bd bg-white p-7 md:p-8"><p className="eyebrow mb-3 text-gold">{stage.label}</p><p className="mb-4 text-[16.5px] font-semibold leading-snug text-tx">{stage.desc}</p><div className="border-t border-bd/60 pt-4"><p className="eyebrow mb-2 text-tx3">適用計畫</p><ul className="grid gap-2">{relevant.length === 0 ? <li className="text-[13.5px] text-tx3">—</li> : relevant.map((subsidy) => <li key={subsidy.slug} className="text-[14.5px] leading-snug text-tx2"><Link href={`#${subsidy.slug}`} className="hover:text-gold"><span className="font-semibold text-gold">{subsidy.num}</span> {subsidy.shortTitle}</Link></li>)}</ul></div></div>;
+              return <div key={stageKey} className="min-w-0 border border-bd bg-white p-7 md:p-8"><p className="eyebrow mb-3 text-gold">{stage.label}</p><p className="mb-4 text-[16.5px] font-semibold leading-snug text-tx">{stage.desc.replace(/。$/, "")}</p><div className="border-t border-bd/60 pt-4"><p className="eyebrow mb-2 text-tx3">適用計畫</p><ul className="grid gap-2">{relevant.length === 0 ? <li className="text-[13.5px] text-tx3">—</li> : relevant.map((subsidy) => <li key={subsidy.slug} className="text-[14.5px] leading-snug text-tx2"><Link href={`#${subsidy.slug}`} className="hover:text-gold"><span className="font-semibold text-gold">{subsidy.num}</span> {subsidy.shortTitle}</Link></li>)}</ul></div></div>;
             })}
           </div>
         </div>
@@ -106,7 +106,7 @@ export default function SubsidiesPage() {
       </section>
 
       <section className="border-t border-bd bg-cream py-[60px] md:py-[80px]">
-        <div className="lufe-container flex flex-col gap-6 md:flex-row md:items-center md:justify-between"><div className="max-w-[520px]"><h3 className="h3 text-tx">補助一有更新，我們通知你</h3><p className="mt-2 text-[14.5px] leading-[1.8] text-tx2">每次有新計畫公告、金額加碼、截止日變動，鹿飛整理成一封信寄給你。不是每週轟炸，只在真的有事時才發。</p></div><div className="shrink-0"><a href="mailto:aaron.yu@reborn.in?subject=%E8%A8%82%E9%96%B1%E8%A3%9C%E5%8A%A9%E5%BF%AB%E8%A8%8A&body=%E5%B8%8C%E6%9C%9B%E6%94%B6%E5%88%B0%E9%B9%BF%E9%A3%9B%E7%9A%84%E6%94%BF%E5%BA%9C%E5%87%BA%E6%B5%B7%E8%A3%9C%E5%8A%A9%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5%EF%BC%9A%0A%0A%E5%85%AC%E5%8F%B8%EF%BC%9A%0A%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E4%B8%BB%E8%A6%81%E5%B8%82%E5%A0%B4%EF%BC%88%E5%8C%97%E7%BE%8E%2F%E6%9D%B1%E5%8D%97%E4%BA%9E%EF%BC%89%EF%BC%9A%0A" className="inline-flex items-center gap-2 bg-navy px-6 py-3.5 text-[14.5px] font-semibold text-white transition-colors hover:bg-navy/90">訂閱補助快訊 →</a><p className="mt-2 text-center text-[11px] text-tx3 md:text-right">寄信到 aaron.yu@reborn.in · 隨時退訂</p></div></div>
+          <div className="lufe-container flex flex-col gap-6 md:flex-row md:items-center md:justify-between"><div className="max-w-[520px]"><h3 className="h3 text-tx">補助一有更新，我們通知你</h3><p className="mt-2 text-[14.5px] leading-[1.8] text-tx2">每次有新計畫公告、金額加碼、截止日變動，鹿飛整理成一封信寄給你。不是每週轟炸，只在真的有事時才發</p></div><div className="shrink-0"><a href="mailto:aaron.yu@reborn.in?subject=%E8%A8%82%E9%96%B1%E8%A3%9C%E5%8A%A9%E5%BF%AB%E8%A8%8A&body=%E5%B8%8C%E6%9C%9B%E6%94%B6%E5%88%B0%E9%B9%BF%E9%A3%9B%E7%9A%84%E6%94%BF%E5%BA%9C%E5%87%BA%E6%B5%B7%E8%A3%9C%E5%8A%A9%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5%EF%BC%9A%0A%0A%E5%85%AC%E5%8F%B8%EF%BC%9A%0A%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E4%B8%BB%E8%A6%81%E5%B8%82%E5%A0%B4%EF%BC%88%E5%8C%97%E7%BE%8E%2F%E6%9D%B1%E5%8D%97%E4%BA%9E%EF%BC%89%EF%BC%9A%0A" className="inline-flex items-center gap-2 bg-navy px-6 py-3.5 text-[14.5px] font-semibold text-white transition-colors hover:bg-navy/90">訂閱補助快訊 →</a><p className="mt-2 text-center text-[11px] text-tx3 md:text-right">寄信到 aaron.yu@reborn.in · 隨時退訂</p></div></div>
       </section>
       <SubsidiesCTASection />
       </div>

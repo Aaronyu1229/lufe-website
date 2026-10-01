@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import { getArticleBySlug, getArticleImage } from "@/data/articles";
 import { ArticleDetail } from "@/components/insights/ArticleDetail";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/StructuredData";
-import { toDatabaseInsight } from "@/lib/articles/presentation";
+import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
+import { toDatabaseInsight, toDatabaseInsightCard, toInsightCard, type InsightCard } from "@/lib/articles/presentation";
 import { getArticlePublishedDate, getPublishedArticles, isPublished } from "@/lib/articles/published";
-import { getPublishedArticleBySlug } from "@/lib/articles/repository";
+import { getPublishedArticleBySlug, listPublishedArticles, type DatabaseArticle } from "@/lib/articles/repository";
 import { SITE_URL } from "@/lib/site";
 import { createArticleMetadata, toAbsoluteUrl, toIsoDate, withoutSiteName } from "@/lib/seo";
 
@@ -57,6 +58,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
+function chapterForSlug(slug: string, databaseArticles: readonly DatabaseArticle[]): ArticleChapterKey | undefined {
+  const staticChapter = (Object.entries(CHAPTER_ARTICLES) as [ArticleChapterKey, readonly string[]][])
+    .find(([, slugs]) => slugs.includes(slug))?.[0];
+  if (staticChapter) return staticChapter;
+
+  const databaseArticle = databaseArticles.find((article) => article.slug === slug);
+  return (Object.entries(CHAPTER_ARTICLE_TAGS) as [ArticleChapterKey, string][])
+    .find(([, tag]) => databaseArticle?.tags.includes(tag))?.[0];
+}
+
+async function getRelatedArticles(article: InsightCard): Promise<readonly InsightCard[]> {
+  let databaseArticles: DatabaseArticle[] = [];
+  try {
+    databaseArticles = await listPublishedArticles();
+  } catch {
+    databaseArticles = [];
+  }
+
+  const chapter = chapterForSlug(article.slug, databaseArticles);
+  const cards = [
+    ...getPublishedArticles().map(toInsightCard),
+    ...databaseArticles.map(toDatabaseInsightCard),
+  ];
+
+  return Array.from(new Map(cards.map((card) => [card.slug, card])).values())
+    .filter((card) => card.slug !== article.slug)
+    .filter((card) => chapter ? chapterForSlug(card.slug, databaseArticles) === chapter : card.category === article.category)
+    .sort((left, right) => right.date.localeCompare(left.date))
+    .slice(0, 3);
+}
+
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const staticArticle = getArticleBySlug(slug);
@@ -69,6 +101,7 @@ export default async function ArticlePage({ params }: Props) {
     const canonical = toAbsoluteUrl(`/insights/${article.slug}`);
     const publishedTime = staticArticle.publishAt ?? toIsoDate(staticArticle.date);
     const modifiedTime = toIsoDate(staticArticle.updated ?? staticArticle.date);
+    const related = await getRelatedArticles(toInsightCard(article));
     return <>
       <BreadcrumbJsonLd items={[
         { name: "洞察與資源", path: "/insights" },
@@ -84,7 +117,7 @@ export default async function ArticlePage({ params }: Props) {
         citation={article.sources?.map((source) => source.url)}
       />
       {article.faq ? <FaqJsonLd items={article.faq.map(({ q, a }) => ({ question: q, answer: a }))} /> : null}
-      <ArticleDetail article={article} image={image} />
+      <ArticleDetail article={article} image={image} related={related} />
     </>;
   }
 
@@ -97,6 +130,7 @@ export default async function ArticlePage({ params }: Props) {
     : toAbsoluteUrl(`/insights/${article.slug}`);
   const publishedTime = toIsoDate(databaseArticle.publishedAt ?? databaseArticle.createdAt);
   const modifiedTime = toIsoDate(databaseArticle.updatedAt ?? databaseArticle.publishedAt ?? databaseArticle.createdAt);
+  const related = await getRelatedArticles(toDatabaseInsightCard(databaseArticle));
   return <>
     <BreadcrumbJsonLd items={[
       { name: "洞察與資源", path: "/insights" },
@@ -110,6 +144,6 @@ export default async function ArticlePage({ params }: Props) {
       dateModified={modifiedTime}
       canonical={canonical}
     />
-    <ArticleDetail article={article} image={article.image} />
+    <ArticleDetail article={article} image={article.image} related={related} />
   </>;
 }

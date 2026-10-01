@@ -7,13 +7,15 @@ import { SUBSIDIES } from "@/data/subsidies";
 import { ACTIVITIES } from "@/data/fieldNotes";
 
 describe("ResourcesPage", () => {
-  it("renders the resource counts without rounded classes", () => {
+  it("renders subsidy rows and the first three real activities without legacy hub stats", () => {
     const markup = renderToStaticMarkup(createElement(ResourcesPage));
 
-    expect(markup).toContain(String(SUBSIDIES.length));
-    expect(markup).toContain(String(ACTIVITIES.length));
-    expect(markup).toContain("2026 政府出海補助");
-    expect(markup).toContain("活動 · 現場紀錄");
+    for (const subsidy of SUBSIDIES) {
+      expect(markup).toContain(subsidy.shortTitle.replace("&", "&amp;"));
+      expect(markup).toContain(`/resources/subsidies#${subsidy.slug}`);
+    }
+    for (const activity of ACTIVITIES.filter((activity) => activity.image && !activity.tbd).slice(0, 3)) expect(markup).toContain(activity.title);
+    expect(markup).not.toContain("4 個正在開放");
     expect(markup).not.toContain("rounded-");
   });
 });

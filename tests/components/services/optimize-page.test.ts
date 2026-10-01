@@ -37,9 +37,9 @@ describe("OptimizePageContent", () => {
   it("uses the D10 soft wording and does not restore unsupported claims", () => {
     const markup = renderPage();
 
-    expect(markup).toContain("盤完通常都有可省的空間，數字第一次談給你範圍。 ".trim());
-    expect(markup).toContain("目標是讓 AI 回答時有你的名字。");
-    expect(markup).toContain("目標是新人第一天就知道東西在哪、事情怎麼跑。");
+    expect(markup).toContain("盤完通常都有可省的空間，數字第一次談給你範圍");
+    expect(markup).toContain("目標是讓 AI 回答時有你的名字");
+    expect(markup).toContain("目標是新人第一天就知道東西在哪、事情怎麼跑");
     expect(markup).not.toContain("12–25%");
     expect(markup).not.toContain("200%+");
     expect(markup).not.toContain("90 天縮到 1 天");
