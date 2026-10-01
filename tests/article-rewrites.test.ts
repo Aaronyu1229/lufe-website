@@ -9,7 +9,9 @@ vi.mock("@/lib/articles/repository", () => ({
 }));
 
 import ArticlePage from "@/app/insights/[slug]/page";
-import { articles, getArticleBySlug } from "@/data/articles";
+import sitemap from "@/app/sitemap";
+import { articles, getArticleBySlug, getArticleImage } from "@/data/articles";
+import { CHAPTER_ARTICLES } from "@/data/chapters";
 
 type DraftSource = {
   readonly id: number;
@@ -32,6 +34,7 @@ type Draft = {
 };
 
 const draftDirectory = "docs/proposals/blog-story-2026-10-01";
+const newDraftDirectory = "docs/proposals/blog-new-2026-10-01";
 
 function scalar(value: string): string {
   return value.startsWith('"') ? JSON.parse(value) as string : value;
@@ -43,8 +46,8 @@ function frontMatterValue(frontMatter: string, key: string): string {
   return scalar(match[1]);
 }
 
-function readDraft(file: string): Draft {
-  const input = readFileSync(join(draftDirectory, file), "utf8");
+function readDraft(file: string, directory = draftDirectory): Draft {
+  const input = readFileSync(join(directory, file), "utf8");
   const match = input.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) throw new Error(`Missing front matter in ${file}`);
 
@@ -77,14 +80,31 @@ function readDraft(file: string): Draft {
 const drafts = readdirSync(draftDirectory)
   .filter((file) => file.endsWith(".md") && file !== "WO.md")
   .sort()
-  .map(readDraft);
+  .map((file) => readDraft(file));
+const newDrafts = readdirSync(newDraftDirectory)
+  .filter((file) => file.endsWith(".md") && file !== "WO.md")
+  .sort()
+  .map((file) => readDraft(file, newDraftDirectory));
 
-describe("eleven story article rewrites", () => {
-  it("copies every approved draft into its matching static article", () => {
+const seoTitles = {
+  "us-fda-registration-guide": "美國 FDA 認證怎麼申請？FDA 不發「認證」：保健品出口美國真正要做的五件事",
+  "landed-cost-before-export": "出口報價前先算到岸成本：FOB、CIF、DDP 差在哪、關稅怎麼算",
+  "tradepilot-tariff-tutorial": "關稅怎麼計算？用 TradePilot 免費查 HS Code、關稅到落地成本",
+  "product-testing-best-practices": "市場調查怎麼做？小預算的海外市場測試，先避開三個錯誤",
+  "first-time-export-checklist": "第一次出口要走哪五步？從確認有人買、產品證到出口報關與上架",
+  "overseas-exhibition-subsidy-115-upgrade": "參展補助怎麼申請？115 年海外參展補助每展最高 16 萬、補到 90%",
+  "why-philippines-first": "東南亞市場先去哪一國？越南、泰國、印尼、菲律賓比較，為什麼先從菲律賓開始",
+  "philippines-ecommerce-first-year": "菲律賓電商第一年：蝦皮、Lazada、TikTok Shop 先開哪一個？店開誰名下",
+  "amazon-us-three-decisions": "產品要上 Amazon 美國站嗎？台灣品牌先做這三個判斷",
+} as const;
+
+describe("article rewrites and additions", () => {
+  it("copies each approved new draft into a static article", () => {
     expect(drafts).toHaveLength(11);
-    expect(articles).toHaveLength(11);
+    expect(newDrafts).toHaveLength(2);
+    expect(articles).toHaveLength(13);
 
-    for (const draft of drafts) {
+    for (const draft of newDrafts) {
       const article = getArticleBySlug(draft.slug);
       expect(article).toMatchObject({
         slug: draft.slug,
@@ -97,6 +117,12 @@ describe("eleven story article rewrites", () => {
         lastVerified: draft.lastVerified,
         updated: "2026-10-01",
       });
+    }
+  });
+
+  it("uses every approved SEO title", () => {
+    for (const [slug, title] of Object.entries(seoTitles)) {
+      expect(getArticleBySlug(slug)?.title).toBe(title);
     }
   });
 
@@ -113,6 +139,21 @@ describe("eleven story article rewrites", () => {
       expect([...citedIds].every((id) => sourceIds.has(id))).toBe(true);
       expect([...sourceIds].every((id) => citedIds.has(id))).toBe(true);
     }
+  });
+
+  it("places the new articles in their required chapter reading lists with dedicated tiered covers", () => {
+    expect(CHAPTER_ARTICLES.m3).toContain("agent-vs-distributor-exclusive");
+    expect(CHAPTER_ARTICLES.m1).toContain("fob-cif-ddp-explained");
+    expect(getArticleImage(getArticleBySlug("agent-vs-distributor-exclusive")!)).toBe("/images/contact/partners-handshake-1600.webp");
+    expect(getArticleImage(getArticleBySlug("fob-cif-ddp-explained")!)).toBe("/images/about/author-hero-port-1600.webp");
+  });
+
+  it("includes both new static articles in the sitemap", async () => {
+    const entries = await sitemap();
+    expect(entries).toEqual(expect.arrayContaining([
+      expect.objectContaining({ url: "https://lufe.world/insights/agent-vs-distributor-exclusive" }),
+      expect.objectContaining({ url: "https://lufe.world/insights/fob-cif-ddp-explained" }),
+    ]));
   });
 
   it("renders the story treatment, citations, sources, FAQPage, and Article citations in server HTML", async () => {
