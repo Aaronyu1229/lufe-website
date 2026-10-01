@@ -3,24 +3,61 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import {
+  BOUNDARIES_COPY,
+  COMPANIONSHIP_COPY,
+  DOUBLE_SCORE_COPY,
+  EXAMPLES_CLOSING,
+  FIRST_MONTH_COPY,
+  FOUNDATIONS_CLOSING,
+  FOUNDATIONS_FOOTNOTE,
   METHODOLOGY_DECISIONS,
   METHODOLOGY_DIMENSIONS,
-  METHODOLOGY_FAQS,
+  METHODOLOGY_EXAMPLES,
+  METHODOLOGY_FOUNDATIONS,
   MethodologyPage,
-  WORKED_EXAMPLE,
+  ORIGIN_STORY,
+  REPORT_DISCLAIMER,
+  REPORT_OUTLINE,
+  RULES_COPY,
+  SCALE_INTRO,
+  THIRD_MONTH_INTRO,
 } from "@/components/services/MethodologyPage";
 
 const renderPage = () => renderToStaticMarkup(createElement(MethodologyPage));
-const markupText = (markup: string) => markup.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+const markupText = (markup: string) => markup.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
 
 describe("MethodologyPage", () => {
-  it("keeps every score detail, answer, and FAQ answer in server markup", () => {
+  it("keeps every specified text section and collapsed detail in server markup", () => {
     const markup = markupText(renderPage());
 
+    for (const copy of [
+      ORIGIN_STORY,
+      EXAMPLES_CLOSING,
+      FIRST_MONTH_COPY,
+      THIRD_MONTH_INTRO,
+      REPORT_DISCLAIMER,
+      SCALE_INTRO,
+      DOUBLE_SCORE_COPY,
+      RULES_COPY,
+      COMPANIONSHIP_COPY,
+      FOUNDATIONS_CLOSING,
+      FOUNDATIONS_FOOTNOTE,
+      BOUNDARIES_COPY,
+    ]) {
+      expect(markup).toContain(copy);
+    }
+
+    for (const example of METHODOLOGY_EXAMPLES) {
+      expect(markup).toContain(example.title);
+      for (const section of example.sections) {
+        expect(markup).toContain(section.label);
+        expect(markup).toContain(section.body);
+      }
+    }
+    for (const item of REPORT_OUTLINE) expect(markup).toContain(item);
     for (const dimension of METHODOLOGY_DIMENSIONS) {
       expect(markup).toContain(dimension.name);
       expect(markup).toContain(dimension.question);
-      expect(markup).toContain(dimension.weight);
       expect(markup).toContain(dimension.criteria);
       expect(markup).toContain(dimension.redAt);
     }
@@ -29,33 +66,37 @@ describe("MethodologyPage", () => {
       expect(markup).toContain(decision.verdict);
       expect(markup).toContain(decision.advice);
     }
-    for (const score of WORKED_EXAMPLE.scores) {
-      expect(markup).toContain(score.dim);
-      expect(markup).toContain(score.note);
-      expect(markup).toContain(String(score.score));
-    }
-    expect(markup).toContain(WORKED_EXAMPLE.condition);
-    expect(markup).toContain(WORKED_EXAMPLE.outcome);
-    for (const [question, answer] of METHODOLOGY_FAQS) {
-      expect(markup).toContain(question);
-      expect(markup).toContain(answer);
+    for (const foundation of METHODOLOGY_FOUNDATIONS) {
+      expect(markup).toContain(foundation.lead);
+      expect(markup).toContain(foundation.footnote);
+      expect(markup).toContain(foundation.body);
     }
   });
 
-  it("includes the D8 Costco outcome", () => {
-    expect(renderPage()).toContain("實際結果：6 個月上架，首月銷量超標 40%");
-  });
-
-  it("keeps the interactive scorecard's default result fully in server markup", () => {
+  it("uses an SSR-native accordion, with only the first rubric open", () => {
     const markup = renderPage();
 
-    expect(markup).toContain("拖拖看 · 加權總分");
-    expect(markup).toContain('data-lufe-score-total="true"');
-    expect(markup).toContain(">74</output>");
-    expect(markup).toContain("Conditional Go");
+    expect(markup.match(/<details/g)).toHaveLength(METHODOLOGY_DIMENSIONS.length);
+    expect(markup.match(/<details open=""/g)).toHaveLength(1);
+    expect(markup.match(/<summary/g)).toHaveLength(METHODOLOGY_DIMENSIONS.length);
   });
 
-  it("does not render rounded utility classes", () => {
-    expect(renderPage()).not.toMatch(/\brounded-/);
+  it("renders the mobile carousel controls and both cards in server markup", () => {
+    const markup = renderPage();
+
+    expect(markup).toContain('aria-label="查看例子 1"');
+    expect(markup).toContain('aria-label="查看例子 2"');
+    expect(markup).toContain('aria-current="true"');
+  });
+
+  it("keeps only the specified red-line percentages and has no rubric weight data", () => {
+    const markup = renderPage();
+
+    expect(markup.match(/%/g)).toHaveLength(2);
+    for (const dimension of METHODOLOGY_DIMENSIONS) expect("weight" in dimension).toBe(false);
+  });
+
+  it("uses square corners except for the carousel dots", () => {
+    expect(renderPage()).not.toMatch(/\brounded-(?!full\b)/);
   });
 });

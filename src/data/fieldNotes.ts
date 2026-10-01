@@ -105,15 +105,6 @@ export const ACTIVITIES: readonly Activity[] = [
     summary: "飛一趟印尼，親自交接海外團隊營運系統給當地 country manager。",
     tbd: true,
   },
-  {
-    id: "a6",
-    tag: "訪談",
-    title: "待補 · 媒體專訪 · 二代與出海",
-    location: "台北",
-    date: "2025 Q4",
-    summary: "受邀專訪，談二代創業者如何結合家族底層資源與新世代方法論。",
-    tbd: true,
-  },
 ];
 
 export const FIELD_NOTES: readonly FieldNote[] = [
