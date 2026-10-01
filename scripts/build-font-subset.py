@@ -33,22 +33,6 @@ SOURCE_EXTENSIONS = {".ts", ".tsx", ".css", ".json"}
 COMMON_PUNCTUATION = "°÷‘’“”‧※↑↓↘■□▲▼◆○☆　〈〉『』【】〔〕＃＄％＆＊＋－．／＝＠＼｜～"
 HERO_SOURCE_FILE = PROJECT_ROOT / "src/components/home/HeroSection.tsx"
 NAVBAR_SOURCE_FILE = PROJECT_ROOT / "src/components/Navbar.tsx"
-CHAPTERS_SOURCE_FILE = PROJECT_ROOT / "src/data/chapters.ts"
-LAYOUT_FILE = PROJECT_ROOT / "src/app/layout.tsx"
-CRITICAL_HERO_SOURCE_FILES = (
-    PROJECT_ROOT / "src/components/services/ServicesPage.tsx",
-    PROJECT_ROOT / "src/components/about/AboutPage.tsx",
-    PROJECT_ROOT / "src/components/cases/CasesPage.tsx",
-    PROJECT_ROOT / "src/components/services/ChapterPage.tsx",
-    PROJECT_ROOT / "src/components/services/OptimizePage.tsx",
-    PROJECT_ROOT / "src/components/services/MethodologyPage.tsx",
-    PROJECT_ROOT / "src/components/contact/ContactPage.tsx",
-    PROJECT_ROOT / "src/components/assess/AssessWizard.tsx",
-    PROJECT_ROOT / "src/components/field-notes/FieldNotesPage.tsx",
-    PROJECT_ROOT / "src/components/insights/InsightsPage.tsx",
-    PROJECT_ROOT / "src/app/resources/page.tsx",
-    PROJECT_ROOT / "src/app/resources/subsidies/page.tsx",
-)
 NAVBAR_CRITICAL_PATTERNS = (
     r"const navItems[\s\S]*?^\];",
     r'<Menu(?:Column|Rail)\s+label="([^"]*)"',
@@ -57,32 +41,6 @@ NAVBAR_CRITICAL_PATTERNS = (
     r"function MessageBoxTrigger[\s\S]*$",
     r'<Link href="/" className="flex items-center gap-2\.5 text-\[17px\] font-semibold">[\s\S]*?</Link>',
 )
-
-
-def first_screen_source(path: Path) -> str:
-    source = path.read_text(encoding="utf-8")
-    match = re.search(
-        r'<section\b(?=[^>]*\blufe-hero\b)[\s\S]*?(?:<ScrollCue\s*/>|</section>)',
-        source,
-    )
-    if not match:
-        raise ValueError(f"Could not find the first-screen hero in {path.relative_to(PROJECT_ROOT)}")
-    return match.group()
-
-
-def chapter_hero_source() -> str:
-    source = CHAPTERS_SOURCE_FILE.read_text(encoding="utf-8")
-    text = ""
-    for chapter in re.finditer(
-        r"^  (?:m1|m3|m9|after|na): \{([\s\S]*?)(?=^  (?:m1|m3|m9|after|na): \{|\Z)",
-        source,
-        re.MULTILINE,
-    ):
-        for property_name in ("label", "title", "scene", "heroAction"):
-            text += "".join(
-                re.findall(rf'^    {property_name}: "([^"]*)"', chapter.group(1), re.MULTILINE)
-            )
-    return text
 
 
 def non_ascii_characters(path: Path) -> set[str]:
@@ -130,7 +88,7 @@ def write_charset(
                 "#",
                 f"# COVERED 這一行是 {output_font.name} 真的畫得出來的字元，共 {len(covered)} 個。",
                 f"# FALLBACK 這一行是 Noto Sans TC 本來就沒有、注定由系統字型畫的字元（emoji 等），共 {len(fallback)} 個。",
-                "# critical 與全站檔合起來涵蓋全站；兩檔的 COVERED 字元不重複。",
+                "# 這兩行以外的非 ASCII 字元一旦出現在網站上，prebuild 會擋下來。",
                 f"COVERED {''.join(covered)}",
                 f"FALLBACK {''.join(fallback)}",
                 "",
@@ -147,9 +105,7 @@ def build_subset(
     *,
     include_common_punctuation: bool = True,
     layout_closure: bool = True,
-    compact_critical: bool = False,
-) -> set[str]:
-    characters = set(characters)
+) -> None:
     if include_common_punctuation:
         characters.update(COMMON_PUNCTUATION)
     ordered_characters = sorted(characters, key=ord)
@@ -166,31 +122,19 @@ def build_subset(
             f"--output-file={output_font}",
             f"--text-file={character_file_path}",
             "--flavor=woff2",
+            "--layout-features=*",
         ]
-        if compact_critical:
-            # The critical subset is used only for horizontal first-screen text.
-            # These OpenType layout/vertical tables cannot affect that rendering,
-            # while dropping them keeps the expanded every-route subset below 120 KB.
-            command.extend(
-                [
-                    "--layout-features=",
-                    "--drop-tables+=BASE,GDEF,GPOS,GSUB,STAT,vhea,vmtx",
-                    "--name-IDs=1,2,4,6",
-                ]
-            )
-        else:
-            command.extend(
-                [
-                    "--layout-features=*",
-                    "--name-IDs=0,1,2,3,4,5,6,13,14",
-                    "--name-legacy",
-                ]
-            )
         if not layout_closure:
             command.append("--no-layout-closure")
-        command.extend(["--no-hinting", "--desubroutinize"])
-        if not compact_critical:
-            command.append("--notdef-outline")
+        command.extend(
+            [
+                "--no-hinting",
+                "--desubroutinize",
+                "--name-IDs=0,1,2,3,4,5,6,13,14",
+                "--name-legacy",
+                "--notdef-outline",
+            ]
+        )
         subprocess.run(command, check=True)
     finally:
         character_file_path.unlink(missing_ok=True)
@@ -207,62 +151,26 @@ def build_subset(
     write_charset(charset_file, output_font, covered, fallback, font_sha256)
     print(f"Built {output_font.relative_to(PROJECT_ROOT)} ({output_font.stat().st_size // 1024} KB).")
     print(f"Covered {len(covered)} characters; {len(fallback)} use system fallback.")
-    return set(covered)
-
-
-def unicode_range(characters: set[str]) -> str:
-    codepoints = sorted(ord(character) for character in characters)
-    ranges: list[tuple[int, int]] = []
-    for codepoint in codepoints:
-        if ranges and codepoint == ranges[-1][1] + 1:
-            ranges[-1] = (ranges[-1][0], codepoint)
-        else:
-            ranges.append((codepoint, codepoint))
-
-    return ", ".join(
-        f"U+{start:04X}" if start == end else f"U+{start:04X}-{end:04X}"
-        for start, end in ranges
-    )
-
-
-def update_full_unicode_range(characters: set[str]) -> None:
-    source = LAYOUT_FILE.read_text(encoding="utf-8")
-    updated, replacements = re.subn(
-        r'(declarations: \[\{ prop: "unicode-range", value: )"[^"]*"( \}\],)',
-        rf'\1"{unicode_range(characters)}"\2',
-        source,
-    )
-    if replacements != 1:
-        raise ValueError("Could not update the generated full-font unicode-range in src/app/layout.tsx")
-    LAYOUT_FILE.write_text(updated, encoding="utf-8")
 
 
 def main() -> None:
+    full_characters = set(chr(codepoint) for codepoint in range(0x20, 0x7F))
+    full_characters.update(scan_directory(PROJECT_ROOT / "src", SOURCE_EXTENSIONS))
+    full_characters.update(scan_directory(PROJECT_ROOT / ".next/server/app", {".html"}))
+    build_subset(FULL_OUTPUT_FONT, FULL_CHARSET_FILE, full_characters)
+
     critical_characters = non_ascii_characters(HERO_SOURCE_FILE)
     navbar_source = NAVBAR_SOURCE_FILE.read_text(encoding="utf-8")
     for pattern in NAVBAR_CRITICAL_PATTERNS:
         for match in re.findall(pattern, navbar_source, re.MULTILINE):
             critical_characters.update(character for character in match if ord(character) >= 0x80)
-    for source_file in CRITICAL_HERO_SOURCE_FILES:
-        critical_characters.update(
-            character for character in first_screen_source(source_file) if ord(character) >= 0x80
-        )
-    critical_characters.update(character for character in chapter_hero_source() if ord(character) >= 0x80)
-    critical_covered = build_subset(
+    build_subset(
         CRITICAL_OUTPUT_FONT,
         CRITICAL_CHARSET_FILE,
         critical_characters,
         include_common_punctuation=False,
         layout_closure=False,
-        compact_critical=True,
     )
-
-    full_characters = set(chr(codepoint) for codepoint in range(0x20, 0x7F))
-    full_characters.update(scan_directory(PROJECT_ROOT / "src", SOURCE_EXTENSIONS))
-    full_characters.update(scan_directory(PROJECT_ROOT / ".next/server/app", {".html"}))
-    full_characters.difference_update(critical_covered)
-    full_covered = build_subset(FULL_OUTPUT_FONT, FULL_CHARSET_FILE, full_characters)
-    update_full_unicode_range(full_covered)
 
 
 if __name__ == "__main__":
