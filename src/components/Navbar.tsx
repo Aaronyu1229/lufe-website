@@ -55,7 +55,7 @@ export function normalizePathname(pathname: string | null | undefined): string {
 export function pathnameHasDarkHero(pathname: string): boolean {
   if (["/", "/about", "/contact", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
   if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
-  return pathname.startsWith("/services") || pathname.startsWith("/cases");
+  return pathname.startsWith("/services") || pathname.startsWith("/cases") || pathname.startsWith("/about/");
 }
 
 export function Navbar({ children }: { readonly children?: ReactNode }) {
@@ -501,7 +501,7 @@ function AboutMenu() {
     </MenuColumn>
     <MenuRail label="創辦人">
       <Link href="/about" className="group grid grid-cols-[64px_minmax(0,1fr)] items-center gap-[14px]">
-        <Image src="/images/about/aaron-portrait.jpg" alt="" width={64} height={64} className="h-16 w-16 object-cover object-[center_18%]" />
+        <TieredImage src="/images/about/aaron-portrait-studio-640.webp" alt="" maxTierWidth={640} sizes="64px" className="h-16 w-16 object-cover object-[center_18%]" />
         <span className="min-w-0"><b className="block text-[16px] font-[650] transition-colors group-hover:text-sky">Aaron Yu</b><small className="mt-0.5 block text-[12.5px] font-semibold text-gold-d">鹿飛 LUFÉ 創辦人・來自躍馬企業</small></span>
         <p className="col-span-full text-[12.5px] leading-[1.7] text-tx2">看了很多年貨櫃出去，決定去接貨到了之後的事。</p>
       </Link>

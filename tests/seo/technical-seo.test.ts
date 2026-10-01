@@ -12,6 +12,8 @@ vi.mock("@/lib/articles/repository", () => ({
 }));
 
 import ArticlePage, { generateMetadata as generateArticleMetadata } from "@/app/insights/[slug]/page";
+import AaronYuPage from "@/app/about/aaron-yu/page";
+import sitemap from "@/app/sitemap";
 import ProductTestingPage from "@/app/services/product-testing/page";
 import Services, { metadata as servicesMetadata } from "@/app/services/page";
 import { Navbar } from "@/components/Navbar";
@@ -66,7 +68,21 @@ describe("technical SEO", () => {
     const articleJsonLd = findJsonLd(markup, "Article");
 
     expect((articleJsonLd.author as { name: string }).name).toBe("Aaron Yu");
+    expect((articleJsonLd.author as { url: string }).url).toBe("https://lufe.world/about/aaron-yu");
     expect(articleJsonLd.datePublished).toBe(toIsoDate(article.date));
+  });
+
+  it("renders Aaron's ProfilePage JSON-LD with the existing Person ID", () => {
+    const markup = renderToStaticMarkup(createElement(AaronYuPage));
+    const profilePage = findJsonLd(markup, "ProfilePage");
+
+    expect(profilePage.mainEntity).toEqual({ "@id": "https://lufe.world/#aaron-yu" });
+  });
+
+  it("includes Aaron's author page in the sitemap", async () => {
+    await expect(sitemap()).resolves.toEqual(expect.arrayContaining([
+      expect.objectContaining({ url: "https://lufe.world/about/aaron-yu" }),
+    ]));
   });
 
   it("keeps each product-testing FAQPage answer identical to the displayed FAQ data", async () => {
