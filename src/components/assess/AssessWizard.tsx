@@ -8,12 +8,13 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
 import { CASES, CASE_CARD_META, getCase, type CaseStudy } from "@/data/cases";
+import { HERO_VIDEOS } from "@/data/heroVideos";
 
 import { useMessageBox } from "../MessageBox";
 import { MatcherFlow, type MatcherFlowQuestion } from "./MatcherFlow";
 
 type Stage = "idea" | "tested" | "scaling";
-type Blocker = "market" | "channel" | "cost" | "execution";
+type Blocker = "market" | "channel" | "cost" | "execution" | "compliance";
 type AssessMarket = "us" | "sea" | "japan" | "europe" | "other";
 type Dim = "stage" | "blocker" | "market";
 
@@ -38,9 +39,8 @@ interface MatchResult {
 }
 
 const CASE_SIGNATURES: readonly CaseSignature[] = [
-  { slug: "costco-health", stage: "scaling", blocker: "channel", market: "us" },
-  { slug: "electronics-tariff", stage: "scaling", blocker: "cost", market: "us" },
-  { slug: "shoe-brand", stage: "tested", blocker: "execution", market: "us" },
+  { slug: "goat-milk-soap-global", stage: "tested", blocker: "market", market: "other" },
+  { slug: "fish-floss-us-fda", stage: "idea", blocker: "compliance", market: "us" },
   { slug: "bubble-tea", stage: "scaling", blocker: "execution", market: "sea" },
 ];
 
@@ -55,6 +55,7 @@ const BLOCKER_SHORT: Record<Blocker, string> = {
   channel: "找通路",
   cost: "算成本",
   execution: "缺執行",
+  compliance: "搞法規",
 };
 
 const MARKET_SHORT: Record<AssessMarket, string> = {
@@ -82,6 +83,7 @@ const BLOCKER_OPTIONS: readonly Option<Blocker>[] = [
   { value: "channel", label: "找不到對的通路或合作夥伴", hint: "訊號：進得去超商、卻進不了量販；或是上架了但產品沒有聲量" },
   { value: "cost", label: "成本算不清、毛利被吃掉", hint: "訊號：報價時覺得賺的，出貨後發現關稅、物流、匯率分掉一半" },
   { value: "execution", label: "方向知道，但沒人真的做執行", hint: "訊號：付過兩家顧問的策略 deck，但沒人真的幫你跑到落地" },
+  { value: "compliance", label: "不確定法規、成分或標示過不過得了關", hint: "訊號：產品在台灣合法上架，但不知道目的地的主管機關、成分限制與標示格式" },
 ];
 
 const MARKET_OPTIONS: readonly Option<AssessMarket>[] = [
@@ -189,7 +191,7 @@ export function EntryScreen({ focusCase }: { readonly focusCase?: CaseStudy }) {
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
-        <HeroBackdrop src="/images/cases/cases-hero-collab-1600.webp" />
+        <HeroBackdrop src="/images/cases/cases-hero-collab-1600.webp" video={HERO_VIDEOS.assess} />
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
@@ -197,7 +199,7 @@ export function EntryScreen({ focusCase }: { readonly focusCase?: CaseStudy }) {
             {focusCase ? <><Link href="/cases" className="hover:text-white">案例</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">比對</span></> : <span className="text-white/75">處境比對</span>}
           </nav>
           <h1 className="h1 mb-6 max-w-[880px] text-white">看看你的處境，<br /><span className="text-gold">跟哪個案例最像</span></h1>
-          <p className="lead max-w-[640px] !text-white/75">三個問題，約 2 分鐘。比對鹿飛做過的四個案例，找出最接近的一個，以及當時的判斷方法</p>
+          <p className="lead max-w-[640px] !text-white/75">三個問題，約 2 分鐘。比對鹿飛做過的三個案例，找出最接近的一個，以及當時的判斷方法</p>
           {focusCase && (
             <div className="mt-8 flex items-center gap-4 border border-gold/20 bg-white/[0.04] px-5 py-4">
               <div className="relative h-[50px] w-[68px] shrink-0 overflow-hidden"><TieredImage src={focusCase.heroImage} alt="" sizes="68px" className="absolute inset-0 h-full w-full object-cover" /></div>
@@ -220,8 +222,8 @@ export function EntryScreen({ focusCase }: { readonly focusCase?: CaseStudy }) {
 
       <section className="bg-cream py-[56px] md:py-[72px]">
         <div className="lufe-container">
-          <h2 className="text-[17px] font-[650] text-tx">會和這四個案例比對</h2>
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+          <h2 className="text-[17px] font-[650] text-tx">會和這三個案例比對</h2>
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {CASES.map((caseItem) => (
               <Link key={caseItem.slug} href={`/cases/${caseItem.slug}`} className="group min-w-0">
                 <div className="aspect-[4/3] overflow-hidden bg-navy">

@@ -7,7 +7,7 @@ import { Carousel } from "@/components/ui";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
-import { getRelatedCases, type CaseStudy } from "@/data/cases";
+import { getRelatedCases, isNumericValue, type CaseStudy } from "@/data/cases";
 import { HERO_VIDEOS } from "@/data/heroVideos";
 
 import { useMessageBox } from "../MessageBox";
@@ -112,7 +112,11 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
           <div className="mt-6 grid gap-8 md:grid-cols-3">
             {caseItem.stats.map((stat) => (
               <div key={stat.label} className="border-t border-bd pt-6">
-                <div data-lufe-counter className="font-sans text-[clamp(48px,7vw,88px)] font-[650] leading-none tracking-[-.03em] text-navy">{stat.value}</div>
+                {isNumericValue(stat.value) ? (
+                  <div data-lufe-counter className="font-sans text-[clamp(48px,7vw,88px)] font-[650] leading-none tracking-[-.03em] text-navy">{stat.value}</div>
+                ) : (
+                  <div className="font-sans text-[clamp(32px,4vw,48px)] font-[650] leading-[1.15] tracking-[-.02em] text-navy">{stat.value}</div>
+                )}
                 <p className="mt-3 text-[15px] text-tx2">{stat.label}</p>
               </div>
             ))}
@@ -152,7 +156,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
               {chapter.image && (
                 <figure ref={(element) => { if (element) storyFigureRefs.current[chapterIndex] = element; }} className="mx-auto max-w-[1180px]">
-                  <div className="aspect-[4/3] overflow-hidden md:aspect-[21/9]">
+                  <div className={chapter.image.aspect === "16/9" ? "aspect-[4/3] overflow-hidden md:aspect-[16/9]" : "aspect-[4/3] overflow-hidden md:aspect-[21/9]"}>
                     <TieredImage
                       src={chapter.image.src}
                       alt={chapter.image.alt}
@@ -242,7 +246,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
                         <span key={tag.label} className={`px-2.5 py-[3px] text-[11px] font-medium ${lightTagStyles[tag.variant]}`}>{tag.label}</span>
                       ))}
                     </div>
-                    <p className="num mb-2.5 text-[36px] leading-none text-gold-d">{relatedCase.num}</p>
+                    <p className={`${isNumericValue(relatedCase.num) ? "num text-[36px]" : "text-[28px]"} mb-2.5 leading-none text-gold-d`}>{relatedCase.num}</p>
                     <h3 className="h3 mb-2 text-tx">{relatedCase.title}</h3>
                     <p className="mb-3 text-[14.5px] leading-[1.65] text-tx2">{relatedCase.summary}</p>
                     <span className="text-[14.5px] font-semibold text-gold-d">看完整案例 →</span>

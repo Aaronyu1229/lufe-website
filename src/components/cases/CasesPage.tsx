@@ -13,6 +13,7 @@ import {
   CASES,
   CASE_CARD_META,
   INDUSTRIES,
+  isNumericValue,
   MARKETS,
   type IndustryFilter,
   type MarketFilter,
@@ -81,7 +82,7 @@ function CasePanel({ caseItem }: { caseItem: (typeof CASES)[number] }) {
   return (
     <div>
       <CaseTags tags={caseItem.tags} />
-      <div className="num mt-2 text-[56px] leading-[0.95] text-gold-d">{caseItem.num}</div>
+      <div className={`${isNumericValue(caseItem.num) ? "num" : "font-sans font-[650]"} mt-2 text-[clamp(40px,5vw,56px)] leading-[0.95] text-gold-d`}>{caseItem.num}</div>
       <p className="mt-2 text-[17px] leading-[1.4] text-tx2">{meta.headline}</p>
       <p className="mt-6 text-[15.5px] leading-[1.8] text-tx2">{caseItem.summary}</p>
 
@@ -134,7 +135,11 @@ function CaseCard({ caseItem }: { caseItem: (typeof CASES)[number] }) {
             </div>
 
             <div className="absolute bottom-7 left-6 right-6 md:bottom-8 md:left-10 md:right-10">
-              <div data-lufe-counter className="num mb-2 text-[clamp(50px,7vw,72px)] leading-[0.95] text-gold">{caseItem.num}</div>
+              {isNumericValue(caseItem.num) ? (
+                <div data-lufe-counter className="num mb-2 text-[clamp(50px,7vw,72px)] leading-[0.95] text-gold">{caseItem.num}</div>
+              ) : (
+                <div className="mb-2 font-sans text-[clamp(40px,5vw,56px)] font-[650] leading-[0.95] tracking-[-.02em] text-gold">{caseItem.num}</div>
+              )}
               <p className="text-[clamp(16px,2vw,18px)] leading-[1.4] text-white">{meta.headline}</p>
             </div>
           </div>
@@ -260,7 +265,7 @@ export function CasesPageContent({
             <Link href="/assess" className="group bg-navy p-8 text-white transition-transform active:scale-[.985] [@media(hover:hover)]:hover:-translate-y-1 md:p-10 lg:col-span-5">
               <p className="text-[13px] font-semibold text-gold">2 分鐘處境比對</p>
               <h3 className="h3 mt-3 text-white">不確定自己比較像哪一條？</h3>
-              <p className="mt-3 text-[15px] leading-[1.8] text-white/70">三個問題，比對鹿飛做過的四個案例，找出最接近的一個</p>
+              <p className="mt-3 text-[15px] leading-[1.8] text-white/70">三個問題，比對鹿飛做過的三個案例，找出最接近的一個</p>
               <div className="mt-6 flex gap-2">
                 {['階段', '卡點', '市場'].map((chip) => <span key={chip} className="border border-white/25 px-3 py-1 text-[13px] text-white/75">{chip}</span>)}
               </div>
