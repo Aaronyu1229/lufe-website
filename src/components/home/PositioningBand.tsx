@@ -129,7 +129,7 @@ export function ChaptersSection() {
 
             return (
             <article ref={(element) => { cardsRef.current[index] = element; }} id={chapter.id} key={chapter.label} onPointerEnter={() => setHoveredIndex(index)} onPointerLeave={() => setHoveredIndex(null)} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} className={`lufe-card group flex min-w-0 flex-col border border-bd bg-white p-6 md:p-8 ${flashIndex === index ? "lufe-home-chapter-flash" : ""}`}>
-              <span aria-hidden="true" className="mb-5 grid h-10 w-10 place-items-center border border-gold/25 bg-gold/10 text-gold-d transition-colors duration-200 [@media(hover:hover)]:group-hover:bg-gold/15">
+              <span aria-hidden="true" className="mb-5 grid h-10 w-10 place-items-center border border-gold/40 text-gold-d transition-colors duration-200 [@media(hover:hover)]:group-hover:border-gold-d">
                 <Icon size={20} className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-px" />
               </span>
               <p className="mb-4 text-[13px] font-semibold text-gold-d">{chapter.label}</p>

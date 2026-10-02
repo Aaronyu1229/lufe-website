@@ -4,7 +4,8 @@ import type { JSX } from "react";
 
 import { useMessageBox } from "@/components/MessageBox";
 
-import { FaqItem, type FaqEntry } from "./FaqItem";
+import { type FaqEntry } from "./FaqItem";
+import { FaqList } from "./FaqList";
 
 export function FaqSection({ title, items, idPrefix, className = "py-[62px] md:py-[96px] md:pb-[100px]" }: {
   readonly title: string;
@@ -26,9 +27,7 @@ export function FaqSection({ title, items, idPrefix, className = "py-[62px] md:p
         </div>
 
         <div className="min-w-0 md:col-span-8">
-          {items.map((item, index) => (
-            <FaqItem key={item.num} item={item} idPrefix={idPrefix} defaultOpen={index === 0} />
-          ))}
+          <FaqList items={items} idPrefix={idPrefix} />
         </div>
       </div>
     </section>

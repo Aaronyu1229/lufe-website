@@ -367,7 +367,7 @@ type FeatureTileProps = {
 
 function FeatureTile({ icon, title, body, action, ...props }: FeatureTileProps) {
   const content = <>
-    <span aria-hidden="true" className="grid h-8 w-8 place-items-center bg-gold/10 text-gold-d">{icon}</span>
+    <span aria-hidden="true" className="grid h-8 w-8 place-items-center border border-gold/40 text-gold-d">{icon}</span>
     <b className="mt-4 block text-[16px] font-[650] text-tx">{title}</b>
     <span className="mt-1.5 block text-[13.5px] leading-[1.7] text-tx2">{body}</span>
     <span className="mt-4 inline-block text-[14px] font-semibold text-sky">{action} <span aria-hidden="true" className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-[3px]">→</span></span>

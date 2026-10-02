@@ -639,13 +639,9 @@ h3:not(.sr-only) { letter-spacing: -.008em; }
 .lufe-steps { position: relative; }
 .lufe-step { position: relative; }
 .lufe-step-icon { position: relative; display: inline-grid; width: 44px; height: 44px; flex: 0 0 auto; place-items: center; }
-.lufe-step[data-lufe-step-reached="true"] .lufe-step-icon { background: var(--color-gold); color: var(--color-navy); border-color: var(--color-gold); }
+.lufe-step[data-lufe-step-reached="true"] .lufe-step-icon { border-color: var(--color-gold-d); color: var(--color-gold-d); }
 .lufe-step[data-lufe-step-reached="true"] .lufe-step-icon svg { animation: lufe-step-pop .42s cubic-bezier(.34,1.56,.64,1) 1 both; }
 @keyframes lufe-step-pop { 0% { transform: scale(.82); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
-@media (min-width: 1024px) {
-  .lufe-step-icon::after { position: absolute; top: 50%; left: calc(100% + 8px); width: clamp(26px, 5vw, 72px); height: 2px; content: ""; background: var(--color-cream-d); transform: translateY(-50%); }
-  .lufe-step:not(:last-child) .lufe-step-icon::after { background: linear-gradient(90deg, var(--color-gold) 0 calc(var(--lufe-step-progress, 0) * 100%), var(--color-cream-d) calc(var(--lufe-step-progress, 0) * 100%)); }
-}
 @media (hover: hover) {
   .lufe-step { transition: transform .25s cubic-bezier(.2,.8,.2,1); }
   .lufe-step:hover { transform: translateY(-3px); }
