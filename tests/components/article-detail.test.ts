@@ -5,6 +5,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { ArticleDetail, renderStaticBoldMarkup } from "@/components/insights/ArticleDetail";
+import { ArticleFaq } from "@/components/insights/ArticleFaq";
 import { StaticArticleContent, getStaticArticleHeadings } from "@/components/insights/StaticArticleContent";
 import { getInlineImages } from "@/data/articleInlineImages";
 import { articles, getArticleBySlug, getArticleImage } from "@/data/articles";
@@ -28,6 +29,21 @@ describe("renderStaticBoldMarkup", () => {
 });
 
 describe("ArticleDetail", () => {
+  it("uses the shared numbered FAQ while keeping every answer in server markup", () => {
+    const faq = [
+      { q: "第一個常見問題", a: "第一個常見問題的答案。" },
+      { q: "第二個常見問題", a: "第二個常見問題的答案。" },
+    ];
+    const markup = renderToStaticMarkup(createElement(ArticleFaq, { faq }));
+
+    expect(markup).toContain(">01<");
+    expect(markup).toContain(">02<");
+    for (const item of faq) {
+      expect(markup).toContain(item.q);
+      expect(markup).toContain(item.a);
+    }
+  });
+
   it("keeps every static article's metadata in the server markup", () => {
     for (const article of articles) {
       const markup = renderToStaticMarkup(createElement(ArticleDetail, { article, image: getArticleImage(article), related: [] }));

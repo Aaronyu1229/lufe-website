@@ -68,16 +68,16 @@ export function MethodologyPage() {
           video={HERO_VIDEOS.methodology}
         />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
-          <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55">
+          <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
-            <span className="mx-2 text-white/30">/</span>
+            <span className="text-white/30">/</span>
             <Link href="/services" className="hover:text-white">服務</Link>
-            <span className="mx-2 text-white/30">/</span>
-            <span className="text-white/80">鹿飛方法論</span>
+            <span className="text-white/30">/</span>
+            <span className="text-white/75">鹿飛方法論</span>
           </nav>
           <p className="mb-4 text-[14px] font-semibold text-gold">鹿飛方法論</p>
-          <h1 className="h1 text-white">小步出海法</h1>
-          <p className="lead mt-5 max-w-[620px] whitespace-pre-line !text-white/75">市場不會因為你準備好了就要你。{"\n"}所以我們先問它。</p>
+          <h1 className="h1 mb-6 text-white">小步出海法</h1>
+          <p className="lead max-w-[620px] whitespace-pre-line !text-white/75">市場不會因為你準備好了就要你。{"\n"}所以我們先問它。</p>
         </div>
         <ScrollCue />
       </section>
@@ -181,7 +181,7 @@ export function MethodologyPage() {
       <section className="bg-cream py-[72px] md:py-[88px]">
         <div className="lufe-container max-w-[920px]">
           <SectionHeading>這套方法站在誰的肩膀上</SectionHeading>
-          <p className="mt-6 text-[16px] leading-[1.9] text-tx2">我們沒有發明這些。</p>
+          <p className="mt-6 text-[16px] leading-[1.9] text-tx2">我們沒有發明這些</p>
           <div className="mt-7 grid gap-6 border-l-4 border-gold bg-white p-6 md:p-7">
             {METHODOLOGY_FOUNDATIONS.map((foundation) => (
               <p key={foundation.footnote} className="whitespace-pre-line text-[16px] leading-[1.9] text-tx2">

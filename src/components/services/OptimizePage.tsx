@@ -79,16 +79,16 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
       <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/v5/optimize-1600.webp" srcSet="/images/v5/optimize-1600.webp 1600w, /images/v5/optimize-2400.webp 2400w" position="70% 30%" video={HERO_VIDEOS.optimize} />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
-          <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55">
+          <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-white">首頁</Link>
-            <span className="mx-2 text-white/30">/</span>
+            <span className="text-white/30">/</span>
             <Link href="/services" className="hover:text-white">服務</Link>
-            <span className="mx-2 text-white/30">/</span>
-            <span className="text-white/80">運營優化</span>
+            <span className="text-white/30">/</span>
+            <span className="text-white/75">運營優化</span>
           </nav>
           <p className="mb-4 text-[14px] font-semibold text-gold">進階 · 運營優化</p>
-          <h1 className="h1 max-w-[760px] text-white">已經跑起來了，該讓每公里更省</h1>
-          <p className="lead mt-5 max-w-[650px] whitespace-pre-line !text-white/75">產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。{"\n"}這不是第一年的事，是走過第一年之後的事</p>
+          <h1 className="h1 mb-6 max-w-[760px] text-white">已經跑起來了，該讓每公里更省</h1>
+          <p className="lead max-w-[650px] whitespace-pre-line !text-white/75">產品在海外已經賣得動，但總覺得利潤被吃掉、效率上不去、決策像在猜。{"\n"}這不是第一年的事，是走過第一年之後的事</p>
           <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">聊聊你卡在哪一段 →</ContactButton>
         </div>
         <ScrollCue />

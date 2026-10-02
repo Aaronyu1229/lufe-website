@@ -30,8 +30,7 @@ export function AccordionItem({ id, num, header, children, defaultOpen = false }
   const [open, setOpen] = useState(defaultOpen);
   const contentHeight = useRef(0);
   const height = useSpring(0);
-  const plusProgress = useSpring(defaultOpen ? 1 : 0, { response: 0.3, damping: 1, precision: 0.001 });
-  const accentProgress = useSpring(defaultOpen ? 1 : 0, { response: 0.35, damping: 1, precision: 0.001 });
+  const plusProgress = useSpring(defaultOpen ? 1 : 0, { response: 0.25, damping: 1, precision: 0.001 });
 
   const measure = useCallback(() => {
     const nextHeight = contentRef.current?.scrollHeight ?? 0;
@@ -42,7 +41,7 @@ export function AccordionItem({ id, num, header, children, defaultOpen = false }
       return;
     }
     if (openRef.current) {
-      if (height.moving) height.to(nextHeight, { response: 0.42 });
+      if (height.moving) height.to(nextHeight, { response: 0.32, damping: 1 });
       else height.jump(nextHeight);
     }
   }, [height]);
@@ -69,23 +68,29 @@ export function AccordionItem({ id, num, header, children, defaultOpen = false }
     if (reducedMotion) {
       height.jump(next ? targetHeight : 0);
       plusProgress.jump(next ? 1 : 0);
-      accentProgress.jump(next ? 1 : 0);
       return;
     }
-    height.to(next ? targetHeight : 0, { response: 0.42 });
-    plusProgress.to(next ? 1 : 0, { response: 0.3, damping: 1 });
-    accentProgress.to(next ? 1 : 0, { response: 0.35, damping: 1 });
+    height.to(next ? targetHeight : 0, { response: 0.32, damping: 1 });
+    plusProgress.to(next ? 1 : 0, { response: 0.25, damping: 1 });
   };
 
+  useLayoutEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+
+    content.style.opacity = String(height.moving
+      ? Math.max(0, Math.min(1, height.value / Math.max(contentHeight.current, 1) * 1.4 - 0.2))
+      : open ? 1 : 0);
+  }, [height.moving, height.value, open]);
+
   return (
-    <div className="relative border-t border-bd last:border-b">
-      <span aria-hidden="true" className="absolute bottom-0 left-0 top-0 w-[3px] origin-top bg-gold" style={{ transform: `scaleY(${accentProgress.value})` }} />
-      <button type="button" aria-expanded={open} aria-controls={id} onClick={toggle} className="grid w-full cursor-pointer grid-cols-[minmax(0,1fr)_32px] items-center gap-4 py-6 text-left outline-none transition-[background-color,transform] duration-150 [@media(hover:hover)]:hover:bg-cream/60 active:scale-[.995] focus-visible:ring-2 focus-visible:ring-gold">
+    <div className="border-t border-bd last:border-b">
+      <button type="button" aria-expanded={open} aria-controls={id} onClick={toggle} className="group grid w-full cursor-pointer grid-cols-[minmax(0,1fr)_32px] items-center gap-4 py-6 text-left outline-none focus-visible:ring-2 focus-visible:ring-gold">
         <span className="grid min-w-0 grid-cols-[42px_minmax(0,1fr)] items-center gap-3 md:grid-cols-[58px_minmax(0,1fr)] md:gap-4">
-          <span className={`font-[var(--font-inter)] text-[28px] font-semibold leading-[1.4] tabular-nums transition-colors duration-200 ${open ? "text-gold-d" : "text-tx3/40"}`}>{num}</span>
+          <span className={`font-[var(--font-inter)] text-[28px] font-semibold leading-[1.4] tabular-nums ${open ? "text-gold-d" : "text-tx3/40"}`}>{num}</span>
           {header}
         </span>
-        <span aria-hidden="true" className="grid h-8 w-8 place-items-center border border-bd text-tx">
+        <span aria-hidden="true" className="grid h-8 w-8 place-items-center border border-bd text-tx [@media(hover:hover)]:group-hover:border-gold-d">
           <span className="block" style={{ transform: `rotate(${plusProgress.value * 45}deg)` }}><PlusIcon size={18} /></span>
         </span>
       </button>

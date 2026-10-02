@@ -5,6 +5,7 @@ import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
+import { SnapRail } from "@/components/motion/SnapRail";
 import { BuildingIcon, PackageIcon, TargetIcon, UsersIcon } from "@/components/icons/LineIcons";
 import { FaqSection } from "@/components/faq/FaqSection";
 import { HERO_VIDEOS } from "@/data/heroVideos";
@@ -125,9 +126,9 @@ export function ServicesPage() {
         <HeroBackdrop src="/images/services/services-hero-dhl-1600.webp" position="center" video={HERO_VIDEOS.services} />
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0 max-w-[760px]">
-            <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55"><Link href="/" className="hover:text-white">首頁</Link><span className="mx-2 text-white/30">/</span><span className="text-white/80">服務</span></nav>
-            <h1 className="h1 max-w-[760px] text-white">一家品牌在馬尼拉的第一年</h1>
-            <p className="lead mt-5 max-w-[720px] !text-white/75">市場探查、寄賣、公司落地、海外客服——企業出海第一年會遇到的四件事，鹿飛做成四個方案。可以只走一章，也可以一路走完</p>
+            <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span className="text-white/30">/</span><span className="text-white/75">服務</span></nav>
+            <h1 className="h1 mb-6 max-w-[760px] text-white">一家品牌在馬尼拉的第一年</h1>
+            <p className="lead max-w-[720px] !text-white/75">市場探查、寄賣、公司落地、海外客服——企業出海第一年會遇到的四件事，鹿飛做成四個方案。可以只走一章，也可以一路走完</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ContactButton className="inline-flex cursor-pointer items-center justify-center bg-gold px-6 py-3.5 text-[15px] font-semibold text-navy hover:bg-gold-l active:scale-[.97]">聊聊你的產品 →</ContactButton>
               <a href="#chapters" className="inline-flex items-center justify-center border border-white/40 px-6 py-3.5 text-[15px] font-medium text-white hover:border-white active:scale-[.97]">看四個章節 ↓</a>
@@ -141,14 +142,10 @@ export function ServicesPage() {
         <div className="lufe-container">
           <h2 className="text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-[-.022em] text-navy">四個章節，按企業的節奏往前走</h2>
           <p className="lead mt-5 text-tx2">每一章獨立計價，每一章結束都能決定是否繼續</p>
-          <div className="mt-12 flex min-w-0 gap-5 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-4">
+          <SnapRail className="mt-12 flex min-w-0 gap-5 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-4">
             {CHAPTER_TILES.map((tile) => (
               <Link key={tile.name} href={tile.href} aria-label="了解方案 →" className="group relative w-[82%] shrink-0 snap-start transition-transform active:scale-[.985] motion-reduce:transition-none md:w-auto">
-                <div className="relative h-[2px] bg-bd">
-                  <span aria-hidden="true" className="absolute -top-1 left-0 h-2.5 w-2.5 bg-gold" />
-                  <span aria-hidden="true" className="absolute inset-0 origin-left scale-x-0 bg-gold transition-transform duration-300 motion-reduce:transition-none [@media(hover:hover)]:group-hover:scale-x-100 motion-reduce:group-hover:scale-x-100" />
-                </div>
-                <figure className="relative mt-5 aspect-[4/5] overflow-hidden">
+                <figure className="relative mt-0 aspect-[4/5] overflow-hidden">
                   <TieredImage src={tile.image} alt={tile.alt} maxTierWidth={tile.maxTierWidth} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 82vw" loading="lazy" className="block h-full w-full object-cover transition-transform duration-[600ms] motion-reduce:transition-none [@media(hover:hover)]:group-hover:scale-[1.04] motion-reduce:group-hover:scale-100" />
                   {tile.badge ? <span className="absolute left-0 top-0 bg-gold px-2.5 py-1 text-[12px] font-semibold text-navy">{tile.badge}</span> : null}
                 </figure>
@@ -158,7 +155,7 @@ export function ServicesPage() {
                 <p className="mt-4 text-[14px] font-semibold text-sky">了解方案 <span aria-hidden="true" className="inline-block transition-transform motion-reduce:transition-none [@media(hover:hover)]:group-hover:translate-x-[3px]">→</span></p>
               </Link>
             ))}
-          </div>
+          </SnapRail>
         </div>
       </section>
 
@@ -198,7 +195,7 @@ export function ServicesPage() {
           <div className="mt-12 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
             {CAPABILITIES.map((capability) => {
               const Icon = capability.icon;
-              return <div key={capability.title} className="bg-navy p-6 md:p-7"><span aria-hidden="true" className="grid h-10 w-10 place-items-center border border-gold/40 bg-gold/10 text-gold"><Icon size={20} /></span><h3 className="mt-5 text-[17px] font-[650] text-white">{capability.title}</h3><p className="mt-2 text-[15px] leading-[1.8] text-white/70">{capability.body}</p></div>;
+              return <div key={capability.title} className="bg-navy p-6 md:p-7"><span aria-hidden="true" className="grid h-10 w-10 place-items-center border border-gold/40 text-gold"><Icon size={20} /></span><h3 className="mt-5 text-[17px] font-[650] text-white">{capability.title}</h3><p className="mt-2 text-[15px] leading-[1.8] text-white/70">{capability.body}</p></div>;
             })}
           </div>
         </div>

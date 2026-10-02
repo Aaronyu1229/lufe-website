@@ -66,17 +66,17 @@ function ChapterHero({ chapter }: { readonly chapter: Chapter }) {
         <HeroBackdrop {...image} video={HERO_VIDEOS[`chapter:${chapter.key}`]} />
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0 max-w-[760px]">
-            <nav aria-label="Breadcrumb" className="mb-7 text-[13px] text-white/55">
+            <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
               <Link href="/" className="[@media(hover:hover)]:hover:text-white">首頁</Link>
-              <span className="mx-2 text-white/30">/</span>
+              <span className="text-white/30">/</span>
               <Link href="/services" className="[@media(hover:hover)]:hover:text-white">服務</Link>
-              <span className="mx-2 text-white/30">/</span>
-              <span className="text-white/80">{chapter.label}</span>
+              <span className="text-white/30">/</span>
+              <span className="text-white/75">{chapter.label}</span>
             </nav>
             {chapter.key === "after" ? <p className="mb-4 inline-block border border-gold bg-gold px-2.5 py-1 text-[12px] font-semibold text-navy">2027 Q1 首批・登記中</p> : null}
             <p className="mb-4 text-[14px] font-medium text-gold">{chapter.label}</p>
-            <h1 className="h1 max-w-[650px] text-white">{chapter.title}</h1>
-            <p className="lead mt-5 max-w-[620px] whitespace-pre-line !text-white/75">{chapter.scene}</p>
+            <h1 className="h1 mb-6 max-w-[650px] text-white">{chapter.title}</h1>
+            <p className="lead max-w-[620px] whitespace-pre-line !text-white/75">{chapter.scene}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               {chapter.key === "after" ? <Link href="#waitlist" className={actionClass}>{chapter.heroAction}</Link> : <ChatAction className={actionClass}>{chapter.heroAction}</ChatAction>}
               {chapter.key === "m1" ? <Link href="/assess" className="inline-flex items-center justify-center border border-white/40 px-6 py-3.5 text-[15px] font-medium text-white active:scale-[.97] [@media(hover:hover)]:hover:border-white">先做 2 分鐘處境比對</Link> : null}
@@ -121,7 +121,7 @@ function Scenarios({ chapter }: { readonly chapter: Chapter }) {
 function ChapterSectionContent({ section }: { readonly section: ChapterSection }) {
   switch (section.type) {
     case "steps": {
-      return <section className="bg-cream py-[72px] md:py-[88px]"><div className="lufe-container"><h2 className="h2 mb-8 text-tx">{section.heading}</h2><div data-lufe-steps className="lufe-steps grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">{section.items.map((item) => { const StepIcon = STEP_ICONS[item.icon]; return <article key={item.number} data-lufe-step className="lufe-card lufe-step border border-bd bg-white p-5 md:p-6"><div className="flex items-center gap-3"><span className="lufe-step-icon border border-gold/25 bg-gold/10 text-gold-d"><StepIcon size={22} /></span><span className="text-[13px] font-semibold text-gold-d">{item.number}</span></div><h3 className="h3 mt-5 text-tx">{item.title}</h3><p className="mt-3 whitespace-pre-line text-[15px] leading-[1.8] text-tx2">{item.body}</p></article>; })}</div></div></section>;
+      return <section className="bg-cream py-[72px] md:py-[88px]"><div className="lufe-container"><h2 className="h2 mb-8 text-tx">{section.heading}</h2><div data-lufe-steps className="lufe-steps grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">{section.items.map((item) => { const StepIcon = STEP_ICONS[item.icon]; return <article key={item.number} data-lufe-step className="lufe-card lufe-step border border-bd bg-white p-5 md:p-6"><div className="flex items-center gap-3"><span className="lufe-step-icon border border-gold/40 text-gold-d"><StepIcon size={22} /></span><span className="text-[13px] font-semibold text-gold-d">{item.number}</span></div><h3 className="h3 mt-5 text-tx">{item.title}</h3><p className="mt-3 whitespace-pre-line text-[15px] leading-[1.8] text-tx2">{item.body}</p></article>; })}</div></div></section>;
     }
     case "report":
       return <section className="bg-white py-[72px] md:py-[88px]"><div className="lufe-container grid min-w-0 grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12"><Tilt aria-hidden="true" className="lufe-report-paper border border-bd bg-cream p-5 text-tx2 md:order-2"><p className="border-b border-bd pb-3 text-[12px] font-semibold">市場探查報告 · 產品 A</p>{["誰會買", "多少錢會買", "為什麼不買"].map((label) => <div key={label} className="border-b border-bd py-4"><p className="text-[13px] font-semibold">{label}</p><div className="mt-2 h-2 w-4/5 bg-sky/30" /><div className="mt-2 h-2 w-3/5 bg-gold/30" /></div>)}</Tilt><div className="md:order-1"><h2 className="h2 text-tx">{section.heading}</h2><ul className="mt-6 grid gap-3">{section.items.map((item) => <li key={item} className="border-l-4 border-gold bg-cream px-4 py-3 text-[15px] leading-[1.7] text-tx2">{item}</li>)}</ul><p className="mt-6 text-[16px] leading-[1.8] text-tx">{section.ending}</p></div></div></section>;

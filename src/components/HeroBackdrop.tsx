@@ -25,7 +25,7 @@ export function HeroBackdrop({ src, srcSet, mobileSrc, position = "center", nigh
         {/* Local responsive sources are pre-generated to the work-order sizes. */}
         <img src={imageSrc} srcSet={imageSrcSet} sizes="100vw" loading="eager" fetchPriority="high" decoding="async" alt="" className="lufe-hero-image" style={{ objectPosition: imagePosition }} />
       </picture>
-      {video ? <HeroBackdropVideo src={video.src} position={imagePosition} /> : null}
+      {video ? <HeroBackdropVideo src={video.src} position={imagePosition} playbackRate={video.playbackRate} /> : null}
       <div className="lufe-hero-scrim" />
     </div>
   );

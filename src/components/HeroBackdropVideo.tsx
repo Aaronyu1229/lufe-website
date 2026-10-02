@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 interface HeroBackdropVideoProps {
   readonly src: string;
   readonly position: string;
+  readonly playbackRate: number;
 }
 
 interface NavigatorConnection {
@@ -20,7 +21,7 @@ function shouldPlay(mediaQuery: MediaQueryList) {
   return !mediaQuery.matches && !(navigator as Navigator & { connection?: NavigatorConnection }).connection?.saveData;
 }
 
-export function HeroBackdropVideo({ src, position }: HeroBackdropVideoProps) {
+export function HeroBackdropVideo({ src, position, playbackRate }: HeroBackdropVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
   const [ready, setReady] = useState(false);
@@ -71,7 +72,11 @@ export function HeroBackdropVideo({ src, position }: HeroBackdropVideoProps) {
 
     let visible = true;
     const play = () => {
-      if (!document.hidden && visible) void video.play().catch(() => undefined);
+      if (!document.hidden && visible) {
+        video.defaultPlaybackRate = playbackRate;
+        video.playbackRate = playbackRate;
+        void video.play().catch(() => undefined);
+      }
     };
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.intersectionRatio >= 0.1;
@@ -93,7 +98,7 @@ export function HeroBackdropVideo({ src, position }: HeroBackdropVideoProps) {
       document.removeEventListener("visibilitychange", onVisibilityChange);
       video.pause();
     };
-  }, [mounted]);
+  }, [mounted, playbackRate]);
 
   if (!mounted) return null;
 
@@ -110,6 +115,10 @@ export function HeroBackdropVideo({ src, position }: HeroBackdropVideoProps) {
       disablePictureInPicture
       data-ready={ready ? "" : undefined}
       style={{ objectPosition: position }}
+      onLoadedMetadata={(event) => {
+        event.currentTarget.defaultPlaybackRate = playbackRate;
+        event.currentTarget.playbackRate = playbackRate;
+      }}
       onPlaying={() => setReady(true)}
     >
       <source src={src} type="video/mp4" />

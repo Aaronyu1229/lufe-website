@@ -36,7 +36,8 @@ describe("FaqSection", () => {
     }
     expect(markup).toContain("還有其他問題？");
     expect(markup).toContain("直接問鹿飛 →");
-    expect(markup.match(/aria-expanded="true"/g)).toHaveLength(1);
+    expect(markup).not.toContain('aria-expanded="true"');
+    expect(markup).not.toContain("scaleY(");
   });
 
   it("uses no rounded utility classes", () => {

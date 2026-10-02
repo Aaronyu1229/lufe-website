@@ -63,7 +63,6 @@ describe("ui SSR contracts", () => {
   it("renders every carousel child in static markup", () => {
     const markup = renderToStaticMarkup(createElement(Carousel, {
       label: "Cards",
-      showControls: false,
     } as import("@/components/ui/Carousel").CarouselProps, [
       createElement("article", { key: "one" }, "First card"),
       createElement("article", { key: "two" }, "Second card"),
@@ -71,6 +70,11 @@ describe("ui SSR contracts", () => {
 
     expect(markup).toContain("First card");
     expect(markup).toContain("Second card");
+    expect(markup).toContain("data-carousel-rail");
+    expect(markup).toContain("01 / 02");
+    expect(markup).toContain('aria-label="上一個"');
+    expect(markup).toContain('aria-label="下一個"');
+    expect(markup).not.toContain("rounded-");
   });
 
   it("marks selected segmented and choice options", () => {
