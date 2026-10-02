@@ -4,7 +4,7 @@ import { isNumericValue } from "@/data/cases";
 
 const JUMPING_STATS = [
   { value: "10", label: "家馬尼拉門市，一年內開出", href: "/cases/bubble-tea" },
-  { value: "全球", label: "羊奶皂品牌調整後的銷售範圍", href: "/cases/goat-milk-soap-global" },
+  { value: "多個市場", label: "羊奶皂品牌調整後，銷往多個海外市場", href: "/cases/goat-milk-soap-global" },
   { value: "FDA", label: "魚鬆進美國，先過法規再談包裝", href: "/cases/fish-floss-us-fda" },
 ] as const;
 
