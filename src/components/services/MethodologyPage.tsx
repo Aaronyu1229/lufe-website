@@ -13,6 +13,7 @@ import {
   COMPANIONSHIP_COPY,
   DOUBLE_SCORE_COPY,
   EXAMPLES_CLOSING,
+  EXAMPLES_INTRO,
   FIRST_MONTH_COPY,
   FOUNDATIONS_CLOSING,
   FOUNDATIONS_FOOTNOTE,
@@ -32,6 +33,7 @@ export {
   COMPANIONSHIP_COPY,
   DOUBLE_SCORE_COPY,
   EXAMPLES_CLOSING,
+  EXAMPLES_INTRO,
   FIRST_MONTH_COPY,
   FOUNDATIONS_CLOSING,
   FOUNDATIONS_FOOTNOTE,
@@ -77,7 +79,7 @@ export function MethodologyPage() {
           </nav>
           <p className="mb-4 text-[14px] font-semibold text-gold">鹿飛方法論</p>
           <h1 className="h1 mb-6 text-white">小步出海法</h1>
-          <p className="lead max-w-[620px] whitespace-pre-line !text-white/75">市場不會因為你準備好了就要你。{"\n"}所以我們先問它。</p>
+          <p className="lead max-w-[620px] whitespace-pre-line !text-white/75">市場不會因為你準備好了就要你。{"\n"}所以我們先問它</p>
         </div>
         <ScrollCue />
       </section>
@@ -102,9 +104,8 @@ export function MethodologyPage() {
       <section className="bg-cream py-[72px] md:py-[88px]">
         <div className="lufe-container">
           <SectionHeading>我們怎麼問市場</SectionHeading>
-          <div className="mt-8">
-            <MethodologyExamples />
-          </div>
+          <p className="mt-4 max-w-[640px] text-[17px] leading-[1.8] text-tx2">{EXAMPLES_INTRO}</p>
+          <MethodologyExamples />
           <p className="mt-8 border-t border-bd pt-6 text-[18px] font-semibold leading-[1.7] text-tx">{EXAMPLES_CLOSING}</p>
           <div className="mt-8 border-l-4 border-gold bg-white p-6 md:flex md:items-end md:justify-between md:gap-8">
             <p className="text-[18px] font-semibold leading-[1.7] text-tx">想知道你的產品會被問到什麼？</p>
@@ -217,7 +218,7 @@ export function MethodologyPage() {
         <div className="lufe-container">
           <div className="mx-auto max-w-[720px] text-center">
             <h2 className="h2 text-white">免費初步評估</h2>
-            <p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，粗跑五個問題，不收費。{"\n"}談完你會知道自己在哪一格、該不該試、該從哪一章開始。</p>
+            <p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，粗跑五個問題，不收費。{"\n"}談完你會知道自己在哪一格、該不該試、該從哪一章開始</p>
             <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">預約 30 分鐘 →</ContactButton>
           </div>
         </div>

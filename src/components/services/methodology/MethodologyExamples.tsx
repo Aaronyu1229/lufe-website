@@ -1,81 +1,84 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { FileIcon, MessageIcon, TargetIcon } from "@/components/icons/LineIcons";
-import { SnapRail } from "@/components/motion/SnapRail";
+import { Segmented } from "@/components/ui";
+import { useSpring } from "@/lib/motion";
 
 import { METHODOLOGY_EXAMPLES } from "./content";
 
-const sectionIcons = [FileIcon, MessageIcon, TargetIcon];
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
 export function MethodologyExamples() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const getScroller = () => containerRef.current?.querySelector<HTMLDivElement>("[data-snap-rail-scroller]");
-
-  const updateActiveIndex = useCallback(() => {
-    const container = getScroller();
-    if (!container) return;
-
-    setActiveIndex(Math.round(container.scrollLeft / container.clientWidth));
-  }, []);
+  const [activeKey, setActiveKey] = useState(METHODOLOGY_EXAMPLES[0]?.key ?? "peanut");
+  const opacity = useSpring(1, { precision: 0.001 });
+  const translateY = useSpring(0, { precision: 0.001 });
 
   useEffect(() => {
-    const container = getScroller();
-    if (!container) return;
+    if (prefersReducedMotion()) {
+      opacity.jump(1);
+      translateY.jump(0);
+      return;
+    }
 
-    container.addEventListener("scroll", updateActiveIndex, { passive: true });
-    return () => container.removeEventListener("scroll", updateActiveIndex);
-  }, [updateActiveIndex]);
+    opacity.jump(0);
+    translateY.jump(8);
+    opacity.to(1, { response: 0.24, damping: 1 });
+    translateY.to(0, { response: 0.24, damping: 1 });
+  }, [activeKey, opacity, translateY]);
 
-  const scrollToExample = (index: number) => {
-    const container = getScroller();
-    if (!container) return;
+  return <>
+    <Segmented
+      label="研究例子"
+      value={activeKey}
+      onChange={(key) => setActiveKey(key === "sunscreen" ? "sunscreen" : "peanut")}
+      options={METHODOLOGY_EXAMPLES.map((example) => ({ value: example.key, label: example.tab }))}
+      className="mt-8"
+    />
+    {METHODOLOGY_EXAMPLES.map((example) => {
+      const active = example.key === activeKey;
 
-    container.scrollTo({ left: container.clientWidth * index });
-    setActiveIndex(index);
-  };
-
-  return (
-    <>
-      <div ref={containerRef}>
-        <SnapRail className="flex min-w-0 snap-x snap-mandatory gap-4 overflow-x-auto pb-3 md:grid md:grid-cols-2 md:items-stretch md:overflow-visible md:pb-0">
-          {METHODOLOGY_EXAMPLES.map((example) => (
-            <article key={example.title} className="w-full shrink-0 snap-center border border-bd bg-cream p-5 md:w-auto md:p-7">
-              <h3 className="h3 max-w-[24ch] text-tx">{example.title}</h3>
-              <div className="mt-7 grid gap-6">
-                {example.sections.map((section, index) => {
-                  const Icon = sectionIcons[index];
-
-                  return (
-                    <section key={section.label}>
-                      <h4 className="flex items-center gap-2 text-[15px] font-semibold text-sky">
-                        <Icon size={16} />
-                        {section.label}
-                      </h4>
-                      <p className="mt-3 whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{section.body}</p>
-                    </section>
-                  );
-                })}
-              </div>
-            </article>
-          ))}
-        </SnapRail>
-      </div>
-      <div className="mt-5 flex justify-center gap-2 md:hidden" aria-label="研究例子">
-        {METHODOLOGY_EXAMPLES.map((example, index) => (
-          <button
-            key={example.title}
-            type="button"
-            aria-label={`查看例子 ${index + 1}`}
-            aria-current={activeIndex === index ? "true" : undefined}
-            onClick={() => scrollToExample(index)}
-            className={`h-2.5 w-2.5 rounded-full border border-navy transition-opacity motion-reduce:transition-none ${activeIndex === index ? "bg-navy" : "bg-transparent opacity-45"}`}
-          />
-        ))}
-      </div>
-    </>
-  );
+      return <article
+        key={example.key}
+        hidden={!active}
+        className="mt-8 border border-bd bg-white"
+        style={active ? { opacity: opacity.value, transform: `translateY(${translateY.value}px)` } : undefined}
+      >
+        <header className="border-b border-bd p-6 md:p-8">
+          <h3 className="h3 text-tx">{example.title}</h3>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {example.tags.map((tag) => <span key={tag} className="border border-bd px-2.5 py-1 text-[13px] text-tx2">{tag}</span>)}
+          </div>
+        </header>
+        <div className="grid min-w-0 lg:grid-cols-12">
+          <section className="p-6 md:p-8 lg:col-span-4 lg:border-r lg:border-bd">
+            <p className="text-[13px] font-semibold text-gold-d">01 怎麼問</p>
+            <p className="mt-4 whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{example.method}</p>
+          </section>
+          <section className="p-6 md:p-8 lg:col-span-8">
+            <p className="text-[13px] font-semibold text-gold-d">02 問到什麼</p>
+            <div data-lufe-methodology-findings className="mt-4 grid gap-3 sm:grid-cols-2">
+              {example.findings.map((finding) => <article key={finding.label} className="border border-bd p-5">
+                <p className="text-[12px] font-semibold text-gold-d">{finding.label}</p>
+                <h4 className="mt-2 text-[18px] font-[650] leading-[1.4] text-tx">{finding.headline}</h4>
+                <p className="mt-2 text-[14px] leading-[1.75] text-tx2">{finding.detail}</p>
+              </article>)}
+            </div>
+          </section>
+        </div>
+        <section className="bg-navy p-6 text-white md:p-8">
+          <p className="text-[13px] font-semibold text-gold">03 決策意涵</p>
+          <div className="mt-4 grid gap-6 md:grid-cols-3">
+            {example.implications.map((implication, index) => <div key={implication} className="border-t border-white/20 pt-4">
+              <p className="font-[var(--font-inter)] text-[13px] font-semibold text-gold">{String(index + 1).padStart(2, "0")}</p>
+              <p className="mt-2 text-[17px] font-[650] leading-[1.55] text-white">{implication}</p>
+            </div>)}
+          </div>
+          <p className="mt-6 text-[14px] leading-[1.8] text-white/70">{example.note}</p>
+        </section>
+      </article>;
+    })}
+  </>;
 }

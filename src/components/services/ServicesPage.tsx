@@ -100,7 +100,7 @@ const CAPABILITIES = [
   {
     icon: UsersIcon,
     title: "在地消費者面板",
-    body: "當地上班族與家長組成的測試面板，產品上架前先取得真實反應",
+    body: "當地消費者組成的測試面板，產品上架前先取得真實反應",
   },
   {
     icon: PackageIcon,

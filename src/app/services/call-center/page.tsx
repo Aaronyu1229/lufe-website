@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/services/call-center",
-  title: "海外客服｜星期五晚上十一點的那封信",
+  title: "海外客服｜交給專業英語團隊",
   description: "一封英文客訴信。退貨、換貨、問哪裡有賣。你不會想為了這件事養一組人，但也不能不回。",
 });
 

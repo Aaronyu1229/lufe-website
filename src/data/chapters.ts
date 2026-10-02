@@ -54,6 +54,10 @@ export type ChapterSection =
       readonly title: string;
       readonly caption?: string;
       readonly details: readonly string[];
+      readonly breakdown?: {
+        readonly heading: string;
+        readonly rows: readonly { readonly item: string; readonly note: string }[];
+      };
       readonly paths?: readonly { readonly label: string; readonly body: string; readonly dark?: boolean }[];
     }
   | {
@@ -67,6 +71,12 @@ export type ChapterSection =
       readonly heading: string;
       readonly items: readonly { readonly title: string; readonly body: string; readonly fit?: string }[];
       readonly ending?: string;
+    }
+  | {
+      readonly type: "included";
+      readonly heading: string;
+      readonly items: readonly { readonly title: string; readonly body: string; readonly icon: StepIcon }[];
+      readonly featureNote: string;
     }
   | {
       readonly type: "table";
@@ -162,8 +172,8 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     key: "m1",
     path: "/services/product-testing",
     label: "第一個月 · 市場探查",
-    title: "先讓馬尼拉的媽媽拿起來看看",
-    scene: "你在台灣問了一百個人，還是不知道馬尼拉的媽媽會不會掏錢。\n市場探查就是把這個問題，拿去問她本人",
+    title: "先驗證市場，再決定投入",
+    scene: "在台灣問了一百個人，還是不知道當地消費者會不會買單。\n市場探查把產品帶到當地，直接取得市場反應",
     image: "/images/services/stage-02-product-test-1600.webp",
     imageAlt: "團隊檢視產品資料",
     heroAction: "聊聊你的產品 →",
@@ -180,7 +190,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         heading: "市場探查的四個步驟",
         items: [
           { number: "01", title: "寄三支產品到馬尼拉", body: "我們先幫你看：這三支在當地有沒有類似的、賣多少錢", icon: "package" },
-          { number: "02", title: "一桌上班族與家長", body: "當地有消費力的上班族和家長（真正掏錢的人）圍著桌子。\n拿起來、聞一聞、翻價錢。有人皺眉，有人問哪裡買得到", icon: "users" },
+          { number: "02", title: "當地消費者測試面板", body: "依產品篩選的當地消費者圍著桌子。\n拿起來、聞一聞、翻價錢。有人皺眉，有人問哪裡買得到", icon: "users" },
           { number: "03", title: "鹿飛在旁邊記", body: "誰拿了第二次、誰看到價錢放下、誰問了成分。每一支產品至少六個數據來源", icon: "pen" },
           { number: "04", title: "一頁報告", body: "誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。\n面板跑完就給，不用等產品證", icon: "file" },
         ],
@@ -209,7 +219,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     faqs: [
       { question: "市場探查沒過會怎樣？", answer: "報告會寫清楚為什麼、什麼條件改了可以再試。這是 1～2 萬買到的最有價值的答案之一。", takeaway: "報告會寫清楚原因，以及什麼條件改了可以再試" },
       { question: "可以只做市場探查嗎？", answer: "可以。市場探查是獨立的，你拿著那一頁去做任何決定都行。", takeaway: "可以，市場探查獨立計價" },
-      { question: "為什麼找上班族與家長？", answer: "上班族是當地有消費力的工薪階層，家長是真正掏錢買東西的人。這兩群人的反應，比問卷準。", takeaway: "一群有消費力，一群真正掏錢" },
+      { question: "測試面板的成員怎麼選？", answer: "依產品的目標市場，篩選當地有購買力、真正會掏錢的消費者。拿起、放下、追問價格的真實反應，比問卷準。", takeaway: "依目標市場篩選，看真實反應" },
     ],
     next: { label: "下一章 →", title: "第三個月 · 寄賣", heading: "上架了，讓人先用過再說", href: "/services/consignment", image: "/images/hero-video/chapter-warehouse-1600.webp", imageAlt: "貨架上待出貨的包裹" },
     cta: { title: "聊聊你的產品", body: "我們先聽你的產品在台灣怎麼賣，再說適不適合去測。\n有時候聽完，我們會建議你再等等——那也是一種答案", action: "聊聊你的產品 →" },
@@ -237,21 +247,22 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         passive: "持證進口商代辦、代持。資料歸你，換人只換一張合約",
         active: [
           { label: "第 1～2 週", body: "貨進合作夥伴的倉，商品頁、當地說明、價格帶定下來" },
-          { label: "第 3～6 週", body: "學校家長活動：先讓人用過。有人在社群裡問，有人拍了影片" },
+          { label: "第 3～6 週", body: "社群試用活動：先讓人用過。有人在社群裡問，有人拍了影片" },
           { label: "第 6～10 週", body: "網紅與活動配套排進去。市場報告從市場探查那一頁展開：價格帶、競品、通路" },
           { label: "證下來那天", body: "貨上架。架上已經有人在等" },
         ],
       },
       {
-        type: "cards",
-        heading: "寄賣包服務內容",
+        type: "included",
+        heading: "寄賣包包含的五件事",
         items: [
-          { title: "電商通路上架", body: "放進合作的菲律賓電商通路，貨放合作夥伴的倉，賣多少算多少" },
-          { title: "產品證代持", body: "化妝品、食品的證由持證進口商代辦代持，資料歸你" },
-          { title: "學校家長活動", body: "證還沒下來的那段時間，先在學校家長社群做試用與活動" },
-          { title: "市場報告", body: "把市場探查那一頁展開，補價格帶、競品、通路" },
-          { title: "網紅與活動配套", body: "只投廣告不夠，這部分跟你一起排" },
+          { title: "電商通路上架", body: "放進合作的菲律賓電商通路，貨放合作夥伴的倉，賣多少算多少", icon: "store" },
+          { title: "產品證代持", body: "化妝品、食品的證由持證進口商代辦代持，資料歸你", icon: "badge-check" },
+          { title: "社群試用活動", body: "證還沒下來的那段時間，先在當地社群做試用與活動", icon: "users" },
+          { title: "市場報告", body: "把市場探查那一頁展開，補價格帶、競品、通路", icon: "chart-column" },
+          { title: "網紅與活動配套", body: "只投廣告不夠，這部分跟你一起排", icon: "presentation" },
         ],
+        featureNote: "核心服務",
       },
       {
         type: "callout",
@@ -314,7 +325,18 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       {
         type: "price",
         title: "按案報價",
-        details: ["第一次談就給成本框架的範圍：註冊、律師、招聘、場地各大概多少", "時間看你要開什麼公司、要幾個人，第一次談給時間表"],
+        caption: "第一次談就給成本框架與時間表",
+        details: [],
+        breakdown: {
+          heading: "第一次談會給你",
+          rows: [
+            { item: "公司註冊", note: "依公司類型給大概範圍" },
+            { item: "律師行文件", note: "依文件範圍給大概範圍" },
+            { item: "招聘", note: "依人數、實體或遠程給大概範圍" },
+            { item: "場地", note: "依地點與規模給大概範圍" },
+            { item: "時間表", note: "依公司類型與人數排出時程" },
+          ],
+        },
       },
     ],
     faqs: [
@@ -322,14 +344,14 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "你們負責合規嗎？", answer: "證幫你申請、坑幫你避，合規的最終責任在品牌方，這一點會清楚寫進合約。", takeaway: "協助申請與避坑，責任歸屬寫進合約" },
       { question: "遠程團隊是什麼意思？", answer: "台灣公司在菲律賓聘人，人在當地、報告給台灣。菲律賓很流行這種做法，我們幫你把合規和招聘處理好。", takeaway: "人在當地，報告給台灣" },
     ],
-    next: { label: "下一章 →", title: "之後的每一天 · 海外客服", heading: "星期五晚上十一點的那封信", href: "/services/call-center", image: "/images/hero-video/chapter-callcenter-1600.webp", imageAlt: "一邊通話一邊打字的客服人員", maxTierWidth: 1600 },
+    next: { label: "下一章 →", title: "之後的每一天 · 海外客服", heading: "海外客服，交給專業英語團隊", href: "/services/call-center", image: "/images/hero-video/chapter-callcenter-1600.webp", imageAlt: "一邊通話一邊打字的客服人員", maxTierWidth: 1600 },
     cta: { title: "聊聊你想在菲律賓開什麼", body: "先說你比較像三條路的哪一條，我們告訴你大概要多少、多久", action: "聊聊你的狀況 →" },
   },
   after: {
     key: "after",
     path: "/services/call-center",
     label: "之後的每一天 · 海外客服",
-    title: "星期五晚上十一點的那封信",
+    title: "海外客服，交給專業英語團隊",
     scene: "一封英文客訴信。退貨、換貨、問哪裡有賣。\n你不會想為了這件事養一組人，但也不能不回",
     image: "/images/services/pillar-team-collab-1600.webp",
     imageAlt: "客服團隊在辦公室協作",
@@ -379,7 +401,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "現在可以簽嗎？", answer: "現在是登記首批。2027 Q1 開始服務，登記的人優先。", takeaway: "2027 Q1 開始服務，登記者優先" },
       { question: "訊息量很小也可以嗎？", answer: "可以先登記。首批我們想找的是量不大、但每一封都重要的品牌，正好一起把服務磨好。", takeaway: "量小也可以先登記" },
     ],
-    next: { label: "故事從頭來 →", title: "第一個月 · 市場探查", heading: "先讓馬尼拉的媽媽拿起來看看", href: "/services/product-testing", image: "/images/hero-video/chapter-research-1600.webp", imageAlt: "會議中討論圖表的團隊" },
+    next: { label: "故事從頭來 →", title: "第一個月 · 市場探查", heading: "先驗證市場，再決定投入", href: "/services/product-testing", image: "/images/hero-video/chapter-research-1600.webp", imageAlt: "會議中討論圖表的團隊" },
     cta: { title: "登記首批", body: "留下你的品牌、大概的訊息量、現在誰在接。開放時我們先找你", action: "登記首批 →", href: "#waitlist" },
   },
   na: {

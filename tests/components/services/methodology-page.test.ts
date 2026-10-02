@@ -8,6 +8,7 @@ import {
   COMPANIONSHIP_COPY,
   DOUBLE_SCORE_COPY,
   EXAMPLES_CLOSING,
+  EXAMPLES_INTRO,
   FIRST_MONTH_COPY,
   FOUNDATIONS_CLOSING,
   FOUNDATIONS_FOOTNOTE,
@@ -35,6 +36,7 @@ describe("MethodologyPage", () => {
     for (const copy of [
       ORIGIN_STORY,
       EXAMPLES_CLOSING,
+      EXAMPLES_INTRO,
       FIRST_MONTH_COPY,
       THIRD_MONTH_INTRO,
       REPORT_DISCLAIMER,
@@ -51,10 +53,16 @@ describe("MethodologyPage", () => {
 
     for (const example of METHODOLOGY_EXAMPLES) {
       expect(markup).toContain(example.title);
-      for (const section of example.sections) {
-        expect(markup).toContain(section.label);
-        expect(markup).toContain(section.body);
+      expect(markup).toContain(example.tab);
+      expect(markup).toContain(example.method);
+      expect(markup).toContain(example.note);
+      for (const tag of example.tags) expect(markup).toContain(tag);
+      for (const finding of example.findings) {
+        expect(markup).toContain(finding.label);
+        expect(markup).toContain(finding.headline);
+        expect(markup).toContain(finding.detail);
       }
+      for (const implication of example.implications) expect(markup).toContain(implication);
     }
     for (const item of REPORT_OUTLINE) expect(markup).toContain(item);
     for (const dimension of METHODOLOGY_DIMENSIONS) {
@@ -85,12 +93,12 @@ describe("MethodologyPage", () => {
     expect(markup.match(/aria-expanded="true"/g)).toHaveLength(1);
   });
 
-  it("renders the mobile carousel controls and both cards in server markup", () => {
+  it("renders the segmented control and both example panels in server markup", () => {
     const markup = renderPage();
 
-    expect(markup).toContain('aria-label="查看例子 1"');
-    expect(markup).toContain('aria-label="查看例子 2"');
-    expect(markup).toContain('aria-current="true"');
+    expect(markup).toContain('aria-label="研究例子"');
+    expect(markup).toContain('role="radio"');
+    expect(markup).toContain('hidden=""');
   });
 
   it("keeps the specified red-line percentages and has no rubric weight data", () => {
@@ -101,7 +109,7 @@ describe("MethodologyPage", () => {
     for (const dimension of METHODOLOGY_DIMENSIONS) expect("weight" in dimension).toBe(false);
   });
 
-  it("uses square corners except for the carousel dots", () => {
+  it("uses square corners", () => {
     expect(renderPage()).not.toMatch(/\brounded-(?!full\b)/);
   });
 
