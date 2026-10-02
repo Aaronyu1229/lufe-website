@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { AccordionItem } from "@/components/faq/AccordionItem";
 import { STAGE_LABELS, type Subsidy } from "@/data/subsidies";
 
 import { SubsidyIcon } from "./SubsidyIcons";
@@ -11,17 +12,21 @@ function CheckIcon() {
 }
 
 function DetailRow({ title, children }: { readonly title: string; readonly children: ReactNode }) {
-  return <section className="grid gap-6 border-t border-bd py-10 lg:grid-cols-12">
+  return <section className="grid gap-6 border-t border-bd py-6 lg:grid-cols-12">
     <h3 className="text-[15px] font-[650] text-tx lg:col-span-3">{title}</h3>
     <div className="min-w-0 lg:col-span-9">{children}</div>
   </section>;
+}
+
+function DetailHeader({ title, meta }: { readonly title: string; readonly meta: string }) {
+  return <span className="flex min-w-0 items-center justify-between gap-4"><span className="text-[15px] font-[650] text-tx">{title}</span><span className="shrink-0 text-[13px] text-tx3">{meta}</span></span>;
 }
 
 export function SubsidyPlanPanel({ subsidy, now }: { readonly subsidy: Subsidy; readonly now: Date }) {
   const stage = STAGE_LABELS[subsidy.stage];
 
   return <article className="min-w-0">
-    <header className="grid gap-8 py-12 lg:grid-cols-12">
+    <header className="grid gap-8 py-8 lg:grid-cols-12">
       <div className="min-w-0 lg:col-span-7">
         {subsidy.highlight ? <div className="mb-5 flex flex-wrap items-center gap-2"><span className="bg-ember px-2.5 py-1 text-[11px] font-semibold tracking-wider text-white">{subsidy.highlight}</span>{subsidy.highlightNote ? <span className="text-[12px] font-medium text-ember">{subsidy.highlightNote}</span> : null}</div> : null}
         <div className="mb-3 flex items-center gap-3"><span className="grid h-11 w-11 place-items-center border border-gold/40 text-gold-d"><SubsidyIcon iconKey={subsidy.iconKey} size={22} /></span><p className="eyebrow text-tx3">{subsidy.num} · {subsidy.agency}</p></div>
@@ -38,10 +43,19 @@ export function SubsidyPlanPanel({ subsidy, now }: { readonly subsidy: Subsidy; 
     </header>
 
     <DetailRow title="適合"><ul className="grid gap-x-8 gap-y-3 md:grid-cols-2">{subsidy.whoFor.map((item) => <li key={item} className="flex gap-3 text-[14.5px] leading-[1.75] text-tx2"><CheckIcon />{item}</li>)}</ul></DetailRow>
-    <DetailRow title="補助涵蓋"><div className="flex flex-wrap gap-2">{subsidy.covers.map((item) => <span key={item} className="border border-bd px-3 py-1.5 text-[13px] text-tx2">{item}</span>)}</div></DetailRow>
-    <DetailRow title="可補助費用明細"><div className="grid gap-3 md:grid-cols-2">{subsidy.coversDetail?.map((item) => <article key={item.title} className="border border-bd p-4"><div className="flex flex-col justify-between gap-3 sm:flex-row"><div><h4 className="text-[15px] font-[650] text-tx">{item.title}</h4><p className="mt-2 text-[13px] leading-[1.7] text-tx2">{item.note}</p></div>{item.limit ? <span className="num shrink-0 text-[15px] text-navy">{item.limit}</span> : null}</div></article>)}</div></DetailRow>
-    <DetailRow title="申請與核銷流程"><ol className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">{subsidy.processSteps?.map((item, index) => <li key={item.title} className="border border-bd p-4"><span className="grid h-8 w-8 place-items-center border border-gold/40 text-[13px] font-semibold text-gold-d">{String(index + 1).padStart(2, "0")}</span><h4 className="mt-4 text-[14.5px] font-[650] text-tx">{item.title}</h4><p className="mt-2 text-[13px] leading-[1.7] text-tx2">{item.note}</p></li>)}</ol></DetailRow>
-    <DetailRow title="容易踩雷的點"><ul className="grid gap-3 border-l-2 border-ember bg-ember/5 p-5">{subsidy.importantNotes?.map((item) => <li key={item} className="text-[14px] leading-[1.75] text-tx2">{item}</li>)}</ul></DetailRow>
+    <div className="mt-6 [&>div>button]:py-3">
+      <p className="mb-1 text-[13px] font-semibold text-tx3">細節</p>
+      {subsidy.coversDetail?.length ? <AccordionItem id={`${subsidy.slug}-detail-1`} num="01" header={<DetailHeader title="補助涵蓋與費用明細" meta={`${subsidy.coversDetail.length} 項`} />}>
+        <div className="flex flex-wrap gap-2">{subsidy.covers.map((item) => <span key={item} className="border border-bd px-3 py-1.5 text-[13px] text-tx2">{item}</span>)}</div>
+        <div className="mt-5 grid gap-3 md:grid-cols-2">{subsidy.coversDetail.map((item) => <article key={item.title} className="border border-bd p-4"><div className="flex flex-col justify-between gap-3 sm:flex-row"><div><h4 className="text-[15px] font-[650] text-tx">{item.title}</h4><p className="mt-2 text-[13px] leading-[1.7] text-tx2">{item.note}</p></div>{item.limit ? <span className="num shrink-0 text-[15px] text-navy">{item.limit}</span> : null}</div></article>)}</div>
+      </AccordionItem> : null}
+      {subsidy.processSteps?.length ? <AccordionItem id={`${subsidy.slug}-detail-2`} num="02" header={<DetailHeader title="申請與核銷流程" meta={`${subsidy.processSteps.length} 步`} />}>
+        <ol className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">{subsidy.processSteps.map((item, index) => <li key={item.title} className="border border-bd p-4"><span className="grid h-8 w-8 place-items-center border border-gold/40 text-[13px] font-semibold text-gold-d">{String(index + 1).padStart(2, "0")}</span><h4 className="mt-4 text-[14.5px] font-[650] text-tx">{item.title}</h4><p className="mt-2 text-[13px] leading-[1.7] text-tx2">{item.note}</p></li>)}</ol>
+      </AccordionItem> : null}
+      {subsidy.importantNotes?.length ? <AccordionItem id={`${subsidy.slug}-detail-3`} num="03" header={<DetailHeader title="容易踩雷的點" meta={`${subsidy.importantNotes.length} 點`} />}>
+        <ul className="grid gap-3 border-l-2 border-ember bg-ember/5 p-5">{subsidy.importantNotes.map((item) => <li key={item} className="text-[14px] leading-[1.75] text-tx2">{item}</li>)}</ul>
+      </AccordionItem> : null}
+    </div>
     <DetailRow title="鹿飛怎麼幫"><div className="bg-navy p-6 text-[15px] leading-[1.8] text-white/90">{subsidy.lufeAngle}</div></DetailRow>
 
     <footer className="flex flex-wrap items-end justify-between gap-4 py-3">

@@ -33,6 +33,13 @@ describe("Navbar", () => {
     expect(markup.match(/TradePilot - 線上報關工具/g)).toHaveLength(2);
   });
 
+  it("uses the new resources label in desktop and mobile menus", () => {
+    const markup = renderNavbar();
+
+    expect(markup.match(/補助與資源/g)).toHaveLength(2);
+    expect(markup).not.toContain("補助與活動");
+  });
+
   it("never lists an insight chapter that has no articles", () => {
     const markup = renderNavbar();
 

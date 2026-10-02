@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { useMemo, useRef, type MouseEvent, type ReactNode } from "react";
 import Link from "next/link";
 
 import { TieredImage } from "@/components/TieredImage";
 import { ArticleFaq } from "@/components/insights/ArticleFaq";
+import { ArticleTocList, MobileArticleToc, ReadingProgress, useActiveHeading, useReadingProgress, type Heading } from "@/components/insights/ArticleToc";
 import { InsightCta } from "@/components/insights/InsightCta";
 import { StaticArticleContent, getStaticArticleHeadings, renderInlineMarkdown } from "@/components/insights/StaticArticleContent";
 import { Disclosure } from "@/components/ui";
 import type { Article } from "@/data/articles";
 import type { DatabaseInsight, InsightCard } from "@/lib/articles/presentation";
-import { useSpring } from "@/lib/motion";
 
 const colorMap: Record<string, string> = {
   sky: "bg-[rgba(91,143,168,0.08)] text-sky",
@@ -20,11 +20,6 @@ const colorMap: Record<string, string> = {
 
 const databaseHeadingPattern = /<h2\b([^>]*)>([\s\S]*?)<\/h2>/gi;
 
-interface Heading {
-  readonly id: string;
-  readonly text: string;
-}
-
 interface Props {
   readonly article: Article | DatabaseInsight;
   readonly image: string;
@@ -33,6 +28,14 @@ interface Props {
 
 function isDatabaseArticle(article: Article | DatabaseInsight): article is DatabaseInsight {
   return !Array.isArray(article.content);
+}
+
+function isDatabaseContent(content: Article["content"] | DatabaseInsight["content"]): content is DatabaseInsight["content"] {
+  return !Array.isArray(content);
+}
+
+function getArticleHeadings(content: Article["content"] | DatabaseInsight["content"]): Heading[] {
+  return isDatabaseContent(content) ? getDatabaseArticleHeadings(content.html) : getStaticArticleHeadings(content);
 }
 
 export function renderStaticBoldMarkup(text: string): ReactNode {
@@ -114,91 +117,8 @@ function ArticleSources({ sources, lastVerified }: Pick<Article, "sources" | "la
   );
 }
 
-function ReadingProgress() {
-  const progress = useSpring(0, { precision: 0.001 });
-
-  useEffect(() => {
-    const updateProgress = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      progress.to(maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0, { response: 0.24 });
-    };
-
-    updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
-    return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
-    };
-  }, [progress]);
-
-  return <div aria-hidden="true" className="fixed left-0 right-0 top-[74px] z-[51] h-[2px] origin-left bg-gold will-change-transform" style={{ transform: `scaleX(${progress.value})` }} />;
-}
-
 function prefersReducedMotion(): boolean {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function ArticleToc({ headings }: { readonly headings: readonly Heading[] }) {
-  const [activeId, setActiveId] = useState(headings[0]?.id ?? "");
-  const itemRefs = useRef(new Map<string, HTMLLIElement>());
-  const indicatorPosition = useSpring(0, { precision: 0.001 });
-  const indicatorHeight = useSpring(0, { precision: 0.001 });
-
-  useEffect(() => {
-    if (!headings.length) return;
-
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const active = headings.reduce<string>((current, heading) => {
-        const element = document.getElementById(heading.id);
-        return element && element.getBoundingClientRect().top <= 120 ? heading.id : current;
-      }, headings[0].id);
-      setActiveId(active);
-    };
-    const requestUpdate = () => {
-      if (!frame) frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    return () => {
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, [headings]);
-
-  useEffect(() => {
-    const item = itemRefs.current.get(activeId);
-    if (!item) return;
-    indicatorPosition.to(item.offsetTop, { response: 0.35, damping: 1 });
-    indicatorHeight.to(item.offsetHeight, { response: 0.35, damping: 1 });
-  }, [activeId, indicatorHeight, indicatorPosition]);
-
-  const navigate = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
-    event.preventDefault();
-    document.getElementById(id)?.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
-    window.history.replaceState(null, "", `#${id}`);
-    setActiveId(id);
-  };
-
-  if (!headings.length) return null;
-
-  return (
-    <nav aria-label="本文目錄" className="relative border-l border-bd">
-      <span aria-hidden="true" className="absolute -left-px top-0 w-[2px] bg-gold" style={{ height: `${indicatorHeight.value}px`, transform: `translateY(${indicatorPosition.value}px)` }} />
-      <ol>
-        {headings.map((heading) => (
-          <li key={heading.id} ref={(element) => { if (element) itemRefs.current.set(heading.id, element); }}>
-            <a href={`#${heading.id}`} onClick={(event) => navigate(event, heading.id)} className={`block py-2 pl-4 text-[14px] leading-[1.45] ${activeId === heading.id ? "font-semibold text-tx" : "text-tx2 hover:text-tx"}`}>{heading.text}</a>
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
 }
 
 function RelatedArticleRows({ articles }: { readonly articles: readonly InsightCard[] }) {
@@ -210,9 +130,9 @@ function RelatedArticleRows({ articles }: { readonly articles: readonly InsightC
   </Link>)}</div>;
 }
 
-function ArticleAside({ headings, related }: { readonly headings: readonly Heading[]; readonly related: readonly InsightCard[] }) {
+function ArticleAside({ headings, related, activeIndex, progress, minutes }: { readonly headings: readonly Heading[]; readonly related: readonly InsightCard[]; readonly activeIndex: number; readonly progress: number; readonly minutes: number | undefined }) {
   return <aside className="sticky top-[96px] self-start">
-    {headings.length ? <><h2 className="mb-3 text-[13px] font-semibold text-tx3">本文目錄</h2><ArticleToc headings={headings} /></> : null}
+    {headings.length ? <ArticleTocList headings={headings} activeIndex={activeIndex} variant="aside" progress={progress} minutes={minutes} /> : null}
     {related.length ? <section className="mt-10"><h2 className="mb-3 text-[13px] font-semibold text-tx3">延伸閱讀</h2><RelatedArticleRows articles={related} /></section> : null}
   </aside>;
 }
@@ -225,8 +145,12 @@ export function ArticleDetail({ article, image, related }: Props) {
   const staticLastVerified = isDatabaseArticle(article) ? undefined : article.lastVerified;
   const coverImage = image || (databaseContent ? getFirstDatabaseArticleImage(databaseContent.html) : "");
   const externalImage = /^https?:\/\//.test(coverImage);
-  const headings = databaseContent ? getDatabaseArticleHeadings(databaseContent.html) : getStaticArticleHeadings(staticContent);
+  const headings = useMemo(() => getArticleHeadings(article.content), [article.content]);
   const databaseHtml = databaseContent ? stripDatabaseArticleImages(addDatabaseArticleHeadingIds(databaseContent.html)) : "";
+  const coverRef = useRef<HTMLElement | null>(null);
+  const activeIndex = useActiveHeading(headings);
+  const readingProgress = useReadingProgress();
+  const minutes = Number.parseInt(article.readTime, 10);
 
   const handleSourceReference = (event: MouseEvent<HTMLDivElement>) => {
     if (!(event.target instanceof Element)) return;
@@ -243,7 +167,8 @@ export function ArticleDetail({ article, image, related }: Props) {
 
   return (
     <article className="min-h-screen bg-white pt-[126px] md:pt-[148px]">
-      <ReadingProgress />
+      <ReadingProgress progress={readingProgress.value} />
+      <MobileArticleToc headings={headings} activeIndex={activeIndex} coverRef={coverRef} />
       <div className="lufe-container">
         <div className="grid gap-16 lg:grid-cols-[minmax(0,720px)_280px]">
           <div className="min-w-0">
@@ -253,10 +178,10 @@ export function ArticleDetail({ article, image, related }: Props) {
               <h1 className="h1 mb-6 font-sans text-tx">{article.title}</h1>
               <div className="mb-6 flex items-center gap-3"><TieredImage src="/images/about/aaron-portrait-studio-640.webp" alt="" maxTierWidth={640} sizes="32px" loading="eager" className="h-8 w-8 rounded-full object-cover object-[center_18%]" /><div className="text-[13px] leading-[1.55] text-tx3"><Link href="/about/aaron-yu" className="font-medium text-tx2 hover:text-navy">Aaron Yu・鹿飛 LUFÉ 創辦人</Link><p>發布：<time dateTime={article.date}>{article.date}</time></p></div></div>
               <p className="border-l-2 border-gold pl-4 text-[17px] leading-[1.8] text-tx2">{article.summary}</p>
-              {headings.length ? <div className="mt-8 lg:hidden"><Disclosure summary="本文目錄"><ArticleToc headings={headings} /></Disclosure></div> : null}
+              {headings.length ? <div className="mt-8 lg:hidden"><Disclosure summary="本文目錄"><ArticleTocList headings={headings} activeIndex={activeIndex} variant="inline" /></Disclosure></div> : null}
             </header>
 
-            <figure className="relative mb-10 h-[240px] w-full overflow-hidden md:h-[360px]">{externalImage
+            <figure ref={coverRef} className="relative mb-10 h-[240px] w-full overflow-hidden md:h-[360px]">{externalImage
               // Database article images are not known to Next's static image configuration.
               // eslint-disable-next-line @next/next/no-img-element
               ? <img src={coverImage} alt={article.title} className="h-full w-full object-cover" />
@@ -270,7 +195,7 @@ export function ArticleDetail({ article, image, related }: Props) {
             {related.length ? <section className="mb-10 lg:hidden"><h2 className="h3 mb-5 text-tx">延伸閱讀</h2><RelatedArticleRows articles={related} /></section> : null}
             <div className="mb-[80px] text-center md:mb-[110px]"><Link href="/insights" className="text-[14.5px] font-medium text-tx3 hover:text-navy">← 回到所有文章</Link></div>
           </div>
-          <div className="hidden lg:block"><ArticleAside headings={headings} related={related} /></div>
+          <div className="hidden lg:block"><ArticleAside headings={headings} related={related} activeIndex={activeIndex} progress={readingProgress.value} minutes={Number.isNaN(minutes) ? undefined : minutes} /></div>
         </div>
       </div>
       <InsightCta />
