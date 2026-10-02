@@ -33,8 +33,8 @@ describe("ServicesPage", () => {
   });
 
   it("uses the approved testing-panel description", () => {
-    expect(normalizedMarkup()).toContain("當地上班族與家長組成的測試面板，產品上架前先取得真實反應");
-    expect(normalizedMarkup()).not.toContain("當地教師與家長組成的測試面板");
+    expect(normalizedMarkup()).toContain("當地消費者組成的測試面板，產品上架前先取得真實反應");
+    expect(normalizedMarkup()).not.toContain("當地上班族與家長組成的測試面板");
   });
 
   it("does not render rounded utility classes", () => {
