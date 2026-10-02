@@ -28,9 +28,10 @@ describe("OptimizePageContent", () => {
         expect(markup).toContain(detail);
       }
     }
-    for (const [question, answer] of OPTIMIZE_FAQS) {
+    for (const [question, answer, takeaway] of OPTIMIZE_FAQS) {
       expect(markup).toContain(question);
       expect(markup).toContain(answer);
+      expect(markup).toContain(takeaway);
     }
   });
 

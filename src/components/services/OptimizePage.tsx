@@ -6,7 +6,7 @@ import { HERO_VIDEOS } from "@/data/heroVideos";
 import { Reveal } from "@/components/Reveal";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
-import { Disclosure } from "@/components/ui";
+import { FaqSection } from "@/components/faq/FaqSection";
 
 import { ContactButton } from "./ContactButton";
 
@@ -64,9 +64,9 @@ export const OPTIMIZE_SERVICES = [
 ] as const;
 
 export const OPTIMIZE_FAQS = [
-  ["沒跟你們走過第一年也可以嗎？", "可以。這一頁的方案是獨立的，第一次談我們會先問你現在的狀況。"],
-  ["不確定我的問題屬於哪一類？", "先聊聊。我們會花 30 分鐘聽你現在的狀況，告訴你是該先診斷，還是可以直接進優化。"],
-  ["怎麼收費？", "診斷是定額，優化是月費加績效。第一次談給範圍。"],
+  ["沒跟你們走過第一年也可以嗎？", "可以。這一頁的方案是獨立的，第一次談我們會先問你現在的狀況。", "可以，方案獨立"],
+  ["不確定我的問題屬於哪一類？", "先聊聊。我們會花 30 分鐘聽你現在的狀況，告訴你是該先診斷，還是可以直接進優化。", "先聊 30 分鐘再決定"],
+  ["怎麼收費？", "診斷是定額，優化是月費加績效。第一次談給範圍。", "診斷定額，優化月費加績效"],
 ] as const;
 
 function SectionHeading({ children }: { readonly children: ReactNode }) {
@@ -177,14 +177,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         </div>
       </section>
 
-      <section className="bg-white py-[72px] md:py-[88px]">
-        <div className="lufe-container">
-          <SectionHeading>常見問題</SectionHeading>
-          <div className="mt-6 border-b border-bd">
-            {OPTIMIZE_FAQS.map(([question, answer], index) => <Disclosure key={question} id={`optimize-faq-${index + 1}`} defaultOpen={index === 0} summary={<span><span aria-hidden="true" className="mr-4 text-[13px] font-semibold text-gold-d">{String(index + 1).padStart(2, "0")}</span>{question}</span>}><p className="text-[15.5px] leading-[1.85] text-tx2">{answer}</p></Disclosure>)}
-          </div>
-        </div>
-      </section>
+      <FaqSection title="常見問題" idPrefix="optimize-faq" items={OPTIMIZE_FAQS.map(([question, answer, takeaway], index) => ({ num: String(index + 1).padStart(2, "0"), question, answer, takeaway }))} className="bg-white py-[72px] md:py-[96px]" />
 
       {relatedReading}
 

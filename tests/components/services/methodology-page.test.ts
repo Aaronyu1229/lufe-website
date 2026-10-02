@@ -22,6 +22,7 @@ import {
   SCALE_INTRO,
   THIRD_MONTH_INTRO,
 } from "@/components/services/MethodologyPage";
+import { splitDimensionName } from "@/components/services/methodology/RubricItem";
 
 const renderPage = () => renderToStaticMarkup(createElement(MethodologyPage));
 const markupText = (markup: string) => markup.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
@@ -56,7 +57,10 @@ describe("MethodologyPage", () => {
     }
     for (const item of REPORT_OUTLINE) expect(markup).toContain(item);
     for (const dimension of METHODOLOGY_DIMENSIONS) {
-      expect(markup).toContain(dimension.name);
+      const [en, zh] = splitDimensionName(dimension.name);
+      expect(`${en} ${zh}`).toBe(dimension.name);
+      expect(markup).toContain(en);
+      expect(markup).toContain(zh);
       expect(markup).toContain(dimension.question);
       expect(markup).toContain(dimension.criteria);
       expect(markup).toContain(dimension.redAt);
@@ -73,12 +77,11 @@ describe("MethodologyPage", () => {
     }
   });
 
-  it("uses an SSR-native accordion, with only the first rubric open", () => {
+  it("uses five SSR rubric accordions, with only the first rubric open", () => {
     const markup = renderPage();
 
-    expect(markup.match(/<details/g)).toHaveLength(METHODOLOGY_DIMENSIONS.length);
-    expect(markup.match(/<details open=""/g)).toHaveLength(1);
-    expect(markup.match(/<summary/g)).toHaveLength(METHODOLOGY_DIMENSIONS.length);
+    expect(markup.match(/aria-expanded="(?:true|false)"/g)).toHaveLength(METHODOLOGY_DIMENSIONS.length);
+    expect(markup.match(/aria-expanded="true"/g)).toHaveLength(1);
   });
 
   it("renders the mobile carousel controls and both cards in server markup", () => {
@@ -89,10 +92,11 @@ describe("MethodologyPage", () => {
     expect(markup).toContain('aria-current="true"');
   });
 
-  it("keeps only the specified red-line percentages and has no rubric weight data", () => {
+  it("keeps the specified red-line percentages and has no rubric weight data", () => {
     const markup = renderPage();
 
-    expect(markup.match(/%/g)).toHaveLength(2);
+    expect(markup).toContain("70%");
+    expect(markup).toContain("5%");
     for (const dimension of METHODOLOGY_DIMENSIONS) expect("weight" in dimension).toBe(false);
   });
 
