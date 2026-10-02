@@ -1,9 +1,11 @@
 import Link from "next/link";
 
+import { isNumericValue } from "@/data/cases";
+
 const JUMPING_STATS = [
-  { value: "120+", label: "家北美 Costco 門市同步上架", href: "/cases/costco-health" },
   { value: "10", label: "家馬尼拉門市，一年內開出", href: "/cases/bubble-tea" },
-  { value: "3x", label: "營收成長，皮鞋品牌轉型襪子", href: "/cases/shoe-brand" },
+  { value: "全球", label: "羊奶皂品牌調整後的銷售範圍", href: "/cases/goat-milk-soap-global" },
+  { value: "FDA", label: "魚鬆進美國，先過法規再談包裝", href: "/cases/fish-floss-us-fda" },
 ] as const;
 
 export const JUMPING_COPY = {
@@ -28,7 +30,11 @@ export function JumpingSection() {
           <div className="grid grid-cols-3 gap-4 border-y border-white/15 pb-2 pt-6 md:gap-7">
             {JUMPING_STATS.map(({ value, label, href }) => (
               <Link key={label} href={href} className="group block active:scale-[.985]">
-                <strong data-lufe-counter className="block font-sans text-[clamp(30px,4vw,44px)] font-semibold leading-none tracking-[-.035em] text-gold">{value}</strong>
+                {isNumericValue(value) ? (
+                  <strong data-lufe-counter className="block font-sans text-[clamp(30px,4vw,44px)] font-semibold leading-none tracking-[-.035em] text-gold">{value}</strong>
+                ) : (
+                  <strong className="block font-sans text-[clamp(26px,3.2vw,36px)] font-[650] leading-[1.15] tracking-[-.02em] text-gold">{value}</strong>
+                )}
                 <span className="mt-3 block text-[11px] leading-[1.5] text-white/65 transition-colors duration-200 [@media(hover:hover)]:group-hover:text-white/85 md:text-[12px]">{label}</span>
               </Link>
             ))}

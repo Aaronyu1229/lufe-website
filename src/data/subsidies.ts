@@ -466,20 +466,20 @@ export const CONTEXTUAL_COPY: readonly {
     },
   },
   {
-    pathPrefix: "/cases/electronics-tariff",
+    pathPrefix: "/cases/goat-milk-soap-global",
     copy: {
-      eyebrow: "這個案例的補助",
-      headline: "產地轉移有政府支援",
-      oneLiner: "研發轉型 + 貿易融資 · 為這種情況設計",
+      eyebrow: "想同時進多個市場？",
+      headline: "海外布建有補助",
+      oneLiner: "通路、據點、參展——依出海階段對應不同計畫",
       cta: "看細節",
     },
   },
   {
-    pathPrefix: "/cases/costco-health",
+    pathPrefix: "/cases/fish-floss-us-fda",
     copy: {
       eyebrow: "這個案例的補助",
-      headline: "打進通路可以申請",
-      oneLiner: "最高 2,000 萬 · 海外通路布建補助（10/30 截止）",
+      headline: "進美國市場也有補助",
+      oneLiner: "海外通路布建、參展都有對應的計畫",
       cta: "看細節",
     },
   },
@@ -490,15 +490,6 @@ export const CONTEXTUAL_COPY: readonly {
       headline: "海外據點有補助",
       oneLiner: "東南亞落地也能申請 · 最高 500 萬",
       cta: "看細節",
-    },
-  },
-  {
-    pathPrefix: "/cases/shoe-brand",
-    copy: {
-      eyebrow: "要上 Amazon？",
-      headline: "跨境電商有免費資源",
-      oneLiner: "政府免費培訓 · 平台廣告補助",
-      cta: "看這個計畫",
     },
   },
   {
@@ -565,20 +556,16 @@ export const CONTEXT_SUBSIDY_MAP: readonly {
     subsidySlug: "supply-chain-support",
   },
   {
-    pathPrefix: "/cases/electronics-tariff",
-    subsidySlug: "supply-chain-support",
+    pathPrefix: "/cases/goat-milk-soap-global",
+    subsidySlug: "market-expansion",
   },
   {
-    pathPrefix: "/cases/costco-health",
+    pathPrefix: "/cases/fish-floss-us-fda",
     subsidySlug: "market-expansion",
   },
   {
     pathPrefix: "/cases/bubble-tea",
     subsidySlug: "market-expansion",
-  },
-  {
-    pathPrefix: "/cases/shoe-brand",
-    subsidySlug: "cross-border-ecommerce",
   },
 ];
 

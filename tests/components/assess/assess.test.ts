@@ -21,15 +21,15 @@ describe("Assess", () => {
     expect(markup).not.toContain("Aaron Yu · 鹿飛創辦人");
     expect(markup).toContain('id="assess-quiz"');
     expect(markup).toContain("開始比對 ↓");
-    expect(markup).toContain("會和這四個案例比對");
+    expect(markup).toContain("會和這三個案例比對");
     for (const caseItem of CASES) expect(markup).toContain(caseItem.title);
     expect(markup).not.toContain("bg-gold text-navy");
     expect(markup).not.toContain("rounded-");
   });
 
   it("parses valid results into a primary case and renders incomplete links safely", () => {
-    const valid = getAssessResult(new URLSearchParams("stage=scaling&blocker=channel&market=us"));
-    expect(valid?.primary.slug).toBe("costco-health");
+    const valid = getAssessResult(new URLSearchParams("stage=idea&blocker=compliance&market=us"));
+    expect(valid?.primary.slug).toBe("fish-floss-us-fda");
     expect(getAssessResult(new URLSearchParams("stage=bad&blocker=channel&market=us"))).toBeNull();
     expect(renderToStaticMarkup(createElement(InvalidAssessResult))).toContain("這份比對連結不完整");
   });

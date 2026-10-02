@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { CaseDetailPageContent } from "@/components/cases/CaseDetailPage";
-import { CASES } from "@/data/cases";
+import { CASES, isNumericValue } from "@/data/cases";
 
 describe("CaseDetailPageContent", () => {
   it("renders every prescribed story chapter and image in server markup", () => {
@@ -49,6 +49,7 @@ describe("CaseDetailPageContent", () => {
     for (const caseItem of CASES) {
       const storyText = caseItem.story.flatMap((chapter) => [chapter.heading, ...chapter.paragraphs]).join(" ");
       for (const stat of caseItem.stats) {
+        if (!isNumericValue(stat.value)) continue;
         const number = stat.value.match(/\d+(?:\.\d+)?/)?.[0];
         expect(number).toBeDefined();
         expect(storyText).toContain(number);
@@ -75,7 +76,8 @@ describe("CaseDetailPageContent", () => {
   });
 
   it("maps legacy stages to the new service routes without duplicate links", () => {
-    const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: CASES[0] }));
+    const fishFloss = CASES.find((caseItem) => caseItem.slug === "fish-floss-us-fda")!;
+    const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: fishFloss }));
 
     expect(markup).toContain('href="/services/product-testing"');
     expect(markup).toContain('href="/services/north-america"');

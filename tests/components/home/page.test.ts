@@ -56,7 +56,7 @@ describe("home page", () => {
       expect(rendered).toContain(item.solutionLine);
       expect(rendered).toContain(item.route.from);
       expect(rendered).toContain(item.route.to);
-      expect(rendered).toContain(item.trustSignal);
+      if (item.trustSignal) expect(rendered).toContain(item.trustSignal);
     }
 
     for (const road of HOME_CASE_ROADS) {
@@ -98,9 +98,9 @@ describe("home page", () => {
     expect(rendered).toContain(JUMPING_COPY.body);
     expect(rendered).toContain("鹿飛相信的事很簡單");
     expect(rendered).toContain("鹿飛案例成果");
-    expect(rendered).toContain("家北美 Costco 門市同步上架");
     expect(rendered).toContain("家馬尼拉門市，一年內開出");
-    expect(rendered).toContain("營收成長，皮鞋品牌轉型襪子");
+    expect(rendered).toContain("羊奶皂品牌調整後的銷售範圍");
+    expect(rendered).toContain("魚鬆進美國，先過法規再談包裝");
     expect(rendered).toContain("出海實務洞察，");
     expect(rendered).toContain("看所有文章 →");
     expect(rendered).not.toContain("越南市場進入指南：台灣品牌該知道的 5 個關鍵");
