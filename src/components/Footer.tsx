@@ -28,7 +28,7 @@ const insightLinks = [
 
 const contactLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "aaron.yu@reborn.in", href: "mailto:aaron.yu@reborn.in" },
-  { label: "合作夥伴聯繫", href: "/contact#partners" },
+  { label: "合作夥伴聯繫", href: "/contact" },
   { label: "台北市", href: "" },
 ];
 

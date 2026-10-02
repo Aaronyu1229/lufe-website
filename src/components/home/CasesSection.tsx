@@ -191,7 +191,7 @@ function CaseCard({ item }: { item: CaseCardData }) {
             <h3 className="font-sans text-[19px] font-semibold leading-[1.4] text-tx">{item.title}</h3>
             <div className="mt-auto flex items-center justify-between gap-3 border-t border-bd pt-5">
               <FromToRoute from={item.route.from} to={item.route.to} />
-              <span aria-hidden="true" className="grid h-[30px] w-[30px] shrink-0 place-items-center bg-navy text-white">
+              <span aria-hidden="true" className="grid h-[30px] w-[30px] shrink-0 place-items-center border border-navy/30 text-navy">
                 <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none">
                   <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                 </svg>
@@ -250,7 +250,7 @@ export function CasesSection() {
 
             return (
             <article key={road.label} className="lufe-card group border border-bd bg-cream p-6 md:p-7">
-              <span aria-hidden="true" className="mb-5 grid h-10 w-10 place-items-center border border-gold/25 bg-gold/10 text-gold-d transition-colors duration-200 [@media(hover:hover)]:group-hover:bg-gold/15">
+              <span aria-hidden="true" className="mb-5 grid h-10 w-10 place-items-center border border-gold/40 text-gold-d transition-colors duration-200 [@media(hover:hover)]:group-hover:border-gold-d">
                 <Icon size={20} className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-px" />
               </span>
               <p className="text-[13px] font-semibold text-gold-d">{road.label}</p>
@@ -260,7 +260,6 @@ export function CasesSection() {
             );
           })}
         </div>
-        <p className="mt-6 max-w-[720px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">三條路的成本、坑、時間都不一樣。{"\n"}第一次談，鹿飛會先確認企業比較像哪一條</p>
       </div>
 
       <div className="lufe-container">

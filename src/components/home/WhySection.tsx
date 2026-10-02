@@ -72,7 +72,6 @@ export function OneContractSection() {
             </tbody>
           </table>
         </div>
-        <p className="mt-5 text-[15px] font-medium leading-[1.8] text-tx2">沒有責任轉交，沒有窗口切換，抵達之後也有人接手</p>
       </div>
     </section>
   );

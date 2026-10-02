@@ -93,9 +93,8 @@ export function InsightsPageContent({
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0">
             <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">洞察</span></nav>
-            <h1 className="display mb-6 max-w-[720px] font-sans text-white">每一章讀到一半會想問的事，<span className="text-gold">這裡先寫好</span></h1>
-            <p className="lead mb-10 max-w-[540px] text-white/70">按你現在在故事的哪一個月找</p>
-            <div className="grid max-w-[520px] grid-cols-3 gap-5 border-t border-white/10 pt-6 md:gap-8">{[{ n: String(listedArticles.length), l: "篇實戰文章" }, { n: "6", l: "章節分類" }, { n: "每月", l: "新增更新" }].map((stat) => <div key={stat.l} className="min-w-0"><div className="num text-[clamp(22px,3vw,32px)] leading-none text-gold">{stat.n}</div><div className="mt-1.5 text-[11px] tracking-[0.5px] text-white/50 md:text-[11.5px]">{stat.l}</div></div>)}</div>
+            <h1 className="h1 mb-6 max-w-[880px] text-white">每一章讀到一半會想問的事，<span className="text-gold">這裡先寫好</span></h1>
+            <p className="lead max-w-[640px] !text-white/75">按你現在在故事的哪一個月找</p>
           </div>
         </div>
         <ScrollCue />

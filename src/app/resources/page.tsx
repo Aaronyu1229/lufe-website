@@ -24,9 +24,10 @@ export default function ResourcesPage() {
     <div className="bg-white">
       <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/hero/hero-compass-1600.webp" video={HERO_VIDEOS.resources} />
-        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
-          <h1 className="h1 mb-7 max-w-[820px] text-white">出海資源中心，<br /><span className="text-gold">補助與現場一次看完</span></h1>
-          <p className="lead max-w-[680px] !text-white/75">政府出海補助協助降低成本，活動與現場紀錄提供第一手市場觀察。兩條路都能直接銜接鹿飛的服務</p>
+        <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+          <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">資源</span></nav>
+          <h1 className="h1 mb-6 max-w-[880px] text-white">出海資源中心，<br /><span className="text-gold">補助與現場一次看完</span></h1>
+          <p className="lead max-w-[640px] !text-white/75">政府出海補助協助降低成本，活動與現場紀錄提供第一手市場觀察。兩條路都能直接銜接鹿飛的服務</p>
         </div>
         <ScrollCue />
       </section>

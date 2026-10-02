@@ -1,12 +1,14 @@
+import Link from "next/link";
+
 const JUMPING_STATS = [
-  ["42+", "躍馬企業 · 年國際物流實戰"],
-  ["500+", "躍馬企業 · 出口實戰案件"],
-  ["30+", "國家與地區覆蓋"],
+  { value: "120+", label: "家北美 Costco 門市同步上架", href: "/cases/costco-health" },
+  { value: "10", label: "家馬尼拉門市，一年內開出", href: "/cases/bubble-tea" },
+  { value: "3x", label: "營收成長，皮鞋品牌轉型襪子", href: "/cases/shoe-brand" },
 ] as const;
 
 export const JUMPING_COPY = {
   title: ["一家企業出海的", "後半段旅程"],
-  body: "企業出海的前半段，是把產品送到海外——\n這一段，躍馬企業做了 42 年、500 多個案件、30 多個國家。\n\n後半段，才是真正的考驗：\n產品要被當地市場接受，通路要談得下來，\n證照、團隊與客服，要有人在當地接住。\n\n多數企業的出海，不是輸在運輸，\n而是輸在抵達之後沒有人接手。\n\n鹿飛，是為了這後半段旅程而成立的",
+  body: "企業出海的前半段，是把產品送到海外——\n訂單、報關、運輸，多數企業都走得過去。\n\n後半段，才是真正的考驗：\n產品要被當地市場接受，通路要談得下來，\n證照、團隊與客服，要有人在當地接住。\n\n多數企業的出海，不是輸在運輸，\n而是輸在抵達之後沒有人接手。\n\n鹿飛，是為了這後半段旅程而成立的",
 } as const;
 
 export function JumpingSection() {
@@ -22,12 +24,13 @@ export function JumpingSection() {
           <p className="mt-6 max-w-[660px] whitespace-pre-line text-[16px] leading-[1.9] text-white/70 md:text-[17px]">{JUMPING_COPY.body}</p>
         </div>
         <div className="self-end">
+          <p className="mb-4 text-[13px] font-semibold text-white/55">鹿飛案例成果</p>
           <div className="grid grid-cols-3 gap-4 border-y border-white/15 pb-2 pt-6 md:gap-7">
-            {JUMPING_STATS.map(([value, label]) => (
-              <div key={label}>
+            {JUMPING_STATS.map(({ value, label, href }) => (
+              <Link key={label} href={href} className="group block active:scale-[.985]">
                 <strong data-lufe-counter className="block font-sans text-[clamp(30px,4vw,44px)] font-semibold leading-none tracking-[-.035em] text-gold">{value}</strong>
-                <span className="mt-3 block text-[11px] leading-[1.5] text-white/65 md:text-[12px]">{label}</span>
-              </div>
+                <span className="mt-3 block text-[11px] leading-[1.5] text-white/65 transition-colors duration-200 [@media(hover:hover)]:group-hover:text-white/85 md:text-[12px]">{label}</span>
+              </Link>
             ))}
           </div>
           <div className="mt-8 border-l-2 border-gold pl-5">

@@ -11,10 +11,13 @@ describe("ContactPage", () => {
     for (const option of stageOptions) expect(markup).toContain(option);
     for (const name of ["name", "email", "company", "phone", "product", "message", "website"]) expect(markup).toContain(`name=\"${name}\"`);
 
-    expect(markup).toContain('id="partners"');
-    expect(markup).toContain("合作洽談");
+    expect(markup).toContain('aria-label="Breadcrumb"');
+    expect(markup).toContain("聯絡鹿飛");
     expect(markup).toContain("aaron.yu@reborn.in");
     expect(markup).toContain("留下你的需求");
+    expect(markup).not.toContain('id="partners"');
+    expect(markup).not.toContain("預約 30 分鐘諮詢");
+    expect(markup).not.toContain("快速留言 →");
     expect(markup).not.toContain("選一個你最方便的方式");
     expect(markup).not.toContain("section-heading");
     expect(markup).not.toContain("hero-title");
