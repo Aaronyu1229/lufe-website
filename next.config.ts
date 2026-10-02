@@ -101,6 +101,10 @@ const nextConfig: NextConfig = {
         destination: "/insights/amazon-us-three-decisions",
         permanent: true,
       },
+      { source: "/cases/shoe-brand", destination: "/cases", permanent: true },
+      { source: "/cases/costco-health", destination: "/cases/goat-milk-soap-global", permanent: true },
+      { source: "/cases/electronics-tariff", destination: "/cases/fish-floss-us-fda", permanent: true },
+      { source: "/field-notes", destination: "/resources", permanent: true },
       {
         source: "/:path((?!ghost/).+)/",
         destination: "/:path",

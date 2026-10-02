@@ -3,10 +3,8 @@ import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
-import { TieredImage } from "@/components/TieredImage";
 import { BreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { HERO_VIDEOS } from "@/data/heroVideos";
-import { ACTIVITIES } from "@/data/fieldNotes";
 import { SUBSIDIES } from "@/data/subsidies";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -15,8 +13,6 @@ export const metadata: Metadata = createPageMetadata({
   title: "資源 · 補助與活動",
   description: "正在開放的政府出海補助、加盟展、論壇、商會活動——一個入口看完所有可以幫你出海的資源。",
 });
-
-const activities = ACTIVITIES.filter((activity) => activity.image && !activity.tbd).slice(0, 3);
 
 export default function ResourcesPage() {
   return <>
@@ -27,7 +23,7 @@ export default function ResourcesPage() {
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">資源</span></nav>
           <h1 className="h1 mb-6 max-w-[880px] text-white">出海資源中心，<br /><span className="text-gold">補助與現場一次看完</span></h1>
-          <p className="lead max-w-[640px] !text-white/75">政府出海補助協助降低成本，活動與現場紀錄提供第一手市場觀察。兩條路都能直接銜接鹿飛的服務</p>
+          <p className="lead max-w-[640px] !text-white/75">政府出海補助協助降低成本，提供第一手市場觀察，直接銜接鹿飛的服務</p>
         </div>
         <ScrollCue />
       </section>
@@ -47,20 +43,6 @@ export default function ResourcesPage() {
             </Link>)}
           </div>
           <Link href="/resources/subsidies" className="mt-8 inline-block text-[15px] font-semibold text-gold-d hover:text-navy">看完整補助整理 →</Link>
-        </div>
-      </section>
-
-      <section className="bg-cream py-[80px] md:py-[110px]">
-        <div className="lufe-container">
-          <h2 className="h2 text-tx">活動與現場紀錄</h2>
-          <p className="lead mt-5 max-w-[700px]">加盟展、論壇、商會與客戶現場，北美與東南亞的第一手紀錄</p>
-          <div className="mt-10 grid min-w-0 gap-5 md:grid-cols-3 md:gap-6">
-            {activities.map((activity) => <article key={activity.id} className="min-w-0 overflow-hidden border border-bd bg-white">
-              <div className="relative aspect-[16/10] overflow-hidden"><TieredImage src={activity.image!} alt={activity.title} sizes="(max-width: 767px) 100vw, 33vw" className="absolute inset-0 h-full w-full object-cover" /><span className="absolute left-3 top-3 bg-white px-2 py-0.5 text-[11px] font-semibold text-gold-d">{activity.tag}</span></div>
-              <div className="p-5 md:p-6"><p className="mb-2 text-[12px] text-tx3">{activity.location} · {activity.date}</p><h3 className="h3 mb-2 text-tx">{activity.title}</h3><p className="text-[14.5px] leading-[1.8] text-tx2">{activity.summary}</p></div>
-            </article>)}
-          </div>
-          <Link href="/field-notes" className="mt-8 inline-block text-[15px] font-semibold text-gold-d hover:text-navy">看所有現場紀錄 →</Link>
         </div>
       </section>
 

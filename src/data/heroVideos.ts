@@ -1,18 +1,19 @@
 export interface HeroVideo {
   readonly src: string;
+  readonly srcHd?: string;
   readonly poster: string;
   readonly posterSrcSet: string;
   readonly playbackRate: number;
   readonly position?: string;
 }
 
-// playbackRate = clamp(round to .05, sqrt(75 / median luma-diff per second), 0.6, 1.25); videos shared with the home hero use the home rate. See DECISIONS-R3 G-1.
+// playbackRate = clamp(round to .05, sqrt(75 / median luma-diff per second at 30fps), 0.6, 1.25). No timelapses. See DECISIONS-R4 H-4 and docs/redesign-v6/round4/measure-motion.sh.
 export const HERO_VIDEOS = {
   about: {
-    src: "/videos/hero/about-flight-720.mp4",
-    poster: "/images/hero-video/about-flight-1600.webp",
-    posterSrcSet: "/images/hero-video/about-flight-640.webp 640w, /images/hero-video/about-flight-1080.webp 1080w, /images/hero-video/about-flight-1600.webp 1600w, /images/hero-video/about-flight-2400.webp 2400w",
-    playbackRate: 0.8,
+    src: "/videos/hero/about-sailing-720.mp4",
+    poster: "/images/hero-video/about-sailing-1600.webp",
+    posterSrcSet: "/images/hero-video/about-sailing-640.webp 640w, /images/hero-video/about-sailing-1080.webp 1080w, /images/hero-video/about-sailing-1600.webp 1600w",
+    playbackRate: 1.25,
   },
   author: {
     src: "/videos/hero/insights-notebook-720.mp4",
@@ -21,27 +22,21 @@ export const HERO_VIDEOS = {
     playbackRate: 1.25,
   },
   cases: {
-    src: "/videos/hero/cases-manila-720.mp4",
-    poster: "/images/hero-video/cases-manila-1600.webp",
-    posterSrcSet: "/images/hero-video/cases-manila-640.webp 640w, /images/hero-video/cases-manila-1080.webp 1080w, /images/hero-video/cases-manila-1600.webp 1600w",
+    src: "/videos/hero/cases-skyline-720.mp4",
+    poster: "/images/hero-video/cases-skyline-1600.webp",
+    posterSrcSet: "/images/hero-video/cases-skyline-640.webp 640w, /images/hero-video/cases-skyline-1080.webp 1080w, /images/hero-video/cases-skyline-1600.webp 1600w, /images/hero-video/cases-skyline-2400.webp 2400w",
     playbackRate: 1.25,
   },
-  "case:costco-health": {
-    src: "/videos/hero/case-costco-720.mp4",
-    poster: "/images/hero-video/case-costco-1600.webp",
-    posterSrcSet: "/images/hero-video/case-costco-640.webp 640w, /images/hero-video/case-costco-1080.webp 1080w, /images/hero-video/case-costco-1600.webp 1600w, /images/hero-video/case-costco-2400.webp 2400w",
-    playbackRate: 0.6,
+  "case:goat-milk-soap-global": {
+    src: "/videos/hero/case-soap-720.mp4",
+    poster: "/images/hero-video/case-soap-1600.webp",
+    posterSrcSet: "/images/hero-video/case-soap-640.webp 640w, /images/hero-video/case-soap-1080.webp 1080w, /images/hero-video/case-soap-1600.webp 1600w, /images/hero-video/case-soap-2400.webp 2400w",
+    playbackRate: 0.75,
   },
-  "case:electronics-tariff": {
-    src: "/videos/hero/case-electronics-720.mp4",
-    poster: "/images/hero-video/case-electronics-1600.webp",
-    posterSrcSet: "/images/hero-video/case-electronics-640.webp 640w, /images/hero-video/case-electronics-1080.webp 1080w, /images/hero-video/case-electronics-1600.webp 1600w, /images/hero-video/case-electronics-2400.webp 2400w",
-    playbackRate: 1.25,
-  },
-  "case:shoe-brand": {
-    src: "/videos/hero/case-shoe-720.mp4",
-    poster: "/images/hero-video/case-shoe-1600.webp",
-    posterSrcSet: "/images/hero-video/case-shoe-640.webp 640w, /images/hero-video/case-shoe-1080.webp 1080w, /images/hero-video/case-shoe-1600.webp 1600w, /images/hero-video/case-shoe-2400.webp 2400w",
+  "case:fish-floss-us-fda": {
+    src: "/videos/hero/case-floss-720.mp4",
+    poster: "/images/hero-video/case-floss-1600.webp",
+    posterSrcSet: "/images/hero-video/case-floss-640.webp 640w, /images/hero-video/case-floss-1080.webp 1080w, /images/hero-video/case-floss-1600.webp 1600w, /images/hero-video/case-floss-2400.webp 2400w",
     playbackRate: 1.25,
   },
   "case:bubble-tea": {
@@ -50,11 +45,11 @@ export const HERO_VIDEOS = {
     posterSrcSet: "/images/hero-video/case-bubbletea-640.webp 640w, /images/hero-video/case-bubbletea-1080.webp 1080w, /images/hero-video/case-bubbletea-1600.webp 1600w, /images/hero-video/case-bubbletea-2400.webp 2400w",
     playbackRate: 1.25,
   },
-  fieldNotes: {
-    src: "/videos/hero/fieldnotes-conference-720.mp4",
-    poster: "/images/hero-video/fieldnotes-conference-1600.webp",
-    posterSrcSet: "/images/hero-video/fieldnotes-conference-640.webp 640w, /images/hero-video/fieldnotes-conference-1080.webp 1080w, /images/hero-video/fieldnotes-conference-1600.webp 1600w",
-    playbackRate: 0.7,
+  assess: {
+    src: "/videos/hero/assess-chess-720.mp4",
+    poster: "/images/hero-video/assess-chess-1600.webp",
+    posterSrcSet: "/images/hero-video/assess-chess-640.webp 640w, /images/hero-video/assess-chess-1080.webp 1080w, /images/hero-video/assess-chess-1600.webp 1600w, /images/hero-video/assess-chess-2400.webp 2400w",
+    playbackRate: 1.25,
   },
   insights: {
     src: "/videos/hero/insights-notebook-720.mp4",
@@ -63,10 +58,10 @@ export const HERO_VIDEOS = {
     playbackRate: 1.25,
   },
   resources: {
-    src: "/videos/hero/resources-taipei-720.mp4",
-    poster: "/images/hero-video/resources-taipei-1600.webp",
-    posterSrcSet: "/images/hero-video/resources-taipei-640.webp 640w, /images/hero-video/resources-taipei-1080.webp 1080w, /images/hero-video/resources-taipei-1600.webp 1600w, /images/hero-video/resources-taipei-2400.webp 2400w",
-    playbackRate: 1,
+    src: "/videos/hero/resources-books-720.mp4",
+    poster: "/images/hero-video/resources-books-1600.webp",
+    posterSrcSet: "/images/hero-video/resources-books-640.webp 640w, /images/hero-video/resources-books-1080.webp 1080w, /images/hero-video/resources-books-1600.webp 1600w",
+    playbackRate: 1.25,
   },
   contact: {
     src: "/videos/hero/contact-laptop-720.mp4",
@@ -75,16 +70,16 @@ export const HERO_VIDEOS = {
     playbackRate: 1.25,
   },
   subsidies: {
-    src: "/videos/hero/subsidies-taipei-720.mp4",
-    poster: "/images/hero-video/subsidies-taipei-1600.webp",
-    posterSrcSet: "/images/hero-video/subsidies-taipei-640.webp 640w, /images/hero-video/subsidies-taipei-1080.webp 1080w, /images/hero-video/subsidies-taipei-1600.webp 1600w, /images/hero-video/subsidies-taipei-2400.webp 2400w",
+    src: "/videos/hero/subsidies-desk-720.mp4",
+    poster: "/images/hero-video/subsidies-desk-1600.webp",
+    posterSrcSet: "/images/hero-video/subsidies-desk-640.webp 640w, /images/hero-video/subsidies-desk-1080.webp 1080w, /images/hero-video/subsidies-desk-1600.webp 1600w, /images/hero-video/subsidies-desk-2400.webp 2400w",
     playbackRate: 1.25,
   },
   services: {
-    src: "/videos/hero/hero-map-planning-720.mp4",
-    poster: "/images/hero/hero-slide-2-poster-1600.webp",
-    posterSrcSet: "/images/hero/hero-slide-2-poster-828.webp 828w, /images/hero/hero-slide-2-poster-1600.webp 1600w, /images/hero/hero-slide-2-poster-2400.webp 2400w",
-    playbackRate: 1,
+    src: "/videos/hero/services-port-720.mp4",
+    poster: "/images/hero-video/services-port-1600.webp",
+    posterSrcSet: "/images/hero-video/services-port-640.webp 640w, /images/hero-video/services-port-1080.webp 1080w, /images/hero-video/services-port-1600.webp 1600w, /images/hero-video/services-port-2400.webp 2400w",
+    playbackRate: 1.15,
   },
   "chapter:m1": {
     src: "/videos/hero/chapter-research-720.mp4",
@@ -112,16 +107,17 @@ export const HERO_VIDEOS = {
     position: "right center",
   },
   "chapter:na": {
-    src: "/videos/hero/chapter-retail-720.mp4",
-    poster: "/images/hero-video/chapter-retail-1600.webp",
-    posterSrcSet: "/images/hero-video/chapter-retail-640.webp 640w, /images/hero-video/chapter-retail-1080.webp 1080w, /images/hero-video/chapter-retail-1600.webp 1600w, /images/hero-video/chapter-retail-2400.webp 2400w",
-    playbackRate: 0.6,
+    src: "/videos/hero/na-skyline-720.mp4",
+    srcHd: "/videos/hero/na-skyline-1080.mp4",
+    poster: "/images/hero-video/na-skyline-1600.webp",
+    posterSrcSet: "/images/hero-video/na-skyline-640.webp 640w, /images/hero-video/na-skyline-1080.webp 1080w, /images/hero-video/na-skyline-1600.webp 1600w, /images/hero-video/na-skyline-2400.webp 2400w",
+    playbackRate: 1.25,
   },
   optimize: {
-    src: "/videos/hero/hero-highway-aerial-720.mp4",
-    poster: "/images/hero/hero-slide-3-poster-1600.webp",
-    posterSrcSet: "/images/hero/hero-slide-3-poster-828.webp 828w, /images/hero/hero-slide-3-poster-1600.webp 1600w, /images/hero/hero-slide-3-poster-2400.webp 2400w",
-    playbackRate: 1,
+    src: "/videos/hero/optimize-containers-720.mp4",
+    poster: "/images/hero-video/optimize-containers-1600.webp",
+    posterSrcSet: "/images/hero-video/optimize-containers-640.webp 640w, /images/hero-video/optimize-containers-1080.webp 1080w, /images/hero-video/optimize-containers-1600.webp 1600w, /images/hero-video/optimize-containers-2400.webp 2400w",
+    playbackRate: 1.05,
   },
   methodology: {
     src: "/videos/hero/methodology-whiteboard-720.mp4",

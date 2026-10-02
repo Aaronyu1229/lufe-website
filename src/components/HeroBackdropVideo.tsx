@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 interface HeroBackdropVideoProps {
   readonly src: string;
+  readonly srcHd?: string;
   readonly position: string;
   readonly playbackRate: number;
 }
@@ -21,9 +22,10 @@ function shouldPlay(mediaQuery: MediaQueryList) {
   return !mediaQuery.matches && !(navigator as Navigator & { connection?: NavigatorConnection }).connection?.saveData;
 }
 
-export function HeroBackdropVideo({ src, position, playbackRate }: HeroBackdropVideoProps) {
+export function HeroBackdropVideo({ src, srcHd, position, playbackRate }: HeroBackdropVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [useHd, setUseHd] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -33,7 +35,11 @@ export function HeroBackdropVideo({ src, position, playbackRate }: HeroBackdropV
     let timeout: number | undefined;
 
     const mount = () => {
-      if (shouldPlay(mediaQuery)) setMounted(true);
+      if (shouldPlay(mediaQuery)) {
+        const useHdSource = Boolean(srcHd) && window.matchMedia("(min-width: 1024px)").matches && !(navigator as Navigator & { connection?: NavigatorConnection }).connection?.saveData;
+        setUseHd(useHdSource);
+        setMounted(true);
+      }
     };
     const scheduleMount = () => {
       if (!shouldPlay(mediaQuery)) return;
@@ -64,7 +70,7 @@ export function HeroBackdropVideo({ src, position, playbackRate }: HeroBackdropV
       if (idleCallback !== undefined) idleWindow.cancelIdleCallback?.(idleCallback);
       if (timeout !== undefined) window.clearTimeout(timeout);
     };
-  }, [src]);
+  }, [src, srcHd]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -121,7 +127,7 @@ export function HeroBackdropVideo({ src, position, playbackRate }: HeroBackdropV
       }}
       onPlaying={() => setReady(true)}
     >
-      <source src={src} type="video/mp4" />
+      <source src={useHd ? srcHd : src} type="video/mp4" />
     </video>
   );
 }

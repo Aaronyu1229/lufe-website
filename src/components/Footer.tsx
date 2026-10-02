@@ -23,7 +23,6 @@ const resourceLinks = [
 const insightLinks = [
   { label: "案例", href: "/cases" },
   { label: "洞察與指南", href: "/insights" },
-  { label: "現場紀錄", href: "/field-notes" },
 ];
 
 const contactLinks: { label: string; href: string; external?: boolean }[] = [

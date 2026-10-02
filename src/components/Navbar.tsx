@@ -58,7 +58,7 @@ export function normalizePathname(pathname: string | null | undefined): string {
 }
 
 export function pathnameHasDarkHero(pathname: string): boolean {
-  if (["/", "/about", "/contact", "/insights", "/field-notes", "/assess", "/assess/result"].includes(pathname)) return true;
+  if (["/", "/about", "/contact", "/insights", "/assess", "/assess/result"].includes(pathname)) return true;
   if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
   return pathname.startsWith("/services") || pathname.startsWith("/cases") || pathname.startsWith("/about/");
 }
@@ -391,10 +391,6 @@ function FileIcon() {
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z" /><path d="M14 3v5h5" /></svg>;
 }
 
-function PinIcon() {
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></svg>;
-}
-
 function TradeIcon() {
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" /></svg>;
 }
@@ -490,7 +486,6 @@ function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: Insights
     </MenuColumn>
     <MenuColumn bordered>
       <MenuLink href="/resources" title="補助與活動" marker={<FileIcon />} />
-      <MenuLink href="/field-notes" title="現場紀錄" marker={<PinIcon />} />
       <MenuLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external />
       <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
     </MenuColumn>
@@ -565,7 +560,6 @@ function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: 
   return <>
     {visibleInsightChapters.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
     <MobileSubLink href="/resources" title="補助與活動" marker={<FileIcon />} onClose={onClose} />
-    <MobileSubLink href="/field-notes" title="現場紀錄" marker={<PinIcon />} onClose={onClose} />
     <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external onClose={onClose} />
     <MobileSubLink href="/insights" title="看所有文章 →" onClose={onClose} />
   </>;
