@@ -27,12 +27,6 @@ export type ChapterScenario = {
   readonly imageAlt: string;
 };
 
-type Overview = {
-  readonly price: string;
-  readonly body: string;
-  readonly linkLabel: string;
-};
-
 type NextChapter = {
   readonly label: string;
   readonly title: string;
@@ -116,7 +110,6 @@ export type Chapter = {
   readonly imageAlt: string;
   readonly heroAction: string;
   readonly showChapterBar: boolean;
-  readonly overview?: Overview;
   readonly scenariosHeading: string;
   readonly scenarios: readonly ChapterScenario[];
   readonly sections: readonly ChapterSection[];
@@ -175,11 +168,6 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     imageAlt: "團隊檢視產品資料",
     heroAction: "聊聊你的產品 →",
     showChapterBar: true,
-    overview: {
-      price: "1～2 萬",
-      body: "你在台灣問一百個人，也不知道馬尼拉的媽媽會不會掏錢。\n我們把產品放進當地學校的教師與家長面板跑一輪，\n給你一頁：誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。\n前 10 家實驗價。沒過，到此為止；過了，抵進下一章",
-      linkLabel: "市場探查怎麼做 →",
-    },
     scenariosHeading: "出海前最常見的三個疑問",
     scenarios: [
       { title: "想出海，不知道從哪裡開始", body: "有產品，聽說東南亞有機會，但不知道從哪裡開始", answer: "先做市場探查：把產品放到當地消費者面前，用一頁報告決定要不要往下走", image: "/images/services/scenarios/m1-1-1600.webp", imageAlt: "在世界地圖上標記目的地" },
@@ -236,11 +224,6 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     imageAlt: "倉儲貨架走道",
     heroAction: "看你的產品適不適合寄賣 →",
     showChapterBar: true,
-    overview: {
-      price: "5～6 萬",
-      body: "上架不難，難的是證還沒下來的那 6～12 週怎麼辦、上了架誰來推。\n我們做的：電商上架、產品證代持、學校家長活動、市場報告、網紅與活動配套。\n貨放合作夥伴的倉，賣多少算多少。跟市場探查合起來就是 7 萬起手包",
-      linkLabel: "寄賣包內容 →",
-    },
     scenariosHeading: "準備寄賣時的三個卡點",
     scenarios: [
       { title: "市場驗證過了，下一步卡住", body: "市場探查過了，想放貨去賣，但不知道證怎麼辦、貨放哪、誰來推", answer: "寄賣包一次處理：產品證代持、貨放合作夥伴的倉、上架前後的活動與推廣", image: "/images/services/scenarios/m3-1-1600.webp", imageAlt: "倉庫鐵架上的紙箱" },
@@ -300,11 +283,6 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     imageAlt: "亞洲團隊在辦公室協作",
     heroAction: "聊聊你想在菲律賓開什麼 →",
     showChapterBar: true,
-    overview: {
-      price: "按案報價",
-      body: "開公司、找人、辦證、日常營運——每一件都要有人在當地。\n我們做的：註冊、招聘（實體或遠程團隊）、律師行文件、FDA 掛證、營運陪跑。\n第一次談就給成本框架",
-      linkLabel: "落地怎麼做 →",
-    },
     scenariosHeading: "考慮在當地設點的三種情況",
     scenarios: [
       { title: "想在當地設點，成本與時程不明", body: "寄賣或代理跑順了，想在當地設點，不知道從註冊到招聘要花多少、多久", answer: "第一次談就給成本框架：註冊、律師、招聘、場地各大概多少，以及時間表", image: "/images/services/scenarios/m9-1-1600.webp", imageAlt: "馬尼拉 Ayala 大道的商業區街景" },
@@ -357,11 +335,6 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     imageAlt: "客服團隊在辦公室協作",
     heroAction: "登記首批 →",
     showChapterBar: true,
-    overview: {
-      price: "2027 Q1 首批",
-      body: "星期五晚上十一點的英文客訴信，要有人接。\n專業的菲律賓英語客服團隊；\n客戶合約、服務規則、品質指標由鹿飛台灣公司負責",
-      linkLabel: "登記首批 →",
-    },
     scenariosHeading: "需要海外客服的三種情況",
     scenarios: [
       { title: "海外客訴回不了", body: "貨在海外賣，客訴和退換貨的訊息回不了，或回得很慢", answer: "客服信箱、平台訊息、社群私訊集中到同一個工作台，由專業英語客服團隊接手", image: "/images/services/scenarios/after-1-1600.webp", imageAlt: "手上拿著待處理的退貨包裹" },
