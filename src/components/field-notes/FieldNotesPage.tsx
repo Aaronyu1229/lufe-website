@@ -35,28 +35,16 @@ export function FieldNotesPage() {
             <span className="text-white/75">現場紀錄</span>
           </nav>
 
-          <h1 className="display mb-6 max-w-[920px] font-sans text-white">
+          <h1 className="h1 mb-6 max-w-[880px] font-sans text-white">
             我們這個月
             <br />
             <span className="text-gold">在哪裡</span>
           </h1>
-          <p className="lead mb-12 max-w-[620px] text-white/70">
+          <p className="lead max-w-[640px] !text-white/75">
             活動、演講、客戶現場、媒體露出——北美和東南亞兩個主戰場的第一手紀錄。
             <br />
             這些是正式文章裡不會寫、但對你來說可能最有用的細節
           </p>
-
-          <div className="grid grid-cols-2 gap-5 border-t border-white/10 pt-7 md:max-w-[420px] md:gap-8">
-            {[
-              { n: String(ACTIVITIES.length), l: "場活動現場" },
-              { n: String(FIELD_NOTES.length), l: "篇現場筆記" },
-            ].map((stat) => (
-              <div key={stat.l} className="min-w-0">
-                <div className="num text-[clamp(24px,3vw,32px)] leading-none text-gold">{stat.n}</div>
-                <div className="mt-1.5 text-[11px] tracking-[0.5px] text-white/50 md:text-[11.5px]">{stat.l}</div>
-              </div>
-            ))}
-          </div>
         </div>
         <ScrollCue />
       </section>
@@ -139,7 +127,7 @@ export function FieldNotesPage() {
             <button onClick={open} className="cursor-pointer bg-gold px-8 py-3.5 text-[15.5px] font-semibold text-navy hover:bg-gold-l">
               聊聊你的狀況 →
             </button>
-            <Link href="/contact#partners" className="inline-flex items-center gap-2 text-[15.5px] font-medium text-white/75 hover:text-white">
+            <Link href="/contact" className="inline-flex items-center gap-2 text-[15.5px] font-medium text-white/75 hover:text-white">
               <span className="border-b border-white/30 pb-0.5">我是合作夥伴</span>
               <span aria-hidden="true">→</span>
             </Link>

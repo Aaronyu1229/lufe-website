@@ -5,11 +5,9 @@ import Link from "next/link";
 
 import { TieredImage } from "@/components/TieredImage";
 import { ArticleFaq } from "@/components/insights/ArticleFaq";
-import { InsightArticleCard } from "@/components/insights/InsightArticleCard";
 import { InsightCta } from "@/components/insights/InsightCta";
 import { StaticArticleContent, getStaticArticleHeadings, renderInlineMarkdown } from "@/components/insights/StaticArticleContent";
 import { Disclosure } from "@/components/ui";
-import { getInlineImages } from "@/data/articleInlineImages";
 import type { Article } from "@/data/articles";
 import type { DatabaseInsight, InsightCard } from "@/lib/articles/presentation";
 import { useSpring } from "@/lib/motion";
@@ -75,6 +73,18 @@ export function addDatabaseArticleHeadingIds(html: string): string {
       ? `<h2${withClass}>`
       : `<h2${withClass} id="section-${index}">`;
   });
+}
+
+export function stripDatabaseArticleImages(html: string): string {
+  return html
+    .replace(/<figure\b[^>]*>[\s\S]*?<\/figure\s*>/gi, "")
+    .replace(/<img\b[^>]*>/gi, "")
+    .replace(/<p\b[^>]*>\s*<\/p\s*>/gi, "");
+}
+
+function getFirstDatabaseArticleImage(html: string): string {
+  const match = /<img\b[^>]*\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))[^>]*>/i.exec(html);
+  return match?.[1] ?? match?.[2] ?? match?.[3] ?? "";
 }
 
 function ArticleSources({ sources, lastVerified }: Pick<Article, "sources" | "lastVerified">) {
@@ -194,15 +204,9 @@ function ArticleToc({ headings }: { readonly headings: readonly Heading[] }) {
 function RelatedArticleRows({ articles }: { readonly articles: readonly InsightCard[] }) {
   if (!articles.length) return null;
 
-  return <div className="grid gap-4">{articles.map((article) => <Link key={article.slug} href={`/insights/${article.slug}`} className="grid grid-cols-[72px_1fr] gap-3 active:scale-[.985]">
-    <div className="h-12 overflow-hidden bg-cream">
-      {/^https?:\/\//.test(article.image)
-        // Database article images are not known to Next's static image configuration.
-        // eslint-disable-next-line @next/next/no-img-element
-        ? <img src={article.image} alt={article.title} loading="lazy" className="h-full w-full object-cover" />
-        : <TieredImage src={article.image} alt={article.title} sizes="72px" className="h-full w-full object-cover" />}
-    </div>
-    <div className="min-w-0"><h3 className="line-clamp-2 text-[14px] font-semibold leading-[1.45] text-tx">{article.title}</h3><p className="mt-1 text-[12px] text-tx3">{article.date}</p></div>
+  return <div className="grid gap-4">{articles.map((article) => <Link key={article.slug} href={`/insights/${article.slug}`} className="border-t border-bd pt-4 active:scale-[.985]">
+    <h3 className="line-clamp-2 text-[14px] font-semibold leading-[1.45] text-tx">{article.title}</h3>
+    <p className="mt-1 text-[12px] text-tx3">{article.date}</p>
   </Link>)}</div>;
 }
 
@@ -219,10 +223,10 @@ export function ArticleDetail({ article, image, related }: Props) {
   const staticFaq = isDatabaseArticle(article) ? undefined : article.faq;
   const staticSources = isDatabaseArticle(article) ? undefined : article.sources;
   const staticLastVerified = isDatabaseArticle(article) ? undefined : article.lastVerified;
-  const hasInlineImage = Boolean(databaseContent && /<img\b/i.test(databaseContent.html));
-  const externalImage = /^https?:\/\//.test(image);
+  const coverImage = image || (databaseContent ? getFirstDatabaseArticleImage(databaseContent.html) : "");
+  const externalImage = /^https?:\/\//.test(coverImage);
   const headings = databaseContent ? getDatabaseArticleHeadings(databaseContent.html) : getStaticArticleHeadings(staticContent);
-  const databaseHtml = databaseContent ? addDatabaseArticleHeadingIds(databaseContent.html) : "";
+  const databaseHtml = databaseContent ? stripDatabaseArticleImages(addDatabaseArticleHeadingIds(databaseContent.html)) : "";
 
   const handleSourceReference = (event: MouseEvent<HTMLDivElement>) => {
     if (!(event.target instanceof Element)) return;
@@ -252,18 +256,18 @@ export function ArticleDetail({ article, image, related }: Props) {
               {headings.length ? <div className="mt-8 lg:hidden"><Disclosure summary="本文目錄"><ArticleToc headings={headings} /></Disclosure></div> : null}
             </header>
 
-            {!hasInlineImage ? <figure className="relative mb-10 h-[240px] w-full overflow-hidden md:h-[360px]">{externalImage
+            <figure className="relative mb-10 h-[240px] w-full overflow-hidden md:h-[360px]">{externalImage
               // Database article images are not known to Next's static image configuration.
               // eslint-disable-next-line @next/next/no-img-element
-              ? <img src={image} alt={article.title} className="h-full w-full object-cover" />
-              : <TieredImage src={image} alt={article.title} sizes="(max-width: 767px) 100vw, 720px" className="absolute inset-0 h-full w-full object-cover" />}</figure> : null}
+              ? <img src={coverImage} alt={article.title} className="h-full w-full object-cover" />
+              : <TieredImage src={coverImage} alt={article.title} sizes="(max-width: 767px) 100vw, 720px" className="absolute inset-0 h-full w-full object-cover" />}</figure>
 
-            {databaseContent ? <div className="text-[17px] leading-[1.95] text-tx [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:font-sans [&_h2]:text-[26px] [&_h2]:font-[650] [&_img]:h-auto [&_img]:max-w-full [&_p+_p]:mt-5" dangerouslySetInnerHTML={{ __html: databaseHtml }} /> : <div onClick={handleSourceReference}><StaticArticleContent content={staticContent} inlineImages={getInlineImages(article.slug, article.category)} /></div>}
+            {databaseContent ? <div className="text-[17px] leading-[1.95] text-tx [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:font-sans [&_h2]:text-[26px] [&_h2]:font-[650] [&_p+_p]:mt-5" dangerouslySetInnerHTML={{ __html: databaseHtml }} /> : <div onClick={handleSourceReference}><StaticArticleContent content={staticContent} /></div>}
             <ArticleFaq faq={staticFaq} />
             <ArticleSources sources={staticSources} lastVerified={staticLastVerified} />
             <div className="my-10 h-px w-full bg-bd md:my-14" />
             <section aria-labelledby="article-author" className="mb-10 border border-bd bg-cream p-5 md:mb-14 md:p-7"><div className="flex flex-col gap-5 sm:flex-row sm:items-start"><TieredImage src="/images/about/aaron-portrait-studio-1080.webp" alt="Aaron Yu" sizes="96px" className="h-24 w-24 shrink-0 object-cover object-[center_18%]" /><div><h2 id="article-author" className="h3 mb-1 text-tx"><Link href="/about/aaron-yu" className="hover:text-gold-d">Aaron Yu</Link></h2><p className="mb-3 text-[14.5px] font-medium text-gold-d">鹿飛 LUFÉ 創辦人・來自躍馬企業</p><p className="mb-4 max-w-[520px] text-[15px] leading-[1.8] text-tx2">躍馬企業國際物流背景出身，專注研究台灣企業如何在北美與東南亞市場落地</p><div className="flex flex-wrap gap-x-5 gap-y-3 text-[14.5px] font-medium"><a href="https://www.linkedin.com/in/wibp/" target="_blank" rel="me noopener" className="border-b border-tx3/40 pb-0.5 text-tx2 hover:text-navy">LinkedIn ↗</a><Link href="/about/aaron-yu" className="border-b border-gold pb-0.5 text-gold-d hover:text-navy">看更多專欄文章 →</Link></div></div></div></section>
-            {related.length ? <section className="mb-10 lg:hidden"><h2 className="h3 mb-5 text-tx">延伸閱讀</h2><div className="grid gap-5 md:grid-cols-3">{related.map((relatedArticle) => <InsightArticleCard key={relatedArticle.slug} article={relatedArticle} />)}</div></section> : null}
+            {related.length ? <section className="mb-10 lg:hidden"><h2 className="h3 mb-5 text-tx">延伸閱讀</h2><RelatedArticleRows articles={related} /></section> : null}
             <div className="mb-[80px] text-center md:mb-[110px]"><Link href="/insights" className="text-[14.5px] font-medium text-tx3 hover:text-navy">← 回到所有文章</Link></div>
           </div>
           <div className="hidden lg:block"><ArticleAside headings={headings} related={related} /></div>

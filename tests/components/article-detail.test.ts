@@ -1,13 +1,10 @@
 import { createElement, Fragment } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { existsSync } from "node:fs";
-import path from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { ArticleDetail, renderStaticBoldMarkup } from "@/components/insights/ArticleDetail";
+import { ArticleDetail, renderStaticBoldMarkup, stripDatabaseArticleImages } from "@/components/insights/ArticleDetail";
 import { ArticleFaq } from "@/components/insights/ArticleFaq";
 import { StaticArticleContent, getStaticArticleHeadings } from "@/components/insights/StaticArticleContent";
-import { getInlineImages } from "@/data/articleInlineImages";
 import { articles, getArticleBySlug, getArticleImage } from "@/data/articles";
 import { toInsightCard } from "@/lib/articles/presentation";
 
@@ -53,7 +50,6 @@ describe("ArticleDetail", () => {
       expect(markup).toContain(article.category);
       expect(markup).toContain(article.date);
       expect(markup).toContain(article.readTime);
-
     }
   });
 
@@ -70,6 +66,29 @@ describe("ArticleDetail", () => {
     expect(markup).toContain('href="https://tradepiloter.com"');
     expect(markup).toContain('target="_blank"');
     expect(markup).toContain('rel="noopener"');
+  });
+
+  it("renders exactly one figure for static articles and no inline-image references", () => {
+    const article = getArticleBySlug("go-no-go-framework");
+    if (!article) throw new Error("Expected go/no-go article");
+
+    const markup = renderToStaticMarkup(createElement(ArticleDetail, {
+      article,
+      image: getArticleImage(article),
+      related: articles.slice(0, 3).map(toInsightCard),
+    }));
+
+    expect((markup.match(/<figure\b/g) ?? [])).toHaveLength(1);
+    expect(markup).not.toContain("insights/inline");
+    expect(markup).toContain("延伸閱讀");
+    for (const heading of getStaticArticleHeadings(article.content)) expect(markup).toContain(heading.text);
+  });
+
+  it("strips figures, bare images, image-only paragraphs, and uppercase image tags from database HTML", () => {
+    expect(stripDatabaseArticleImages('<figure><img src="figure.jpg" /><figcaption>圖說</figcaption></figure><p>留下文字</p>')).toBe("<p>留下文字</p>");
+    expect(stripDatabaseArticleImages('<h2>標題</h2><img src="bare.jpg" /><p>內容</p>')).toBe("<h2>標題</h2><p>內容</p>");
+    expect(stripDatabaseArticleImages('<p><img src="inside.jpg" /></p><p>內容</p>')).toBe("<p>內容</p>");
+    expect(stripDatabaseArticleImages('<FIGURE><IMG SRC="upper.jpg" /></FIGURE><P>內容</P>')).toBe("<P>內容</P>");
   });
 
   it("does not render rounded utility classes", () => {
@@ -90,49 +109,5 @@ describe("ArticleDetail", () => {
     expect(markup).toContain("躍馬企業國際物流背景出身，專注研究台灣企業如何在北美與東南亞市場落地");
     expect(markup).toContain("看更多專欄文章 →");
     expect(markup).not.toContain("看更多 Aaron 的文章");
-  });
-
-  it("renders TOC anchors, related reading, and inline images before their matching headings", () => {
-    const article = getArticleBySlug("go-no-go-framework");
-    if (!article) throw new Error("Expected go/no-go article");
-    const headings = getStaticArticleHeadings(article.content);
-    const inlineImages = getInlineImages(article.slug, article.category);
-    expect(headings.length).toBeGreaterThanOrEqual(5);
-
-    const markup = renderToStaticMarkup(createElement(ArticleDetail, {
-      article,
-      image: getArticleImage(article),
-      related: articles.slice(0, 3).map(toInsightCard),
-    }));
-
-    expect(markup).toContain('id="section-1"');
-    expect(markup).toContain('id="section-3"');
-    expect(markup).toContain('id="section-5"');
-    for (const heading of headings) expect(markup).toContain(heading.text);
-    expect(markup.indexOf(inlineImages[0].alt)).toBeLessThan(markup.indexOf('id="section-3"'));
-    expect(markup.indexOf(inlineImages[1].alt)).toBeLessThan(markup.indexOf('id="section-5"'));
-    expect(markup).toContain("延伸閱讀");
-    expect(markup).toContain("把文章裡的方法，");
-  });
-
-  it("skips inline images for an article with fewer than three headings", () => {
-    const article = { ...articles[0], content: ["## 第一節", "內容", "## 第二節", "更多內容"] };
-    const markup = renderToStaticMarkup(createElement(ArticleDetail, { article, image: getArticleImage(article), related: [] }));
-
-    for (const image of getInlineImages(article.slug, article.category)) expect(markup).not.toContain(image.alt);
-  });
-
-  it("provides category defaults and generated files for every inline image", () => {
-    const categories = ["菲律賓", "印尼", "東南亞趨勢", "北美市場", "出海實戰", "企業體質"] as const;
-
-    for (const category of categories) {
-      const images = getInlineImages("unconfigured-article", category);
-      expect(images).toHaveLength(2);
-      for (const image of images) {
-        const imageRoot = path.join(process.cwd(), "public", image.src.replace(/^\//, "").replace("-1600.webp", ""));
-        expect(existsSync(`${imageRoot}.jpg`)).toBe(true);
-        for (const width of [640, 1080, 1600, 2400]) expect(existsSync(`${imageRoot}-${width}.webp`)).toBe(true);
-      }
-    }
   });
 });

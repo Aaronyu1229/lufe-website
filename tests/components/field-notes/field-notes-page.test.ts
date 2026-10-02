@@ -31,6 +31,8 @@ describe("FieldNotesPage", () => {
     expect(pageText).not.toContain("一起做事的夥伴網絡");
     expect(pageText).not.toContain("次媒體露出");
     expect(pageText).not.toContain("個合作單位");
+    expect(pageText).not.toContain("場活動現場");
+    expect(pageText).not.toContain("篇現場筆記");
   });
 
   it("does not turn field notes into links or render rounded utility classes", () => {

@@ -5,12 +5,11 @@ import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { HERO_VIDEOS } from "@/data/heroVideos";
 import { ScrollCue } from "@/components/ScrollCue";
-import { Disclosure } from "@/components/ui";
+import { FaqSection } from "@/components/faq/FaqSection";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/StructuredData";
 import { SubsidiesCTASection } from "@/components/subsidy/SubsidiesCTASection";
-import { SubsidyMatcher } from "@/components/subsidy/SubsidyMatcher";
-import { SubsidyComparison, SubsidyPlanCard } from "@/components/subsidy/SubsidyPlanCard";
-import { getActiveSubsidyCount, STAGE_LABELS, SUBSIDIES, SUBSIDY_CARD_COPY } from "@/data/subsidies";
+import { SubsidyPlans } from "@/components/subsidy/SubsidyPlans";
+import { SUBSIDIES, SUBSIDY_CARD_COPY } from "@/data/subsidies";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -29,7 +28,6 @@ export const SUBSIDY_FAQS = [
 
 export default function SubsidiesPage() {
   const now = new Date();
-  const activeSubsidyCount = getActiveSubsidyCount(now);
 
   return (
     <>
@@ -39,19 +37,17 @@ export default function SubsidiesPage() {
         { name: "2026 政府出海補助", path: "/resources/subsidies" },
       ]} />
       <FaqJsonLd items={SUBSIDY_FAQS} />
-      <div className="overflow-hidden bg-white">
+      <div className="bg-white">
       <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src={SUBSIDY_CARD_COPY.hero} video={HERO_VIDEOS.subsidies} />
-        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
-          <h1 className="h1 mb-8 max-w-[900px] text-white">政府在幫你出海，<br /><span className="text-gold/90">你知道怎麼拿嗎？</span></h1>
-          <p className="lead mb-12 max-w-[700px] !text-white/[.72]">
+        <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+          <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><Link href="/resources" className="hover:text-white">資源</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">2026 政府出海補助</span></nav>
+          <h1 className="h1 mb-6 max-w-[880px] text-white">政府在幫你出海，<br /><span className="text-gold">你知道怎麼拿嗎？</span></h1>
+          <p className="lead max-w-[640px] !text-white/75">
             貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入<span className="font-medium text-white">北美</span>和<span className="font-medium text-white">東南亞</span>兩個主戰場。
             但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫
             我們替你整理了 <span className="font-medium text-white">4 個和鹿飛三支柱方法論對齊</span> 的計畫
           </p>
-          <div className="grid grid-cols-2 gap-6 border-t border-white/10 pt-10 md:grid-cols-4 md:gap-10">
-            <Stat num={String(activeSubsidyCount)} label="當期開放計畫" /><Stat num="2,000萬" label="聯合申請最高補助" /><Stat num="3" label="主管機關" /><Stat num="100%" label="和鹿飛服務對齊" />
-          </div>
         </div>
         <ScrollCue />
       </section>
@@ -75,38 +71,9 @@ export default function SubsidiesPage() {
         </div>
       </section>
 
-      <SubsidyMatcher />
+      <SubsidyPlans subsidies={SUBSIDIES} now={now} />
 
-      <section className="bg-white py-[72px] md:py-[96px]">
-        <div className="lufe-container">
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <h2 className="h2 max-w-[780px] text-tx">4 個計畫，對應你出海的<span className="text-gold">不同階段</span></h2>
-            <p className="text-[14.5px] text-tx3 md:text-right">資料最後確認 <span className="font-medium text-tx">2026.10.02</span><br />名額有限 · 部分計畫經費用罄即止</p>
-          </div>
-          <SubsidyComparison subsidies={SUBSIDIES} now={now} />
-          <div className="mx-auto grid max-w-[1120px] min-w-0 gap-5 md:gap-6">{SUBSIDIES.map((subsidy) => <SubsidyPlanCard key={subsidy.slug} subsidy={subsidy} now={now} />)}</div>
-        </div>
-      </section>
-
-      <section className="bg-cream py-[72px] md:py-[96px]">
-        <div className="lufe-container">
-          <h2 className="h2 mb-10 max-w-[780px] text-tx">不知道哪個適合？先看你<span className="text-gold">現在在哪一步</span></h2>
-          <div className="grid gap-5 md:grid-cols-3 md:gap-6">
-            {(["assess", "enter", "optimize"] as const).map((stageKey) => {
-              const stage = STAGE_LABELS[stageKey];
-              const relevant = SUBSIDIES.filter((subsidy) => subsidy.stage === stageKey);
-              return <div key={stageKey} className="min-w-0 border border-bd bg-white p-7 md:p-8"><p className="eyebrow mb-3 text-gold">{stage.label}</p><p className="mb-4 text-[16.5px] font-semibold leading-snug text-tx">{stage.desc.replace(/。$/, "")}</p><div className="border-t border-bd/60 pt-4"><p className="eyebrow mb-2 text-tx3">適用計畫</p><ul className="grid gap-2">{relevant.length === 0 ? <li className="text-[13.5px] text-tx3">—</li> : relevant.map((subsidy) => <li key={subsidy.slug} className="text-[14.5px] leading-snug text-tx2"><Link href={`#${subsidy.slug}`} className="hover:text-gold"><span className="font-semibold text-gold">{subsidy.num}</span> {subsidy.shortTitle}</Link></li>)}</ul></div></div>;
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-[72px] md:py-[96px]">
-        <div className="lufe-container">
-          <h2 className="h2 mb-12 text-tx">申請前你最可能想問的事</h2>
-          <div className="border-b border-bd2">{SUBSIDY_FAQS.map((faq) => <FAQItem key={faq.question} q={faq.question} a={faq.answer} />)}</div>
-        </div>
-      </section>
+      <FaqSection title="申請前你最可能想問的事" idPrefix="subsidy-faq" items={SUBSIDY_FAQS.map((faq, index) => ({ num: String(index + 1).padStart(2, "0"), question: faq.question, answer: faq.answer }))} className="bg-white py-[72px] md:py-[96px]" />
 
       <section className="border-t border-bd bg-cream py-[60px] md:py-[80px]">
           <div className="lufe-container flex flex-col gap-6 md:flex-row md:items-center md:justify-between"><div className="max-w-[520px]"><h3 className="h3 text-tx">補助一有更新，我們通知你</h3><p className="mt-2 text-[14.5px] leading-[1.8] text-tx2">每次有新計畫公告、金額加碼、截止日變動，鹿飛整理成一封信寄給你。不是每週轟炸，只在真的有事時才發</p></div><div className="shrink-0"><a href="mailto:aaron.yu@reborn.in?subject=%E8%A8%82%E9%96%B1%E8%A3%9C%E5%8A%A9%E5%BF%AB%E8%A8%8A&body=%E5%B8%8C%E6%9C%9B%E6%94%B6%E5%88%B0%E9%B9%BF%E9%A3%9B%E7%9A%84%E6%94%BF%E5%BA%9C%E5%87%BA%E6%B5%B7%E8%A3%9C%E5%8A%A9%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5%EF%BC%9A%0A%0A%E5%85%AC%E5%8F%B8%EF%BC%9A%0A%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E4%B8%BB%E8%A6%81%E5%B8%82%E5%A0%B4%EF%BC%88%E5%8C%97%E7%BE%8E%2F%E6%9D%B1%E5%8D%97%E4%BA%9E%EF%BC%89%EF%BC%9A%0A" className="inline-flex items-center gap-2 bg-navy px-6 py-3.5 text-[14.5px] font-semibold text-white transition-colors hover:bg-navy/90">訂閱補助快訊 →</a><p className="mt-2 text-center text-[11px] text-tx3 md:text-right">寄信到 aaron.yu@reborn.in · 隨時退訂</p></div></div>
@@ -117,7 +84,5 @@ export default function SubsidiesPage() {
   );
 }
 
-function Stat({ num, label }: { readonly num: string; readonly label: string }) { return <div><p className="num mb-2 text-[32px] leading-none text-gold md:text-[40px]">{num}</p><p className="text-[11.5px] font-medium tracking-wider text-white/60">{label}</p></div>; }
 function AgencyBadge({ name, sub }: { readonly name: string; readonly sub: string }) { return <div className="flex items-baseline gap-2.5"><span className="text-[15.5px] font-semibold tracking-[-0.2px] text-tx md:text-[16.5px]">{name}</span><span className="text-[10.5px] font-medium tracking-wider text-tx3">{sub}</span></div>; }
-function Pillar({ num, title, desc, icon }: { readonly num: string; readonly title: string; readonly desc: string; readonly icon: ReactNode }) { return <div className="border border-bd bg-white p-7"><div className="mb-4 flex items-center justify-between"><div className="grid h-12 w-12 place-items-center border border-gold/30 bg-gold/[.08] text-gold-d">{icon}</div><span className="num text-[24px] text-gold">{num}</span></div><h3 className="h3 text-tx">{title}</h3><p className="mt-2 text-[15px] leading-[1.8] text-tx2">{desc}</p></div>; }
-function FAQItem({ q, a }: { readonly q: string; readonly a: string }) { return <Disclosure summary={q}><p className="max-w-[720px] text-[15.5px] leading-[1.85]">{a}</p></Disclosure>; }
+function Pillar({ num, title, desc, icon }: { readonly num: string; readonly title: string; readonly desc: string; readonly icon: ReactNode }) { return <div className="border border-bd bg-white p-7"><div className="mb-4 flex items-center justify-between"><div className="grid h-12 w-12 place-items-center border border-gold/40 text-gold-d">{icon}</div><span className="num text-[24px] text-gold">{num}</span></div><h3 className="h3 text-tx">{title}</h3><p className="mt-2 text-[15px] leading-[1.8] text-tx2">{desc}</p></div>; }

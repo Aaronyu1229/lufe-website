@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 
-import { TieredImage } from "@/components/TieredImage";
-import type { InlineImage } from "@/data/articleInlineImages";
 
 type StaticContentBlock =
   | { readonly type: "heading"; readonly level: 2 | 3; readonly text: string }
@@ -158,10 +156,8 @@ export function getStaticArticleHeadings(content: readonly string[]): { id: stri
 
 export function StaticArticleContent({
   content,
-  inlineImages = [],
 }: {
   readonly content: readonly string[];
-  readonly inlineImages?: readonly InlineImage[];
 }) {
   const blocks = parseStaticMarkdown(content);
   const numberedBlocks = blocks.map((block, index) => ({
@@ -182,15 +178,8 @@ export function StaticArticleContent({
             }
 
             if (!headingNumber) return null;
-            const image = inlineImages.find((candidate) => candidate.beforeH2 === headingNumber);
             const heading = <h2 key={index} id={`section-${headingNumber}`} className={`${block.text.startsWith("情境：") ? "mb-6 mt-10 border-l-[3px] border-gold bg-cream px-5 py-4" : "mb-3 mt-10"} scroll-mt-[96px] font-sans text-[26px] font-[650] leading-[1.35] text-tx`}>{renderInlineMarkdown(block.text)}</h2>;
-            return image ? [
-              <figure key={`${index}-image`} className="my-10">
-                <TieredImage src={image.src} alt={image.alt} sizes="(max-width: 767px) 100vw, 720px" className="aspect-[16/9] w-full object-cover" />
-                <figcaption className="mt-3 text-[13px] text-tx3">{image.alt}</figcaption>
-              </figure>,
-              heading,
-            ] : heading;
+            return heading;
           }
           case "paragraph":
             return <p key={index} className={index === 0 ? "" : "mt-5"}>{renderInlineMarkdown(block.text)}</p>;

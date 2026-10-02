@@ -20,6 +20,8 @@ describe("InsightsPageContent", () => {
       expect(markup).toContain(article.date);
       expect(markup).toContain(article.readTime);
     }
+    expect(markup).not.toContain("篇實戰文章");
+    expect(markup).not.toContain("章節分類");
   });
 
   it("renders the empty chapter state", () => {

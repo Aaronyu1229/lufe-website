@@ -97,7 +97,10 @@ describe("home page", () => {
     expect(rendered).toContain(JUMPING_COPY.title[1]);
     expect(rendered).toContain(JUMPING_COPY.body);
     expect(rendered).toContain("鹿飛相信的事很簡單");
-    expect(rendered).toContain("躍馬企業 · 年國際物流實戰");
+    expect(rendered).toContain("鹿飛案例成果");
+    expect(rendered).toContain("家北美 Costco 門市同步上架");
+    expect(rendered).toContain("家馬尼拉門市，一年內開出");
+    expect(rendered).toContain("營收成長，皮鞋品牌轉型襪子");
     expect(rendered).toContain("出海實務洞察，");
     expect(rendered).toContain("看所有文章 →");
     expect(rendered).not.toContain("越南市場進入指南：台灣品牌該知道的 5 個關鍵");
@@ -108,7 +111,8 @@ describe("home page", () => {
 
     expect(rendered).not.toContain("馬尼拉的媽媽");
     expect(JUMPING_COPY.title).toEqual(["一家企業出海的", "後半段旅程"]);
-    expect(JUMPING_COPY.body).toBe("企業出海的前半段，是把產品送到海外——\n這一段，躍馬企業做了 42 年、500 多個案件、30 多個國家。\n\n後半段，才是真正的考驗：\n產品要被當地市場接受，通路要談得下來，\n證照、團隊與客服，要有人在當地接住。\n\n多數企業的出海，不是輸在運輸，\n而是輸在抵達之後沒有人接手。\n\n鹿飛，是為了這後半段旅程而成立的");
+    expect(JUMPING_COPY.body).toBe("企業出海的前半段，是把產品送到海外——\n訂單、報關、運輸，多數企業都走得過去。\n\n後半段，才是真正的考驗：\n產品要被當地市場接受，通路要談得下來，\n證照、團隊與客服，要有人在當地接住。\n\n多數企業的出海，不是輸在運輸，\n而是輸在抵達之後沒有人接手。\n\n鹿飛，是為了這後半段旅程而成立的");
+    expect(JUMPING_COPY.body).not.toContain("躍馬");
   });
 
   it("removes the starter-package price and renders the prescribed card icons", async () => {
@@ -118,8 +122,7 @@ describe("home page", () => {
 
     expect(chaptersMarkup).not.toContain("出海起手包 7 萬");
     expect(chaptersMarkup.match(/<svg/g)).toHaveLength(HOME_CHAPTERS.length);
-    const roadsMarkup = casesMarkup.slice(0, casesMarkup.indexOf("三條路的成本、坑、時間都不一樣。"));
-    expect(roadsMarkup.match(/<svg/g)).toHaveLength(HOME_CASE_ROADS.length);
+    expect(casesMarkup).not.toContain("三條路的成本、坑、時間都不一樣。");
     expect(rendered).toContain("一家企業出海的");
   });
 

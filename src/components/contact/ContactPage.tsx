@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { ScrollCue } from "@/components/ScrollCue";
 import { CalendarClockIcon, MailIcon, MapPinIcon, MessageIcon } from "@/components/icons/LineIcons";
 import { ChoiceGroup } from "@/components/ui/ChoiceGroup";
 import { HERO_VIDEOS } from "@/data/heroVideos";
 
-import { useMessageBox } from "../MessageBox";
 
 export const stageOptions = [
   "還在觀望，想了解出海",
@@ -39,10 +40,7 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-const bookingMailto = "mailto:aaron.yu@reborn.in?subject=%E9%A0%90%E7%B4%84%2030%20%E5%88%86%E9%90%98%E5%85%8D%E8%B2%BB%E8%AB%AE%E8%A9%A2&body=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%2030%20%E5%88%86%E9%90%98%E5%85%8D%E8%B2%BB%E8%AB%AE%E8%A9%A2%E3%80%82%0A%0A%E6%96%B9%E4%BE%BF%E7%9A%84%E6%99%82%E9%96%93%EF%BC%9A%0A%E5%85%AC%E5%8F%B8%20%2F%20%E7%94%A2%E5%93%81%EF%BC%9A%0A%E6%83%B3%E8%81%8A%E7%9A%84%E5%95%8F%E9%A1%8C%EF%BC%9A%0A";
-
 export function ContactPage() {
-  const { open } = useMessageBox();
   const [formState, setFormState] = useState<ContactFormFields>({
     name: "",
     email: "",
@@ -155,12 +153,18 @@ export function ContactPage() {
 
   return (
     <>
-      <section className="lufe-hero min-h-[56svh] bg-navy text-white">
+      <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/contact/hero-handshake-1600.webp" video={HERO_VIDEOS.contact} />
-        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[96px] md:pt-[170px]">
-          <h1 className="h1 text-white">聯絡鹿飛</h1>
-          <p className="lead mt-5 max-w-[600px] !text-white/75">出海規劃、合作洽談或媒體邀約，留下訊息，一個工作天內回覆</p>
+        <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+          <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
+            <Link href="/" className="hover:text-white">首頁</Link>
+            <span aria-hidden="true" className="text-white/30">/</span>
+            <span className="text-white/75">聯絡鹿飛</span>
+          </nav>
+          <h1 className="h1 mb-6 max-w-[880px] text-white">聯絡鹿飛</h1>
+          <p className="lead max-w-[640px] !text-white/75">出海規劃、合作洽談或媒體邀約，留下訊息，一個工作天內回覆</p>
         </div>
+        <ScrollCue />
       </section>
 
       <section className="bg-white py-[72px] md:py-[96px]">
@@ -184,15 +188,6 @@ export function ContactPage() {
                 <div><dt className="text-[13px] text-tx3">回覆時間</dt><dd className="mt-1 text-[16px] text-tx">一個工作天內</dd></div>
               </div>
             </dl>
-            <div className="mt-6 flex flex-col items-start gap-4 text-[15px] font-semibold text-sky">
-              <a href={bookingMailto} className="hover:text-gold-d">預約 30 分鐘諮詢 →</a>
-              <button type="button" onClick={open} className="cursor-pointer active:scale-[.97]">快速留言 →</button>
-            </div>
-            <section id="partners" className="mt-10 scroll-mt-[100px] border-l-2 border-gold pl-5">
-              <h2 className="h3">合作洽談</h2>
-              <p className="mt-3 text-[15px] leading-[1.8] text-tx2">商會、同業顧問、在地服務商與物流夥伴，歡迎來信洽談合作。不收介紹費、不綁獨家</p>
-              <a href="mailto:aaron.yu@reborn.in?subject=%E5%90%88%E4%BD%9C%E5%A4%A5%E4%BC%B4%E6%B4%BD%E8%AB%87" className="mt-4 inline-flex text-[15px] font-semibold text-sky hover:text-gold-d">寄信洽談合作 →</a>
-            </section>
           </aside>
 
           <section className="min-w-0 bg-cream p-6 md:p-10">
@@ -200,7 +195,7 @@ export function ContactPage() {
             <p className="mb-8 mt-3 text-[15px] text-tx2">資訊越完整，第一次回覆越精準</p>
             {submitted ? (
               <div className="py-12 text-center">
-                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center bg-sky/10">
+                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center border border-sky text-sky">
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 14L12 19L21 10" stroke="currentColor" className="text-sky" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </div>
                 <h3 className="h3 mb-2">收到了！</h3>
