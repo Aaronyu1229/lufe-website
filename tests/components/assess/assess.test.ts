@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { EntryScreen, getAssessResult, InvalidAssessResult, assessQuestions } from "@/components/assess/AssessWizard";
+import { CASES } from "@/data/cases";
 
 describe("Assess", () => {
   it("keeps every question and answer in the entry SSR markup", () => {
@@ -18,7 +19,11 @@ describe("Assess", () => {
 
     expect(markup).not.toContain("AY");
     expect(markup).not.toContain("Aaron Yu · 鹿飛創辦人");
-    expect(markup).not.toContain("開始比對 →");
+    expect(markup).toContain('id="assess-quiz"');
+    expect(markup).toContain("開始比對 ↓");
+    expect(markup).toContain("會和這四個案例比對");
+    for (const caseItem of CASES) expect(markup).toContain(caseItem.title);
+    expect(markup).not.toContain("bg-gold text-navy");
     expect(markup).not.toContain("rounded-");
   });
 

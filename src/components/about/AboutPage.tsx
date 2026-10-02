@@ -46,7 +46,7 @@ const networkCards = [
     title: "北美",
     desc: "北美團隊：研究、展覽、買家、談判",
     className: "text-gold-d",
-    icon: <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" stroke="currentColor" strokeWidth="1.5" /><path d="M4 13H28" stroke="currentColor" strokeWidth="1.5" /><circle cx="8" cy="20" r="1.5" fill="currentColor" /><rect x="18" y="18" width="6" height="3" stroke="currentColor" strokeWidth="1" /></svg>,
+    icon: <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" stroke="currentColor" strokeWidth="1.5" /><path d="M4 13H28" stroke="currentColor" strokeWidth="1.5" /><circle cx="8" cy="20" r="1.5" stroke="currentColor" strokeWidth="1" /><rect x="18" y="18" width="6" height="3" stroke="currentColor" strokeWidth="1" /></svg>,
   },
   {
     title: "東南亞",
@@ -84,7 +84,7 @@ const teamRoles = [
   {
     title: "菲律賓合作夥伴",
     desc: "在當地經營英語教育機構與連鎖餐飲多年，市場探查面板、落地執行、客服團隊都從這裡來",
-    icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="1.5" /><path d="M5 16H27M16 5C19 8 19 24 16 27M16 5C13 8 13 24 16 27" stroke="currentColor" strokeWidth="1.2" /><circle cx="22" cy="11" r="1.5" fill="currentColor" /></svg>,
+    icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="1.5" /><path d="M5 16H27M16 5C19 8 19 24 16 27M16 5C13 8 13 24 16 27" stroke="currentColor" strokeWidth="1.2" /><circle cx="22" cy="11" r="1.5" stroke="currentColor" strokeWidth="1" /></svg>,
   },
   {
     title: "北美團隊",
@@ -101,39 +101,27 @@ export function AboutPage() {
       <section id="story" className="lufe-hero scroll-mt-[80px] bg-navy text-white">
         <HeroBackdrop src="/images/about/about-hero-executive-1600.webp" position="65% center" video={HERO_VIDEOS.about} />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
-          <nav aria-label="Breadcrumb" className="mb-7 text-[11px] font-medium tracking-[1px] text-white/50">
+          <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/" className="hover:text-gold">首頁</Link>
-            <span className="mx-2 text-white/30">/</span>
+            <span aria-hidden="true" className="text-white/30">/</span>
             <span className="text-white/75">關於我們</span>
           </nav>
-          <h1 className="display mb-7 max-w-[920px] text-white">
+          <h1 className="h1 mb-6 max-w-[880px] text-white">
             協助台灣企業<br />在<span className="text-gold">北美</span>與<span className="text-gold">東南亞</span>落地
           </h1>
           <p className="max-w-[640px] text-[18px] leading-[1.8] text-white/80">「別人幫你開車，我們幫你找路。」</p>
-          <p className="lead !text-white/75 mt-4 mb-10 max-w-[640px]">鹿飛協助台灣企業規劃並執行海外落地，從市場驗證、通路進入到在地團隊與客服，一個窗口串起出海的每一段。以躍馬企業 42 年國際物流為基礎，讓每一步都有實際的執行力</p>
-          <div className="grid max-w-[780px] grid-cols-3 gap-5 border-t border-white/10 pt-7 md:gap-10">
-            {[
-              { n: "42+", l: "躍馬企業 · 年國際物流實戰" },
-              { n: "500+", l: "躍馬企業 · 出口實戰案件" },
-              { n: "30+", l: "國家與地區覆蓋" },
-            ].map((stat) => (
-              <div key={stat.l}>
-                <div data-lufe-counter className="num text-[26px] leading-none text-gold md:text-[30px]">{stat.n}</div>
-                <div className="mt-1.5 text-[11px] tracking-[0.5px] text-white/50 md:text-[11.5px]">{stat.l}</div>
-              </div>
-            ))}
-          </div>
+          <p className="lead mb-0 mt-4 max-w-[640px] !text-white/75">鹿飛協助台灣企業規劃並執行海外落地，從市場驗證、通路進入到在地團隊與客服，一個窗口串起出海的每一段。以躍馬企業 42 年國際物流為基礎，讓每一步都有實際的執行力</p>
         </div>
         <ScrollCue />
       </section>
 
       <section className="overflow-hidden border-t border-white/5 bg-navy py-[80px] text-white md:py-[110px]">
         <div className="lufe-container">
-          <Carousel label="鹿飛的故事" itemClassName="basis-[min(82vw,380px)] md:basis-[calc((100%-2rem)/2)]">
+          <Carousel tone="dark" label="鹿飛的故事" itemClassName="basis-[min(82vw,380px)] md:basis-[calc((100%-2rem)/2)]">
             {storyCards.map((card) => (
               <article key={card.num} className="overflow-hidden border border-white/15 bg-white/[0.04]">
                 <div className="relative aspect-[4/5] overflow-hidden">
-                  <TieredImage src={card.image} alt={card.alt} sizes="(max-width: 768px) 82vw, 48vw" maxTierWidth={card.maxTierWidth} className={`absolute inset-0 h-full w-full ${card.imageClassName}`} />
+                  <TieredImage data-carousel-parallax src={card.image} alt={card.alt} sizes="(max-width: 768px) 82vw, 48vw" maxTierWidth={card.maxTierWidth} className={`absolute inset-0 h-full w-full ${card.imageClassName}`} />
                   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50" />
                 </div>
                 <div className="p-6 md:p-7">
@@ -154,7 +142,7 @@ export function AboutPage() {
           <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
             {teamRoles.map((role) => (
               <article key={role.title} className="border border-bd bg-white p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center border border-gold-d/25 bg-gold/10 text-gold-d">{role.icon}</div>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center border border-gold/40 text-gold-d">{role.icon}</div>
                 <h3 className="h3 mb-2">{role.title}</h3>
                 <p className="text-[14.5px] leading-[1.8] text-tx2">{role.desc}</p>
               </article>
@@ -170,12 +158,16 @@ export function AboutPage() {
             <p className="lead !text-white/70 mt-5 max-w-[620px]">通路關係、在地夥伴與科技工具，整合為同一套跨境執行體系</p>
             <div className="mt-10 grid max-w-[560px] grid-cols-3 gap-5">
               {[
-                { value: "30+", label: "國家與地區" },
-                { value: "500+", label: "出口案件" },
-                { value: "42", label: "年國際物流" },
+                { value: "30+", label: "國家與地區・躍馬物流網絡" },
+                { value: "500+", label: "出口案件・躍馬企業" },
+                { value: "42", label: "年國際物流・躍馬企業" },
               ].map((stat) => <div key={stat.label}><div data-lufe-counter className="num text-gold">{stat.value}</div><div className="mt-2 text-[13px] text-white/65">{stat.label}</div></div>)}
             </div>
-            <p className="mt-8 text-[13px] text-white/55">台北・馬尼拉・洛杉磯・多倫多</p>
+            <p className="mt-8 text-[13px] text-white/55">台北・馬尼拉・洛杉磯・紐約・舊金山・拉斯維加斯</p>
+            <div className="mt-4 grid gap-2 text-[13px] text-white/55">
+              <div className="flex items-center gap-2"><span aria-hidden="true" className="h-2 w-2 bg-gold" />資源網絡城市</div>
+              <div className="flex items-center gap-2"><span aria-hidden="true" className="h-2 w-2 bg-sky" />關注市場：新加坡・吉隆坡・曼谷・胡志明市・雅加達・宿霧</div>
+            </div>
           </div>
           <NetworkGlobe />
         </div>

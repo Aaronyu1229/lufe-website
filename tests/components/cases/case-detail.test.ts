@@ -62,6 +62,18 @@ describe("CaseDetailPageContent", () => {
     expect(markup).not.toMatch(/\brounded-/);
   });
 
+  it("moves statistics out of the hero and keeps two story figures per case", () => {
+    for (const caseItem of CASES) {
+      const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem }));
+      const heroMarkup = markup.slice(markup.indexOf('<section class="lufe-hero'), markup.indexOf("</section>") + "</section>".length);
+
+      expect(heroMarkup).not.toContain("data-lufe-counter");
+      for (const stat of caseItem.stats) expect(markup).toContain(stat.value);
+      expect(markup.match(/<figure/g)).toHaveLength(2);
+      expect(markup).not.toContain("h-10 w-10 place-items-center bg-gold");
+    }
+  });
+
   it("maps legacy stages to the new service routes without duplicate links", () => {
     const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: CASES[0] }));
 

@@ -2,7 +2,9 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
+import { AaronAuthorPage } from "@/components/about/AaronAuthorPage";
 import { AboutPage, storyCards } from "@/components/about/AboutPage";
+import { getPublishedArticles } from "@/lib/articles/published";
 
 describe("AboutPage", () => {
   it("keeps the approved story, beliefs, and network copy in SSR markup", () => {
@@ -23,6 +25,10 @@ describe("AboutPage", () => {
     expect(markup).toContain("跨越三地的資源網絡");
     expect(markup).toContain("30+");
     expect(markup).toContain("500+");
+    expect(markup).toContain("台北・馬尼拉・洛杉磯・紐約・舊金山・拉斯維加斯");
+    expect(markup).not.toContain("多倫多");
+    const heroMarkup = markup.slice(markup.indexOf('<section id="story"'), markup.indexOf("</section>") + "</section>".length);
+    expect(heroMarkup).not.toContain("data-lufe-counter");
     expect(markup).not.toContain("誠實的邊界");
     expect(markup).not.toContain("你會得到什麼樣的陪跑");
     expect(markup).not.toContain("看 Aaron 的文章");
@@ -32,5 +38,13 @@ describe("AboutPage", () => {
     expect(markup).not.toContain("section-heading");
     expect(markup).not.toContain("hero-title");
     expect(markup).not.toContain("rounded-");
+  });
+
+  it("renders every author article behind the category filter", () => {
+    const markup = renderToStaticMarkup(createElement(AaronAuthorPage));
+
+    expect(markup).toContain("全部");
+    expect(markup).toContain("lufe-insight-count");
+    for (const article of getPublishedArticles()) expect(markup).toContain(article.title);
   });
 });
