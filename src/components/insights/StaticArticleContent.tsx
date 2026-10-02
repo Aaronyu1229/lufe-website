@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 
+
 type StaticContentBlock =
   | { readonly type: "heading"; readonly level: 2 | 3; readonly text: string }
   | { readonly type: "paragraph"; readonly text: string }
@@ -143,15 +144,43 @@ export function renderInlineMarkdown(text: string): ReactNode {
   });
 }
 
-export function StaticArticleContent({ content }: { readonly content: readonly string[] }) {
+export function getStaticArticleHeadings(content: readonly string[]): { id: string; text: string }[] {
+  let headingNumber = 0;
+
+  return parseStaticMarkdown(content).flatMap((block) => {
+    if (block.type !== "heading" || block.level !== 2) return [];
+    headingNumber += 1;
+    return [{ id: `section-${headingNumber}`, text: block.text.replaceAll("**", "") }];
+  });
+}
+
+export function StaticArticleContent({
+  content,
+}: {
+  readonly content: readonly string[];
+}) {
+  const blocks = parseStaticMarkdown(content);
+  const numberedBlocks = blocks.map((block, index) => ({
+    block,
+    index,
+    headingNumber: block.type === "heading" && block.level === 2
+      ? blocks.slice(0, index + 1).filter((candidate) => candidate.type === "heading" && candidate.level === 2).length
+      : undefined,
+  }));
+
   return (
     <div className="text-[17px] leading-[1.95] text-tx">
-      {parseStaticMarkdown(content).map((block, index) => {
+      {numberedBlocks.flatMap(({ block, index, headingNumber }) => {
         switch (block.type) {
-          case "heading":
-            return block.level === 2
-              ? <h2 key={index} className={block.text.startsWith("情境：") ? "mb-6 mt-10 border-l-[3px] border-gold bg-cream px-5 py-4 font-sans text-[26px] font-[650] leading-[1.35] text-tx" : "mb-3 mt-10 font-sans text-[26px] font-[650] leading-[1.35] text-tx"}>{renderInlineMarkdown(block.text)}</h2>
-              : <h3 key={index} className="mb-3 mt-8 font-sans text-[21px] font-[650] leading-[1.45] text-tx">{renderInlineMarkdown(block.text)}</h3>;
+          case "heading": {
+            if (block.level !== 2) {
+              return <h3 key={index} className="mb-3 mt-8 font-sans text-[21px] font-[650] leading-[1.45] text-tx">{renderInlineMarkdown(block.text)}</h3>;
+            }
+
+            if (!headingNumber) return null;
+            const heading = <h2 key={index} id={`section-${headingNumber}`} className={`${block.text.startsWith("情境：") ? "mb-6 mt-10 border-l-[3px] border-gold bg-cream px-5 py-4" : "mb-3 mt-10"} scroll-mt-[96px] font-sans text-[26px] font-[650] leading-[1.35] text-tx`}>{renderInlineMarkdown(block.text)}</h2>;
+            return heading;
+          }
           case "paragraph":
             return <p key={index} className={index === 0 ? "" : "mt-5"}>{renderInlineMarkdown(block.text)}</p>;
           case "blockquote":

@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { CHAPTERS, PHILIPPINES_CHAPTER_KEYS, type PhilippinesChapterKey } from "@/data/chapters";
 
 export function ChapterBar({ current }: { readonly current: PhilippinesChapterKey }) {
   const [atEdge, setAtEdge] = useState(false);
+  const [previewIndex, setPreviewIndex] = useState<number | null>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const currentIndex = PHILIPPINES_CHAPTER_KEYS.indexOf(current);
 
   useEffect(() => {
@@ -16,23 +18,44 @@ export function ChapterBar({ current }: { readonly current: PhilippinesChapterKe
     return () => window.removeEventListener("scroll", update);
   }, []);
 
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    const link = scroller?.querySelector<HTMLAnchorElement>(`[data-chapter-key="${current}"]`);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (scroller && link) {
+      scroller.scrollTo({
+        left: link.offsetLeft - (scroller.clientWidth - link.offsetWidth) / 2,
+        behavior: reduced ? "auto" : "smooth",
+      });
+    }
+  }, [current]);
+
   return (
     <nav aria-label="菲律賓服務章節" className={`lufe-chapter-bar sticky top-[64px] z-20 py-3 ${atEdge ? "lufe-chapter-bar-edge" : ""}`}>
-      <div className="lufe-container flex items-center gap-0 overflow-x-auto md:justify-between">
+      <div ref={scrollerRef} className="lufe-container flex items-center gap-0 overflow-x-auto md:justify-between md:overflow-visible">
         {PHILIPPINES_CHAPTER_KEYS.map((key, index) => {
           const chapter = CHAPTERS[key];
           const isCurrent = key === current;
           const isDone = index < currentIndex;
+          const previewOn = previewIndex !== null && index > currentIndex && index <= previewIndex;
+
           return (
             <div key={key} className="flex shrink-0 items-center gap-2">
-              {index > 0 ? <span aria-hidden="true" className={`lufe-chapter-line ${index <= currentIndex ? "lufe-chapter-line-done" : ""}`} /> : null}
+              {index > 0 ? <span aria-hidden="true" className={`lufe-chapter-line ${index <= currentIndex ? "lufe-chapter-line-done" : ""}`}><span className="lufe-chapter-line-preview" data-on={previewOn} /></span> : null}
               <Link
                 href={chapter.path}
+                data-chapter-key={key}
                 aria-current={isCurrent ? "page" : undefined}
                 className={`lufe-chapter-link ${isCurrent ? "lufe-chapter-link-current" : ""} ${isDone ? "lufe-chapter-link-done" : ""}`}
+                onPointerEnter={() => setPreviewIndex(index)}
+                onPointerLeave={() => setPreviewIndex(null)}
+                onFocus={() => setPreviewIndex(index)}
+                onBlur={() => setPreviewIndex(null)}
               >
                 <span aria-hidden="true" className="lufe-chapter-dot" />
                 <span>{chapter.label}</span>
+                <span aria-hidden="true" className="lufe-chapter-peek">{chapter.title}</span>
               </Link>
             </div>
           );

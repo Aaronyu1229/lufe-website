@@ -15,21 +15,29 @@ describe("Navbar", () => {
     const markup = renderNavbar();
 
     expect(markup).toContain('id="desktop-mega-menu"');
-    for (const label of ["菲律賓 · 第一年四章", "已經在海外", "精選案例", "按章節找", "認識鹿飛"]) {
-      expect(markup).toContain(label);
+    for (const label of ["菲律賓 · 第一年四章", "另一條線", "從這裡開始", "一頁看完", "第一個月 · 1～2 萬"]) {
+      expect(markup).not.toContain(label);
     }
-
+    expect(markup).not.toContain("bg-navy");
+    for (const title of ["不確定從哪裡開始？", "免費初步評估", "不確定比較像哪一條？", "創辦人專欄"]) {
+      expect(markup).toContain(title);
+    }
+    expect(markup).not.toContain("/about#how-we-work");
+    expect(markup).not.toContain("/about#what-we-dont-do");
     expect(markup).not.toContain("rounded-");
   });
 
-  it("replaces the former about card and keeps cases tags actionable", () => {
+  it("uses the renamed TradePilot link in desktop and mobile menus", () => {
     const markup = renderNavbar();
 
-    expect(markup).toContain("鹿飛 LUFÉ 創辦人・來自躍馬企業");
-    expect(markup).toContain("看了很多年貨櫃出去，決定去接貨到了之後的事。");
-    expect(markup).not.toContain("42+ 年國際物流實戰");
-    expect(markup).not.toContain("AY");
-    expect(markup).not.toContain("分類瀏覽");
+    expect(markup.match(/TradePilot - 線上報關工具/g)).toHaveLength(2);
+  });
+
+  it("uses the new resources label in desktop and mobile menus", () => {
+    const markup = renderNavbar();
+
+    expect(markup.match(/補助與資源/g)).toHaveLength(2);
+    expect(markup).not.toContain("補助與活動");
   });
 
   it("never lists an insight chapter that has no articles", () => {
@@ -41,5 +49,9 @@ describe("Navbar", () => {
   it.each([null, "", "/index"])("normalizes %j to the homepage pathname", (pathname) => {
     expect(normalizePathname(pathname)).toBe("/");
     expect(pathnameHasDarkHero(normalizePathname(pathname))).toBe(true);
+  });
+
+  it("keeps the assess result shell on a dark hero", () => {
+    expect(pathnameHasDarkHero("/assess/result")).toBe(true);
   });
 });

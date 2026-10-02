@@ -43,7 +43,7 @@ export function BoothIcon({ size = 28, className = "" }: IconProps) {
       <path d="M4 10L6 6H26L28 10V12H4V10Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       <path d="M6 12V26H26V12" stroke="currentColor" strokeWidth="1.5" />
       <path d="M12 26V18H20V26" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="18" cy="22" r="0.8" fill="currentColor" />
+      <circle cx="18" cy="22" r="0.8" stroke="currentColor" strokeWidth="1.5" fill="none" />
     </svg>
   );
 }

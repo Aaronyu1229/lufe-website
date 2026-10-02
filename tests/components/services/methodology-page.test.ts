@@ -2,25 +2,75 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
+import { metadata } from "@/app/services/methodology/page";
 import {
+  BOUNDARIES_COPY,
+  COMPANIONSHIP_COPY,
+  DOUBLE_SCORE_COPY,
+  EXAMPLES_CLOSING,
+  EXAMPLES_INTRO,
+  FIRST_MONTH_COPY,
+  FOUNDATIONS_CLOSING,
+  FOUNDATIONS_FOOTNOTE,
   METHODOLOGY_DECISIONS,
   METHODOLOGY_DIMENSIONS,
-  METHODOLOGY_FAQS,
+  METHODOLOGY_EXAMPLES,
+  METHODOLOGY_FOUNDATIONS,
   MethodologyPage,
-  WORKED_EXAMPLE,
+  ORIGIN_STORY,
+  REPORT_DISCLAIMER,
+  REPORT_OUTLINE,
+  RULES_COPY,
+  SCALE_INTRO,
+  THIRD_MONTH_INTRO,
 } from "@/components/services/MethodologyPage";
+import { splitDimensionName } from "@/components/services/methodology/RubricItem";
 
 const renderPage = () => renderToStaticMarkup(createElement(MethodologyPage));
-const markupText = (markup: string) => markup.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+const markupText = (markup: string) => markup.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
 
 describe("MethodologyPage", () => {
-  it("keeps every score detail, answer, and FAQ answer in server markup", () => {
+  it("keeps every specified text section and collapsed detail in server markup", () => {
     const markup = markupText(renderPage());
 
+    for (const copy of [
+      ORIGIN_STORY,
+      EXAMPLES_CLOSING,
+      EXAMPLES_INTRO,
+      FIRST_MONTH_COPY,
+      THIRD_MONTH_INTRO,
+      REPORT_DISCLAIMER,
+      SCALE_INTRO,
+      DOUBLE_SCORE_COPY,
+      RULES_COPY,
+      COMPANIONSHIP_COPY,
+      FOUNDATIONS_CLOSING,
+      FOUNDATIONS_FOOTNOTE,
+      BOUNDARIES_COPY,
+    ]) {
+      expect(markup).toContain(copy);
+    }
+
+    for (const example of METHODOLOGY_EXAMPLES) {
+      expect(markup).toContain(example.title);
+      expect(markup).toContain(example.tab);
+      expect(markup).toContain(example.method);
+      expect(markup).toContain(example.note);
+      for (const tag of example.tags) expect(markup).toContain(tag);
+      for (const finding of example.findings) {
+        expect(markup).toContain(finding.label);
+        expect(markup).toContain(finding.headline);
+        expect(markup).toContain(finding.detail);
+      }
+      for (const implication of example.implications) expect(markup).toContain(implication);
+    }
+    for (const item of REPORT_OUTLINE) expect(markup).toContain(item);
     for (const dimension of METHODOLOGY_DIMENSIONS) {
-      expect(markup).toContain(dimension.name);
+      const [en, zh] = splitDimensionName(dimension.name);
+      expect(`${en} ${zh}`).toBe(dimension.name);
+      expect(markup).toContain(en);
+      expect(markup).toContain(zh);
       expect(markup).toContain(dimension.question);
-      expect(markup).toContain(dimension.weight);
       expect(markup).toContain(dimension.criteria);
       expect(markup).toContain(dimension.redAt);
     }
@@ -29,33 +79,48 @@ describe("MethodologyPage", () => {
       expect(markup).toContain(decision.verdict);
       expect(markup).toContain(decision.advice);
     }
-    for (const score of WORKED_EXAMPLE.scores) {
-      expect(markup).toContain(score.dim);
-      expect(markup).toContain(score.note);
-      expect(markup).toContain(String(score.score));
-    }
-    expect(markup).toContain(WORKED_EXAMPLE.condition);
-    expect(markup).toContain(WORKED_EXAMPLE.outcome);
-    for (const [question, answer] of METHODOLOGY_FAQS) {
-      expect(markup).toContain(question);
-      expect(markup).toContain(answer);
+    for (const foundation of METHODOLOGY_FOUNDATIONS) {
+      expect(markup).toContain(foundation.lead);
+      expect(markup).toContain(foundation.footnote);
+      expect(markup).toContain(foundation.body);
     }
   });
 
-  it("includes the D8 Costco outcome", () => {
-    expect(renderPage()).toContain("實際結果：6 個月上架，首月銷量超標 40%。");
-  });
-
-  it("keeps the interactive scorecard's default result fully in server markup", () => {
+  it("uses five SSR rubric accordions, with only the first rubric open", () => {
     const markup = renderPage();
 
-    expect(markup).toContain("拖拖看 · 加權總分");
-    expect(markup).toContain('data-lufe-score-total="true"');
-    expect(markup).toContain(">74</output>");
-    expect(markup).toContain("Conditional Go");
+    expect(markup.match(/aria-expanded="(?:true|false)"/g)).toHaveLength(METHODOLOGY_DIMENSIONS.length);
+    expect(markup.match(/aria-expanded="true"/g)).toHaveLength(1);
   });
 
-  it("does not render rounded utility classes", () => {
-    expect(renderPage()).not.toMatch(/\brounded-/);
+  it("renders the segmented control and both example panels in server markup", () => {
+    const markup = renderPage();
+
+    expect(markup).toContain('aria-label="研究例子"');
+    expect(markup).toContain('role="radio"');
+    expect(markup).toContain('hidden=""');
+  });
+
+  it("keeps the specified red-line percentages and has no rubric weight data", () => {
+    const markup = renderPage();
+
+    expect(markup).toContain("70%");
+    expect(markup).toContain("5%");
+    for (const dimension of METHODOLOGY_DIMENSIONS) expect("weight" in dimension).toBe(false);
+  });
+
+  it("uses square corners", () => {
+    expect(renderPage()).not.toMatch(/\brounded-(?!full\b)/);
+  });
+
+  it("uses the approved origin image and removes the withdrawn methodology claims", () => {
+    const markup = renderPage();
+
+    expect(markup).toContain('/images/methodology/origin-product-review-1600.webp');
+    expect(markup).toContain('alt="女性在貨架前檢視產品包裝"');
+    expect(markup).not.toContain("這不是第五章。這是我們第一次跟你談的時候，腦子裡跑的那套東西。");
+    expect(RULES_COPY).not.toContain("總分不到 60，我們不接。");
+    expect(RULES_COPY).not.toContain("不是不想賺，是接了對你沒有好處，對我們的案例也沒有好處。");
+    expect(metadata.description).toBe("鹿飛的出海方法論：先用一兩萬問菲律賓市場，再決定投多少。兩個真實研究例子、五個評估問題、打兩次分。");
   });
 });

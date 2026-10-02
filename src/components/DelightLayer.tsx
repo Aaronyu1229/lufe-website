@@ -3,7 +3,26 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
-const numberPattern = /^(.*?)(-?\d[\d,]*)([^\d]*)$/;
+const numberPattern = /^(.*?)(-?\d[\d,]*(?:\.\d+)?)(\D*)$/;
+
+export function formatCounter(raw: string, progress: number): string {
+  const match = raw.match(numberPattern);
+  if (!match) return raw;
+
+  const [, prefix, value, suffix] = match;
+  const target = Number(value.replace(/,/g, ""));
+  if (!Number.isFinite(target)) return raw;
+
+  const decimals = value.split(".")[1]?.length ?? 0;
+  const useGrouping = value.includes(",");
+  const formatted = (progress === 0 ? 0 : target * progress).toLocaleString("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+    useGrouping,
+  });
+
+  return `${prefix}${formatted}${suffix}`;
+}
 
 function isReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -21,14 +40,15 @@ export function DelightLayer() {
     const reduced = isReducedMotion();
     const observers: IntersectionObserver[] = [];
     const cleanups: Array<() => void> = [];
-    const onView = (elements: readonly Element[], callback: (element: HTMLElement) => void) => {
+    const onView = (elements: readonly Element[], callback: (element: HTMLElement) => void, options?: IntersectionObserverInit) => {
+      const minimumRatio = typeof options?.threshold === "number" ? options.threshold : 0;
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+          if (!entry.isIntersecting || entry.intersectionRatio < minimumRatio) return;
           callback(entry.target as HTMLElement);
           observer.unobserve(entry.target);
         });
-      }, { rootMargin: "0px 0px -12% 0px" });
+      }, options ?? { rootMargin: "0px 0px -12% 0px" });
       elements.forEach((element) => observer.observe(element));
       observers.push(observer);
     };
@@ -44,27 +64,44 @@ export function DelightLayer() {
       if (/看所有|下一章|閱讀更多|完整故事|全部案例/.test(text)) link.setAttribute("data-lufe-text-link", "");
     });
 
-    const counters = Array.from(root.querySelectorAll<HTMLElement>("[data-lufe-counter], .num"))
+    const counters = Array.from(root.querySelectorAll<HTMLElement>("[data-lufe-counter]"))
       // Skip anything React keeps live (the scorecard), and zero-padded labels like "01" that counting would reformat.
       .filter((element) => !element.closest(".lufe-scorecard") && element.tagName !== "OUTPUT"
         && !/^0\d/.test((element.textContent ?? "").trim()) && !element.dataset.lufeCounterReady);
     counters.forEach((element) => { element.dataset.lufeCounterReady = ""; });
-    onView(counters, (element) => {
-      const match = (element.textContent ?? "").trim().match(numberPattern);
-      if (!match || reduced) return;
-      const [, prefix, value, suffix] = match;
-      const target = Number(value.replace(/,/g, ""));
-      if (!Number.isFinite(target)) return;
+    const counterValues = new Map<HTMLElement, string>();
+    counters.forEach((element) => {
+      const raw = (element.textContent ?? "").trim();
+      const match = raw.match(numberPattern);
+      if (!match || !Number.isFinite(Number(match[2].replace(/,/g, "")))) return;
+
+      element.style.fontVariantNumeric = "tabular-nums";
+      element.style.minWidth = `${element.getBoundingClientRect().width}px`;
+      counterValues.set(element, raw);
+      element.textContent = formatCounter(raw, 0);
+    });
+    if (reduced) {
+      counterValues.forEach((raw, element) => {
+        element.textContent = raw;
+        element.dataset.lufeCounted = "";
+      });
+    } else onView([...counterValues.keys()], (element) => {
+      const raw = counterValues.get(element);
+      if (!raw) return;
+
       const started = performance.now();
-      const duration = 900 + Math.min(Math.abs(target), 600);
       const tick = (now: number) => {
-        const progress = Math.min(1, (now - started) / duration);
-        const eased = 1 - (1 - progress) ** 4;
-        element.textContent = `${prefix}${Math.round(target * eased).toLocaleString()}${suffix}`;
+        const progress = Math.min(1, (now - started) / 2500);
+        const eased = 1 - (1 - progress) ** 3;
+        element.textContent = formatCounter(raw, eased);
         if (progress < 1) requestAnimationFrame(tick);
+        else {
+          element.textContent = raw;
+          element.dataset.lufeCounted = "";
+        }
       };
       requestAnimationFrame(tick);
-    });
+    }, { threshold: 0.5 });
 
     const heroBackdrops = pathname === "/" ? [] : Array.from(root.querySelectorAll<HTMLElement>(".lufe-hero-backdrop"));
     heroBackdrops.forEach((backdrop) => backdrop.setAttribute("data-lufe-hero-photo", ""));
@@ -108,7 +145,6 @@ export function DelightLayer() {
       root.querySelectorAll<HTMLElement>("[data-lufe-steps]").forEach((steps) => {
         const rect = steps.getBoundingClientRect();
         const progress = Math.max(0, Math.min(1, (window.innerHeight * .75 - rect.top) / (rect.height + window.innerHeight * .25)));
-        steps.style.setProperty("--lufe-step-progress", String(progress));
         Array.from(steps.querySelectorAll<HTMLElement>("[data-lufe-step]")).forEach((step, index, all) => {
           step.dataset.lufeStepReached = String(progress >= (index + .5) / all.length || reduced);
         });

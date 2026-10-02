@@ -13,6 +13,12 @@ describe("CasesPageContent", () => {
   it("keeps every filter, case card, and expanded panel summary in server markup", () => {
     const markup = renderCasesPage();
 
+    expect(markup).toContain("每一個判斷，");
+    expect(markup).toContain("都有案例可以對照");
+    const roadIconMarkup = markup.split("data-case-road-icon=").slice(1);
+    expect(roadIconMarkup).toHaveLength(3);
+    for (const iconMarkup of roadIconMarkup) expect(iconMarkup).toContain("<svg");
+
     for (const option of [...INDUSTRIES, ...MARKETS]) {
       expect(markup).toContain(option.label);
     }
@@ -39,5 +45,13 @@ describe("CasesPageContent", () => {
 
   it("does not render rounded utility classes", () => {
     expect(renderCasesPage()).not.toMatch(/\brounded-(?!full\b)/);
+  });
+
+  it("keeps the assessment prompt only in the bottom CTA card", () => {
+    const markup = renderCasesPage();
+
+    expect(markup.match(/不確定自己比較像哪一條？/g)).toHaveLength(1);
+    expect(markup).toContain("開始比對 →");
+    expect(markup).toContain('href="/assess"');
   });
 });

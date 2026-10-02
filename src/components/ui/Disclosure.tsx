@@ -75,7 +75,7 @@ export function Disclosure({ summary, children, defaultOpen = false, id }: Discl
   return <div className="border-t border-bd2 last:border-b">
     <button type="button" aria-expanded={open} aria-controls={contentId} onClick={toggle} className="grid w-full cursor-pointer grid-cols-[1fr_auto] items-center gap-3 py-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-gold">
       <span className="text-lg font-semibold text-tx">{summary}</span>
-      <span className="grid h-7 w-7 place-items-center bg-black/[.06] text-tx2"><Chevron open={open} /></span>
+      <span className="grid h-7 w-7 place-items-center border border-bd text-tx2"><Chevron open={open} /></span>
     </button>
     <div ref={containerRef} id={contentId} aria-hidden={!open} inert={!open} className="overflow-hidden" style={{ height: disclosureHeight(open, height.value, height.moving) }}>
       <div ref={contentRef} className="pb-6 text-tx2">{children}</div>

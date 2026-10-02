@@ -15,6 +15,15 @@ import { useMessageBox } from "./MessageBox";
 import { DelightLayer } from "./DelightLayer";
 import { TieredImage } from "./TieredImage";
 import { useSpring } from "@/lib/motion";
+import {
+  BuildingIcon,
+  ClockIcon,
+  CompassIcon,
+  HeadsetIcon,
+  PenIcon,
+  TargetIcon,
+  TrendIcon,
+} from "@/components/icons/LineIcons";
 import { CASES } from "@/data/cases";
 import type { InsightCard } from "@/lib/articles/presentation";
 import {
@@ -38,12 +47,10 @@ const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
 const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
 // Chapters without articles stay out of the menu (a "0 篇" row reads as an empty site); they appear once an article is mapped.
 const ABOUT_MENU_ITEMS = [
-  { href: "/about#story", title: "創辦故事", desc: "我們為什麼做這件事", num: "01" },
-  { href: "/about#team", title: "團隊組成", desc: "台灣核心＋全球節點", num: "02" },
-  { href: "/about#how-we-work", title: "我們怎麼合作", desc: "你會得到什麼樣的陪跑", num: "03" },
-  { href: "/about#network", title: "合作夥伴網絡", desc: "北美／東南亞／全球物流", num: "04" },
-  { href: "/about#philosophy", title: "我們相信的事", desc: "品牌理念", num: "05" },
-  { href: "/about#what-we-dont-do", title: "誠實的邊界", desc: "我們不做什麼", num: "06" },
+  { href: "/about#story", title: "品牌故事", num: "01" },
+  { href: "/about#team", title: "團隊組成", num: "02" },
+  { href: "/about#network", title: "合作夥伴網絡", num: "03" },
+  { href: "/about#philosophy", title: "品牌理念", num: "04" },
 ] as const;
 
 export function normalizePathname(pathname: string | null | undefined): string {
@@ -51,7 +58,7 @@ export function normalizePathname(pathname: string | null | undefined): string {
 }
 
 export function pathnameHasDarkHero(pathname: string): boolean {
-  if (["/", "/about", "/contact", "/insights", "/field-notes", "/assess"].includes(pathname)) return true;
+  if (["/", "/about", "/contact", "/insights", "/assess", "/assess/result"].includes(pathname)) return true;
   if (pathname === "/resources" || pathname === "/resources/subsidies") return true;
   return pathname.startsWith("/services") || pathname.startsWith("/cases") || pathname.startsWith("/about/");
 }
@@ -210,8 +217,8 @@ export function Navbar({
 
       <nav className={`relative transition-colors duration-300 ${transparentOverHero ? "navbar-over-hero" : lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark navbar-scrolled text-white"}`} aria-label="主要導航">
         <div className="lufe-container relative flex h-[64px] items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2.5 text-[17px] font-semibold">
-            <Image src={lightGlass ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"} alt="" width={26} height={26} priority />
+          <Link href="/" className="lufe-deer-trigger flex items-center gap-2.5 text-[17px] font-semibold">
+            <Image className="lufe-deer" src={lightGlass ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"} alt="" width={26} height={26} priority />
             <span>鹿飛 LUF<span className={lightGlass ? "text-gold-d" : "text-gold"}>É</span></span>
           </Link>
 
@@ -312,40 +319,35 @@ function MegaPane({ itemKey, active, onMessageOpen, insightsNavigation, setRef }
       {itemKey === "services" && <ServicesMenu />}
       {itemKey === "advanced" && <AdvancedMenu onMessageOpen={onMessageOpen} />}
       {itemKey === "cases" && <CasesMenu />}
-      {itemKey === "insights" && <InsightsMenu {...insightsNavigation} />}
+      {itemKey === "insights" && <InsightsMenu {...insightsNavigation} active={active} />}
       {itemKey === "about" && <AboutMenu />}
     </div>
   );
 }
 
-function MenuColumn({ label, bordered = false, children }: { label: string; bordered?: boolean; children: ReactNode }) {
-  return <section className={`${bordered ? "border-l border-bd" : ""} min-w-0 px-[26px] pb-7 pt-[26px]`}><MenuLabel>{label}</MenuLabel>{children}</section>;
+function MenuColumn({ bordered = false, children }: { bordered?: boolean; children: ReactNode }) {
+  return <section className={`${bordered ? "border-l border-bd" : ""} min-w-0 px-[26px] pb-7 pt-[22px]`}>{children}</section>;
 }
 
-function MenuRail({ label, children }: { label: string; children: ReactNode }) {
-  return <aside className="min-w-0 border-l border-bd bg-[rgba(245,242,236,.7)] px-[26px] pb-7 pt-[26px]"><MenuLabel>{label}</MenuLabel>{children}</aside>;
-}
-
-function MenuLabel({ children }: { children: ReactNode }) {
-  if (!children) return <div aria-hidden="true" className="mb-3 h-[18px]" />;
-  return <p className="mb-3 text-[12px] font-semibold text-tx3">{children}</p>;
+function MenuRail({ children }: { children: ReactNode }) {
+  return <aside className="min-w-0 border-l border-bd bg-[rgba(245,242,236,.7)] px-[26px] pb-7 pt-[22px]">{children}</aside>;
 }
 
 function MenuMarker({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <span className={`grid h-7 w-7 shrink-0 place-items-center text-gold-d transition-[color,transform] duration-[350ms] ease-[var(--ease-spring)] group-hover:translate-x-px group-hover:text-[#7A5A1A] ${className}`}>{children}</span>;
+  return <span className={`grid h-7 w-7 shrink-0 place-items-center text-gold-d transition-[color,transform] duration-200 [@media(hover:hover)]:group-hover:translate-x-px ${className}`}>{children}</span>;
 }
 
 type MenuLinkProps = {
   href: string;
-  title: string;
-  desc?: string;
+  title: ReactNode;
   marker: ReactNode;
+  desc?: string;
   external?: boolean;
 };
 
-function MenuLink({ href, title, desc, marker, external = false }: MenuLinkProps) {
-  const content = <><MenuMarker>{marker}</MenuMarker><span className="min-w-0"><b className="block text-[15px] font-[650] tracking-[-.005em] transition-colors group-hover:text-sky">{title}</b>{desc && <span className="mt-0.5 block truncate text-[12.5px] text-tx3">{desc}</span>}</span></>;
-  const className = "group -mx-3 grid grid-cols-[28px_minmax(0,1fr)] items-start gap-3 px-3 py-2.5 transition-[background-color,transform] duration-150 hover:bg-[rgba(58,107,132,.07)] active:scale-[.985]";
+function MenuLink({ href, title, marker, desc, external = false }: MenuLinkProps) {
+  const content = <><MenuMarker>{marker}</MenuMarker><span className="min-w-0"><b className="block text-[15.5px] font-[650] tracking-[-.005em] transition-colors [@media(hover:hover)]:group-hover:text-sky">{title}</b>{desc && <span className="mt-0.5 block truncate text-[12.5px] text-tx2">{desc}</span>}</span></>;
+  const className = "group -mx-3 grid grid-cols-[28px_minmax(0,1fr)] items-center gap-3 px-3 py-3 transition-[background-color,transform] duration-150 [@media(hover:hover)]:hover:bg-[rgba(58,107,132,.07)] active:scale-[.985]";
 
   return external
     ? <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
@@ -356,28 +358,25 @@ function MenuMoreLink({ href, children }: { href: string; children: ReactNode })
   return <Link href={href} className="mt-2 inline-flex text-[13.5px] font-semibold text-sky hover:text-navy">{children}</Link>;
 }
 
-function FeatureLink({ href, title, value, desc, action }: { href: string; title: string; value?: string; desc: ReactNode; action: string }) {
-  return <Link href={href} className="group block bg-navy p-5 text-white hover:bg-navy-l"><b className="block text-[17px] font-[650]">{title}</b>{value && <strong className="num my-2 block text-[38px] leading-none text-gold">{value}</strong>}<span className="block text-[12.5px] leading-[1.6] text-white/70">{desc}</span><span className="mt-[14px] inline-block bg-gold px-[14px] py-[9px] text-[13.5px] font-semibold text-navy">{action}</span></Link>;
-}
+type FeatureTileProps = {
+  icon: ReactNode;
+  title: string;
+  body: string;
+  action: string;
+} & ({ href: string; onClick?: never } | { href?: never; onClick: () => void });
 
-function FeatureAction({ title, value, desc, action, onClick }: { title: string; value: string; desc: string; action: string; onClick: () => void }) {
-  return <button type="button" onClick={onClick} className="block w-full cursor-pointer bg-navy p-5 text-left text-white hover:bg-navy-l active:!scale-[.985]"><b className="block text-[17px] font-[650]">{title}</b><strong className="num my-2 block text-[38px] leading-none text-gold">{value}</strong><span className="block text-[12.5px] leading-[1.6] text-white/70">{desc}</span><span className="mt-[14px] inline-block bg-gold px-[14px] py-[9px] text-[13.5px] font-semibold text-navy">{action}</span></button>;
-}
+function FeatureTile({ icon, title, body, action, ...props }: FeatureTileProps) {
+  const content = <>
+    <span aria-hidden="true" className="grid h-8 w-8 place-items-center border border-gold/40 text-gold-d">{icon}</span>
+    <b className="mt-4 block text-[16px] font-[650] text-tx">{title}</b>
+    <span className="mt-1.5 block text-[13.5px] leading-[1.7] text-tx2">{body}</span>
+    <span className="mt-4 inline-block text-[14px] font-semibold text-sky">{action} <span aria-hidden="true" className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-[3px]">→</span></span>
+  </>;
+  const className = "group block border border-bd bg-white p-5 text-left transition-[transform,border-color] duration-200 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:border-gold/50 active:scale-[.985]";
 
-function CompassIcon() {
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></svg>;
-}
-
-function TrendIcon() {
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8" /><path d="M15 7h6v6" /></svg>;
-}
-
-function BuildingIcon() {
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" /><path d="M15 9h4a1 1 0 0 1 1 1v11" /><path d="M3 21h18" /></svg>;
-}
-
-function HeadsetIcon() {
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0" /><path d="M3 14h4v6H3zM17 14h4v6h-4z" /></svg>;
+  return "href" in props && props.href
+    ? <Link href={props.href} className={className}>{content}</Link>
+    : <button type="button" onClick={props.onClick} className={`${className} w-full cursor-pointer`}>{content}</button>;
 }
 
 function ListIcon() {
@@ -388,16 +387,8 @@ function BarsIcon() {
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>;
 }
 
-function ClockIcon() {
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>;
-}
-
 function FileIcon() {
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z" /><path d="M14 3v5h5" /></svg>;
-}
-
-function PinIcon() {
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z" /><circle cx="12" cy="10" r="2" /></svg>;
 }
 
 function TradeIcon() {
@@ -406,34 +397,33 @@ function TradeIcon() {
 
 function ServicesMenu() {
   return <>
-    <MenuColumn label="菲律賓 · 第一年四章">
-      <MenuLink href="/services/product-testing" title="市場探查" desc="第一個月 · 1～2 萬" marker={<CompassIcon />} />
-      <MenuLink href="/services/consignment" title="寄賣" desc="第三個月 · 5～6 萬" marker={<TrendIcon />} />
-      <MenuLink href="/services/localization" title="公司落地" desc="第九個月 · 按案報價" marker={<BuildingIcon />} />
-      <MenuLink href="/services/call-center" title="海外客服" desc="之後的每一天 · 2027 Q1 首批" marker={<HeadsetIcon />} />
+    <MenuColumn>
+      <MenuLink href="/services/product-testing" title="市場探查" marker={<CompassIcon size={18} />} />
+      <MenuLink href="/services/consignment" title="寄賣" marker={<TrendIcon size={18} />} />
+      <MenuLink href="/services/localization" title="公司落地" marker={<BuildingIcon size={18} />} />
+      <MenuLink href="/services/call-center" title="海外客服" marker={<HeadsetIcon size={18} />} />
     </MenuColumn>
-    <MenuColumn label="另一條線" bordered>
-      <MenuLink href="/services/north-america" title="北美通路" desc="Costco、Walmart、Amazon" marker={<span className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>} />
-      <div className="mt-[18px]"><MenuLabel>一頁看完</MenuLabel></div>
-      <MenuLink href="/services" title="四章總覽" desc="一家品牌在馬尼拉的第一年" marker={<ListIcon />} />
+    <MenuColumn bordered>
+      <MenuLink href="/services/north-america" title="北美通路" marker={<span className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>} />
+      <div className="mt-[18px]"><MenuLink href="/services" title="四章總覽" marker={<ListIcon />} /></div>
     </MenuColumn>
-    <MenuRail label="從這裡開始">
-      <FeatureLink href="/services/product-testing" title="出海起手包" value="7 萬" desc={<>市場探查 1～2 萬＋寄賣包 5～6 萬。<br />沒過，錢到此為止。</>} action="看市場探查怎麼做 →" />
+    <MenuRail>
+      <FeatureTile href="/services/product-testing" icon={<CompassIcon size={16} />} title="不確定從哪裡開始？" body="先做市場探查，用當地真實消費者的反應決定下一步" action="看市場探查怎麼做" />
     </MenuRail>
   </>;
 }
 
 function AdvancedMenu({ onMessageOpen }: { onMessageOpen: () => void }) {
   return <>
-    <MenuColumn label="已經在海外">
-      <MenuLink href="/services/optimize" title="運營優化" desc="已經跑起來了，該讓每公里更省" marker={<TrendIcon />} />
+    <MenuColumn>
+      <MenuLink href="/services/optimize" title="運營優化" marker={<TrendIcon size={18} />} />
     </MenuColumn>
-    <MenuColumn label="我們怎麼判斷" bordered>
-      <MenuLink href="/services/methodology" title="鹿飛方法論" desc="五個問題、分數怎麼讀" marker={<BarsIcon />} />
-      <MenuLink href="/assess" title="2 分鐘處境比對" desc="看你最像哪一個案例" marker={<ClockIcon />} />
+    <MenuColumn bordered>
+      <MenuLink href="/services/methodology" title="鹿飛方法論" desc="小步出海法 · 先問市場，再投錢" marker={<BarsIcon />} />
+      <MenuLink href="/assess" title="2 分鐘處境比對" marker={<ClockIcon size={18} />} />
     </MenuColumn>
-    <MenuRail label="不確定從哪一段開始">
-      <FeatureAction title="免費初步評估" value="30 分鐘" desc="粗跑五個問題，不收費。" action="預約 30 分鐘 →" onClick={onMessageOpen} />
+    <MenuRail>
+      <FeatureTile icon={<ClockIcon size={16} />} title="免費初步評估" body="30 分鐘，用鹿飛方法論的五個問題，初步檢視出海條件" action="預約 30 分鐘" onClick={onMessageOpen} />
     </MenuRail>
   </>;
 }
@@ -445,27 +435,27 @@ function CasesMenu() {
   ] as const;
 
   return <>
-    <MenuColumn label="精選案例">
+    <MenuColumn>
       {caseColumns[0].map((caseItem) => <CaseMenuLink key={caseItem.slug} caseItem={caseItem} />)}
     </MenuColumn>
-    <MenuColumn label="" bordered>
+    <MenuColumn bordered>
       {caseColumns[1].map((caseItem) => <CaseMenuLink key={caseItem.slug} caseItem={caseItem} />)}
       <MenuMoreLink href="/cases">看所有案例 →</MenuMoreLink>
     </MenuColumn>
-    <MenuRail label="按產業、按市場">
+    <MenuRail>
       <div className="flex flex-wrap gap-[6px]">
         {["食品", "電子", "服飾", "飲品"].map((tag) => <CaseTagLink key={tag}>{tag}</CaseTagLink>)}
       </div>
       <div className="mt-[6px] flex flex-wrap gap-[6px]">
         {["北美", "東南亞"].map((tag) => <CaseTagLink key={tag}>{tag}</CaseTagLink>)}
       </div>
-      <div className="mt-4"><FeatureLink href="/assess" title="不確定比較像哪一條？" desc="先做 2 分鐘處境比對。" action="開始比對 →" /></div>
+      <div className="mt-4"><FeatureTile href="/assess" icon={<TargetIcon size={16} />} title="不確定比較像哪一條？" body="2 分鐘處境比對，找出最接近的案例" action="開始比對" /></div>
     </MenuRail>
   </>;
 }
 
 function CaseMenuLink({ caseItem }: { caseItem: (typeof CASES)[number] }) {
-  return <MenuLink href={`/cases/${caseItem.slug}`} title={caseItem.title} desc={caseItem.tags.map((tag) => tag.label).join(" · ")} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} />;
+  return <MenuLink href={`/cases/${caseItem.slug}`} title={caseItem.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} />;
 }
 
 function CaseTagLink({ children }: { children: ReactNode }) {
@@ -484,47 +474,43 @@ function ChapterIcon({ chapter }: { chapter: (typeof INSIGHT_MENU_CHAPTERS)[numb
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{CHAPTER_ICON_PATHS[chapter]}</svg>;
 }
 
-function InsightsMenu({ latestArticle, publishedArticleSlugs }: InsightsNavigation) {
+function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: InsightsNavigation & { active: boolean }) {
   const publishedArticleSlugSet = new Set(publishedArticleSlugs);
   const visibleInsightChapters = INSIGHT_MENU_CHAPTERS.filter((chapter) =>
     CHAPTER_ARTICLES[chapter].some((slug) => publishedArticleSlugSet.has(slug)),
   );
 
   return <>
-    <MenuColumn label="按章節找">
-      {visibleInsightChapters.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} desc={`${CHAPTER_ARTICLES[chapter].filter((slug) => publishedArticleSlugSet.has(slug)).length} 篇`} marker={<ChapterIcon chapter={chapter} />} />)}
+    <MenuColumn>
+      {visibleInsightChapters.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} />)}
     </MenuColumn>
-    <MenuColumn label="其他內容" bordered>
-      <MenuLink href="/resources" title="補助與活動" desc="政府補助＋現場紀錄" marker={<FileIcon />} />
-      <MenuLink href="/field-notes" title="現場紀錄" desc="活動、演講、媒體露出" marker={<PinIcon />} />
-      <MenuLink href="https://tradepiloter.com" title="TradePilot 關稅工具 ↗" desc="三分鐘查完目標市場關稅 ↗" marker={<TradeIcon />} external />
+    <MenuColumn bordered>
+      <MenuLink href="/resources" title="補助與資源" marker={<FileIcon />} />
+      <MenuLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external />
       <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
     </MenuColumn>
-    <MenuRail label="最新文章">
-      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block"><div className="relative mb-3 aspect-video overflow-hidden"><TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" /></div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
+    <MenuRail>
+      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block">{active && <div className="relative mb-3 aspect-video overflow-hidden"><TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" /></div>}<b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
     </MenuRail>
   </>;
 }
 
 function AboutMenu() {
   return <>
-    <MenuColumn label="認識鹿飛">
-      {ABOUT_MENU_ITEMS.slice(0, 3).map((item) => <AboutMenuLink key={item.num} {...item} />)}
+    <MenuColumn>
+      {ABOUT_MENU_ITEMS.slice(0, 2).map((item) => <AboutMenuLink key={item.num} {...item} />)}
     </MenuColumn>
-    <MenuColumn label="立場與網絡" bordered>
-      {ABOUT_MENU_ITEMS.slice(3).map((item) => <AboutMenuLink key={item.num} {...item} />)}
+    <MenuColumn bordered>
+      {ABOUT_MENU_ITEMS.slice(2).map((item) => <AboutMenuLink key={item.num} {...item} />)}
     </MenuColumn>
-    <MenuRail label="創辦人">
-      <Link href="/about" className="group grid grid-cols-1 gap-[14px]">
-        <span className="min-w-0"><b className="block text-[16px] font-[650] transition-colors group-hover:text-sky">Aaron Yu</b><small className="mt-0.5 block text-[12.5px] font-semibold text-gold-d">鹿飛 LUFÉ 創辦人・來自躍馬企業</small></span>
-        <p className="col-span-full text-[12.5px] leading-[1.7] text-tx2">看了很多年貨櫃出去，決定去接貨到了之後的事。</p>
-      </Link>
+    <MenuRail>
+      <FeatureTile href="/about/aaron-yu" icon={<PenIcon size={16} />} title="創辦人專欄" body="跨境市場、通路與法規的第一手觀察" action="閱讀專欄" />
     </MenuRail>
   </>;
 }
 
-function AboutMenuLink({ href, title, desc, num }: (typeof ABOUT_MENU_ITEMS)[number]) {
-  return <MenuLink href={href} title={title} desc={desc} marker={<span className="num text-[13px] font-bold">{num}</span>} />;
+function AboutMenuLink({ href, title, num }: (typeof ABOUT_MENU_ITEMS)[number]) {
+  return <MenuLink href={href} title={title} marker={<span className="num text-[13px] font-bold">{num}</span>} />;
 }
 
 function MobileGroup({ item, open, onToggle, onClose, insightsNavigation }: { item: { key: MenuKey; label: string }; open: boolean; onToggle: () => void; onClose: () => void; insightsNavigation: InsightsNavigation }) {
@@ -543,7 +529,7 @@ function MobileGroup({ item, open, onToggle, onClose, insightsNavigation }: { it
   </div>;
 }
 
-function MobileSubLink({ href, title, marker, external = false, onClose }: { href: string; title: string; marker?: ReactNode; external?: boolean; onClose: () => void }) {
+function MobileSubLink({ href, title, marker, external = false, onClose }: { href: string; title: ReactNode; marker?: ReactNode; external?: boolean; onClose: () => void }) {
   const content = <>{marker && <MenuMarker>{marker}</MenuMarker>}<span>{title}</span></>;
   const className = `group flex items-center ${marker ? "gap-2" : ""} border-b border-bd px-7 py-[10px] text-[14.5px] text-tx2 active:bg-black/[.07]`;
   return external
@@ -573,9 +559,8 @@ function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: 
   );
   return <>
     {visibleInsightChapters.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
-    <MobileSubLink href="/resources" title="補助與活動" marker={<FileIcon />} onClose={onClose} />
-    <MobileSubLink href="/field-notes" title="現場紀錄" marker={<PinIcon />} onClose={onClose} />
-    <MobileSubLink href="https://tradepiloter.com" title="TradePilot 關稅工具 ↗" marker={<TradeIcon />} external onClose={onClose} />
+    <MobileSubLink href="/resources" title="補助與資源" marker={<FileIcon />} onClose={onClose} />
+    <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external onClose={onClose} />
     <MobileSubLink href="/insights" title="看所有文章 →" onClose={onClose} />
   </>;
 }
