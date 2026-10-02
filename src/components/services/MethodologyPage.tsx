@@ -6,6 +6,7 @@ import { HERO_VIDEOS } from "@/data/heroVideos";
 
 import { ContactButton } from "./ContactButton";
 import { MethodologyExamples } from "./methodology/MethodologyExamples";
+import { RubricItem } from "./methodology/RubricItem";
 import {
   BOUNDARIES_COPY,
   COMPANIONSHIP_COPY,
@@ -48,6 +49,13 @@ export {
 function SectionHeading({ children }: { readonly children: React.ReactNode }) {
   return <h2 className="h2 text-tx">{children}</h2>;
 }
+
+const DECISION_COLORS = {
+  Go: "bg-navy",
+  "Conditional Go": "bg-gold",
+  Hold: "bg-gold-l",
+  "No-Go": "bg-ember/70",
+} as const;
 
 export function MethodologyPage() {
   return (
@@ -117,31 +125,21 @@ export function MethodologyPage() {
         <div className="lufe-container">
           <SectionHeading>量尺：五個問題，打兩次分</SectionHeading>
           <p className="mt-6 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">{SCALE_INTRO}</p>
-          <div className="mt-8 border-y border-bd">
-            {METHODOLOGY_DIMENSIONS.map((dimension, index) => (
-              <details key={dimension.name} open={index === 0} className="group border-b border-bd last:border-b-0">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 bg-white px-5 py-5 text-tx marker:content-none md:px-7">
-                  <span>
-                    <span className="block text-[18px] font-semibold">{dimension.name}</span>
-                    <span className="mt-1 block text-[15px] font-medium text-sky">「{dimension.question}」</span>
-                  </span>
-                  <span aria-hidden="true" className="text-[22px] text-gold-d transition-transform group-open:rotate-45 motion-reduce:transition-none">+</span>
-                </summary>
-                <div className="grid gap-5 border-t border-bd bg-cream px-5 py-5 md:grid-cols-2 md:px-7">
-                  <p className="text-[15px] leading-[1.85] text-tx2"><strong className="text-tx">看：</strong>{dimension.criteria}</p>
-                  <p className="border-l-2 border-ember pl-4 text-[15px] leading-[1.85] text-tx2"><strong className="text-ember">紅線：</strong>{dimension.redAt}</p>
-                </div>
-              </details>
-            ))}
+          <div className="mt-8 bg-white px-5 md:px-8">
+            {METHODOLOGY_DIMENSIONS.map((dimension, index) => <RubricItem key={dimension.name} dimension={dimension} num={String(index + 1).padStart(2, "0")} defaultOpen={index === 0} />)}
           </div>
 
           <div className="mt-12 grid min-w-0 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-12">
             <div>
               <h3 className="h3 text-tx">分數怎麼讀</h3>
+              <div aria-hidden="true" className="mt-5">
+                <div className="flex h-[6px]"><span className="w-[45%] bg-ember/70" /><span className="w-[15%] bg-gold-l" /><span className="w-[15%] bg-gold" /><span className="w-[25%] bg-navy" /></div>
+                <div className="relative mt-2 h-4 text-[11px] text-tx3"><span className="absolute left-0">0</span><span className="absolute left-[45%] -translate-x-1/2">45</span><span className="absolute left-[60%] -translate-x-1/2">60</span><span className="absolute left-[75%] -translate-x-1/2">75</span><span className="absolute right-0">100</span></div>
+              </div>
               <div className="mt-5 border border-bd bg-white">
                 {METHODOLOGY_DECISIONS.map((decision) => (
                   <div key={decision.verdict} className="grid grid-cols-[86px_minmax(0,1fr)] gap-x-4 border-b border-bd p-4 last:border-b-0 md:grid-cols-[96px_180px_minmax(0,1fr)]">
-                    <span className="font-sans text-[16px] font-semibold tabular-nums tracking-[-.035em] text-gold-d">{decision.score}</span>
+                    <span className="flex items-center gap-2 font-sans text-[16px] font-semibold tabular-nums tracking-[-.035em] text-gold-d"><span aria-hidden="true" className={`h-2 w-2 shrink-0 ${DECISION_COLORS[decision.verdict]}`} />{decision.score}</span>
                     <strong className="text-[15px] text-tx">{decision.verdict}</strong>
                     <span className="col-span-2 mt-2 text-[14px] leading-[1.7] text-tx2 md:col-span-1 md:mt-0">{decision.advice}</span>
                   </div>
