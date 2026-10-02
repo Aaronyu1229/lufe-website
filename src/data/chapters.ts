@@ -378,7 +378,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     faqs: [
       { question: "跟一般客服外包差在哪？", answer: "兩件事：團隊是受過完整訓練的英語客服專業人員，不是一般話務員；服務規則在台灣公司，你面對的窗口是鹿飛，不是菲律賓的外包廠。", takeaway: "專業英語團隊，規則由台灣端負責" },
       { question: "現在可以簽嗎？", answer: "現在是登記首批。2027 Q1 開始服務，登記的人優先。", takeaway: "2027 Q1 開始服務，登記者優先" },
-      { question: "我的量很小也可以嗎？", answer: "可以先登記。首批我們想找的是量不大、但每一封都重要的品牌，正好一起把服務磨好。", takeaway: "量小也可以先登記" },
+      { question: "訊息量很小也可以嗎？", answer: "可以先登記。首批我們想找的是量不大、但每一封都重要的品牌，正好一起把服務磨好。", takeaway: "量小也可以先登記" },
     ],
     next: { label: "故事從頭來 →", title: "第一個月 · 市場探查", heading: "先讓馬尼拉的媽媽拿起來看看", href: "/services/product-testing", image: "/images/hero-video/chapter-research-1600.webp", imageAlt: "會議中討論圖表的團隊" },
     cta: { title: "登記首批", body: "留下你的品牌、大概的訊息量、現在誰在接。開放時我們先找你", action: "登記首批 →", href: "#waitlist" },
