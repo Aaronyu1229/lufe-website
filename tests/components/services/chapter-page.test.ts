@@ -73,7 +73,7 @@ describe("ChapterPage", () => {
     }
   });
 
-  it("does not use 老師 in the chapter data or template", () => {
+  it("does not reveal teacher or education-background claims in service content", () => {
     const root = process.cwd();
     const files = [
       "src/data/chapters.ts",
@@ -84,7 +84,11 @@ describe("ChapterPage", () => {
     ];
 
     for (const file of files) {
-      expect(readFileSync(path.join(root, file), "utf8")).not.toContain("老師");
+      const content = readFileSync(path.join(root, file), "utf8");
+      expect(content).not.toContain("老師");
+      expect(content).not.toContain("教師");
+      expect(content).not.toContain("英語教育體系");
+      expect(content).not.toContain("出身");
     }
   });
 });

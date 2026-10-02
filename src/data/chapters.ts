@@ -180,7 +180,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         heading: "市場探查的四個步驟",
         items: [
           { number: "01", title: "寄三支產品到馬尼拉", body: "我們先幫你看：這三支在當地有沒有類似的、賣多少錢", icon: "package" },
-          { number: "02", title: "一桌教師與家長", body: "當地學校的教師（高收入的工薪階層）和家長（真正掏錢的人）圍著桌子。\n拿起來、聞一聞、翻價錢。有人皺眉，有人問哪裡買得到", icon: "users" },
+          { number: "02", title: "一桌上班族與家長", body: "當地有消費力的上班族和家長（真正掏錢的人）圍著桌子。\n拿起來、聞一聞、翻價錢。有人皺眉，有人問哪裡買得到", icon: "users" },
           { number: "03", title: "鹿飛在旁邊記", body: "誰拿了第二次、誰看到價錢放下、誰問了成分。每一支產品至少六個數據來源", icon: "pen" },
           { number: "04", title: "一頁報告", body: "誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。\n面板跑完就給，不用等產品證", icon: "file" },
         ],
@@ -209,7 +209,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     faqs: [
       { question: "市場探查沒過會怎樣？", answer: "報告會寫清楚為什麼、什麼條件改了可以再試。這是 1～2 萬買到的最有價值的答案之一。", takeaway: "報告會寫清楚原因，以及什麼條件改了可以再試" },
       { question: "可以只做市場探查嗎？", answer: "可以。市場探查是獨立的，你拿著那一頁去做任何決定都行。", takeaway: "可以，市場探查獨立計價" },
-      { question: "為什麼找教師與家長？", answer: "教師是當地高收入的工薪階層，家長是真正掏錢買東西的人。這兩群人的反應，比問卷準。", takeaway: "一群有消費力，一群真正掏錢" },
+      { question: "為什麼找上班族與家長？", answer: "上班族是當地有消費力的工薪階層，家長是真正掏錢買東西的人。這兩群人的反應，比問卷準。", takeaway: "一群有消費力，一群真正掏錢" },
     ],
     next: { label: "下一章 →", title: "第三個月 · 寄賣", heading: "上架了，讓人先用過再說", href: "/services/consignment", image: "/images/hero-video/chapter-warehouse-1600.webp", imageAlt: "貨架上待出貨的包裹" },
     cta: { title: "聊聊你的產品", body: "我們先聽你的產品在台灣怎麼賣，再說適不適合去測。\n有時候聽完，我們會建議你再等等——那也是一種答案", action: "聊聊你的產品 →" },
@@ -347,7 +347,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         heading: "客服服務流程",
         items: [
           { number: "01", title: "訊息集中到同一個工作台", body: "客服信箱、平台訊息、社群私訊，接到同一個工作台", icon: "inbox" },
-          { number: "02", title: "由專業英語客服團隊接手", body: "受過完整訓練的菲律賓英語客服團隊，成員出身當地英語教育體系。\n合作夥伴在當地經營英語教育機構與連鎖餐飲，已服務過家長與餐飲客戶", icon: "badge-check" },
+          { number: "02", title: "由專業英語客服團隊接手", body: "受過完整訓練的菲律賓英語客服團隊，英文溝通是基本功。\n規則與標準由台灣端制定與管理", icon: "badge-check" },
           { number: "03", title: "依品牌規則回覆", body: "回覆範本、退換貨規則、哪些情況要升級給品牌方——都寫進服務流程，由鹿飛台灣公司負責", icon: "list-checks" },
           { number: "04", title: "每月服務報表", body: "每月的訊息量、回覆時間、升級次數，一份報表看清楚", icon: "chart-column" },
         ],
@@ -357,7 +357,6 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         heading: "為什麼選擇菲律賓團隊",
         paragraphs: [
           "菲律賓是全球英語客服外包的重鎮，這是產業長年累積的結果",
-          "鹿飛多做的一件事，是團隊成員出身英語教育體系：習慣向家長說明、溝通有耐心，也接得住品牌的客戶",
           "規則、合約、品質指標留在台灣公司；人在菲律賓。品牌面對的窗口是鹿飛，不是當地的外包廠",
         ],
       },

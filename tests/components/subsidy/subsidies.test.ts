@@ -10,6 +10,13 @@ const expectText = (markup: string, value: string) =>
   expect(markup).toContain(renderToStaticMarkup(createElement(Fragment, null, value)));
 
 describe("subsidy SSR content", () => {
+  it("uses revenue decline as the supply-chain support eligibility threshold", () => {
+    const support = SUBSIDIES.find((subsidy) => subsidy.slug === "supply-chain-support")!;
+
+    expect(support.whoFor).toContain("月平均營業額較基期衰退 10% 以上的製造業（輸美實績衝擊門檻）");
+    expect(support.importantNotes).toContain("輸美實績衝擊門檻：月均營業額較基期（前一年同期 / 前一年下半年 / 當年 1-2 月，三者擇一）衰退 10% 以上");
+  });
+
   it("keeps matcher questions and options in the static markup", () => {
     const markup = renderToStaticMarkup(createElement(SubsidyMatcher));
 

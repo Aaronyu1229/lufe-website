@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
+import { TieredImage } from "@/components/TieredImage";
 import { HERO_VIDEOS } from "@/data/heroVideos";
 
 import { ContactButton } from "./ContactButton";
@@ -77,15 +78,24 @@ export function MethodologyPage() {
           <p className="mb-4 text-[14px] font-semibold text-gold">鹿飛方法論</p>
           <h1 className="h1 text-white">小步出海法</h1>
           <p className="lead mt-5 max-w-[620px] whitespace-pre-line !text-white/75">市場不會因為你準備好了就要你。{"\n"}所以我們先問它。</p>
-          <p className="mt-7 max-w-[620px] text-[14px] leading-[1.8] text-white/65">這不是第五章。這是我們第一次跟你談的時候，腦子裡跑的那套東西。</p>
         </div>
         <ScrollCue />
       </section>
 
       <section className="bg-white py-[72px] md:py-[88px]">
-        <div className="lufe-container max-w-[920px]">
-          <SectionHeading>我們的初心</SectionHeading>
-          <p className="mt-6 whitespace-pre-line text-[16px] leading-[1.95] text-tx2">{ORIGIN_STORY}</p>
+        <div className="lufe-container grid min-w-0 gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center md:gap-12">
+          <div>
+            <SectionHeading>我們的初心</SectionHeading>
+            <p className="mt-6 whitespace-pre-line text-[16px] leading-[1.95] text-tx2">{ORIGIN_STORY}</p>
+          </div>
+          <figure className="aspect-[4/5] overflow-hidden">
+            <TieredImage
+              src="/images/methodology/origin-product-review-1600.webp"
+              alt="女性在貨架前檢視產品包裝"
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="h-full w-full object-cover object-[68%_center]"
+            />
+          </figure>
         </div>
       </section>
 
