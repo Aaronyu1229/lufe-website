@@ -66,7 +66,7 @@ const CHAPTER_TILES: readonly ChapterTile[] = [
 const SERVICE_PATHS = [
   {
     href: "/services/product-testing",
-    image: "/images/cases/story/bubble-tea-2-1600.webp",
+    image: "/images/subsidies/card-skyline-1600.webp",
     alt: "馬尼拉都會區的商業大樓街景",
     eyebrow: "菲律賓 · 第一年四章",
     eyebrowClassName: "text-sky",

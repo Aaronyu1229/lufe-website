@@ -101,7 +101,7 @@ export function Carousel({ children, label, showControls = true, className, item
     }
 
     const snap = nearest(geometryRef.current.snaps, clamp(x, geometryRef.current.minX, 0));
-    const current = geometryRef.current.snaps.indexOf(snap) + 1;
+    const current = Math.min(childCount, geometryRef.current.snaps.indexOf(snap) + 1);
     if (counterRef.current) counterRef.current.textContent = `${ordinal(current)} / ${ordinal(childCount)}`;
   }, [childCount, reducedMotion, trackX]);
 
