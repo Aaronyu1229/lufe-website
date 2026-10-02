@@ -964,7 +964,7 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 
 先花 1～2 萬做一次[市場探查](/services/product-testing)：三支產品寄到馬尼拉，一桌老師和家長拿起來看，一頁報告告訴你誰會買、多少錢會買、為什麼不買。沒過，故事在這裡停；過了，這筆錢抵進下一章。
 
-本文改寫自 2026 年 3 月的既有指南，舊網址已轉到這裡。最後查證：2026-10-01，法規會變，每季回頭對一次。`],
+本文改寫自 2026 年 3 月的〈越南市場進入指南〉，舊網址已轉到這裡。最後查證：2026-10-01，法規會變，每季回頭對一次。`],
     faq: [{"q":"越南市場不是比較大嗎？為什麼不先去越南？","a":"我們建議的不是「最大的市場」，是「最容易先確認的市場」。越南的食品標籤必須有越南文、申報要由越南境內企業做 [3][7]；菲律賓用英文就能做市場探查、法規文件與電商溝通，第一年可以花 1～2 萬先驗證，沒過就停。其他三國在語言與證照上第一步就要投入更多，不適合拿來當第一次驗證。"},{"q":"我的產品在越南或泰國已經有代理找上門，還要先去菲律賓嗎？","a":"不用。有具體通路或買家的市場，就從那個市場開始。這篇文章回答的是「還沒有任何線索時先去哪裡試」，不是「所有品牌都該先去菲律賓」。"},{"q":"台灣跟菲律賓有自由貿易協定嗎？關稅會不會比別國高？","a":"台灣目前與東協任何一國都沒有自由貿易協定（只有新加坡與紐西蘭），所以去菲律賓、越南、泰國、印尼都是走最惠國（MFN）稅率，菲律賓並不特別吃虧。實際稅率可在菲律賓關稅委員會的 Tariff Finder 或 TradePilot 查。"}],
     sources: [{"id":1,"title":"1987 年菲律賓憲法第十四條第七節","publisher":"Official Gazette（菲律賓政府公報）","url":"https://www.officialgazette.gov.ph/constitutions/1987-constitution/","note":"官方語言為菲律賓文及英文。"},{"id":2,"title":"DOH AO 2014-0030 預包裝食品標籤規則","publisher":"FAOLEX（聯合國糧農組織法規庫）","url":"https://www.fao.org/faolex/results/details/en/c/LEX-FAOC174223/","note":"標籤須為英文或菲律賓文，外文標籤須附英文翻譯。"},{"id":3,"title":"越南 Decree 43/2017 商品標籤規定","publisher":"ChemLinked（第三方整理）","url":"https://food.chemlinked.com/foodpedia/vietnam-food-labeling-regulation","note":"標籤須為越南文，進口品可貼越南文副標籤。"},{"id":4,"title":"USDA FAIRS 泰國年度報告 TH2024-0036","publisher":"美國農業部海外農業局","url":"https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Bangkok_Thailand_TH2024-0036","note":"泰文標籤為基本要求，特定管制食品須由進口商先登錄。"},{"id":5,"title":"印尼 BPOM 進口食品 ML 登錄","publisher":"ChemLinked（第三方整理）","url":"https://food.chemlinked.com/foodpedia/indonesia-processed-food-regulation","note":"須由印尼境內公司申請，並附印尼文標籤。"},{"id":6,"title":"菲律賓 FDA AO 2024-0016 收費辦法","publisher":"菲律賓 FDA","url":"https://rrdportal.fda.gov.ph/docs/AO2024-0016.pdf","note":"收費辦法暫停實施；食品登錄新系統見 FDA Circular 2026-0002。"},{"id":7,"title":"越南 Decree 15/2018 食品申報與登錄","publisher":"CIRS Group（第三方整理）","url":"https://www.cirs-group.com/en/food/health-supplement-registration-in-vietnam-know-how-and-what-to-do","note":"多數加工食品走自我申報，保健食品等四類須登錄。"},{"id":8,"title":"印尼 PP 42/2024 進口品清真認證期限","publisher":"Emerhub（第三方整理）","url":"https://emerhub.com/indonesia/halal-certification-in-indonesia/","note":"進口食品、飲料、保健品、化妝品自 2026-10-17 起須持清真認證。"},{"id":9,"title":"台灣現有 FTA：新加坡 ASTEP","publisher":"中華民國總統府","url":"https://english.president.gov.tw/NEWS/4289","note":"另一個是紐西蘭 ANZTEC（2013）。"},{"id":10,"title":"Philippine Tariff Finder","publisher":"菲律賓關稅委員會","url":"https://finder.tariffcommission.gov.ph/about","note":"MFN 與各 FTA 稅率，AHTN 2022 版。"}],
     lastVerified: "2026-10-01",
@@ -1146,7 +1146,7 @@ FDA 設施登記與標示合規之外，Amazon 自 2024 年起要求第三方 TI
     color: "sky",
     content: [String.raw`> **先說答案：** 菲律賓 FDA 的 LTO 是給公司的營業許可，CPR 是食品的產品登錄證，CPN 是化妝品的通報證。先有 LTO，才能辦後兩張。
 
-## 情境：一位保健食品接班團隊成員被老闆叫去「把 FDA 搞定」
+## 情境：一位保健食品品牌經理被老闆叫去「把 FDA 搞定」
 
 以下是假設的情境，不是特定客戶的故事。
 
