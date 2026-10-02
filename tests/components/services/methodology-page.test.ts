@@ -2,6 +2,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
+import { metadata } from "@/app/services/methodology/page";
 import {
   BOUNDARIES_COPY,
   COMPANIONSHIP_COPY,
@@ -102,5 +103,16 @@ describe("MethodologyPage", () => {
 
   it("uses square corners except for the carousel dots", () => {
     expect(renderPage()).not.toMatch(/\brounded-(?!full\b)/);
+  });
+
+  it("uses the approved origin image and removes the withdrawn methodology claims", () => {
+    const markup = renderPage();
+
+    expect(markup).toContain('/images/methodology/origin-product-review-1600.webp');
+    expect(markup).toContain('alt="女性在貨架前檢視產品包裝"');
+    expect(markup).not.toContain("這不是第五章。這是我們第一次跟你談的時候，腦子裡跑的那套東西。");
+    expect(RULES_COPY).not.toContain("總分不到 60，我們不接。");
+    expect(RULES_COPY).not.toContain("不是不想賺，是接了對你沒有好處，對我們的案例也沒有好處。");
+    expect(metadata.description).toBe("鹿飛的出海方法論：先用一兩萬問菲律賓市場，再決定投多少。兩個真實研究例子、五個評估問題、打兩次分。");
   });
 });
