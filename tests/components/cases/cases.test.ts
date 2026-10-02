@@ -46,4 +46,12 @@ describe("CasesPageContent", () => {
   it("does not render rounded utility classes", () => {
     expect(renderCasesPage()).not.toMatch(/\brounded-(?!full\b)/);
   });
+
+  it("keeps the assessment prompt only in the bottom CTA card", () => {
+    const markup = renderCasesPage();
+
+    expect(markup.match(/不確定自己比較像哪一條？/g)).toHaveLength(1);
+    expect(markup).toContain("開始比對 →");
+    expect(markup).toContain('href="/assess"');
+  });
 });

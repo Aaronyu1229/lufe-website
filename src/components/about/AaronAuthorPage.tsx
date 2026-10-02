@@ -3,9 +3,10 @@ import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { LinkedInIcon } from "@/components/icons/LineIcons";
 import { HERO_VIDEOS } from "@/data/heroVideos";
-import { InsightArticleCard } from "@/components/insights/InsightArticleCard";
 import { toInsightCard } from "@/lib/articles/presentation";
 import { getArticlePublishedDate, getPublishedArticles } from "@/lib/articles/published";
+
+import { AuthorArticleList } from "./AuthorArticleList";
 
 export function AaronAuthorPage() {
   const publishedArticles = getPublishedArticles();
@@ -31,7 +32,7 @@ export function AaronAuthorPage() {
             <span aria-hidden="true" className="text-white/30">/</span>
             <span className="text-white/75">Aaron Yu</span>
           </nav>
-          <h1 className="display mb-5 max-w-[620px] font-sans text-white">Aaron Yu</h1>
+          <h1 className="h1 mb-6 max-w-[880px] text-white">Aaron Yu</h1>
           <p className="mb-3 text-[17px] font-medium text-gold md:text-[18px]">鹿飛 LUFÉ 創辦人・來自躍馬企業</p>
           <p className="mb-8 max-w-[500px] text-[17px] leading-[1.8] text-white/70">躍馬企業國際物流背景出身，專注研究台灣企業如何在北美與東南亞市場落地</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px] text-white/60">
@@ -47,9 +48,7 @@ export function AaronAuthorPage() {
       <section className="bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
         <div className="lufe-container">
           <h2 className="h2 mb-10">專欄文章</h2>
-          <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {authorArticles.map((article) => <InsightArticleCard key={article.slug} article={article} />)}
-          </div>
+          <AuthorArticleList articles={authorArticles} />
         </div>
       </section>
     </>

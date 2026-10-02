@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useRef, type CSSProperties } from "react";
 import Link from "next/link";
 
 import { Carousel } from "@/components/ui";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
 import { getRelatedCases, type CaseStudy } from "@/data/cases";
 import { HERO_VIDEOS } from "@/data/heroVideos";
@@ -38,6 +40,7 @@ interface CaseDetailPageContentProps extends Props {
 export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: CaseDetailPageContentProps) {
   const relatedCases = getRelatedCases(caseItem.slug);
   const heroVideo = HERO_VIDEOS[`case:${caseItem.slug}` as keyof typeof HERO_VIDEOS];
+  const storyFigureRefs = useRef<HTMLElement[]>([]);
   const stageLinks = Array.from(
     new Map(caseItem.stagesUsed.map((stageSlug) => {
       const stage = CASE_STAGE_LINKS[stageSlug];
@@ -45,15 +48,48 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
     })).values(),
   );
 
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame: number | undefined;
+    const updateDrift = () => {
+      frame = undefined;
+      const viewportHeight = window.innerHeight;
+      const viewportCenter = viewportHeight / 2;
+      storyFigureRefs.current.forEach((figure) => {
+        const rect = figure.getBoundingClientRect();
+        if (rect.bottom <= 0 || rect.top >= viewportHeight) {
+          figure.style.setProperty("--lufe-figure-drift", "0");
+          return;
+        }
+        const figureCenter = rect.top + rect.height / 2;
+        const drift = ((viewportCenter - figureCenter) / viewportHeight) * 4;
+        figure.style.setProperty("--lufe-figure-drift", `${drift}%`);
+      });
+    };
+    const scheduleDrift = () => {
+      if (frame === undefined) frame = window.requestAnimationFrame(updateDrift);
+    };
+
+    scheduleDrift();
+    window.addEventListener("scroll", scheduleDrift, { passive: true });
+    window.addEventListener("resize", scheduleDrift);
+    return () => {
+      window.removeEventListener("scroll", scheduleDrift);
+      window.removeEventListener("resize", scheduleDrift);
+      if (frame !== undefined) window.cancelAnimationFrame(frame);
+    };
+  }, [caseItem.slug]);
+
   return (
     <>
       <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src={caseItem.heroImage} video={heroVideo} />
-        <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
-          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap gap-2 text-[13px] text-white/60">
+        <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
+          <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
             <Link href="/cases" className="hover:text-white">案例</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
-            <span className="text-white/80">{caseItem.tags[0]?.label}</span>
+            <span className="text-white/75">{caseItem.tags[0]?.label}</span>
           </nav>
 
           <div className="mb-4 flex flex-wrap gap-1.5">
@@ -64,65 +100,81 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
             ))}
           </div>
 
-          <h1 className="h1 mb-6 max-w-[840px] text-white">{caseItem.title}</h1>
-          <p className="lead max-w-[720px] !text-white/75">{caseItem.summary}</p>
+          <h1 className="h1 mb-6 max-w-[880px] text-white">{caseItem.title}</h1>
+          <p className="lead max-w-[640px] !text-white/75">{caseItem.summary}</p>
+        </div>
+        <ScrollCue />
+      </section>
 
-          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-6 md:gap-x-12">
+      <section className="border-b border-bd bg-white py-[64px] md:py-[88px]">
+        <div className="lufe-container">
+          <p className="text-[13px] font-semibold text-gold-d">成果</p>
+          <div className="mt-6 grid gap-8 md:grid-cols-3">
             {caseItem.stats.map((stat) => (
-              <div key={stat.label} className="min-w-0">
-                <div data-lufe-counter className="num text-[clamp(35px,4vw,44px)] leading-none text-gold">{stat.value}</div>
-                <p className="mt-2 text-[11px] tracking-wide text-white/65 md:text-[13px]">{stat.label}</p>
+              <div key={stat.label} className="border-t border-bd pt-6">
+                <div data-lufe-counter className="font-sans text-[clamp(48px,7vw,88px)] font-[650] leading-none tracking-[-.03em] text-navy">{stat.value}</div>
+                <p className="mt-3 text-[15px] text-tx2">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-[80px] md:py-[100px]">
+      <section className="bg-white py-[80px] md:py-[112px]">
         <div className="lufe-container">
           {caseItem.story.map((chapter, chapterIndex) => (
-            <article key={chapter.heading} className={chapterIndex === 0 ? "" : "mt-16"}>
-              <div className="mx-auto max-w-[680px]">
-                <span className="num text-[13px] text-gold-d">{String(chapterIndex + 1).padStart(2, "0")}</span>
-                <h2 className="h3 mt-2 text-tx">{chapter.heading}</h2>
-                {chapter.paragraphs.map((paragraph, paragraphIndex) => (
-                  <p key={paragraph} className={`${paragraphIndex === 0 ? "mt-6" : "mt-5"} text-[17px] leading-[1.95] text-tx2`}>{paragraph}</p>
-                ))}
+            <div key={chapter.heading}>
+              <article className={`grid gap-8 py-14 md:py-20 lg:grid-cols-12 ${chapterIndex === 0 ? "" : "border-t border-bd"}`}>
+                <div className="self-start lg:sticky lg:top-[112px] lg:col-span-4">
+                  <span className="font-sans text-[14px] font-semibold text-gold-d">{String(chapterIndex + 1).padStart(2, "0")}</span>
+                  <h2 className="mt-2 text-[clamp(24px,2.6vw,34px)] font-[650] leading-[1.3] text-tx">{chapter.heading}</h2>
+                </div>
+                <div className="lg:col-span-7 lg:col-start-6">
+                  {chapter.paragraphs.map((paragraph, paragraphIndex) => (
+                    <p key={paragraph} className={`${paragraphIndex === 0 ? "mt-0" : "mt-6"} text-[18px] leading-[1.9] text-tx2`}>{paragraph}</p>
+                  ))}
 
-                {chapter.showStageLinks && stageLinks.length > 0 && (
-                  <div className="mt-6 border-t border-bd pt-6">
-                    <div className="flex flex-wrap gap-2">
-                      {stageLinks.map((stage) => (
-                        <Link key={stage.href} href={stage.href} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
-                          <span className="num text-gold-d">{stage.label}</span>
-                          <span>{stage.title}</span>
-                          <span aria-hidden="true" className="text-tx3">→</span>
-                        </Link>
-                      ))}
+                  {chapter.showStageLinks && stageLinks.length > 0 && (
+                    <div className="mt-6 border-t border-bd pt-6">
+                      <div className="flex flex-wrap gap-2">
+                        {stageLinks.map((stage) => (
+                          <Link key={stage.href} href={stage.href} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
+                            <span className="num text-gold-d">{stage.label}</span>
+                            <span>{stage.title}</span>
+                            <span aria-hidden="true" className="text-tx3">→</span>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              </article>
 
               {chapter.image && (
-                <figure className="mx-auto my-12 max-w-[980px]">
-                  <TieredImage
-                    src={chapter.image.src}
-                    alt={chapter.image.alt}
-                    sizes="(max-width: 1024px) 100vw, 980px"
-                    className="aspect-[3/2] w-full object-cover"
-                    style={chapter.image.position ? { objectPosition: chapter.image.position } : undefined}
-                  />
+                <figure ref={(element) => { if (element) storyFigureRefs.current[chapterIndex] = element; }} className="mx-auto max-w-[1180px]">
+                  <div className="aspect-[4/3] overflow-hidden md:aspect-[21/9]">
+                    <TieredImage
+                      src={chapter.image.src}
+                      alt={chapter.image.alt}
+                      loading="lazy"
+                      sizes="(max-width: 1180px) 100vw, 1180px"
+                      className="h-full w-full object-cover"
+                      style={{
+                        transform: "translateY(var(--lufe-figure-drift,0)) scale(1.06)",
+                        ...(chapter.image.position ? { objectPosition: chapter.image.position } : {}),
+                      } as CSSProperties}
+                    />
+                  </div>
                   <figcaption className="mt-3 text-[13px] text-tx3">{chapter.image.alt}</figcaption>
                 </figure>
               )}
-            </article>
+            </div>
           ))}
         </div>
       </section>
 
       {caseItem.timeline.length > 0 && (
-        <section className="overflow-hidden bg-white py-[80px] md:py-[100px]">
+        <section className="overflow-hidden bg-cream py-[80px] md:py-[100px]">
           <div className="lufe-container">
             <div className="max-w-[980px] min-w-0">
               <h2 className="h2 text-tx">從啟動到收尾的<span className="text-gold-d">時間節奏</span></h2>
@@ -136,8 +188,8 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
               itemClassName="basis-[min(78vw,330px)]"
             >
               {caseItem.timeline.map((item, index) => (
-                <article key={`${item.when}-${item.title}`} className="flex min-h-[260px] min-w-0 flex-col border border-bd bg-cream p-7">
-                  <span className="num mb-5 grid h-10 w-10 place-items-center bg-gold text-[15px] leading-none text-navy">{index + 1}</span>
+                <article key={`${item.when}-${item.title}`} className="flex min-h-[260px] min-w-0 flex-col border border-bd bg-white p-7">
+                  <span className="mb-5 grid h-10 w-10 place-items-center border border-gold/40 text-[15px] font-semibold leading-none text-gold-d tabular-nums">{index + 1}</span>
                   <p className="mb-2 text-[13px] font-semibold text-gold-d">{item.when}</p>
                   <h3 className="h3 mb-2 text-tx">{item.title}</h3>
                   <p className="text-[15px] leading-[1.75] text-tx2">{item.desc}</p>

@@ -134,7 +134,7 @@ function CaseCard({ caseItem }: { caseItem: (typeof CASES)[number] }) {
             </div>
 
             <div className="absolute bottom-7 left-6 right-6 md:bottom-8 md:left-10 md:right-10">
-              <div className="num mb-2 text-[clamp(50px,7vw,72px)] leading-[0.95] text-gold">{caseItem.num}</div>
+              <div data-lufe-counter className="num mb-2 text-[clamp(50px,7vw,72px)] leading-[0.95] text-gold">{caseItem.num}</div>
               <p className="text-[clamp(16px,2vw,18px)] leading-[1.4] text-white">{meta.headline}</p>
             </div>
           </div>
@@ -181,8 +181,8 @@ export function CasesPageContent({
             <span className="text-white/75">案例</span>
           </nav>
 
-          <h1 className="h1 mb-7 max-w-[880px] text-white">每一個判斷，<br /><span className="text-gold">都有案例可以對照</span></h1>
-          <p className="lead max-w-[600px] whitespace-pre-line text-white/70">在菲律賓與北美，鹿飛走過三條不一樣的出海路徑{"\n"}以下是其中幾個關鍵決策的完整過程</p>
+          <h1 className="h1 mb-6 max-w-[880px] text-white">每一個判斷，<br /><span className="text-gold">都有案例可以對照</span></h1>
+          <p className="lead max-w-[640px] whitespace-pre-line !text-white/75">在菲律賓與北美，鹿飛走過三條不一樣的出海路徑{"\n"}以下是其中幾個關鍵決策的完整過程</p>
         </div>
         <ScrollCue />
       </section>
@@ -192,14 +192,10 @@ export function CasesPageContent({
           <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-3">
             {CASE_ROADS.map((road) => {
               const Icon = road.icon;
-              return <article key={road.label} className="group lufe-card border border-bd bg-cream p-6"><div data-case-road-icon="" className="grid h-10 w-10 place-items-center border border-gold/25 bg-gold/10 text-gold-d [@media(hover:hover)]:group-hover:bg-gold/15"><Icon size={20} /></div><p className="mt-4 text-[14px] font-semibold text-gold-d">{road.label}</p><h2 className="h3 mt-3 text-tx">{road.title}</h2><p className="mt-4 text-[15px] leading-[1.8] text-tx2">{road.body}</p><div className="mt-6 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="block text-tx">這條路教我們的事</strong>{road.lesson}</div></article>;
+              return <article key={road.label} className="group lufe-card border border-bd bg-cream p-6"><div data-case-road-icon="" className="grid h-10 w-10 place-items-center border border-gold/40 text-gold-d [@media(hover:hover)]:group-hover:border-gold-d"><Icon size={20} /></div><p className="mt-4 text-[14px] font-semibold text-gold-d">{road.label}</p><h2 className="h3 mt-3 text-tx">{road.title}</h2><p className="mt-4 text-[15px] leading-[1.8] text-tx2">{road.body}</p><div className="mt-6 border-t border-bd pt-4 text-[14px] leading-[1.8] text-tx2"><strong className="block text-tx">這條路教我們的事</strong>{road.lesson}</div></article>;
             })}
           </div>
         </div>
-      </section>
-
-      <section className="bg-white pb-0">
-        <div className="lufe-container"><div className="flex flex-col items-start justify-between gap-6 border border-bd bg-cream p-6 md:flex-row md:items-center md:p-8"><div><h2 className="h3 text-tx">不確定自己比較像哪一條？</h2><p className="mt-2 text-[15px] leading-[1.8] text-tx2">先做 2 分鐘處境比對，鹿飛告訴你最像哪一個案例</p></div><Link href="/assess" className="shrink-0 bg-gold px-6 py-3.5 text-[15px] font-semibold text-navy hover:bg-gold-l">先做 2 分鐘處境比對 →</Link></div></div>
       </section>
 
       <section className="overflow-hidden bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
@@ -253,18 +249,23 @@ export function CasesPageContent({
             這個組合暫時沒有案例。試試調整篩選條件
           </div>
 
-          <div className="mt-20 border-t border-bd pt-14 text-center">
-            <h2 className="h2 text-tx">你的故事會是哪一條？</h2>
-            <p className="mx-auto mt-3 max-w-[440px] text-[15px] leading-[1.8] text-tx2">聊聊你的產品，鹿飛先幫你看比較像哪一條路</p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-6">
-              <button onClick={onMessageOpen} className="cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy hover:bg-gold-l">
+          <div className="mt-20 grid gap-8 border-t border-bd pt-14 lg:grid-cols-12 lg:items-stretch">
+            <div className="lg:col-span-7">
+              <h2 className="h2 text-tx">你的故事會是哪一條？</h2>
+              <p className="mt-3 max-w-[440px] text-[15px] leading-[1.8] text-tx2">聊聊你的產品，鹿飛先幫你看比較像哪一條路</p>
+              <button onClick={onMessageOpen} className="mt-6 cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy hover:bg-gold-l">
                 聊聊你的產品 →
               </button>
-              <Link href="/assess" className="inline-flex items-center gap-2 text-[15.5px] font-medium text-tx2 hover:text-navy">
-                <span className="border-b border-tx3/40 pb-0.5">先做 2 分鐘評估</span>
-                <span aria-hidden="true">→</span>
-              </Link>
             </div>
+            <Link href="/assess" className="group bg-navy p-8 text-white transition-transform active:scale-[.985] [@media(hover:hover)]:hover:-translate-y-1 md:p-10 lg:col-span-5">
+              <p className="text-[13px] font-semibold text-gold">2 分鐘處境比對</p>
+              <h3 className="h3 mt-3 text-white">不確定自己比較像哪一條？</h3>
+              <p className="mt-3 text-[15px] leading-[1.8] text-white/70">三個問題，比對鹿飛做過的四個案例，找出最接近的一個</p>
+              <div className="mt-6 flex gap-2">
+                {['階段', '卡點', '市場'].map((chip) => <span key={chip} className="border border-white/25 px-3 py-1 text-[13px] text-white/75">{chip}</span>)}
+              </div>
+              <span aria-label="開始比對 →" className="mt-8 inline-flex text-[15px] font-semibold text-gold">開始比對 <span aria-hidden="true" className="ml-1 transition-transform [@media(hover:hover)]:group-hover:translate-x-1">→</span></span>
+            </Link>
           </div>
         </div>
       </section>

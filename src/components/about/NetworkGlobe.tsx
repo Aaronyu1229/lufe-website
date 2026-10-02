@@ -8,7 +8,15 @@ const locations = {
   taipei: [25.033, 121.565] as [number, number],
   manila: [14.599, 120.984] as [number, number],
   losAngeles: [34.052, -118.244] as [number, number],
-  toronto: [43.653, -79.383] as [number, number],
+  newYork: [40.713, -74.006] as [number, number],
+  sanFrancisco: [37.775, -122.419] as [number, number],
+  lasVegas: [36.17, -115.14] as [number, number],
+  singapore: [1.352, 103.82] as [number, number],
+  kualaLumpur: [3.139, 101.687] as [number, number],
+  bangkok: [13.756, 100.502] as [number, number],
+  hoChiMinhCity: [10.823, 106.63] as [number, number],
+  jakarta: [-6.208, 106.846] as [number, number],
+  cebu: [10.316, 123.885] as [number, number],
 };
 
 export function NetworkGlobe() {
@@ -36,7 +44,7 @@ export function NetworkGlobe() {
 
     let cancelled = false;
     let frame: number | undefined;
-    let phi = 0;
+    let phi = 4.1;
     let momentum = 0;
     let dragging = false;
     let lastX = 0;
@@ -67,12 +75,22 @@ export function NetworkGlobe() {
           { location: locations.taipei, size: 0.08 },
           { location: locations.manila, size: 0.07 },
           { location: locations.losAngeles, size: 0.06 },
-          { location: locations.toronto, size: 0.05 },
+          { location: locations.newYork, size: 0.06 },
+          { location: locations.sanFrancisco, size: 0.05 },
+          { location: locations.lasVegas, size: 0.05 },
+          { location: locations.singapore, size: 0.035, color: [0.36, 0.56, 0.66] },
+          { location: locations.kualaLumpur, size: 0.035, color: [0.36, 0.56, 0.66] },
+          { location: locations.bangkok, size: 0.035, color: [0.36, 0.56, 0.66] },
+          { location: locations.hoChiMinhCity, size: 0.035, color: [0.36, 0.56, 0.66] },
+          { location: locations.jakarta, size: 0.035, color: [0.36, 0.56, 0.66] },
+          { location: locations.cebu, size: 0.035, color: [0.36, 0.56, 0.66] },
         ],
         arcs: [
           { from: locations.taipei, to: locations.manila },
           { from: locations.taipei, to: locations.losAngeles },
-          { from: locations.taipei, to: locations.toronto },
+          { from: locations.taipei, to: locations.newYork },
+          { from: locations.taipei, to: locations.sanFrancisco },
+          { from: locations.taipei, to: locations.lasVegas },
         ],
         arcColor: [0.83, 0.66, 0.36],
         arcWidth: 0.5,
