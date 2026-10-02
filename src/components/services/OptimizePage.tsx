@@ -100,7 +100,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
 
       <section className="bg-white py-[72px] md:py-[88px]">
         <div className="lufe-container">
-          <SectionHeading>你大概卡在<span className="text-gold-d">這五段之一</span></SectionHeading>
+          <SectionHeading>最常卡在<span className="text-gold-d">這五段之一</span></SectionHeading>
           <Reveal className="mt-8 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-5">
             {OPTIMIZE_PAIN_POINTS.map((point) => (
               <Link key={point.anchor} href={`#${point.anchor}`} className="lufe-card border border-bd bg-cream p-5 hover:border-gold hover:bg-white">
@@ -183,7 +183,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
 
       <section className="bg-navy py-[78px] text-white md:py-[96px]">
         <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
-          <h2 className="h2 text-white">聊聊你卡在哪一段</h2>
+          <h2 className="h2 text-white">聊聊目前卡在哪一段</h2>
           <p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，聽你現在的狀況，告訴你該先診斷還是直接做</p>
           <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">聊聊你的狀況 →</ContactButton>
         </div></div>

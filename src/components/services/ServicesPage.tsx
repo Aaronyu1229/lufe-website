@@ -206,7 +206,7 @@ export function ServicesPage() {
 
       <FaqSection title="選方案之前，最常被問的三件事" idPrefix="services-faq" items={SERVICE_FAQS.map((faq, index) => ({ num: String(index + 1).padStart(2, "0"), question: faq.q, answer: faq.a, takeaway: faq.takeaway }))} className="bg-white py-[72px] md:py-[96px]" />
 
-      <section className="bg-navy py-[78px] text-white md:py-[96px]"><div className="lufe-container"><div className="mx-auto max-w-[720px] text-center"><h2 className="h2 text-white">想知道你該從哪一章開始？</h2><p className="mt-4 text-[16px] leading-[1.85] text-white/70">聊聊你的狀況，我們幫你看——也可能建議你再等等。不收費、不承諾、不賣課</p><ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">聊聊你的產品 →</ContactButton></div></div></section>
+      <section className="bg-navy py-[78px] text-white md:py-[96px]"><div className="lufe-container"><div className="mx-auto max-w-[720px] text-center"><h2 className="h2 text-white">想知道該從哪一章開始？</h2><p className="mt-4 text-[16px] leading-[1.85] text-white/70">聊聊你的狀況，我們幫你看——也可能建議你再等等。不收費、不承諾、不賣課</p><ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">聊聊你的產品 →</ContactButton></div></div></section>
     </>
   );
 }
