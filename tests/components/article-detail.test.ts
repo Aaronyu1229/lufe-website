@@ -99,6 +99,30 @@ describe("ArticleDetail", () => {
     expect(markup).not.toMatch(/\brounded-(?!full\b)/);
   });
 
+  it("renders the shared numbered TOC in every article presentation", () => {
+    const article = articles.find((candidate) => getStaticArticleHeadings(candidate.content).length >= 3);
+    if (!article) throw new Error("Expected article with at least three headings");
+    const headings = getStaticArticleHeadings(article.content);
+    const markup = renderToStaticMarkup(createElement(ArticleDetail, { article, image: getArticleImage(article), related: [] }));
+    const sheetStart = markup.indexOf('data-article-toc-variant="sheet"');
+    const sheetMarkup = markup.slice(sheetStart, markup.indexOf("</nav>", sheetStart));
+
+    expect(markup).toContain("本文目錄");
+    expect(markup).toContain(">01<");
+    expect(markup).toContain(">02<");
+    expect(markup).toContain('<nav aria-label="本文目錄"');
+    expect((sheetMarkup.match(/href="#/g) ?? [])).toHaveLength(headings.length);
+    expect(markup).not.toMatch(/\brounded-(?!full\b)/);
+  });
+
+  it("omits every TOC presentation for an article without headings", () => {
+    const article = { ...articles[0], content: ["只有一段沒有章節的文字。"] };
+    const markup = renderToStaticMarkup(createElement(ArticleDetail, { article, image: getArticleImage(article), related: [] }));
+
+    expect(markup).not.toContain("本文目錄");
+    expect(markup).not.toContain("data-article-toc-variant");
+  });
+
   it("renders Aaron's byline and author card with links to the author page", () => {
     const markup = renderToStaticMarkup(
       createElement(ArticleDetail, { article: articles[0], image: getArticleImage(articles[0]), related: [] }),

@@ -50,4 +50,12 @@ describe("InsightsPageContent", () => {
     expect(markup).toContain("把文章裡的方法，");
     expect(markup).toContain("聊聊你的產品");
   });
+
+  it("uses the R4 practical-guide hero copy", () => {
+    const markup = renderPage();
+
+    expect(markup).toContain("出海洞察，");
+    expect(markup).toContain("從判斷到執行的實務指南");
+    expect(markup).toContain("依出海的每個階段整理：市場探查、寄賣通路、公司落地、海外客服與北美市場的分析與實務指南");
+  });
 });

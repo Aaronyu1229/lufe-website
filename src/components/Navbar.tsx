@@ -485,7 +485,7 @@ function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: Insights
       {visibleInsightChapters.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} />)}
     </MenuColumn>
     <MenuColumn bordered>
-      <MenuLink href="/resources" title="補助與活動" marker={<FileIcon />} />
+      <MenuLink href="/resources" title="補助與資源" marker={<FileIcon />} />
       <MenuLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external />
       <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
     </MenuColumn>
@@ -559,7 +559,7 @@ function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: 
   );
   return <>
     {visibleInsightChapters.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
-    <MobileSubLink href="/resources" title="補助與活動" marker={<FileIcon />} onClose={onClose} />
+    <MobileSubLink href="/resources" title="補助與資源" marker={<FileIcon />} onClose={onClose} />
     <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external onClose={onClose} />
     <MobileSubLink href="/insights" title="看所有文章 →" onClose={onClose} />
   </>;

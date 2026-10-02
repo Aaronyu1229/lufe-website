@@ -5,41 +5,53 @@ import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
-import { Carousel } from "@/components/ui/Carousel";
 import { HERO_VIDEOS } from "@/data/heroVideos";
 
 import { useMessageBox } from "../MessageBox";
 import { NetworkGlobe } from "./NetworkGlobe";
+import { StoryChapters, type StoryChapter } from "../story/StoryChapters";
 
-export const storyCards = [
+export const storyChapters = [
   {
     num: "01",
-    title: "看到的問題",
-    image: "/images/about/aaron-workshop-1600.webp",
-    maxTierWidth: 2400,
-    alt: "鹿飛工作坊現場，分享跨境實戰觀察",
-    imageClassName: "object-cover object-[center_30%]",
-    copy: "在躍馬企業看了很多年\n\n躍馬做的是把貨送出去——42 年，500 多個出口案件，30 多個國家。\n看的不是報表，是貨櫃出去以後的事：\n有的品牌在當地開了第二家店，\n更多的是幾個月後貨退回來，或者就沒有下文了",
+    label: "起點・躍馬企業",
+    title: "42 年，把台灣的貨送到世界各地",
+    paragraphs: [
+      "躍馬企業做國際貨運承攬已經 42 年：報關、倉儲、海空運、最後一哩。台灣企業要出口，躍馬負責把貨安全、準時地送到對的地方。",
+      "500 多個出口案件、30 多個國家——累積下來的不只是航線與據點，還有一個只有站在物流這一端才看得到的視角。",
+    ],
+    stats: true,
+    jumpingLink: true,
+    image: { src: "/images/about/about-port-1600.webp", alt: "貨櫃碼頭——躍馬 42 年的日常", position: "center 40%" },
   },
   {
     num: "02",
-    title: "想通的事",
-    image: "/images/about/story-belief-compass-1600.webp",
-    maxTierWidth: 1600,
-    alt: "羅盤放在世界地圖上 — 有計畫的探索",
-    imageClassName: "object-cover",
-    copy: "差別從來不在物流，貨都有送到。\n差別在抵達之後，有沒有人接著走：\n證照有沒有人辦、貨架上有沒有人推、第一封英文客訴有沒有人回",
+    label: "市場觀察",
+    title: "貨都送到了，故事卻常常停在抵達之後",
+    paragraphs: ["看的不是報表，是貨櫃出去以後的事：有的品牌在當地開了第二家店；更多的是幾個月後貨退回來，或者就沒有下文了。"],
   },
   {
     num: "03",
-    title: "做了什麼",
-    image: "/images/about/aaron-news-interview-1080.webp",
-    maxTierWidth: 1080,
-    alt: "台視新聞訪問躍馬企業市場經理",
-    imageClassName: "object-cover object-[42%_center]",
-    copy: "台灣市場不夠大，出海是遲早的事；出去有難度，但出得去。\n鹿飛把抵達之後最難的四件事，做成四個方案，\n讓第一步小到企業敢踏，後面的每一步都有人在",
+    label: "關鍵洞察",
+    title: "差別不在物流，而在抵達之後有沒有人接手",
+    paragraphs: [
+      "貨都有送到。真正拉開差距的，是抵達之後有沒有人接著走：證照有沒有人辦、貨架上有沒有人推、第一封英文客訴有沒有人回。",
+      "這些事不在任何一家貨代的服務範圍裡，卻決定了一個品牌能不能在海外站穩。",
+    ],
+    image: { src: "/images/about/story-belief-compass-1600.webp", alt: "羅盤放在世界地圖上——有計畫的探索", maxTierWidth: 1600, position: "center" },
   },
-] as const;
+  {
+    num: "04",
+    label: "鹿飛的成立",
+    title: "從躍馬出發，鹿飛接手抵達之後的每一段",
+    paragraphs: [
+      "台灣市場不夠大，出海是遲早的事；出去有難度，但出得去。鹿飛從躍馬企業出發，把抵達之後最難的四件事做成四個方案：市場探查、寄賣、公司落地、海外客服。",
+      "讓第一步小到企業敢踏，後面的每一步都有人在。躍馬把貨送到，鹿飛讓貨在當地被買走。",
+    ],
+    servicesLink: true,
+    image: { src: "/images/about/aaron-news-interview-1080.webp", alt: "台視新聞訪問躍馬企業市場經理", maxTierWidth: 1080, position: "42% center" },
+  },
+] as const satisfies readonly StoryChapter[];
 
 const networkCards = [
   {
@@ -98,7 +110,7 @@ export function AboutPage() {
 
   return (
     <>
-      <section id="story" className="lufe-hero scroll-mt-[80px] bg-navy text-white">
+      <section className="lufe-hero bg-navy text-white">
         <HeroBackdrop src="/images/about/about-hero-executive-1600.webp" position="65% center" video={HERO_VIDEOS.about} />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
@@ -107,36 +119,24 @@ export function AboutPage() {
             <span className="text-white/75">關於我們</span>
           </nav>
           <h1 className="h1 mb-6 max-w-[880px] text-white">
-            協助台灣企業<br />在<span className="text-gold">北美</span>與<span className="text-gold">東南亞</span>落地
+            從貨櫃出發，<br /><span className="text-gold">陪台灣企業走完抵達之後</span>
           </h1>
           <p className="max-w-[640px] text-[18px] leading-[1.8] text-white/80">「別人幫你開車，我們幫你找路。」</p>
-          <p className="lead mb-0 mt-4 max-w-[640px] !text-white/75">鹿飛協助台灣企業規劃並執行海外落地，從市場驗證、通路進入到在地團隊與客服，一個窗口串起出海的每一段。以躍馬企業 42 年國際物流為基礎，讓每一步都有實際的執行力</p>
+          <p className="lead mb-0 mt-4 max-w-[640px] !text-white/75">鹿飛協助台灣企業在北美與東南亞落地：市場驗證、通路進入、在地團隊與客服，一個窗口串起出海的每一段。這個故事，要從躍馬企業說起</p>
         </div>
         <ScrollCue />
       </section>
 
-      <section className="overflow-hidden border-t border-white/5 bg-navy py-[80px] text-white md:py-[110px]">
+      <section id="story" className="scroll-mt-[80px] bg-white py-[80px] md:py-[112px]">
         <div className="lufe-container">
-          <Carousel tone="dark" label="鹿飛的故事" itemClassName="basis-[min(82vw,380px)] md:basis-[calc((100%-2rem)/2)]">
-            {storyCards.map((card) => (
-              <article key={card.num} className="overflow-hidden border border-white/15 bg-white/[0.04]">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <TieredImage data-carousel-parallax src={card.image} alt={card.alt} sizes="(max-width: 768px) 82vw, 48vw" maxTierWidth={card.maxTierWidth} className={`absolute inset-0 h-full w-full ${card.imageClassName}`} />
-                  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-navy/30 via-transparent to-navy/50" />
-                </div>
-                <div className="p-6 md:p-7">
-                  <p className="mb-4 text-[10px] font-semibold tracking-[2px] text-gold/90">{card.num}</p>
-                  <h2 className="h3 mb-4 text-gold">{card.title}</h2>
-                  <p className="whitespace-pre-line text-[15px] leading-[1.9] text-white/75">{card.copy}</p>
-                </div>
-              </article>
-            ))}
-          </Carousel>
+          <p className="text-[13px] font-semibold text-gold-d">鹿飛的故事</p>
+          <StoryChapters chapters={storyChapters} />
         </div>
       </section>
 
       <section id="team" className="scroll-mt-[80px] border-y border-bd/40 bg-cream py-[72px]">
         <div className="lufe-container">
+          <p className="mb-4 text-[13px] font-semibold text-gold-d">05・今天的團隊</p>
           <h2 className="h2">小而精的核心團隊，<br /><span className="text-gold-d">連結全球在地節點</span></h2>
           <p className="lead mt-5 max-w-[720px]">鹿飛刻意維持精簡規模：每個案子由核心團隊親自把關，再由北美與東南亞的在地夥伴分工執行</p>
           <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -154,15 +154,9 @@ export function AboutPage() {
       <section id="network" className="scroll-mt-[80px] bg-navy py-[80px] text-white md:py-[96px]">
         <div className="lufe-container grid items-center gap-12 lg:grid-cols-[1fr_480px]">
           <div className="min-w-0">
+            <p className="mb-4 text-[13px] font-semibold text-gold">06・資源網絡</p>
             <h2 className="h2 text-white">跨越三地的資源網絡，<br /><span className="text-gold">支援每一個出海計畫</span></h2>
             <p className="lead !text-white/70 mt-5 max-w-[620px]">通路關係、在地夥伴與科技工具，整合為同一套跨境執行體系</p>
-            <div className="mt-10 grid max-w-[560px] grid-cols-3 gap-5">
-              {[
-                { value: "30+", label: "國家與地區・躍馬物流網絡" },
-                { value: "500+", label: "出口案件・躍馬企業" },
-                { value: "42", label: "年國際物流・躍馬企業" },
-              ].map((stat) => <div key={stat.label}><div data-lufe-counter className="num text-gold">{stat.value}</div><div className="mt-2 text-[13px] text-white/65">{stat.label}</div></div>)}
-            </div>
             <p className="mt-8 text-[13px] text-white/55">台北・馬尼拉・洛杉磯・紐約・舊金山・拉斯維加斯</p>
             <div className="mt-4 grid gap-2 text-[13px] text-white/55">
               <div className="flex items-center gap-2"><span aria-hidden="true" className="h-2 w-2 bg-gold" />資源網絡城市</div>
@@ -188,6 +182,7 @@ export function AboutPage() {
       <section id="philosophy" className="scroll-mt-[80px] bg-navy py-[80px] text-white md:py-[96px]">
         <div className="lufe-container grid items-center gap-14 lg:grid-cols-[1fr_440px]">
           <div className="order-2 lg:order-1">
+            <p className="mb-4 text-[13px] font-semibold text-gold">07・鹿飛的信念</p>
             <h2 className="h2 text-white">鹿飛相信的四件事</h2>
             <div className="mt-10 divide-y divide-white/15 border-y border-white/15">
               {beliefs.map((belief, index) => (
@@ -209,7 +204,7 @@ export function AboutPage() {
               <TieredImage src="/images/about/aaron-teaching-1600.webp" alt="工作坊現場，陪學員實際操作" sizes="(max-width: 680px) 100vw, 680px" className="absolute inset-0 h-full w-full object-cover object-[center_35%]" />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/20 to-navy/75" />
             </div>
-            <h2 className="h2 text-white">從一次對話，開始規劃出海</h2>
+            <h2 className="h2 text-white">下一章，從你的產品開始</h2>
             <p className="mt-4 text-[15.5px] leading-[1.8] text-white/70">首次諮詢不收費，先釐清方向，再決定下一步</p>
             <button type="button" onClick={open} className="mt-7 cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy active:scale-[.97]">聊聊你的產品 →</button>
           </div>

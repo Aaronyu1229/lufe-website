@@ -3,12 +3,14 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import SubsidiesPage from "@/app/resources/subsidies/page";
+import { SubsidyCompare } from "@/components/subsidy/SubsidyCompare";
 import { SubsidyPlans } from "@/components/subsidy/SubsidyPlans";
 import { subsidyStatus } from "@/components/subsidy/SubsidyStatus";
 import { SUBSIDIES } from "@/data/subsidies";
 
 const expectText = (markup: string, value: string) =>
   expect(markup).toContain(renderToStaticMarkup(createElement(Fragment, null, value)));
+const markupText = (value: string) => renderToStaticMarkup(createElement(Fragment, null, value));
 
 describe("subsidy SSR content", () => {
   it("uses revenue decline as the supply-chain support eligibility threshold", () => {
@@ -57,5 +59,27 @@ describe("subsidy SSR content", () => {
     expect(markup).not.toContain('id="match"');
     expect(markup).not.toContain("算算你能拿");
     expect(markup).not.toContain("rounded-");
+  });
+
+  it("keeps every subsidy in the aligned compare grid and every detail in SSR", () => {
+    const compareMarkup = renderToStaticMarkup(createElement(SubsidyCompare, {
+      subsidies: SUBSIDIES,
+      now: new Date("2026-10-01T12:00:00+08:00"),
+      onSelect: () => {},
+    }));
+    const markup = renderToStaticMarkup(createElement(SubsidyPlans, {
+      subsidies: SUBSIDIES,
+      now: new Date("2026-10-01T12:00:00+08:00"),
+    }));
+
+    for (const subsidy of SUBSIDIES) {
+      expect(compareMarkup.split(markupText(subsidy.shortTitle)).length - 1).toBe(1);
+      for (const item of subsidy.coversDetail ?? []) expectText(markup, item.title);
+      for (const item of subsidy.processSteps ?? []) expectText(markup, item.title);
+      for (const item of subsidy.importantNotes ?? []) expectText(markup, item);
+    }
+    expect(compareMarkup.match(/看重點 ↓/g)).toHaveLength(4);
+    expect(markup.match(/細節/g)).toHaveLength(4);
+    expect(markup).not.toContain("SubsidyStageMap");
   });
 });

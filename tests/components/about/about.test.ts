@@ -3,16 +3,16 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { AaronAuthorPage } from "@/components/about/AaronAuthorPage";
-import { AboutPage, storyCards } from "@/components/about/AboutPage";
+import { AboutPage, storyChapters } from "@/components/about/AboutPage";
 import { getPublishedArticles } from "@/lib/articles/published";
 
 describe("AboutPage", () => {
   it("keeps the approved story, beliefs, and network copy in SSR markup", () => {
     const markup = renderToStaticMarkup(createElement(AboutPage));
 
-    for (const card of storyCards) {
-      expect(markup).toContain(card.title);
-      expect(markup).toContain(card.copy);
+    for (const chapter of storyChapters) {
+      expect(markup).toContain(chapter.title);
+      for (const paragraph of chapter.paragraphs) expect(markup).toContain(paragraph);
     }
 
     for (const belief of [
@@ -27,7 +27,7 @@ describe("AboutPage", () => {
     expect(markup).toContain("500+");
     expect(markup).toContain("台北・馬尼拉・洛杉磯・紐約・舊金山・拉斯維加斯");
     expect(markup).not.toContain("多倫多");
-    const heroMarkup = markup.slice(markup.indexOf('<section id="story"'), markup.indexOf("</section>") + "</section>".length);
+    const heroMarkup = markup.slice(markup.indexOf('class="lufe-hero'), markup.indexOf("</section>") + "</section>".length);
     expect(heroMarkup).not.toContain("data-lufe-counter");
     expect(markup).not.toContain("誠實的邊界");
     expect(markup).not.toContain("你會得到什麼樣的陪跑");

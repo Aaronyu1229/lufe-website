@@ -152,7 +152,7 @@ export const CHAPTER_ARTICLE_TAGS = {
   m9: "第九個月：落地與團隊",
   after: "之後的每一天：客服與營運",
   na: "北美市場",
-  sub: "補助與活動",
+  sub: "補助與資源",
 } as const satisfies Record<ArticleChapterKey, string>;
 
 export const TAG_ONLY_ARTICLE_SLUGS = [] as const;

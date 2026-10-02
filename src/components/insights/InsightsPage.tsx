@@ -93,8 +93,8 @@ export function InsightsPageContent({
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <div className="min-w-0">
             <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">洞察</span></nav>
-            <h1 className="h1 mb-6 max-w-[880px] text-white">每一章讀到一半會想問的事，<span className="text-gold">這裡先寫好</span></h1>
-            <p className="lead max-w-[640px] !text-white/75">按你現在在故事的哪一個月找</p>
+            <h1 className="h1 mb-6 max-w-[880px] text-white">出海洞察，<br /><span className="text-gold">從判斷到執行的實務指南</span></h1>
+            <p className="lead max-w-[640px] !text-white/75">依出海的每個階段整理：市場探查、寄賣通路、公司落地、海外客服與北美市場的分析與實務指南</p>
           </div>
         </div>
         <ScrollCue />
