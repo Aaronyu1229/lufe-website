@@ -99,7 +99,7 @@ describe("home page", () => {
     expect(rendered).toContain("鹿飛相信的事很簡單");
     expect(rendered).toContain("鹿飛案例成果");
     expect(rendered).toContain("家馬尼拉門市，一年內開出");
-    expect(rendered).toContain("羊奶皂品牌調整後的銷售範圍");
+    expect(rendered).toContain("羊奶皂品牌調整後，銷往多個海外市場");
     expect(rendered).toContain("魚鬆進美國，先過法規再談包裝");
     expect(rendered).toContain("出海實務洞察，");
     expect(rendered).toContain("看所有文章 →");
