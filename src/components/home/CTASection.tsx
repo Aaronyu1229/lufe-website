@@ -51,7 +51,7 @@ export function CTASection() {
             還不確定？先做 2 分鐘處境比對 →
           </Link>
         </div>
-        <p className="mt-6 text-[13px] text-white/50">送出後 24 小時內回覆。</p>
+        <p className="mt-6 text-[13px] text-white/50">送出後一個工作天內回覆。</p>
       </div>
     </section>
   );

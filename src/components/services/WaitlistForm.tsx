@@ -102,7 +102,7 @@ export function WaitlistForm() {
     return (
       <div className="py-8 text-center">
         <h3 className="h3 mb-2 text-tx">收到了！</h3>
-        <p className="text-[15px] leading-[1.8] text-tx2">我們會在 24 小時內用你提供的 Email 跟你約時間</p>
+        <p className="text-[15px] leading-[1.8] text-tx2">我們會在一個工作天內用你提供的 Email 跟你約時間</p>
       </div>
     );
   }

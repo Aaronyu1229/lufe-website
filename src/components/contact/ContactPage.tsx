@@ -162,7 +162,7 @@ export function ContactPage() {
             <span className="text-white/75">聯絡鹿飛</span>
           </nav>
           <h1 className="h1 mb-6 max-w-[880px] text-white">聯絡鹿飛</h1>
-          <p className="lead max-w-[640px] !text-white/75">出海規劃、合作洽談或媒體邀約，留下訊息，24 小時內回覆</p>
+          <p className="lead max-w-[640px] !text-white/75">出海規劃、合作洽談或媒體邀約，留下訊息，一個工作天內回覆</p>
         </div>
         <ScrollCue />
       </section>
@@ -185,7 +185,7 @@ export function ContactPage() {
               </div>
               <div className="grid grid-cols-[24px_1fr] gap-4 border-y border-bd py-5">
                 <MessageIcon size={20} className="mt-1 text-gold-d" />
-                <div><dt className="text-[13px] text-tx3">回覆時間</dt><dd className="mt-1 text-[16px] text-tx">24 小時內</dd></div>
+                <div><dt className="text-[13px] text-tx3">回覆時間</dt><dd className="mt-1 text-[16px] text-tx">一個工作天內</dd></div>
               </div>
             </dl>
           </aside>
@@ -199,7 +199,7 @@ export function ContactPage() {
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 14L12 19L21 10" stroke="currentColor" className="text-sky" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </div>
                 <h3 className="h3 mb-2">收到了！</h3>
-                <p className="text-[15.5px] leading-[1.8] text-tx2">我們會在 <span className="font-semibold text-tx">24 小時內</span>用你提供的 Email 回覆你。</p>
+                <p className="text-[15.5px] leading-[1.8] text-tx2">我們會在 <span className="font-semibold text-tx">一個工作天內</span>用你提供的 Email 回覆你。</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5" noValidate>

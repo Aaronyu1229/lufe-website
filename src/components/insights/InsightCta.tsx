@@ -8,7 +8,7 @@ import { useMessageBox } from "@/components/MessageBox";
 const points = [
   { icon: FileIcon, text: "談完給你一頁：建議從哪一章開始，或建議再等等" },
   { icon: ReceiptIcon, text: "每一章都有明碼價格，第一次談就講清楚" },
-  { icon: ClockIcon, text: "24 小時內回覆" },
+  { icon: ClockIcon, text: "一個工作天內回覆" },
 ] as const;
 
 export function InsightCta() {
