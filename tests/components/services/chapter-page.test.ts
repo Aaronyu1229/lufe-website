@@ -32,7 +32,7 @@ describe("ChapterPage", () => {
       }
       for (const faq of chapter.faqs) {
         expect(markup).toContain(faq.question);
-        expect(markup).toContain(faq.answer);
+        expect(markup).toContain(faq.answer.replaceAll("\n", ""));
         expect(markup).toContain(faq.takeaway);
       }
 
@@ -68,7 +68,7 @@ describe("ChapterPage", () => {
     expect(markup).toContain('href="/services/call-center"');
     for (const faq of CHAPTERS.na.faqs) {
       expect(markup).toContain(faq.question);
-      expect(markup).toContain(faq.answer);
+      expect(markup).toContain(faq.answer.replaceAll("\n", ""));
       expect(markup).toContain(faq.takeaway);
     }
   });

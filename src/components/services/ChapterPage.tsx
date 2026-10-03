@@ -106,7 +106,7 @@ function Scenarios({ chapter }: { readonly chapter: Chapter }) {
                 <h3 className="h3 mt-3 text-tx">{scenario.title}</h3>
                 <p className="mt-4 text-[16px] leading-[1.85] text-tx2">{scenario.body}</p>
                 <div className="mt-6 border-l-2 border-gold pl-4">
-                  <p className="text-[13px] font-semibold text-gold-d">鹿飛的做法</p>
+                  <p className="text-[13px] font-semibold text-gold-d">{chapter.scenarioAnswerLabel ?? "鹿飛的做法"}</p>
                   <p className="mt-2 text-[15.5px] leading-[1.8] text-tx">{scenario.answer}</p>
                 </div>
               </div>
@@ -160,7 +160,7 @@ export async function ChapterPage({ chapter }: { readonly chapter: Chapter }) {
       {chapter.faqs.length > 0 ? <FaqSection title="常見問題" idPrefix={`${chapter.key}-faq`} items={chapter.faqs.map((faq, index) => ({ num: String(index + 1).padStart(2, "0"), question: faq.question, answer: faq.answer, takeaway: faq.takeaway }))} className="bg-white py-[72px] md:py-[96px]" /> : null}
       {relatedReading}
       <NextChapter chapter={chapter} />
-      <section className="bg-navy py-[78px] text-white md:py-[96px]"><div className="lufe-container"><div className="mx-auto max-w-[720px] text-center"><h2 className="h2 text-white">{chapter.cta.title}</h2><p className="mt-4 whitespace-pre-line text-[16px] leading-[1.85] text-white/70">{chapter.cta.body}</p><div className="mt-8">{chapter.cta.href ? <Link href={chapter.cta.href} className="inline-flex items-center justify-center bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy active:scale-[.97] [@media(hover:hover)]:hover:bg-gold-l">{chapter.cta.action}</Link> : <ChatAction className="bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy active:scale-[.97] [@media(hover:hover)]:hover:bg-gold-l">{chapter.cta.action}</ChatAction>}</div></div></div></section>
+      <section className="bg-navy py-[78px] text-white md:py-[96px]"><div className="lufe-container"><div className="mx-auto max-w-[720px] text-center"><h2 className="h2 text-white">{chapter.cta.title}</h2><p className="mt-4 whitespace-pre-line text-[16px] leading-[1.85] text-white/70">{chapter.cta.body}</p>{chapter.cta.notes ? <p className="mt-5 whitespace-pre-line text-[14px] leading-[1.8] text-white/60">{chapter.cta.notes}</p> : null}<div className="mt-8">{chapter.cta.href ? <Link href={chapter.cta.href} className="inline-flex items-center justify-center bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy active:scale-[.97] [@media(hover:hover)]:hover:bg-gold-l">{chapter.cta.action}</Link> : <ChatAction className="bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy active:scale-[.97] [@media(hover:hover)]:hover:bg-gold-l">{chapter.cta.action}</ChatAction>}</div>{chapter.cta.link ? <p className="mt-5"><Link href={chapter.cta.link.href} className="text-[15px] font-medium text-gold [@media(hover:hover)]:hover:text-gold-l">{chapter.cta.link.label}</Link></p> : null}{chapter.cta.footnote ? <p className="mt-6 text-[13px] text-white/50">{chapter.cta.footnote}</p> : null}</div></div></section>
     </>
   );
 }
