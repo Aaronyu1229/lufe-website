@@ -51,7 +51,7 @@ describe("InsightsPageContent", () => {
     expect(markup).toContain("精選");
     expect(markup).toContain("把文章裡的方法，");
     expect(markup).toContain("預約 30 分鐘");
-    expect(markup).toContain("24 小時內回覆");
+    expect(markup).toContain("一個工作天內回覆");
   });
 
   it("uses the first-year hero copy and keeps retired list wording out", () => {
@@ -61,7 +61,7 @@ describe("InsightsPageContent", () => {
     expect(markup).toContain("每個月會卡住的事");
     expect(markup).toContain(">北美通路<");
     expect(markup).toContain("按你現在走到哪一個月來找：第一個月問市場，第三個月談通路與證，第九個月落地與團隊。北美通路另成一條線。");
-    for (const retired of ["一個工作天內回覆", "各有權重", "加權後", "Conditional Go", "No-Go", "五題評分（MBCPR）", "北美市場", "寄賣通路", "首次諮詢即說明費用與時程"]) {
+    for (const retired of ["24 小時內回覆", "各有權重", "加權後", "Conditional Go", "No-Go", "五題評分（MBCPR）", "北美市場", "寄賣通路", "首次諮詢即說明費用與時程"]) {
       expect(markup).not.toContain(retired);
     }
   });

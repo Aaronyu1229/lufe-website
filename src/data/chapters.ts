@@ -232,7 +232,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "訪談的是誰？樣本夠嗎？", answer: "目前是當地有固定收入、會自己掏錢買東西的消費者，每一位都先用過試用包再聊。\n人數不多、集中在特定族群與地區，我們在每一份報告裡都寫明這件事。\n1～2 萬買的是方向，不是統計。方向對了，再花錢擴樣。", takeaway: "1～2 萬買的是方向，不是統計" },
     ],
     next: { label: "下一章 →", title: "第三個月 · 寄賣", heading: "上架了，讓人先用過再說", href: "/services/consignment", image: "/images/hero-video/chapter-warehouse-1600.webp", imageAlt: "貨架上待出貨的包裹" },
-    cta: { title: "從一次評估開始", body: "我們先聽你的產品在台灣怎麼賣，再說適不適合去問菲律賓。\n有時候聽完，我們會建議你再等等——那也是一種答案。", notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。", action: "預約 30 分鐘 →", link: { label: "想先看我們實際問到了什麼？→ 小步出海法", href: "/services/methodology" }, footnote: "送出後 24 小時內回覆。" },
+    cta: { title: "從一次評估開始", body: "我們先聽你的產品在台灣怎麼賣，再說適不適合去問菲律賓。\n有時候聽完，我們會建議你再等等——那也是一種答案。", notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。", action: "預約 30 分鐘 →", link: { label: "想先看我們實際問到了什麼？→ 小步出海法", href: "/services/methodology" }, footnote: "送出後一個工作天內回覆。" },
   },
   m3: {
     key: "m3",
@@ -323,7 +323,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       body: "沒做過市場探查也可以聊，我們會先問你在台灣賣得怎麼樣。\n有時候聽完，我們會建議你先做市場探查，或再等等——那也是一種答案。",
       notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。",
       action: "預約 30 分鐘 →",
-      footnote: "送出後 24 小時內回覆。",
+      footnote: "送出後一個工作天內回覆。",
     },
     partnerStrip: {
       body: "你是通路？電商店家、連鎖、餐飲集團，想要更多台灣品牌上架？\n我們帶來的品牌都先做過市場探查、證走持證進口商、合約跟我們簽，你專心做通路。",
