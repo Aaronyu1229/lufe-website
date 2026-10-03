@@ -230,28 +230,30 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
       <section className="bg-cream py-[72px] md:py-[96px]">
         <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
-          {caseItem.cta ? (
+          {caseItem.cta?.heading ? (
             <h2 className="h2 mb-4 text-tx">{caseItem.cta.heading[0]}<span className="text-gold-d">{caseItem.cta.heading[1]}</span></h2>
           ) : (
             <h2 className="h2 mb-4 text-tx">你的產品也有<span className="text-gold-d">類似的機會</span>嗎？</h2>
           )}
           <p className="mx-auto mb-10 max-w-[520px] text-[16.5px] leading-[1.8] text-tx2">{caseItem.cta?.body ?? "每個案子的起點都是一場對話。聊聊你的狀況，鹿飛會說明這個故事裡哪一段跟你最相關"}</p>
+          {caseItem.cta?.notes ? <p className="mx-auto -mt-4 mb-10 max-w-[520px] whitespace-pre-line text-[14px] leading-[1.8] text-tx3">{caseItem.cta.notes}</p> : null}
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
             <button onClick={onMessageOpen} className="cursor-pointer bg-gold px-9 py-[15px] text-[15.5px] font-semibold tracking-[0.5px] text-navy hover:bg-gold-l">
               預約 30 分鐘 →
             </button>
             <Link href="/assess" className="inline-flex items-center gap-2 text-[15.5px] font-medium text-tx2 hover:text-navy">
-              <span className="border-b border-tx3/40 pb-0.5">還不確定像哪一種？先做 2 分鐘處境比對</span>
+              <span className="border-b border-tx3/40 pb-0.5">{caseItem.cta?.secondary ?? "還不確定像哪一種？先做 2 分鐘處境比對"}</span>
               <span aria-hidden="true">→</span>
             </Link>
           </div>
+          {caseItem.cta?.footnote ? <p className="mt-6 text-[13px] text-tx3">{caseItem.cta.footnote}</p> : null}
         </div></div>
       </section>
 
       {relatedCases.length > 0 && (
         <section className="border-t border-bd bg-white py-[72px] md:py-[96px]">
           <div className="lufe-container"><div className="max-w-[1100px] min-w-0">
-            <h2 className="h2 text-tx">更多成功的故事</h2>
+            <h2 className="h2 text-tx">更多案例</h2>
 
             <div className="mt-10 grid min-w-0 grid-cols-1 gap-[18px] md:grid-cols-2">
               {relatedCases.map((relatedCase) => (
