@@ -109,7 +109,7 @@ export function MethodologyPage() {
           <p className="mt-8 border-t border-bd pt-6 text-[18px] font-semibold leading-[1.7] text-tx">{EXAMPLES_CLOSING}</p>
           <div className="mt-8 border-l-4 border-gold bg-white p-6 md:flex md:items-end md:justify-between md:gap-8">
             <p className="text-[18px] font-semibold leading-[1.7] text-tx">想知道你的產品會被問到什麼？</p>
-            <ContactButton className="mt-5 cursor-pointer bg-navy px-6 py-3 text-[16px] font-semibold text-white hover:bg-sky md:mt-0">聊聊你的產品 →</ContactButton>
+            <ContactButton className="mt-5 cursor-pointer bg-navy px-6 py-3 text-[16px] font-semibold text-white hover:bg-sky md:mt-0">免費初步評估 30 分鐘 →</ContactButton>
           </div>
         </div>
       </section>
@@ -207,7 +207,7 @@ export function MethodologyPage() {
           <Link href="/services" className="flex items-center justify-between gap-5 border border-bd bg-white p-6 hover:border-gold">
             <div>
               <p className="text-[14px] font-semibold text-sky">看完量尺，回去看路 →</p>
-              <h2 className="h3 mt-3 text-tx">一家品牌在馬尼拉的第一年：品測、通路、公司落地、海外客服</h2>
+              <h2 className="h3 mt-3 text-tx">一家品牌在馬尼拉的第一年：市場探查、寄賣、公司落地、海外客服</h2>
             </div>
             <span aria-hidden="true" className="text-[28px] text-gold-d">→</span>
           </Link>
@@ -218,8 +218,9 @@ export function MethodologyPage() {
         <div className="lufe-container">
           <div className="mx-auto max-w-[720px] text-center">
             <h2 className="h2 text-white">免費初步評估</h2>
-            <p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，粗跑五個問題，不收費。{"\n"}談完你會知道自己在哪一格、該不該試、該從哪一章開始</p>
+            <p className="mt-4 whitespace-pre-line text-[16px] leading-[1.85] text-white/70">30 分鐘，用五個問題粗跑你的產品，不收費。{"\n"}談完你會知道自己在哪一格、該不該試、該從哪一章開始。</p>
             <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">預約 30 分鐘 →</ContactButton>
+            <p className="mx-auto mt-6 max-w-[520px] whitespace-pre-line text-left text-[14px] leading-[1.8] text-white/60">{"按了之後：\n1. 留下名字、聯絡方式、一句話講你的產品，我們一個工作天內回覆約時間。\n2. 30 分鐘，我們問、你答，不是簡報。\n3. 談完不用當場決定，我們也不會一直追著你。"}</p>
           </div>
         </div>
       </section>
