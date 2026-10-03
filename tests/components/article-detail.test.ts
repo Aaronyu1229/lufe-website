@@ -130,7 +130,7 @@ describe("ArticleDetail", () => {
 
     expect(markup).toContain('href="/about/aaron-yu"');
     expect(markup).toContain("Aaron Yu・鹿飛 LUFÉ 創辦人");
-    expect(markup).toContain("創辦人來自躍馬企業，底下是 42 年的國際物流。貨代把貨送到，故事才開始；這個專欄寫的是貨到了之後的事。");
+    expect(markup).toContain("創辦人來自躍馬企業，底下是 43 年的國際物流。貨代把貨送到，故事才開始；這個專欄寫的是貨到了之後的事。");
     expect(markup).toContain("看更多專欄文章 →");
     expect(markup).not.toContain("看更多 Aaron 的文章");
   });

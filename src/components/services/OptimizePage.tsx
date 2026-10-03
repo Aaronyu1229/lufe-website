@@ -119,7 +119,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
           <div className="md:order-1">
             <p className="text-[14px] font-semibold text-gold-d">01</p>
             <SectionHeading>省不下來：<span className="text-gold-d">先看你的物流帳單</span></SectionHeading>
-            <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">創辦人來自躍馬企業，背後是 42 年的國際物流。一張月結單裡哪些數字不該長那樣，我們看得出來。我們從運輸方式、倉儲位置、退貨處理三個層面重新盤點。</p>
+            <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">創辦人來自躍馬企業，背後是 43 年的國際物流。一張月結單裡哪些數字不該長那樣，我們看得出來。我們從運輸方式、倉儲位置、退貨處理三個層面重新盤點。</p>
             <p className="mt-6 border-l-4 border-gold bg-white px-5 py-4 text-[16px] font-medium leading-[1.8] text-tx">盤完，我們告訴你哪裡能省、值不值得動。不值得動的，我們會直接說。</p>
           </div>
         </div>

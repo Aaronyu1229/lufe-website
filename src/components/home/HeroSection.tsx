@@ -74,10 +74,10 @@ export const HOME_HERO_SLIDES: Slide[] = [
   {
     id: "logistics-moat",
     heavyOverlay: true,
-    chipLabel: "基石 · 42 年國際物流",
+    chipLabel: "基石 · 43 年國際物流",
     chipHref: "#jumping",
     titleLines: ["真的跑過船的人，", "才懂出海的眉角"],
-    subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬企業 42 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通",
+    subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬企業 43 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通",
     primary: { label: "認識躍馬企業", href: "https://jumping.group", external: true },
     secondary: { label: "看完整服務內容", href: "/services" },
     media: {
