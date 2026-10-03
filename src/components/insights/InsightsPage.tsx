@@ -10,11 +10,11 @@ import { TieredImage } from "@/components/TieredImage";
 import { InsightArticleCard } from "@/components/insights/InsightArticleCard";
 import { InsightCta } from "@/components/insights/InsightCta";
 import { Segmented, flip } from "@/components/ui";
-import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, type ArticleChapterKey } from "@/data/chapters";
+import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, CHAPTER_DISPLAY_LABELS, type ArticleChapterKey } from "@/data/chapters";
 import type { InsightCard } from "@/lib/articles/presentation";
 
 // Display names on this page. CHAPTER_ARTICLE_TAGS stay the stored article tags, so database articles keep matching.
-const INSIGHT_LABELS: Readonly<Record<ArticleChapterKey, string>> = { ...CHAPTER_ARTICLE_TAGS, na: "北美通路" };
+const INSIGHT_LABELS: Readonly<Record<ArticleChapterKey, string>> = CHAPTER_DISPLAY_LABELS;
 
 export const INSIGHT_CHAPTERS = [
   { key: "all", label: "全部" },

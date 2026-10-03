@@ -174,6 +174,16 @@ export const CHAPTER_ARTICLE_TAGS = {
   sub: "補助與資源",
 } as const satisfies Record<ArticleChapterKey, string>;
 
+/** Visitor-facing chapter names, aligned with the four service chapters; CHAPTER_ARTICLE_TAGS stay the stored article tags. */
+export const CHAPTER_DISPLAY_LABELS = {
+  m1: "第一個月：市場探查",
+  m3: "第三個月：寄賣",
+  m9: "第九個月：公司落地",
+  after: "之後的每一天：海外客服",
+  na: "北美通路",
+  sub: "補助與資源",
+} as const satisfies Record<ArticleChapterKey, string>;
+
 export const TAG_ONLY_ARTICLE_SLUGS = [] as const;
 
 export const CHAPTERS: Record<ChapterKey, Chapter> = {
