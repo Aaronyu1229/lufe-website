@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 import { SITE_LOCALE, SITE_NAME } from "@/lib/site";
 
 const TITLE = "Aaron Yu · 創辦人專欄";
-const DESCRIPTION = "鹿飛 LUFÉ 創辦人專欄。創辦人來自躍馬企業，寫台灣品牌進菲律賓第一年會卡住的事：市場探查、通路與證、落地與團隊，以及北美通路。";
+const DESCRIPTION = "鹿飛 LUFÉ 創辦人專欄。創辦人來自躍馬企業，寫台灣品牌進菲律賓第一年會卡住的事：市場探查、寄賣、公司落地，以及北美通路。";
 
 export const metadata: Metadata = {
   ...createPageMetadata({ path: "/about/aaron-yu", title: TITLE, description: DESCRIPTION }),

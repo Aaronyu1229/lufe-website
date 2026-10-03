@@ -35,7 +35,7 @@ export function AaronAuthorPage() {
           </nav>
           <h1 className="h1 mb-6 max-w-[880px] text-white">Aaron Yu</h1>
           <p className="mb-3 text-[17px] font-medium text-gold md:text-[18px]">鹿飛 LUFÉ 創辦人・來自躍馬企業</p>
-          <p className="mb-8 max-w-[500px] whitespace-pre-line text-[17px] leading-[1.8] text-white/70">{"創辦人來自躍馬企業，底下是 42 年的國際物流。貨代把貨送到，故事才開始；這個專欄寫的是貨到了之後的事。\n台灣品牌進菲律賓的第一年：市場探查、通路與證、落地與團隊，北美通路另成一條線。你可能已經卡在其中一步，這裡多半有一篇在講它。"}</p>
+          <p className="mb-8 max-w-[500px] whitespace-pre-line text-[17px] leading-[1.8] text-white/70">{"創辦人來自躍馬企業，底下是 42 年的國際物流。貨代把貨送到，故事才開始；這個專欄寫的是貨到了之後的事。\n台灣品牌進菲律賓的第一年：市場探查、寄賣、公司落地，北美通路另成一條線。你可能已經卡在其中一步，這裡多半有一篇在講它。"}</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px] text-white/60">
             <span>專欄文章 {authorArticles.length} 篇</span>
             <span aria-hidden="true">・</span>
