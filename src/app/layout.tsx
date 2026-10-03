@@ -3,7 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import { FooterSwitch } from "@/components/FooterSwitch";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
 import { SiteStructuredData } from "@/components/seo/StructuredData";
 import { toInsightCard } from "@/lib/articles/presentation";
@@ -144,7 +144,7 @@ export default function RootLayout({
           <Navbar latestArticle={latestArticle} publishedArticleSlugs={publishedArticles.map((article) => article.slug)}>
             <main id="main-content">{children}</main>
           </Navbar>
-          <Footer />
+          <FooterSwitch />
           <MessageBox />
         </MessageBoxProvider>
       </body>
