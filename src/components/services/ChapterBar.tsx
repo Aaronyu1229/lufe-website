@@ -4,8 +4,16 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import { CHAPTERS, PHILIPPINES_CHAPTER_KEYS, type PhilippinesChapterKey } from "@/data/chapters";
+import { localizedHref, type Locale } from "@/i18n/locale";
 
-export function ChapterBar({ current }: { readonly current: PhilippinesChapterKey }) {
+const chapterBarEn: Record<PhilippinesChapterKey, { readonly label: string; readonly title: string }> = {
+  m1: { label: "Month 1 · Market Test", title: "Validate the market before deciding what to invest" },
+  m3: { label: "Month 3 · Consignment", title: "Get listed, then let people try it" },
+  m9: { label: "Month 9 · Company Setup", title: "Build your own team on the ground" },
+  after: { label: "Every day after · Call Center", title: "Let a professional English-speaking team handle customer service" },
+};
+
+export function ChapterBar({ current, locale = "zh" }: { readonly current: PhilippinesChapterKey; readonly locale?: Locale }) {
   const [atEdge, setAtEdge] = useState(false);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -32,10 +40,11 @@ export function ChapterBar({ current }: { readonly current: PhilippinesChapterKe
   }, [current]);
 
   return (
-    <nav aria-label="菲律賓服務章節" className={`lufe-chapter-bar sticky top-[64px] z-20 py-3 ${atEdge ? "lufe-chapter-bar-edge" : ""}`}>
+    <nav aria-label={locale === "en" ? "Philippines service chapters" : "菲律賓服務章節"} className={`lufe-chapter-bar sticky top-[64px] z-20 py-3 ${atEdge ? "lufe-chapter-bar-edge" : ""}`}>
       <div ref={scrollerRef} className="lufe-container flex items-center gap-0 overflow-x-auto md:justify-between md:overflow-visible">
         {PHILIPPINES_CHAPTER_KEYS.map((key, index) => {
           const chapter = CHAPTERS[key];
+          const copy = locale === "en" ? chapterBarEn[key] : chapter;
           const isCurrent = key === current;
           const isDone = index < currentIndex;
           const previewOn = previewIndex !== null && index > currentIndex && index <= previewIndex;
@@ -44,7 +53,7 @@ export function ChapterBar({ current }: { readonly current: PhilippinesChapterKe
             <div key={key} className="flex shrink-0 items-center gap-2">
               {index > 0 ? <span aria-hidden="true" className={`lufe-chapter-line ${index <= currentIndex ? "lufe-chapter-line-done" : ""}`}><span className="lufe-chapter-line-preview" data-on={previewOn} /></span> : null}
               <Link
-                href={chapter.path}
+                href={localizedHref(locale, chapter.path)}
                 data-chapter-key={key}
                 aria-current={isCurrent ? "page" : undefined}
                 className={`lufe-chapter-link ${isCurrent ? "lufe-chapter-link-current" : ""} ${isDone ? "lufe-chapter-link-done" : ""}`}
@@ -54,8 +63,8 @@ export function ChapterBar({ current }: { readonly current: PhilippinesChapterKe
                 onBlur={() => setPreviewIndex(null)}
               >
                 <span aria-hidden="true" className="lufe-chapter-dot" />
-                <span>{chapter.label}</span>
-                <span aria-hidden="true" className="lufe-chapter-peek">{chapter.title}</span>
+                <span>{copy.label}</span>
+                <span aria-hidden="true" className="lufe-chapter-peek">{copy.title}</span>
               </Link>
             </div>
           );

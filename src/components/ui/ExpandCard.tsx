@@ -28,6 +28,7 @@ export interface ExpandCardProps {
   title: string;
   image?: { src: string; alt: string };
   className?: string;
+  closeLabel?: string;
 }
 
 const interpolate = (from: number, to: number, progress: number) => from + (to - from) * progress;
@@ -47,7 +48,7 @@ function DialogPortal({ mounted, children }: { mounted: boolean; children: React
   return mounted ? createPortal(children, document.body) : children;
 }
 
-export function ExpandCard({ card, panel, title, image, className }: ExpandCardProps) {
+export function ExpandCard({ card, panel, title, image, className, closeLabel = "關閉" }: ExpandCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -246,7 +247,7 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
         className="fixed inset-0 z-[90]"
         style={{ visibility: present ? "visible" : "hidden", pointerEvents: open ? "auto" : "none" }}
       >
-        <button type="button" tabIndex={-1} aria-label="關閉" className="absolute inset-0 h-full w-full cursor-default bg-[#0A1222]/50" style={{ opacity: progress * (1 - pullProgress) }} onClick={() => close()} />
+        <button type="button" tabIndex={-1} aria-label={closeLabel} className="absolute inset-0 h-full w-full cursor-default bg-[#0A1222]/50" style={{ opacity: progress * (1 - pullProgress) }} onClick={() => close()} />
         <div
           className="absolute inset-0 origin-top will-change-[clip-path,transform]"
           style={{
@@ -271,7 +272,7 @@ export function ExpandCard({ card, panel, title, image, className }: ExpandCardP
               )}
               <span aria-hidden="true" className="absolute left-1/2 top-2 block h-[5px] w-10 -translate-x-1/2 bg-white/75 shadow-[0_1px_4px_rgba(0,0,0,.3)]" />
             </div>
-            <button ref={closeRef} type="button" aria-label="關閉" onClick={() => close()} className="lufe-glass-dark absolute right-3 top-3 z-10 grid h-10 w-10 cursor-pointer place-items-center text-white outline-none focus-visible:ring-2 focus-visible:ring-white">
+            <button ref={closeRef} type="button" aria-label={closeLabel} onClick={() => close()} className="lufe-glass-dark absolute right-3 top-3 z-10 grid h-10 w-10 cursor-pointer place-items-center text-white outline-none focus-visible:ring-2 focus-visible:ring-white">
               <CloseIcon />
             </button>
             <div className="min-h-0 flex-1 overflow-auto overscroll-contain px-7 pb-10 pt-7 md:px-12 md:pb-12 md:pt-10" style={{ opacity: clamp((progress - 0.35) / 0.65, 0, 1) }}>
