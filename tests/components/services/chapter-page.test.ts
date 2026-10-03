@@ -62,7 +62,7 @@ describe("ChapterPage", () => {
   it("does not render the Philippines chapter bar on the North America page", async () => {
     const markup = await renderChapter("na");
 
-    expect(markup).toContain("進入北美主流零售通路");
+    expect(markup).toContain("把台灣產品，送進北美的貨架");
     expect(markup).not.toContain('aria-label="菲律賓服務章節"');
     expect(markup).toContain("步 01");
     expect(markup).toContain('href="/services/call-center"');
