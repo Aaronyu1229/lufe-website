@@ -47,13 +47,12 @@ export function SubsidyPlans({ subsidies, now }: { readonly subsidies: readonly 
 
   return <section id="plans" className="bg-white py-[72px] md:py-[96px]">
     <div className="lufe-container">
-      <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div className="mb-14 flex flex-col md:mb-20 gap-4 md:flex-row md:items-end md:justify-between">
         <h2 className="h2 max-w-[780px] text-tx">4 個計畫，對應你出海的<span className="text-gold">不同階段</span></h2>
-        <p className="text-[14.5px] text-tx3 md:text-right">資料最後確認 <span className="font-medium text-tx">2026.10.02</span><br />名額有限 · 部分計畫經費用罄即止</p>
       </div>
       <SubsidyCompare subsidies={subsidies} now={now} onSelect={(slug) => selectPlan(slug, true)} />
     </div>
-    <div ref={tabsRef} className="sticky top-[74px] z-10 mt-12 border-b border-bd bg-white/90 py-3 backdrop-blur">
+    <div ref={tabsRef} className="sticky top-[74px] z-10 mt-16 md:mt-24 border-b border-bd bg-white/90 py-3 backdrop-blur">
       <div className="lufe-container overflow-x-auto"><Segmented label="補助計畫" value={activeSlug} onChange={(slug) => selectPlan(slug, true, false)} options={subsidies.map((subsidy) => ({ value: subsidy.slug, label: `${subsidy.num} ${subsidy.shortTitle}` }))} className="max-w-none" /></div>
     </div>
     <div className="lufe-container">

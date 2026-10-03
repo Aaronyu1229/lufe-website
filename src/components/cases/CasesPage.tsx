@@ -20,6 +20,7 @@ import {
 } from "@/data/cases";
 
 import { useMessageBox } from "../MessageBox";
+import { CTA_LINE } from "@/data/cta";
 
 const BEAT_LABELS = ["情境", "卡點", "決策", "結果"] as const;
 
@@ -91,7 +92,6 @@ function CasePanel({ caseItem }: { caseItem: (typeof CASES)[number] }) {
           <div key={BEAT_LABELS[index]} className="grid grid-cols-[32px_minmax(0,1fr)] gap-3 border-b border-bd py-4">
             <span className="num text-[14px] text-gold-d">{String(index + 1).padStart(2, "0")}</span>
             <div className="min-w-0">
-              <p className="mb-1 text-[11px] font-semibold tracking-[0.12em] text-tx3">{BEAT_LABELS[index]}</p>
               <p className="text-[15.5px] leading-[1.8] text-tx2">{beat}</p>
             </div>
           </div>
@@ -207,7 +207,6 @@ export function CasesPageContent({
         <div className="lufe-container min-w-0">
           <div className="mb-10 flex flex-wrap items-center gap-x-7 gap-y-5 md:mb-11">
             <div className="min-w-0">
-              <p className="mb-2 text-[13px] font-semibold text-tx3">產業</p>
               <div className="max-w-full overflow-x-auto pb-1">
                 <Segmented
                   label="產業"
@@ -222,7 +221,6 @@ export function CasesPageContent({
             </div>
 
             <div className="min-w-0">
-              <p className="mb-2 text-[13px] font-semibold text-tx3">市場</p>
               <div className="max-w-full overflow-x-auto pb-1">
                 <Segmented
                   label="市場"
@@ -257,13 +255,12 @@ export function CasesPageContent({
           <div className="mt-20 grid gap-8 border-t border-bd pt-14 lg:grid-cols-12 lg:items-stretch">
             <div className="lg:col-span-7">
               <h2 className="h2 text-tx">你的故事會是哪一條？</h2>
-              <p className="mt-3 max-w-[440px] text-[15px] leading-[1.8] text-tx2">免費初步評估 30 分鐘：先聽你的產品在台灣怎麼賣，談完給你一頁，說你比較像哪一條路、建議從哪一章開始。有時候我們會建議你再等等，那也是一種答案。</p>
+              <p className="mt-3 max-w-[440px] text-[15px] leading-[1.8] text-tx2">{CTA_LINE}</p>
               <button onClick={onMessageOpen} className="mt-6 cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy hover:bg-gold-l">
                 預約 30 分鐘 →
               </button>
             </div>
             <Link href="/assess" className="group bg-navy p-8 text-white transition-transform active:scale-[.985] [@media(hover:hover)]:hover:-translate-y-1 md:p-10 lg:col-span-5">
-              <p className="text-[13px] font-semibold text-gold">2 分鐘處境比對</p>
               <h3 className="h3 mt-3 text-white">不確定自己比較像哪一條？</h3>
               <p className="mt-3 text-[15px] leading-[1.8] text-white/70">三個問題，比對我們參與過的三個案例，找出最接近的一個</p>
               <div className="mt-6 flex gap-2">

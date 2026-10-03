@@ -21,8 +21,8 @@ export const storyChapters = [
     label: "起點・躍馬企業",
     title: "43 年，把台灣的貨送到世界各地",
     paragraphs: [
-      "躍馬做國際貨運承攬已經 43 年：報關、倉儲、海空運、最後一哩。",
-      "在躍馬，接手的不只是報關單和貨櫃，還有 43 年累積下來的客戶——和他們的處境。",
+      "躍馬做國際貨運承攬已經 43 年：報關、倉儲、海空運、最後一哩",
+      "在躍馬，接手的不只是報關單和貨櫃，還有 43 年累積下來的客戶——和他們的處境",
     ],
     stats: true,
     image: { src: "/images/about/about-port-1600.webp", alt: "貨櫃碼頭——躍馬 43 年的日常", position: "center 40%" },
@@ -33,9 +33,9 @@ export const storyChapters = [
     label: "市場觀察",
     title: "貨送到了，客戶的日子卻一年比一年難",
     paragraphs: [
-      "每一批貨送完，我們會打電話關心。聽到的，越來越不是物流的事：產品要怎麼在當地註冊、證要掛在誰名下；有的客戶，訂單變成一單有、一單沒有。",
-      "疫情那幾年最明顯。2021 年 9 月，一個 40 呎貨櫃的全球平均運價漲到 10,377 美元，是 2019 年的七倍多。很多客戶不是貨送不出去，是送出去已經不划算。",
-      "疫情過了，壓力沒有走。台灣 171 萬家中小企業，2024 年賣出 31.1 兆元，賣到國外的只有 3.2 兆——十塊錢裡大約只有一塊。島內的人口，從 2024 年起每個月都在減少。",
+      "每一批貨送完，我們會打電話關心。聽到的，越來越不是物流的事：產品要怎麼在當地註冊、證要掛在誰名下；有的客戶，訂單變成一單有、一單沒有",
+      "疫情那幾年最明顯。2021 年 9 月，一個 40 呎貨櫃的全球平均運價漲到 10,377 美元，是 2019 年的七倍多。很多客戶不是貨送不出去，是送出去已經不划算",
+      "疫情過了，壓力沒有走。台灣 171 萬家中小企業，2024 年賣出 31.1 兆元，賣到國外的只有 3.2 兆——十塊錢裡大約只有一塊。島內的人口，從 2024 年起每個月都在減少",
     ],
     insert: { afterParagraph: 1, content: <FreightRateChart /> },
   },
@@ -44,8 +44,8 @@ export const storyChapters = [
     label: "關鍵洞察",
     title: "差別不在物流，而在抵達之後有沒有人接手",
     paragraphs: [
-      "我們的客戶，跟著市場一起面臨轉型與生存的壓力。一次一次聊下去，看清楚一件事：貨都送得到。真正拉開差距的，是抵達之後有沒有人接著走——證照有沒有人辦、貨架上有沒有人推、第一封英文客訴有沒有人回。",
-      "這些事不在任何一家貨代的服務範圍裡，也不在躍馬的。",
+      "我們的客戶，跟著市場一起面臨轉型與生存的壓力。一次一次聊下去，看清楚一件事：貨都送得到。真正拉開差距的，是抵達之後有沒有人接著走——證照有沒有人辦、貨架上有沒有人推、第一封英文客訴有沒有人回",
+      "這些事不在任何一家貨代的服務範圍裡，也不在躍馬的",
     ],
     image: { src: "/images/about/story-belief-compass-1600.webp", alt: "羅盤放在世界地圖上——有計畫的探索", maxTierWidth: 1600, position: "center" },
     photoSlot: "PHOTO-SLOT-03",
@@ -55,9 +55,9 @@ export const storyChapters = [
     label: "鹿飛的成立",
     title: "守住本業很安全，但客戶需要我們再往前走一步",
     paragraphs: [
-      "最穩的路，是把報關和運送做好，守住 43 年的本業。但客戶卡住的地方，已經不在港口了。",
-      "所以跳出躍馬既有的框架，成立了鹿飛：從那些痛點往前走——先看清海外市場，弄懂當地法規，找到通路，再陪你落地、接客服。四件最難的事，做成四個方案：市場探查、寄賣、公司落地、海外客服。",
-      "躍馬是我們的後盾：躍馬把貨送到，鹿飛讓貨在當地被買走。",
+      "最穩的路，是把報關和運送做好，守住 43 年的本業。但客戶卡住的地方，已經不在港口了",
+      "所以跳出躍馬既有的框架，成立了鹿飛：從那些痛點往前走——先看清海外市場，弄懂當地法規，找到通路，再陪你落地、接客服。四件最難的事，做成四個方案：市場探查、寄賣、公司落地、海外客服",
+      "躍馬是我們的後盾：躍馬把貨送到，鹿飛讓貨在當地被買走",
     ],
     servicesLink: true,
     image: { src: "/images/about/aaron-news-interview-1080.webp", alt: "台視新聞訪問躍馬企業市場經理", maxTierWidth: 1080, position: "42% center" },
@@ -101,19 +101,19 @@ const beliefs = [
 const teamRoles = [
   {
     title: "台灣核心",
-    desc: "合約、進度、對口窗口都在台灣，從第一次評估到最後一章，你只需要找同一個人。要出的貨，交給躍馬報關、運送——那是我們 43 年的本業。",
+    desc: "合約、進度、對口窗口都在台灣，從第一次評估到最後一章，你只需要找同一個人。要出的貨，交給躍馬報關、運送——那是我們 43 年的本業",
     photoSlot: "PHOTO-SLOT-05A",
     icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="11" r="4" stroke="currentColor" strokeWidth="1.5" /><path d="M7 26C7 21.0294 11.0294 17 16 17C20.9706 17 25 21.0294 25 26" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><circle cx="25" cy="9" r="2" stroke="currentColor" strokeWidth="1.2" /><circle cx="7" cy="9" r="2" stroke="currentColor" strokeWidth="1.2" /></svg>,
   },
   {
     title: "菲律賓合作夥伴",
-    desc: "貨到了馬尼拉，接手的是一群在當地做了多年的人：他們經營英語教育機構與連鎖餐飲，把一個台灣手搖飲品牌從一家做到十幾家。市場探查的面板、落地的文件與跑腿、海外客服的人手，都從這裡出來。",
+    desc: "貨到了馬尼拉，接手的是一群在當地做了多年的人：他們經營英語教育機構與連鎖餐飲，把一個台灣手搖飲品牌從一家做到十幾家。市場探查的面板、落地的文件與跑腿、海外客服的人手，都從這裡出來",
     photoSlot: "PHOTO-SLOT-05B",
     icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="1.5" /><path d="M5 16H27M16 5C19 8 19 24 16 27M16 5C13 8 13 24 16 27" stroke="currentColor" strokeWidth="1.2" /><circle cx="22" cy="11" r="1.5" stroke="currentColor" strokeWidth="1" /></svg>,
   },
   {
     title: "北美團隊",
-    desc: "另一條路通往北美。當地團隊做研究、跑展覽、引進買家、上談判桌，正陪一個台灣魚鬆品牌走美國的第一關。北美通路由他們執行，台灣這邊的窗口不換。",
+    desc: "另一條路通往北美。當地團隊做研究、跑展覽、引進買家、上談判桌，正陪一個台灣魚鬆品牌走美國的第一關。北美通路由他們執行，台灣這邊的窗口不換",
     photoSlot: "PHOTO-SLOT-05C",
     icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="4" y="10" width="24" height="14" stroke="currentColor" strokeWidth="1.5" /><path d="M4 15H28M10 6L10 10M22 6L22 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" /><rect x="18" y="18" width="6" height="3" stroke="currentColor" strokeWidth="1" /></svg>,
   },
@@ -143,16 +143,14 @@ export function AboutPage({ photoSources = {} }: { readonly photoSources?: About
 
       <section id="story" className="scroll-mt-[80px] bg-white py-[80px] md:py-[112px]">
         <div className="lufe-container">
-          <p className="text-[13px] font-semibold text-gold-d">鹿飛的故事</p>
           <StoryChapters chapters={storyChapters} photoSources={photoSources} />
         </div>
       </section>
 
       <section id="team" className="scroll-mt-[80px] border-y border-bd/40 bg-cream py-[72px]">
         <div className="lufe-container">
-          <p className="mb-4 text-[13px] font-semibold text-gold-d">05・今天的團隊</p>
           <h2 className="h2">讓台灣企業出海，少一點害怕，<br /><span className="text-gold-d">多一點把握</span></h2>
-          <p className="lead mt-5 max-w-[720px]">這是成立鹿飛的原因。做法是把出海拆成小步：先花 1～2 萬看市場反應，再決定要不要往下走。所以第一次談，只問問題；有時候會建議你再等等，那也是一種答案。</p>
+          <p className="lead mt-5 max-w-[720px]">這是成立鹿飛的原因。做法是把出海拆成小步：先花 1～2 萬看市場反應，再決定要不要往下走。所以第一次談，只問問題；有時候會建議你再等等，那也是一種答案</p>
           <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
             {teamRoles.map((role) => (
               <article key={role.title} className="border border-bd bg-white p-6">
@@ -169,7 +167,6 @@ export function AboutPage({ photoSources = {} }: { readonly photoSources?: About
       <section id="network" className="scroll-mt-[80px] bg-navy py-[80px] text-white md:py-[96px]">
         <div className="lufe-container grid items-center gap-12 lg:grid-cols-[1fr_480px]">
           <div className="min-w-0">
-            <p className="mb-4 text-[13px] font-semibold text-gold">06・資源網絡</p>
             <h2 className="h2 text-white">跨越三地的資源網絡，<br /><span className="text-gold">支援每一個出海計畫</span></h2>
             <p className="lead !text-white/70 mt-5 max-w-[620px]">通路關係、在地夥伴與科技工具，整合為同一套跨境執行體系</p>
             <p className="mt-8 text-[13px] text-white/55">台北・馬尼拉・洛杉磯・紐約・舊金山・拉斯維加斯</p>
@@ -197,7 +194,6 @@ export function AboutPage({ photoSources = {} }: { readonly photoSources?: About
       <section id="philosophy" className="scroll-mt-[80px] bg-navy py-[80px] text-white md:py-[96px]">
         <div className="lufe-container grid items-center gap-14 lg:grid-cols-[1fr_440px]">
           <div className="order-2 lg:order-1">
-            <p className="mb-4 text-[13px] font-semibold text-gold">07・鹿飛的信念</p>
             <h2 className="h2 text-white">鹿飛相信的四件事</h2>
             <div className="mt-10 divide-y divide-white/15 border-y border-white/15">
               {beliefs.map((belief, index) => (

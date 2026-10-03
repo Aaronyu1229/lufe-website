@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
@@ -54,9 +55,11 @@ export default function SubsidiesPage() {
 
       <section className="border-y border-bd/60 bg-cream/60 py-7">
         <div className="lufe-container flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
-          <p className="eyebrow shrink-0 text-gold">主管機關</p>
-          <div className="flex flex-1 flex-wrap items-center gap-x-8 gap-y-2"><AgencyBadge name="國際貿易署" sub="TITA · 貿易署" /><span className="hidden h-5 w-px bg-bd md:block" /><AgencyBadge name="經濟部" sub="MOEA" /><span className="hidden h-5 w-px bg-bd md:block" /><AgencyBadge name="中小及新創企業署" sub="SMEA · 中企署" /></div>
-          <p className="shrink-0 text-[11.5px] text-tx3 md:text-right">最後更新 2026.10</p>
+          <div className="flex flex-1 flex-wrap items-center justify-center gap-x-12 gap-y-5 opacity-80 md:justify-start">
+            <Image src="/images/logo/agencies/tita.png" alt="經濟部國際貿易署" width={460} height={61} className="h-7 w-auto md:h-8" />
+            <span className="flex items-center gap-2.5" role="img" aria-label="經濟部"><Image src="/images/logo/agencies/moea-mark.png" alt="" width={97} height={96} className="h-7 w-auto md:h-8" /><span className="text-[20px] font-semibold tracking-[0.12em] text-tx md:text-[22px]">經濟部</span></span>
+            <Image src="/images/logo/agencies/smea.png" alt="經濟部中小及新創企業署" width={391} height={55} className="h-7 w-auto md:h-8" />
+          </div>
         </div>
       </section>
 
@@ -64,9 +67,9 @@ export default function SubsidiesPage() {
         <div className="lufe-container">
           <h2 className="h2 mb-10 max-w-[780px] text-tx">補助不是額外收入，是<span className="text-gold">降低你出海的實際成本</span></h2>
           <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-            <Pillar num="01" title="錢是真的" desc="每年數億元的預算由貿易署、經濟部執行，不是畫大餅。重點是知道怎麼申請、寫對計畫書" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" /><path d="M9 9C9 9 9.5 8 12 8C14.5 8 15 9.5 15 10.2C15 11.1 14 11.6 12 12.2C10 12.8 9 13.5 9 14.5C9 15.5 10 16 12 16C14 16 15 15 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M12 6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
-            <Pillar num="02" title="不只是申請表" desc="計畫書要和你的商業目標對齊，執行過程要有產出與報告。鹿飛的服務本身就符合大多數結案標準" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M10 13L12 15L16 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
-            <Pillar num="03" title="可以疊加使用" desc="同一家公司可以同時申請不同計畫——例如用展覽補助去美國展，用市場布建補助建立當地通路" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="9" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="8" y="6" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="13" y="3" width="8" height="8" stroke="currentColor" strokeWidth="1.5" /></svg>} />
+            <Pillar title="錢是真的" desc="每年數億元的預算由貿易署、經濟部執行，不是畫大餅。重點是知道怎麼申請、寫對計畫書" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" /><path d="M9 9C9 9 9.5 8 12 8C14.5 8 15 9.5 15 10.2C15 11.1 14 11.6 12 12.2C10 12.8 9 13.5 9 14.5C9 15.5 10 16 12 16C14 16 15 15 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M12 6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
+            <Pillar title="不只是申請表" desc="計畫書要和你的商業目標對齊，執行過程要有產出與報告。鹿飛的服務本身就符合大多數結案標準" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 3H15L19 7V20C19 20.5523 18.5523 21 18 21H8C7.44772 21 7 20.5523 7 20V4C7 3.44772 7.44772 3 8 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M14 3V8H19" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="M10 13L12 15L16 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>} />
+            <Pillar title="可以疊加使用" desc="同一家公司可以同時申請不同計畫——例如用展覽補助去美國展，用市場布建補助建立當地通路" icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="9" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="8" y="6" width="10" height="10" stroke="currentColor" strokeWidth="1.5" /><rect x="13" y="3" width="8" height="8" stroke="currentColor" strokeWidth="1.5" /></svg>} />
           </div>
         </div>
       </section>
@@ -84,5 +87,4 @@ export default function SubsidiesPage() {
   );
 }
 
-function AgencyBadge({ name, sub }: { readonly name: string; readonly sub: string }) { return <div className="flex items-baseline gap-2.5"><span className="text-[15.5px] font-semibold tracking-[-0.2px] text-tx md:text-[16.5px]">{name}</span><span className="text-[10.5px] font-medium tracking-wider text-tx3">{sub}</span></div>; }
-function Pillar({ num, title, desc, icon }: { readonly num: string; readonly title: string; readonly desc: string; readonly icon: ReactNode }) { return <div className="border border-bd bg-white p-7"><div className="mb-4 flex items-center justify-between"><div className="grid h-12 w-12 place-items-center border border-gold/40 text-gold-d">{icon}</div><span className="num text-[24px] text-gold">{num}</span></div><h3 className="h3 text-tx">{title}</h3><p className="mt-2 text-[15px] leading-[1.8] text-tx2">{desc}</p></div>; }
+function Pillar({ title, desc, icon }: { readonly title: string; readonly desc: string; readonly icon: ReactNode }) { return <div className="border border-bd bg-white p-7"><div className="mb-4 flex items-center justify-between"><div className="grid h-12 w-12 place-items-center border border-gold/40 text-gold-d">{icon}</div></div><h3 className="h3 text-tx">{title}</h3><p className="mt-2 text-[15px] leading-[1.8] text-tx2">{desc}</p></div>; }

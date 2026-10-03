@@ -60,7 +60,6 @@ describe("home page", () => {
     }
 
     for (const road of HOME_CASE_ROADS) {
-      expect(rendered).toContain(road.label);
       expect(rendered).toContain(road.title);
       expect(rendered).toContain(road.detail);
     }
@@ -74,7 +73,6 @@ describe("home page", () => {
     for (const [index, expected] of HOME_CHAPTER_COPY.entries()) {
       const chapter = HOME_CHAPTERS[index];
       expect(chapter).toMatchObject(expected);
-      expect(rendered).toContain(expected.label);
       expect(rendered).toContain(`>${expected.title}</h3>`);
       expect(rendered).toContain(expected.subtitle);
       expect(rendered).toContain(`>${expected.linkLabel}</a>`);
@@ -102,7 +100,7 @@ describe("home page", () => {
     }
     expect(rendered).toContain("預約 30 分鐘 →");
     expect(rendered).toContain("還不確定？先做 2 分鐘處境比對 →");
-    expect(rendered).toContain("送出後一個工作天內回覆。");
+    expect(rendered).toContain("免費 30 分鐘初步評估，一個工作天內回覆。");
     expect(rendered).not.toContain("24 小時內");
     for (const removed of ["80 家", "1.2 倍", "已簽 NDA", "24 小時內由鹿飛顧問團隊回覆"]) expect(rendered).not.toContain(removed);
     expect(rendered).toContain("出海實務洞察，");

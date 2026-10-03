@@ -6,6 +6,8 @@
  * Each case is its own /cases/[slug] route.
  */
 
+import { CTA_LINE } from "./cta";
+
 export type TagVariant = "sky" | "gold";
 export type CaseStageSlug = "market-assessment" | "product-testing" | "channel-entry" | "localization";
 
@@ -166,7 +168,7 @@ const goatMilkSoap: CaseStudy = {
   timelineHeading: ["這一案走的", "四步"],
   cta: {
     heading: ["你的產品，可能也卡在", "「別人看不懂」"],
-    body: "免費初步評估 30 分鐘。先聽你的產品在台灣怎麼賣，談完給你一頁：建議從哪一章開始，或建議再等等。不收費。",
+    body: CTA_LINE,
   },
   related: ["fish-floss-us-fda", "bubble-tea"],
 };
@@ -249,7 +251,7 @@ const fishFloss: CaseStudy = {
   timelineHeading: ["這個案子的", "四個步驟"],
   cta: {
     heading: ["你的產品，可能也卡在", "同一關"],
-    body: "想進美國的食品，你可能已經卡在成分表上，只是還沒發現。\n免費初步評估 30 分鐘：先聽你的產品在台灣怎麼賣，談完給你一頁——建議從哪一章開始，或建議再等等。不收費、不賣課、不承諾一定接。",
+    body: CTA_LINE,
     secondary: "不確定像哪一個案例？先做 2 分鐘處境比對",
   },
   related: ["goat-milk-soap-global", "bubble-tea"],
@@ -311,10 +313,8 @@ const bubbleTea: CaseStudy = {
   keyDecisions: [],
   timeline: [],
   cta: {
-    body: "每個案子的起點都是一場對話。先聽你的產品在台灣怎麼賣，我們會說明這個故事裡哪一段跟你最相關；有時候聽完，我們會建議你再等等——那也是一種答案。",
-    notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。",
+    body: CTA_LINE,
     secondary: "還不確定？先做 2 分鐘處境比對",
-    footnote: "送出後一個工作天內回覆。",
   },
   related: ["goat-milk-soap-global", "fish-floss-us-fda"],
 };

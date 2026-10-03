@@ -34,7 +34,6 @@ describe("CaseDetailPageContent", () => {
         }
       }
       for (const event of caseItem.timeline) {
-        expect(markup).toContain(event.when);
         expect(markup).toContain(event.title);
         expect(markup).toContain(event.desc);
       }
@@ -92,6 +91,6 @@ describe("CaseDetailPageContent", () => {
     expect(markup).not.toContain('href="/services/product-testing"');
     expect(markup).toContain("北美走另一條線，看「北美通路」怎麼做");
     expect(markup).toContain("不確定像哪一個案例？先做 2 分鐘處境比對");
-    expect(markup).toContain("交出來的");
+    expect(markup).not.toContain("交出來的");
   });
 });

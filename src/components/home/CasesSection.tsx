@@ -235,8 +235,7 @@ export function CasesSection() {
               <span aria-hidden="true" className="mb-5 grid h-10 w-10 place-items-center border border-gold/40 text-gold-d transition-colors duration-200 [@media(hover:hover)]:group-hover:border-gold-d">
                 <Icon size={20} className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-px" />
               </span>
-              <p className="text-[13px] font-semibold text-gold-d">{road.label}</p>
-              <h3 className="mt-3 font-sans text-[22px] font-semibold leading-[1.35] text-tx">{road.title}</h3>
+              <h3 className="font-sans text-[22px] font-semibold leading-[1.35] text-tx">{road.title}</h3>
               <p className="mt-4 whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{road.detail}</p>
             </article>
             );

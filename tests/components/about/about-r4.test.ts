@@ -13,7 +13,7 @@ describe("AboutPage R4 story", () => {
     const networkMarkup = markup.slice(markup.indexOf('id="network"'), markup.indexOf('id="philosophy"'));
 
     expect(markup).not.toContain("躍馬企業官網");
-    expect(markup).toContain("關鍵洞察");
+    expect(markup).not.toContain("關鍵洞察");
     for (const chapter of storyChapters) expect(storyMarkup).toContain(chapter.title);
     expect((markup.match(/id="story"/g) ?? [])).toHaveLength(1);
     expect(markup.slice(markup.indexOf('class="lufe-hero'), markup.indexOf("</section>") + "</section>".length)).not.toContain('id="story"');

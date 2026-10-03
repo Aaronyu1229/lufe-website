@@ -73,7 +73,7 @@ function ExploreTile({ href, icon, eyebrow, title, description, action, external
   readonly external?: boolean;
 }) {
   const className = "group flex min-h-[280px] flex-col border border-bd bg-white p-7 transition-[border-color,transform] active:scale-[.985] md:p-8 [@media(hover:hover)]:hover:-translate-y-1 [@media(hover:hover)]:hover:border-gold";
-  const content = <><span className="grid h-10 w-10 place-items-center border border-gold/40 text-gold-d">{icon}</span><p className="mt-6 text-[13px] font-semibold text-gold-d">{eyebrow}</p><h3 className="h3 mt-2 text-tx">{title}</h3><p className="mt-3 text-[15px] leading-[1.8] text-tx2">{description}</p><span className="mt-auto pt-8 text-[15px] font-semibold text-navy"><span className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-1">{action}</span></span></>;
+  const content = <><span className="grid h-10 w-10 place-items-center border border-gold/40 text-gold-d">{icon}</span><h3 className="h3 mt-6 text-tx">{title}</h3><p className="mt-3 text-[15px] leading-[1.8] text-tx2">{description}</p><span className="mt-auto pt-8 text-[15px] font-semibold text-navy"><span className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-1">{action}</span></span></>;
 
   return external
     ? <a href={href} target="_blank" rel="noopener noreferrer" aria-label="前往 TradePilot（另開新分頁）" className={className}>{content}</a>

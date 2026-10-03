@@ -77,7 +77,6 @@ export function MethodologyPage() {
             <span className="text-white/30">/</span>
             <span className="text-white/75">鹿飛方法論</span>
           </nav>
-          <p className="mb-4 text-[14px] font-semibold text-gold">鹿飛方法論</p>
           <h1 className="h1 mb-6 text-white">小步出海法</h1>
           <p className="lead max-w-[620px] whitespace-pre-line !text-white/75">市場不會因為你準備好了就要你。{"\n"}所以我們先問它</p>
         </div>

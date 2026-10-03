@@ -79,7 +79,6 @@ describe("subsidy SSR content", () => {
       for (const item of subsidy.importantNotes ?? []) expectText(markup, item);
     }
     expect(compareMarkup.match(/看重點 ↓/g)).toHaveLength(4);
-    expect(markup.match(/細節/g)).toHaveLength(4);
     expect(markup).not.toContain("SubsidyStageMap");
   });
 });

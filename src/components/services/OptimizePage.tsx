@@ -9,6 +9,7 @@ import { TieredImage } from "@/components/TieredImage";
 import { FaqSection } from "@/components/faq/FaqSection";
 
 import { ContactButton } from "./ContactButton";
+import { CTA_LINE } from "@/data/cta";
 
 export const OPTIMIZE_PAIN_POINTS = [
   {
@@ -86,7 +87,6 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
             <span className="text-white/30">/</span>
             <span className="text-white/75">運營優化</span>
           </nav>
-          <p className="mb-4 text-[14px] font-semibold text-gold">進階 · 運營優化</p>
           <h1 className="h1 mb-6 max-w-[760px] text-white">已經跑起來了，該讓每公里更省</h1>
           <p className="lead max-w-[650px] whitespace-pre-line !text-white/75">產品在海外已經賣得動，但利潤好像一直被吃掉、事情一直對不上、每個月的決定像在猜。你可能已經卡在這裡——這不是第一年的事，是走過第一年之後的事。</p>
           <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">免費初步評估 30 分鐘 →</ContactButton>
@@ -117,7 +117,6 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         <div className="lufe-container grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
           <div className="relative min-h-[260px] overflow-hidden border border-bd md:order-2"><TieredImage src="/images/services/services-optimize-whiteboard-1600.webp" alt="檢視物流與營運資料" sizes="(max-width: 767px) 100vw, 50vw" className="absolute inset-0 h-full w-full object-cover" /></div>
           <div className="md:order-1">
-            <p className="text-[14px] font-semibold text-gold-d">01</p>
             <SectionHeading>省不下來：<span className="text-gold-d">先看你的物流帳單</span></SectionHeading>
             <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">創辦人來自躍馬企業，背後是 43 年的國際物流。一張月結單裡哪些數字不該長那樣，我們看得出來。我們從運輸方式、倉儲位置、退貨處理三個層面重新盤點。</p>
             <p className="mt-6 border-l-4 border-gold bg-white px-5 py-4 text-[16px] font-medium leading-[1.8] text-tx">盤完，我們告訴你哪裡能省、值不值得動。不值得動的，我們會直接說。</p>
@@ -128,7 +127,6 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
       <section id="opt-sales" className="scroll-mt-[90px] bg-white py-[72px] md:py-[88px]">
         <div className="lufe-container grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-12">
           <div>
-            <p className="text-[14px] font-semibold text-gold-d">02</p>
             <SectionHeading>賣得起伏：<span className="text-gold-d">廣告一停就沒單，通常不是廣告的問題</span></SectionHeading>
             <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">銷量跟著節慶走、廣告停了就掉、評價忽高忽低——多半是通路組合、價格帶、上架內容三件事有一件沒對。{"\n"}我們把三件事攤開來看，告訴你該調哪一個。這一段我們不代操廣告、不代管通路；要找人執行，我們幫你介紹。</p>
           </div>
@@ -140,7 +138,6 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
         <div className="lufe-container grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
           <div className="relative min-h-[260px] overflow-hidden border border-bd md:order-2"><TieredImage src="/images/insights/amazon-category-1600.webp" alt="線上通路與搜尋資料" sizes="(max-width: 767px) 100vw, 50vw" className="absolute inset-0 h-full w-full object-cover" /></div>
           <div className="md:order-1">
-            <p className="text-[14px] font-semibold text-gold-d">03</p>
             <SectionHeading>沒被找到：<span className="text-gold-d">客人在問 AI，AI 沒提到你</span></SectionHeading>
             <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-tx2">越來越多人買東西前，先問 ChatGPT、Perplexity。AI 回答時沒有你的名字，客人就不知道你在架上。{"\n"}這一段我們現在不代寫、不代操。第一次談，我們幫你看缺在哪：是搜尋、是 AI 問答，還是社群；要找人做，我們幫你介紹。</p>
             <p className="mt-6 border-l-4 border-gold bg-white px-5 py-4 text-[16px] font-medium leading-[1.8] text-tx">先弄清楚缺在哪，再決定花不花錢。</p>
@@ -150,7 +147,6 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
 
       <section id="opt-system" className="scroll-mt-[90px] bg-white py-[72px] md:py-[88px]">
         <div className="lufe-container">
-          <p className="text-[14px] font-semibold text-gold-d">04</p>
           <SectionHeading>跑得卡卡：<span className="text-gold-d">事情都在人的腦子裡</span></SectionHeading>
           <p className="mt-5 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.9] text-tx2">台灣早上九點，馬尼拉也是九點，但事情還是對不上——因為流程在人身上，不在系統裡。我們幫你導入一套營運系統，分五步：</p>
           <Reveal className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-5">
@@ -163,7 +159,6 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
 
       <section id="opt-dashboard" className="scroll-mt-[90px] bg-navy py-[72px] text-white md:py-[88px]">
         <div className="lufe-container">
-          <p className="text-[14px] font-semibold text-gold">05</p>
           <h2 className="h2 text-white">看不見：<span className="text-gold">每個月結束才知道賺沒賺</span></h2>
           <p className="mt-5 whitespace-pre-line text-[16px] leading-[1.9] text-white/75">營運系統的第四步就是這件事：把物流、通路、客服的數字放到同一個畫面。不是為了好看，是為了下個月的決定不用猜。</p>
         </div>
@@ -185,7 +180,7 @@ export function OptimizePageContent({ relatedReading }: { readonly relatedReadin
       <section className="bg-navy py-[78px] text-white md:py-[96px]">
         <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
           <h2 className="h2 text-white">聊聊目前卡在哪一段</h2>
-          <p className="mt-4 text-[16px] leading-[1.85] text-white/70">30 分鐘，聽你現在的狀況，告訴你該從哪一段動——也可能建議你再等等。不收費、不承諾、不賣課。</p>
+          <p className="mt-4 text-[16px] leading-[1.85] text-white/70">{CTA_LINE}</p>
           <ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">免費初步評估 30 分鐘 →</ContactButton>
         </div></div>
       </section>

@@ -15,7 +15,7 @@ describe("AboutPage v3 story", () => {
       "多一點把握",
       "10,377 美元",
       "1,420 美元",
-      "躍馬是我們的後盾：躍馬把貨送到，鹿飛讓貨在當地被買走。",
+      "躍馬是我們的後盾：躍馬把貨送到，鹿飛讓貨在當地被買走",
     ]) expect(markup).toContain(copy);
     for (const removed of ["資料來源", "退場", "認識躍馬企業", "jumping.group"]) expect(markup).not.toContain(removed);
     expect(markup).not.toMatch(/我(?!們)/);

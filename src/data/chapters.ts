@@ -1,3 +1,5 @@
+import { CTA_LINE } from "./cta";
+
 export const PHILIPPINES_CHAPTER_KEYS = ["m1", "m3", "m9", "after"] as const;
 
 export type PhilippinesChapterKey = (typeof PHILIPPINES_CHAPTER_KEYS)[number];
@@ -242,7 +244,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "訪談的是誰？樣本夠嗎？", answer: "目前是當地有固定收入、會自己掏錢買東西的消費者，每一位都先用過試用包再聊。\n人數不多、集中在特定族群與地區，我們在每一份報告裡都寫明這件事。\n1～2 萬買的是方向，不是統計。方向對了，再花錢擴樣。", takeaway: "1～2 萬買的是方向，不是統計" },
     ],
     next: { label: "下一章 →", title: "第三個月 · 寄賣", heading: "上架了，讓人先用過再說", href: "/services/consignment", image: "/images/hero-video/chapter-warehouse-1600.webp", imageAlt: "貨架上待出貨的包裹" },
-    cta: { title: "從一次評估開始", body: "我們先聽你的產品在台灣怎麼賣，再說適不適合去問菲律賓。\n有時候聽完，我們會建議你再等等——那也是一種答案。", notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。", action: "預約 30 分鐘 →", link: { label: "想先看我們實際問到了什麼？→ 小步出海法", href: "/services/methodology" }, footnote: "送出後一個工作天內回覆。" },
+    cta: { title: "從一次評估開始", body: CTA_LINE, action: "預約 30 分鐘 →", link: { label: "想先看我們實際問到了什麼？→ 小步出海法", href: "/services/methodology" } },
   },
   m3: {
     key: "m3",
@@ -330,10 +332,8 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     next: { label: "下一章 →", title: "第九個月 · 公司落地", heading: "開始想要在當地有自己的人", href: "/services/localization", image: "/images/hero-video/chapter-storefront-1600.webp", imageAlt: "夜晚街角的咖啡店與行人" },
     cta: {
       title: "看你的產品適不適合寄賣",
-      body: "沒做過市場探查也可以聊，我們會先問你在台灣賣得怎麼樣。\n有時候聽完，我們會建議你先做市場探查，或再等等——那也是一種答案。",
-      notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。",
+      body: CTA_LINE,
       action: "預約 30 分鐘 →",
-      footnote: "送出後一個工作天內回覆。",
     },
     partnerStrip: {
       body: "你是通路？電商店家、連鎖、餐飲集團，想要更多台灣品牌上架？\n我們帶來的品牌都先做過市場探查、證走持證進口商、合約跟我們簽，你專心做通路。",
@@ -377,7 +377,6 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
           { title: "第二條 · 改了再帶過去", body: "台灣的產品到了當地，改名字、改價格、改包裝，\n變成當地人願意掏錢的樣子", fit: "適合：產品好、但知道當地口味和價格帶不一樣的品牌" },
           { title: "第三條 · 原封不動帶過去", body: "一個台灣的美業品牌，什麼都不改，只做當地的行銷，看它站不站得住", fit: "適合：品牌本身就是賣點、不想動產品的" },
         ],
-        ending: "三條路的成本、坑、時間都不一樣。第一次談，我們會先問你比較像哪一條",
       },
       {
         type: "price",
@@ -403,7 +402,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "你們會替我經營當地公司嗎？", answer: "不會。我們做的是統籌與代跑：把註冊、招人、證照、場地這些事接起來，陪到第一批人到位、流程跑順。\n公司是你的，決定也是你的。我們不替你經營，也不保證證照哪一天下來——審核時間不是我們能壓的。", takeaway: "不會。我們統籌、代跑，公司是你的" },
     ],
     next: { label: "下一章 →", title: "之後的每一天 · 海外客服", heading: "海外客服，交給專業英語團隊", href: "/services/call-center", image: "/images/hero-video/chapter-callcenter-1600.webp", imageAlt: "一邊通話一邊打字的客服人員", maxTierWidth: 1600 },
-    cta: { title: "聊聊你想在菲律賓開什麼", body: "先說你比較像三條路的哪一條，我們告訴你大概要多少、多久。\n有時候聽完，我們會建議你再等等——那也是一種答案。", notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。", action: "預約 30 分鐘 →", footnote: "送出後一個工作天內回覆。" },
+    cta: { title: "聊聊你想在菲律賓開什麼", body: CTA_LINE, action: "預約 30 分鐘 →" },
   },
   after: {
     key: "after",
@@ -461,7 +460,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "訊息量很小也可以嗎？", answer: "可以先約。首批我們想找的是量不大、但每一封都重要的品牌，一起把服務磨好。如果你的量小到自己回比較划算，我們會直接說。有時候我們會建議你再等等，那也是一種答案。", takeaway: "可以談，但划不划算我們會直說" },
     ],
     next: { label: "故事從頭來 →", title: "第一個月 · 市場探查", heading: "先驗證市場，再決定投入", href: "/services/product-testing", image: "/images/hero-video/chapter-research-1600.webp", imageAlt: "會議中討論圖表的團隊" },
-    cta: { title: "先約 30 分鐘", body: "免費初步評估。聊你現在的客訊量、誰在接、卡在哪；外包和自己請人哪個划算，第一次就告訴你。", action: "預約 30 分鐘初步評估 →", href: "#waitlist" },
+    cta: { title: "先約 30 分鐘", body: CTA_LINE, action: "預約 30 分鐘初步評估 →", href: "#waitlist" },
   },
   na: {
     key: "na",
@@ -510,6 +509,6 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { question: "跟菲律賓四章有關係嗎？", answer: "兩條線。北美由北美團隊在當地執行，鹿飛是你在台灣的窗口；要去北美的品牌如果需要英文客服，可以搭配海外客服。", takeaway: "兩條線，可搭配海外客服" },
     ],
     next: { label: "延伸服務 →", title: "海外客服", heading: "去北美的品牌，第一封英文客訴信也會來", href: "/services/call-center", image: "/images/hero-video/chapter-callcenter-1600.webp", imageAlt: "一邊通話一邊打字的客服人員", maxTierWidth: 1600 },
-    cta: { title: "先談 30 分鐘", body: "免費初步評估。先說你的產品現在在哪裡賣、賣得怎麼樣，我們一起看北美是不是你現在該走的那一步。不收費，談完你會知道下一步。", action: "預約 30 分鐘 →" },
+    cta: { title: "先談 30 分鐘", body: CTA_LINE, action: "預約 30 分鐘 →" },
   },
 };
