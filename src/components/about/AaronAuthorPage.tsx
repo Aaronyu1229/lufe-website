@@ -8,6 +8,7 @@ import { getArticlePublishedDate, getPublishedArticles } from "@/lib/articles/pu
 
 import { SubsidiesCTASection } from "../subsidy/SubsidiesCTASection";
 import { AuthorArticleList } from "./AuthorArticleList";
+import { CTA_LINE } from "@/data/cta";
 
 export function AaronAuthorPage() {
   const publishedArticles = getPublishedArticles();
@@ -55,7 +56,7 @@ export function AaronAuthorPage() {
 
       <SubsidiesCTASection
         heading="讀到這裡，還是不確定自己卡在哪？"
-        body="免費初步評估 30 分鐘：先聽你的產品在台灣怎麼賣，談完給你一頁，建議從哪一章開始。有時候我們會建議你再等等，那也是一種答案。不收費，一個工作天內回覆。"
+        body={CTA_LINE}
         buttonLabel="預約 30 分鐘 →"
         secondaryLabel="還不確定像哪一種？先做 2 分鐘處境比對"
       />

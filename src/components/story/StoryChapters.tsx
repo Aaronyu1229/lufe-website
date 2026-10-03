@@ -72,8 +72,6 @@ export function StoryChapters({ chapters, photoSources = {} }: { readonly chapte
   return <>{chapters.map((chapter, chapterIndex) => <div key={chapter.num}>
     <article className={`grid gap-8 py-14 md:py-20 lg:grid-cols-12 ${chapterIndex ? "border-t border-bd" : ""}`}>
       <div className="self-start lg:sticky lg:top-[112px] lg:col-span-4">
-        <p className="font-[var(--font-inter)] text-[14px] font-semibold text-gold-d">{chapter.num}</p>
-        <p className="mt-1 text-[13px] font-semibold text-tx3">{chapter.label}</p>
         <h2 className="mt-2 text-[clamp(24px,2.6vw,34px)] font-[650] leading-[1.3] text-tx">{chapter.title}</h2>
       </div>
       <div className="lg:col-span-7 lg:col-start-6">

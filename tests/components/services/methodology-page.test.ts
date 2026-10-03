@@ -68,7 +68,6 @@ describe("MethodologyPage", () => {
     for (const dimension of METHODOLOGY_DIMENSIONS) {
       const [en, zh] = splitDimensionName(dimension.name);
       expect(`${en} ${zh}`).toBe(dimension.name);
-      expect(markup).toContain(en);
       expect(markup).toContain(zh);
       expect(markup).toContain(dimension.question);
       expect(markup).toContain(dimension.criteria);

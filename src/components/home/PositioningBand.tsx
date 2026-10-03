@@ -135,7 +135,6 @@ export function ChaptersSection() {
               <span aria-hidden="true" className="mb-5 grid h-10 w-10 place-items-center border border-gold/40 text-gold-d transition-colors duration-200 [@media(hover:hover)]:group-hover:border-gold-d">
                 <Icon size={20} className="transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-px" />
               </span>
-              <p className="mb-4 text-[13px] font-semibold text-gold-d">{chapter.label}</p>
               <h3 className="mb-5 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">{chapter.title}</h3>
               <p className="text-[15px] leading-[1.85] text-tx2">{chapter.subtitle}</p>
               <Link href={chapter.href} className="mt-6 inline-flex text-[15px] font-semibold text-sky">

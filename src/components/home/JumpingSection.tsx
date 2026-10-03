@@ -53,7 +53,6 @@ export function JumpingSection() {
     <section id="jumping" className="py-[80px] md:py-[104px]">
       <div className="lufe-container">
         <div className="max-w-[820px]">
-          <p className="mb-4 text-[13px] font-semibold text-gold-d">{JUMPING_COPY.eyebrow}</p>
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
             {/* Keep each comma phrase whole so "到" never strands at a line end on phones. */}
             {JUMPING_COPY.title[0].split(/(?<=，)/).map((phrase) => <span key={phrase} className="inline-block">{phrase}</span>)}

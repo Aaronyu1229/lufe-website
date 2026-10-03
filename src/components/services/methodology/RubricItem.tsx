@@ -16,14 +16,14 @@ export function RubricItem({ dimension, num, defaultOpen }: {
   readonly num: string;
   readonly defaultOpen: boolean;
 }) {
-  const [en, zh] = splitDimensionName(dimension.name);
+  const [, zh] = splitDimensionName(dimension.name);
 
   return (
     <AccordionItem
       id={`methodology-rubric-${num}`}
       num={num}
       defaultOpen={defaultOpen}
-      header={<span className="block"><span className="block font-[var(--font-inter)] text-[12px] font-semibold uppercase tracking-[.08em] text-tx3">{en}</span><span className="block text-[22px] font-[650] leading-[1.35] text-tx">{zh}</span><span className="mt-1 block text-[16px] font-medium text-sky">「{dimension.question}」</span></span>}
+      header={<span className="block"><span className="block text-[22px] font-[650] leading-[1.35] text-tx">{zh}</span><span className="mt-1 block text-[16px] font-medium text-sky">「{dimension.question}」</span></span>}
     >
       <div className="grid gap-5 md:grid-cols-2">
         <p className="text-[15px] leading-[1.85] text-tx2"><strong className="text-tx">看：</strong>{dimension.criteria}</p>

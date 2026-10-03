@@ -113,7 +113,6 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
       <section className="border-b border-bd bg-white py-[64px] md:py-[88px]">
         <div className="lufe-container">
-          <p className="text-[13px] font-semibold text-gold-d">{caseItem.statsLabel ?? "成果"}</p>
           <div className="mt-6 grid gap-8 md:grid-cols-3">
             {caseItem.stats.map((stat) => (
               <div key={stat.label} className="border-t border-bd pt-6">
@@ -135,7 +134,6 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
             <div key={chapter.heading}>
               <article className={`grid gap-8 py-14 md:py-20 lg:grid-cols-12 ${chapterIndex === 0 ? "" : "border-t border-bd"}`}>
                 <div className="self-start lg:sticky lg:top-[112px] lg:col-span-4">
-                  <span className="font-sans text-[14px] font-semibold text-gold-d">{String(chapterIndex + 1).padStart(2, "0")}</span>
                   <h2 className="mt-2 text-[clamp(24px,2.6vw,34px)] font-[650] leading-[1.3] text-tx">{chapter.heading}</h2>
                 </div>
                 <div className="lg:col-span-7 lg:col-start-6">
@@ -209,7 +207,6 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
               {caseItem.timeline.map((item, index) => (
                 <article key={`${item.when}-${item.title}`} className="flex min-h-[260px] min-w-0 flex-col border border-bd bg-white p-7">
                   <span className="mb-5 grid h-10 w-10 place-items-center border border-gold/40 text-[15px] font-semibold leading-none text-gold-d tabular-nums">{index + 1}</span>
-                  <p className="mb-2 text-[13px] font-semibold text-gold-d">{item.when}</p>
                   <h3 className="h3 mb-2 text-tx">{item.title}</h3>
                   <p className="text-[15px] leading-[1.75] text-tx2">{item.desc}</p>
                 </article>

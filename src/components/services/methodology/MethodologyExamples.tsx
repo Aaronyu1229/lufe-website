@@ -54,11 +54,9 @@ export function MethodologyExamples() {
         </header>
         <div className="grid min-w-0 lg:grid-cols-12">
           <section className="p-6 md:p-8 lg:col-span-4 lg:border-r lg:border-bd">
-            <p className="text-[13px] font-semibold text-gold-d">01 怎麼問</p>
             <p className="mt-4 whitespace-pre-line text-[15px] leading-[1.85] text-tx2">{example.method}</p>
           </section>
           <section className="p-6 md:p-8 lg:col-span-8">
-            <p className="text-[13px] font-semibold text-gold-d">02 問到什麼</p>
             <div data-lufe-methodology-findings className="mt-4 grid gap-3 sm:grid-cols-2">
               {example.findings.map((finding) => <article key={finding.label} className="border border-bd p-5">
                 <p className="text-[12px] font-semibold text-gold-d">{finding.label}</p>
@@ -69,10 +67,8 @@ export function MethodologyExamples() {
           </section>
         </div>
         <section className="bg-navy p-6 text-white md:p-8">
-          <p className="text-[13px] font-semibold text-gold">03 決策意涵</p>
           <div className="mt-4 grid gap-6 md:grid-cols-3">
             {example.implications.map((implication, index) => <div key={implication} className="border-t border-white/20 pt-4">
-              <p className="font-[var(--font-inter)] text-[13px] font-semibold text-gold">{String(index + 1).padStart(2, "0")}</p>
               <p className="mt-2 text-[17px] font-[650] leading-[1.55] text-white">{implication}</p>
             </div>)}
           </div>
