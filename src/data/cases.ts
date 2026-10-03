@@ -47,9 +47,15 @@ export interface StoryChapter {
 }
 
 export interface CaseCta {
-  /** [plain, gold] heading parts. */
-  readonly heading: readonly [string, string];
+  /** [plain, gold] heading parts; defaults to the shared heading. */
+  readonly heading?: readonly [string, string];
   readonly body: string;
+  /** Small lines between body and buttons. */
+  readonly notes?: string;
+  /** Secondary /assess link label; defaults to the shared label. */
+  readonly secondary?: string;
+  /** Small line under the buttons. */
+  readonly footnote?: string;
 }
 
 export interface CaseStudy {
@@ -62,7 +68,7 @@ export interface CaseStudy {
   readonly summary: string;
   /** Hard line break in the hero title after this phrase. */
   readonly titleBreakAfter?: string;
-  /** Shorter summary for "更多成功的故事" cards on other case pages; defaults to summary. */
+  /** Shorter summary for "更多案例" cards on other case pages; defaults to summary. */
   readonly cardSummary?: string;
   readonly heroImage: string;
   readonly listImage: string;
@@ -246,11 +252,11 @@ const bubbleTea: CaseStudy = {
   market: "sea",
   num: "十幾家",
   title: "一個手搖飲品牌，怎麼在菲律賓從零做到十幾家？",
-  summary: "合作夥伴在菲律賓自己做的手搖飲品牌：從台灣茶出發，改成當地的口味與價格，先開第一家驗證，再開放加盟，現在已經十幾家",
+  summary: "我們在菲律賓的當地夥伴從零做起的手搖飲品牌：從台灣茶出發，改成當地的口味與價格，先開第一家驗證，再開放加盟，現在十幾家。",
   heroImage: "/images/cases/detail/bubbletea-manila-hero-1080.webp",
   listImage: "/case-bubbletea.jpg",
   stats: [
-    { label: "從第一家店開始，在菲律賓自己展店", value: "十幾家" },
+    { label: "從第一家店開始，一路開到十幾家", value: "十幾家" },
     { label: "第一家站穩之後，才開放加盟", value: "開放加盟" },
     { label: "原料從台灣進口，口味與價格照當地調整", value: "台灣茶" },
   ],
@@ -258,15 +264,15 @@ const bubbleTea: CaseStudy = {
     {
       heading: "這不是我們幫別人做的案子，是合作夥伴自己做起來的",
       paragraphs: [
-        "這個手搖飲品牌，是我們在菲律賓的合作夥伴自己創立的。他們先在當地蓋了一間英語教育機構——找老師、找場地、招第一個學生；後來用同樣的方法，從零做了一個連鎖手搖飲品牌。",
-        "我們把它放進案例，是因為鹿飛在菲律賓的落地執行，就是從這群人來的：他們自己開過第一家店、聘過第一批人，也自己決定過什麼時候該開放加盟。",
+        "這個手搖飲品牌，是我們在菲律賓的當地夥伴從零做起來的。他們先在當地蓋了一間英語教育機構——招募師資、找場地、招第一個學生；後來也從零做起這個連鎖手搖飲品牌。",
+        "我們把它放進案例，是因為台灣品牌在菲律賓落地時，陪在現場的就是這群人：他們自己開過第一家店、聘過第一批人，也自己決定過什麼時候該開放加盟。",
       ],
       image: { src: "/images/cases/story/bubble-tea-1-1600.webp", alt: "櫃檯上的珍珠奶茶" },
     },
     {
       heading: "市場上已經有國際品牌",
       paragraphs: [
-        "進場的時候，當地手搖飲市場已經有國際品牌。一個新品牌要做的，是找到自己的位置，還要守住配方。",
+        "進場的時候，當地手搖飲市場已經有國際品牌。一個新品牌要做的，不是跟它們比大，是找到自己的位置，還要守住配方。",
       ],
     },
     {
@@ -280,7 +286,7 @@ const bubbleTea: CaseStudy = {
       heading: "先開一家驗證，再開放加盟",
       paragraphs: [
         "不是一開始就鋪點。先開第一家，確認口味、價格和營運都站得住，再開放加盟往外擴。現在這個品牌在菲律賓已經有十幾家店。",
-        "我們帶台灣品牌進菲律賓，也是同樣的順序：先小規模驗證，站得住了，再談擴張。",
+        "我們帶台灣品牌進菲律賓，也是同樣的順序：先用市場探查問當地消費者，再用寄賣小量上架；站得住了，才談公司落地。",
       ],
       showStageLinks: true,
     },
@@ -291,6 +297,12 @@ const bubbleTea: CaseStudy = {
   stagesUsed: ["localization"],
   keyDecisions: [],
   timeline: [],
+  cta: {
+    body: "每個案子的起點都是一場對話。先聽你的產品在台灣怎麼賣，我們會說明這個故事裡哪一段跟你最相關；有時候聽完，我們會建議你再等等——那也是一種答案。",
+    notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。",
+    secondary: "還不確定？先做 2 分鐘處境比對",
+    footnote: "送出後一個工作天內回覆。",
+  },
   related: ["goat-milk-soap-global", "fish-floss-us-fda"],
 };
 

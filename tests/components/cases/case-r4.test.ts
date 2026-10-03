@@ -57,8 +57,20 @@ describe("round 4 cases", () => {
     for (const caseItem of CASES) {
       const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem }));
       expect(markup).toContain("預約 30 分鐘 →");
-      expect(markup).toContain("還不確定像哪一種？先做 2 分鐘處境比對");
+      expect(markup).toContain(caseItem.cta?.secondary ?? "還不確定像哪一種？先做 2 分鐘處境比對");
+      expect(markup).toContain("更多案例");
       expect(markup).not.toContain("先做 2 分鐘評估");
+      expect(markup).not.toContain("更多成功的故事");
+    }
+  });
+
+  it("tells the bubble tea case through the local partner and keeps retired wording off", () => {
+    const tea = CASES.find((item) => item.slug === "bubble-tea")!;
+    const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: tea }));
+    for (const copy of ["還不確定？先做 2 分鐘處境比對", "送出後一個工作天內回覆。", "要不要走、走幾章，由你決定。", "陪在現場的就是這群人"]) expect(markup).toContain(copy);
+    expect(markup.split("預約 30 分鐘").length - 1).toBe(1);
+    for (const retired of ["老師", "家長", "學校", "用同樣的方法", "自己展店", "自己創立", "落地執行，就是從", "鹿飛會說明", "律師行", "24 小時內", "接班人", "二代"]) {
+      expect(markup).not.toContain(retired);
     }
   });
 });
