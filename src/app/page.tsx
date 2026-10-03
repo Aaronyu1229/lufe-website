@@ -40,8 +40,8 @@ export default async function Home() {
       <FaqJsonLd items={HOME_FAQ_ITEMS.map(({ question, answer }) => ({ question, answer }))} />
       <HeroSection />
       <OpeningSection />
-      <ChaptersSection />
       <JumpingSection />
+      <ChaptersSection />
       <CasesSection />
       <LatestInsightsSection articles={latestArticles} />
       <OneContractSection />

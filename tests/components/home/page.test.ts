@@ -12,7 +12,7 @@ import Home from "@/app/page";
 import { CasesSection, HOME_CASE_CARDS, HOME_CASE_ROADS } from "@/components/home/CasesSection";
 import { HOME_FAQ_ITEMS } from "@/components/home/HomeFAQ";
 import { HOME_HERO_SLIDES } from "@/components/home/HeroSection";
-import { JUMPING_COPY } from "@/components/home/JumpingSection";
+import { JUMPING_COPY, JUMPING_ROUTE } from "@/components/home/JumpingSection";
 import { ChaptersSection, HOME_CHAPTERS } from "@/components/home/PositioningBand";
 import { HOME_CONTRACT_COLUMNS, HOME_CONTRACT_ROWS, HOME_CONTRACT_WEEKDAYS } from "@/components/home/WhySection";
 
@@ -93,14 +93,13 @@ describe("home page", () => {
     expect(rendered).toContain("企業出海，前半段是把貨送到，");
     expect(rendered).toContain("後半段才是真正的考驗");
     expect(rendered).toContain("先花 1～2 萬問市場，過了，再一章一章往下走。");
-    expect(rendered).toContain(JUMPING_COPY.title[0]);
+    expect(rendered.replace(/<[^>]+>/g, "")).toContain(JUMPING_COPY.title[0]);
     expect(rendered).toContain(JUMPING_COPY.title[1]);
-    expect(rendered).toContain(JUMPING_COPY.body);
-    expect(rendered).toContain("我們相信的事很簡單");
-    expect(rendered).toContain("鹿飛案例成果");
-    expect(rendered).toContain("合作夥伴在菲律賓從零做起的手搖飲品牌，已開放加盟");
-    expect(rendered).toContain("台灣羊奶皂品牌重新定位後，銷往多個海外市場");
-    expect(rendered).toContain("台灣魚鬆進美國，先過法規，再談上市");
+    expect(rendered).toContain(JUMPING_COPY.intro);
+    for (const node of JUMPING_ROUTE) {
+      expect(rendered).toContain(node.title);
+      expect(rendered).toContain(node.note);
+    }
     expect(rendered).toContain("預約 30 分鐘 →");
     expect(rendered).toContain("還不確定？先做 2 分鐘處境比對 →");
     expect(rendered).toContain("送出後 24 小時內回覆。");
@@ -114,9 +113,10 @@ describe("home page", () => {
     const rendered = await markup();
 
     expect(rendered).not.toContain("馬尼拉的媽媽");
-    expect(JUMPING_COPY.eyebrow).toBe("來自躍馬企業");
-    expect(JUMPING_COPY.title).toEqual(["四十二年，", "看著貨櫃一個一個出去"]);
-    expect(JUMPING_COPY.body).toBe("躍馬企業做國際物流 42 年，500 多個出口案件，30 多個國家。\n在躍馬看的不是報表，是貨櫃出去以後的事：\n有的品牌在當地開了第二家店；\n更多的，是幾個月後貨退回來，或者就沒有下文了。\n\n貨都有送到。差別在到了之後，有沒有人接。\n鹿飛就是從這個觀察長出來的。");
+    expect(JUMPING_COPY.eyebrow).toBe("躍馬企業 × 鹿飛");
+    expect(JUMPING_COPY.title).toEqual(["從你的工廠，到菲律賓的貨架，", "是同一條路"]);
+    expect(JUMPING_COPY.intro).toBe("這條路的前半段，躍馬企業走了 42 年：500 多個出口案件，30 多個國家。看了這麼多年，我們最清楚貨櫃門打開之後，品牌會卡在哪裡。所以鹿飛的創辦人從躍馬走出來，把後半段接上。");
+    expect(rendered).toContain("每一家只負責自己那一段，進度卡住時，沒有人負責把它串起來。\n我們把市場探查、寄賣、公司落地與海外客服，放在同一份合約裡；國際物流交給躍馬企業。\n一個窗口對接所有環節，你只需要開一次會。");
   });
 
   it("shows the starter-package price and renders the prescribed card icons", async () => {
@@ -127,11 +127,29 @@ describe("home page", () => {
     expect(chaptersMarkup).toContain("出海起手包 7 萬 ＝ 市場探查 1～2 萬 ＋ 寄賣包 5～6 萬");
     expect(chaptersMarkup.match(/<svg/g)).toHaveLength(HOME_CHAPTERS.length);
     expect(casesMarkup).not.toContain("三條路的成本、坑、時間都不一樣。");
-    expect(rendered).toContain("看著貨櫃一個一個出去");
+    for (const removed of ["後半段旅程", "四十二年，", "看著貨櫃一個一個出去", "貨櫃關上門的那一刻", "接班人", "二代"]) expect(rendered).not.toContain(removed);
   });
 
   it("does not retain the deprecated North America wording in source files", () => {
     expect(readSourceTree(path.join(process.cwd(), "src"))).not.toContain("另一個故事");
+  });
+
+  it("places the Jumping route before the chapters and links each LUFÉ node to its chapter card", async () => {
+    const rendered = await markup();
+    const opening = rendered.indexOf("企業出海，前半段是把貨送到，");
+    const route = rendered.indexOf('id="jumping"');
+    const chapters = rendered.indexOf('id="chapters"');
+    expect(opening).toBeLessThan(route);
+    expect(route).toBeLessThan(chapters);
+    expect(rendered.match(/id="jumping"/g)).toHaveLength(1);
+    expect(rendered).toContain('aria-label="從台灣到菲律賓的同一條路"');
+    for (const [index, id] of ["chapter-1", "chapter-2", "chapter-3", "chapter-4"].entries()) {
+      expect(rendered).toContain(`href="#${id}"`);
+      expect(HOME_CHAPTERS[index].id).toBe(id);
+    }
+    expect(JUMPING_ROUTE.filter((node) => node.target)).toHaveLength(4);
+    expect(rendered).toContain('href="#chapters"');
+    expect(rendered).toMatch(/href="https:\/\/jumping\.group" target="_blank" rel="noopener noreferrer"/);
   });
 
   it("uses no rounded utility classes", async () => {

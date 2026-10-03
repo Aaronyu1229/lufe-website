@@ -5,6 +5,8 @@ type ContractRow = {
   readonly desc: string;
   readonly pillars: readonly [boolean, boolean, boolean];
   readonly isLufe?: boolean;
+  /** Shown in place of the dash where a partner covers the column. */
+  readonly partner?: string;
 };
 
 export const HOME_CONTRACT_ROWS: readonly ContractRow[] = [
@@ -12,7 +14,7 @@ export const HOME_CONTRACT_ROWS: readonly ContractRow[] = [
   { type: "貿易商", desc: "幫你把貨賣掉", pillars: [true, false, false] },
   { type: "客服外包", desc: "幫你接電話", pillars: [false, true, false] },
   { type: "貨代", desc: "把貨送到", pillars: [false, false, true] },
-  { type: "鹿飛 LUFÉ", desc: "一份合約走完", pillars: [true, true, true], isLufe: true },
+  { type: "鹿飛 LUFÉ", desc: "一份合約走完", pillars: [true, true, false], isLufe: true, partner: "躍馬企業" },
 ];
 
 export const HOME_CONTRACT_WEEKDAYS = [
@@ -44,7 +46,7 @@ export function OneContractSection() {
           ))}
         </div>
 
-        <p className="mt-6 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">每一家只負責自己那一段，進度卡住時，沒有人負責把它串起來。{"\n"}我們把市場探查、寄賣、公司落地、海外客服與國際物流，放在同一份合約裡。{"\n"}一個窗口對接所有環節，你只需要開一次會。</p>
+        <p className="mt-6 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">每一家只負責自己那一段，進度卡住時，沒有人負責把它串起來。{"\n"}我們把市場探查、寄賣、公司落地與海外客服，放在同一份合約裡；國際物流交給躍馬企業。{"\n"}一個窗口對接所有環節，你只需要開一次會。</p>
 
         <div className="mt-10 overflow-x-auto border border-bd bg-white">
           <table className="w-full min-w-[620px] table-fixed border-collapse">
@@ -63,8 +65,8 @@ export function OneContractSection() {
                     <span className="font-semibold">{row.type}</span><span className="text-tx3"> - </span><span className={row.isLufe ? "font-normal text-gold-d" : "font-normal text-tx2"}>{row.desc}</span>
                   </th>
                   {row.pillars.map((covered, index) => (
-                    <td key={HOME_CONTRACT_COLUMNS[index]} aria-label={covered ? `${row.type} - ${row.desc}涵蓋${HOME_CONTRACT_COLUMNS[index]}` : `${row.type} - ${row.desc}不涵蓋${HOME_CONTRACT_COLUMNS[index]}`} className={`px-2 py-5 text-center ${covered ? "text-gold-d" : "text-tx3/50"}`}>
-                      {covered ? <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="inline-block align-middle"><path d="m3 8 3 3 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" /></svg> : <span aria-hidden="true" className="inline-block text-[18px] leading-none">—</span>}
+                    <td key={HOME_CONTRACT_COLUMNS[index]} aria-label={covered ? `${row.type} - ${row.desc}涵蓋${HOME_CONTRACT_COLUMNS[index]}` : row.partner ? `${HOME_CONTRACT_COLUMNS[index]}由${row.partner}負責` : `${row.type} - ${row.desc}不涵蓋${HOME_CONTRACT_COLUMNS[index]}`} className={`px-2 py-5 text-center ${covered ? "text-gold-d" : "text-tx3/50"}`}>
+                      {covered ? <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="inline-block align-middle"><path d="m3 8 3 3 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" /></svg> : row.partner ? <span aria-hidden="true" className="text-[13px] font-medium text-tx2">{row.partner}</span> : <span aria-hidden="true" className="inline-block text-[18px] leading-none">—</span>}
                     </td>
                   ))}
                 </tr>

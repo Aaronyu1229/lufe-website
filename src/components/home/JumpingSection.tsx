@@ -1,50 +1,98 @@
-import Link from "next/link";
+"use client";
 
-import { isNumericValue } from "@/data/cases";
+import type { MouseEvent } from "react";
 
-const JUMPING_STATS = [
-  { value: "十幾家", label: "合作夥伴在菲律賓從零做起的手搖飲品牌，已開放加盟", href: "/cases/bubble-tea" },
-  { value: "多個市場", label: "台灣羊奶皂品牌重新定位後，銷往多個海外市場", href: "/cases/goat-milk-soap-global" },
-  { value: "FDA", label: "台灣魚鬆進美國，先過法規，再談上市", href: "/cases/fish-floss-us-fda" },
-] as const;
+import styles from "./JumpingRoute.module.css";
+
+type RouteNode = {
+  readonly title: string;
+  readonly note: string;
+  readonly side: "jumping" | "handoff" | "lufe";
+  readonly target?: string;
+};
 
 export const JUMPING_COPY = {
-  eyebrow: "來自躍馬企業",
-  title: ["四十二年，", "看著貨櫃一個一個出去"],
-  body: "躍馬企業做國際物流 42 年，500 多個出口案件，30 多個國家。\n在躍馬看的不是報表，是貨櫃出去以後的事：\n有的品牌在當地開了第二家店；\n更多的，是幾個月後貨退回來，或者就沒有下文了。\n\n貨都有送到。差別在到了之後，有沒有人接。\n鹿飛就是從這個觀察長出來的。",
+  eyebrow: "躍馬企業 × 鹿飛",
+  title: ["從你的工廠，到菲律賓的貨架，", "是同一條路"],
+  intro: "這條路的前半段，躍馬企業走了 42 年：500 多個出口案件，30 多個國家。看了這麼多年，我們最清楚貨櫃門打開之後，品牌會卡在哪裡。所以鹿飛的創辦人從躍馬走出來，把後半段接上。",
+  jumping: { title: "躍馬企業 · 把貨送到", body: "報關、倉儲、海空運、最後一哩。貨怎麼過去、到岸成本大概多少，不用另外找人問。" },
+  lufe: { title: "鹿飛 · 到了之後", body: "陪台灣品牌走完在菲律賓的第一年。這四步，就在下面。" },
+  primaryExit: "往下看這四章 ↓",
+  secondaryExit: "現在只需要把貨送出去？找躍馬企業 ↗",
 } as const;
+
+export const JUMPING_ROUTE: readonly RouteNode[] = [
+  { title: "台灣出廠", note: "報關、文件", side: "jumping" },
+  { title: "裝櫃出港", note: "倉儲、併櫃", side: "jumping" },
+  { title: "海上", note: "海空運", side: "jumping" },
+  { title: "櫃門打開", note: "在這裡交棒", side: "handoff" },
+  { title: "市場探查", note: "第一個月", side: "lufe", target: "chapter-1" },
+  { title: "寄賣", note: "第三個月", side: "lufe", target: "chapter-2" },
+  { title: "公司落地", note: "第九個月", side: "lufe", target: "chapter-3" },
+  { title: "海外客服", note: "之後的每一天", side: "lufe", target: "chapter-4" },
+];
+
+const FLASH_CLASS = "lufe-home-chapter-flash";
+
+// Smooth-scroll to an in-page target; plain anchor navigation remains the no-JS fallback.
+function scrollToTarget(event: MouseEvent<HTMLAnchorElement>, id: string, block: ScrollLogicalPosition, flash: boolean) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  event.preventDefault();
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block });
+  window.history.replaceState(null, "", `#${id}`);
+  if (flash && !reduce) {
+    target.classList.add(FLASH_CLASS);
+    window.setTimeout(() => target.classList.remove(FLASH_CLASS), 1200);
+  }
+}
 
 export function JumpingSection() {
   return (
-    <section id="jumping" className="bg-navy py-[80px] text-white md:py-[104px]">
-      <div className="lufe-container grid gap-12 lg:grid-cols-[1.1fr_.9fr] lg:gap-20">
-        <div>
-          <p className="mb-4 text-[13px] font-semibold text-gold">{JUMPING_COPY.eyebrow}</p>
-          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal [text-wrap:balance]">
-            {JUMPING_COPY.title[0]}
+    <section id="jumping" className="py-[80px] md:py-[104px]">
+      <div className="lufe-container">
+        <div className="max-w-[820px]">
+          <p className="mb-4 text-[13px] font-semibold text-gold-d">{JUMPING_COPY.eyebrow}</p>
+          <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
+            {/* Keep each comma phrase whole so "到" never strands at a line end on phones. */}
+            {JUMPING_COPY.title[0].split(/(?<=，)/).map((phrase) => <span key={phrase} className="inline-block">{phrase}</span>)}
             <br />
-            <span className="text-gold">{JUMPING_COPY.title[1]}</span>
+            <span className="text-gold-d">{JUMPING_COPY.title[1]}</span>
           </h2>
-          <p className="mt-6 max-w-[660px] whitespace-pre-line text-[16px] leading-[1.9] text-white/70 md:text-[17px]">{JUMPING_COPY.body}</p>
+          <p className="mt-6 max-w-[720px] text-[17px] leading-[1.8] text-tx2 md:text-[18px]">{JUMPING_COPY.intro}</p>
         </div>
-        <div className="self-end">
-          <p className="mb-4 text-[13px] font-semibold text-white/55">鹿飛案例成果</p>
-          <div className="grid grid-cols-3 gap-4 border-y border-white/15 pb-2 pt-6 md:gap-7">
-            {JUMPING_STATS.map(({ value, label, href }) => (
-              <Link key={label} href={href} className="group block active:scale-[.985]">
-                {isNumericValue(value) ? (
-                  <strong data-lufe-counter className="block font-sans text-[clamp(30px,4vw,44px)] font-semibold leading-none tracking-[-.035em] text-gold">{value}</strong>
+
+        <ol role="list" aria-label="從台灣到菲律賓的同一條路" className={`${styles.route} mt-12 md:mt-16`}>
+          {JUMPING_ROUTE.map((node) => (
+            <li key={node.title} role="listitem" className={`${styles.node} ${node.side === "handoff" ? styles.handoff : node.side === "lufe" ? styles.lufe : ""}`}>
+              <span className={styles.mark} aria-hidden="true"><span className={styles.dot} /></span>
+              <span className={styles.text}>
+                {node.target ? (
+                  <a href={`#${node.target}`} onClick={(event) => scrollToTarget(event, node.target!, "center", true)} className={styles.title}>{node.title}</a>
                 ) : (
-                  <strong className="block font-sans text-[clamp(26px,3.2vw,36px)] font-[650] leading-[1.15] tracking-[-.02em] text-gold">{value}</strong>
+                  <span className={styles.title}>{node.title}</span>
                 )}
-                <span className="mt-3 block text-[11px] leading-[1.5] text-white/65 transition-colors duration-200 [@media(hover:hover)]:group-hover:text-white/85 md:text-[12px]">{label}</span>
-              </Link>
-            ))}
+                <span className={styles.note}>{node.note}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-2 md:gap-10">
+          <div className="border-t-2 border-navy pt-5">
+            <h3 className="text-[19px] font-semibold leading-[1.4] text-navy">{JUMPING_COPY.jumping.title}</h3>
+            <p className="mt-2 text-[16px] leading-[1.8] text-tx2">{JUMPING_COPY.jumping.body}</p>
           </div>
-          <div className="mt-8 border-l-2 border-gold pl-5">
-            <h3 className="font-sans text-[21px] font-semibold leading-[1.3] text-white">我們相信的事很簡單</h3>
-            <p className="mt-3 whitespace-pre-line text-[15px] leading-[1.85] text-white/70">台灣市場不夠大，這件事做生意的人都知道。{"\n"}出去有難度，但出得去。{"\n"}我們想做的，是讓第一步小到你敢踏，{"\n"}後面的每一步，都有人在。</p>
+          <div className="border-t-2 border-gold pt-5">
+            <h3 className="text-[19px] font-semibold leading-[1.4] text-gold-d">{JUMPING_COPY.lufe.title}</h3>
+            <p className="mt-2 text-[16px] leading-[1.8] text-tx2">{JUMPING_COPY.lufe.body}</p>
           </div>
+        </div>
+
+        <div className="mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-3">
+          <a href="#chapters" onClick={(event) => scrollToTarget(event, "chapters", "start", false)} className="lufe-press inline-block text-[16px] font-semibold text-gold-d underline-offset-4 hover:underline">{JUMPING_COPY.primaryExit}</a>
+          <a href="https://jumping.group" target="_blank" rel="noopener noreferrer" className="lufe-press inline-block text-[15px] text-tx3 underline-offset-4 hover:text-tx2 hover:underline">{JUMPING_COPY.secondaryExit}</a>
         </div>
       </div>
     </section>
