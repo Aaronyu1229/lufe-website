@@ -22,7 +22,7 @@ const HOME_CHAPTER_COPY = [
   { label: "第一個月", title: "市場探查", subtitle: "在當地找真實消費者試用，確認誰會買、願意付多少", linkLabel: "看市場探查怎麼做 →" },
   { label: "第三個月", title: "寄賣", subtitle: "產品證審核期間，電商上架與市場活動同步推進", linkLabel: "看寄賣包內容 →" },
   { label: "第九個月", title: "公司落地", subtitle: "公司註冊、人員招聘、FDA 掛證，建立當地據點", linkLabel: "看落地怎麼做 →" },
-  { label: "之後的每一天", title: "海外客服", subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理。2027 Q1 開放首批。", linkLabel: "登記首批 →" },
+  { label: "之後的每一天", title: "海外客服", subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理。預計 2027 Q1 開放首批。", linkLabel: "登記首批 →" },
 ] as const;
 
 function readSourceTree(directory: string): string {
