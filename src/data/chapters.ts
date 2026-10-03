@@ -148,10 +148,10 @@ export const CHAPTER_ARTICLES = {
     "first-time-export-checklist",
     "product-testing-best-practices",
     "why-philippines-first",
-    "fob-cif-ddp-explained",
     "market-entry-modes-compared",
   ],
   m3: [
+    "fob-cif-ddp-explained",
     "tradepilot-tariff-tutorial",
     "philippines-ecommerce-first-year",
     "landed-cost-before-export",

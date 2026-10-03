@@ -145,7 +145,7 @@ describe("article rewrites and additions", () => {
 
   it("places the new articles in their required chapter reading lists with dedicated tiered covers", () => {
     expect(CHAPTER_ARTICLES.m3).toContain("agent-vs-distributor-exclusive");
-    expect(CHAPTER_ARTICLES.m1).toContain("fob-cif-ddp-explained");
+    expect(CHAPTER_ARTICLES.m3).toContain("fob-cif-ddp-explained");
     expect(getArticleImage(getArticleBySlug("agent-vs-distributor-exclusive")!)).toBe("/images/contact/partners-handshake-1600.webp");
     expect(getArticleImage(getArticleBySlug("fob-cif-ddp-explained")!)).toBe("/images/about/author-hero-port-1600.webp");
   });
