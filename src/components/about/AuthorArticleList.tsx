@@ -16,6 +16,9 @@ const CATEGORY_ORDER: readonly Category[] = [
   "企業體質",
 ];
 
+/** Display names that differ from the category key on this page. */
+const CATEGORY_LABELS: Partial<Record<Category, string>> = { "北美市場": "北美通路" };
+
 type AuthorArticleFilter = "all" | Category;
 
 function categoryFromLocation(categories: readonly Category[]): AuthorArticleFilter {
@@ -70,7 +73,7 @@ export function AuthorArticleList({ articles }: { readonly articles: readonly In
             { value: "all", label: <>全部<span className="lufe-insight-count" aria-hidden="true">{articles.length}</span></> },
             ...categories.map((category) => ({
               value: category,
-              label: <>{category}<span className="lufe-insight-count" aria-hidden="true">{counts.get(category) ?? 0}</span></>,
+              label: <>{CATEGORY_LABELS[category] ?? category}<span className="lufe-insight-count" aria-hidden="true">{counts.get(category) ?? 0}</span></>,
             })),
           ]}
           className="max-w-none"
