@@ -55,7 +55,7 @@ const CHAPTER_TILES: readonly ChapterTile[] = [
   {
     month: "之後的每一天",
     name: "海外客服",
-    line: "英文客服由菲律賓團隊接手，服務規則由台灣端制定。首批客戶 2027 年起承接",
+    line: "英文客服由菲律賓團隊接手，服務規則由台灣端制定。預計 2027 Q1 開放首批",
     href: "/services/call-center",
     image: "/images/hero-video/chapter-callcenter-1600.webp",
     alt: "一邊通話一邊打字的客服人員",
