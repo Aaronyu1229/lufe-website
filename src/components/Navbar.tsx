@@ -347,6 +347,19 @@ function MenuRail({ children }: { children: ReactNode }) {
   return <aside className="min-w-0 border-l border-bd bg-[rgba(245,242,236,.7)] px-[26px] pb-7 pt-[22px]">{children}</aside>;
 }
 
+function MenuLabel({ children }: { children: ReactNode }) {
+  return <p className="mb-1 text-[12px] font-semibold text-tx3">{children}</p>;
+}
+
+function chapterMenuParts(chapter: ArticleChapterKey): { readonly title: string; readonly month?: string } {
+  const [month, title] = CHAPTER_DISPLAY_LABELS[chapter].split("：");
+  return title ? { title, month } : { title: month };
+}
+
+function TradePilotMark() {
+  return <Image src="/images/logo/partners/tradepilot-gold.png" alt="" width={20} height={20} />;
+}
+
 function MenuMarker({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <span className={`grid h-7 w-7 shrink-0 place-items-center text-gold-d transition-[color,transform] duration-200 [@media(hover:hover)]:group-hover:translate-x-px ${className}`}>{children}</span>;
 }
@@ -404,10 +417,6 @@ function BarsIcon() {
 
 function FileIcon() {
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z" /><path d="M14 3v5h5" /></svg>;
-}
-
-function TradeIcon() {
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" /></svg>;
 }
 
 function ServicesMenu() {
@@ -505,17 +514,23 @@ function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: Insights
 
   return <>
     <MenuColumn>
-      {menuChapters.map(({ chapter, fallbackHref }) => fallbackHref
-        ? <MenuLink key={chapter} href={fallbackHref} title={CHAPTER_DISPLAY_LABELS[chapter]} desc="文章整理中，先看服務說明 →" marker={<ChapterIcon chapter={chapter} />} />
-        : <MenuLink key={chapter} href={insightChapterHref(chapter)} onClick={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} title={CHAPTER_DISPLAY_LABELS[chapter]} marker={<ChapterIcon chapter={chapter} />} />)}
-    </MenuColumn>
-    <MenuColumn bordered>
-      <MenuLink href="/resources" title="補助與資源" marker={<FileIcon />} />
-      <MenuLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external />
+      <MenuLabel>依章節看文章</MenuLabel>
+      {menuChapters.map(({ chapter, fallbackHref }) => {
+        const { title, month } = chapterMenuParts(chapter);
+        return fallbackHref
+          ? <MenuLink key={chapter} href={fallbackHref} title={<>{title}{month && <span className="ml-2 text-[12.5px] font-normal text-tx3">{month}</span>}</>} desc="文章整理中，先看服務說明 →" marker={<ChapterIcon chapter={chapter} />} />
+          : <MenuLink key={chapter} href={insightChapterHref(chapter)} onClick={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} title={<>{title}{month && <span className="ml-2 text-[12.5px] font-normal text-tx3">{month}</span>}</>} marker={<ChapterIcon chapter={chapter} />} />;
+      })}
       <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
     </MenuColumn>
+    <MenuColumn bordered>
+      <MenuLabel>工具與資源</MenuLabel>
+      <MenuLink href="/resources" title="補助與資源" desc="政府補助整理" marker={<FileIcon />} />
+      <MenuLink href="https://tradepiloter.com" title={<>TradePilot<span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} desc="線上報關工具" marker={<TradePilotMark />} external />
+    </MenuColumn>
     <MenuRail>
-      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group block">{active && <div className="relative mb-3 aspect-video overflow-hidden"><TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" /></div>}<b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
+      <MenuLabel>最新文章</MenuLabel>
+      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group mt-2 block"><div className="relative mb-3 aspect-video overflow-hidden bg-[rgba(26,26,46,.06)]">{active && <TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" />}</div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
     </MenuRail>
   </>;
 }
@@ -562,6 +577,11 @@ function MobileSubLink({ href, title, marker, external = false, onClose, onNavig
     : <Link href={href} onClick={(event) => { onNavigate?.(event); onClose(); }} className={className}>{content}</Link>;
 }
 
+function MobileChapterTitle({ chapter }: { chapter: ArticleChapterKey }) {
+  const { title, month } = chapterMenuParts(chapter);
+  return <>{title}{month && <span className="ml-1.5 text-[12.5px] text-tx3">{month}</span>}</>;
+}
+
 function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: MenuKey; onClose: () => void; insightsNavigation: InsightsNavigation }) {
   if (itemKey === "services") return <>
     <MobileSubLink href="/services/product-testing" title="市場探查" marker={<CompassIcon />} onClose={onClose} />
@@ -581,11 +601,11 @@ function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: 
   const publishedArticleSlugSet = new Set(insightsNavigation.publishedArticleSlugs);
   return <>
     {insightMenuChapters(publishedArticleSlugSet).map(({ chapter, fallbackHref }) => fallbackHref
-      ? <MobileSubLink key={chapter} href={fallbackHref} title={CHAPTER_DISPLAY_LABELS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />
-      : <MobileSubLink key={chapter} href={insightChapterHref(chapter)} title={CHAPTER_DISPLAY_LABELS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} onNavigate={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} />)}
-    <MobileSubLink href="/resources" title="補助與資源" marker={<FileIcon />} onClose={onClose} />
-    <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external onClose={onClose} />
+      ? <MobileSubLink key={chapter} href={fallbackHref} title={<MobileChapterTitle chapter={chapter} />} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />
+      : <MobileSubLink key={chapter} href={insightChapterHref(chapter)} title={<MobileChapterTitle chapter={chapter} />} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} onNavigate={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} />)}
     <MobileSubLink href="/insights" title="看所有文章 →" onClose={onClose} />
+    <MobileSubLink href="/resources" title="補助與資源" marker={<FileIcon />} onClose={onClose} />
+    <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot<span className="ml-1.5 text-[12.5px] text-tx3">線上報關工具</span><span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradePilotMark />} external onClose={onClose} />
   </>;
 }
 
