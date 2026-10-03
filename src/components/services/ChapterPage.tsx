@@ -85,7 +85,7 @@ function ChapterHero({ chapter }: { readonly chapter: Chapter }) {
         </div>
         <ScrollCue />
       </section>
-      {!chapter.showChapterBar ? <div className="border-b border-bd bg-cream py-4 text-[14px] leading-[1.8] text-tx2"><p className="lufe-container"><strong className="text-tx">北美市場拓展</strong> 本頁服務與菲律賓四章各自獨立，由北美專責團隊規劃執行，鹿飛負責合約與進度</p></div> : null}
+      {!chapter.showChapterBar ? <div className="border-b border-bd bg-cream py-4 text-[14px] leading-[1.8] text-tx2"><p className="lufe-container"><strong className="text-tx">北美通路</strong>　跟菲律賓的四章是兩條線：北美團隊在當地執行，鹿飛是你在台灣的窗口。</p></div> : null}
     </>
   );
 }
