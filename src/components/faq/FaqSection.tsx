@@ -7,11 +7,12 @@ import { useMessageBox } from "@/components/MessageBox";
 import { type FaqEntry } from "./FaqItem";
 import { FaqList } from "./FaqList";
 
-export function FaqSection({ title, items, idPrefix, className = "py-[62px] md:py-[96px] md:pb-[100px]" }: {
+export function FaqSection({ title, items, idPrefix, className = "py-[62px] md:py-[96px] md:pb-[100px]", askLabel = "直接問鹿飛 →" }: {
   readonly title: string;
   readonly items: readonly FaqEntry[];
   readonly idPrefix: string;
   readonly className?: string;
+  readonly askLabel?: string;
 }): JSX.Element {
   const { open } = useMessageBox();
 
@@ -23,7 +24,7 @@ export function FaqSection({ title, items, idPrefix, className = "py-[62px] md:p
             {title}
           </h2>
           <p className="mt-6 text-[15px] text-tx2">還有其他問題？</p>
-          <button type="button" onClick={open} className="mt-2 cursor-pointer text-[15px] font-semibold text-sky">直接問鹿飛 →</button>
+          <button type="button" onClick={open} className="mt-2 cursor-pointer text-[15px] font-semibold text-sky">{askLabel}</button>
         </div>
 
         <div className="min-w-0 md:col-span-8">
