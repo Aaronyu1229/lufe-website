@@ -29,7 +29,7 @@ import { CASES } from "@/data/cases";
 import type { InsightCard } from "@/lib/articles/presentation";
 import {
   CHAPTER_ARTICLES,
-  CHAPTER_ARTICLE_TAGS,
+  CHAPTER_DISPLAY_LABELS,
   type ArticleChapterKey,
 } from "@/data/chapters";
 
@@ -56,6 +56,8 @@ function switchInsightChapterInPlace(event: MouseEvent<HTMLAnchorElement>, href:
   window.dispatchEvent(new PopStateEvent("popstate"));
   document.getElementById("articles")?.scrollIntoView({ behavior: "smooth" });
 }
+// Until it has articles, the customer-service chapter points at its service page instead of an empty filter.
+const INSIGHT_CHAPTER_FALLBACK_HREF: Partial<Record<ArticleChapterKey, string>> = { after: "/services/call-center" };
 // Chapters without articles stay out of the menu (a "0 篇" row reads as an empty site); they appear once an article is mapped.
 const ABOUT_MENU_ITEMS = [
   { href: "/about#story", title: "品牌故事", num: "01" },
@@ -487,15 +489,25 @@ function ChapterIcon({ chapter }: { chapter: (typeof INSIGHT_MENU_CHAPTERS)[numb
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{CHAPTER_ICON_PATHS[chapter]}</svg>;
 }
 
+type InsightMenuChapter = { readonly chapter: (typeof INSIGHT_MENU_CHAPTERS)[number]; readonly fallbackHref?: string };
+
+function insightMenuChapters(publishedArticleSlugSet: ReadonlySet<string>): readonly InsightMenuChapter[] {
+  return INSIGHT_MENU_CHAPTERS.flatMap((chapter): InsightMenuChapter[] => {
+    if (CHAPTER_ARTICLES[chapter].some((slug) => publishedArticleSlugSet.has(slug))) return [{ chapter, fallbackHref: undefined }];
+    const fallbackHref = INSIGHT_CHAPTER_FALLBACK_HREF[chapter];
+    return fallbackHref ? [{ chapter, fallbackHref }] : [];
+  });
+}
+
 function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: InsightsNavigation & { active: boolean }) {
   const publishedArticleSlugSet = new Set(publishedArticleSlugs);
-  const visibleInsightChapters = INSIGHT_MENU_CHAPTERS.filter((chapter) =>
-    CHAPTER_ARTICLES[chapter].some((slug) => publishedArticleSlugSet.has(slug)),
-  );
+  const menuChapters = insightMenuChapters(publishedArticleSlugSet);
 
   return <>
     <MenuColumn>
-      {visibleInsightChapters.map((chapter) => <MenuLink key={chapter} href={insightChapterHref(chapter)} onClick={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} />)}
+      {menuChapters.map(({ chapter, fallbackHref }) => fallbackHref
+        ? <MenuLink key={chapter} href={fallbackHref} title={CHAPTER_DISPLAY_LABELS[chapter]} desc="文章整理中，先看服務說明 →" marker={<ChapterIcon chapter={chapter} />} />
+        : <MenuLink key={chapter} href={insightChapterHref(chapter)} onClick={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} title={CHAPTER_DISPLAY_LABELS[chapter]} marker={<ChapterIcon chapter={chapter} />} />)}
     </MenuColumn>
     <MenuColumn bordered>
       <MenuLink href="/resources" title="補助與資源" marker={<FileIcon />} />
@@ -567,11 +579,10 @@ function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: 
   if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={caseItem.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例 →" onClose={onClose} /></>;
   if (itemKey === "about") return <>{ABOUT_MENU_ITEMS.map((item) => <MobileSubLink key={item.num} href={item.href} title={item.title} marker={<span className="num text-[13px] font-bold">{item.num}</span>} onClose={onClose} />)}</>;
   const publishedArticleSlugSet = new Set(insightsNavigation.publishedArticleSlugs);
-  const visibleInsightChapters = INSIGHT_MENU_CHAPTERS.filter((chapter) =>
-    CHAPTER_ARTICLES[chapter].some((slug) => publishedArticleSlugSet.has(slug)),
-  );
   return <>
-    {visibleInsightChapters.map((chapter) => <MobileSubLink key={chapter} href={insightChapterHref(chapter)} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} onNavigate={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} />)}
+    {insightMenuChapters(publishedArticleSlugSet).map(({ chapter, fallbackHref }) => fallbackHref
+      ? <MobileSubLink key={chapter} href={fallbackHref} title={CHAPTER_DISPLAY_LABELS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />
+      : <MobileSubLink key={chapter} href={insightChapterHref(chapter)} title={CHAPTER_DISPLAY_LABELS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} onNavigate={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} />)}
     <MobileSubLink href="/resources" title="補助與資源" marker={<FileIcon />} onClose={onClose} />
     <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external onClose={onClose} />
     <MobileSubLink href="/insights" title="看所有文章 →" onClose={onClose} />
