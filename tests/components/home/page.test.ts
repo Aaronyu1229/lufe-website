@@ -103,7 +103,7 @@ describe("home page", () => {
     expect(rendered).toContain("台灣魚鬆進美國，先過法規，再談上市");
     expect(rendered).toContain("預約 30 分鐘 →");
     expect(rendered).toContain("還不確定？先做 2 分鐘處境比對 →");
-    expect(rendered).toContain("送出後一個工作天內回覆。");
+    expect(rendered).toContain("送出後 24 小時內回覆。");
     for (const removed of ["80 家", "1.2 倍", "已簽 NDA", "24 小時內由鹿飛顧問團隊回覆"]) expect(rendered).not.toContain(removed);
     expect(rendered).toContain("出海實務洞察，");
     expect(rendered).toContain("看所有文章 →");

@@ -82,7 +82,6 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
     solutionLine:
       "從台灣茶出發，改成當地的口味與價格，先開第一家驗證，再開放加盟。",
     route: { from: "台灣", to: "菲律賓" },
-    hideStoryLink: true,
     image: "/images/cases/case-4-manila-1080.webp",
   },
 ];

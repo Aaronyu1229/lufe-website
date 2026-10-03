@@ -21,22 +21,18 @@ describe("round 4 cases", () => {
   });
 
   it("only animates numeric results", () => {
-    for (const slug of ["goat-milk-soap-global", "fish-floss-us-fda"] as const) {
+    for (const slug of ["goat-milk-soap-global", "fish-floss-us-fda", "bubble-tea"] as const) {
       const caseItem = CASES.find((item) => item.slug === slug);
       expect(caseItem).toBeDefined();
       expect(renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: caseItem! }))).not.toContain("data-lufe-counter");
     }
-
-    const bubbleTea = CASES.find((item) => item.slug === "bubble-tea");
-    const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: bubbleTea! }));
-    expect(markup.match(/data-lufe-counter/g)).toHaveLength(3);
   });
 
-  it("retains the revised bubble tea story and removes retired case claims", () => {
+  it("tells the partner-owned bubble tea story and removes retired case claims", () => {
     const bubbleTea = CASES.find((item) => item.slug === "bubble-tea")!;
     const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: bubbleTea }));
-    expect(markup).toContain("九宮格");
-    expect(markup).toContain("盲飲");
+    expect(markup).toContain("十幾家");
+    for (const retired of ["10 家", "1.2", "BGC", "P150", "第三次", "拿走了配方", "九宮格", "盲飲"]) expect(markup).not.toContain(retired);
     expect(markup).not.toContain(["甜度", "偏高"].join(""));
     expect(markup).not.toContain(["白", "領"].join(""));
 
