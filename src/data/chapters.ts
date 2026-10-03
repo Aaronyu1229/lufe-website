@@ -65,6 +65,9 @@ export type ChapterSection =
       readonly heading: string;
       readonly passive: string;
       readonly active: readonly { readonly label: string; readonly body: string }[];
+      readonly passiveLabel?: string;
+      readonly activeLabel?: string;
+      readonly ending?: string;
     }
   | {
       readonly type: "cards";
@@ -76,7 +79,8 @@ export type ChapterSection =
       readonly type: "included";
       readonly heading: string;
       readonly items: readonly { readonly title: string; readonly body: string; readonly icon: StepIcon }[];
-      readonly featureNote: string;
+      readonly featureNote?: string;
+      readonly footnote?: string;
     }
   | {
       readonly type: "table";
@@ -135,6 +139,7 @@ export type Chapter = {
     readonly link?: { readonly label: string; readonly href: string };
     readonly footnote?: string;
   };
+  readonly partnerStrip?: { readonly body: string; readonly action: string; readonly href: string };
 };
 
 export const CHAPTER_ARTICLES = {
@@ -234,40 +239,65 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     path: "/services/consignment",
     label: "第三個月 · 寄賣",
     title: "上架了，讓人先用過再說",
-    scene: "報告說可以。接下來的問題是：證要多久、貨放哪、上了架誰來推",
+    scene: "市場探查說可以。接下來的問題是：證要多久、貨放哪、上了架誰來推。\n我們不自己開店。我們把你接到已經在賣的通路，然後把通路不做的事接起來。",
     image: "/images/services/stage-03-retail-aisle-1600.webp",
     imageAlt: "倉儲貨架走道",
     heroAction: "看你的產品適不適合寄賣 →",
     showChapterBar: true,
     scenariosHeading: "準備寄賣時的三個卡點",
+    scenarioAnswerLabel: "我們的做法",
     scenarios: [
-      { title: "市場驗證過了，下一步卡住", body: "市場探查過了，想放貨去賣，但不知道證怎麼辦、貨放哪、誰來推", answer: "寄賣包一次處理：產品證代持、貨放合作夥伴的倉、上架前後的活動與推廣", image: "/images/services/scenarios/m3-1-1600.webp", imageAlt: "倉庫鐵架上的紙箱" },
+      { title: "市場驗證過了，下一步卡住", body: "市場探查過了，想放貨去賣，但不知道證怎麼辦、貨放哪、誰來推", answer: "寄賣包一次處理：找到合適的通路、產品證代持、上架前的試用活動，一份合約。", image: "/images/services/scenarios/m3-1-1600.webp", imageAlt: "倉庫鐵架上的紙箱" },
       { title: "廣告投了，沒有人看見", body: "自己上過東南亞平台，投了廣告，沒人看見", answer: "菲律賓消費者看網紅、看活動、看有沒有人真的用過；寄賣期間先讓人用過，再談廣告", image: "/images/services/scenarios/m3-2-1600.webp", imageAlt: "手機上瀏覽購物應用程式" },
-      { title: "代理商只想抽成", body: "有代理商找上門，只想抽成，不管你賣不賣得動", answer: "寄賣是賣多少算多少；產品證資料歸品牌，換通路只換一張合約", image: "/images/services/scenarios/m3-3-1600.webp", imageAlt: "會議桌上準備簽署的合約" },
+      { title: "代理商只想抽成", body: "有代理商找上門，只想抽成，不管你賣不賣得動", answer: "通路夥伴按實際賣出結算，我們不要求獨家；證由持證進口商代持，換通路、換進口商，都只換一張合約。", image: "/images/services/scenarios/m3-3-1600.webp", imageAlt: "會議桌上準備簽署的合約" },
     ],
     sections: [
+      {
+        type: "included",
+        heading: "三種通路，我們替你去談",
+        items: [
+          { title: "電商通路", body: "菲律賓的電商店家，已經在賣食品、快消、生活用品。\n我們把你的產品帶進他們的架上，賣出才結算。最快開始的一條路。", icon: "store" },
+          { title: "社群通路", body: "當地的消費社群與合作夥伴的線上通路。\n證還在跑的那幾週，先從這裡讓人用過。", icon: "users" },
+          { title: "實體與企業通路", body: "藥妝連鎖、百貨、餐飲集團這類大通路。\n門檻比較高，要證、要數字、要談條件。\n電商跑出成績之後，我們拿著數字替你去談。", icon: "handshake" },
+        ],
+      },
       {
         type: "tracks",
         heading: "產品證審核的 6～12 週，兩條進度同時走",
         passive: "持證進口商代辦、代持。資料歸你，換人只換一張合約",
+        activeLabel: "我們這一軌（每週都有進度）",
         active: [
-          { label: "第 1～2 週", body: "貨進合作夥伴的倉，商品頁、當地說明、價格帶定下來" },
-          { label: "第 3～6 週", body: "社群試用活動：先讓人用過。有人在社群裡問，有人拍了影片" },
-          { label: "第 6～10 週", body: "網紅與活動配套排進去。市場報告從市場探查那一頁展開：價格帶、競品、通路" },
-          { label: "證下來那天", body: "貨上架。架上已經有人在等" },
+          { label: "第 1～2 週", body: "選通路，試用包寄到；商品頁、當地說明、價格帶定下來。\n上架用的貨，等證下來再進。" },
+          { label: "第 3～6 週", body: "社群試用：先讓人用過，聽他們怎麼說、怎麼問。" },
+          { label: "第 6～10 週", body: "市場報告從市場探查那一頁展開：價格帶、競品、通路。\n需要網紅或活動，這時候一起排。" },
+          { label: "證下來那天", body: "貨進倉、上架。先用過的人，就是第一批會找你的人。" },
         ],
       },
       {
         type: "included",
-        heading: "寄賣包包含的五件事",
+        heading: "寄賣包包含的四件事",
         items: [
-          { title: "電商通路上架", body: "放進合作的菲律賓電商通路，貨放合作夥伴的倉，賣多少算多少", icon: "store" },
-          { title: "產品證代持", body: "化妝品、食品的證由持證進口商代辦代持，資料歸你", icon: "badge-check" },
-          { title: "社群試用活動", body: "證還沒下來的那段時間，先在當地社群做試用與活動", icon: "users" },
-          { title: "市場報告", body: "把市場探查那一頁展開，補價格帶、競品、通路", icon: "chart-column" },
-          { title: "網紅與活動配套", body: "只投廣告不夠，這部分跟你一起排", icon: "presentation" },
+          { title: "通路媒合", body: "替你找合適的菲律賓電商通路，談上架條件；貨放通路夥伴的倉，賣出才結算。", icon: "store" },
+          { title: "產品證代持", body: "化妝品、食品的證由持證進口商代辦、代持；換進口商只換一張合約。", icon: "badge-check" },
+          { title: "社群試用", body: "證還沒下來的那段時間，先在當地社群讓人用過。", icon: "users" },
+          { title: "市場報告", body: "把市場探查那一頁展開，補價格帶、競品、通路。", icon: "chart-column" },
         ],
         featureNote: "核心服務",
+        footnote: "網紅與活動配套：只投廣告不夠，需要的話一起規劃，費用另計。",
+      },
+      {
+        type: "tracks",
+        heading: "接上通路之後，我們還在",
+        passiveLabel: "通路夥伴做的",
+        passive: "上架、陳列、出貨\n平台上的日常營運\n自己熟悉的客群",
+        activeLabel: "我們做的",
+        active: [
+          { label: "產品證", body: "交給持證進口商代辦代持" },
+          { label: "試用", body: "證還在跑的那幾週，先讓人用過" },
+          { label: "數據", body: "每月看廣告、點擊、轉換、銷售" },
+          { label: "合約", body: "你只跟我們簽一份，通路那邊我們去對" },
+        ],
+        ending: "你不用一家一家去談、一家一家去催。",
       },
       {
         type: "callout",
@@ -278,16 +308,28 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         type: "price",
         title: "5～6 萬",
         caption: "市場探查費可抵。跟第一個月合起來，就是 7 萬起手包",
-        details: ["產品證 6～12 週，證下來貨就上架；這段時間活動先跑", "平台費用與抽成、產品到當地的包裝與說明調整另計，第一次談會先講"],
+        details: ["產品證 6～12 週，證下來貨就上架；這段時間活動先跑", "通路的抽成依通路不同、產品到當地的包裝與說明調整另計，第一次談會先講清楚。"],
       },
     ],
     faqs: [
-      { question: "為什麼不直接投廣告？", answer: "老實說，我們的經驗是不夠。菲律賓的消費者看網紅、看活動、看有沒有人真的用過，廣告只是其中一段。", takeaway: "廣告只是其中一段" },
+      { question: "為什麼不直接投廣告？", answer: "老實說，我們的經驗是不夠。菲律賓的消費者看網紅、看活動、看有沒有人真的用過，廣告只是其中一段。", takeaway: "菲律賓的消費者要先看到有人用過" },
       { question: "賣不動怎麼辦？", answer: "寄賣是賣多少算多少，不會逼你進貨。三個月看數字，賣不動我們會直接說。", takeaway: "賣多少算多少，三個月看數字" },
-      { question: "證掛在誰名下？", answer: "持證進口商代持，合約寫清楚資料歸你、轉移配合。不綁任何一家通路。", takeaway: "持證進口商代持，資料歸品牌" },
+      { question: "證掛在誰名下？", answer: "產品證由持證進口商代辦、代持。合約寫清楚轉移配合：換進口商只換一張合約，不用從頭重辦。我們不綁任何一家通路。", takeaway: "持證進口商代持，不綁任何一家通路" },
+      { question: "你們是通路嗎？", answer: "我們不開店、不買斷你的貨。我們把你接到已經在賣的通路，然後把證、試用、數據、合約這些通路不做的事接起來。", takeaway: "不是，我們把你接到通路" },
     ],
     next: { label: "下一章 →", title: "第九個月 · 公司落地", heading: "開始想要在當地有自己的人", href: "/services/localization", image: "/images/hero-video/chapter-storefront-1600.webp", imageAlt: "夜晚街角的咖啡店與行人" },
-    cta: { title: "看你的產品適不適合寄賣", body: "沒做過市場探查也可以聊，我們會先問你在台灣賣得怎麼樣", action: "聊聊你的產品 →" },
+    cta: {
+      title: "看你的產品適不適合寄賣",
+      body: "沒做過市場探查也可以聊，我們會先問你在台灣賣得怎麼樣。\n有時候聽完，我們會建議你先做市場探查，或再等等——那也是一種答案。",
+      notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。",
+      action: "預約 30 分鐘 →",
+      footnote: "送出後 24 小時內回覆。",
+    },
+    partnerStrip: {
+      body: "你是通路？電商店家、連鎖、餐飲集團，想要更多台灣品牌上架？\n我們帶來的品牌都先做過市場探查、證走持證進口商、合約跟我們簽，你專心做通路。",
+      action: "成為通路夥伴 →",
+      href: "/contact#partners",
+    },
   },
   m9: {
     key: "m9",
