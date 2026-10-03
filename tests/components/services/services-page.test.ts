@@ -5,10 +5,10 @@ import { describe, expect, it } from "vitest";
 import { SERVICE_FAQS, ServicesPage } from "@/components/services/ServicesPage";
 
 const chapterTileLines = [
-  "用當地真實消費者的反應，決定要不要往下走",
-  "產品證審核期間，上架與市場活動同步推進",
-  "註冊、招聘、掛證，在當地建立自己的團隊",
-  "英文客服由菲律賓專業團隊接手，服務規則由台灣端制定",
+  "讓當地真實消費者先用、先說，再決定要不要往下走",
+  "產品證由當地持證進口商代辦、代持；證下來之前，先把通路和市場活動準備好",
+  "註冊、招聘、掛證，在當地建立你自己的團隊",
+  "英文客服由菲律賓團隊接手，服務規則由台灣端制定。首批客戶 2027 年起承接",
 ];
 
 const renderPage = () => renderToStaticMarkup(createElement(ServicesPage));
@@ -33,7 +33,7 @@ describe("ServicesPage", () => {
   });
 
   it("uses the approved testing-panel description", () => {
-    expect(normalizedMarkup()).toContain("當地消費者組成的測試面板，產品上架前先取得真實反應");
+    expect(normalizedMarkup()).toContain("由當地老師與家長組成的試用面板，產品上架前先拿到真實反應");
     expect(normalizedMarkup()).not.toContain("當地上班族與家長組成的測試面板");
   });
 
@@ -45,9 +45,9 @@ describe("ServicesPage", () => {
     const markup = normalizedMarkup();
 
     expect(markup).toContain("我們不會先報價再問你需求。");
-    expect(markup).toContain("第一次見面，我們想先聽你的產品在台灣怎麼賣、為什麼想出去。有時候聽完，我們會建議你再等等——那也是一種答案。");
-    expect(markup).toContain("兩條出海路徑：菲律賓在地落地，北美通路拓展");
-    expect(markup).toContain("市場探查、寄賣、公司落地、海外客服——企業出海第一年會遇到的四件事，鹿飛做成四個方案。可以只走一章，也可以一路走完");
+    expect(markup).toContain("第一次見面，我們想先聽你的產品在台灣怎麼賣、為什麼想出去。");
+    expect(markup).toContain("主線是菲律賓；產品已經站穩的，另有北美通路");
+    expect(markup).toContain("市場探查、寄賣、公司落地、海外客服——台灣品牌進菲律賓的第一年，多半會依序遇到這四件事。我們把它做成四個方案，每個都有明碼價格。可以只走一章，也可以一路走完。");
     expect(markup).toContain("進入北美主流零售通路");
     expect(markup).toContain("串起當地的每一個執行夥伴");
     expect(markup).not.toContain("躍馬企業 · 年物流底層");
