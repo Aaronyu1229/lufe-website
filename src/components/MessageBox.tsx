@@ -243,7 +243,7 @@ export function MessageBox() {
           <Field label="簡單說說你的產品跟想法 *" error={errors.message}><textarea required aria-required="true" className={`min-h-[68px] w-full resize-y border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.message ? "border-red-400" : "border-bd"}`} placeholder="例如：我們做鳳梨酥，想看看美國有沒有機會⋯⋯" value={form.message} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("message")} onChange={(event) => updateField("message", event.target.value)} /></Field>
           <input type="text" name="website" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />
           {submitError && <p className="mb-3 text-[12px] text-red-500">送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
-          <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-navy py-3 text-[15px] font-semibold text-white hover:bg-navy-l disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? "送出中…" : "送出，我們 24 小時內回覆"}</button>
+          <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-navy py-3 text-[15px] font-semibold text-white hover:bg-navy-l disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? "送出中…" : "送出，我們一個工作天內回覆"}</button>
         </form> : <div className="px-5 py-8 text-center"><h3 className="mb-1.5 text-[17px] font-semibold">收到了！</h3><p className="text-[14.5px] font-light text-tx2">我們會在 24 小時內回覆你。</p></div>}
       </div>
     </div>

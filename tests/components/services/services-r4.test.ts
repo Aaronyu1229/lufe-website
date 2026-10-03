@@ -40,7 +40,7 @@ describe("services round four", () => {
     const markup = await renderChapter("m9");
     const priceSection = markup.match(/<section[^>]*data-lufe-price[^>]*>[\s\S]*?<\/section>/)?.[0] ?? "";
 
-    for (const copy of ["費用", "按案報價", "第一次談會給你", "公司註冊", "律師行文件", "招聘", "場地", "時間表"]) expect(priceSection).toContain(copy);
+    for (const copy of ["費用", "按案報價", "談清楚之後會給你", "公司註冊", "律師文件", "招聘", "場地", "時間表"]) expect(priceSection).toContain(copy);
     expect(priceSection).not.toMatch(/class="[^"]*(?:border-navy-l[^"]*bg-navy|bg-navy[^"]*border-navy-l)[^"]*"/);
   });
 

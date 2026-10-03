@@ -44,7 +44,7 @@ describe("ChapterPage", () => {
   it("renders the product-testing report, consignment tracks, localization table, and waitlist form", async () => {
     await expect(renderChapter("m1")).resolves.toContain("市場探查報告 · 產品 A");
     await expect(renderChapter("m3")).resolves.toContain("證下來那天");
-    await expect(renderChapter("m9")).resolves.toContain("品牌方的角色");
+    await expect(renderChapter("m9")).resolves.toContain("你的角色");
 
     const waitlistMarkup = await renderChapter("after");
     expect(waitlistMarkup).toContain("2027 Q1 開放首批客戶");
