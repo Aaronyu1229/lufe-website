@@ -60,10 +60,10 @@ const BLOCKER_SHORT: Record<Blocker, string> = {
 
 const MARKET_SHORT: Record<AssessMarket, string> = {
   us: "北美",
-  sea: "東南亞",
+  sea: "菲律賓 / 東南亞",
   japan: "日韓",
   europe: "歐洲",
-  other: "多市場並行",
+  other: "其他市場",
 };
 
 interface Option<T extends string> {
@@ -82,16 +82,14 @@ const BLOCKER_OPTIONS: readonly Option<Blocker>[] = [
   { value: "market", label: "不知道該去哪個市場", hint: "訊號：手上有三個以上國家的代理聯絡，但沒有任何一個真的簽下去" },
   { value: "channel", label: "找不到對的通路或合作夥伴", hint: "訊號：進得去超商、卻進不了量販；或是上架了但產品沒有聲量" },
   { value: "cost", label: "成本算不清、毛利被吃掉", hint: "訊號：報價時覺得賺的，出貨後發現關稅、物流、匯率分掉一半" },
-  { value: "execution", label: "方向知道，但沒人真的做執行", hint: "訊號：付過兩家顧問的策略 deck，但沒人真的幫你跑到落地" },
+  { value: "execution", label: "方向知道，但沒人真的做執行", hint: "訊號：策略簡報看過好幾份，但沒有人真的陪你跑到落地" },
   { value: "compliance", label: "不確定法規、成分或標示過不過得了關", hint: "訊號：產品在台灣合法上架，但不知道目的地的主管機關、成分限制與標示格式" },
 ];
 
 const MARKET_OPTIONS: readonly Option<AssessMarket>[] = [
+  { value: "sea", label: "菲律賓 / 東南亞" },
   { value: "us", label: "美國 / 北美" },
-  { value: "sea", label: "東南亞" },
-  { value: "japan", label: "日韓" },
-  { value: "europe", label: "歐洲" },
-  { value: "other", label: "還沒決定 / 多市場並行" },
+  { value: "other", label: "其他市場，或還沒決定" },
 ];
 
 export const assessQuestions: readonly MatcherFlowQuestion[] = [
@@ -130,6 +128,20 @@ interface NarrativePiece {
   readonly sentence: string;
 }
 
+const CHAPTER_BY_BLOCKER: Record<Blocker, { readonly text: string; readonly href: string }> = {
+  market: { text: "跟你處境最像的人，多半從「市場探查」開始談 →", href: "/services/product-testing" },
+  channel: { text: "跟你處境最像的人，多半從「寄賣」開始談 →", href: "/services/consignment" },
+  compliance: { text: "跟你處境最像的人，多半從「寄賣」開始談：產品證我們代辦、掛證 →", href: "/services/consignment" },
+  execution: { text: "跟你處境最像的人，多半從「公司落地」開始談 →", href: "/services/localization" },
+  cost: { text: "跟你處境最像的人，多半從「運營優化」開始談 →", href: "/services/optimize" },
+};
+
+const NORTH_AMERICA_CHAPTER = { text: "北美走另一條線，先看「北美通路」怎麼做 →", href: "/services/north-america" };
+
+function getChapterHint(answers: Answers) {
+  return answers.market === "us" ? NORTH_AMERICA_CHAPTER : CHAPTER_BY_BLOCKER[answers.blocker];
+}
+
 function buildNarrative(result: MatchResult, answers: Answers) {
   const signature = CASE_SIGNATURES.find((item) => item.slug === result.slug);
   if (!signature) return { headline: "處境比對", pieces: [] as readonly NarrativePiece[], closing: "" };
@@ -158,10 +170,10 @@ function buildNarrative(result: MatchResult, answers: Answers) {
     },
   ];
 
-  if (result.score === 3) return { headline: "你的處境，幾乎就是他們當時遇到的事", pieces, closing: "這份案例就是為你寫的。他們的判斷邏輯跟具體做法，都能直接放到你身上。讀到最後一個字" };
+  if (result.score === 3) return { headline: "你的處境，幾乎就是他們當時遇到的事", pieces, closing: "他們當時怎麼判斷、先做了哪一步，大多能拿來對照你的情況。具體做法還是要看你的產品，這份值得從頭讀到尾。" };
   if (result.score === 2) return { headline: "兩項對齊 — 同路但不同戰場", pieces, closing: "他們的判斷邏輯可以直接用，但具體做法要換成你的版本。這份案例值得讀到最後 — 學怎麼想，換怎麼做" };
-  if (result.score === 1) return { headline: "一項對齊 — 可以當參考方向", pieces, closing: "學他們怎麼想事情、怎麼做決定，不要照抄他們做的事。如果你想看更貼近的案例，鹿飛還有幾個沒放上網的" };
-  return { headline: "三個維度都不同 — 但方法仍然能用", pieces, closing: "顧問的價值不是模板，是判斷方法。這份案例你可以快速瀏覽 — 看他們當時的判斷邏輯，這部分對你仍然有用。想直接聊更貼近的狀況，鹿飛隨時可以安排" };
+  if (result.score === 1) return { headline: "一項對齊 — 可以當參考方向", pieces, closing: "學他們怎麼想事情、怎麼做決定，不要照抄他們做的事。想對照更貼近你的狀況，30 分鐘就能聊。" };
+  return { headline: "三個維度都不同 — 但判斷方法仍然能用", pieces, closing: "這份案例可以快速瀏覽，看他們當時怎麼判斷就好。你的狀況，也許適合先聊一次再決定；有時候我們會建議你再等等，那也是一種答案。" };
 }
 
 export function AssessFallback() {
@@ -199,7 +211,7 @@ export function EntryScreen({ focusCase }: { readonly focusCase?: CaseStudy }) {
             {focusCase ? <><Link href="/cases" className="hover:text-white">案例</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">比對</span></> : <span className="text-white/75">處境比對</span>}
           </nav>
           <h1 className="h1 mb-6 max-w-[880px] text-white">看看你的處境，<br /><span className="text-gold">跟哪個案例最像</span></h1>
-          <p className="lead max-w-[640px] !text-white/75">三個問題，約 2 分鐘。比對鹿飛做過的三個案例，找出最接近的一個，以及當時的判斷方法</p>
+          <p className="lead max-w-[640px] !text-white/75">三個問題，約 2 分鐘。比對我們參與過的三個案例，找出最接近的一個、當時怎麼判斷，以及多半從哪一章開始。</p>
           {focusCase && (
             <div className="mt-8 flex items-center gap-4 border border-gold/20 bg-white/[0.04] px-5 py-4">
               <div className="relative h-[50px] w-[68px] shrink-0 overflow-hidden"><TieredImage src={focusCase.heroImage} alt="" sizes="68px" className="absolute inset-0 h-full w-full object-cover" /></div>
@@ -261,7 +273,7 @@ export function parseAssessResultParams(searchParams: SearchParamReader): { read
   const blocker = searchParams.get("blocker");
   const market = searchParams.get("market");
   const focusSlug = searchParams.get("case");
-  if (!STAGE_OPTIONS.some((option) => option.value === stage) || !BLOCKER_OPTIONS.some((option) => option.value === blocker) || !MARKET_OPTIONS.some((option) => option.value === market)) return null;
+  if (!STAGE_OPTIONS.some((option) => option.value === stage) || !BLOCKER_OPTIONS.some((option) => option.value === blocker) || !(market && Object.hasOwn(MARKET_SHORT, market))) return null;
   const focusCase = focusSlug ? getCase(focusSlug) : undefined;
   if (focusSlug && (!focusCase || !CASE_SIGNATURES.some((signature) => signature.slug === focusCase.slug))) return null;
   return { answers: { stage: stage as Stage, blocker: blocker as Blocker, market: market as AssessMarket }, focusCase };
@@ -292,6 +304,7 @@ function ResultScreen({ primary, alternative, answers }: { readonly primary: Mat
   if (!primaryCase) return null;
   const narrative = buildNarrative(primary, answers);
   const meta = CASE_CARD_META[primaryCase.slug];
+  const chapter = getChapterHint(answers);
   const copyShareLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -311,6 +324,7 @@ function ResultScreen({ primary, alternative, answers }: { readonly primary: Mat
           <div className="mb-10 max-w-[740px] space-y-4">
             {narrative.pieces.map((piece) => <div key={piece.label} className="flex items-start gap-4"><span aria-label={piece.matched ? "相同" : "不同"} className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center text-[11px] font-bold ${piece.matched ? "border border-gold text-gold" : "border border-white/25 text-white/40"}`}>{piece.matched ? "✓" : "×"}</span><p className="text-[16.5px] leading-[1.8] text-white/80 md:text-[18px]"><span className="mr-2.5 inline-block min-w-[32px] text-[10.5px] font-semibold tracking-[2px] text-white/40">{piece.label}</span>{piece.sentence}</p></div>)}
           </div>
+          <Link href={chapter.href} className="mb-10 -mt-4 inline-flex text-[15px] font-medium text-gold hover:text-white md:text-[16px]">{chapter.text}</Link>
           <p className="max-w-[700px] border-l-2 border-gold/50 pl-5 text-[15.5px] leading-[1.9] text-white/70 md:text-[17px]">{narrative.closing}</p>
         </div></div>
       </section>
@@ -326,7 +340,7 @@ function ResultScreen({ primary, alternative, answers }: { readonly primary: Mat
             {meta && <div className="relative px-6 pb-10 pt-10 md:px-12 md:pb-14 md:pt-14"><blockquote className="h3 relative mb-8 text-tx"><span aria-hidden="true" className="absolute -left-3 -top-8 text-[80px] leading-none text-gold/20 md:-left-6 md:-top-12 md:text-[120px]">&ldquo;</span>{meta.painTitle}</blockquote><Link href={`/cases/${primaryCase.slug}`} className="inline-flex bg-navy px-6 py-3 text-[14.5px] font-semibold text-white hover:bg-gold hover:text-navy">讀完整案例 →</Link></div>}
           </article>
           {alternativeCase && alternative && <article className="mb-10 border border-bd bg-white px-6 py-6 md:mb-12 md:px-8 md:py-7"><div className="flex items-start gap-5"><div className="relative h-[66px] w-[88px] shrink-0 overflow-hidden md:h-[88px] md:w-[120px]"><TieredImage src={alternativeCase.heroImage} alt="" sizes="120px" className="absolute inset-0 h-full w-full object-cover" /></div><div className="min-w-0 flex-1"><span className="text-[10.5px] font-semibold tracking-[0.5px] text-gold-d">吻合 {alternative.score}/3</span><h2 className="mt-2 text-[16.5px] font-semibold leading-[1.5] text-tx md:text-[17px]">{alternativeCase.title}</h2><Link href={`/cases/${alternativeCase.slug}`} className="mt-2 inline-flex text-[13.5px] font-medium text-tx2 hover:text-gold">看另一條路 →</Link></div></div></article>}
-          <div className="flex flex-wrap items-start justify-between gap-6 border-t border-bd pt-8 md:pt-10"><div className="max-w-[420px]"><div className="mb-1.5 text-[16.5px] font-medium text-tx md:text-[17px]">想知道這個方法放在你身上會長什麼樣？</div><div className="text-[14.5px] leading-[1.8] text-tx3">直接聊。不收費、不賣課、不承諾一定接</div></div><div className="flex flex-wrap items-center gap-6"><button type="button" onClick={copyShareLink} className="inline-flex cursor-pointer items-center gap-2 text-[14.5px] font-medium text-tx2 hover:text-gold" aria-live="polite"><span className="border-b border-tx3/40 pb-0.5">{copied ? "✓ 連結已複製" : "複製這份比對"}</span>{!copied && <span>↗</span>}</button><button type="button" onClick={open} className="cursor-pointer bg-gold px-7 py-3.5 text-[15.5px] font-semibold text-navy active:scale-[.97]">聊聊你的狀況 →</button></div></div>
+          <div className="flex flex-wrap items-start justify-between gap-6 border-t border-bd pt-8 md:pt-10"><div className="max-w-[420px]"><div className="mb-1.5 text-[16.5px] font-medium text-tx md:text-[17px]">想知道這個方法放在你身上會長什麼樣？</div><div className="text-[14.5px] leading-[1.8] text-tx3">免費初步評估 30 分鐘：先聽你的產品在台灣怎麼賣，談完給你一頁——建議從哪一章開始，或建議再等等。不收費、不賣課、不承諾一定接。</div></div><div className="flex flex-wrap items-center gap-6"><button type="button" onClick={copyShareLink} className="inline-flex cursor-pointer items-center gap-2 text-[14.5px] font-medium text-tx2 hover:text-gold" aria-live="polite"><span className="border-b border-tx3/40 pb-0.5">{copied ? "✓ 連結已複製" : "複製這份比對"}</span>{!copied && <span>↗</span>}</button><button type="button" onClick={open} className="cursor-pointer bg-gold px-7 py-3.5 text-[15.5px] font-semibold text-navy active:scale-[.97]">預約 30 分鐘 →</button></div></div>
         </div></div>
       </section>
     </>
