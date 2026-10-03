@@ -400,16 +400,17 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     path: "/services/call-center",
     label: "之後的每一天 · 海外客服",
     title: "海外客服，交給專業英語團隊",
-    scene: "一封英文客訴信。退貨、換貨、問哪裡有賣。\n你不會想為了這件事養一組人，但也不能不回",
+    scene: "一封英文客訴信。退貨、換貨、問哪裡有賣。\n在台灣請一個英文客服，難招也難留；但客人的信不能不回。",
     image: "/images/services/pillar-team-collab-1600.webp",
     imageAlt: "客服團隊在辦公室協作",
-    heroAction: "登記首批 →",
+    heroAction: "預約 30 分鐘初步評估 →",
     showChapterBar: true,
-    scenariosHeading: "需要海外客服的三種情況",
+    scenariosHeading: "你可能已經卡在這三個地方",
+    scenarioAnswerLabel: "我們的做法",
     scenarios: [
-      { title: "海外客訴回不了", body: "貨在海外賣，客訴和退換貨的訊息回不了，或回得很慢", answer: "客服信箱、平台訊息、社群私訊集中到同一個工作台，由專業英語客服團隊接手", image: "/images/services/scenarios/after-1-1600.webp", imageAlt: "手上拿著待處理的退貨包裹" },
-      { title: "北美客服太貴，自己人英文不夠", body: "去北美賣，請不起北美客服；去東南亞賣，自己人英文不夠", answer: "由菲律賓英語客服團隊承接，品牌不必在當地另聘客服", image: "/images/services/scenarios/after-2-1600.webp", imageAlt: "戴著耳機的客服人員" },
-      { title: "客服外包價格偏高", body: "找過台灣的客服外包，價格不便宜", answer: "服務規則、合約與品質指標由鹿飛台灣公司負責；報價區間第一次談就給", image: "/images/services/scenarios/after-3-1600.webp", imageAlt: "指著帳單上的金額討論" },
+      { title: "海外客訴回不了", body: "貨在海外賣了，英文的客訴、退換貨、詢問一直進來，你們回不了，或回得很慢。", answer: "把客服信箱、平台訊息、社群私訊接到同一個地方，由我們在菲律賓的英語客服接手回覆。", image: "/images/services/scenarios/after-1-1600.webp", imageAlt: "手上拿著待處理的退貨包裹" },
+      { title: "想請一個英文客服，請不到也留不住", body: "職缺開了很久，英文好的人不多；好不容易請到，教會了，人又走了，一切從頭來。", answer: "招人、訓練、排班、有人離職再補，都由我們處理。你不用自己養一個英文客服。", image: "/images/services/scenarios/after-2-1600.webp", imageAlt: "戴著耳機的客服人員" },
+      { title: "找過外包，報價看不懂", body: "問過台灣的客服外包，價格不便宜，也說不清楚錢花在哪。", answer: "第一次談就給你報價區間，放在「自己請一個人」的成本旁邊比。服務規則、合約與品質指標由我們在台灣負責。", image: "/images/services/scenarios/after-3-1600.webp", imageAlt: "指著帳單上的金額討論" },
     ],
     sections: [
       {
@@ -417,17 +418,17 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         heading: "客服服務流程",
         items: [
           { number: "01", title: "訊息集中到同一個工作台", body: "客服信箱、平台訊息、社群私訊，接到同一個工作台", icon: "inbox" },
-          { number: "02", title: "由專業英語客服團隊接手", body: "受過完整訓練的菲律賓英語客服團隊，英文溝通是基本功。\n規則與標準由台灣端制定與管理", icon: "badge-check" },
-          { number: "03", title: "依品牌規則回覆", body: "回覆範本、退換貨規則、哪些情況要升級給品牌方——都寫進服務流程，由鹿飛台灣公司負責", icon: "list-checks" },
-          { number: "04", title: "每月服務報表", body: "每月的訊息量、回覆時間、升級次數，一份報表看清楚", icon: "chart-column" },
+          { number: "02", title: "由英語客服團隊接手", body: "我們找的是英文溝通專業的菲律賓客服，上線前先用你的產品和規則訓練。\n有人請假或離職，由團隊補上，你不用重新招人。", icon: "badge-check" },
+          { number: "03", title: "依品牌規則回覆", body: "回覆範本、退換貨規則、哪些情況要轉回給你處理，開始前一起寫成你的服務規則，之後照規則回。", icon: "list-checks" },
+          { number: "04", title: "每月服務報表", body: "每月的訊息量、回覆時間、轉回給你的次數，一份報表看清楚。", icon: "chart-column" },
         ],
       },
       {
         type: "dark-copy",
-        heading: "為什麼選擇菲律賓團隊",
+        heading: "人在菲律賓，規則在台灣",
         paragraphs: [
-          "菲律賓是全球英語客服外包的重鎮，這是產業長年累積的結果",
-          "規則、合約、品質指標留在台灣公司；人在菲律賓。品牌面對的窗口是鹿飛，不是當地的外包廠",
+          "台灣企業平均要花近 45 天才找到一位員工，新人待滿半年的只有六成二（104 人力銀行《2026 年人資 FBI 報告》）。你要找的，還得英文好、願意長期做客服。菲律賓長年是英語客服外包的主要地區之一，這樣的人才是整個產業累積出來的。",
+          "服務規則、合約與品質指標留在台灣，你面對的窗口是我們，不是當地的外包廠。我們只接你的客人主動來問的事：不做電話行銷、不做催收，也不做資料輸入這類後勤。",
         ],
       },
       {
@@ -437,7 +438,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         items: [
           { label: "寄賣階段", body: "電商平台開始有訂單，客訴、退換貨與商品詢問需要即時回覆" },
           { label: "公司落地之後", body: "當地門市或團隊成立，客服量變大，需要穩定的服務流程" },
-          { label: "北美市場", body: "北美品牌的英文客服，多半也由菲律賓團隊承接；不必在北美另聘客服" },
+          { label: "北美市場", body: "在北美賣，英文客服交給菲律賓團隊接，不必在北美另外請客服。" },
         ],
         image: "/images/services/fit/call-center-fit-1600.webp",
         imageAlt: "兩位團隊成員一邊看筆電一邊包裝網路訂單",
@@ -445,12 +446,12 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       { type: "waitlist" },
     ],
     faqs: [
-      { question: "跟一般客服外包差在哪？", answer: "兩件事：團隊是受過完整訓練的英語客服專業人員，不是一般話務員；服務規則在台灣公司，你面對的窗口是鹿飛，不是菲律賓的外包廠。", takeaway: "專業英語團隊，規則由台灣端負責" },
-      { question: "現在可以簽嗎？", answer: "現在是登記首批。2027 Q1 開始服務，登記的人優先。", takeaway: "2027 Q1 開始服務，登記者優先" },
-      { question: "訊息量很小也可以嗎？", answer: "可以先登記。首批我們想找的是量不大、但每一封都重要的品牌，正好一起把服務磨好。", takeaway: "量小也可以先登記" },
+      { question: "跟自己請一個英文客服比，差在哪？", answer: "自己請，你要招人、訓練、帶人，有人離職就從頭來。交給我們，招募、訓練、排班和補人都由我們處理；服務規則、合約和品質指標在台灣，你面對的窗口是我們，不是菲律賓的外包廠。前三個月由創辦人親自帶第一批團隊，把你的規則寫進流程，再交給固定的主管。", takeaway: "不用自己招、自己帶、自己補人" },
+      { question: "現在可以簽嗎？", answer: "現在還不能簽。預計 2027 Q1 開始服務；現在先約 30 分鐘聊需求，約過的品牌開放時優先。時程有變，我們會先通知你。", takeaway: "預計 2027 Q1 開始，約過的優先" },
+      { question: "訊息量很小也可以嗎？", answer: "可以先約。首批我們想找的是量不大、但每一封都重要的品牌，一起把服務磨好。如果你的量小到自己回比較划算，我們會直接說。有時候我們會建議你再等等，那也是一種答案。", takeaway: "可以談，但划不划算我們會直說" },
     ],
     next: { label: "故事從頭來 →", title: "第一個月 · 市場探查", heading: "先驗證市場，再決定投入", href: "/services/product-testing", image: "/images/hero-video/chapter-research-1600.webp", imageAlt: "會議中討論圖表的團隊" },
-    cta: { title: "登記首批", body: "留下你的品牌、大概的訊息量、現在誰在接。開放時我們先找你", action: "登記首批 →", href: "#waitlist" },
+    cta: { title: "先約 30 分鐘", body: "免費初步評估。聊你現在的客訊量、誰在接、卡在哪；外包和自己請人哪個划算，第一次就告訴你。", action: "預約 30 分鐘初步評估 →", href: "#waitlist" },
   },
   na: {
     key: "na",

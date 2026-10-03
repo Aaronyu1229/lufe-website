@@ -47,7 +47,7 @@ describe("ChapterPage", () => {
     await expect(renderChapter("m9")).resolves.toContain("你的角色");
 
     const waitlistMarkup = await renderChapter("after");
-    expect(waitlistMarkup).toContain("2027 Q1 開放首批客戶");
+    expect(waitlistMarkup).toContain("預計 2027 Q1 開放，首批只收少數幾家");
     expect(waitlistMarkup).toContain("每月大概幾封客訊");
     expect(waitlistMarkup).toContain("現在誰在接");
     expect(waitlistMarkup).toContain("適合的品牌");
