@@ -47,7 +47,7 @@ export const HOME_CHAPTERS: readonly Chapter[] = [
     id: "chapter-4",
     label: "之後的每一天",
     title: "海外客服",
-    subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理。2027 Q1 開放首批。",
+    subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理。預計 2027 Q1 開放首批。",
     href: "/services/call-center",
     linkLabel: "登記首批 →",
     icon: HeadsetIcon,
