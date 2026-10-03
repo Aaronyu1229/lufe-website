@@ -17,7 +17,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const c = getCase(slug);
   if (!c) return { title: "案例" };
-  return createPageMetadata({ path: `/cases/${c.slug}`, title: c.title, description: c.summary });
+  return createPageMetadata({ path: `/cases/${c.slug}`, title: c.title, description: c.metaDescription ?? c.summary });
 }
 
 export default async function CasePage({

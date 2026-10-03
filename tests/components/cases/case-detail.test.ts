@@ -77,10 +77,21 @@ describe("CaseDetailPageContent", () => {
 
   it("maps legacy stages to the new service routes without duplicate links", () => {
     const fishFloss = CASES.find((caseItem) => caseItem.slug === "fish-floss-us-fda")!;
-    const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: fishFloss }));
+    const withStageLinks = { ...fishFloss, story: fishFloss.story.map((chapter, index) => (index === 0 ? { ...chapter, showStageLinks: true } : chapter)) };
+    const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: withStageLinks }));
 
     expect(markup).toContain('href="/services/product-testing"');
     expect(markup).toContain('href="/services/north-america"');
     expect(markup.match(/href="\/services\/product-testing"/g)).toHaveLength(1);
+  });
+
+  it("sends the fish floss story to north america at the end instead of mid-story stage links", () => {
+    const fishFloss = CASES.find((caseItem) => caseItem.slug === "fish-floss-us-fda")!;
+    const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem: fishFloss }));
+
+    expect(markup).not.toContain('href="/services/product-testing"');
+    expect(markup).toContain("北美走另一條線，看「北美通路」怎麼做");
+    expect(markup).toContain("不確定像哪一個案例？先做 2 分鐘處境比對");
+    expect(markup).toContain("交出來的");
   });
 });

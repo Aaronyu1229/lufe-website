@@ -113,7 +113,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
       <section className="border-b border-bd bg-white py-[64px] md:py-[88px]">
         <div className="lufe-container">
-          <p className="text-[13px] font-semibold text-gold-d">成果</p>
+          <p className="text-[13px] font-semibold text-gold-d">{caseItem.statsLabel ?? "成果"}</p>
           <div className="mt-6 grid gap-8 md:grid-cols-3">
             {caseItem.stats.map((stat) => (
               <div key={stat.label} className="border-t border-bd pt-6">
@@ -235,7 +235,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
           ) : (
             <h2 className="h2 mb-4 text-tx">你的產品也有<span className="text-gold-d">類似的機會</span>嗎？</h2>
           )}
-          <p className="mx-auto mb-10 max-w-[520px] text-[16.5px] leading-[1.8] text-tx2">{caseItem.cta?.body ?? "每個案子的起點都是一場對話。聊聊你的狀況，鹿飛會說明這個故事裡哪一段跟你最相關"}</p>
+          <p className="mx-auto mb-10 max-w-[520px] whitespace-pre-line text-[16.5px] leading-[1.8] text-tx2">{caseItem.cta?.body ?? "每個案子的起點都是一場對話。聊聊你的狀況，鹿飛會說明這個故事裡哪一段跟你最相關"}</p>
           {caseItem.cta?.notes ? <p className="mx-auto -mt-4 mb-10 max-w-[520px] whitespace-pre-line text-[14px] leading-[1.8] text-tx3">{caseItem.cta.notes}</p> : null}
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
             <button onClick={onMessageOpen} className="cursor-pointer bg-gold px-9 py-[15px] text-[15.5px] font-semibold tracking-[0.5px] text-navy hover:bg-gold-l">
