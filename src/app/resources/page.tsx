@@ -54,7 +54,7 @@ export default function ResourcesPage() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <ExploreTile href="/cases" icon={<BuildingIcon size={22} />} eyebrow="案例" title="實際做過的案子" description="每個案例的完整過程：卡在哪、怎麼判斷、後來怎麼走" action="看案例 →" />
             <ExploreTile href="/insights" icon={<FileIcon size={22} />} eyebrow="洞察與指南" title="市場與法規的實務文章" description="依出海階段整理的分析與實務指南" action="讀文章 →" />
-            <ExploreTile href="/assess" icon={<CompassIcon size={22} />} eyebrow="處境比對" title="2 分鐘找到最像你的案例" description="三個問題，比對鹿飛做過的案例與當時的判斷方法" action="開始比對 →" />
+            <ExploreTile href="/assess" icon={<CompassIcon size={22} />} eyebrow="處境比對" title="2 分鐘找到最像你的案例" description="三個問題，比對我們參與過的案例與當時的判斷方法" action="開始比對 →" />
             <ExploreTile href="https://tradepiloter.com" icon={<ReceiptIcon size={22} />} eyebrow="TradePilot" title="線上關稅查詢工具" description="鹿飛自主開發，出口前先把稅則查清楚" action="前往 TradePilot ↗" external />
           </div>
         </div>

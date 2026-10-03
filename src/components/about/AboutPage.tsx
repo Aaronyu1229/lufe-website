@@ -122,7 +122,7 @@ export function AboutPage() {
             從貨櫃出發，<br /><span className="text-gold">陪台灣企業走完抵達之後</span>
           </h1>
           <p className="max-w-[640px] text-[18px] leading-[1.8] text-white/80">「別人幫你開車，我們幫你找路。」</p>
-          <p className="lead mb-0 mt-4 max-w-[640px] !text-white/75">鹿飛協助台灣企業在北美與東南亞落地：市場驗證、通路進入、在地團隊與客服，一個窗口串起出海的每一段。這個故事，要從躍馬企業說起</p>
+          <p className="lead mb-0 mt-4 max-w-[640px] !text-white/75">我們協助台灣企業在北美與東南亞落地：市場驗證、通路進入、在地團隊與客服，一個窗口串起出海的每一段。這個故事，要從躍馬企業說起</p>
         </div>
         <ScrollCue />
       </section>

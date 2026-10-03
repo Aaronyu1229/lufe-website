@@ -90,7 +90,7 @@ export const HOME_CASE_ROADS = [
   {
     label: "第一條",
     title: "從零開始",
-    detail: "在當地蓋一間英語教育機構——招募師資、找場地、招第一個學生；\n後來用同樣的方法，做了一個連鎖手搖飲品牌",
+    detail: "我們在菲律賓的當地夥伴，先做了一間英語教育機構；\n後來也從零做起一個連鎖手搖飲品牌",
     icon: SproutIcon,
   },
   {

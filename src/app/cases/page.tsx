@@ -4,8 +4,8 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   path: "/cases",
-  title: "案例 · 北美與東南亞實戰",
-  description: "兩個主戰場，四個真實案例：從台灣保健品進北美 Costco、電子廠關稅轉移，到珍奶品牌落地菲律賓。每個案例都能翻到最後一個決策。",
+  title: "案例 · 菲律賓與北美通路",
+  description: "三種出海走法、三個案例：台灣羊奶皂配方不動、改說法與標示走進北美量販通路、台灣魚鬆先過 FDA 再談美國上市、一個手搖飲品牌在菲律賓從零做到十幾家。每個案例都寫到當時最關鍵的決定。",
 });
 
 export default function Cases() {
