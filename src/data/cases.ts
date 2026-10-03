@@ -42,6 +42,14 @@ export interface StoryChapter {
     readonly aspect?: "16/9";
   };
   readonly showStageLinks?: boolean;
+  /** A single chapter link that replaces the stage links for this chapter. */
+  readonly link?: { readonly text: string; readonly href: string };
+}
+
+export interface CaseCta {
+  /** [plain, gold] heading parts. */
+  readonly heading: readonly [string, string];
+  readonly body: string;
 }
 
 export interface CaseStudy {
@@ -52,6 +60,10 @@ export interface CaseStudy {
   readonly num: string;
   readonly title: string;
   readonly summary: string;
+  /** Hard line break in the hero title after this phrase. */
+  readonly titleBreakAfter?: string;
+  /** Shorter summary for "更多成功的故事" cards on other case pages; defaults to summary. */
+  readonly cardSummary?: string;
   readonly heroImage: string;
   readonly listImage: string;
   readonly stats: readonly CaseStat[];
@@ -62,6 +74,9 @@ export interface CaseStudy {
   readonly stagesUsed: readonly CaseStageSlug[];
   readonly keyDecisions: readonly KeyDecision[];
   readonly timeline: readonly TimelineEvent[];
+  /** [plain, gold] timeline heading parts; defaults to the shared heading. */
+  readonly timelineHeading?: readonly [string, string];
+  readonly cta?: CaseCta;
   readonly quote?: {
     readonly text: string;
     readonly attribution: string;
@@ -79,65 +94,70 @@ const goatMilkSoap: CaseStudy = {
   slug: "goat-milk-soap-global",
   tags: [
     { label: "美妝個護", variant: "sky" },
-    { label: "全球", variant: "gold" },
+    { label: "北美", variant: "gold" },
   ],
   industry: "personal-care",
-  market: "global",
-  num: "全球",
-  title: "一塊台灣羊奶皂，怎麼調整成海外也買得到？",
-  summary: "產品本身沒有問題，卡住的是海外買家看不懂它。鹿飛協助品牌調整定位、宣稱、包裝與品項，現在透過跨境電商與海外通路，銷往多個海外市場",
+  market: "north-america",
+  num: "北美",
+  title: "一塊台灣羊奶皂，怎麼讓北美買家看懂？",
+  titleBreakAfter: "台灣羊奶皂，",
+  summary: "產品本身沒有問題，卡住的是北美買家看不懂它。配方不動，改的是說法與標示，再帶進北美的量販通路。",
   heroImage: "/images/hero-video/case-soap-1600.webp",
   listImage: "/images/hero-video/case-soap-1600.webp",
   stats: [
-    { label: "透過跨境電商與海外通路銷售", value: "多個市場" },
-    { label: "從台灣手工皂改成以成分與膚質切入", value: "重新定位" },
-    { label: "INCI 成分標示、宣稱範圍與資訊順序依市場調整", value: "在地化包裝" },
+    { label: "已進入北美的量販通路", value: "北美" },
+    { label: "改的是說法與標示，不是產品", value: "配方不動" },
+    { label: "宣稱範圍與包裝標示，依美國規定重新整理", value: "合規標示" },
   ],
   story: [
     {
-      heading: "在台灣被認識的好皂，到了海外沒人看懂",
+      heading: "在台灣賣得好的皂，到了北美沒人看懂",
       paragraphs: [
-        "這個台灣羊奶皂品牌，在國內已經累積穩定的口碑：配方溫和、做工扎實，回購的客人不少。品牌想走出台灣，卻發現海外買家拿起產品，看不出它和架上其他手工皂差在哪裡。",
-        "問題不在產品，而在產品被介紹的方式。台灣消費者熟悉的賣點與說法，到了不同市場不一定成立；包裝上的資訊，也不一定是當地買家要找的那幾行。",
+        "這個台灣羊奶皂品牌，在台灣有自己的客人。想往北美走，卻發現北美買家拿起產品，看不出它跟架上其他的皂差在哪裡。",
+        "問題不在產品，而在產品被介紹的方式。台灣客人熟悉的賣點與說法，到了北美不一定成立；包裝上的資訊，也不一定是當地買家要找的那幾行。",
       ],
       image: { src: "/images/cases/story/goat-soap-1-1600.webp", alt: "木桌上的手工羊奶皂", position: "center 75%" },
     },
     {
-      heading: "先弄清楚海外買家怎麼看羊奶皂，以及每個市場怎麼管它",
+      heading: "先問兩件事：北美買家怎麼看羊奶皂，這塊皂在美國歸誰管",
       paragraphs: [
-        "鹿飛從市場調研開始：目標市場的消費者怎麼理解「羊奶」這個成分——是溫和、天然，還是對敏感肌友善；同一個價位帶的手工皂與羊奶皂競品，又用什麼故事和宣稱說自己。調研很快指出一件事：「台灣手工」在國內是賣點，到了海外的手工皂市場只是眾多產地之一，真正能讓人停下來的是成分與膚質。",
-        "同時盤點各市場的規定。同樣一塊皂，在不同市場會被歸成不同品項：在美國，只主打清潔的真皂與強調保濕等效果的皂，由不同單位管理，說法一變，要走的路徑就跟著變；在歐盟，皂一律屬於化妝品，上市前要指定境內的負責人、完成產品通報，並備妥產品資訊檔案。品牌想講的每一句話，都要先對照這些框架。",
+        "第一件是市場的事：同一個價位帶的皂，用什麼故事和宣稱說自己；「台灣手工」在北美的架上，是不是一個會讓人停下來的理由。",
+        "第二件是規定的事。同樣一塊皂，在美國會因為說法不同，被歸到不同類：只講清潔的真皂，和強調保濕等效果的皂，由不同單位管理；講到治療，又是另一條路。說法一變，要走的路徑就跟著變。所以品牌想講的每一句話，都要先對照這個框架。",
       ],
-      showStageLinks: true,
+      link: { text: "看北美通路怎麼走 →", href: "/services/north-america" },
     },
     {
-      heading: "產品的核心不動，調整的是定位、宣稱、包裝與品項",
+      heading: "產品的核心不動，調整的是說法與標示",
       paragraphs: [
-        "根據調研結果，品牌把重心放在「怎麼被看懂」：定位從「台灣手工皂」轉成「以羊奶為核心成分、給敏感與乾性肌膚的溫和清潔」，台灣成了工藝出處，不再是主訴求。所有宣稱守在化妝品允許的範圍——講溫和、講成分，不講治療。",
-        "包裝跟著改：成分改用國際通用的 INCI 命名、淨重同時標示公制與英制、加上批號與保存資訊，資訊順序照當地買家拿起產品時的閱讀習慣排列。品項也收斂：手工皂品牌常有十幾款香味，跨境銷售先留一款主打加少數變化，讓第一次接觸的買家不用做選擇題。",
-        "最後整理成一套可以帶進不同市場的品牌底稿：定位、宣稱邊界、標示模板、主打品項，讓每一個新市場、每一位新的通路夥伴，講的都是同一個故事。",
+        "配方沒有動。改的是它被理解的方式：宣稱守在允許的範圍，講溫和、講成分，不講治療；包裝上的資訊，照北美買家拿起產品時要找的那幾行重新排。",
+        "這一路上，北美的團隊在當地負責研究、送評與談判；我們在台灣當品牌的窗口，有事找同一個人。",
       ],
       image: { src: "/images/cases/story/goat-soap-2-1600.webp", alt: "包裝好的手工皂與牛皮紙標籤" },
     },
     {
-      heading: "現在，透過跨境電商與海外通路銷往多個市場",
+      heading: "現在，這塊皂進了北美的量販通路",
       paragraphs: [
-        "調整後的品牌先從跨境電商與線上市集開始，用最小的投入看市場反應，再逐步進入海外通路。今天，這塊來自台灣的羊奶皂，已經在多個海外市場買得到。",
-        "這個案例走的是第二條路：產品的核心保留下來，改的是它被理解的方式。",
+        "從台灣的櫃上到北美的貨架，配方一樣，換的是說法。",
+        "不是每一支產品都該這樣走。有時候我們會建議你再等等，那也是一種答案。",
       ],
     },
   ],
-  challenge: "產品在台灣口碑穩定，但海外買家看不出它和其他手工皂的差別，各市場對皂的品項歸類、宣稱與標示規定也不同。",
-  approach: "先調研海外買家怎麼理解羊奶皂與競品的說法，同步盤點各市場規定，再調整品牌定位、宣稱範圍、包裝標示與主打品項，整理成一套品牌底稿。",
-  result: "一套可帶進不同市場的品牌底稿；品牌透過跨境電商與海外通路，銷往多個海外市場。",
-  stagesUsed: ["market-assessment", "product-testing"],
+  challenge: "產品本身沒有問題，卡住的是北美買家看不懂它。",
+  approach: "配方不動，改的是說法與標示。",
+  result: "這塊皂進了北美的量販通路。",
+  stagesUsed: ["channel-entry"],
   keyDecisions: [],
   timeline: [
-    { when: "第一步", title: "市場調研", desc: "了解目標市場怎麼看羊奶皂、競品用什麼故事與宣稱" },
-    { when: "第二步", title: "法規盤點", desc: "確認各市場的品項歸類、允許的宣稱、標示規定與上市前文件" },
-    { when: "第三步", title: "品牌調整", desc: "定位、宣稱邊界、包裝標示與主打品項依市場重新整理" },
-    { when: "第四步", title: "進入市場", desc: "先以跨境電商試水溫，再帶著同一套底稿進入海外通路" },
+    { when: "第一步", title: "市場調研", desc: "北美買家怎麼看羊奶皂、同價位的皂用什麼故事與宣稱" },
+    { when: "第二步", title: "法規盤點", desc: "這塊皂在美國歸哪一類、能講什麼、標示要寫什麼" },
+    { when: "第三步", title: "說法與標示", desc: "宣稱範圍與包裝標示，依美國規定重新整理" },
+    { when: "第四步", title: "進入通路", desc: "送評、談判，進北美的量販通路" },
   ],
+  timelineHeading: ["這一案走的", "四步"],
+  cta: {
+    heading: ["你的產品，可能也卡在", "「別人看不懂」"],
+    body: "免費初步評估 30 分鐘。先聽你的產品在台灣怎麼賣，談完給你一頁：建議從哪一章開始，或建議再等等。不收費。",
+  },
   related: ["fish-floss-us-fda", "bubble-tea"],
 };
 
@@ -152,6 +172,7 @@ const fishFloss: CaseStudy = {
   num: "FDA",
   title: "台灣魚鬆想進美國，第一關卡在哪裡？",
   summary: "原本以為是行銷問題，調研後發現先要解決的是法規與成分。鹿飛協助品牌釐清 FDA 規範與成分調整點、用美國消費者盲測驗證介紹方式，再重新規劃美國版包裝",
+  cardSummary: "先釐清 FDA 規範與成分、標示要調整的地方，再談包裝與上市。",
   heroImage: "/images/hero-video/case-floss-1600.webp",
   listImage: "/images/hero-video/case-floss-1600.webp",
   stats: [
@@ -302,7 +323,6 @@ export const MARKETS = [
   { value: "all", label: "全部市場" },
   { value: "north-america", label: "北美" },
   { value: "sea", label: "東南亞" },
-  { value: "global", label: "全球" },
 ] as const;
 
 export type IndustryFilter = (typeof INDUSTRIES)[number]["value"];
@@ -318,13 +338,13 @@ export interface CaseCardMeta {
 
 export const CASE_CARD_META: Record<string, CaseCardMeta> = {
   "goat-milk-soap-global": {
-    headline: "重新定位之後，多個海外市場都買得到",
-    painTitle: "產品在台灣口碑好，到了海外卻沒人看得懂",
+    headline: "配方不動，改的是說法與標示",
+    painTitle: "在台灣賣得好的皂，到了北美沒人看懂",
     beats: [
-      "台灣羊奶皂品牌在國內口碑穩定，想把產品帶到海外",
-      "海外買家看不出它和其他手工皂的差別，各市場的品項歸類、宣稱與標示規定也不一樣",
-      "先調研海外買家怎麼看羊奶皂，再調整定位、宣稱範圍、包裝標示與主打品項",
-      "帶著同一套品牌底稿，從跨境電商走進海外通路，現在多個海外市場都買得到",
+      "這個台灣羊奶皂品牌，在台灣有自己的客人，想往北美走",
+      "北美買家拿起產品，看不出它跟架上其他的皂差在哪裡",
+      "宣稱守在允許的範圍，包裝上的資訊照北美買家要找的那幾行重新排",
+      "這塊皂進了北美的量販通路",
     ],
   },
   "fish-floss-us-fda": {

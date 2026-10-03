@@ -41,6 +41,11 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
   const relatedCases = getRelatedCases(caseItem.slug);
   const heroVideo = HERO_VIDEOS[`case:${caseItem.slug}` as keyof typeof HERO_VIDEOS];
   const storyFigureRefs = useRef<HTMLElement[]>([]);
+  const timelineHeading = caseItem.timelineHeading ?? ["從啟動到收尾的", "時間節奏"];
+  const titleBreakIndex = caseItem.titleBreakAfter ? caseItem.title.indexOf(caseItem.titleBreakAfter) : -1;
+  const titleLines = titleBreakIndex >= 0
+    ? [caseItem.title.slice(0, titleBreakIndex + caseItem.titleBreakAfter!.length), caseItem.title.slice(titleBreakIndex + caseItem.titleBreakAfter!.length)]
+    : [caseItem.title];
   const stageLinks = Array.from(
     new Map(caseItem.stagesUsed.map((stageSlug) => {
       const stage = CASE_STAGE_LINKS[stageSlug];
@@ -100,7 +105,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
             ))}
           </div>
 
-          <h1 className="h1 mb-6 max-w-[880px] text-white">{caseItem.title}</h1>
+          <h1 className="h1 mb-6 max-w-[880px] text-white">{titleLines.length === 2 ? <>{titleLines[0]}<br />{titleLines[1]}</> : caseItem.title}</h1>
           <p className="lead max-w-[640px] !text-white/75">{caseItem.summary}</p>
         </div>
         <ScrollCue />
@@ -138,7 +143,17 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
                     <p key={paragraph} className={`${paragraphIndex === 0 ? "mt-0" : "mt-6"} text-[18px] leading-[1.9] text-tx2`}>{paragraph}</p>
                   ))}
 
-                  {chapter.showStageLinks && stageLinks.length > 0 && (
+                  {chapter.link && (
+                    <div className="mt-6 border-t border-bd pt-6">
+                      <div className="flex flex-wrap gap-2">
+                        <Link href={chapter.link.href} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
+                          {chapter.link.text}
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+
+                  {!chapter.link && chapter.showStageLinks && stageLinks.length > 0 && (
                     <div className="mt-6 border-t border-bd pt-6">
                       <div className="flex flex-wrap gap-2">
                         {stageLinks.map((stage) => (
@@ -181,7 +196,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
         <section className="overflow-hidden bg-cream py-[80px] md:py-[100px]">
           <div className="lufe-container">
             <div className="max-w-[980px] min-w-0">
-              <h2 className="h2 text-tx">從啟動到收尾的<span className="text-gold-d">時間節奏</span></h2>
+              <h2 className="h2 text-tx">{timelineHeading[0]}<span className="text-gold-d">{timelineHeading[1]}</span></h2>
             </div>
           </div>
 
@@ -215,14 +230,18 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
       <section className="bg-cream py-[72px] md:py-[96px]">
         <div className="lufe-container"><div className="mx-auto max-w-[720px] text-center">
-          <h2 className="h2 mb-4 text-tx">你的產品也有<span className="text-gold-d">類似的機會</span>嗎？</h2>
-          <p className="mx-auto mb-10 max-w-[520px] text-[16.5px] leading-[1.8] text-tx2">每個案子的起點都是一場對話。聊聊你的狀況，鹿飛會說明這個故事裡哪一段跟你最相關</p>
+          {caseItem.cta ? (
+            <h2 className="h2 mb-4 text-tx">{caseItem.cta.heading[0]}<span className="text-gold-d">{caseItem.cta.heading[1]}</span></h2>
+          ) : (
+            <h2 className="h2 mb-4 text-tx">你的產品也有<span className="text-gold-d">類似的機會</span>嗎？</h2>
+          )}
+          <p className="mx-auto mb-10 max-w-[520px] text-[16.5px] leading-[1.8] text-tx2">{caseItem.cta?.body ?? "每個案子的起點都是一場對話。聊聊你的狀況，鹿飛會說明這個故事裡哪一段跟你最相關"}</p>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
             <button onClick={onMessageOpen} className="cursor-pointer bg-gold px-9 py-[15px] text-[15.5px] font-semibold tracking-[0.5px] text-navy hover:bg-gold-l">
-              聊聊你的產品 →
+              預約 30 分鐘 →
             </button>
             <Link href="/assess" className="inline-flex items-center gap-2 text-[15.5px] font-medium text-tx2 hover:text-navy">
-              <span className="border-b border-tx3/40 pb-0.5">先做 2 分鐘評估</span>
+              <span className="border-b border-tx3/40 pb-0.5">還不確定像哪一種？先做 2 分鐘處境比對</span>
               <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -248,7 +267,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
                     </div>
                     <p className={`${isNumericValue(relatedCase.num) ? "num text-[36px]" : "text-[28px]"} mb-2.5 leading-none text-gold-d`}>{relatedCase.num}</p>
                     <h3 className="h3 mb-2 text-tx">{relatedCase.title}</h3>
-                    <p className="mb-3 text-[14.5px] leading-[1.65] text-tx2">{relatedCase.summary}</p>
+                    <p className="mb-3 text-[14.5px] leading-[1.65] text-tx2">{relatedCase.cardSummary ?? relatedCase.summary}</p>
                     <span className="text-[14.5px] font-semibold text-gold-d">看完整案例 →</span>
                   </div>
                 </Link>
