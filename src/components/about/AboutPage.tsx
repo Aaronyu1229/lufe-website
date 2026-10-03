@@ -22,7 +22,7 @@ export const storyChapters = [
     title: "43 年，把台灣的貨送到世界各地",
     paragraphs: [
       "躍馬做國際貨運承攬已經 43 年：報關、倉儲、海空運、最後一哩",
-      "在躍馬，接手的不只是報關單和貨櫃，還有 43 年累積下來的客戶——和他們的處境",
+      "43 年下來，我們看到的不只是報關單和貨櫃，還有客戶的處境",
     ],
     stats: true,
     image: { src: "/images/about/about-port-1600.webp", alt: "貨櫃碼頭——躍馬 43 年的日常", position: "center 40%" },
