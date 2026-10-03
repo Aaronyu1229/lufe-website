@@ -12,7 +12,7 @@ describe("CaseDetailPageContent", () => {
     for (const caseItem of CASES) {
       const markup = renderToStaticMarkup(createElement(CaseDetailPageContent, { caseItem }));
 
-      expect(markup).toContain(caseItem.title);
+      expect(markup.replaceAll("<br/>", "")).toContain(caseItem.title);
       expect(markup).toContain(caseItem.summary);
       expect(markup).toContain("<img");
       expect(markup).not.toContain("<video");

@@ -7,7 +7,7 @@ import { Carousel, ExpandCard } from "@/components/ui";
 import { isNumericValue } from "@/data/cases";
 
 type Industry = "food" | "personal-care" | "fnb";
-type Market = "north-america" | "sea" | "global";
+type Market = "north-america" | "sea";
 
 interface CaseCardData {
   readonly slug: string;
@@ -32,18 +32,18 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
     slug: "goat-milk-soap-global",
     featured: false,
     industry: "personal-care",
-    market: "global",
+    market: "north-america",
     tags: [
       { label: "美妝個護", variant: "sky" },
-      { label: "全球", variant: "gold" },
+      { label: "北美", variant: "gold" },
     ],
-    num: "多個市場",
-    numLabel: "透過跨境電商與海外通路銷售",
+    num: "北美",
+    numLabel: "已進入北美的量販通路",
     scalePrefix: "台灣羊奶皂品牌",
-    title: "一塊台灣羊奶皂，怎麼賣到海外？",
-    painLine: "產品在台灣口碑好，但到了海外，買家看不懂它的價值",
-    solutionLine: "先拆解海外買家怎麼看羊奶皂，再調整品牌定位、包裝與說法，讓每個市場講同一個故事",
-    route: { from: "台灣", to: "全球市場" },
+    title: "一塊台灣羊奶皂，怎麼讓北美買家看懂？",
+    painLine: "產品本身沒有問題，卡住的是北美買家看不懂它",
+    solutionLine: "配方不動，改的是說法與標示，再帶進北美的量販通路。",
+    route: { from: "台灣", to: "北美" },
     image: "/images/hero-video/case-soap-1600.webp",
   },
   {
