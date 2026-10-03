@@ -102,7 +102,7 @@ export function InsightsPageContent({
           <div className="min-w-0">
             <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60"><Link href="/" className="hover:text-white">首頁</Link><span aria-hidden="true" className="text-white/30">/</span><span className="text-white/75">洞察</span></nav>
             <h1 className="h1 mb-6 max-w-[880px] text-white">出海第一年，<br /><span className="text-gold">每個月會卡住的事</span></h1>
-            <p className="lead max-w-[640px] !text-white/75">按你現在走到哪一個月來找：第一個月問市場，第三個月談通路與證，第九個月落地與團隊。北美通路另成一條線。</p>
+            <p className="lead max-w-[640px] !text-white/75">按你現在走到哪一個月來找：第一個月問市場，第三個月談寄賣，第九個月談公司落地。北美通路另成一條線。</p>
           </div>
         </div>
         <ScrollCue />

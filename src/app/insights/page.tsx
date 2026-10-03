@@ -12,7 +12,7 @@ export const revalidate = 300;
 export const metadata = createPageMetadata({
   path: "/insights",
   title: "洞察 · 出海第一年會遇到的事",
-  description: "按出海第一年的順序整理：第一個月問市場、第三個月談通路與證、第九個月落地與團隊，以及北美通路。台灣品牌進菲律賓之前，先把常見的卡點讀一遍。",
+  description: "按出海第一年的順序整理：第一個月問市場、第三個月談寄賣、第九個月談公司落地，以及北美通路。台灣品牌進菲律賓之前，先把常見的卡點讀一遍。",
 });
 
 export default async function Insights() {
