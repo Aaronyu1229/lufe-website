@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 
+import { EN_PUBLIC, hasEnglishRoute } from "@/i18n/config";
+import { localizedHref, type Locale } from "@/i18n/locale";
+
 import { SITE_NAME, SITE_URL } from "./site";
 
 type PageMetadataOptions = {
+  /** Always the Chinese path; English canonicals are derived from it. */
   readonly path: string;
   readonly title?: string;
   readonly description?: string;
+  readonly locale?: Locale;
 };
 
 type ArticleMetadataOptions = {
@@ -31,11 +36,15 @@ export function withoutSiteName(title: string): string {
   return withoutName || title;
 }
 
-export function createPageMetadata({ path, title, description }: PageMetadataOptions): Metadata {
+export function createPageMetadata({ path, title, description, locale = "zh" }: PageMetadataOptions): Metadata {
+  const canonical = localizedHref(locale, path);
+  const languages = EN_PUBLIC && hasEnglishRoute(path)
+    ? { languages: { "zh-Hant": path, en: localizedHref("en", path), "x-default": path } }
+    : {};
   return {
     ...(title ? { title } : {}),
     ...(description ? { description } : {}),
-    alternates: { canonical: path },
+    alternates: { canonical, ...languages },
   };
 }
 
