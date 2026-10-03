@@ -51,7 +51,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="text-[14px] max-w-[260px] leading-[1.8] font-normal mt-[14px] text-white/70">
-            協助台灣企業在北美與東南亞落地：市場探查、寄賣、公司落地到海外客服，一個窗口走完出海第一年。以躍馬企業 42 年國際物流為後盾
+            協助台灣企業在北美與東南亞落地：市場探查、寄賣、公司落地到海外客服，一個窗口走完出海第一年。以躍馬企業 43 年國際物流為後盾
           </p>
         </div>
 

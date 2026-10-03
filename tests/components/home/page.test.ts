@@ -116,7 +116,7 @@ describe("home page", () => {
     expect(rendered).not.toContain("馬尼拉的媽媽");
     expect(JUMPING_COPY.eyebrow).toBe("躍馬企業 × 鹿飛");
     expect(JUMPING_COPY.title).toEqual(["從你的工廠，到菲律賓的貨架，", "是同一條路"]);
-    expect(JUMPING_COPY.intro).toBe("這條路的前半段，躍馬企業走了 42 年：500 多個出口案件，30 多個國家。看了這麼多年，我們最清楚貨櫃門打開之後，品牌會卡在哪裡。所以鹿飛的創辦人從躍馬走出來，把後半段接上。");
+    expect(JUMPING_COPY.intro).toBe("這條路的前半段，躍馬企業走了 43 年：500 多個出口案件，30 多個國家。看了這麼多年，我們最清楚貨櫃門打開之後，品牌會卡在哪裡。所以鹿飛的創辦人從躍馬走出來，把後半段接上。");
     expect(rendered).toContain("每一家只負責自己那一段，進度卡住時，沒有人負責把它串起來。\n我們把市場探查、寄賣、公司落地與海外客服，放在同一份合約裡；國際物流交給躍馬企業。\n一個窗口對接所有環節，你只需要開一次會。");
   });
 
