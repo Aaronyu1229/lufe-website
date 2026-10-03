@@ -175,7 +175,7 @@ describe("article rewrites and additions", () => {
       expect(markup).not.toMatch(/>https?:\/\//);
       expect(faqPage?.mainEntity).toHaveLength(3);
       expect(articleJsonLd?.citation).toEqual(article.sources?.map((source) => source.url));
-      expect(articleJsonLd?.dateModified).toBe("2026-10-01T00:00:00+08:00");
+      expect(articleJsonLd?.dateModified).toBe(`${article.updated}T00:00:00+08:00`);
     }
   });
 });
