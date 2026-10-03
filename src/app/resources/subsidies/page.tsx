@@ -46,7 +46,7 @@ export default function SubsidiesPage() {
           <p className="lead max-w-[640px] !text-white/75">
             貿易署、經濟部、中企署——每年都有上億元的預算在幫台灣企業進入<span className="font-medium text-white">北美</span>和<span className="font-medium text-white">東南亞</span>兩個主戰場。
             但多數中小企業根本沒申請過，不是因為不符合資格，是因為不知道有這些計畫
-            我們替你整理了 <span className="font-medium text-white">4 個和鹿飛三支柱方法論對齊</span> 的計畫
+            我們替你整理了 <span className="font-medium text-white">4 個</span>計畫
           </p>
         </div>
         <ScrollCue />
