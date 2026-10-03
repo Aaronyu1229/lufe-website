@@ -121,6 +121,7 @@ export type Chapter = {
   readonly heroAction: string;
   readonly showChapterBar: boolean;
   readonly scenariosHeading: string;
+  readonly scenarioAnswerLabel?: string;
   readonly scenarios: readonly ChapterScenario[];
   readonly sections: readonly ChapterSection[];
   readonly faqs: readonly ChapterFaq[];
@@ -130,6 +131,9 @@ export type Chapter = {
     readonly body: string;
     readonly action: string;
     readonly href?: string;
+    readonly notes?: string;
+    readonly link?: { readonly label: string; readonly href: string };
+    readonly footnote?: string;
   };
 };
 
@@ -173,14 +177,15 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     path: "/services/product-testing",
     label: "第一個月 · 市場探查",
     title: "先驗證市場，再決定投入",
-    scene: "在台灣問了一百個人，還是不知道當地消費者會不會買單。\n市場探查把產品帶到當地，直接取得市場反應",
+    scene: "市場不會因為你準備好了就要你。\n在台灣問了一百個人，還是不知道菲律賓的消費者會不會買單。\n市場探查把你的產品帶到當地人面前，一個一個問。",
     image: "/images/services/stage-02-product-test-1600.webp",
     imageAlt: "團隊檢視產品資料",
     heroAction: "聊聊你的產品 →",
     showChapterBar: true,
     scenariosHeading: "出海前最常見的三個疑問",
+    scenarioAnswerLabel: "我們的做法",
     scenarios: [
-      { title: "想出海，不知道從哪裡開始", body: "有產品，聽說東南亞有機會，但不知道從哪裡開始", answer: "先做市場探查：把產品放到當地消費者面前，用一頁報告決定要不要往下走", image: "/images/services/scenarios/m1-1-1600.webp", imageAlt: "在世界地圖上標記目的地" },
+      { title: "想出海，不知道從哪裡開始", body: "有產品，聽說東南亞有機會，但不知道從哪裡開始", answer: "先做市場探查：把產品放到當地人面前，一頁報告告訴你要不要往下走", image: "/images/services/scenarios/m1-1-1600.webp", imageAlt: "在世界地圖上標記目的地" },
       { title: "報告很厚，決定還是沒有", body: "找過顧問，拿到一份很厚的報告，還是不知道該不該去", answer: "市場探查只交一頁：誰會買、多少錢會買、為什麼不買。拿來做決定，不是拿來歸檔", image: "/images/services/scenarios/m1-2-1600.webp", imageAlt: "整疊厚重的資料夾" },
       { title: "不想一開始就投入幾百萬", body: "怕一去就是幾百萬，想先花小錢確認", answer: "市場探查 1～2 萬（前 10 家實驗價）。沒過就停在這裡，過了再抵進下一章", image: "/images/services/scenarios/m1-3-1600.webp", imageAlt: "裝滿硬幣的儲蓄罐與計算機" },
     ],
@@ -189,19 +194,19 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         type: "steps",
         heading: "市場探查的四個步驟",
         items: [
-          { number: "01", title: "寄三支產品到馬尼拉", body: "我們先幫你看：這三支在當地有沒有類似的、賣多少錢", icon: "package" },
-          { number: "02", title: "當地消費者測試面板", body: "依產品篩選的當地消費者圍著桌子。\n拿起來、聞一聞、翻價錢。有人皺眉，有人問哪裡買得到", icon: "users" },
-          { number: "03", title: "鹿飛在旁邊記", body: "誰拿了第二次、誰看到價錢放下、誰問了成分。每一支產品至少六個數據來源", icon: "pen" },
-          { number: "04", title: "一頁報告", body: "誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。\n面板跑完就給，不用等產品證", icon: "file" },
+          { number: "01", title: "先做一張產品卡", body: "把你的產品寫成一頁當地人看得懂的介紹：是什麼、怎麼用、多少錢。\n同時查當地有沒有類似的產品、賣多少錢。", icon: "package" },
+          { number: "02", title: "一對一，問當地人", body: "請當地有固定收入、會自己掏錢買東西的消費者，\n拿著產品卡、用過試用包，一個一個聊。\n喜歡什麼、看不懂什麼、多少錢會買、為什麼不買。", icon: "users" },
+          { number: "03", title: "跟公開資料交叉比對", body: "訪談聽到的，再對照當地電商的評價、競品的價格與說法。\n嘴巴說的，跟市場上真的在賣的，放在一起看。", icon: "pen" },
+          { number: "04", title: "一頁報告", body: "誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。\n訪談跑完就給，不用等產品證。", icon: "file" },
         ],
       },
       {
         type: "report",
-        heading: "交付內容：一頁決策報告",
+        heading: "交付內容：一頁報告",
         items: [
-          "誰會買：哪一群人拿了第二次",
+          "誰會買：哪一群人有興趣、為什麼",
           "多少錢會買：價格帶落在哪、跟台灣差多少",
-          "為什麼不買：皺眉的那幾個人說了什麼",
+          "為什麼不買：沒興趣的人說了什麼",
         ],
         ending: "這一頁是拿來做下一個決定的，不是拿來歸檔的",
       },
@@ -209,7 +214,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         type: "price",
         title: "1～2 萬",
         caption: "前 10 家實驗價",
-        details: ["面板跑完就給報告，不用等產品證"],
+        details: ["訪談跑完就給報告，不用等產品證"],
         paths: [
           { label: "過了 →", body: "這筆抵進第三個月的寄賣包（5～6 萬），合起來就是 7 萬起手包" },
           { label: "沒過 →", body: "故事在這裡停。你花的是 1～2 萬，不是幾百萬", dark: true },
@@ -219,10 +224,10 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     faqs: [
       { question: "市場探查沒過會怎樣？", answer: "報告會寫清楚為什麼、什麼條件改了可以再試。這是 1～2 萬買到的最有價值的答案之一。", takeaway: "報告會寫清楚原因，以及什麼條件改了可以再試" },
       { question: "可以只做市場探查嗎？", answer: "可以。市場探查是獨立的，你拿著那一頁去做任何決定都行。", takeaway: "可以，市場探查獨立計價" },
-      { question: "測試面板的成員怎麼選？", answer: "依產品的目標市場，篩選當地有購買力、真正會掏錢的消費者。拿起、放下、追問價格的真實反應，比問卷準。", takeaway: "依目標市場篩選，看真實反應" },
+      { question: "訪談的是誰？樣本夠嗎？", answer: "目前是當地有固定收入、會自己掏錢買東西的消費者，每一位都先用過試用包再聊。\n人數不多、集中在特定族群與地區，我們在每一份報告裡都寫明這件事。\n1～2 萬買的是方向，不是統計。方向對了，再花錢擴樣。", takeaway: "1～2 萬買的是方向，不是統計" },
     ],
     next: { label: "下一章 →", title: "第三個月 · 寄賣", heading: "上架了，讓人先用過再說", href: "/services/consignment", image: "/images/hero-video/chapter-warehouse-1600.webp", imageAlt: "貨架上待出貨的包裹" },
-    cta: { title: "聊聊你的產品", body: "我們先聽你的產品在台灣怎麼賣，再說適不適合去測。\n有時候聽完，我們會建議你再等等——那也是一種答案", action: "聊聊你的產品 →" },
+    cta: { title: "從一次評估開始", body: "我們先聽你的產品在台灣怎麼賣，再說適不適合去問菲律賓。\n有時候聽完，我們會建議你再等等——那也是一種答案。", notes: "第一次談 30 分鐘，不收費。\n談完給你一頁：建議從哪一章開始，或建議再等等。\n要不要走、走幾章，由你決定。", action: "預約 30 分鐘 →", link: { label: "想先看我們實際問到了什麼？→ 小步出海法", href: "/services/methodology" }, footnote: "送出後一個工作天內回覆。" },
   },
   m3: {
     key: "m3",
