@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 import { useMessageBox } from "./MessageBox";
 import { DelightLayer } from "./DelightLayer";
 import { TieredImage } from "./TieredImage";
+import { LanguageToggle } from "@/components/i18n/LanguageToggle";
 import { useSpring } from "@/lib/motion";
 import {
   BuildingIcon,
@@ -32,6 +33,7 @@ import {
   CHAPTER_DISPLAY_LABELS,
   type ArticleChapterKey,
 } from "@/data/chapters";
+import { stripLocale } from "@/i18n/locale";
 
 type MenuKey = "services" | "advanced" | "cases" | "insights" | "about";
 
@@ -50,7 +52,7 @@ const insightChapterHref = (chapter: ArticleChapterKey) => `/insights?cat=${chap
 
 /** On /insights itself a soft navigation keeps the page mounted, so swap the filter in place instead. */
 function switchInsightChapterInPlace(event: MouseEvent<HTMLAnchorElement>, href: string) {
-  if (window.location.pathname !== "/insights") return;
+  if (stripLocale(window.location.pathname) !== "/insights") return;
   event.preventDefault();
   window.history.pushState(null, "", href);
   window.dispatchEvent(new PopStateEvent("popstate"));
@@ -67,7 +69,8 @@ const ABOUT_MENU_ITEMS = [
 ] as const;
 
 export function normalizePathname(pathname: string | null | undefined): string {
-  return !pathname || pathname === "/index" ? "/" : pathname;
+  if (!pathname || pathname === "/index") return "/";
+  return stripLocale(pathname);
 }
 
 export function pathnameHasDarkHero(pathname: string): boolean {
@@ -91,6 +94,7 @@ export function Navbar({
   readonly publishedArticleSlugs?: readonly string[];
 }) {
   const pathname = normalizePathname(usePathname());
+  const rawPathname = usePathname() ?? "/";
   const { open: openMessageBox } = useMessageBox();
   const darkHero = pathnameHasDarkHero(pathname);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
@@ -254,6 +258,7 @@ export function Navbar({
           </div>
 
           <div className="flex items-center gap-2">
+            <LanguageToggle pathname={rawPathname} className="hidden px-2 text-[14px] font-semibold min-[900px]:inline-flex" />
             <MessageBoxTrigger className="hidden min-[900px]:inline-flex" />
             <button type="button" onClick={toggleMobile} aria-label={mobileOpen ? "關閉選單" : "開啟選單"} aria-controls="mobile-navigation" aria-expanded={mobileOpen} className="flex h-10 w-10 cursor-pointer items-center justify-center min-[900px]:hidden">
               <span className="sr-only">{mobileOpen ? "關閉選單" : "開啟選單"}</span>
@@ -280,6 +285,7 @@ export function Navbar({
         {navItems.map((item) => (
           <MobileGroup key={item.key} item={item} open={mobileGroup === item.key} onToggle={() => setMobileGroup((current) => current === item.key ? null : item.key)} onClose={closeMobile} insightsNavigation={{ latestArticle, publishedArticleSlugs }} />
         ))}
+        <LanguageToggle pathname={rawPathname} className="mx-3 mt-3 flex justify-center border border-bd py-2 text-[14px] font-semibold" />
         <MessageBoxTrigger className="m-3 flex w-[calc(100%-24px)] justify-center" onOpen={closeMobile} />
       </div>
       <button

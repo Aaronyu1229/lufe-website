@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
+import { stripLocale } from "@/i18n/locale";
+
 const numberPattern = /^(.*?)(-?\d[\d,]*(?:\.\d+)?)(\D*)$/;
 
 export function formatCounter(raw: string, progress: number): string {
@@ -103,7 +105,7 @@ export function DelightLayer() {
       requestAnimationFrame(tick);
     }, { threshold: 0.5 });
 
-    const heroBackdrops = pathname === "/" ? [] : Array.from(root.querySelectorAll<HTMLElement>(".lufe-hero-backdrop"));
+    const heroBackdrops = stripLocale(pathname ?? "") === "/" ? [] : Array.from(root.querySelectorAll<HTMLElement>(".lufe-hero-backdrop"));
     heroBackdrops.forEach((backdrop) => backdrop.setAttribute("data-lufe-hero-photo", ""));
     if (!reduced) onView(heroBackdrops, (element) => { element.dataset.lufeHeroSettled = ""; });
 
