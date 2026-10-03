@@ -15,9 +15,10 @@ describe("AboutPage v3 story", () => {
       "多一點把握",
       "10,377 美元",
       "1,420 美元",
-      "資料來源：Drewry World Container Index；經濟部《2025 中小企業白皮書》；內政部戶口統計",
-      "認識躍馬企業 →",
+      "躍馬是我們的後盾：躍馬把貨送到，鹿飛讓貨在當地被買走。",
     ]) expect(markup).toContain(copy);
+    for (const removed of ["資料來源", "退場", "認識躍馬企業", "jumping.group"]) expect(markup).not.toContain(removed);
+    expect(markup).not.toMatch(/我(?!們)/);
     for (const retired of ["二代", "第二代", "接班人", "42 年", "四十二年", "全球在地節點", "三支柱方法論", "一群躍馬的人"]) expect(markup).not.toContain(retired);
   });
 

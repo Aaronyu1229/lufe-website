@@ -22,10 +22,9 @@ export const storyChapters = [
     title: "43 年，把台灣的貨送到世界各地",
     paragraphs: [
       "躍馬做國際貨運承攬已經 43 年：報關、倉儲、海空運、最後一哩。",
-      "在躍馬，我接手的不只是報關單和貨櫃，還有 43 年累積下來的客戶——和他們的處境。",
+      "在躍馬，接手的不只是報關單和貨櫃，還有 43 年累積下來的客戶——和他們的處境。",
     ],
     stats: true,
-    jumpingLink: true,
     image: { src: "/images/about/about-port-1600.webp", alt: "貨櫃碼頭——躍馬 43 年的日常", position: "center 40%" },
     photoSlot: "PHOTO-SLOT-01",
   },
@@ -39,14 +38,13 @@ export const storyChapters = [
       "疫情過了，壓力沒有走。台灣 171 萬家中小企業，2024 年賣出 31.1 兆元，賣到國外的只有 3.2 兆——十塊錢裡大約只有一塊。島內的人口，從 2024 年起每個月都在減少。",
     ],
     insert: { afterParagraph: 1, content: <FreightRateChart /> },
-    note: "資料來源：Drewry World Container Index；經濟部《2025 中小企業白皮書》；內政部戶口統計",
   },
   {
     num: "03",
     label: "關鍵洞察",
     title: "差別不在物流，而在抵達之後有沒有人接手",
     paragraphs: [
-      "我們的客戶，跟著市場一起面臨轉型與生存的壓力。一次一次聊下去，我看清楚一件事：貨都送得到。真正拉開差距的，是抵達之後有沒有人接著走——證照有沒有人辦、貨架上有沒有人推、第一封英文客訴有沒有人回。",
+      "我們的客戶，跟著市場一起面臨轉型與生存的壓力。一次一次聊下去，看清楚一件事：貨都送得到。真正拉開差距的，是抵達之後有沒有人接著走——證照有沒有人辦、貨架上有沒有人推、第一封英文客訴有沒有人回。",
       "這些事不在任何一家貨代的服務範圍裡，也不在躍馬的。",
     ],
     image: { src: "/images/about/story-belief-compass-1600.webp", alt: "羅盤放在世界地圖上——有計畫的探索", maxTierWidth: 1600, position: "center" },
@@ -58,8 +56,8 @@ export const storyChapters = [
     title: "守住本業很安全，但客戶需要我們再往前走一步",
     paragraphs: [
       "最穩的路，是把報關和運送做好，守住 43 年的本業。但客戶卡住的地方，已經不在港口了。",
-      "所以我跳出躍馬既有的框架，成立了鹿飛：從那些痛點往前走——先看清海外市場，弄懂當地法規，找到通路，再陪你落地、接客服。四件最難的事，做成四個方案：市場探查、寄賣、公司落地、海外客服。",
-      "躍馬沒有退場，它是我們的後盾：躍馬把貨送到，鹿飛讓貨在當地被買走。",
+      "所以跳出躍馬既有的框架，成立了鹿飛：從那些痛點往前走——先看清海外市場，弄懂當地法規，找到通路，再陪你落地、接客服。四件最難的事，做成四個方案：市場探查、寄賣、公司落地、海外客服。",
+      "躍馬是我們的後盾：躍馬把貨送到，鹿飛讓貨在當地被買走。",
     ],
     servicesLink: true,
     image: { src: "/images/about/aaron-news-interview-1080.webp", alt: "台視新聞訪問躍馬企業市場經理", maxTierWidth: 1080, position: "42% center" },
@@ -105,7 +103,6 @@ const teamRoles = [
     title: "台灣核心",
     desc: "合約、進度、對口窗口都在台灣，從第一次評估到最後一章，你只需要找同一個人。要出的貨，交給躍馬報關、運送——那是我們 43 年的本業。",
     photoSlot: "PHOTO-SLOT-05A",
-    link: { label: "認識躍馬企業 →", href: "https://jumping.group" },
     icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="11" r="4" stroke="currentColor" strokeWidth="1.5" /><path d="M7 26C7 21.0294 11.0294 17 16 17C20.9706 17 25 21.0294 25 26" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><circle cx="25" cy="9" r="2" stroke="currentColor" strokeWidth="1.2" /><circle cx="7" cy="9" r="2" stroke="currentColor" strokeWidth="1.2" /></svg>,
   },
   {
@@ -155,7 +152,7 @@ export function AboutPage({ photoSources = {} }: { readonly photoSources?: About
         <div className="lufe-container">
           <p className="mb-4 text-[13px] font-semibold text-gold-d">05・今天的團隊</p>
           <h2 className="h2">讓台灣企業出海，少一點害怕，<br /><span className="text-gold-d">多一點把握</span></h2>
-          <p className="lead mt-5 max-w-[720px]">這是我成立鹿飛的原因。做法是把出海拆成小步：先花 1～2 萬看市場反應，再決定要不要往下走。所以第一次談，我只問問題；有時候我會建議你再等等，那也是一種答案。</p>
+          <p className="lead mt-5 max-w-[720px]">這是成立鹿飛的原因。做法是把出海拆成小步：先花 1～2 萬看市場反應，再決定要不要往下走。所以第一次談，只問問題；有時候會建議你再等等，那也是一種答案。</p>
           <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
             {teamRoles.map((role) => (
               <article key={role.title} className="border border-bd bg-white p-6">
@@ -163,7 +160,6 @@ export function AboutPage({ photoSources = {} }: { readonly photoSources?: About
                 <div className="mb-4 flex h-12 w-12 items-center justify-center border border-gold/40 text-gold-d">{role.icon}</div>
                 <h3 className="h3 mb-2">{role.title}</h3>
                 <p className="text-[14.5px] leading-[1.8] text-tx2">{role.desc}</p>
-                {"link" in role ? <a href={role.link.href} target="_blank" rel="noopener noreferrer" className="group mt-4 inline-flex text-[15px] font-semibold text-gold-d"><span>{role.link.label}</span></a> : null}
               </article>
             ))}
           </div>

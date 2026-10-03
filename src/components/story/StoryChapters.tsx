@@ -13,7 +13,6 @@ export type StoryChapter = {
   readonly title: string;
   readonly paragraphs: readonly string[];
   readonly stats?: boolean;
-  readonly jumpingLink?: boolean;
   readonly servicesLink?: boolean;
   readonly image?: {
     readonly src: string;
@@ -25,8 +24,6 @@ export type StoryChapter = {
   readonly photoSlot?: AboutPhotoSlotId;
   /** Content inserted after the paragraph at this index. */
   readonly insert?: { readonly afterParagraph: number; readonly content: ReactNode };
-  /** Small source line after the paragraphs, in the figure caption style. */
-  readonly note?: string;
 };
 
 const storyStats = [
@@ -84,14 +81,9 @@ export function StoryChapters({ chapters, photoSources = {} }: { readonly chapte
           <p className={`${index ? "mt-6" : ""} text-[18px] leading-[1.9] text-tx2`}>{paragraph}</p>
           {chapter.insert?.afterParagraph === index ? chapter.insert.content : null}
         </div>)}
-        {chapter.note ? <p className="mt-6 text-[13px] text-tx3">{chapter.note}</p> : null}
         {chapter.stats ? <div className="mt-10 grid grid-cols-3 gap-5 border-t border-bd pt-6">
           {storyStats.map((stat) => <div key={stat.label}><p data-lufe-counter className="num text-navy">{stat.value}</p><p className="mt-2 text-[13px] leading-[1.6] text-tx3">{stat.label}</p></div>)}
         </div> : null}
-        {chapter.jumpingLink ? <a href="https://jumping.group" target="_blank" rel="noopener noreferrer" aria-label="認識躍馬企業（另開新分頁）" className="group mt-8 grid grid-cols-[1fr_auto] items-center border border-bd p-6 transition-[border-color,transform] active:scale-[.985] [@media(hover:hover)]:hover:border-gold">
-          <span><span className="block text-[13px] font-semibold text-gold-d">躍馬企業官網</span><span className="mt-2 block text-[22px] font-[650] leading-[1.3] text-tx">認識躍馬企業</span><span className="mt-2 block text-[14px] text-tx3">jumping.group</span></span>
-          <span aria-hidden="true" className="grid h-11 w-11 place-items-center border border-gold/40 text-[20px] text-gold-d transition-transform [@media(hover:hover)]:group-hover:-translate-y-0.5 [@media(hover:hover)]:group-hover:translate-x-0.5">↗</span>
-        </a> : null}
         {chapter.servicesLink ? <Link href="/services" className="group mt-8 inline-flex text-[15px] font-semibold text-gold-d"><span>看四個方案 </span><span className="transition-transform [@media(hover:hover)]:group-hover:translate-x-1">→</span></Link> : null}
       </div>
     </article>

@@ -12,8 +12,7 @@ describe("AboutPage R4 story", () => {
     const storyMarkup = markup.slice(storyStart, storyEnd);
     const networkMarkup = markup.slice(markup.indexOf('id="network"'), markup.indexOf('id="philosophy"'));
 
-    expect(markup).toContain("躍馬企業官網");
-    expect(markup).toContain('href="https://jumping.group"');
+    expect(markup).not.toContain("躍馬企業官網");
     expect(markup).toContain("關鍵洞察");
     for (const chapter of storyChapters) expect(storyMarkup).toContain(chapter.title);
     expect((markup.match(/id="story"/g) ?? [])).toHaveLength(1);
