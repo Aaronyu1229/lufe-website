@@ -32,26 +32,27 @@
 
 - 英文文字放在**獨立檔案**（`src/data/en/`、`src/i18n/en/`），不改中文檔案的結構；避免和每天改中文的其他視窗互撞。
 - **中英漂移守門**：每條英文旁存對應中文的指紋（hash）；中文改了、英文沒更新 → 測試失敗、不能上線。改中文的那個視窗會看到紅燈並順手補英文。
-- 用語表（全站統一，之後翻譯照表）：
+- 用語表（Aaron 2026-10-03 定案；全站統一，選單與標題一律用這個短名）：
 
 | 中文 | 英文 |
 |---|---|
 | 鹿飛 | LUFÉ |
-| 市場探查 | Market Probe |
+| 市場探查 | Market Test |
 | 寄賣 | Consignment |
 | 公司落地 | Company Setup |
-| 海外客服 | Overseas Customer Service |
+| 海外客服 | Call Center |
 | 北美通路 | North America Retail |
-| 躍馬企業 | Jumping Group |
+| 躍馬企業 | Jumping Freight（躍馬官網 jumping.group 現用英文名） |
 | 免費初步評估 30 分鐘 | Free 30-minute initial assessment |
 | 一個工作天內回覆 | We reply within one business day |
+
+  名稱用短名；搜尋用的長字（importer、distributor、company registration、customer service outsourcing 等）放在頁面標題的副標或內文，不放在服務名稱裡。
 
 - 翻譯鐵律（機器檢查，不過就不上）：
   1. 英文不得比中文多說：數字、年份、百分比、金額與「預計／estimated」的出現次數，中英必須一致。
   2. 金額一律 NT$（例：NT$10,000–20,000），不換算 USD／PHP。
   3. 禁用詞英文版：guarantee(d)、golden decade、demographic dividend 等，對應中文鐵律。
   4. 中文沒有的案例、經驗、客戶數字，英文一律不得出現。
-- 英文頁頁尾固定一句：*The Chinese version of this site prevails in case of any discrepancy.*
 
 ## 4. 文章
 
