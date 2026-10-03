@@ -35,12 +35,14 @@ describe("OptimizePageContent", () => {
     }
   });
 
-  it("uses the D10 soft wording and does not restore unsupported claims", () => {
+  it("uses the five-role soft wording and does not restore unsupported claims", () => {
     const markup = renderPage();
 
-    expect(markup).toContain("盤完通常都有可省的空間，數字第一次談給你範圍");
-    expect(markup).toContain("目標是讓 AI 回答時有你的名字");
+    expect(markup).toContain("盤完，我們告訴你哪裡能省、值不值得動。不值得動的，我們會直接說。");
+    expect(markup).toContain("先弄清楚缺在哪，再決定花不花錢。");
     expect(markup).toContain("目標是新人第一天就知道東西在哪、事情怎麼跑");
+    expect(markup).toContain("直接問我們 →");
+    for (const banned of ["績效獎金", "月費", "2–3 週", "1–3 個月", "定額診斷", "SEO 文章月產", "AIO", "跨時區溝通延遲", "五階裡的第四階", "AI 複利知識庫", "AI 數位員工", "團隊創新共創", "我們是做物流出身的", "直接問鹿飛"]) expect(markup).not.toContain(banned);
     expect(markup).not.toContain("12–25%");
     expect(markup).not.toContain("200%+");
     expect(markup).not.toContain("90 天縮到 1 天");
