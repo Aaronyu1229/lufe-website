@@ -44,7 +44,7 @@ export function OneContractSection() {
           ))}
         </div>
 
-        <p className="mt-6 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">每一家只負責自己那一段，進度卡住時，沒有人負責把它串起來。{"\n\n"}鹿飛把市場探查、寄賣、落地、客服與國際物流，整合在同一份合約裡{"\n"}一個窗口對接所有環節，企業只需要開一次會</p>
+        <p className="mt-6 max-w-[760px] whitespace-pre-line text-[16px] leading-[1.85] text-tx2">每一家只負責自己那一段，進度卡住時，沒有人負責把它串起來。{"\n"}我們把市場探查、寄賣、公司落地、海外客服與國際物流，放在同一份合約裡。{"\n"}一個窗口對接所有環節，你只需要開一次會。</p>
 
         <div className="mt-10 overflow-x-auto border border-bd bg-white">
           <table className="w-full min-w-[620px] table-fixed border-collapse">

@@ -23,6 +23,7 @@ interface CaseCardData {
   readonly solutionLine: string;
   readonly route: { from: string; to: string };
   readonly trustSignal?: string;
+  readonly hideStoryLink?: boolean;
   readonly image: string;
 }
 
@@ -59,7 +60,7 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
     scalePrefix: "台灣魚鬆品牌",
     title: "魚鬆進美國，卡在哪一關？",
     painLine: "配方裡的成分與標示方式，在美國都可能過不了關",
-    solutionLine: "先釐清 FDA 規範與成分調整點，再用美國消費者的盲試吃與命名測試決定怎麼介紹，重新設計美國版包裝",
+    solutionLine: "先釐清 FDA 規範與成分、標示要調整的地方，再談包裝與上市。",
     route: { from: "台灣", to: "美國" },
     image: "/images/hero-video/case-floss-1600.webp",
   },
@@ -72,16 +73,16 @@ export const HOME_CASE_CARDS: readonly CaseCardData[] = [
       { label: "飲品", variant: "sky" },
       { label: "東南亞", variant: "gold" },
     ],
-    num: "10 家",
-    numLabel: "一年內加盟 + 直營門市",
-    scalePrefix: "在台灣有 80 家門市的珍奶連鎖",
-    title: "兩次失敗後，第三次怎麼把馬尼拉做成功？",
+    num: "十幾家",
+    numLabel: "從零開始，已開放加盟",
+    scalePrefix: "合作夥伴在菲律賓的手搖飲品牌",
+    title: "一個手搖飲品牌，怎麼在菲律賓從零做到十幾家？",
     painLine:
-      "市場已被日出茶太、COCO、Tiger Sugar 佔住，前兩次一次被拿走配方、一次選錯區",
+      "當地手搖飲市場已有國際品牌，新品牌要找到自己的位置，還要守住配方。",
     solutionLine:
-      "機會點調研、九宮格盤點全市場奶茶、盲飲找到健康賽道，第一家開在 BGC、混合直營與加盟，單店月營收做到台灣母店 1.2 倍",
-    route: { from: "台灣母店", to: "馬尼拉 BGC" },
-    trustSignal: "已簽 NDA · 經營層審閱",
+      "從台灣茶出發，改成當地的口味與價格，先開第一家驗證，再開放加盟。",
+    route: { from: "台灣", to: "菲律賓" },
+    hideStoryLink: true,
     image: "/images/cases/case-4-manila-1080.webp",
   },
 ];
@@ -203,9 +204,11 @@ function CaseCard({ item }: { item: CaseCardData }) {
             <FromToRoute from={item.route.from} to={item.route.to} />
             {item.trustSignal && <TrustSignal text={item.trustSignal} />}
           </div>
-          <Link href={`/cases/${item.slug}`} className="inline-flex bg-navy px-5 py-3 text-[14px] font-semibold text-white">
-            {storyLabel}
-          </Link>
+          {!item.hideStoryLink && (
+            <Link href={`/cases/${item.slug}`} className="inline-flex bg-navy px-5 py-3 text-[14px] font-semibold text-white">
+              {storyLabel}
+            </Link>
+          )}
         </div>
       }
     />
@@ -222,7 +225,7 @@ export function CasesSection() {
             <br />
             <span className="text-gold-d">用實戰調整做法</span>
           </h2>
-          <p className="mt-5 text-[17px] leading-[1.8] text-tx2">在菲律賓，鹿飛與合作夥伴走過三條不一樣的路；每一條都先小規模驗證，再依數據調整、放大</p>
+          <p className="mt-5 text-[17px] leading-[1.8] text-tx2">在菲律賓，我們協助合作夥伴走過三條不一樣的路；每一條都先小規模驗證，再依數據調整、放大。</p>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {HOME_CASE_ROADS.map((road) => {

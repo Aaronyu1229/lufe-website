@@ -27,16 +27,16 @@ export const HOME_CHAPTERS: readonly Chapter[] = [
   {
     id: "chapter-2",
     label: "第三個月",
-    title: "試銷寄賣",
-    subtitle: "電商上架與產品證同步進行，用實際銷售驗證市場",
+    title: "寄賣",
+    subtitle: "產品證審核期間，電商上架與市場活動同步推進",
     href: "/services/consignment",
     linkLabel: "看寄賣包內容 →",
     icon: TrendIcon,
   },
   {
     label: "第九個月",
-    title: "在地設立",
-    subtitle: "公司註冊、人員招聘、FDA 證照轉移，建立當地據點",
+    title: "公司落地",
+    subtitle: "公司註冊、人員招聘、FDA 掛證，建立當地據點",
     href: "/services/localization",
     linkLabel: "看落地怎麼做 →",
     icon: BuildingIcon,
@@ -44,7 +44,7 @@ export const HOME_CHAPTERS: readonly Chapter[] = [
   {
     label: "之後的每一天",
     title: "海外客服",
-    subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理",
+    subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理。2027 Q1 開放首批。",
     href: "/services/call-center",
     linkLabel: "登記首批 →",
     icon: HeadsetIcon,
@@ -143,10 +143,12 @@ export function ChaptersSection() {
           })}
         </div>
 
-        <Link href="/services/north-america" className="group mt-8 flex items-center gap-4 border-y border-bd py-4">
+        <p className="mx-auto mt-8 max-w-[860px] text-[15px] leading-[1.85] text-tx2 md:text-[16px]">出海起手包 7 萬 ＝ 市場探查 1～2 萬 ＋ 寄賣包 5～6 萬。先付市場探查；沒過，錢到此為止；過了，這筆抵進寄賣包。前 10 家是實驗價。</p>
+
+        <Link href="/services/north-america" className="group mt-6 flex items-center gap-4 border-y border-bd py-4">
           <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em] text-gold-d">US</span>
-          <span className="text-[15px] text-tx transition-colors [@media(hover:hover)]:group-hover:text-sky">已具規模、準備進入北美零售通路</span>
-          <span className="ml-auto whitespace-nowrap text-[15px] font-semibold text-sky">北美市場拓展 <span aria-hidden="true" className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-[3px]">→</span></span>
+          <span className="text-[15px] text-tx transition-colors [@media(hover:hover)]:group-hover:text-sky">產品已經成熟、目標是北美貨架？那是另一條路，由北美團隊執行</span>
+          <span className="ml-auto whitespace-nowrap text-[15px] font-semibold text-sky">北美通路 <span aria-hidden="true" className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-[3px]">→</span></span>
         </Link>
       </div>
     </section>
