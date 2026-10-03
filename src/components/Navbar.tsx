@@ -32,6 +32,7 @@ import {
   CHAPTER_DISPLAY_LABELS,
   type ArticleChapterKey,
 } from "@/data/chapters";
+import { stripLocale } from "@/i18n/locale";
 
 type MenuKey = "services" | "advanced" | "cases" | "insights" | "about";
 
@@ -50,7 +51,7 @@ const insightChapterHref = (chapter: ArticleChapterKey) => `/insights?cat=${chap
 
 /** On /insights itself a soft navigation keeps the page mounted, so swap the filter in place instead. */
 function switchInsightChapterInPlace(event: MouseEvent<HTMLAnchorElement>, href: string) {
-  if (window.location.pathname !== "/insights") return;
+  if (stripLocale(window.location.pathname) !== "/insights") return;
   event.preventDefault();
   window.history.pushState(null, "", href);
   window.dispatchEvent(new PopStateEvent("popstate"));
@@ -67,7 +68,8 @@ const ABOUT_MENU_ITEMS = [
 ] as const;
 
 export function normalizePathname(pathname: string | null | undefined): string {
-  return !pathname || pathname === "/index" ? "/" : pathname;
+  if (!pathname || pathname === "/index") return "/";
+  return stripLocale(pathname);
 }
 
 export function pathnameHasDarkHero(pathname: string): boolean {

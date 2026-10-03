@@ -8,6 +8,8 @@
  * 最後更新：2026 年 10 月（2026-10-02 逐條核對官方公告）
  */
 
+import { stripLocale } from "@/i18n/locale";
+
 export type SubsidyStage = "assess" | "enter" | "optimize";
 
 export type Subsidy = {
@@ -517,11 +519,12 @@ export const CONTEXTUAL_COPY: readonly {
  */
 export function getContextualCopy(pathname: string): ContextualCopy {
   if (!pathname) return DEFAULT_COPY;
+  const path = stripLocale(pathname);
   const sorted = [...CONTEXTUAL_COPY].sort(
     (a, b) => b.pathPrefix.length - a.pathPrefix.length
   );
   for (const entry of sorted) {
-    if (pathname.startsWith(entry.pathPrefix)) return entry.copy;
+    if (path.startsWith(entry.pathPrefix)) return entry.copy;
   }
   return DEFAULT_COPY;
 }
@@ -575,12 +578,13 @@ export function getSubsidyBySlug(slug: string): Subsidy | undefined {
 
 /** Find the best-matching subsidy for a given pathname. Returns null if none match. */
 export function getContextualSubsidy(pathname: string): Subsidy | null {
+  const path = stripLocale(pathname);
   // Longest prefix wins so /services/channel-entry matches before /services
   const sorted = [...CONTEXT_SUBSIDY_MAP].sort(
     (a, b) => b.pathPrefix.length - a.pathPrefix.length
   );
   for (const entry of sorted) {
-    if (pathname.startsWith(entry.pathPrefix)) {
+    if (path.startsWith(entry.pathPrefix)) {
       const s = getSubsidyBySlug(entry.subsidySlug);
       if (s) return s;
     }
