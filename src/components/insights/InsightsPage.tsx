@@ -108,7 +108,7 @@ export function InsightsPageContent({
         <ScrollCue />
       </section>
 
-      <section className="overflow-hidden bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
+      <section id="articles" className="scroll-mt-[64px] overflow-hidden bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
         <div className="lufe-container min-w-0">
           <div className="mb-10 max-w-full overflow-x-auto pb-1"><Segmented label="洞察章節" value={active} onChange={(value) => { if (isValidCategory(value)) onCategoryChange(value); }} options={INSIGHT_CHAPTERS.filter((chapter) => chapter.key === "all" || (chapterCounts.get(chapter.key) ?? 0) > 0).map((chapter) => ({ value: chapter.key, label: <>{chapter.label}<span className="lufe-insight-count" aria-hidden="true">{chapterCounts.get(chapter.key) ?? 0}</span></> }))} className="max-w-none" /></div>
           {active === "m1" ? <div className="mb-8 max-w-[760px]">

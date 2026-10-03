@@ -5,6 +5,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type MouseEvent,
   type ReactNode,
 } from "react";
 import Image from "next/image";
@@ -45,6 +46,16 @@ const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
 ];
 
 const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
+const insightChapterHref = (chapter: ArticleChapterKey) => `/insights?cat=${chapter}#articles`;
+
+/** On /insights itself a soft navigation keeps the page mounted, so swap the filter in place instead. */
+function switchInsightChapterInPlace(event: MouseEvent<HTMLAnchorElement>, href: string) {
+  if (window.location.pathname !== "/insights") return;
+  event.preventDefault();
+  window.history.pushState(null, "", href);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+  document.getElementById("articles")?.scrollIntoView({ behavior: "smooth" });
+}
 // Chapters without articles stay out of the menu (a "0 篇" row reads as an empty site); they appear once an article is mapped.
 const ABOUT_MENU_ITEMS = [
   { href: "/about#story", title: "品牌故事", num: "01" },
@@ -295,6 +306,7 @@ export function Navbar({
         }}
         onMouseEnter={clearClose}
         onMouseLeave={() => closeMega()}
+        onClick={(event) => { if ((event.target as Element).closest("a")) closeMega(0); }}
       >
         {navItems.map((item) => (
           <MegaPane
@@ -343,15 +355,16 @@ type MenuLinkProps = {
   marker: ReactNode;
   desc?: string;
   external?: boolean;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 };
 
-function MenuLink({ href, title, marker, desc, external = false }: MenuLinkProps) {
+function MenuLink({ href, title, marker, desc, external = false, onClick }: MenuLinkProps) {
   const content = <><MenuMarker>{marker}</MenuMarker><span className="min-w-0"><b className="block text-[15.5px] font-[650] tracking-[-.005em] transition-colors [@media(hover:hover)]:group-hover:text-sky">{title}</b>{desc && <span className="mt-0.5 block truncate text-[12.5px] text-tx2">{desc}</span>}</span></>;
   const className = "group -mx-3 grid grid-cols-[28px_minmax(0,1fr)] items-center gap-3 px-3 py-3 transition-[background-color,transform] duration-150 [@media(hover:hover)]:hover:bg-[rgba(58,107,132,.07)] active:scale-[.985]";
 
   return external
     ? <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
-    : <Link href={href} className={className}>{content}</Link>;
+    : <Link href={href} onClick={onClick} className={className}>{content}</Link>;
 }
 
 function MenuMoreLink({ href, children }: { href: string; children: ReactNode }) {
@@ -482,7 +495,7 @@ function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: Insights
 
   return <>
     <MenuColumn>
-      {visibleInsightChapters.map((chapter) => <MenuLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} />)}
+      {visibleInsightChapters.map((chapter) => <MenuLink key={chapter} href={insightChapterHref(chapter)} onClick={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} />)}
     </MenuColumn>
     <MenuColumn bordered>
       <MenuLink href="/resources" title="補助與資源" marker={<FileIcon />} />
@@ -529,12 +542,12 @@ function MobileGroup({ item, open, onToggle, onClose, insightsNavigation }: { it
   </div>;
 }
 
-function MobileSubLink({ href, title, marker, external = false, onClose }: { href: string; title: ReactNode; marker?: ReactNode; external?: boolean; onClose: () => void }) {
+function MobileSubLink({ href, title, marker, external = false, onClose, onNavigate }: { href: string; title: ReactNode; marker?: ReactNode; external?: boolean; onClose: () => void; onNavigate?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
   const content = <>{marker && <MenuMarker>{marker}</MenuMarker>}<span>{title}</span></>;
   const className = `group flex items-center ${marker ? "gap-2" : ""} border-b border-bd px-7 py-[10px] text-[14.5px] text-tx2 active:bg-black/[.07]`;
   return external
     ? <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClose} className={className}>{content}</a>
-    : <Link href={href} onClick={onClose} className={className}>{content}</Link>;
+    : <Link href={href} onClick={(event) => { onNavigate?.(event); onClose(); }} className={className}>{content}</Link>;
 }
 
 function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: MenuKey; onClose: () => void; insightsNavigation: InsightsNavigation }) {
@@ -558,7 +571,7 @@ function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: 
     CHAPTER_ARTICLES[chapter].some((slug) => publishedArticleSlugSet.has(slug)),
   );
   return <>
-    {visibleInsightChapters.map((chapter) => <MobileSubLink key={chapter} href={`/insights?cat=${chapter}`} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />)}
+    {visibleInsightChapters.map((chapter) => <MobileSubLink key={chapter} href={insightChapterHref(chapter)} title={CHAPTER_ARTICLE_TAGS[chapter]} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} onNavigate={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} />)}
     <MobileSubLink href="/resources" title="補助與資源" marker={<FileIcon />} onClose={onClose} />
     <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot - 線上報關工具 <span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradeIcon />} external onClose={onClose} />
     <MobileSubLink href="/insights" title="看所有文章 →" onClose={onClose} />
