@@ -16,8 +16,11 @@ const resourceLinks = [
   { label: "2 分鐘處境比對", href: "/assess" },
   { label: "政府補助整理", href: "/resources/subsidies" },
   { label: "全部資源", href: "/resources" },
-  { label: "TradePilot - 線上報關工具", href: "https://tradepiloter.com", external: true },
-  { label: "躍馬企業 - 官網", href: "https://jumping.group", external: true },
+];
+
+const partnerLinks = [
+  { name: "TradePilot", note: "線上報關工具", href: "https://tradepiloter.com", logo: "/images/logo/partners/tradepilot-white.png", width: 22 },
+  { name: "躍馬企業", note: "國際物流・官網", href: "https://jumping.group", logo: "/images/logo/partners/jumping-white.png", width: 17 },
 ];
 
 const insightLinks = [
@@ -91,17 +94,27 @@ export function Footer() {
             資源
           </h2>
           <div className="grid gap-[10px]">
-            {resourceLinks.map((link) =>
-              link.external ? (
-                <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="text-[14px] text-white/70 hover:text-white transition-colors">
-                  {link.label}<span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span>
-                </a>
-              ) : (
-                <Link key={link.label} href={link.href} className="text-[14px] text-white/70 hover:text-white transition-colors">
-                  {link.label}
-                </Link>
-              ),
-            )}
+            {resourceLinks.map((link) => (
+              <Link key={link.label} href={link.href} className="text-[14px] text-white/70 hover:text-white transition-colors">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+          <div className="mt-[18px] grid gap-[12px] border-t border-white/10 pt-[14px]">
+            <p className="text-[12px] text-white/45">相關企業</p>
+            {partnerLinks.map((partner) => (
+              <a key={partner.name} href={partner.href} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2.5">
+                <span className="grid h-[22px] w-[22px] shrink-0 place-items-center opacity-75 transition-opacity group-hover:opacity-100">
+                  <Image src={partner.logo} alt="" width={partner.width} height={22} />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[14px] text-white/85 transition-colors group-hover:text-white">
+                    {partner.name}<span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span>
+                  </span>
+                  <span className="mt-0.5 block text-[12.5px] text-white/45">{partner.note}</span>
+                </span>
+              </a>
+            ))}
           </div>
         </div>
 
