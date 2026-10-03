@@ -101,11 +101,8 @@ describe("MethodologyPage", () => {
     expect(markup).toContain('hidden=""');
   });
 
-  it("keeps the specified red-line percentages and has no rubric weight data", () => {
-    const markup = renderPage();
-
-    expect(markup).toContain("70%");
-    expect(markup).toContain("5%");
+  it("describes red lines without unconfirmed thresholds and has no rubric weight data", () => {
+    for (const dimension of METHODOLOGY_DIMENSIONS) expect(dimension.redAt).not.toMatch(/\d/);
     for (const dimension of METHODOLOGY_DIMENSIONS) expect("weight" in dimension).toBe(false);
   });
 
@@ -120,6 +117,7 @@ describe("MethodologyPage", () => {
     expect(markup).toContain('alt="女性在貨架前檢視產品包裝"');
     expect(markup).not.toContain("這不是第五章。這是我們第一次跟你談的時候，腦子裡跑的那套東西。");
     expect(RULES_COPY).not.toContain("總分不到 60，我們不接。");
+    expect(RULES_COPY).not.toContain("不到 60 分，我們不接");
     expect(RULES_COPY).not.toContain("不是不想賺，是接了對你沒有好處，對我們的案例也沒有好處。");
     expect(metadata.description).toBe("鹿飛的出海方法論：先用一兩萬問菲律賓市場，再決定投多少。兩個真實研究例子、五個評估問題、打兩次分。");
   });
