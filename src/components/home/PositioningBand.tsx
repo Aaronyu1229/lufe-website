@@ -17,6 +17,7 @@ type Chapter = {
 
 export const HOME_CHAPTERS: readonly Chapter[] = [
   {
+    id: "chapter-1",
     label: "第一個月",
     title: "市場探查",
     subtitle: "在當地找真實消費者試用，確認誰會買、願意付多少",
@@ -34,6 +35,7 @@ export const HOME_CHAPTERS: readonly Chapter[] = [
     icon: TrendIcon,
   },
   {
+    id: "chapter-3",
     label: "第九個月",
     title: "公司落地",
     subtitle: "公司註冊、人員招聘、FDA 掛證，建立當地據點",
@@ -42,6 +44,7 @@ export const HOME_CHAPTERS: readonly Chapter[] = [
     icon: BuildingIcon,
   },
   {
+    id: "chapter-4",
     label: "之後的每一天",
     title: "海外客服",
     subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理。2027 Q1 開放首批。",
