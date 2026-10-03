@@ -17,6 +17,7 @@ const criticalSubset = {
   sourceFiles: [
     resolve(projectRoot, "src/components/home/HeroSection.tsx"),
     resolve(projectRoot, "src/components/Navbar.tsx"),
+    resolve(projectRoot, "src/i18n/zh/navbar-critical.ts"),
   ],
 };
 const navbarCriticalPatterns = [
@@ -90,6 +91,9 @@ function findMissingCharacters(allowed, files, textForFile = (filePath) => readF
 function criticalSourceText(filePath) {
   const source = readFileSync(filePath, "utf8");
   if (filePath.endsWith("HeroSection.tsx")) return source;
+  if (filePath.endsWith("navbar-critical.ts")) return [...source]
+    .filter((character) => character.codePointAt(0) >= 0x80)
+    .join("");
 
   let text = "";
   for (const pattern of navbarCriticalPatterns) {

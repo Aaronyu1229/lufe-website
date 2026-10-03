@@ -30,7 +30,7 @@ function isReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function DelightLayer() {
+export function DelightLayer({ backToTopLabel = "回到頂端" }: { readonly backToTopLabel?: string } = {}) {
   const pathname = usePathname();
   const progressRef = useRef<HTMLDivElement>(null);
   const [showTop, setShowTop] = useState(false);
@@ -180,7 +180,7 @@ export function DelightLayer() {
     <div ref={progressRef} aria-hidden="true" className="lufe-reading-progress" />
     <button
       type="button"
-      aria-label="回到頂端"
+      aria-label={backToTopLabel}
       onClick={() => window.scrollTo({ top: 0, behavior: isReducedMotion() ? "auto" : "smooth" })}
       className={`lufe-back-to-top ${showTop ? "lufe-back-to-top-visible" : ""}`}
     >

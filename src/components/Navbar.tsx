@@ -1,7 +1,9 @@
 "use client";
 
 import {
+  createContext,
   useEffect,
+  useContext,
   useLayoutEffect,
   useRef,
   useState,
@@ -30,22 +32,17 @@ import { CASES } from "@/data/cases";
 import type { InsightCard } from "@/lib/articles/presentation";
 import {
   CHAPTER_ARTICLES,
-  CHAPTER_DISPLAY_LABELS,
   type ArticleChapterKey,
 } from "@/data/chapters";
-import { stripLocale } from "@/i18n/locale";
+import { navbarCriticalEn } from "@/i18n/en/navbar-critical";
+import { navbarMenuEn } from "@/i18n/en/navbar-menu";
+import { navbarCriticalZh, type NavbarCriticalCopy, type NavbarMenuKey } from "@/i18n/zh/navbar-critical";
+import { navbarMenuZh, type NavbarMenuCopy } from "@/i18n/zh/navbar-menu";
+import { localeFromPathname, localizedHref, stripLocale, type Locale } from "@/i18n/locale";
 
-type MenuKey = "services" | "advanced" | "cases" | "insights" | "about";
+type MenuKey = NavbarMenuKey;
 
 const NAV_HEIGHT = 64;
-
-const navItems: ReadonlyArray<{ key: MenuKey; label: string }> = [
-  { key: "services", label: "服務" },
-  { key: "advanced", label: "進階" },
-  { key: "cases", label: "案例" },
-  { key: "insights", label: "洞察" },
-  { key: "about", label: "關於我們" },
-];
 
 const INSIGHT_MENU_CHAPTERS = ["m1", "m3", "m9", "after", "na"] as const satisfies readonly ArticleChapterKey[];
 const insightChapterHref = (chapter: ArticleChapterKey) => `/insights?cat=${chapter}#articles`;
@@ -62,11 +59,27 @@ function switchInsightChapterInPlace(event: MouseEvent<HTMLAnchorElement>, href:
 const INSIGHT_CHAPTER_FALLBACK_HREF: Partial<Record<ArticleChapterKey, string>> = { after: "/services/call-center" };
 // Chapters without articles stay out of the menu (a "0 篇" row reads as an empty site); they appear once an article is mapped.
 const ABOUT_MENU_ITEMS = [
-  { href: "/about#story", title: "品牌故事", num: "01" },
-  { href: "/about#team", title: "團隊組成", num: "02" },
-  { href: "/about#network", title: "合作夥伴網絡", num: "03" },
-  { href: "/about#philosophy", title: "品牌理念", num: "04" },
+  { href: "/about#story", num: "01" },
+  { href: "/about#team", num: "02" },
+  { href: "/about#network", num: "03" },
+  { href: "/about#philosophy", num: "04" },
 ] as const;
+
+type NavbarCopy = {
+  readonly locale: Locale;
+  readonly critical: NavbarCriticalCopy;
+  readonly menu: NavbarMenuCopy;
+};
+
+const NavbarCopyContext = createContext<NavbarCopy>({
+  locale: "zh",
+  critical: navbarCriticalZh,
+  menu: navbarMenuZh,
+});
+
+function useNavbarCopy() {
+  return useContext(NavbarCopyContext);
+}
 
 export function normalizePathname(pathname: string | null | undefined): string {
   if (!pathname || pathname === "/index") return "/";
@@ -93,8 +106,11 @@ export function Navbar({
   readonly latestArticle?: InsightCard;
   readonly publishedArticleSlugs?: readonly string[];
 }) {
-  const pathname = normalizePathname(usePathname());
   const rawPathname = usePathname() ?? "/";
+  const pathname = normalizePathname(rawPathname);
+  const locale = localeFromPathname(rawPathname);
+  const critical = locale === "en" ? navbarCriticalEn : navbarCriticalZh;
+  const menu = locale === "en" ? navbarMenuEn : navbarMenuZh;
   const { open: openMessageBox } = useMessageBox();
   const darkHero = pathnameHasDarkHero(pathname);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
@@ -226,21 +242,22 @@ export function Navbar({
   const mobileOpacity = mobileReveal.value;
 
   return (
+    <NavbarCopyContext.Provider value={{ locale, critical, menu }}>
     <>
       <header ref={headerRef} className="fixed inset-x-0 top-0 z-[100]" onMouseLeave={() => closeMega()}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-gold focus:px-4 focus:py-2 focus:text-[14.5px] focus:font-semibold focus:text-navy">
-        跳到主要內容
+        {menu.header.skipToContent}
       </a>
 
-      <nav className={`relative transition-colors duration-300 ${transparentOverHero ? "navbar-over-hero" : lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark navbar-scrolled text-white"}`} aria-label="主要導航">
+      <nav className={`relative transition-colors duration-300 ${transparentOverHero ? "navbar-over-hero" : lightGlass ? "lufe-glass-light text-tx" : "lufe-glass-dark navbar-scrolled text-white"}`} aria-label={menu.header.navAriaLabel}>
         <div className="lufe-container relative flex h-[64px] items-center justify-between gap-4">
-          <Link href="/" className="lufe-deer-trigger flex items-center gap-2.5 text-[17px] font-semibold">
+          <Link href={localizedHref(locale, "/")} className="lufe-deer-trigger flex items-center gap-2.5 text-[17px] font-semibold">
             <Image className="lufe-deer" src={lightGlass ? "/images/logo/logo-mark-navy.png" : "/images/logo/logo-mark-white.png"} alt="" width={26} height={26} priority />
-            <span>鹿飛 LUF<span className={lightGlass ? "text-gold-d" : "text-gold"}>É</span></span>
+            <span>{critical.brandPrefix}<span className={lightGlass ? "text-gold-d" : "text-gold"}>É</span></span>
           </Link>
 
           <div className="hidden min-[900px]:flex items-center gap-[6px] text-[14px]">
-            {navItems.map((item) => (
+            {critical.navItems.map((item) => (
               <button
                 key={item.key}
                 type="button"
@@ -260,8 +277,8 @@ export function Navbar({
           <div className="flex items-center gap-2">
             <LanguageToggle pathname={rawPathname} className="hidden px-2 text-[14px] font-semibold min-[900px]:inline-flex" />
             <MessageBoxTrigger className="hidden min-[900px]:inline-flex" />
-            <button type="button" onClick={toggleMobile} aria-label={mobileOpen ? "關閉選單" : "開啟選單"} aria-controls="mobile-navigation" aria-expanded={mobileOpen} className="flex h-10 w-10 cursor-pointer items-center justify-center min-[900px]:hidden">
-              <span className="sr-only">{mobileOpen ? "關閉選單" : "開啟選單"}</span>
+            <button type="button" onClick={toggleMobile} aria-label={mobileOpen ? menu.header.mobileMenuClose : menu.header.mobileMenuOpen} aria-controls="mobile-navigation" aria-expanded={mobileOpen} className="flex h-10 w-10 cursor-pointer items-center justify-center min-[900px]:hidden">
+              <span className="sr-only">{mobileOpen ? menu.header.mobileMenuClose : menu.header.mobileMenuOpen}</span>
               <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
                 <path d="M1 1H19M1 7H19M1 13H19" stroke="currentColor" strokeWidth="1.5" />
               </svg>
@@ -282,7 +299,7 @@ export function Navbar({
           visibility: mobileOpacity > 0.01 ? "visible" : "hidden",
         }}
       >
-        {navItems.map((item) => (
+        {critical.navItems.map((item) => (
           <MobileGroup key={item.key} item={item} open={mobileGroup === item.key} onToggle={() => setMobileGroup((current) => current === item.key ? null : item.key)} onClose={closeMobile} insightsNavigation={{ latestArticle, publishedArticleSlugs }} />
         ))}
         <LanguageToggle pathname={rawPathname} className="mx-3 mt-3 flex justify-center border border-bd py-2 text-[14px] font-semibold" />
@@ -293,10 +310,10 @@ export function Navbar({
         className={`lufe-mobile-cta ${scrolledPastHero ? "lufe-mobile-cta-visible" : ""}`}
         onClick={openMessageBox}
       >
-        <span>第一次談不收費</span>
-        <strong>聊聊你的產品 →</strong>
+        <span>{critical.mobileCtaLine}</span>
+        <strong>{critical.mobileCtaAction}</strong>
       </button>
-      <DelightLayer />
+      <DelightLayer backToTopLabel={menu.header.backToTop} />
       </header>
       {children}
       <div
@@ -316,7 +333,7 @@ export function Navbar({
         onMouseLeave={() => closeMega()}
         onClick={(event) => { if ((event.target as Element).closest("a")) closeMega(0); }}
       >
-        {navItems.map((item) => (
+        {critical.navItems.map((item) => (
           <MegaPane
             key={item.key}
             itemKey={item.key}
@@ -330,6 +347,7 @@ export function Navbar({
         ))}
       </div>
     </>
+    </NavbarCopyContext.Provider>
   );
 }
 
@@ -357,9 +375,8 @@ function MenuLabel({ children }: { children: ReactNode }) {
   return <p className="mb-1 text-[12px] font-semibold text-tx3">{children}</p>;
 }
 
-function chapterMenuParts(chapter: ArticleChapterKey): { readonly title: string; readonly month?: string } {
-  const [month, title] = CHAPTER_DISPLAY_LABELS[chapter].split("：");
-  return title ? { title, month } : { title: month };
+function chapterMenuParts(chapter: Exclude<ArticleChapterKey, "sub">, menu: NavbarMenuCopy): { readonly title: string; readonly month?: string } {
+  return menu.insights.chapters[chapter];
 }
 
 function TradePilotMark() {
@@ -380,16 +397,18 @@ type MenuLinkProps = {
 };
 
 function MenuLink({ href, title, marker, desc, external = false, onClick }: MenuLinkProps) {
+  const { locale } = useNavbarCopy();
   const content = <><MenuMarker>{marker}</MenuMarker><span className="min-w-0"><b className="block text-[15.5px] font-[650] tracking-[-.005em] transition-colors [@media(hover:hover)]:group-hover:text-sky">{title}</b>{desc && <span className="mt-0.5 block truncate text-[12.5px] text-tx2">{desc}</span>}</span></>;
   const className = "group -mx-3 grid grid-cols-[28px_minmax(0,1fr)] items-center gap-3 px-3 py-3 transition-[background-color,transform] duration-150 [@media(hover:hover)]:hover:bg-[rgba(58,107,132,.07)] active:scale-[.985]";
 
   return external
     ? <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
-    : <Link href={href} onClick={onClick} className={className}>{content}</Link>;
+    : <Link href={localizedHref(locale, href)} onClick={onClick} className={className}>{content}</Link>;
 }
 
 function MenuMoreLink({ href, children }: { href: string; children: ReactNode }) {
-  return <Link href={href} className="mt-2 inline-flex text-[13.5px] font-semibold text-sky hover:text-navy">{children}</Link>;
+  const { locale } = useNavbarCopy();
+  return <Link href={localizedHref(locale, href)} className="mt-2 inline-flex text-[13.5px] font-semibold text-sky hover:text-navy">{children}</Link>;
 }
 
 type FeatureTileProps = {
@@ -400,6 +419,7 @@ type FeatureTileProps = {
 } & ({ href: string; onClick?: never } | { href?: never; onClick: () => void });
 
 function FeatureTile({ icon, title, body, action, ...props }: FeatureTileProps) {
+  const { locale } = useNavbarCopy();
   const content = <>
     <span aria-hidden="true" className="grid h-8 w-8 place-items-center border border-gold/40 text-gold-d">{icon}</span>
     <b className="mt-4 block text-[16px] font-[650] text-tx">{title}</b>
@@ -409,7 +429,7 @@ function FeatureTile({ icon, title, body, action, ...props }: FeatureTileProps) 
   const className = "group block border border-bd bg-white p-5 text-left transition-[transform,border-color] duration-200 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:border-gold/50 active:scale-[.985]";
 
   return "href" in props && props.href
-    ? <Link href={props.href} className={className}>{content}</Link>
+    ? <Link href={localizedHref(locale, props.href)} className={className}>{content}</Link>
     : <button type="button" onClick={props.onClick} className={`${className} w-full cursor-pointer`}>{content}</button>;
 }
 
@@ -426,39 +446,47 @@ function FileIcon() {
 }
 
 function ServicesMenu() {
+  const { menu } = useNavbarCopy();
+  const copy = menu.services;
+
   return <>
     <MenuColumn>
-      <MenuLink href="/services/product-testing" title="市場探查" marker={<CompassIcon size={18} />} />
-      <MenuLink href="/services/consignment" title="寄賣" marker={<TrendIcon size={18} />} />
-      <MenuLink href="/services/localization" title="公司落地" marker={<BuildingIcon size={18} />} />
-      <MenuLink href="/services/call-center" title="海外客服" marker={<HeadsetIcon size={18} />} />
+      <MenuLink href="/services/product-testing" title={copy.marketTest} marker={<CompassIcon size={18} />} />
+      <MenuLink href="/services/consignment" title={copy.consignment} marker={<TrendIcon size={18} />} />
+      <MenuLink href="/services/localization" title={copy.companySetup} marker={<BuildingIcon size={18} />} />
+      <MenuLink href="/services/call-center" title={copy.callCenter} marker={<HeadsetIcon size={18} />} />
     </MenuColumn>
     <MenuColumn bordered>
-      <MenuLink href="/services/north-america" title="北美通路" marker={<span className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>} />
-      <div className="mt-[18px]"><MenuLink href="/services" title="四章總覽" marker={<ListIcon />} /></div>
+      <MenuLink href="/services/north-america" title={copy.northAmericaRetail} marker={<span className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>} />
+      <div className="mt-[18px]"><MenuLink href="/services" title={copy.allFourChapters} marker={<ListIcon />} /></div>
     </MenuColumn>
     <MenuRail>
-      <FeatureTile href="/services/product-testing" icon={<CompassIcon size={16} />} title="不確定從哪裡開始？" body="先做市場探查，用當地真實消費者的反應決定下一步" action="看市場探查怎麼做" />
+      <FeatureTile href="/services/product-testing" icon={<CompassIcon size={16} />} title={copy.featuredTitle} body={copy.featuredBody} action={copy.featuredAction} />
     </MenuRail>
   </>;
 }
 
 function AdvancedMenu({ onMessageOpen }: { onMessageOpen: () => void }) {
+  const { menu } = useNavbarCopy();
+  const copy = menu.advanced;
+
   return <>
     <MenuColumn>
-      <MenuLink href="/services/optimize" title="運營優化" marker={<TrendIcon size={18} />} />
+      <MenuLink href="/services/optimize" title={copy.operationsOptimization} marker={<TrendIcon size={18} />} />
     </MenuColumn>
     <MenuColumn bordered>
-      <MenuLink href="/services/methodology" title="鹿飛方法論" desc="小步出海法 · 先問市場，再投錢" marker={<BarsIcon />} />
-      <MenuLink href="/assess" title="2 分鐘處境比對" marker={<ClockIcon size={18} />} />
+      <MenuLink href="/services/methodology" title={copy.lufeMethod} desc={copy.methodDescription} marker={<BarsIcon />} />
+      <MenuLink href="/assess" title={copy.situationCheck} marker={<ClockIcon size={18} />} />
     </MenuColumn>
     <MenuRail>
-      <FeatureTile icon={<ClockIcon size={16} />} title="免費初步評估" body="30 分鐘，用鹿飛方法論的五個問題，初步檢視出海條件" action="預約 30 分鐘" onClick={onMessageOpen} />
+      <FeatureTile icon={<ClockIcon size={16} />} title={copy.featuredTitle} body={copy.featuredBody} action={copy.featuredAction} onClick={onMessageOpen} />
     </MenuRail>
   </>;
 }
 
 function CasesMenu() {
+  const { menu } = useNavbarCopy();
+  const copy = menu.cases;
   const caseColumns = [
     CASES.filter((_, index) => index === 0 || index === 2),
     CASES.filter((_, index) => index === 1 || index === 3),
@@ -466,30 +494,31 @@ function CasesMenu() {
 
   return <>
     <MenuColumn>
-      {caseColumns[0].map((caseItem) => <CaseMenuLink key={caseItem.slug} caseItem={caseItem} />)}
+      {caseColumns[0].map((caseItem) => <CaseMenuLink key={caseItem.slug} caseItem={caseItem} copy={copy.items[caseItem.slug]} />)}
     </MenuColumn>
     <MenuColumn bordered>
-      {caseColumns[1].map((caseItem) => <CaseMenuLink key={caseItem.slug} caseItem={caseItem} />)}
-      <MenuMoreLink href="/cases">看所有案例 →</MenuMoreLink>
+      {caseColumns[1].map((caseItem) => <CaseMenuLink key={caseItem.slug} caseItem={caseItem} copy={copy.items[caseItem.slug]} />)}
+      <MenuMoreLink href="/cases">{copy.allCases}</MenuMoreLink>
     </MenuColumn>
     <MenuRail>
       <div className="flex flex-wrap gap-[6px]">
-        {["食品", "電子", "服飾", "飲品"].map((tag) => <CaseTagLink key={tag}>{tag}</CaseTagLink>)}
+        {copy.tags.map((tag) => <CaseTagLink key={tag}>{tag}</CaseTagLink>)}
       </div>
       <div className="mt-[6px] flex flex-wrap gap-[6px]">
-        {["北美", "東南亞"].map((tag) => <CaseTagLink key={tag}>{tag}</CaseTagLink>)}
+        {copy.markets.map((tag) => <CaseTagLink key={tag}>{tag}</CaseTagLink>)}
       </div>
-      <div className="mt-4"><FeatureTile href="/assess" icon={<TargetIcon size={16} />} title="不確定比較像哪一條？" body="2 分鐘處境比對，找出最接近的案例" action="開始比對" /></div>
+      <div className="mt-4"><FeatureTile href="/assess" icon={<TargetIcon size={16} />} title={copy.featuredTitle} body={copy.featuredBody} action={copy.featuredAction} /></div>
     </MenuRail>
   </>;
 }
 
-function CaseMenuLink({ caseItem }: { caseItem: (typeof CASES)[number] }) {
-  return <MenuLink href={`/cases/${caseItem.slug}`} title={caseItem.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} />;
+function CaseMenuLink({ caseItem, copy }: { caseItem: (typeof CASES)[number]; copy: { readonly num: string; readonly title: string } }) {
+  return <MenuLink href={`/cases/${caseItem.slug}`} title={copy.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{copy.num}</span>} />;
 }
 
 function CaseTagLink({ children }: { children: ReactNode }) {
-  return <Link href="/cases" className="border border-bd bg-white px-2.5 py-[5px] text-[12.5px] text-tx2 hover:border-sky hover:text-sky">{children}</Link>;
+  const { locale } = useNavbarCopy();
+  return <Link href={localizedHref(locale, "/cases")} className="border border-bd bg-white px-2.5 py-[5px] text-[12.5px] text-tx2 hover:border-sky hover:text-sky">{children}</Link>;
 }
 
 const CHAPTER_ICON_PATHS: Record<Exclude<ArticleChapterKey, "na" | "sub">, ReactNode> = {
@@ -515,47 +544,51 @@ function insightMenuChapters(publishedArticleSlugSet: ReadonlySet<string>): read
 }
 
 function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: InsightsNavigation & { active: boolean }) {
+  const { critical, locale, menu } = useNavbarCopy();
   const publishedArticleSlugSet = new Set(publishedArticleSlugs);
   const menuChapters = insightMenuChapters(publishedArticleSlugSet);
 
   return <>
     <MenuColumn>
-      <MenuLabel>依章節看文章</MenuLabel>
+      <MenuLabel>{critical.insightMenuLabels.byChapter}</MenuLabel>
       {menuChapters.map(({ chapter, fallbackHref }) => {
-        const { title, month } = chapterMenuParts(chapter);
+        const { title, month } = chapterMenuParts(chapter, menu);
         return fallbackHref
-          ? <MenuLink key={chapter} href={fallbackHref} title={<>{title}{month && <span className="ml-2 text-[12.5px] font-normal text-tx3">{month}</span>}</>} desc="文章整理中，先看服務說明 →" marker={<ChapterIcon chapter={chapter} />} />
-          : <MenuLink key={chapter} href={insightChapterHref(chapter)} onClick={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} title={<>{title}{month && <span className="ml-2 text-[12.5px] font-normal text-tx3">{month}</span>}</>} marker={<ChapterIcon chapter={chapter} />} />;
+          ? <MenuLink key={chapter} href={fallbackHref} title={<>{title}{month && <span className="ml-2 text-[12.5px] font-normal text-tx3">{month}</span>}</>} desc={menu.insights.fallbackDescription} marker={<ChapterIcon chapter={chapter} />} />
+          : <MenuLink key={chapter} href={insightChapterHref(chapter)} onClick={(event) => switchInsightChapterInPlace(event, localizedHref(locale, insightChapterHref(chapter)))} title={<>{title}{month && <span className="ml-2 text-[12.5px] font-normal text-tx3">{month}</span>}</>} marker={<ChapterIcon chapter={chapter} />} />;
       })}
-      <MenuMoreLink href="/insights">看所有文章 →</MenuMoreLink>
+      <MenuMoreLink href="/insights">{menu.insights.allArticles}</MenuMoreLink>
     </MenuColumn>
     <MenuColumn bordered>
-      <MenuLabel>工具與資源</MenuLabel>
-      <MenuLink href="/resources" title="補助與資源" desc="政府補助整理" marker={<FileIcon />} />
-      <MenuLink href="https://tradepiloter.com" title={<>TradePilot<span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} desc="線上報關工具" marker={<TradePilotMark />} external />
+      <MenuLabel>{critical.insightMenuLabels.toolsAndResources}</MenuLabel>
+      <MenuLink href="/resources" title={menu.insights.subsidiesAndResources} desc={menu.insights.subsidyDescription} marker={<FileIcon />} />
+      <MenuLink href="https://tradepiloter.com" title={<>TradePilot<span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} desc={menu.insights.tradePilotDescription} marker={<TradePilotMark />} external />
     </MenuColumn>
     <MenuRail>
-      <MenuLabel>最新文章</MenuLabel>
-      {latestArticle && <Link href={`/insights/${latestArticle.slug}`} className="group mt-2 block"><div className="relative mb-3 aspect-video overflow-hidden bg-[rgba(26,26,46,.06)]">{active && <TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" />}</div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
+      <MenuLabel>{critical.insightMenuLabels.latestArticles}</MenuLabel>
+      {locale === "zh" && latestArticle && <Link href={localizedHref(locale, `/insights/${latestArticle.slug}`)} className="group mt-2 block"><div className="relative mb-3 aspect-video overflow-hidden bg-[rgba(26,26,46,.06)]">{active && <TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" />}</div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
     </MenuRail>
   </>;
 }
 
 function AboutMenu() {
+  const { menu } = useNavbarCopy();
+  const copy = menu.about;
+
   return <>
     <MenuColumn>
-      {ABOUT_MENU_ITEMS.slice(0, 2).map((item) => <AboutMenuLink key={item.num} {...item} />)}
+      {ABOUT_MENU_ITEMS.slice(0, 2).map((item, index) => <AboutMenuLink key={item.num} {...item} title={copy.items[index]} />)}
     </MenuColumn>
     <MenuColumn bordered>
-      {ABOUT_MENU_ITEMS.slice(2).map((item) => <AboutMenuLink key={item.num} {...item} />)}
+      {ABOUT_MENU_ITEMS.slice(2).map((item, index) => <AboutMenuLink key={item.num} {...item} title={copy.items[index + 2]} />)}
     </MenuColumn>
     <MenuRail>
-      <FeatureTile href="/about/aaron-yu" icon={<PenIcon size={16} />} title="創辦人專欄" body="跨境市場、通路與法規的第一手觀察" action="閱讀專欄" />
+      <FeatureTile href="/about/aaron-yu" icon={<PenIcon size={16} />} title={copy.founderColumn} body={copy.founderDescription} action={copy.founderAction} />
     </MenuRail>
   </>;
 }
 
-function AboutMenuLink({ href, title, num }: (typeof ABOUT_MENU_ITEMS)[number]) {
+function AboutMenuLink({ href, title, num }: (typeof ABOUT_MENU_ITEMS)[number] & { readonly title: string }) {
   return <MenuLink href={href} title={title} marker={<span className="num text-[13px] font-bold">{num}</span>} />;
 }
 
@@ -576,46 +609,53 @@ function MobileGroup({ item, open, onToggle, onClose, insightsNavigation }: { it
 }
 
 function MobileSubLink({ href, title, marker, external = false, onClose, onNavigate }: { href: string; title: ReactNode; marker?: ReactNode; external?: boolean; onClose: () => void; onNavigate?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
+  const { locale } = useNavbarCopy();
   const content = <>{marker && <MenuMarker>{marker}</MenuMarker>}<span>{title}</span></>;
   const className = `group flex items-center ${marker ? "gap-2" : ""} border-b border-bd px-7 py-[10px] text-[14.5px] text-tx2 active:bg-black/[.07]`;
   return external
     ? <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClose} className={className}>{content}</a>
-    : <Link href={href} onClick={(event) => { onNavigate?.(event); onClose(); }} className={className}>{content}</Link>;
+    : <Link href={localizedHref(locale, href)} onClick={(event) => { onNavigate?.(event); onClose(); }} className={className}>{content}</Link>;
 }
 
-function MobileChapterTitle({ chapter }: { chapter: ArticleChapterKey }) {
-  const { title, month } = chapterMenuParts(chapter);
+function MobileChapterTitle({ chapter }: { chapter: Exclude<ArticleChapterKey, "sub"> }) {
+  const { menu } = useNavbarCopy();
+  const { title, month } = chapterMenuParts(chapter, menu);
   return <>{title}{month && <span className="ml-1.5 text-[12.5px] text-tx3">{month}</span>}</>;
 }
 
 function MobileMenuContent({ itemKey, onClose, insightsNavigation }: { itemKey: MenuKey; onClose: () => void; insightsNavigation: InsightsNavigation }) {
+  const { menu, locale } = useNavbarCopy();
   if (itemKey === "services") return <>
-    <MobileSubLink href="/services/product-testing" title="市場探查" marker={<CompassIcon />} onClose={onClose} />
-    <MobileSubLink href="/services/consignment" title="寄賣" marker={<TrendIcon />} onClose={onClose} />
-    <MobileSubLink href="/services/localization" title="公司落地" marker={<BuildingIcon />} onClose={onClose} />
-    <MobileSubLink href="/services/call-center" title="海外客服" marker={<HeadsetIcon />} onClose={onClose} />
-    <MobileSubLink href="/services/north-america" title="北美通路" marker={<span className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>} onClose={onClose} />
-    <MobileSubLink href="/services" title="四章總覽" marker={<ListIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/product-testing" title={menu.services.marketTest} marker={<CompassIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/consignment" title={menu.services.consignment} marker={<TrendIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/localization" title={menu.services.companySetup} marker={<BuildingIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/call-center" title={menu.services.callCenter} marker={<HeadsetIcon />} onClose={onClose} />
+    <MobileSubLink href="/services/north-america" title={menu.services.northAmericaRetail} marker={<span className="font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em]">US</span>} onClose={onClose} />
+    <MobileSubLink href="/services" title={menu.services.allFourChapters} marker={<ListIcon />} onClose={onClose} />
   </>;
   if (itemKey === "advanced") return <>
-    <MobileSubLink href="/services/optimize" title="運營優化" onClose={onClose} />
-    <MobileSubLink href="/services/methodology" title="鹿飛方法論" onClose={onClose} />
-    <MobileSubLink href="/assess" title="2 分鐘處境比對" onClose={onClose} />
+    <MobileSubLink href="/services/optimize" title={menu.advanced.operationsOptimization} onClose={onClose} />
+    <MobileSubLink href="/services/methodology" title={menu.advanced.lufeMethod} onClose={onClose} />
+    <MobileSubLink href="/assess" title={menu.advanced.situationCheck} onClose={onClose} />
   </>;
-  if (itemKey === "cases") return <>{CASES.map((caseItem) => <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={caseItem.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{caseItem.num}</span>} onClose={onClose} />)}<MobileSubLink href="/cases" title="看所有案例 →" onClose={onClose} /></>;
-  if (itemKey === "about") return <>{ABOUT_MENU_ITEMS.map((item) => <MobileSubLink key={item.num} href={item.href} title={item.title} marker={<span className="num text-[13px] font-bold">{item.num}</span>} onClose={onClose} />)}</>;
+  if (itemKey === "cases") return <>{CASES.map((caseItem) => {
+    const copy = menu.cases.items[caseItem.slug];
+    return <MobileSubLink key={caseItem.slug} href={`/cases/${caseItem.slug}`} title={copy.title} marker={<span className="num whitespace-nowrap text-[13px] font-bold">{copy.num}</span>} onClose={onClose} />;
+  })}<MobileSubLink href="/cases" title={menu.cases.allCases} onClose={onClose} /></>;
+  if (itemKey === "about") return <>{ABOUT_MENU_ITEMS.map((item, index) => <MobileSubLink key={item.num} href={item.href} title={menu.about.items[index]} marker={<span className="num text-[13px] font-bold">{item.num}</span>} onClose={onClose} />)}</>;
   const publishedArticleSlugSet = new Set(insightsNavigation.publishedArticleSlugs);
   return <>
     {insightMenuChapters(publishedArticleSlugSet).map(({ chapter, fallbackHref }) => fallbackHref
       ? <MobileSubLink key={chapter} href={fallbackHref} title={<MobileChapterTitle chapter={chapter} />} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} />
-      : <MobileSubLink key={chapter} href={insightChapterHref(chapter)} title={<MobileChapterTitle chapter={chapter} />} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} onNavigate={(event) => switchInsightChapterInPlace(event, insightChapterHref(chapter))} />)}
-    <MobileSubLink href="/insights" title="看所有文章 →" onClose={onClose} />
-    <MobileSubLink href="/resources" title="補助與資源" marker={<FileIcon />} onClose={onClose} />
-    <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot<span className="ml-1.5 text-[12.5px] text-tx3">線上報關工具</span><span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradePilotMark />} external onClose={onClose} />
+      : <MobileSubLink key={chapter} href={insightChapterHref(chapter)} title={<MobileChapterTitle chapter={chapter} />} marker={<ChapterIcon chapter={chapter} />} onClose={onClose} onNavigate={(event) => switchInsightChapterInPlace(event, localizedHref(locale, insightChapterHref(chapter)))} />)}
+    <MobileSubLink href="/insights" title={menu.insights.allArticles} onClose={onClose} />
+    <MobileSubLink href="/resources" title={menu.insights.subsidiesAndResources} marker={<FileIcon />} onClose={onClose} />
+    <MobileSubLink href="https://tradepiloter.com" title={<>TradePilot<span className="ml-1.5 text-[12.5px] text-tx3">{menu.insights.tradePilotDescription}</span><span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span></>} marker={<TradePilotMark />} external onClose={onClose} />
   </>;
 }
 
 function MessageBoxTrigger({ className = "", onOpen }: { className?: string; onOpen?: () => void }) {
+  const { critical } = useNavbarCopy();
   const { open } = useMessageBox();
-  return <button type="button" className={`bg-gold px-4 py-[9px] text-[14px] font-semibold text-navy hover:bg-gold-l ${className}`} onClick={() => { open(); onOpen?.(); }}>聊聊你的產品 →</button>;
+  return <button type="button" className={`bg-gold px-4 py-[9px] text-[14px] font-semibold text-navy hover:bg-gold-l ${className}`} onClick={() => { open(); onOpen?.(); }}>{critical.messageBoxTrigger}</button>;
 }

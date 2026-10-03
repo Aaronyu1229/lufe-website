@@ -33,6 +33,7 @@ SOURCE_EXTENSIONS = {".ts", ".tsx", ".css", ".json"}
 COMMON_PUNCTUATION = "°÷‘’“”‧※↑↓↘■□▲▼◆○☆　〈〉『』【】〔〕＃＄％＆＊＋－．／＝＠＼｜～"
 HERO_SOURCE_FILE = PROJECT_ROOT / "src/components/home/HeroSection.tsx"
 NAVBAR_SOURCE_FILE = PROJECT_ROOT / "src/components/Navbar.tsx"
+NAVBAR_CRITICAL_SOURCE_FILE = PROJECT_ROOT / "src/i18n/zh/navbar-critical.ts"
 NAVBAR_CRITICAL_PATTERNS = (
     r"const navItems[\s\S]*?^\];",
     r'<Menu(?:Column|Rail)\s+label="([^"]*)"',
@@ -160,6 +161,7 @@ def main() -> None:
     build_subset(FULL_OUTPUT_FONT, FULL_CHARSET_FILE, full_characters)
 
     critical_characters = non_ascii_characters(HERO_SOURCE_FILE)
+    critical_characters.update(non_ascii_characters(NAVBAR_CRITICAL_SOURCE_FILE))
     navbar_source = NAVBAR_SOURCE_FILE.read_text(encoding="utf-8")
     for pattern in NAVBAR_CRITICAL_PATTERNS:
         for match in re.findall(pattern, navbar_source, re.MULTILINE):
