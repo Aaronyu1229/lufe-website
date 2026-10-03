@@ -102,7 +102,7 @@ export function WaitlistForm() {
     return (
       <div className="py-8 text-center">
         <h3 className="h3 mb-2 text-tx">收到了！</h3>
-        <p className="text-[15px] leading-[1.8] text-tx2">開放首批時，我們會先用你提供的 Email 找你</p>
+        <p className="text-[15px] leading-[1.8] text-tx2">我們會在 24 小時內用你提供的 Email 跟你約時間</p>
       </div>
     );
   }
@@ -138,7 +138,7 @@ export function WaitlistForm() {
       </div>
       <input type="text" name="website" value={fields.website} onChange={(event) => update("website", event.target.value)} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />
       <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-gold py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l disabled:cursor-not-allowed disabled:opacity-50">
-        {isSubmitting ? "送出中…" : "登記首批 →"}
+        {isSubmitting ? "送出中…" : "預約 30 分鐘初步評估 →"}
       </button>
       {submitError ? <p className="text-center text-[13px] text-red-500">送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p> : null}
     </form>
