@@ -11,8 +11,8 @@ export const revalidate = 300;
 
 export const metadata = createPageMetadata({
   path: "/insights",
-  title: "洞察 · 東南亞與北美出海實戰",
-  description: "菲律賓、印尼、東南亞趨勢、北美市場、出海實戰、企業體質——幫台灣企業用最少的時間搞懂北美與東南亞出海。",
+  title: "洞察 · 出海第一年會遇到的事",
+  description: "按出海第一年的順序整理：第一個月問市場、第三個月談通路與證、第九個月落地與團隊，以及北美通路。台灣品牌進菲律賓之前，先把常見的卡點讀一遍。",
 });
 
 export default async function Insights() {
