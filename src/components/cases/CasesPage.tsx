@@ -27,7 +27,7 @@ export const CASE_ROADS = [
   {
     label: "第一條",
     title: "從零開始",
-    body: "在當地蓋一間英語教育機構，後來用同樣的方法做了一個連鎖手搖飲品牌",
+    body: "在當地從零做起。我們在菲律賓的當地夥伴，先做了一間英語教育機構，後來也從零做起一個連鎖手搖飲品牌",
     lesson: "找人比找店面難，第一批人決定後面所有事",
     icon: SproutIcon,
   },
@@ -41,7 +41,7 @@ export const CASE_ROADS = [
   {
     label: "第三條",
     title: "原封不動帶過去",
-    body: "一個台灣的美業品牌，什麼都不改，只做當地行銷",
+    body: "產品和品牌原封不動，只換在當地講故事的方式。我們的當地夥伴，陪過台灣的美業品牌這樣走",
     lesson: "品牌可以不改，但講故事的方式一定要改",
     icon: PackageIcon,
   },
@@ -98,7 +98,7 @@ function CasePanel({ caseItem }: { caseItem: (typeof CASES)[number] }) {
         ))}
       </div>
 
-      <p className="py-5 text-[14px] leading-[1.7] text-tx3">完整時間軸、關鍵決策推理、客戶回饋——都在內頁</p>
+      <p className="py-5 text-[14px] leading-[1.7] text-tx3">完整的過程，和當時為什麼這樣決定，都在內頁</p>
       <div className="flex flex-wrap gap-3 border-t border-bd pt-5">
         <Link href={`/cases/${caseItem.slug}`} className="inline-flex bg-navy px-5 py-3 text-[14px] font-semibold text-white hover:bg-navy-l">
           讀完整案例 →
@@ -187,7 +187,7 @@ export function CasesPageContent({
           </nav>
 
           <h1 className="h1 mb-6 max-w-[880px] text-white">每一個判斷，<br /><span className="text-gold">都有案例可以對照</span></h1>
-          <p className="lead max-w-[640px] whitespace-pre-line !text-white/75">在菲律賓與北美，鹿飛走過三條不一樣的出海路徑{"\n"}以下是其中幾個關鍵決策的完整過程</p>
+          <p className="lead max-w-[640px] whitespace-pre-line !text-white/75">台灣品牌出海，大致有三種走法。下面是我們參與過、和我們在菲律賓的當地夥伴自己走過的案例，每一個都寫到當時最關鍵的那個決定。</p>
         </div>
         <ScrollCue />
       </section>
@@ -257,15 +257,15 @@ export function CasesPageContent({
           <div className="mt-20 grid gap-8 border-t border-bd pt-14 lg:grid-cols-12 lg:items-stretch">
             <div className="lg:col-span-7">
               <h2 className="h2 text-tx">你的故事會是哪一條？</h2>
-              <p className="mt-3 max-w-[440px] text-[15px] leading-[1.8] text-tx2">聊聊你的產品，鹿飛先幫你看比較像哪一條路</p>
+              <p className="mt-3 max-w-[440px] text-[15px] leading-[1.8] text-tx2">免費初步評估 30 分鐘：先聽你的產品在台灣怎麼賣，談完給你一頁，說你比較像哪一條路、建議從哪一章開始。有時候我們會建議你再等等，那也是一種答案。</p>
               <button onClick={onMessageOpen} className="mt-6 cursor-pointer bg-gold px-8 py-3.5 text-[16.5px] font-semibold text-navy hover:bg-gold-l">
-                聊聊你的產品 →
+                預約 30 分鐘 →
               </button>
             </div>
             <Link href="/assess" className="group bg-navy p-8 text-white transition-transform active:scale-[.985] [@media(hover:hover)]:hover:-translate-y-1 md:p-10 lg:col-span-5">
               <p className="text-[13px] font-semibold text-gold">2 分鐘處境比對</p>
               <h3 className="h3 mt-3 text-white">不確定自己比較像哪一條？</h3>
-              <p className="mt-3 text-[15px] leading-[1.8] text-white/70">三個問題，比對鹿飛做過的三個案例，找出最接近的一個</p>
+              <p className="mt-3 text-[15px] leading-[1.8] text-white/70">三個問題，比對我們參與過的三個案例，找出最接近的一個</p>
               <div className="mt-6 flex gap-2">
                 {['階段', '卡點', '市場'].map((chip) => <span key={chip} className="border border-white/25 px-3 py-1 text-[13px] text-white/75">{chip}</span>)}
               </div>
