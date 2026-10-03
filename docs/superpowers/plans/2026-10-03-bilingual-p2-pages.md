@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-03-bilingual-site-design.md`；**前置：** Plan 1 已上線（PR #139）。
 
+**Aaron 2026-10-04 確認：** 五批分批照做；運營優化＝Operations Optimization、鹿飛方法論＝The LUFÉ Method、處境比對＝Situation Check 三個名稱定案。
+
 **分批：** 五批，各自一個分支、一個 PR、審查合併後才派下一批（每批改到的元件其他視窗要暫停改中文，見各批「凍結」）。
 
 | 批 | 內容 | 英文路由 |
@@ -300,7 +302,7 @@ Expected：**無差異**。有差異就代表首屏字集變了：檢查 `navbar
 - 照配方；`content.ts` 若是資料檔用覆寫模式（`src/i18n/en/methodology-content.ts`）。路由 `/en/services/methodology`。
 
 ### Task C3: 運營優化（`OptimizePage`＋`src/data/services.ts` 相關條目）
-- 照配方；`services.ts` 覆寫模式只覆寫 Optimize 頁會用到的條目；若 `services.ts` 有「自然流量平均成長 200%+」這類無出處宣稱，**照翻不加碼也不刪**，並在 PR 描述列出（交 Aaron 決定，不在本計畫改中文）。路由 `/en/services/optimize`。
+- 照配方；`services.ts` 覆寫模式只覆寫 Optimize 頁會用到的條目；**Aaron 2026-10-04 決定：「自然流量平均成長 200%+。」中英文都拿掉**——先單獨一個 commit 刪中文 `src/data/services.ts` 那句（`fix(copy): drop unsourced 200%+ traffic claim`，同步更新受影響的快照／指紋），英文不翻這句；其他無出處宣稱照翻不加碼也不刪，並在 PR 描述列出。路由 `/en/services/optimize`。
 
 ### Task C4: 驗證與 PR（同 A5，`… (Plan 2 batch C)`）
 
