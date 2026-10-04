@@ -5,6 +5,9 @@ import Link from "next/link";
 import { PackageIcon, SlidersIcon, SproutIcon } from "@/components/icons/LineIcons";
 import { Carousel, ExpandCard } from "@/components/ui";
 import { isNumericValue } from "@/data/cases";
+import { homeCasesEn } from "@/i18n/en/home-cases";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { homeCasesZh, type HomeCasesCopy } from "@/i18n/zh/home-cases";
 
 type Industry = "food" | "personal-care" | "fnb";
 type Market = "north-america" | "sea";
@@ -27,85 +30,28 @@ interface CaseCardData {
   readonly image: string;
 }
 
-export const HOME_CASE_CARDS: readonly CaseCardData[] = [
-  {
-    slug: "goat-milk-soap-global",
-    featured: false,
-    industry: "personal-care",
-    market: "north-america",
-    tags: [
-      { label: "美妝個護", variant: "sky" },
-      { label: "北美", variant: "gold" },
-    ],
-    num: "北美",
-    numLabel: "已進入北美的量販通路",
-    scalePrefix: "台灣羊奶皂品牌",
-    title: "一塊台灣羊奶皂，怎麼讓北美買家看懂？",
-    painLine: "產品本身沒有問題，卡住的是北美買家看不懂它",
-    solutionLine: "配方不動，改的是說法與標示，再帶進北美的量販通路。",
-    route: { from: "台灣", to: "北美" },
-    image: "/images/hero-video/case-soap-1600.webp",
-  },
-  {
-    slug: "fish-floss-us-fda",
-    featured: false,
-    industry: "food",
-    market: "north-america",
-    tags: [
-      { label: "食品", variant: "sky" },
-      { label: "美國", variant: "gold" },
-    ],
-    num: "FDA",
-    numLabel: "先解決法規，再談上市",
-    scalePrefix: "台灣魚鬆品牌",
-    title: "魚鬆進美國，卡在哪一關？",
-    painLine: "配方裡的成分與標示方式，在美國都可能過不了關",
-    solutionLine: "先釐清 FDA 規範與成分、標示要調整的地方，再談包裝與上市。",
-    route: { from: "台灣", to: "美國" },
-    image: "/images/hero-video/case-floss-1600.webp",
-  },
-  {
-    slug: "bubble-tea",
-    featured: true,
-    industry: "fnb",
-    market: "sea",
-    tags: [
-      { label: "飲品", variant: "sky" },
-      { label: "東南亞", variant: "gold" },
-    ],
-    num: "十幾家",
-    numLabel: "從零開始，已開放加盟",
-    scalePrefix: "合作夥伴在菲律賓的手搖飲品牌",
-    title: "一個手搖飲品牌，怎麼在菲律賓從零做到十幾家？",
-    painLine:
-      "當地手搖飲市場已有國際品牌，新品牌要找到自己的位置，還要守住配方。",
-    solutionLine:
-      "從台灣茶出發，改成當地的口味與價格，先開第一家驗證，再開放加盟。",
-    route: { from: "台灣", to: "菲律賓" },
-    image: "/images/cases/case-4-manila-1080.webp",
-  },
-];
-
-export const HOME_CASE_ROADS = [
-  {
-    label: "第一條",
-    title: "從零開始",
-    detail: "我們在菲律賓的當地夥伴，先做了一間英語教育機構；\n後來也從零做起一個連鎖手搖飲品牌",
-    icon: SproutIcon,
-  },
-  {
-    label: "第二條",
-    title: "改了再帶過去",
-    detail: "台灣的產品到了當地，改配方、改價格、改包裝，\n變成當地人願意掏錢的樣子",
-    icon: SlidersIcon,
-  },
-  {
-    label: "第三條",
-    title: "原封不動帶過去",
-    detail: "一個台灣的美業品牌，什麼都不改，只做當地的行銷，看它站不站得住",
-    icon: PackageIcon,
-  },
+const HOME_CASE_CARD_CONFIG = [
+  { slug: "goat-milk-soap-global", featured: false, industry: "personal-care", market: "north-america", image: "/images/hero-video/case-soap-1600.webp" },
+  { slug: "fish-floss-us-fda", featured: false, industry: "food", market: "north-america", image: "/images/hero-video/case-floss-1600.webp" },
+  { slug: "bubble-tea", featured: true, industry: "fnb", market: "sea", image: "/images/cases/case-4-manila-1080.webp" },
 ] as const;
+
+const HOME_CASE_ROAD_CONFIG = [
+  { icon: SproutIcon },
+  { icon: SlidersIcon },
+  { icon: PackageIcon },
+] as const;
+
+function createCaseCards(copy: HomeCasesCopy): CaseCardData[] {
+  return HOME_CASE_CARD_CONFIG.map((config, index) => ({ ...config, ...copy.cards[index]! }));
+}
+
+function createCaseRoads(copy: HomeCasesCopy) {
+  return HOME_CASE_ROAD_CONFIG.map((config, index) => ({ ...config, ...copy.roads[index]! }));
+}
+
+export const HOME_CASE_CARDS = createCaseCards(homeCasesZh);
+export const HOME_CASE_ROADS = createCaseRoads(homeCasesZh);
 
 const tagStyles: Record<"sky" | "gold", string> = {
   sky: "bg-[rgba(91,143,168,0.08)] text-sky",
@@ -140,21 +86,22 @@ function CaseTags({ tags }: { tags: CaseCardData["tags"] }) {
   );
 }
 
-function CaseCard({ item }: { item: CaseCardData }) {
-  const storyLabel = item.featured ? "看完整故事 →" : "閱讀案例 →";
+function CaseCard({ item, copy, locale }: { readonly item: CaseCardData; readonly copy: HomeCasesCopy; readonly locale: Locale }) {
+  const storyLabel = item.featured ? copy.storyLabels.featured : copy.storyLabels.standard;
 
   return (
     <ExpandCard
       title={item.title}
       image={{ src: item.image, alt: item.title }}
       className="h-full"
+      closeLabel={copy.closeLabel}
       card={
         <article className="lufe-card flex h-full min-w-0 flex-col overflow-hidden border border-bd bg-white shadow-[0_12px_32px_rgba(16,27,48,0.08)]">
           <div className="flex min-w-0 flex-1 flex-col p-6">
             <CaseTags tags={item.tags} />
             {item.featured && (
               <span className="mb-4 inline-flex w-fit bg-gold/15 px-2.5 py-1 text-[11px] font-semibold tracking-[0.5px] text-gold-d">
-                最常被問到
+                {copy.featuredLabel}
               </span>
             )}
             {isNumericValue(item.num) ? (
@@ -181,7 +128,7 @@ function CaseCard({ item }: { item: CaseCardData }) {
           <CaseTags tags={item.tags} />
           {item.featured && (
             <span className="mb-4 inline-flex bg-gold/15 px-2.5 py-1 text-[11px] font-semibold tracking-[0.5px] text-gold-d">
-              最常被問到
+              {copy.featuredLabel}
             </span>
           )}
           {isNumericValue(item.num) ? (
@@ -192,11 +139,11 @@ function CaseCard({ item }: { item: CaseCardData }) {
           <p className="mb-5 mt-2 text-[14px] font-medium text-tx3">{item.numLabel}</p>
           <p className="mb-6 text-[13px] font-medium text-tx2">{item.scalePrefix}</p>
           <div className="border-t border-bd py-4">
-            <h3 className="mb-2 text-[14px] font-semibold text-tx3">卡點</h3>
+            <h3 className="mb-2 text-[14px] font-semibold text-tx3">{copy.painHeading}</h3>
             <p className="leading-[1.85] text-tx2">{item.painLine}</p>
           </div>
           <div className="border-t border-bd py-4">
-            <h3 className="mb-2 text-[14px] font-semibold text-gold-d">怎麼解</h3>
+            <h3 className="mb-2 text-[14px] font-semibold text-gold-d">{copy.solutionHeading}</h3>
             <p className="leading-[1.85] text-tx">{item.solutionLine}</p>
           </div>
           <div className="flex flex-wrap justify-between gap-3 border-t border-bd py-4 text-[13px] text-tx3">
@@ -204,7 +151,7 @@ function CaseCard({ item }: { item: CaseCardData }) {
             {item.trustSignal && <TrustSignal text={item.trustSignal} />}
           </div>
           {!item.hideStoryLink && (
-            <Link href={`/cases/${item.slug}`} className="inline-flex bg-navy px-5 py-3 text-[14px] font-semibold text-white">
+            <Link href={localizedHref(locale, `/cases/${item.slug}`)} className="inline-flex bg-navy px-5 py-3 text-[14px] font-semibold text-white">
               {storyLabel}
             </Link>
           )}
@@ -214,20 +161,24 @@ function CaseCard({ item }: { item: CaseCardData }) {
   );
 }
 
-export function CasesSection() {
+export function CasesSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+  const copy = locale === "en" ? homeCasesEn : homeCasesZh;
+  const cards = createCaseCards(copy);
+  const roads = createCaseRoads(copy);
+
   return (
     <section className="overflow-hidden py-[80px]">
       <div className="lufe-container">
         <div className="max-w-[820px]">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
-            用數據判斷方向，
+            {copy.heading[0]}
             <br />
-            <span className="text-gold-d">用實戰調整做法</span>
+            <span className="text-gold-d">{copy.heading[1]}</span>
           </h2>
-          <p className="mt-5 text-[17px] leading-[1.8] text-tx2">在菲律賓，我們協助合作夥伴走過三條不一樣的路；每一條都先小規模驗證，再依數據調整、放大。</p>
+          <p className="mt-5 text-[17px] leading-[1.8] text-tx2">{copy.lead}</p>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {HOME_CASE_ROADS.map((road) => {
+          {roads.map((road) => {
             const Icon = road.icon;
 
             return (
@@ -245,17 +196,19 @@ export function CasesSection() {
 
       <div className="lufe-container">
         <Carousel
-          label="案例"
+          label={copy.carousel.label}
+          previousLabel={copy.carousel.previous}
+          nextLabel={copy.carousel.next}
           className="mt-8 overflow-hidden"
           itemClassName="basis-[82vw] max-w-[520px] md:basis-[380px]"
         >
-          {HOME_CASE_CARDS.map((item) => <CaseCard key={item.slug} item={item} />)}
+          {cards.map((item) => <CaseCard key={item.slug} item={item} copy={copy} locale={locale} />)}
         </Carousel>
       </div>
 
       <div className="lufe-container mt-4">
-        <Link href="/cases" className="inline-flex text-[16px] font-semibold text-sky">
-          全部案例 →
+        <Link href={localizedHref(locale, "/cases")} className="inline-flex text-[16px] font-semibold text-sky">
+          {copy.allCases}
         </Link>
       </div>
     </section>
