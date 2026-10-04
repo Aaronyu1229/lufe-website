@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 import { BuildingIcon, CompassIcon, HeadsetIcon, TrendIcon } from "@/components/icons/LineIcons";
+import { homeChaptersEn } from "@/i18n/en/home-chapters";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { homeChaptersZh, type HomeChaptersCopy } from "@/i18n/zh/home-chapters";
 
 type Chapter = {
   readonly id?: string;
@@ -15,54 +18,28 @@ type Chapter = {
   readonly icon: typeof CompassIcon;
 };
 
-export const HOME_CHAPTERS: readonly Chapter[] = [
-  {
-    id: "chapter-1",
-    label: "第一個月",
-    title: "市場探查",
-    subtitle: "在當地找真實消費者試用，確認誰會買、願意付多少",
-    href: "/services/product-testing",
-    linkLabel: "看市場探查怎麼做 →",
-    icon: CompassIcon,
-  },
-  {
-    id: "chapter-2",
-    label: "第三個月",
-    title: "寄賣",
-    subtitle: "產品證審核期間，電商上架與市場活動同步推進",
-    href: "/services/consignment",
-    linkLabel: "看寄賣包內容 →",
-    icon: TrendIcon,
-  },
-  {
-    id: "chapter-3",
-    label: "第九個月",
-    title: "公司落地",
-    subtitle: "公司註冊、人員招聘、FDA 掛證，建立當地據點",
-    href: "/services/localization",
-    linkLabel: "看落地怎麼做 →",
-    icon: BuildingIcon,
-  },
-  {
-    id: "chapter-4",
-    label: "之後的每一天",
-    title: "海外客服",
-    subtitle: "菲律賓是全球英語客服外包的重鎮。由當地專業團隊接手英文客服，品質標準由台灣端制定與管理。預計 2027 Q1 開放首批。",
-    href: "/services/call-center",
-    linkLabel: "登記首批 →",
-    icon: HeadsetIcon,
-  },
-];
+const HOME_CHAPTER_CONFIG = [
+  { id: "chapter-1", href: "/services/product-testing", icon: CompassIcon },
+  { id: "chapter-2", href: "/services/consignment", icon: TrendIcon },
+  { id: "chapter-3", href: "/services/localization", icon: BuildingIcon },
+  { id: "chapter-4", href: "/services/call-center", icon: HeadsetIcon },
+] as const;
 
-const TIMELINE_LABELS = ["第一個月", "第三個月", "第九個月", "之後的每一天"] as const;
+function createChapters(copy: HomeChaptersCopy): Chapter[] {
+  return HOME_CHAPTER_CONFIG.map((config, index) => ({ ...config, ...copy.chapters[index]! }));
+}
 
-export function ChaptersSection() {
+export const HOME_CHAPTERS = createChapters(homeChaptersZh);
+
+export function ChaptersSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+  const copy = locale === "en" ? homeChaptersEn : homeChaptersZh;
+  const chapters = createChapters(copy);
   const cardsRef = useRef<Array<HTMLElement | null>>([]);
   const [progress, setProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [flashIndex, setFlashIndex] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const timelineProgress = hoveredIndex === null ? progress : hoveredIndex / (TIMELINE_LABELS.length - 1);
+  const timelineProgress = hoveredIndex === null ? progress : hoveredIndex / (copy.timelineLabels.length - 1);
   const reachedIndex = hoveredIndex ?? activeIndex;
 
   useEffect(() => {
@@ -106,17 +83,17 @@ export function ChaptersSection() {
       <div className="lufe-container">
         <div className="mx-auto mb-12 max-w-[820px] text-center md:mb-16">
           <h2 className="mb-5 font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance] md:mb-6">
-            一家品牌在馬尼拉的第一年，
+            {copy.heading[0]}
             <br />
-            <span className="text-gold-d">通常是這樣走的</span>
+            <span className="text-gold-d">{copy.heading[1]}</span>
           </h2>
           <p className="mx-auto max-w-[720px] text-[17px] font-normal leading-[1.8] text-tx2 md:text-[18px]">
-            四個章節，四個方案。可從第一章開始，也可一路走完；每一章獨立計價，每一章結束都能決定是否繼續
+            {copy.lead}
           </p>
         </div>
 
         <ol className="lufe-home-timeline mx-auto mb-8 grid max-w-[1040px] grid-cols-4 gap-2 border-y border-bd py-5 md:mb-10 md:gap-5" style={{ "--lufe-home-progress": timelineProgress } as CSSProperties}>
-          {TIMELINE_LABELS.map((label, index) => (
+          {copy.timelineLabels.map((label, index) => (
             <li key={label} className="min-w-0 text-center">
               <button type="button" onClick={() => jumpToChapter(index)} onPointerEnter={() => setHoveredIndex(index)} onPointerLeave={() => setHoveredIndex(null)} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} onFocus={() => setHoveredIndex(index)} onBlur={() => setHoveredIndex(null)} className={`lufe-home-timeline-button ${index <= reachedIndex ? "lufe-home-timeline-hit" : ""}`}>
                 <span className="lufe-home-timeline-dot" aria-hidden="true" />
@@ -127,7 +104,7 @@ export function ChaptersSection() {
         </ol>
 
         <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-          {HOME_CHAPTERS.map((chapter, index) => {
+          {chapters.map((chapter, index) => {
             const Icon = chapter.icon;
 
             return (
@@ -137,7 +114,7 @@ export function ChaptersSection() {
               </span>
               <h3 className="mb-5 font-sans text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.3] text-tx">{chapter.title}</h3>
               <p className="text-[15px] leading-[1.85] text-tx2">{chapter.subtitle}</p>
-              <Link href={chapter.href} className="mt-6 inline-flex text-[15px] font-semibold text-sky">
+              <Link href={localizedHref(locale, chapter.href)} className="mt-6 inline-flex text-[15px] font-semibold text-sky">
                 {chapter.linkLabel}
               </Link>
             </article>
@@ -145,12 +122,12 @@ export function ChaptersSection() {
           })}
         </div>
 
-        <p className="mx-auto mt-8 max-w-[860px] text-[15px] leading-[1.85] text-tx2 md:text-[16px]">出海起手包 7 萬 ＝ 市場探查 1～2 萬 ＋ 寄賣包 5～6 萬。先付市場探查；沒過，錢到此為止；過了，這筆抵進寄賣包。前 10 家是實驗價。</p>
+        <p className="mx-auto mt-8 max-w-[860px] text-[15px] leading-[1.85] text-tx2 md:text-[16px]">{copy.starterPackage}</p>
 
-        <Link href="/services/north-america" className="group mt-6 flex items-center gap-4 border-y border-bd py-4">
+        <Link href={localizedHref(locale, "/services/north-america")} className="group mt-6 flex items-center gap-4 border-y border-bd py-4">
           <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center font-[var(--font-inter)] text-[12px] font-bold tracking-[-.01em] text-gold-d">US</span>
-          <span className="text-[15px] text-tx transition-colors [@media(hover:hover)]:group-hover:text-sky">產品已經成熟、目標是北美貨架？那是另一條路，由北美團隊執行</span>
-          <span className="ml-auto whitespace-nowrap text-[15px] font-semibold text-sky">北美通路 <span aria-hidden="true" className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-[3px]">→</span></span>
+          <span className="text-[15px] text-tx transition-colors [@media(hover:hover)]:group-hover:text-sky">{copy.northAmerica.description}</span>
+          <span className="ml-auto whitespace-nowrap text-[15px] font-semibold text-sky">{copy.northAmerica.label} <span aria-hidden="true" className="inline-block transition-transform [@media(hover:hover)]:group-hover:translate-x-[3px]">→</span></span>
         </Link>
       </div>
     </section>
