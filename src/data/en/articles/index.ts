@@ -20,8 +20,10 @@ export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [fobCifDdpExplained.slug]: fobCifDdpExplained,
   [manilaBeverageFirstStore90Days.slug]: manilaBeverageFirstStore90Days,
   [overseasExhibitionSubsidy115Upgrade.slug]: overseasExhibitionSubsidy115Upgrade,
+  [philippinesEcommerceFirstYear.slug]: philippinesEcommerceFirstYear,
 };
 import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
 import { article as fobCifDdpExplained } from "./fob-cif-ddp-explained";
 import { article as manilaBeverageFirstStore90Days } from "./manila-beverage-first-store-90-days";
 import { article as overseasExhibitionSubsidy115Upgrade } from "./overseas-exhibition-subsidy-115-upgrade";
+import { article as philippinesEcommerceFirstYear } from "./philippines-ecommerce-first-year";
