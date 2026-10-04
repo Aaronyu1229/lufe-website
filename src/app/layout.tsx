@@ -6,7 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { FooterSwitch } from "@/components/FooterSwitch";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
-import { SiteStructuredData } from "@/components/seo/StructuredData";
+import { SiteStructuredDataSwitch } from "@/components/seo/SiteStructuredDataSwitch";
 import { toInsightCard } from "@/lib/articles/presentation";
 import { getPublishedEnglishArticles } from "@/lib/articles/english";
 import { getPublishedArticles } from "@/lib/articles/published";
@@ -147,7 +147,7 @@ export default function RootLayout({
     >
       <body>
         <MessageBoxProvider>
-          <SiteStructuredData />
+          <SiteStructuredDataSwitch />
           <Navbar latestArticle={latestArticle} latestArticleEn={latestArticleEn} publishedArticleSlugs={publishedArticles.map((article) => article.slug)}>
             <main id="main-content">{children}</main>
           </Navbar>

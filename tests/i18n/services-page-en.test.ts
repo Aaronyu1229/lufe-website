@@ -32,7 +32,14 @@ describe("services page i18n", () => {
   });
 
   it("has English metadata pointing at /en/services", () => {
-    expect(enMetadata.alternates).toEqual({ canonical: "/en/services" });
+    expect(enMetadata.alternates).toEqual({
+      canonical: "/en/services",
+      languages: {
+        "zh-Hant": "/services",
+        en: "/en/services",
+        "x-default": "/services",
+      },
+    });
     expect(String(enMetadata.title)).not.toMatch(/\p{Script=Han}/u);
   });
 });

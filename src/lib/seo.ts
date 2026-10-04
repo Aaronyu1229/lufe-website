@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { EN_PUBLIC, hasEnglishRoute } from "@/i18n/config";
 import { localizedHref, type Locale } from "@/i18n/locale";
+import { hasEnglishArticle } from "@/lib/articles/english";
 
 import { SITE_NAME, SITE_URL } from "./site";
 
@@ -14,12 +15,14 @@ type PageMetadataOptions = {
 };
 
 type ArticleMetadataOptions = {
+  /** Always the Chinese path; English canonicals are derived from it. */
   readonly path: string;
   readonly title: string;
   readonly description: string;
   readonly image: string;
   readonly publishedTime: string;
   readonly modifiedTime: string;
+  readonly locale?: Locale;
   readonly canonical?: string;
 };
 
@@ -55,13 +58,19 @@ export function createArticleMetadata({
   image,
   publishedTime,
   modifiedTime,
-  canonical = toAbsoluteUrl(path),
+  locale = "zh",
+  canonical = toAbsoluteUrl(localizedHref(locale, path)),
 }: ArticleMetadataOptions): Metadata {
+  const slug = path.startsWith("/insights/") ? path.slice("/insights/".length) : "";
+  const languages = EN_PUBLIC && slug && hasEnglishArticle(slug)
+    ? { languages: { "zh-Hant": path, en: localizedHref("en", path), "x-default": path } }
+    : {};
+
   return {
     title,
     description,
     authors: [{ name: "Aaron Yu" }],
-    alternates: { canonical },
+    alternates: { canonical, ...languages },
     openGraph: {
       type: "article",
       url: canonical,

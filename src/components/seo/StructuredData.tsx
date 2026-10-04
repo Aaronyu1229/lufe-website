@@ -1,5 +1,7 @@
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { toAbsoluteUrl } from "@/lib/seo";
+import { EN_SITE_DESCRIPTION } from "@/lib/english-site";
+import type { Locale } from "@/i18n/locale";
 
 export type BreadcrumbItem = {
   readonly name: string;
@@ -19,6 +21,7 @@ type ArticleStructuredData = {
   readonly dateModified: string;
   readonly canonical: string;
   readonly citation?: readonly string[];
+  readonly locale?: Locale;
 };
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
@@ -37,7 +40,13 @@ function JsonLd({ data }: { readonly data: unknown }) {
   );
 }
 
-export function SiteStructuredData() {
+export function SiteStructuredData({ locale = "zh" }: { readonly locale?: Locale }) {
+  const isEnglish = locale === "en";
+  const siteUrl = isEnglish ? `${SITE_URL}/en` : SITE_URL;
+  const organizationId = isEnglish ? `${siteUrl}#organization` : ORGANIZATION_ID;
+  const personId = isEnglish ? `${siteUrl}#aaron-yu` : PERSON_ID;
+  const profilePath = isEnglish ? "/en/about/aaron-yu" : AARON_PROFILE_PATH;
+
   return (
     <JsonLd
       data={{
@@ -45,27 +54,29 @@ export function SiteStructuredData() {
         "@graph": [
           {
             "@type": "Organization",
-            "@id": ORGANIZATION_ID,
-            name: SITE_NAME,
-            url: SITE_URL,
+            "@id": organizationId,
+            name: isEnglish ? "LUFÉ" : SITE_NAME,
+            url: siteUrl,
             logo: toAbsoluteUrl("/images/logo/logo-mark-navy.png"),
-            founder: { "@id": PERSON_ID },
+            founder: { "@id": personId },
             sameAs: [],
+            ...(isEnglish ? { description: EN_SITE_DESCRIPTION, inLanguage: "en" } : {}),
           },
           {
             "@type": "WebSite",
-            "@id": `${SITE_URL}/#website`,
-            name: SITE_NAME,
-            url: SITE_URL,
+            "@id": isEnglish ? `${siteUrl}#website` : `${SITE_URL}/#website`,
+            name: isEnglish ? "LUFÉ" : SITE_NAME,
+            url: siteUrl,
+            ...(isEnglish ? { description: EN_SITE_DESCRIPTION, inLanguage: "en" } : {}),
           },
           {
             "@type": "Person",
-            "@id": PERSON_ID,
+            "@id": personId,
             name: "Aaron Yu",
-            jobTitle: "鹿飛 LUFÉ 創辦人",
-            worksFor: { "@id": ORGANIZATION_ID },
-            description: "看了很多年貨櫃出去，決定去接貨到了之後的事。",
-            url: toAbsoluteUrl(AARON_PROFILE_PATH),
+            jobTitle: isEnglish ? "Founder of LUFÉ" : "鹿飛 LUFÉ 創辦人",
+            worksFor: { "@id": organizationId },
+            description: isEnglish ? "After years of watching containers leave, he decided to take care of what happens after they arrive." : "看了很多年貨櫃出去，決定去接貨到了之後的事。",
+            url: toAbsoluteUrl(profilePath),
             image: toAbsoluteUrl(AARON_IMAGE_PATH),
             sameAs: ["https://www.linkedin.com/in/wibp/"],
           },
@@ -131,7 +142,13 @@ export function ArticleJsonLd({
   dateModified,
   canonical,
   citation,
+  locale = "zh",
 }: ArticleStructuredData) {
+  const isEnglish = locale === "en";
+  const organizationId = isEnglish ? `${SITE_URL}/en#organization` : ORGANIZATION_ID;
+  const personId = isEnglish ? `${SITE_URL}/en#aaron-yu` : PERSON_ID;
+  const profilePath = isEnglish ? "/en/about/aaron-yu" : AARON_PROFILE_PATH;
+
   return (
     <JsonLd
       data={{
@@ -139,20 +156,21 @@ export function ArticleJsonLd({
         "@type": "Article",
         headline,
         description,
+        ...(isEnglish ? { inLanguage: "en" } : {}),
         image: toAbsoluteUrl(image),
         datePublished,
         dateModified,
         ...(citation?.length ? { citation } : {}),
         author: {
           "@type": "Person",
-          "@id": PERSON_ID,
+          "@id": personId,
           name: "Aaron Yu",
-          url: toAbsoluteUrl(AARON_PROFILE_PATH),
+          url: toAbsoluteUrl(profilePath),
         },
         publisher: {
           "@type": "Organization",
-          "@id": ORGANIZATION_ID,
-          name: SITE_NAME,
+          "@id": organizationId,
+          name: isEnglish ? "LUFÉ" : SITE_NAME,
         },
         mainEntityOfPage: {
           "@type": "WebPage",

@@ -7,9 +7,10 @@ const isLocalizable = (href: string) => {
 };
 
 export function expectEnglishMarkup(html: string): void {
-  const han = html.match(/\p{Script=Han}+/gu);
+  const withoutLanguageToggle = html.replace(/<a\b(?=[^>]*\bhrefLang="zh-Hant")(?=[^>]*\blang="zh-Hant")[^>]*>中文<\/a>/g, "");
+  const han = withoutLanguageToggle.match(/\p{Script=Han}+/gu);
   expect(han, `English markup still contains Chinese: ${han?.slice(0, 10).join(" ")}`).toBeNull();
-  const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
+  const hrefs = [...withoutLanguageToggle.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
   const leaks = hrefs
     .filter(isLocalizable)
     .filter((href) => !(href === "/en" || href.startsWith("/en/") || href.startsWith("/en?") || href.startsWith("/en#")));

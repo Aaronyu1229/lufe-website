@@ -1,5 +1,5 @@
 // Flip to true only on open day (spec §6 P5): shows the toggle, allows indexing, emits hreflang.
-export const EN_PUBLIC = false;
+export const EN_PUBLIC = true;
 
 // Chinese paths that already have a finished English page. Grows page by page (Plan 2).
 export const EN_ROUTES: readonly string[] = ["/", "/services", "/services/product-testing", "/services/consignment", "/services/localization", "/services/call-center", "/services/north-america", "/services/methodology", "/services/optimize", "/about", "/about/aaron-yu", "/contact", "/cases", "/cases/[slug]", "/assess", "/assess/result", "/resources", "/resources/subsidies", "/insights", "/insights/[slug]"];
