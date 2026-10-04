@@ -7,6 +7,7 @@ import { HOME_OPENING_SOURCE_FINGERPRINT, homeOpeningEn } from "./en/home-openin
 import { HOME_JUMPING_SOURCE_FINGERPRINT, homeJumpingEn } from "./en/home-jumping";
 import { HOME_CHAPTERS_SOURCE_FINGERPRINT, homeChaptersEn } from "./en/home-chapters";
 import { HOME_CASES_SOURCE_FINGERPRINT, homeCasesEn } from "./en/home-cases";
+import { HOME_WHY_SOURCE_FINGERPRINT, homeWhyEn } from "./en/home-why";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -16,6 +17,7 @@ import { homeOpeningZh } from "./zh/home-opening";
 import { homeJumpingZh } from "./zh/home-jumping";
 import { homeChaptersZh } from "./zh/home-chapters";
 import { homeCasesZh } from "./zh/home-cases";
+import { homeWhyZh } from "./zh/home-why";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -27,4 +29,5 @@ export const I18N_MODULES = [
   { name: "home-jumping", zh: homeJumpingZh, en: homeJumpingEn, sourceFingerprint: HOME_JUMPING_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-jumping.ts" },
   { name: "home-chapters", zh: homeChaptersZh, en: homeChaptersEn, sourceFingerprint: HOME_CHAPTERS_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-chapters.ts" },
   { name: "home-cases", zh: homeCasesZh, en: homeCasesEn, sourceFingerprint: HOME_CASES_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-cases.ts" },
+  { name: "home-why", zh: homeWhyZh, en: homeWhyEn, sourceFingerprint: HOME_WHY_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-why.ts" },
 ] as const;
