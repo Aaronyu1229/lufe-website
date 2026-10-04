@@ -9,6 +9,7 @@ import { HOME_CHAPTERS_SOURCE_FINGERPRINT, homeChaptersEn } from "./en/home-chap
 import { HOME_CASES_SOURCE_FINGERPRINT, homeCasesEn } from "./en/home-cases";
 import { HOME_WHY_SOURCE_FINGERPRINT, homeWhyEn } from "./en/home-why";
 import { HOME_FAQ_SOURCE_FINGERPRINT, homeFaqEn } from "./en/home-faq";
+import { HOME_CTA_SOURCE_FINGERPRINT, homeCtaEn } from "./en/home-cta";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -20,6 +21,7 @@ import { homeChaptersZh } from "./zh/home-chapters";
 import { homeCasesZh } from "./zh/home-cases";
 import { homeWhyZh } from "./zh/home-why";
 import { homeFaqZh } from "./zh/home-faq";
+import { homeCtaZh } from "./zh/home-cta";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -33,4 +35,5 @@ export const I18N_MODULES = [
   { name: "home-cases", zh: homeCasesZh, en: homeCasesEn, sourceFingerprint: HOME_CASES_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-cases.ts" },
   { name: "home-why", zh: homeWhyZh, en: homeWhyEn, sourceFingerprint: HOME_WHY_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-why.ts" },
   { name: "home-faq", zh: homeFaqZh, en: homeFaqEn, sourceFingerprint: HOME_FAQ_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-faq.ts" },
+  { name: "home-cta", zh: homeCtaZh, en: homeCtaEn, sourceFingerprint: HOME_CTA_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-cta.ts" },
 ] as const;
