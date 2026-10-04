@@ -34,7 +34,7 @@ export const HOME_CONTRACT_COLUMNS = homeWhyZh.columns;
 export const HOME_CONTRACT_ROWS = createRows(homeWhyZh);
 export const HOME_CONTRACT_WEEKDAYS = homeWhyZh.weekdays;
 
-export function OneContractSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+export function OneContractSection({ locale = "zh" }: { readonly locale?: Locale }) {
   const copy = locale === "en" ? homeWhyEn : homeWhyZh;
   const rows = createRows(copy);
 

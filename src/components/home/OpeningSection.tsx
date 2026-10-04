@@ -2,7 +2,7 @@ import { homeOpeningEn } from "@/i18n/en/home-opening";
 import { type Locale } from "@/i18n/locale";
 import { homeOpeningZh } from "@/i18n/zh/home-opening";
 
-export function OpeningSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+export function OpeningSection({ locale = "zh" }: { readonly locale?: Locale }) {
   const copy = locale === "en" ? homeOpeningEn : homeOpeningZh;
 
   return (

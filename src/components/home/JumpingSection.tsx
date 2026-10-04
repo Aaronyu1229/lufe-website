@@ -50,7 +50,7 @@ function scrollToTarget(event: MouseEvent<HTMLAnchorElement>, id: string, block:
   }
 }
 
-export function JumpingSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+export function JumpingSection({ locale = "zh" }: { readonly locale?: Locale }) {
   const copy = locale === "en" ? homeJumpingEn : homeJumpingZh;
   const route = createRoute(copy);
 

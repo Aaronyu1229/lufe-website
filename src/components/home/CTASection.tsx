@@ -12,7 +12,7 @@ import { homeCtaZh } from "@/i18n/zh/home-cta";
  * Primary: opens MessageBox; secondary text link goes to /assess.
  */
 
-export function CTASection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+export function CTASection({ locale = "zh" }: { readonly locale?: Locale }) {
   const copy = locale === "en" ? homeCtaEn : homeCtaZh;
   const { open } = useMessageBox();
 

@@ -31,7 +31,7 @@ function createChapters(copy: HomeChaptersCopy): Chapter[] {
 
 export const HOME_CHAPTERS = createChapters(homeChaptersZh);
 
-export function ChaptersSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+export function ChaptersSection({ locale = "zh" }: { readonly locale?: Locale }) {
   const copy = locale === "en" ? homeChaptersEn : homeChaptersZh;
   const chapters = createChapters(copy);
   const cardsRef = useRef<Array<HTMLElement | null>>([]);

@@ -161,7 +161,7 @@ function CaseCard({ item, copy, locale }: { readonly item: CaseCardData; readonl
   );
 }
 
-export function CasesSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+export function CasesSection({ locale = "zh" }: { readonly locale?: Locale }) {
   const copy = locale === "en" ? homeCasesEn : homeCasesZh;
   const cards = createCaseCards(copy);
   const roads = createCaseRoads(copy);

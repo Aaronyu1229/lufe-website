@@ -106,7 +106,7 @@ export const HOME_HERO_SLIDES = createSlides(homeHeroZh);
 
 const AUTOPLAY_MS = 10000;
 
-export function HeroSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
   const copy = locale === "en" ? homeHeroEn : homeHeroZh;
   const slides = useMemo(() => createSlides(copy), [copy]);
   const [isPortrait, setIsPortrait] = useState(false);
