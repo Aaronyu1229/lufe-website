@@ -18,6 +18,8 @@ import { METHODOLOGY_SOURCE_FINGERPRINT, methodologyPageEn } from "./en/methodol
 import { methodologyContentEn } from "./en/methodology-content";
 import { OPTIMIZE_PAGE_SOURCE_FINGERPRINT, optimizePageEn } from "./en/optimize-page";
 import { CONTACT_PAGE_SOURCE_FINGERPRINT, contactPageEn } from "./en/contact-page";
+import { CASES_SOURCE_FINGERPRINT, CASES_EN, CASE_CARD_META_EN, INDUSTRIES_EN, MARKETS_EN } from "./en/cases";
+import { casesPageEn } from "./en/cases-page";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -38,6 +40,8 @@ import { methodologyContentZh } from "./zh/methodology-content";
 import { methodologyPageZh } from "./zh/methodology-page";
 import { optimizePageZh } from "./zh/optimize-page";
 import { contactPageZh } from "./zh/contact-page";
+import { casesPageZh } from "./zh/cases-page";
+import { CASES, CASE_CARD_META, INDUSTRIES, MARKETS } from "@/data/cases";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -58,4 +62,5 @@ export const I18N_MODULES = [
   { name: "methodology", zh: { copy: methodologyPageZh, content: methodologyContentZh }, en: { copy: methodologyPageEn, content: methodologyContentEn }, sourceFingerprint: METHODOLOGY_SOURCE_FINGERPRINT, enFile: "src/i18n/en/methodology-page.ts" },
   { name: "optimize-page", zh: optimizePageZh, en: optimizePageEn, sourceFingerprint: OPTIMIZE_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/optimize-page.ts" },
   { name: "contact-page", zh: contactPageZh, en: contactPageEn, sourceFingerprint: CONTACT_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/contact-page.ts" },
+  { name: "cases", zh: { copy: casesPageZh, cases: CASES, cardMeta: CASE_CARD_META, industries: INDUSTRIES, markets: MARKETS }, en: { copy: casesPageEn, cases: CASES_EN, cardMeta: CASE_CARD_META_EN, industries: INDUSTRIES_EN, markets: MARKETS_EN }, sourceFingerprint: CASES_SOURCE_FINGERPRINT, enFile: "src/i18n/en/cases.ts" },
 ] as const;

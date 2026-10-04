@@ -48,5 +48,6 @@ describe("locale helpers", () => {
     expect(EN_ROUTES).toContain("/services");
     expect(hasEnglishRoute("/services")).toBe(true);
     expect(hasEnglishRoute("/contact")).toBe(true);
+    expect(hasEnglishRoute("/cases/goat-milk-soap-global")).toBe(true);
   });
 });

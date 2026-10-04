@@ -7,13 +7,18 @@ import { Carousel } from "@/components/ui";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { ScrollCue } from "@/components/ScrollCue";
 import { TieredImage } from "@/components/TieredImage";
-import { getRelatedCases, isNumericValue, type CaseStudy } from "@/data/cases";
+import { CASES, isNumericValue, type CaseStageSlug, type CaseStudy } from "@/data/cases";
 import { HERO_VIDEOS } from "@/data/heroVideos";
+import { CASES_EN } from "@/i18n/en/cases";
+import { casesPageEn } from "@/i18n/en/cases-page";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { casesPageZh } from "@/i18n/zh/cases-page";
 
 import { useMessageBox } from "../MessageBox";
 
 interface Props {
   readonly caseItem: CaseStudy;
+  readonly locale?: Locale;
 }
 
 const tagStyles: Record<string, string> = {
@@ -26,30 +31,34 @@ const lightTagStyles: Record<string, string> = {
   gold: "bg-[rgba(212,168,92,0.12)] text-gold-d",
 };
 
-const CASE_STAGE_LINKS = {
-  "market-assessment": { label: "第一個月", title: "市場探查", href: "/services/product-testing" },
-  "product-testing": { label: "第一個月", title: "市場探查", href: "/services/product-testing" },
-  "channel-entry": { label: "北美", title: "北美通路", href: "/services/north-america" },
-  localization: { label: "第九個月", title: "公司落地", href: "/services/localization" },
-} as const;
+const CASE_STAGE_HREFS: Record<CaseStageSlug, string> = {
+  "market-assessment": "/services/product-testing",
+  "product-testing": "/services/product-testing",
+  "channel-entry": "/services/north-america",
+  localization: "/services/localization",
+};
 
 interface CaseDetailPageContentProps extends Props {
   readonly onMessageOpen?: () => void;
 }
 
-export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: CaseDetailPageContentProps) {
-  const relatedCases = getRelatedCases(caseItem.slug);
+export function CaseDetailPageContent({ caseItem, locale = "zh", onMessageOpen = () => {} }: CaseDetailPageContentProps) {
+  const copy = locale === "en" ? casesPageEn : casesPageZh;
+  const cases = locale === "en" ? CASES_EN : CASES;
+  const relatedCases = caseItem.related
+    .map((relatedSlug) => cases.find((relatedCase) => relatedCase.slug === relatedSlug))
+    .filter((relatedCase): relatedCase is CaseStudy => relatedCase !== undefined);
   const heroVideo = HERO_VIDEOS[`case:${caseItem.slug}` as keyof typeof HERO_VIDEOS];
   const storyFigureRefs = useRef<HTMLElement[]>([]);
-  const timelineHeading = caseItem.timelineHeading ?? ["從啟動到收尾的", "時間節奏"];
+  const timelineHeading = caseItem.timelineHeading ?? copy.detail.defaultTimelineHeading;
   const titleBreakIndex = caseItem.titleBreakAfter ? caseItem.title.indexOf(caseItem.titleBreakAfter) : -1;
   const titleLines = titleBreakIndex >= 0
     ? [caseItem.title.slice(0, titleBreakIndex + caseItem.titleBreakAfter!.length), caseItem.title.slice(titleBreakIndex + caseItem.titleBreakAfter!.length)]
     : [caseItem.title];
   const stageLinks = Array.from(
     new Map(caseItem.stagesUsed.map((stageSlug) => {
-      const stage = CASE_STAGE_LINKS[stageSlug];
-      return [stage.href, stage] as const;
+      const href = CASE_STAGE_HREFS[stageSlug];
+      return [href, { ...copy.detail.stages[stageSlug], href }] as const;
     })).values(),
   );
 
@@ -92,7 +101,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
         <HeroBackdrop src={caseItem.heroImage} video={heroVideo} />
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
-            <Link href="/cases" className="hover:text-white">案例</Link>
+            <Link href={localizedHref(locale, "/cases")} className="hover:text-white">{copy.detail.breadcrumb}</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
             <span className="text-white/75">{caseItem.tags[0]?.label}</span>
           </nav>
@@ -108,7 +117,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
           <h1 className="h1 mb-6 max-w-[880px] text-white">{titleLines.length === 2 ? <>{titleLines[0]}<br />{titleLines[1]}</> : caseItem.title}</h1>
           <p className="lead max-w-[640px] !text-white/75">{caseItem.summary}</p>
         </div>
-        <ScrollCue />
+        <ScrollCue label={copy.scrollCue} />
       </section>
 
       <section className="border-b border-bd bg-white py-[64px] md:py-[88px]">
@@ -144,7 +153,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
                   {chapter.link && (
                     <div className="mt-6 border-t border-bd pt-6">
                       <div className="flex flex-wrap gap-2">
-                        <Link href={chapter.link.href} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
+                        <Link href={localizedHref(locale, chapter.link.href)} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
                           {chapter.link.text}
                         </Link>
                       </div>
@@ -155,7 +164,7 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
                     <div className="mt-6 border-t border-bd pt-6">
                       <div className="flex flex-wrap gap-2">
                         {stageLinks.map((stage) => (
-                          <Link key={stage.href} href={stage.href} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
+                          <Link key={stage.href} href={localizedHref(locale, stage.href)} className="inline-flex items-center gap-2 border border-bd px-3 py-2 text-[13.5px] text-tx2 hover:border-gold hover:text-tx">
                             <span className="num text-gold-d">{stage.label}</span>
                             <span>{stage.title}</span>
                             <span aria-hidden="true" className="text-tx3">→</span>
@@ -200,7 +209,9 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
 
           <div className="lufe-container">
             <Carousel
-              label="時間軸"
+              label={copy.detail.timelineLabel}
+              previousLabel={copy.detail.previousLabel}
+              nextLabel={copy.detail.nextLabel}
               className="mt-8 overflow-hidden"
               itemClassName="basis-[min(78vw,330px)]"
             >
@@ -230,16 +241,16 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
           {caseItem.cta?.heading ? (
             <h2 className="h2 mb-4 text-tx">{caseItem.cta.heading[0]}<span className="text-gold-d">{caseItem.cta.heading[1]}</span></h2>
           ) : (
-            <h2 className="h2 mb-4 text-tx">你的產品也有<span className="text-gold-d">類似的機會</span>嗎？</h2>
+            <h2 className="h2 mb-4 text-tx">{copy.detail.defaultCtaHeading[0]}<span className="text-gold-d">{copy.detail.defaultCtaHeading[1]}</span>{copy.detail.defaultCtaSuffix}</h2>
           )}
-          <p className="mx-auto mb-10 max-w-[520px] whitespace-pre-line text-[16.5px] leading-[1.8] text-tx2">{caseItem.cta?.body ?? "每個案子的起點都是一場對話。聊聊你的狀況，鹿飛會說明這個故事裡哪一段跟你最相關"}</p>
+          <p className="mx-auto mb-10 max-w-[520px] whitespace-pre-line text-[16.5px] leading-[1.8] text-tx2">{caseItem.cta?.body ?? copy.detail.defaultCtaBody}</p>
           {caseItem.cta?.notes ? <p className="mx-auto -mt-4 mb-10 max-w-[520px] whitespace-pre-line text-[14px] leading-[1.8] text-tx3">{caseItem.cta.notes}</p> : null}
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
             <button onClick={onMessageOpen} className="cursor-pointer bg-gold px-9 py-[15px] text-[15.5px] font-semibold tracking-[0.5px] text-navy hover:bg-gold-l">
-              預約 30 分鐘 →
+              {copy.detail.button}
             </button>
-            <Link href="/assess" className="inline-flex items-center gap-2 text-[15.5px] font-medium text-tx2 hover:text-navy">
-              <span className="border-b border-tx3/40 pb-0.5">{caseItem.cta?.secondary ?? "還不確定像哪一種？先做 2 分鐘處境比對"}</span>
+            <Link href={localizedHref(locale, "/assess")} className="inline-flex items-center gap-2 text-[15.5px] font-medium text-tx2 hover:text-navy">
+              <span className="border-b border-tx3/40 pb-0.5">{caseItem.cta?.secondary ?? copy.detail.defaultCtaSecondary}</span>
               <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -250,11 +261,11 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
       {relatedCases.length > 0 && (
         <section className="border-t border-bd bg-white py-[72px] md:py-[96px]">
           <div className="lufe-container"><div className="max-w-[1100px] min-w-0">
-            <h2 className="h2 text-tx">更多案例</h2>
+            <h2 className="h2 text-tx">{copy.detail.relatedHeading}</h2>
 
             <div className="mt-10 grid min-w-0 grid-cols-1 gap-[18px] md:grid-cols-2">
               {relatedCases.map((relatedCase) => (
-                <Link key={relatedCase.slug} href={`/cases/${relatedCase.slug}`} className="group min-w-0 overflow-hidden bg-cream hover:bg-white">
+                <Link key={relatedCase.slug} href={localizedHref(locale, `/cases/${relatedCase.slug}`)} className="group min-w-0 overflow-hidden bg-cream hover:bg-white">
                   <div className="relative h-[180px] overflow-hidden bg-navy">
                     <TieredImage src={relatedCase.heroImage} alt={relatedCase.title} sizes="(max-width: 767px) 100vw, 50vw" className="absolute inset-0 h-full w-full object-cover" />
                   </div>
@@ -267,16 +278,16 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
                     <p className={`${isNumericValue(relatedCase.num) ? "num text-[36px]" : "text-[28px]"} mb-2.5 leading-none text-gold-d`}>{relatedCase.num}</p>
                     <h3 className="h3 mb-2 text-tx">{relatedCase.title}</h3>
                     <p className="mb-3 text-[14.5px] leading-[1.65] text-tx2">{relatedCase.cardSummary ?? relatedCase.summary}</p>
-                    <span className="text-[14.5px] font-semibold text-gold-d">看完整案例 →</span>
+                    <span className="text-[14.5px] font-semibold text-gold-d">{copy.detail.relatedReadCase}</span>
                   </div>
                 </Link>
               ))}
             </div>
 
             <div className="mt-[34px] text-center">
-              <Link href="/cases" className="inline-flex items-center gap-2 text-[14.5px] font-medium text-tx2 hover:text-navy">
+              <Link href={localizedHref(locale, "/cases")} className="inline-flex items-center gap-2 text-[14.5px] font-medium text-tx2 hover:text-navy">
                 <span aria-hidden="true">←</span>
-                <span className="border-b border-tx3/40 pb-0.5">回到所有案例</span>
+                <span className="border-b border-tx3/40 pb-0.5">{copy.detail.backToCases}</span>
               </Link>
             </div>
           </div></div>
@@ -286,8 +297,8 @@ export function CaseDetailPageContent({ caseItem, onMessageOpen = () => {} }: Ca
   );
 }
 
-export function CaseDetailPage({ caseItem }: Props) {
+export function CaseDetailPage({ caseItem, locale = "zh" }: Props) {
   const { open } = useMessageBox();
 
-  return <CaseDetailPageContent caseItem={caseItem} onMessageOpen={open} />;
+  return <CaseDetailPageContent caseItem={caseItem} locale={locale} onMessageOpen={open} />;
 }

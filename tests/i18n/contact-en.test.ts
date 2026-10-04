@@ -12,7 +12,7 @@ describe("ContactPage i18n", () => {
   });
 
   it("renders the contact interface in complete English", () => {
-    const html = renderToStaticMarkup(createElement(ContactPage, { locale: "en" }));
+    const html = renderToStaticMarkup(createElement(ContactPage, { locale: "en" } as any));
 
     expectEnglishMarkup(html);
     expect(html).toContain("We reply within one business day");

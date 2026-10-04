@@ -1,12 +1,15 @@
 import { CTA_LINE_EN } from "@/data/cta";
 import { CASES, type CaseCardMeta, type CaseStudy } from "@/data/cases";
 
+// Fingerprint of the Chinese case copy and data this English was translated from; registry.test.ts prints the value after the first run.
+export const CASES_SOURCE_FINGERPRINT = "9136fed7a9cdd4dd";
+
 const [goatMilkSoap, fishFloss, bubbleTea] = CASES;
 
 const goatMilkSoapEn: CaseStudy = {
   ...goatMilkSoap,
   tags: [{ label: "Personal care", variant: "sky" }, { label: "North America", variant: "gold" }],
-  num: "North America", title: "How can North American buyers understand a Taiwanese goat-milk soap?", titleBreakAfter: "a Taiwanese goat-milk soap,",
+  num: "North America", title: "How can North American buyers understand a Taiwanese goat-milk soap?", titleBreakAfter: "a Taiwanese goat-milk soap",
   summary: "The product is not the problem. North American buyers do not understand it. The formula stays the same; the wording and labeling change before it enters North American mass retail.",
   stats: [{ label: "Now in North American mass retail", value: "North America" }, { label: "The wording and labeling change, not the product", value: "Formula unchanged" }, { label: "Claims and package labels reorganized under U.S. rules", value: "Compliant labeling" }],
   story: [
