@@ -29,6 +29,7 @@ export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [landedCostBeforeExport.slug]: landedCostBeforeExport,
   [whyPhilippinesFirst.slug]: whyPhilippinesFirst,
   [amazonUsThreeDecisions.slug]: amazonUsThreeDecisions,
+  [philippinesFdaLtoCprCpn.slug]: philippinesFdaLtoCprCpn,
 };
 import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
 import { article as fobCifDdpExplained } from "./fob-cif-ddp-explained";
@@ -43,3 +44,4 @@ import { article as tradepilotTariffTutorial } from "./tradepilot-tariff-tutoria
 import { article as landedCostBeforeExport } from "./landed-cost-before-export";
 import { article as whyPhilippinesFirst } from "./why-philippines-first";
 import { article as amazonUsThreeDecisions } from "./amazon-us-three-decisions";
+import { article as philippinesFdaLtoCprCpn } from "./philippines-fda-lto-cpr-cpn";
