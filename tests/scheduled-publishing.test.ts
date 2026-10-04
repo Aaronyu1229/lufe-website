@@ -44,9 +44,8 @@ const mutableChapterArticles = CHAPTER_ARTICLES.m1 as unknown as string[];
 
 function renderNavbar(now: Date): string {
   const publishedArticles = getPublishedArticles(now);
-  const latestArticle = publishedArticles[0] ? toInsightCard(publishedArticles[0]) : undefined;
   return renderToStaticMarkup(createElement(Navbar, {
-    latestArticlePayload: latestArticle ? Buffer.from(JSON.stringify(latestArticle), "utf8").toString("base64") : undefined,
+    latestArticle: publishedArticles[0] ? toInsightCard(publishedArticles[0]) : undefined,
     publishedArticleSlugs: publishedArticles.map((article) => article.slug),
   }));
 }
