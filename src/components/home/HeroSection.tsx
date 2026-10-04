@@ -334,7 +334,7 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
               }`}
             >
               <h2
-                className="display mb-6 text-white"
+                className={locale === "en" ? "display mb-6 text-[clamp(32px,4vw,48px)] text-white" : "display mb-6 text-white"}
                 style={{
                   textShadow: "0 1px 2px rgba(10,20,40,0.35)",
                 }}

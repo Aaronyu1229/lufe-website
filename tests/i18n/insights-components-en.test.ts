@@ -75,6 +75,7 @@ describe("insight component i18n", () => {
 
     expectEnglishMarkup(markup);
     expect(markup).toContain(CATEGORY_LABELS_EN[chineseArticle.category]);
+    expect(markup).toContain(`Published: <time dateTime="${englishArticle.date}">${englishArticle.date}</time>`);
   });
 
   it("renders a complete English insights page", () => {
