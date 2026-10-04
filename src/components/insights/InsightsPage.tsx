@@ -91,7 +91,9 @@ export function InsightsPageContent({
   const featuredSlug = FEATURED_SLUG_BY_FILTER[active];
   const featured = featuredSlug ? listedArticles.find((article) => article.slug === featuredSlug) : listedArticles[0];
   const showFeatured = active === "all" || Boolean(featuredSlug);
-  const hasMatches = active === "all" || listedArticles.some((article) => chapterForArticle(article.slug, chapterBySlug) === active);
+  const hasMatches = active === "all"
+    ? listedArticles.length > 0
+    : listedArticles.some((article) => chapterForArticle(article.slug, chapterBySlug) === active);
   const chapterCounts = new Map<InsightFilter, number>(INSIGHT_CHAPTERS.map((chapter) => [chapter.key, 0]));
   chapterCounts.set("all", listedArticles.length);
   listedArticles.forEach((article) => {

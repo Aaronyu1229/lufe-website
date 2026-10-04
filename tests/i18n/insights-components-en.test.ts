@@ -85,4 +85,14 @@ describe("insight component i18n", () => {
 
     expectEnglishMarkup(markup);
   });
+
+  it("renders an English empty state when no English articles are available", () => {
+    const markup = renderToStaticMarkup(createElement(InsightsPage, {
+      articles: [],
+      locale: "en",
+    }));
+
+    expectEnglishMarkup(markup);
+    expect(markup).toContain("There are no articles in this category yet.");
+  });
 });
