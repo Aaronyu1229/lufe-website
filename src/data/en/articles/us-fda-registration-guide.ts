@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "us-fda-registration-guide",
-  sourceFingerprint: "db6e96c7ed09bcd6",
+  sourceFingerprint: "94e385d4d15ff31a",
   title: "How do you prepare for U.S. FDA requirements? The FDA does not issue certificates: five things dietary-supplement exports to the United States actually need to do",
   summary: "Many people ask about U.S. FDA registration, but the FDA does not 'approve' dietary supplements or issue certificates. What you actually need are facility registration and a U.S. agent, prior notification for new ingredients, compliant labeling, and prior notice for every shipment.",
   readTime: "5 min read",
@@ -21,14 +21,14 @@ The problem lies in the four words, "sort out the FDA." They actually cover five
 
 First, clarify the most common misunderstanding: **the FDA does not 'approve' dietary supplements.** Under the 1994 DSHEA, dietary supplements are classified as food. The FDA has no authority to review a product's safety, efficacy, or labeling before it goes on the market; the company itself is responsible for product safety and truthful labeling [1]. So the phrase "obtaining FDA approval" does not exist for dietary supplements. When a distributor says to "sort it out," they mean completing the five tasks below and being able to produce the documents.
 
-**The FDA does not issue a registration certificate.** It does not recognize "proof of registration" issued by private providers [9]. A registration number only means that you registered; it does not mean the FDA approved or endorsed you [2]. For food and dietary supplements, the tasks are facility registration, premarket notification for a new dietary ingredient (NDI), and compliant labeling [2][3][4]. Cosmetics follow MoCRA for facility registration and product listing, updated every two years; the FDA likewise issues no proof document, and a registration number does not mean approval [10]. Documents sold as FDA registration are usually issued by an intermediary or are laboratory test reports. Neither is issued by the FDA.
+**The FDA does not issue a registration certificate.** It does not recognize "proof of registration" issued by private providers [9]. A registration number only means that you registered; it does not mean the FDA approved or endorsed you [2]. For food and dietary supplements, the tasks are facility registration, premarket notification for a new dietary ingredient (NDI), and compliant labeling [2][3][4]. Cosmetics follow MoCRA: facility registration is renewed every two years and product listings are updated annually; the FDA likewise issues no proof document, and a registration number does not mean approval [10]. Documents sold as FDA registration are usually issued by an intermediary or are laboratory test reports. Neither is issued by the FDA.
 
 ## Five steps, in order
 
 | Step | What to do | Who is responsible | Where it usually gets stuck |
 |---|---|---|---|
 | 1. Confirm the product classification | Is your product a dietary supplement, conventional food, or drug under U.S. rules? The classification determines every step that follows. | Brand owner and someone who understands U.S. regulations | The formula contains a drug ingredient or makes a therapeutic claim, so it is not a supplement |
-| 2. Facility registration and U.S. agent | Register facilities that manufacture, process, pack, or hold the product with the FDA, and update every two years. Foreign facilities must appoint a U.S. agent [2]. | Factory (a contract manufacturer registers itself) | The contract manufacturer has not registered, or the U.S. agent has not confirmed consent, so the registration number cannot be issued |
+| 2. Facility registration and U.S. agent | Register facilities that manufacture, process, pack, or hold the product with the FDA, and update every two years. Foreign facilities must appoint a U.S. agent [2]. Facilities that manufacture, package, label, or hold dietary supplements, including foreign ones, must also follow cGMP (21 CFR Part 111) [11]. | Factory (a contract manufacturer registers itself) | The contract manufacturer has not registered, or the U.S. agent has not confirmed consent, so the registration number cannot be issued |
 | 3. NDI notification | For a new dietary ingredient not sold in the United States before October 15, 1994, submit a safety notification to the FDA at least 75 days before marketing [3]. | Manufacturer or distributor | Assuming an ingredient commonly used in Taiwan is also 'old' in the United States without checking |
 | 4. Label compliance | Use the FDA format for the Supplement Facts panel, ingredient list, and manufacturer or distributor name and address [4]. | Brand owner | Directly translating the Taiwan label into English while using the wrong format |
 | 5. Prior notice for every import | Submit Prior Notice to the FDA before the shipment reaches port: 8 hours before arrival by sea and 4 hours before arrival by air [5]. The importer also needs an FSVP plan [8]. | Importer or customs broker | Assuming prior notice is unnecessary once registration is complete |
@@ -37,9 +37,9 @@ Back to the scenario: what the distributor usually wants is the registration num
 
 ## Five pitfalls Taiwan brands most often encounter
 
-**1. Promoting a dietary supplement as a drug.** Disease claims such as "improves eyesight" or "prevents macular degeneration" cannot be used for dietary supplements. You can make only structure/function claims, such as "helps support eye health," and must include the disclaimer that the statement has not been evaluated by the FDA [6]. This is where directly translating Taiwan copy most often causes trouble.
+**1. Promoting a dietary supplement as a drug.** Disease claims such as "improves eyesight" or "prevents macular degeneration" cannot be used for dietary supplements. You can make only structure/function claims, such as "helps support eye health," and must include the disclaimer that the statement has not been evaluated by the FDA [6]. If you use a structure/function claim, the manufacturer, packer, or distributor must notify the FDA within 30 days after first marketing [12]. This is where directly translating Taiwan copy most often causes trouble.
 
-**2. Ignoring state-level rules.** Clearing federal requirements does not mean that you clear every state. For example, California Proposition 65 requires a warning on products sold in California, including online, when people are exposed to chemicals on its list [7]. Check this before entering California channels.
+**2. Ignoring state-level rules.** Clearing federal requirements does not mean that you clear every state. For example, California Proposition 65 requires a warning on products sold in California, including online, when people are exposed to a listed chemical above its safe-harbor level; businesses with fewer than 10 employees are exempt [7][13]. Check this before entering California channels.
 
 **3. A label translation that is not compliant.** Supplement Facts is not simply an English translation of a nutrition label. Its fields, units, and order are all prescribed [4].
 
@@ -69,7 +69,7 @@ For a new dietary ingredient that was not sold in the United States before Octob
 
 Before replying to the distributor, write one line for each of the five steps: "who is responsible, and where are we now?" For the lines you cannot complete, message us (LINE or email). For North America, our model is a low upfront service fee plus a share of completed business; we will give clear figures in the first discussion.
 
-Last verified: October 1, 2026. Follow the current version of official FDA pages for FDA requirements.`],
+Based on practical experience; not legal advice. Last verified: October 1, 2026. Follow the current version of official FDA pages for FDA requirements.`],
   faq: [
     {
       q: "Do dietary supplements need FDA approval before they can be sold in the United States?",
@@ -154,6 +154,27 @@ Last verified: October 1, 2026. Follow the current version of official FDA pages
       publisher: "U.S. FDA",
       url: "https://www.fda.gov/cosmetics/registration-listing-cosmetic-product-facilities-and-products",
       note: "Facility registration is renewed every two years and product listings are updated annually. The FDA issues no proof document, and registration and listing numbers do not mean approval.",
+    },
+    {
+      id: 11,
+      title: "21 CFR 111.1: who is subject to dietary supplement cGMP",
+      publisher: "Electronic Code of Federal Regulations (eCFR)",
+      url: "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-111/subpart-A/section-111.1",
+      note: "Applies to anyone who manufactures, packages, labels, or holds a dietary supplement, including supplements imported or offered for import into the United States.",
+    },
+    {
+      id: 12,
+      title: "21 CFR 101.93: notification of structure/function statements for dietary supplements",
+      publisher: "Electronic Code of Federal Regulations (eCFR)",
+      url: "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-101/subpart-F/section-101.93",
+      note: "The manufacturer, packer, or distributor must notify the FDA no later than 30 days after first marketing.",
+    },
+    {
+      id: 13,
+      title: "Proposition 65 in Plain Language",
+      publisher: "California Office of Environmental Health Hazard Assessment (OEHHA)",
+      url: "https://oehha.ca.gov/proposition-65/general-info/proposition-65-plain-language",
+      note: "No warning is required for exposures at or below safe-harbor levels; businesses with fewer than 10 employees are not subject to the warning requirement (California Health and Safety Code 25249.11(b)).",
     },
   ],
 };

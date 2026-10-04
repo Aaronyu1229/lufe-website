@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "market-entry-modes-compared",
-  sourceFingerprint: "8255d7a96edef0cb",
+  sourceFingerprint: "90cab9247e2af44c",
   title: "Importers, agents, your own company, or cross-border e-commerce: four international market-entry modes compared, using the Philippines as an example",
   summary: "For small and medium-sized brands, international market entry is effectively a choice among four options: an importing distributor, an agent, your own company, or cross-border e-commerce. This table compares who buys the goods, whose name holds the registration, how high the entry barrier is, and how hard it is to exit. It also explains why food and cosmetics cannot bypass the Philippine FDA through cross-border e-commerce.",
   readTime: "6 min read",
@@ -23,7 +23,7 @@ All four directions make sense, and all have worked for someone. But you realize
 |---|---|---|---|---|
 | Who buys the goods and carries inventory | The distributor orders from you, buys outright, and holds inventory [1] | Does not stock goods. Customers order directly from you, and the agent earns commission [1] | Your subsidiary | You; the platform handles listings and part of the logistics [7] |
 | How you earn | The difference between your selling price to the distributor and its onward selling price | You keep the full selling price and pay commission, commonly 5–10% [1] | You keep the full local selling price | Selling price less platform fees |
-| Whose name holds registration for food and cosmetics | The distributor: it needs an LTO before import and the product needs a CPR [5] | The local customer placing the import order must hold its own LTO and CPR [1][5] | Your subsidiary applies under its own LTO [6] | A local certificate-holding company is still needed; platforms cannot sell regulated products without permit information [9] |
+| Whose name holds registration for food and cosmetics | The distributor: it needs an LTO before import and the product needs a CPR (a CPN for cosmetics) [5][10] | The local customer placing the import order must hold its own LTO and CPR/CPN [1][5][10] | Your subsidiary applies under its own LTO [6] | A local certificate-holding company is still needed; platforms cannot sell regulated products without permit information [9] |
 | Starting threshold (official figures) | Low | Low | Foreign-owned domestic-market enterprises generally need paid-in capital from US$200,000; direct retail sales to consumers require Php 25,000,000 [3][4] | Low; shipments to the Philippines valued at Php 10,000 or less are duty-free [8] |
 | Control over pricing and customers | Low | High | Highest | Medium; platform rules control the environment [7] |
 | Difficulty of exit | Contracts commonly provide 30 days’ notice [1], but the registration is under its name | Contracts commonly provide 30 days’ notice [1] | Most difficult; you must handle the company, people, and registrations | Easiest; delist the products |
@@ -32,7 +32,7 @@ The U.S. International Trade Administration describes the Philippines plainly: *
 
 ## Decision steps: remove options in this order
 
-**Step 1: Does the product need registration?** Food, beverages, food supplements, and cosmetics need a local importer holding an LTO before import into the Philippines, and every product needs a CPR before its first import [5]. An LTO application requires Philippines SEC or DTI registration documents [6]. For products that need registration, this effectively removes “cross-border e-commerce only”: the e-commerce law requires platforms to prohibit regulated goods that do not provide permit information [9]. The Php 10,000 duty-free threshold concerns customs duty [8], not registration with the Philippine FDA.
+**Step 1: Does the product need registration?** Food, beverages, food supplements, and cosmetics need a local importer holding an LTO before import into the Philippines, and every product needs a CPR before its first import (cosmetics instead need a pre-market CPN notification) [5][10]. An LTO application requires Philippines SEC or DTI registration documents [6]. For products that need registration, this effectively removes “cross-border e-commerce only”: the e-commerce law requires platforms to prohibit regulated goods that do not provide permit information [9]. The Php 10,000 duty-free threshold concerns customs duty [8], not registration with the Philippine FDA.
 
 **Step 2: How much inventory are you willing to carry?** If you want to ship the goods, receive payment, and avoid managing the local market, choose a distributor. If you want to retain pricing control and keep the goods and invoices on your side, choose an agent. The full comparison is in [the difference between agents, distributors, and exclusivity](/insights/agent-vs-distributor-exclusive).
 
@@ -152,6 +152,13 @@ Based on practical experience; not legal advice. Before establishing a company o
       publisher: "Philippines Congress (full text collected by Lawphil)",
       url: "https://lawphil.net/statutes/repacts/ra2023/ra_11967_2023.html",
       note: "Section 21: before listing, e-commerce platforms must, as far as practicable, collect identity or business-registration information from domestic and foreign online merchants and prohibit regulated goods that do not provide necessary permit and license information.",
+    },
+    {
+      id: 10,
+      title: "Citizen's Charter: Issuance of Cosmetic Product Notification",
+      publisher: "Philippines FDA",
+      url: "https://www.fda.gov.ph/wp-content/uploads/2025/09/1.-Issuance-of-Cosmetic-Product-Notification.pdf",
+      note: "Cosmetics require a pre-market CPN notification; the applicant must hold a valid LTO listing cosmetic activities.",
     },
   ],
 };

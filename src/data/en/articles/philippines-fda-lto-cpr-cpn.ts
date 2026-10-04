@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "philippines-fda-lto-cpr-cpn",
-  sourceFingerprint: "82ce78742ebb3f11",
+  sourceFingerprint: "2dfc81095fe8fde9",
   title: "What is the difference between the Philippine FDA’s LTO, CPR, and CPN? Which document do food, supplements, and cosmetics need?",
   summary: "The Philippine FDA’s LTO is an operating license for a company, CPR is product registration for food, and CPN is notification for cosmetics. You need an LTO before applying for the other two. This table compares what the three documents cover, who holds them, and official fees and processing days, including the impact of the 2025–2026 fee suspension and registration-system change.",
   readTime: "6 min read",
@@ -81,7 +81,7 @@ No. Cosmetics use CPN, a notification system [3][4]; CPR is for food and food su
 
 Make a table of the products you plan to sell in the Philippines with just three columns: **product name, food/food supplement/cosmetic, and the claims on the packaging.** Then ask the other party one question: “Which activities are listed on your LTO?” If you can fill out the table and the other party can answer, you already know which documents to apply for. If one column is stuck, message us (LINE or email).
 
-Last verified: October 1, 2026. The Philippine FDA’s fees and registration system are changing, so check the FDA’s current notices before filing.`],
+Based on practical experience; not legal advice. Last verified: October 1, 2026. The Philippine FDA’s fees and registration system are changing, so check the FDA’s current notices before filing.`],
   faq: [
     {
       q: "How long does registration with the Philippine FDA take?",

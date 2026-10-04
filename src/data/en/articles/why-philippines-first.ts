@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "why-philippines-first",
-  sourceFingerprint: "f798f033aec4f8a1",
+  sourceFingerprint: "32151d0c4aef6476",
   title: "Which Southeast Asian market should you enter first? Vietnam, Thailand, Indonesia, and the Philippines compared, and why begin with the Philippines",
   summary: "Should Vietnam, Thailand, Indonesia, or the Philippines be your first Southeast Asian market? The Philippines is not the largest, but it is most suitable for a first-time, small-budget test that you can stop after completing. This article compares the four countries on the Barrier and Regulatory questions and identifies product categories that should not start there.",
   readTime: "6 min read",
@@ -27,15 +27,15 @@ The table below includes only verified regulatory facts, not market-size figures
 |---|---|---|---|---|
 | Official languages / regulatory documents | Filipino and English are co-official languages [1] | Vietnamese | Thai | Indonesian |
 | Food-label language | English or Filipino is permitted; a foreign-language label needs an English translation [2] | Vietnamese is required; imported products may use a supplementary Vietnamese label [3] | Thai is required (brand names may remain in the original language) [4] | An Indonesian-language label is required [5] |
-| Whose name holds the product registration | A locally licensed importer (the LTO holder); the brand owner cannot hold it directly [6] | Filed by an enterprise within Vietnam; most processed food uses self-declaration, while health foods require registration [7] | Registered by a Thai importer [4] | Registered with BPOM by an Indonesian company (an ML certificate) [5] |
-| New hard barrier in 2026 | FDA fees and the registration system are being revised; use the position on the verification date for fees [6] | — | — | **From October 17, 2026, imported food, health supplements, and cosmetics require halal certification** (PP 42/2024) [8] |
+| Whose name holds the product registration | A locally licensed importer (the LTO holder); a brand owner without a Philippine company cannot hold it itself [11] | Filed by an enterprise within Vietnam; most processed food uses self-declaration, while health foods require registration [7] | Registered by a Thai importer [4] | Registered with BPOM by an Indonesian company (an ML certificate) [5] |
+| New hard barrier in 2026 | FDA fees and the registration system are being revised; use the position on the verification date for fees [6] | — | — | **From October 17, 2026, imported food, health supplements, and cosmetics require halal certification** (PP 42/2024) [8]; products with non-halal ingredients are labeled non-halal instead [12] |
 | Does Taiwan have an FTA? | No; MFN rates apply [9] | No; MFN rates apply | No; MFN rates apply | No; MFN rates apply |
 
 For the three reports on your desk, this table answers the following:
 
 1. **The Philippines is the only one of the four markets where you can work entirely in English.** Panel interviews, importer contracts, FDA documents, and e-commerce backends do not first require a translator. For a brand's first overseas expansion, what this saves is not only translation cost; it is being able to understand what the other party is saying. If you can read the contract, you can sign the first expenditure with more certainty.
 2. **All four countries require a locally licensed importer.** The Philippines is neither better nor worse on this point. The difference is the language used to communicate with that importer and whether you can read the contract.
-3. **Indonesia gains another hard barrier after October 2026: halal certification.** Food, health supplements, and cosmetics cannot enter without certification. This does not mean Indonesia cannot be done; it means it is not suitable as a market for a first, small-budget validation.
+3. **Indonesia gains another hard barrier after October 2026: halal certification.** Food, health supplements, and cosmetics cannot enter without certification; products with non-halal ingredients may still be imported if labeled non-halal [12]. This does not mean Indonesia cannot be done; it means it is not suitable as a market for a first, small-budget validation.
 4. **The Philippines is not at a tariff disadvantage.** Taiwan has no FTA with any of the four countries, so all use MFN rates. Use [TradePilot](https://tradepiloter.com) or the Philippine Tariff Commission's [Tariff Finder](https://finder.tariffcommission.gov.ph/) to check the rate [10]. We do not publish numbers in the article that will become outdated.
 
 ## When we do not recommend starting with the Philippines
@@ -58,7 +58,7 @@ We do not recommend the "largest market"; we recommend the market that is easies
 No. This article answers where to test first when you have no leads at all.
 
 **Does Taiwan have a free trade agreement with the Philippines? Will tariffs be higher than in other countries?**
-Taiwan currently has no FTA with any ASEAN country (only Singapore and New Zealand) [9]. All four countries use MFN rates, so the Philippines is not at a special disadvantage.
+Within ASEAN, Taiwan has an FTA only with Singapore (ASTEP); it has none with the Philippines, Vietnam, Thailand, or Indonesia [9]. All four countries use MFN rates, so the Philippines is not at a special disadvantage.
 
 ## One small next step
 
@@ -76,7 +76,7 @@ This article is rewritten from the March 2026 article, "Vietnam market-entry gui
     },
     {
       q: "Does Taiwan have a free trade agreement with the Philippines? Will tariffs be higher than in other countries?",
-      a: "Taiwan currently has no free trade agreement with any ASEAN country (only Singapore and New Zealand), so the Philippines, Vietnam, Thailand, and Indonesia all use most-favored-nation (MFN) rates. The Philippines is not at a special disadvantage. You can check actual rates with the Philippine Tariff Commission's Tariff Finder or TradePilot.",
+      a: "Apart from ASTEP with Singapore, Taiwan has no free trade agreement with any ASEAN country, so the Philippines, Vietnam, Thailand, and Indonesia all use most-favored-nation (MFN) rates. The Philippines is not at a special disadvantage. You can check actual rates with the Philippine Tariff Commission's Tariff Finder or TradePilot.",
     },
   ],
   sources: [
@@ -141,7 +141,7 @@ This article is rewritten from the March 2026 article, "Vietnam market-entry gui
       title: "Taiwan's current FTA: Singapore ASTEP",
       publisher: "Office of the President, Republic of China (Taiwan)",
       url: "https://english.president.gov.tw/NEWS/4289",
-      note: "The other agreement is New Zealand ANZTEC (2013).",
+      note: "Singapore is the only ASEAN member; for Taiwan's other signed agreements (including New Zealand ANZTEC), see the Ministry of Economic Affairs International Trade Administration at https://fta.trade.gov.tw/.",
     },
     {
       id: 10,
@@ -149,6 +149,20 @@ This article is rewritten from the March 2026 article, "Vietnam market-entry gui
       publisher: "Philippine Tariff Commission",
       url: "https://finder.tariffcommission.gov.ph/about",
       note: "MFN and FTA rates, using the AHTN 2022 edition.",
+    },
+    {
+      id: 11,
+      title: "FDA Citizen's Charter 2024 (1st Edition, as of 18 July 2024)",
+      publisher: "Philippines FDA",
+      url: "https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf",
+      note: "LTO applications require Philippine SEC or DTI registration; every CPR application requires a valid LTO.",
+    },
+    {
+      id: 12,
+      title: "BPJPH at the WTO: non-halal products may be imported",
+      publisher: "Halal Product Assurance Organizing Agency (BPJPH), Indonesia",
+      url: "https://bpjph.halal.go.id/detail/penegasan-bpjph-di-sidang-wto-dari-produk-nonhalal-dapat-diimpor-hingga-skema-registrasi-halal-luar-negeri/",
+      note: "2025-06-25: non-halal products may still be imported and sold if labeled non-halal; the halal-certification deadline for imported food, beverages, and slaughter services was extended to 2026-10-17.",
     },
   ],
 };

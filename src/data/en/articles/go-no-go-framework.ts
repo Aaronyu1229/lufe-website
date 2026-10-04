@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "go-no-go-framework",
-  sourceFingerprint: "40acb6c4d4b832e9",
+  sourceFingerprint: "727f63317efa4cee",
   title: "How do we decide whether an overseas expansion is worth doing? Five questions and their red lines",
   summary: "Overseas expansion too often relies on instinct. We use five questions to assess a project: market, barrier, competition, profitability, and regulatory. Each has a red line; when one is crossed, we will tell you directly not to go yet. This article lays out what each question examines and its red line. We use the same five questions in the Free 30-minute initial assessment.",
   readTime: "5 min read",
@@ -44,7 +44,7 @@ There are two reasons. First, it forces us to run the whole process honestly bef
 
 ## An example of scoring
 
-This is a case we have published on our methodology page: a dietary supplement entering Costco in North America [1][2].
+The following is a hypothetical example; the numbers only show how the calculation works and are not a real case: a dietary supplement seeking to enter Costco in North America.
 
 | Dimension | Score | Note |
 |---|---|---|
@@ -54,9 +54,9 @@ This is a case we have published on our methodology page: a dietary supplement e
 | Profitability | 78 | There is enough gross-margin room, but Costco terms must be absorbed |
 | Regulatory | 80 | North American regulation is stable |
 
-The weighted total was 74, so the conclusion was Conditional Go, on the condition that the formula be adjusted slightly for North American tastes. The actual result: it launched in 6 months, and first-month sales exceeded target by 40%.
+The weighted total is 74.5 (82×20% + 62×20% + 71×20% + 78×25% + 80×15%), below 75, so the conclusion is Conditional Go.
 
-The point is not that the result was good. Before making the decision, we already knew that the Barrier question was the weak point, so we addressed it early.
+The point is not the total. Before deciding, you can already see that the Barrier question scores lowest, so that question must be addressed first.
 
 ## When this framework will not help
 
@@ -101,13 +101,7 @@ Last verified: October 1, 2026. The weights and red lines for the five questions
       title: "LUFÉ five-question assessment (methodology page)",
       publisher: "LUFÉ",
       url: "https://lufe.world/services/methodology",
-      note: "The five dimensions' weights, what they examine, red lines, four conclusions, and the scoring example for a dietary supplement entering Costco in North America.",
-    },
-    {
-      id: 2,
-      title: "Case study: How a dietary supplement entered Costco in North America",
-      publisher: "LUFÉ",
-      url: "https://lufe.world/cases/costco-health",
+      note: "What the five dimensions examine, their red lines, and the four conclusions.",
     },
   ],
 };

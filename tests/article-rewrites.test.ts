@@ -117,7 +117,7 @@ describe("article rewrites and additions", () => {
         faq: draft.faq,
         sources: draft.sources,
         lastVerified: draft.lastVerified,
-        updated: "2026-10-01",
+        updated: draft.slug === "agent-vs-distributor-exclusive" ? "2026-10-04" : "2026-10-01",
       });
     }
   });

@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "landed-cost-before-export",
-  sourceFingerprint: "36b2b0c1a9864437",
+  sourceFingerprint: "f2ccd3202f182eb1",
   title: "Calculate landed cost before export quotations: what FOB, CIF, and DDP mean, and how to calculate tariffs",
   summary: "A customer asks for an FOB price. What does FOB mean, how does it differ from CIF and DDP, who can estimate the seven parts of landed cost, how are tariffs calculated, and why do we not publish tariff rates in this article?",
   readTime: "6 min read",
@@ -25,7 +25,7 @@ Landed cost is the total cost at the moment goods reach the destination warehous
 |---|---|---|---|
 | 1 | **Ex-factory price** | You | Export packaging, outer cartons, pallets, and label changes required locally are often left out |
 | 2 | **International freight** | Freight forwarder (this is what Jumping Freight does) | Sea versus air freight, full-container versus consolidated shipments; origin-port charges, document fees, and peak-season surcharges |
-| 3 | **Insurance** | Freight forwarder or insurer | Most destination countries use "goods value + freight + insurance" as the basis for customs value, so insurance is not only insurance |
+| 3 | **Insurance** | Freight forwarder or insurer | Most destination countries use "goods value + freight + insurance" as the basis for customs value, so insurance is not only insurance; the United States and Canada exclude international freight and insurance from customs value [16][17] |
 | 4 | **Destination-country tariff** | TradePilot or the destination country's official lookup tool | Incorrect HS-code classification, or assuming an FTA preference exists when Taiwan does not have one |
 | 5 | **Destination-country value-added tax/excise tax** | Destination-country tax law or customs broker | Payable at import, not when goods are sold; some categories have additional excise tax |
 | 6 | **Customs clearance and local delivery** | Destination-country customs broker or licensed importer [12] | The importer needs customs registration; FDA-regulated goods need registration before release |
@@ -35,9 +35,9 @@ A few points need to be clear first. They are also exactly where the owner in th
 
 **Which price tariff is calculated on depends on Incoterms.** If the other party asks for an FOB price, it means that freight and import tariff are both its responsibility. If it changes its request to DDP, you cover everything [1]. A quotation without Incoterms is not a quotation.
 
-**Using the Philippines as an example, this is how the taxes stack.** Tariff is based on the transaction value (the goods value, in practice plus freight and insurance) [2]. On top of tariff, a 12% value-added tax applies, based on "customs value + tariff" [3]. Sugary drinks also have excise tax of 6 or 12 pesos per liter; imported finished products must pay it before customs release [4]. If the tea-drink gift box contains sugar, this field cannot be missed. A single shipment with an FOB value of 10,000 pesos or less is duty-free [2], but this is for small personal parcels, not a way to split shipments to avoid tax.
+**Using the Philippines as an example, this is how the taxes stack.** Tariff is based on the transaction value (the goods value, in practice plus freight and insurance) [2]. On top of tariff, a 12% value-added tax applies, based on "customs value + tariff + excise tax (if any) + other charges" [3]. Sugary drinks also have excise tax of 6 or 12 pesos per liter; imported finished products must pay it before customs release [4]. If the tea-drink gift box contains sugar, this field cannot be missed. A single shipment with an FOB value of 10,000 pesos or less is duty-free [2], but this is for small personal parcels, not a way to split shipments to avoid tax.
 
-**Taiwan has no FTA with any ASEAN country.** Exports to the Philippines, Vietnam, Thailand, and Indonesia all use MFN rates [5]. Information about "zero tariffs within ASEAN" applies between ASEAN member states, not to exports from Taiwan.
+**Apart from ASTEP with Singapore, Taiwan has no FTA with any ASEAN country.** Exports to the Philippines, Vietnam, Thailand, and Indonesia all use MFN rates [5]. Information about "zero tariffs within ASEAN" applies between ASEAN member states, not to exports from Taiwan.
 
 ## What is the difference between FOB, CIF, and DDP?
 
@@ -127,10 +127,10 @@ This article is rewritten from the February 2026 article, "Strategies for shifti
     },
     {
       id: 3,
-      title: "How to calculate Philippine import duties, VAT, and taxes",
-      publisher: "Respicio & Co. (third-party summary)",
-      url: "https://www.respicio.ph/commentaries/how-to-compute-import-duties-vat-and-taxes-philippines",
-      note: "12%, based on customs value plus tariff.",
+      title: "RA 10963 (TRAIN Law), Section 32, amending NIRC Section 107 on VAT on importation",
+      publisher: "Philippines Congress (full text collected by Lawphil)",
+      url: "https://lawphil.net/statutes/repacts/ra2017/ra_10963_2017.html",
+      note: "12%, based on the customs value used by the Bureau of Customs plus customs duties, excise tax (if any), and other charges, paid before release.",
     },
     {
       id: 4,
@@ -144,7 +144,7 @@ This article is rewritten from the February 2026 article, "Strategies for shifti
       title: "Taiwan's current FTA: Singapore ASTEP",
       publisher: "Office of the President, Republic of China (Taiwan)",
       url: "https://english.president.gov.tw/NEWS/4289",
-      note: "The other FTA is New Zealand ANZTEC; see the U.S. Library of Congress at https://www.loc.gov/item/global-legal-monitor/2013-07-18/new-zealand-taiwan-free-trade-agreement-signed/.",
+      note: "Singapore is the only ASEAN member; for Taiwan's other signed agreements (including New Zealand ANZTEC), see the Ministry of Economic Affairs International Trade Administration at https://fta.trade.gov.tw/.",
     },
     {
       id: 6,
@@ -158,7 +158,7 @@ This article is rewritten from the February 2026 article, "Strategies for shifti
       title: "EO 14324 suspension of the de minimis exemption",
       publisher: "Federal Register",
       url: "https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis",
-      note: "Effective August 29, 2025; postal parcels suspended indefinitely from June 24, 2026 at https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry.",
+      note: "Effective 2025-08-29. On 2026-06-24, U.S. Customs and Border Protection (CBP) published two rules suspending the de minimis exemption for goods of US$800 or less indefinitely: all modes other than mail (effective the same day) at https://www.federalregister.gov/documents/2026/06/24/2026-12670/indefinite-suspension-of-the-de-minimis-exemption-for-merchandise-arriving-through-all-modes-other; and mail shipments (effective 2026-07-24) at https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry.",
     },
     {
       id: 8,
@@ -214,6 +214,20 @@ This article is rewritten from the February 2026 article, "Strategies for shifti
       publisher: "U.S. International Trade Administration (ITA)",
       url: "https://www.trade.gov/know-your-incoterms",
       note: "FOB and CIF are two of the four rules exclusively for sea and inland-waterway transport. Incoterms does not regulate when ownership of goods transfers.",
+    },
+    {
+      id: 16,
+      title: "19 U.S.C. 1401a: transaction value",
+      publisher: "Office of the Law Revision Counsel, U.S. House of Representatives (U.S. Code)",
+      url: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title19-section1401a&num=0&edition=prelim",
+      note: "(b)(4)(A): the price actually paid or payable excludes international freight, insurance, and related services from the country of exportation to the United States.",
+    },
+    {
+      id: 17,
+      title: "Memorandum D13-3-3: Transportation and Associated Costs",
+      publisher: "Canada Border Services Agency (CBSA)",
+      url: "https://www.cbsa-asfc.gc.ca/publications/dm-md/d13/d13-3-3-eng.html",
+      note: "Transportation costs from the place of direct shipment to Canada, including associated costs such as insurance, are not included in value for duty.",
     },
   ],
 };
