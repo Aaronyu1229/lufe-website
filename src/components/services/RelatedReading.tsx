@@ -5,6 +5,7 @@ import { CHAPTER_ARTICLES, CHAPTER_ARTICLE_TAGS, type ChapterKey } from "@/data/
 import { toDatabaseInsightCard, toInsightCard, type InsightCard } from "@/lib/articles/presentation";
 import { getPublishedArticles } from "@/lib/articles/published";
 import { listPublishedArticles } from "@/lib/articles/repository";
+import type { Locale } from "@/i18n/locale";
 
 const isExternalImage = (image: string): boolean => /^https?:\/\//.test(image);
 
@@ -39,7 +40,9 @@ export function RelatedReadingContent({ articles: reading }: { readonly articles
   );
 }
 
-export async function RelatedReading({ chapter }: { readonly chapter: ChapterKey }) {
+export async function RelatedReading({ chapter, locale = "zh" }: { readonly chapter: ChapterKey; readonly locale?: Locale }) {
+  if (locale === "en") return null;
+
   const staticSlugs: ReadonlySet<string> = new Set(CHAPTER_ARTICLES[chapter]);
   const staticCards = getPublishedArticles()
     .filter((article) => staticSlugs.has(article.slug))

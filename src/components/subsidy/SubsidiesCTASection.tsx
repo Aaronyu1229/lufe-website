@@ -3,12 +3,14 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { useMessageBox } from "../MessageBox";
+import { localizedHref, type Locale } from "@/i18n/locale";
 
 interface SubsidiesCTASectionProps {
   readonly heading?: ReactNode;
   readonly body?: ReactNode;
   readonly buttonLabel?: string;
   readonly secondaryLabel?: string;
+  readonly locale?: Locale;
 }
 
 /**
@@ -16,8 +18,22 @@ interface SubsidiesCTASectionProps {
  * Uses MessageBox for the primary CTA to stay consistent with site-wide
  * CTA rules ("聊聊你的產品" + "先做 2 分鐘評估").
  */
-export function SubsidiesCTASection({ heading, body, buttonLabel = "聊聊你的產品 →", secondaryLabel = "先做 2 分鐘評估" }: SubsidiesCTASectionProps = {}) {
+export function SubsidiesCTASection({ heading, body, buttonLabel, secondaryLabel, locale = "zh" }: SubsidiesCTASectionProps) {
   const { open } = useMessageBox();
+  const copy = locale === "en"
+    ? {
+      heading: <>Not sure which one fits you?<br /><span className="text-gold">Talk first</span></>,
+      body: <>Tell us about your product, target market and where you are stuck. We will tell you which subsidy fits best and what to do next.</>,
+      buttonLabel: "Talk about your product →",
+      secondaryLabel: "Start with a 2-minute Situation Check",
+    }
+    : {
+      heading: <>不確定哪個適合你？<br /><span className="text-gold">先聊聊看</span></>,
+      body: <>告訴我們你的產品、市場目標和現在卡在哪一步，
+      我們會告訴你哪個補助最適合、下一步怎麼走</>,
+      buttonLabel: "聊聊你的產品 →",
+      secondaryLabel: "先做 2 分鐘評估",
+    };
 
   return (
     <section className="relative overflow-hidden bg-navy py-[72px] text-white md:py-[100px]">
@@ -33,25 +49,24 @@ export function SubsidiesCTASection({ heading, body, buttonLabel = "聊聊你的
         <h2
           className="h2 mb-6 text-white"
         >
-          {heading ?? <>不確定哪個適合你？<br /><span className="text-gold">先聊聊看</span></>}
+          {heading ?? copy.heading}
         </h2>
         <p className="text-[17px] text-white/70 max-w-[600px] mx-auto mb-10 leading-[1.8]">
-          {body ?? <>告訴我們你的產品、市場目標和現在卡在哪一步，
-          我們會告訴你哪個補助最適合、下一步怎麼走</>}
+          {body ?? copy.body}
         </p>
         <div className="flex items-center justify-center gap-6 md:gap-8 flex-wrap">
           <button
             onClick={open}
             className="bg-gold text-navy px-9 py-[15px] text-[15.5px] font-semibold tracking-[0.5px] transition-colors hover:bg-gold-l cursor-pointer"
           >
-            {buttonLabel}
+            {buttonLabel ?? copy.buttonLabel}
           </button>
           <Link
-            href="/assess"
+            href={localizedHref(locale, "/assess")}
             className="group inline-flex items-center gap-2 text-white/75 text-[15.5px] font-medium transition-colors hover:text-white"
           >
             <span className="border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
-              {secondaryLabel}
+              {secondaryLabel ?? copy.secondaryLabel}
             </span>
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">
               →

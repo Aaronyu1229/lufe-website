@@ -22,6 +22,8 @@ export interface CarouselProps {
   className?: string;
   itemClassName?: string;
   tone?: "light" | "dark";
+  previousLabel?: string;
+  nextLabel?: string;
 }
 
 type SlideGeometry = { readonly offsetLeft: number; readonly width: number };
@@ -40,7 +42,7 @@ function ordinal(value: number) {
   return String(value).padStart(2, "0");
 }
 
-export function Carousel({ children, label, showControls = true, className, itemClassName, tone = "light" }: CarouselProps) {
+export function Carousel({ children, label, showControls = true, className, itemClassName, tone = "light", previousLabel = "上一個", nextLabel = "下一個" }: CarouselProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
@@ -264,10 +266,10 @@ export function Carousel({ children, label, showControls = true, className, item
         <span ref={railThumbRef} className="absolute inset-y-0 left-0 bg-gold" style={{ width: "12%", transform: "translate3d(0, 0, 0)" }} />
       </div>
       <span ref={counterRef} aria-hidden="true" className={`text-[13px] tabular-nums ${counterClassName}`}>{ordinal(1)} / {ordinal(childCount)}</span>
-      <button type="button" aria-label="上一個" disabled={atStart} onClick={() => step(-1)} className={`grid h-10 w-10 cursor-pointer place-items-center border active:scale-[.94] disabled:cursor-not-allowed disabled:opacity-35 [@media(hover:hover)]:hover:border-gold ${buttonClassName}`}>
+      <button type="button" aria-label={previousLabel} disabled={atStart} onClick={() => step(-1)} className={`grid h-10 w-10 cursor-pointer place-items-center border active:scale-[.94] disabled:cursor-not-allowed disabled:opacity-35 [@media(hover:hover)]:hover:border-gold ${buttonClassName}`}>
         <Arrow direction="left" />
       </button>
-      <button type="button" aria-label="下一個" disabled={atEnd} onClick={() => step(1)} className={`grid h-10 w-10 cursor-pointer place-items-center border active:scale-[.94] disabled:cursor-not-allowed disabled:opacity-35 [@media(hover:hover)]:hover:border-gold ${buttonClassName}`}>
+      <button type="button" aria-label={nextLabel} disabled={atEnd} onClick={() => step(1)} className={`grid h-10 w-10 cursor-pointer place-items-center border active:scale-[.94] disabled:cursor-not-allowed disabled:opacity-35 [@media(hover:hover)]:hover:border-gold ${buttonClassName}`}>
         <Arrow direction="right" />
       </button>
     </div>}
