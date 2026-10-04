@@ -3,6 +3,9 @@
 import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent, type RefObject } from "react";
 
 import { useSpring } from "@/lib/motion";
+import { insightsEn } from "@/i18n/en/insights";
+import { type Locale } from "@/i18n/locale";
+import { insightsZh } from "@/i18n/zh/insights";
 
 export type Heading = {
   readonly id: string;
@@ -82,6 +85,7 @@ export function ArticleTocList({
   variant,
   progress,
   minutes,
+  locale = "zh",
 }: {
   readonly headings: readonly Heading[];
   readonly activeIndex: number;
@@ -89,11 +93,13 @@ export function ArticleTocList({
   readonly variant: "aside" | "inline" | "sheet";
   readonly progress?: number;
   readonly minutes?: number;
+  readonly locale?: Locale;
 }) {
   const itemRefs = useRef(new Map<string, HTMLLIElement>());
   const plateY = useSpring(0, { response: 0.35, damping: 1, precision: 0.001 });
   const plateHeight = useSpring(0, { response: 0.35, damping: 1, precision: 0.001 });
   const hasAside = variant === "aside";
+  const copy = locale === "en" ? insightsEn : insightsZh;
 
   useLayoutEffect(() => {
     if (!hasAside) return;
@@ -114,8 +120,8 @@ export function ArticleTocList({
   const total = String(headings.length).padStart(2, "0");
   const remaining = minutes && progress !== undefined ? Math.ceil(minutes * (1 - progress)) : undefined;
 
-  return <nav aria-label="本文目錄" data-article-toc-variant={variant} className="relative">
-    {hasAside ? <div className="mb-3 flex items-center justify-between text-[13px] font-semibold text-tx3"><span>本文目錄</span><span className="tabular-nums">{current} / {total}</span></div> : null}
+  return <nav aria-label={copy.article.tableOfContents} data-article-toc-variant={variant} className="relative">
+    {hasAside ? <div className="mb-3 flex items-center justify-between text-[13px] font-semibold text-tx3"><span>{copy.article.tableOfContents}</span><span className="tabular-nums">{current} / {total}</span></div> : null}
     <div className="relative">
       {hasAside ? <span aria-hidden="true" className="absolute left-0 top-0 z-0 w-full border-l-2 border-gold bg-cream" style={{ height: `${plateHeight.value}px`, transform: `translateY(${plateY.value}px)` }} /> : null}
       <ol className="relative z-[1]">
@@ -133,7 +139,7 @@ export function ArticleTocList({
     </div>
     {hasAside && progress !== undefined ? <div className="mt-5">
       <div className="h-[2px] bg-bd"><span className="block h-full origin-left bg-gold" style={{ transform: `scaleX(${progress})` }} /></div>
-      {remaining !== undefined ? <p className="mt-2 text-right text-[12px] text-tx3">{progress >= 0.98 ? "已讀完" : `剩約 ${remaining} 分鐘`}</p> : null}
+      {remaining !== undefined ? <p className="mt-2 text-right text-[12px] text-tx3">{progress >= 0.98 ? copy.article.tocComplete : copy.article.tocRemaining.replace("{n}", String(remaining))}</p> : null}
     </div> : null}
   </nav>;
 }
@@ -142,10 +148,12 @@ export function MobileArticleToc({
   headings,
   activeIndex,
   coverRef,
+  locale = "zh",
 }: {
   readonly headings: readonly Heading[];
   readonly activeIndex: number;
   readonly coverRef: RefObject<HTMLElement | null>;
+  readonly locale?: Locale;
 }) {
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
@@ -236,7 +244,7 @@ export function MobileArticleToc({
     </div>
     <div id={controls} hidden={!open} className="pointer-events-auto overflow-hidden border-b border-bd bg-white" style={{ height: `${sheetHeight.value}px` }}>
       <div ref={contentRef} className="max-h-[60svh] overflow-y-auto px-1" style={{ opacity: sheetOpacity.value }}>
-        <ArticleTocList headings={headings} activeIndex={activeIndex} variant="sheet" onNavigate={() => setOpen(false)} />
+        <ArticleTocList headings={headings} activeIndex={activeIndex} variant="sheet" onNavigate={() => setOpen(false)} locale={locale} />
       </div>
     </div>
   </div>;

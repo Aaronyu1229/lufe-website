@@ -1,6 +1,10 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 
+import { hasEnglishArticle } from "@/lib/articles/english";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { insightsEn } from "@/i18n/en/insights";
+import { insightsZh } from "@/i18n/zh/insights";
 
 type StaticContentBlock =
   | { readonly type: "heading"; readonly level: 2 | 3; readonly text: string }
@@ -107,7 +111,17 @@ export function parseStaticMarkdown(content: readonly string[]): readonly Static
   return blocks;
 }
 
-export function renderInlineMarkdown(text: string): ReactNode {
+export function localizeArticleHref(locale: Locale, href: string): string {
+  if (locale === "zh") return href;
+
+  const articleMatch = /^\/insights\/([^/?#]+)$/.exec(href);
+  if (articleMatch) return hasEnglishArticle(articleMatch[1]) ? `/en/insights/${articleMatch[1]}` : "/en/insights";
+  return href.startsWith("/") ? localizedHref(locale, href) : href;
+}
+
+export function renderInlineMarkdown(text: string, locale: Locale = "zh"): ReactNode {
+  const copy = locale === "en" ? insightsEn : insightsZh;
+
   return text.split(INLINE_MARKDOWN).map((part, index) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={index} className="text-tx font-semibold">{part.slice(2, -2)}</strong>;
@@ -121,7 +135,7 @@ export function renderInlineMarkdown(text: string): ReactNode {
           <a
             href={`#source-${sourceId}`}
             data-source-id={`source-${sourceId}`}
-            aria-label={`查看出處 ${sourceId}`}
+            aria-label={copy.article.sourceReference.replace("{n}", sourceId)}
             className="ml-0.5 text-[0.75em] text-gold-d underline decoration-gold/50 underline-offset-2 hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             {sourceId}
@@ -134,7 +148,7 @@ export function renderInlineMarkdown(text: string): ReactNode {
     if (link) {
       const [, label, href] = link;
       return href.startsWith("/")
-        ? <Link key={index} href={href} className="text-gold-d underline decoration-gold/50 underline-offset-4 hover:text-navy">{label}</Link>
+        ? <Link key={index} href={localizeArticleHref(locale, href)} className="text-gold-d underline decoration-gold/50 underline-offset-4 hover:text-navy">{label}</Link>
         : <a key={index} href={href} target="_blank" rel="noopener" className="break-all text-gold-d underline decoration-gold/50 underline-offset-4 hover:text-navy">{label}</a>;
     }
 
@@ -156,9 +170,12 @@ export function getStaticArticleHeadings(content: readonly string[]): { id: stri
 
 export function StaticArticleContent({
   content,
+  locale = "zh",
 }: {
   readonly content: readonly string[];
+  readonly locale?: Locale;
 }) {
+  const copy = locale === "en" ? insightsEn : insightsZh;
   const blocks = parseStaticMarkdown(content);
   const numberedBlocks = blocks.map((block, index) => ({
     block,
@@ -174,33 +191,33 @@ export function StaticArticleContent({
         switch (block.type) {
           case "heading": {
             if (block.level !== 2) {
-              return <h3 key={index} className="mb-3 mt-8 font-sans text-[21px] font-[650] leading-[1.45] text-tx">{renderInlineMarkdown(block.text)}</h3>;
+              return <h3 key={index} className="mb-3 mt-8 font-sans text-[21px] font-[650] leading-[1.45] text-tx">{renderInlineMarkdown(block.text, locale)}</h3>;
             }
 
             if (!headingNumber) return null;
-            const heading = <h2 key={index} id={`section-${headingNumber}`} className={`${block.text.startsWith("情境：") ? "mb-6 mt-10 border-l-[3px] border-gold bg-cream px-5 py-4" : "mb-3 mt-10"} scroll-mt-[96px] font-sans text-[26px] font-[650] leading-[1.35] text-tx`}>{renderInlineMarkdown(block.text)}</h2>;
+            const heading = <h2 key={index} id={`section-${headingNumber}`} className={`${block.text.startsWith(copy.article.scenarioPrefix) ? "mb-6 mt-10 border-l-[3px] border-gold bg-cream px-5 py-4" : "mb-3 mt-10"} scroll-mt-[96px] font-sans text-[26px] font-[650] leading-[1.35] text-tx`}>{renderInlineMarkdown(block.text, locale)}</h2>;
             return heading;
           }
           case "paragraph":
-            return <p key={index} className={index === 0 ? "" : "mt-5"}>{renderInlineMarkdown(block.text)}</p>;
+            return <p key={index} className={index === 0 ? "" : "mt-5"}>{renderInlineMarkdown(block.text, locale)}</p>;
           case "blockquote":
-            return <blockquote key={index} className="my-6 border-l-2 border-gold pl-5 text-tx2">{renderInlineMarkdown(block.text)}</blockquote>;
+            return <blockquote key={index} className="my-6 border-l-2 border-gold pl-5 text-tx2">{renderInlineMarkdown(block.text, locale)}</blockquote>;
           case "list": {
             const listClassName = block.ordered
               ? "my-5 list-decimal space-y-2 pl-6 marker:text-gold-d"
               : "my-5 list-disc space-y-2 pl-6 marker:text-gold-d";
             return block.ordered
-              ? <ol key={index} className={listClassName}>{block.items.map((item, itemIndex) => <li key={itemIndex}>{renderInlineMarkdown(item)}</li>)}</ol>
-              : <ul key={index} className={listClassName}>{block.items.map((item, itemIndex) => <li key={itemIndex}>{renderInlineMarkdown(item)}</li>)}</ul>;
+              ? <ol key={index} className={listClassName}>{block.items.map((item, itemIndex) => <li key={itemIndex}>{renderInlineMarkdown(item, locale)}</li>)}</ol>
+              : <ul key={index} className={listClassName}>{block.items.map((item, itemIndex) => <li key={itemIndex}>{renderInlineMarkdown(item, locale)}</li>)}</ul>;
           }
           case "table":
             return <div key={index} className="my-6 overflow-x-auto">
               <table className="min-w-full border-collapse text-left text-[15px] leading-[1.7]">
                 <thead className="bg-cream text-tx">
-                  <tr>{block.headings.map((heading, headingIndex) => <th key={headingIndex} className="border border-bd px-3 py-2 font-semibold">{renderInlineMarkdown(heading)}</th>)}</tr>
+                  <tr>{block.headings.map((heading, headingIndex) => <th key={headingIndex} className="border border-bd px-3 py-2 font-semibold">{renderInlineMarkdown(heading, locale)}</th>)}</tr>
                 </thead>
                 <tbody>
-                  {block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex} className="border border-bd px-3 py-2 align-top">{renderInlineMarkdown(cell)}</td>)}</tr>)}
+                  {block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex} className="border border-bd px-3 py-2 align-top">{renderInlineMarkdown(cell, locale)}</td>)}</tr>)}
                 </tbody>
               </table>
             </div>;

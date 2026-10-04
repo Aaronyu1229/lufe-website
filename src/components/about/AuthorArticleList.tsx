@@ -5,6 +5,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { InsightArticleCard } from "@/components/insights/InsightArticleCard";
 import { Segmented, flip } from "@/components/ui";
 import type { Category } from "@/data/articles";
+import { CATEGORY_LABELS_EN } from "@/data/en/article-categories";
+import type { Locale } from "@/i18n/locale";
 import type { InsightCard } from "@/lib/articles/presentation";
 
 const CATEGORY_ORDER: readonly Category[] = [
@@ -27,7 +29,7 @@ function categoryFromLocation(categories: readonly Category[]): AuthorArticleFil
   return categories.includes(category as Category) ? category as Category : "all";
 }
 
-export function AuthorArticleList({ articles, emptyLabel }: { readonly articles: readonly InsightCard[]; readonly emptyLabel?: string }) {
+export function AuthorArticleList({ articles, emptyLabel, locale = "zh", filterLabel = "文章分類", allLabel = "全部" }: { readonly articles: readonly InsightCard[]; readonly emptyLabel?: string; readonly locale?: Locale; readonly filterLabel?: string; readonly allLabel?: string }) {
   const categories = useMemo(
     () => CATEGORY_ORDER.filter((category) => articles.some((article) => article.category === category)),
     [articles],
@@ -66,16 +68,16 @@ export function AuthorArticleList({ articles, emptyLabel }: { readonly articles:
     <>
       <div className="mb-10 max-w-full overflow-x-auto pb-1">
         <Segmented
-          label="文章分類"
+          label={filterLabel}
           value={active}
           onChange={(value) => {
             if (value === "all" || categories.includes(value as Category)) selectCategory(value as AuthorArticleFilter);
           }}
           options={[
-            { value: "all", label: <>全部<span className="lufe-insight-count" aria-hidden="true">{articles.length}</span></> },
+            { value: "all", label: <>{allLabel}<span className="lufe-insight-count" aria-hidden="true">{articles.length}</span></> },
             ...categories.map((category) => ({
               value: category,
-              label: <>{CATEGORY_LABELS[category] ?? category}<span className="lufe-insight-count" aria-hidden="true">{counts.get(category) ?? 0}</span></>,
+              label: <>{locale === "en" ? CATEGORY_LABELS_EN[category] : CATEGORY_LABELS[category] ?? category}<span className="lufe-insight-count" aria-hidden="true">{counts.get(category) ?? 0}</span></>,
             })),
           ]}
           className="max-w-none"
@@ -84,7 +86,7 @@ export function AuthorArticleList({ articles, emptyLabel }: { readonly articles:
       <div ref={gridRef} className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => (
           <div key={article.slug} data-key={article.slug} className={active === "all" || active === article.category ? "" : "hidden"}>
-            <InsightArticleCard article={article} />
+            <InsightArticleCard article={article} locale={locale} />
           </div>
         ))}
       </div>

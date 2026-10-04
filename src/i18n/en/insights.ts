@@ -1,0 +1,46 @@
+import type { InsightsCopy } from "@/i18n/zh/insights";
+
+export const insightsEn: InsightsCopy = {
+  article: {
+    breadcrumb: "Insights & resources",
+    tableOfContents: "Table of contents",
+    sourcesSummary: "Sources and verification ({n} sources) · Last verified {date}",
+    published: "Published:",
+    relatedReading: "Related reading",
+    backToArticles: "← Back to all articles",
+    founderByline: "Aaron Yu · LUFÉ founder",
+    founderLine: "LUFÉ founder · from Jumping Freight",
+    founderBio: "The founder comes from Jumping Freight, backed by 43 years of international logistics. Freight forwarders get goods there; the story starts after arrival. This column is about what happens next.",
+    moreFounderArticles: "See more column articles →",
+    sourceReference: "View source {n}",
+    faqHeading: "Frequently asked questions",
+    tocComplete: "Completed",
+    tocRemaining: "About {n} min remaining",
+    scenarioPrefix: "Scenario:",
+  },
+  card: {
+    readMore: "Read more →",
+  },
+  page: {
+    home: "Home",
+    breadcrumb: "Insights",
+    title: ["The first year abroad:", "what gets stuck each month"],
+    lead: "Find what applies to the stage you are in: ask about the market in month one, discuss Consignment in month three, and Company Setup in month nine. North America Retail follows a separate track.",
+    scrollCue: "Scroll down",
+    chapterFilter: "Insight chapters",
+    all: "All",
+    chapterLabels: {
+      m1: "Month 1: Market Test",
+      m3: "Month 3: Consignment",
+      m9: "Month 9: Company Setup",
+      after: "Afterward: Call Center",
+      na: "North America Retail",
+      sub: "Subsidies and resources",
+    },
+    firstMonthNote: "Month one asks just one thing: will local people buy, and what will they pay?\nOur approach is to spend NT$10,000–20,000 first to test the product with real consumers in the Philippines; \"not yet\" is also an answer.",
+    productTesting: "See how Market Test works →",
+    featured: "Featured",
+    readArticle: "Read the article →",
+    empty: "There are no articles in this category yet.",
+  },
+};

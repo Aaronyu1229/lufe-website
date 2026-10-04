@@ -94,16 +94,19 @@ export function pathnameHasDarkHero(pathname: string): boolean {
 
 type InsightsNavigation = {
   readonly latestArticle?: InsightCard;
+  readonly latestArticleEn?: InsightCard;
   readonly publishedArticleSlugs: readonly string[];
 };
 
 export function Navbar({
   children,
   latestArticle,
+  latestArticleEn,
   publishedArticleSlugs = [],
 }: {
   readonly children?: ReactNode;
   readonly latestArticle?: InsightCard;
+  readonly latestArticleEn?: InsightCard;
   readonly publishedArticleSlugs?: readonly string[];
 }) {
   const rawPathname = usePathname() ?? "/";
@@ -300,7 +303,7 @@ export function Navbar({
         }}
       >
         {critical.navItems.map((item) => (
-          <MobileGroup key={item.key} item={item} open={mobileGroup === item.key} onToggle={() => setMobileGroup((current) => current === item.key ? null : item.key)} onClose={closeMobile} insightsNavigation={{ latestArticle, publishedArticleSlugs }} />
+          <MobileGroup key={item.key} item={item} open={mobileGroup === item.key} onToggle={() => setMobileGroup((current) => current === item.key ? null : item.key)} onClose={closeMobile} insightsNavigation={{ latestArticle, latestArticleEn, publishedArticleSlugs }} />
         ))}
         <LanguageToggle pathname={rawPathname} className="mx-3 mt-3 flex justify-center border border-bd py-2 text-[14px] font-semibold" />
         <MessageBoxTrigger className="m-3 flex w-[calc(100%-24px)] justify-center" onOpen={closeMobile} />
@@ -339,7 +342,7 @@ export function Navbar({
             itemKey={item.key}
             active={activeMenu === item.key && megaOpen}
             onMessageOpen={openMessageBox}
-            insightsNavigation={{ latestArticle, publishedArticleSlugs }}
+            insightsNavigation={{ latestArticle, latestArticleEn, publishedArticleSlugs }}
             setRef={(node) => {
               if (node) panelRefs.current[item.key] = node;
             }}
@@ -543,10 +546,11 @@ function insightMenuChapters(publishedArticleSlugSet: ReadonlySet<string>): read
   });
 }
 
-function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: InsightsNavigation & { active: boolean }) {
+function InsightsMenu({ latestArticle, latestArticleEn, publishedArticleSlugs, active }: InsightsNavigation & { active: boolean }) {
   const { critical, locale, menu } = useNavbarCopy();
   const publishedArticleSlugSet = new Set(publishedArticleSlugs);
   const menuChapters = insightMenuChapters(publishedArticleSlugSet);
+  const latest = locale === "en" ? latestArticleEn : latestArticle;
 
   return <>
     <MenuColumn>
@@ -566,7 +570,7 @@ function InsightsMenu({ latestArticle, publishedArticleSlugs, active }: Insights
     </MenuColumn>
     <MenuRail>
       <MenuLabel>{critical.insightMenuLabels.latestArticles}</MenuLabel>
-      {locale === "zh" && latestArticle && <Link href={localizedHref(locale, `/insights/${latestArticle.slug}`)} className="group mt-2 block"><div className="relative mb-3 aspect-video overflow-hidden bg-[rgba(26,26,46,.06)]">{active && <TieredImage src={latestArticle.image} alt={latestArticle.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" />}</div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latestArticle.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latestArticle.date} · {latestArticle.readTime}</span></Link>}
+      {latest && <Link href={localizedHref(locale, `/insights/${latest.slug}`)} className="group mt-2 block"><div className="relative mb-3 aspect-video overflow-hidden bg-[rgba(26,26,46,.06)]">{active && <TieredImage src={latest.image} alt={latest.title} sizes="268px" className="absolute inset-0 h-full w-full object-cover" />}</div><b className="block text-[15px] font-[650] leading-[1.5] transition-colors group-hover:text-sky">{latest.title}</b><span className="mt-[6px] block text-[12.5px] text-tx3">{latest.date} · {latest.readTime}</span></Link>}
     </MenuRail>
   </>;
 }

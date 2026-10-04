@@ -9,6 +9,8 @@ export type AaronAuthorPageCopy = {
   readonly articleCountSuffix: string;
   readonly latestUpdatePrefix: string;
   readonly articleHeading: string;
+  readonly articleFilter: string;
+  readonly allArticles: string;
   readonly emptyArticles: string;
   readonly cta: {
     readonly heading: string;
@@ -27,6 +29,8 @@ export const aaronAuthorPageZh: AaronAuthorPageCopy = {
   articleCountSuffix: " 篇",
   latestUpdatePrefix: "最近更新 ",
   articleHeading: "專欄文章",
+  articleFilter: "文章分類",
+  allArticles: "全部",
   emptyArticles: "",
   cta: {
     heading: "讀到這裡，還是不確定自己卡在哪？",

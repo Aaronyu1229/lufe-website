@@ -8,6 +8,7 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
 import { SiteStructuredData } from "@/components/seo/StructuredData";
 import { toInsightCard } from "@/lib/articles/presentation";
+import { getPublishedEnglishArticles } from "@/lib/articles/english";
 import { getPublishedArticles } from "@/lib/articles/published";
 import { SITE_URL, SITE_NAME, SITE_LOCALE } from "@/lib/site";
 
@@ -136,6 +137,8 @@ export default function RootLayout({
 }>) {
   const publishedArticles = getPublishedArticles();
   const latestArticle = publishedArticles[0] ? toInsightCard(publishedArticles[0]) : undefined;
+  const publishedEnglishArticles = getPublishedEnglishArticles();
+  const latestArticleEn = publishedEnglishArticles[0] ? toInsightCard(publishedEnglishArticles[0]) : undefined;
 
   return (
     <html
@@ -145,7 +148,7 @@ export default function RootLayout({
       <body>
         <MessageBoxProvider>
           <SiteStructuredData />
-          <Navbar latestArticle={latestArticle} publishedArticleSlugs={publishedArticles.map((article) => article.slug)}>
+          <Navbar latestArticle={latestArticle} latestArticleEn={latestArticleEn} publishedArticleSlugs={publishedArticles.map((article) => article.slug)}>
             <main id="main-content">{children}</main>
           </Navbar>
           <FooterSwitch />

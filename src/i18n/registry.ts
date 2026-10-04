@@ -56,6 +56,9 @@ import { assessPageZh } from "./zh/assess-page";
 import { resourcesPageZh } from "./zh/resources-page";
 import { subsidiesPageZh } from "./zh/subsidies-page";
 import { SUBSIDIES } from "@/data/subsidies";
+import { EN_ARTICLES } from "@/data/en/articles";
+import { articles } from "@/data/articles";
+import { articleZhText } from "@/lib/articles/english";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -82,4 +85,21 @@ export const I18N_MODULES = [
   { name: "assess-page", zh: assessPageZh, en: assessPageEn, sourceFingerprint: ASSESS_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/assess-page.ts" },
   { name: "resources-page", zh: resourcesPageZh, en: resourcesPageEn, sourceFingerprint: RESOURCES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/resources-page.ts" },
   { name: "subsidies", zh: { copy: subsidiesPageZh, subsidies: SUBSIDIES }, en: { copy: subsidiesPageEn, subsidies: SUBSIDIES_EN }, sourceFingerprint: SUBSIDIES_SOURCE_FINGERPRINT, enFile: "src/i18n/en/subsidies.ts" },
+  ...Object.values(EN_ARTICLES).map((en) => {
+    const zh = articles.find((article) => article.slug === en.slug)!;
+    const { slug: _slug, sourceFingerprint, ...enText } = en;
+    return {
+      name: `article:${en.slug}`,
+      zh: articleZhText(zh),
+      en: {
+        title: enText.title,
+        summary: enText.summary,
+        content: enText.content,
+        faq: enText.faq,
+        sources: enText.sources?.map(({ title, publisher, note }) => ({ title, publisher, note })),
+      },
+      sourceFingerprint,
+      enFile: `src/data/en/articles/${en.slug}.ts`,
+    };
+  }),
 ] as const;
