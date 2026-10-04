@@ -2,6 +2,8 @@ import type { CSSProperties } from "react";
 
 import { TieredImage } from "@/components/TieredImage";
 import { ABOUT_PHOTO_SLOTS, type AboutPhotoSlotId } from "@/data/aboutPhotoSlots";
+import { ABOUT_PHOTO_SLOTS_EN } from "@/i18n/en/about-photo-slots";
+import type { Locale } from "@/i18n/locale";
 
 type PhotoSlotProps = {
   readonly slotId: AboutPhotoSlotId;
@@ -13,13 +15,18 @@ type PhotoSlotProps = {
   readonly imageClassName?: string;
   readonly imageStyle?: CSSProperties;
   readonly maxTierWidth?: number;
+  readonly locale?: Locale;
 };
 
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 /** Returns the caption that matches what PhotoSlot is showing. */
-export function photoSlotCaption(slotId: AboutPhotoSlotId, src?: string): string | undefined {
-  const slot = ABOUT_PHOTO_SLOTS[slotId];
+function photoSlots(locale: Locale) {
+  return locale === "en" ? ABOUT_PHOTO_SLOTS_EN : ABOUT_PHOTO_SLOTS;
+}
+
+export function photoSlotCaption(slotId: AboutPhotoSlotId, src?: string, locale: Locale = "zh"): string | undefined {
+  const slot = photoSlots(locale)[slotId];
   if (src) return "caption" in slot ? slot.caption : undefined;
   return "fallback" in slot ? slot.fallback.caption : undefined;
 }
@@ -28,8 +35,8 @@ export function photoSlotVisible(slotId: AboutPhotoSlotId, src?: string): boolea
   return Boolean(src) || "fallback" in ABOUT_PHOTO_SLOTS[slotId] || !IS_PRODUCTION;
 }
 
-export function PhotoSlot({ slotId, src, sizes, ratioClassName, className = "", imageClassName = "h-full w-full object-cover", imageStyle, maxTierWidth }: PhotoSlotProps) {
-  const slot = ABOUT_PHOTO_SLOTS[slotId];
+export function PhotoSlot({ slotId, src, sizes, ratioClassName, className = "", imageClassName = "h-full w-full object-cover", imageStyle, maxTierWidth, locale = "zh" }: PhotoSlotProps) {
+  const slot = photoSlots(locale)[slotId];
   const fallback = "fallback" in slot ? slot.fallback : undefined;
 
   if (src || fallback) {

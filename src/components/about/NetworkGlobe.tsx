@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { TieredImage } from "@/components/TieredImage";
+import { aboutPageZh } from "@/i18n/zh/about-page";
 
 const locations = {
   taipei: [25.033, 121.565] as [number, number],
@@ -19,7 +20,7 @@ const locations = {
   cebu: [10.316, 123.885] as [number, number],
 };
 
-export function NetworkGlobe() {
+export function NetworkGlobe({ fallbackAlt = aboutPageZh.network.fallbackImageAlt }: { readonly fallbackAlt?: string } = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [supported, setSupported] = useState<boolean | null>(null);
@@ -206,7 +207,7 @@ export function NetworkGlobe() {
   return (
     <div ref={containerRef} className="mx-auto aspect-square w-full max-w-[320px] lg:max-w-[480px]">
       {supported === false ? (
-        <TieredImage src="/images/about/network-saigon-night-1600.webp" alt="西貢夜景" sizes="(max-width: 1024px) 320px, 480px" className="h-full w-full object-cover" />
+        <TieredImage src="/images/about/network-saigon-night-1600.webp" alt={fallbackAlt} sizes="(max-width: 1024px) 320px, 480px" className="h-full w-full object-cover" />
       ) : supported ? (
         <canvas ref={canvasRef} aria-hidden="true" className="aspect-square w-full max-w-[480px] cursor-grab touch-pan-y opacity-0 transition-opacity duration-[600ms] active:cursor-grabbing" />
       ) : null}
