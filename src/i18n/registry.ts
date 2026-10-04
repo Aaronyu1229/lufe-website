@@ -17,6 +17,7 @@ import { chapterPageEn } from "./en/chapter-page";
 import { METHODOLOGY_SOURCE_FINGERPRINT, methodologyPageEn } from "./en/methodology-page";
 import { methodologyContentEn } from "./en/methodology-content";
 import { OPTIMIZE_PAGE_SOURCE_FINGERPRINT, optimizePageEn } from "./en/optimize-page";
+import { CONTACT_PAGE_SOURCE_FINGERPRINT, contactPageEn } from "./en/contact-page";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -36,6 +37,7 @@ import { CHAPTERS } from "@/data/chapters";
 import { methodologyContentZh } from "./zh/methodology-content";
 import { methodologyPageZh } from "./zh/methodology-page";
 import { optimizePageZh } from "./zh/optimize-page";
+import { contactPageZh } from "./zh/contact-page";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -55,4 +57,5 @@ export const I18N_MODULES = [
   { name: "chapters", zh: { copy: chapterPageZh, chapters: CHAPTERS }, en: { copy: chapterPageEn, chapters: CHAPTERS_EN }, sourceFingerprint: CHAPTERS_SOURCE_FINGERPRINT, enFile: "src/i18n/en/chapters.ts" },
   { name: "methodology", zh: { copy: methodologyPageZh, content: methodologyContentZh }, en: { copy: methodologyPageEn, content: methodologyContentEn }, sourceFingerprint: METHODOLOGY_SOURCE_FINGERPRINT, enFile: "src/i18n/en/methodology-page.ts" },
   { name: "optimize-page", zh: optimizePageZh, en: optimizePageEn, sourceFingerprint: OPTIMIZE_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/optimize-page.ts" },
+  { name: "contact-page", zh: contactPageZh, en: contactPageEn, sourceFingerprint: CONTACT_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/contact-page.ts" },
 ] as const;

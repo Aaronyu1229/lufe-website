@@ -1,7 +1,7 @@
 import type { ContactPageCopy } from "@/i18n/zh/contact-page";
 
 // Fingerprint of contactPageZh this English was translated from; registry.test.ts prints the value after the first run.
-export const CONTACT_PAGE_SOURCE_FINGERPRINT = "SET_AFTER_FIRST_RUN";
+export const CONTACT_PAGE_SOURCE_FINGERPRINT = "42a0702bf7e2d4ec";
 
 export const contactPageEn: ContactPageCopy = {
   home: "Home", breadcrumb: "Contact LUFÉ", title: "Contact LUFÉ", lead: "For expansion planning, partnership discussions, or media inquiries, leave a message. We reply within one business day.", scrollCue: "Scroll down",
