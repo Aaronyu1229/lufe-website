@@ -105,6 +105,27 @@ describe("POST /api/lead", () => {
     expect(state.createLead).not.toHaveBeenCalled();
   });
 
+  it("returns English validation errors for an English quick form", async () => {
+    const response = await POST(request(quickLead({
+      lang: "en",
+      name: " ",
+      contact: "",
+      message: "",
+    })));
+
+    expect(response.status).toBe(400);
+    const result = await response.json() as { ok: boolean; errors: Record<string, string> };
+    expect(result).toEqual({
+      ok: false,
+      errors: {
+        name: "Please enter your name",
+        contact: "Please provide an email address or phone number",
+        message: "Please briefly tell us about your inquiry",
+      },
+    });
+    expect(Object.values(result.errors).join(" ")).not.toMatch(/\p{Script=Han}/u);
+  });
+
   it("returns the existing full-form validation errors", async () => {
     const requiredResponse = await POST(request(contactLead({ name: "", email: "", message: "" })));
     const emailResponse = await POST(request(contactLead({ email: "not-an-email" })));
@@ -121,6 +142,29 @@ describe("POST /api/lead", () => {
     await expect(emailResponse.json()).resolves.toEqual({
       ok: false,
       errors: { email: "Email 格式不正確" },
+    });
+  });
+
+  it("returns English full-form validation errors", async () => {
+    const requiredResponse = await POST(request(contactLead({
+      lang: "en",
+      name: "",
+      email: "",
+      message: "",
+    })));
+    const emailResponse = await POST(request(contactLead({ lang: "en", email: "not-an-email" })));
+
+    await expect(requiredResponse.json()).resolves.toEqual({
+      ok: false,
+      errors: {
+        name: "Please enter your name",
+        email: "Please enter your email address",
+        message: "Please enter your question",
+      },
+    });
+    await expect(emailResponse.json()).resolves.toEqual({
+      ok: false,
+      errors: { email: "Please enter a valid email address" },
     });
   });
 
@@ -171,6 +215,31 @@ describe("POST /api/lead", () => {
       msg: "想談日本市場\n產品：鳳梨酥\n出海階段：準備出海，需要方向",
     });
     expect(state.updateLeadNotification).toHaveBeenCalledWith("lead-1", true, null);
+  });
+
+  it("sends an English notification payload for English inquiries", async () => {
+    const response = await POST(request(contactLead({ lang: "en", page: " /en/contact " })));
+
+    expect(response.status).toBe(200);
+    const [, options] = state.fetch.mock.calls[0] as [string, RequestInit];
+    expect(JSON.parse(options.body as string)).toMatchObject({
+      source: "Contact form",
+      lang: "en",
+      page: "/en/contact",
+      msg: "想談日本市場\nProduct: 鳳梨酥\nStage: 準備出海，需要方向",
+    });
+  });
+
+  it("keeps Chinese notifications for missing or unsupported languages", async () => {
+    const response = await POST(request(contactLead({ lang: "ja" })));
+
+    expect(response.status).toBe(200);
+    const [, options] = state.fetch.mock.calls[0] as [string, RequestInit];
+    expect(JSON.parse(options.body as string)).toMatchObject({
+      source: "聯絡頁完整表單",
+      lang: "zh",
+      msg: "想談日本市場\n產品：鳳梨酥\n出海階段：準備出海，需要方向",
+    });
   });
 
   it("returns 200 and records the notification error when saving succeeds", async () => {
@@ -269,6 +338,37 @@ describe("POST /api/lead", () => {
       },
     });
     expect(state.createLead).not.toHaveBeenCalled();
+  });
+
+  it("returns English waitlist validation errors and keeps Chinese volume values", async () => {
+    const requiredResponse = await POST(request(waitlistLead({
+      lang: "en",
+      name: "",
+      email: "",
+      monthlyVolume: "",
+    })));
+    const invalidVolumeResponse = await POST(request(waitlistLead({ lang: "en", monthlyVolume: "1000" })));
+    const acceptedResponse = await POST(request(waitlistLead({ lang: "en", monthlyVolume: "100～500" })));
+
+    await expect(requiredResponse.json()).resolves.toEqual({
+      ok: false,
+      errors: {
+        name: "Please enter your brand name",
+        email: "Please enter your email address",
+        monthlyVolume: "Please select your monthly customer-message volume",
+      },
+    });
+    await expect(invalidVolumeResponse.json()).resolves.toEqual({
+      ok: false,
+      errors: { monthlyVolume: "The monthly customer-message volume is invalid" },
+    });
+    expect(acceptedResponse.status).toBe(200);
+    const [, options] = state.fetch.mock.calls.at(-1) as [string, RequestInit];
+    expect(JSON.parse(options.body as string)).toMatchObject({
+      source: "Call Center waitlist",
+      lang: "en",
+      msg: "Call Center waitlist\nMonthly messages: 100～500\nCurrent handler: 台灣客服",
+    });
   });
 
   it("rejects an invalid waitlist monthly volume", async () => {
