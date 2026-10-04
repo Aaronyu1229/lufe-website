@@ -59,7 +59,7 @@ export function JumpingSection({ locale = "zh" }: { readonly locale?: Locale } =
       <div className="lufe-container">
         <div className="max-w-[820px]">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
-            {/* Keep each comma phrase whole so "到" never strands at a line end on phones. */}
+            {/* Keep each comma phrase whole so it never strands at a line end on phones. */}
             {copy.title[0].split(locale === "zh" ? /(?<=，)/ : /(?<=,)/).map((phrase) => <span key={phrase} className="inline-block">{phrase}</span>)}
             <br />
             <span className="text-gold-d">{copy.title[1]}</span>

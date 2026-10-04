@@ -5,17 +5,17 @@ import { localizedHref, type Locale } from "@/i18n/locale";
 import { homeSubsidyAlertZh } from "@/i18n/zh/home-subsidy-alert";
 
 /**
- * SubsidyAlertBand — 限期政府加碼 news flash
+ * SubsidyAlertBand — a limited-time government funding news flash.
  *
- * 為什麼存在：
- *   115 年度海外通路布建補助受理至 2026/10/30 18:00；截止後改推買主直達。
- *   這是「新聞事件」不是「常設資訊」，所以用編輯感、有 timestamp、有 urgency 的視覺處理，
- *   不是 marketing banner。
+ * Why it exists:
+ *   The current programme has a deadline; after it closes, the Buyer Direct programme is featured.
+ *   This is a news event, not permanent information, so it uses an editorial, timestamped treatment
+ *   rather than a marketing banner.
  *
- * 設計原則：
- *   - 不做動畫輪播、不做彈跳 CTA
- *   - 視覺上像一則編輯精選的快訊
- *   - 主 CTA 導向當期補助卡，讓使用者直接看細節
+ * Design principles:
+ *   - No animated carousel or pop-up CTA
+ *   - It looks like an editorial news flash
+ *   - The primary CTA links to the active funding card for the details
  *   - Secondary CTA links to /assess for a 2-minute situation comparison.
  *
  * The band uses the data deadline at build time and shows the selected programme's verifiedOn date.

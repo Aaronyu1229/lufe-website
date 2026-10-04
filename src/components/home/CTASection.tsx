@@ -9,7 +9,7 @@ import { homeCtaZh } from "@/i18n/zh/home-cta";
 
 /**
  * CTASection — final conversion block.
- * Primary: "預約 30 分鐘" → MessageBox; secondary text link → /assess.
+ * Primary: opens MessageBox; secondary text link goes to /assess.
  */
 
 export function CTASection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
