@@ -32,6 +32,7 @@ SOURCE_EXTENSIONS = {".ts", ".tsx", ".css", ".json"}
 # literal source text. Keep them so ordinary punctuation changes stay covered.
 COMMON_PUNCTUATION = "°÷‘’“”‧※↑↓↘■□▲▼◆○☆　〈〉『』【】〔〕＃＄％＆＊＋－．／＝＠＼｜～"
 HERO_SOURCE_FILE = PROJECT_ROOT / "src/components/home/HeroSection.tsx"
+HOME_HERO_SOURCE_FILE = PROJECT_ROOT / "src/i18n/zh/home-hero.ts"
 NAVBAR_SOURCE_FILE = PROJECT_ROOT / "src/components/Navbar.tsx"
 NAVBAR_CRITICAL_SOURCE_FILE = PROJECT_ROOT / "src/i18n/zh/navbar-critical.ts"
 NAVBAR_CRITICAL_PATTERNS = (
@@ -161,6 +162,7 @@ def main() -> None:
     build_subset(FULL_OUTPUT_FONT, FULL_CHARSET_FILE, full_characters)
 
     critical_characters = non_ascii_characters(HERO_SOURCE_FILE)
+    critical_characters.update(non_ascii_characters(HOME_HERO_SOURCE_FILE))
     critical_characters.update(non_ascii_characters(NAVBAR_CRITICAL_SOURCE_FILE))
     navbar_source = NAVBAR_SOURCE_FILE.read_text(encoding="utf-8")
     for pattern in NAVBAR_CRITICAL_PATTERNS:

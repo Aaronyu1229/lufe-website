@@ -16,6 +16,7 @@ const criticalSubset = {
   fontPath: resolve(projectRoot, "src/app/fonts/NotoSansTC-critical.woff2"),
   sourceFiles: [
     resolve(projectRoot, "src/components/home/HeroSection.tsx"),
+    resolve(projectRoot, "src/i18n/zh/home-hero.ts"),
     resolve(projectRoot, "src/components/Navbar.tsx"),
     resolve(projectRoot, "src/i18n/zh/navbar-critical.ts"),
   ],
@@ -91,6 +92,9 @@ function findMissingCharacters(allowed, files, textForFile = (filePath) => readF
 function criticalSourceText(filePath) {
   const source = readFileSync(filePath, "utf8");
   if (filePath.endsWith("HeroSection.tsx")) return source;
+  if (filePath.endsWith("home-hero.ts")) return [...source]
+    .filter((character) => character.codePointAt(0) >= 0x80)
+    .join("");
   if (filePath.endsWith("navbar-critical.ts")) return [...source]
     .filter((character) => character.codePointAt(0) >= 0x80)
     .join("");
