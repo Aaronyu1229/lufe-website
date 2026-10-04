@@ -18,7 +18,9 @@ export type MatcherFlowQuestion = {
 type MatcherFlowProps = {
   readonly questions: readonly MatcherFlowQuestion[];
   readonly onComplete: (answers: Readonly<Record<string, string>>) => ReactNode;
+  readonly previousLabel?: string;
   readonly onRestartLabel?: string;
+  readonly answeredLabel?: string;
   readonly className?: string;
 };
 
@@ -30,7 +32,9 @@ type MatcherFlowProps = {
 export function MatcherFlow({
   questions,
   onComplete,
+  previousLabel = "← 上一步",
   onRestartLabel = "重新開始",
+  answeredLabel = "已回答的題目",
   className = "",
 }: MatcherFlowProps) {
   const [step, setStep] = useState(0);
@@ -113,7 +117,7 @@ export function MatcherFlow({
                 className="cursor-pointer transition-colors hover:text-navy disabled:pointer-events-none disabled:opacity-0"
                 disabled={step === 0}
               >
-                ← 上一步
+                {previousLabel}
               </button>
               <button type="button" onClick={restart} className="cursor-pointer transition-colors hover:text-navy">
                 {onRestartLabel}
@@ -130,7 +134,7 @@ export function MatcherFlow({
           </div>
 
           {answered.length > 0 && (
-            <div className="mt-5 flex flex-wrap gap-2" aria-label="已回答的題目">
+            <div className="mt-5 flex flex-wrap gap-2" aria-label={answeredLabel}>
               {answered.map((question) => (
                 <button
                   key={question.id}

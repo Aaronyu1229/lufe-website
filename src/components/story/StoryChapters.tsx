@@ -6,6 +6,8 @@ import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { PhotoSlot, photoSlotCaption } from "@/components/about/PhotoSlot";
 import { TieredImage } from "@/components/TieredImage";
 import type { AboutPhotoSlotId, AboutPhotoSources } from "@/data/aboutPhotoSlots";
+import { aboutPageZh } from "@/i18n/zh/about-page";
+import { localizedHref, type Locale } from "@/i18n/locale";
 
 export type StoryChapter = {
   readonly num: string;
@@ -26,13 +28,7 @@ export type StoryChapter = {
   readonly insert?: { readonly afterParagraph: number; readonly content: ReactNode };
 };
 
-const storyStats = [
-  { value: "43", label: "年國際物流・躍馬企業" },
-  { value: "500+", label: "出口案件・躍馬企業" },
-  { value: "30+", label: "國家與地區・躍馬物流網絡" },
-] as const;
-
-export function StoryChapters({ chapters, photoSources = {} }: { readonly chapters: readonly StoryChapter[]; readonly photoSources?: AboutPhotoSources }) {
+export function StoryChapters({ chapters, photoSources = {}, stats = aboutPageZh.storyStats, servicesLinkLabel = aboutPageZh.servicesLink, locale = "zh" }: { readonly chapters: readonly StoryChapter[]; readonly photoSources?: AboutPhotoSources; readonly stats?: readonly { readonly value: string; readonly label: string }[]; readonly servicesLinkLabel?: string; readonly locale?: Locale }) {
   const figures = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -79,15 +75,15 @@ export function StoryChapters({ chapters, photoSources = {} }: { readonly chapte
           <p className={`${index ? "mt-6" : ""} text-[18px] leading-[1.9] text-tx2`}>{paragraph}</p>
           {chapter.insert?.afterParagraph === index ? chapter.insert.content : null}
         </div>)}
-        {chapter.stats ? <div className="mt-10 grid grid-cols-3 gap-5 border-t border-bd pt-6">
-          {storyStats.map((stat) => <div key={stat.label}><p data-lufe-counter className="num text-navy">{stat.value}</p><p className="mt-2 text-[13px] leading-[1.6] text-tx3">{stat.label}</p></div>)}
+          {chapter.stats ? <div className="mt-10 grid grid-cols-3 gap-5 border-t border-bd pt-6">
+          {stats.map((stat) => <div key={stat.label}><p data-lufe-counter className="num text-navy">{stat.value}</p><p className="mt-2 text-[13px] leading-[1.6] text-tx3">{stat.label}</p></div>)}
         </div> : null}
-        {chapter.servicesLink ? <Link href="/services" className="group mt-8 inline-flex text-[15px] font-semibold text-gold-d"><span>看四個方案 </span><span className="transition-transform [@media(hover:hover)]:group-hover:translate-x-1">→</span></Link> : null}
+        {chapter.servicesLink ? <Link href={localizedHref(locale, "/services")} className="group mt-8 inline-flex text-[15px] font-semibold text-gold-d"><span>{servicesLinkLabel}</span><span className="transition-transform [@media(hover:hover)]:group-hover:translate-x-1">→</span></Link> : null}
       </div>
     </article>
     {chapter.photoSlot ? <figure ref={(element) => { figures.current[chapterIndex] = element; }} className="mx-auto max-w-[1180px]">
-      <PhotoSlot slotId={chapter.photoSlot} src={photoSources[chapter.photoSlot]} ratioClassName="aspect-[4/3] md:aspect-[21/9]" maxTierWidth={chapter.image?.maxTierWidth} sizes="(max-width: 1180px) 100vw, 1180px" imageStyle={{ transform: "translateY(var(--lufe-figure-drift, 0px)) scale(1.06)", ...(chapter.image?.position && !photoSources[chapter.photoSlot] ? { objectPosition: chapter.image.position } : {}) } as CSSProperties} />
-      <figcaption className="mt-3 text-[13px] text-tx3">{photoSlotCaption(chapter.photoSlot, photoSources[chapter.photoSlot])}</figcaption>
+      <PhotoSlot slotId={chapter.photoSlot} src={photoSources[chapter.photoSlot]} ratioClassName="aspect-[4/3] md:aspect-[21/9]" maxTierWidth={chapter.image?.maxTierWidth} sizes="(max-width: 1180px) 100vw, 1180px" imageStyle={{ transform: "translateY(var(--lufe-figure-drift, 0px)) scale(1.06)", ...(chapter.image?.position && !photoSources[chapter.photoSlot] ? { objectPosition: chapter.image.position } : {}) } as CSSProperties} locale={locale} />
+      <figcaption className="mt-3 text-[13px] text-tx3">{photoSlotCaption(chapter.photoSlot, photoSources[chapter.photoSlot], locale)}</figcaption>
     </figure> : chapter.image ? <figure ref={(element) => { figures.current[chapterIndex] = element; }} className="mx-auto max-w-[1180px]">
       <div className="aspect-[4/3] overflow-hidden md:aspect-[21/9]">
         <TieredImage src={chapter.image.src} alt={chapter.image.alt} maxTierWidth={chapter.image.maxTierWidth} loading="lazy" sizes="(max-width: 1180px) 100vw, 1180px" className="h-full w-full object-cover" style={{ transform: "translateY(var(--lufe-figure-drift, 0px)) scale(1.06)", ...(chapter.image.position ? { objectPosition: chapter.image.position } : {}) } as CSSProperties} />

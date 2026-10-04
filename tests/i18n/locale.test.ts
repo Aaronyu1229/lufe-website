@@ -43,10 +43,11 @@ describe("locale helpers", () => {
     expect(switchLocalePath("/en", "zh", has)).toBe("/");
   });
 
-  it("keeps English closed and lists the pilot route", () => {
+  it("keeps English closed and lists finished routes", () => {
     expect(EN_PUBLIC).toBe(false);
     expect(EN_ROUTES).toContain("/services");
     expect(hasEnglishRoute("/services")).toBe(true);
-    expect(hasEnglishRoute("/contact")).toBe(false);
+    expect(hasEnglishRoute("/contact")).toBe(true);
+    expect(hasEnglishRoute("/cases/goat-milk-soap-global")).toBe(true);
   });
 });

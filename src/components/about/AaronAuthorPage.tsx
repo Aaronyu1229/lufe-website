@@ -3,19 +3,22 @@ import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { LinkedInIcon } from "@/components/icons/LineIcons";
 import { HERO_VIDEOS } from "@/data/heroVideos";
+import { aaronAuthorPageEn } from "@/i18n/en/aaron-author-page";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { aaronAuthorPageZh } from "@/i18n/zh/aaron-author-page";
 import { toInsightCard } from "@/lib/articles/presentation";
 import { getArticlePublishedDate, getPublishedArticles } from "@/lib/articles/published";
 
 import { SubsidiesCTASection } from "../subsidy/SubsidiesCTASection";
 import { AuthorArticleList } from "./AuthorArticleList";
-import { CTA_LINE } from "@/data/cta";
 
-export function AaronAuthorPage() {
+export function AaronAuthorPage({ locale = "zh" }: { readonly locale?: Locale }) {
   const publishedArticles = getPublishedArticles();
   const authorArticles = publishedArticles.map(toInsightCard);
   const latestDate = [...publishedArticles]
     .map(getArticlePublishedDate)
     .sort((first, second) => second.localeCompare(first))[0];
+  const copy = locale === "en" ? aaronAuthorPageEn : aaronAuthorPageZh;
 
   return (
     <>
@@ -28,19 +31,19 @@ export function AaronAuthorPage() {
         />
         <div className="lufe-container lufe-hero-content pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
-            <Link href="/" className="hover:text-white">首頁</Link>
+            <Link href={localizedHref(locale, "/")} className="hover:text-white">{copy.home}</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
-            <Link href="/about" className="hover:text-white">關於我們</Link>
+            <Link href={localizedHref(locale, "/about")} className="hover:text-white">{copy.about}</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
             <span className="text-white/75">Aaron Yu</span>
           </nav>
           <h1 className="h1 mb-6 max-w-[880px] text-white">Aaron Yu</h1>
-          <p className="mb-3 text-[17px] font-medium text-gold md:text-[18px]">鹿飛 LUFÉ 創辦人・來自躍馬企業</p>
-          <p className="mb-8 max-w-[500px] whitespace-pre-line text-[17px] leading-[1.8] text-white/70">{"創辦人來自躍馬企業，底下是 43 年的國際物流。貨代把貨送到，故事才開始；這個專欄寫的是貨到了之後的事。\n台灣品牌進菲律賓的第一年：市場探查、寄賣、公司落地，北美通路另成一條線。你可能已經卡在其中一步，這裡多半有一篇在講它。"}</p>
+          <p className="mb-3 text-[17px] font-medium text-gold md:text-[18px]">{copy.founderLine}</p>
+          <p className="mb-8 max-w-[500px] whitespace-pre-line text-[17px] leading-[1.8] text-white/70">{copy.intro}</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px] text-white/60">
-            <span>專欄文章 {authorArticles.length} 篇</span>
+            <span>{copy.articleCountPrefix}{authorArticles.length}{copy.articleCountSuffix}</span>
             <span aria-hidden="true">・</span>
-            <span>最近更新 {latestDate}</span>
+            <span>{copy.latestUpdatePrefix}{latestDate}</span>
             <span aria-hidden="true">・</span>
             <a href="https://www.linkedin.com/in/wibp/" target="_blank" rel="me noopener" className="inline-flex items-center gap-1 hover:text-white"><LinkedInIcon size={16} />LinkedIn</a>
           </div>
@@ -49,16 +52,17 @@ export function AaronAuthorPage() {
 
       <section className="bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
         <div className="lufe-container">
-          <h2 className="h2 mb-10">專欄文章</h2>
-          <AuthorArticleList articles={authorArticles} />
+          <h2 className="h2 mb-10">{copy.articleHeading}</h2>
+          <AuthorArticleList articles={locale === "en" ? [] : authorArticles} emptyLabel={locale === "en" ? copy.emptyArticles : undefined} />
         </div>
       </section>
 
       <SubsidiesCTASection
-        heading="讀到這裡，還是不確定自己卡在哪？"
-        body={CTA_LINE}
-        buttonLabel="預約 30 分鐘 →"
-        secondaryLabel="還不確定像哪一種？先做 2 分鐘處境比對"
+        heading={copy.cta.heading}
+        body={copy.cta.body}
+        buttonLabel={copy.cta.button}
+        secondaryLabel={copy.cta.secondary}
+        locale={locale}
       />
     </>
   );
