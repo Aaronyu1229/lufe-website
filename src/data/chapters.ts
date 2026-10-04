@@ -204,7 +204,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     scenarios: [
       { title: "想出海，不知道從哪裡開始", body: "有產品，聽說東南亞有機會，但不知道從哪裡開始", answer: "先做市場探查：把產品放到當地人面前，一頁報告告訴你要不要往下走", image: "/images/services/scenarios/m1-1-1600.webp", imageAlt: "在世界地圖上標記目的地" },
       { title: "報告很厚，決定還是沒有", body: "找過顧問，拿到一份很厚的報告，還是不知道該不該去", answer: "市場探查只交一頁：誰會買、多少錢會買、為什麼不買。拿來做決定，不是拿來歸檔", image: "/images/services/scenarios/m1-2-1600.webp", imageAlt: "整疊厚重的資料夾" },
-      { title: "不想一開始就投入幾百萬", body: "怕一去就是幾百萬，想先花小錢確認", answer: "市場探查 1～2 萬（前 10 家實驗價）。沒過就停在這裡，過了再抵進下一章", image: "/images/services/scenarios/m1-3-1600.webp", imageAlt: "裝滿硬幣的儲蓄罐與計算機" },
+      { title: "不想一開始就投入幾百萬", body: "怕一去就是幾百萬，想先花小錢確認", answer: "市場探查 1～2 萬（前 10 家實驗價）。沒過就停在這裡，過了市場探查費可抵寄賣包", image: "/images/services/scenarios/m1-3-1600.webp", imageAlt: "裝滿硬幣的儲蓄罐與計算機" },
     ],
     sections: [
       {
@@ -212,7 +212,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         heading: "市場探查的四個步驟",
         items: [
           { number: "01", title: "先做一張產品卡", body: "把你的產品寫成一頁當地人看得懂的介紹：是什麼、怎麼用、多少錢。\n同時查當地有沒有類似的產品、賣多少錢。", icon: "package" },
-          { number: "02", title: "一對一，問當地人", body: "請當地有固定收入、會自己掏錢買東西的消費者，\n拿著產品卡、用過試用包，一個一個聊。\n喜歡什麼、看不懂什麼、多少錢會買、為什麼不買。", icon: "users" },
+          { number: "02", title: "一對一，問當地人", body: "請當地老師、家長等有固定收入、自己花錢買東西的消費者，\n拿著產品卡、用過試用包，一個一個聊。\n喜歡什麼、看不懂什麼、多少錢會買、為什麼不買。", icon: "users" },
           { number: "03", title: "跟公開資料交叉比對", body: "訪談聽到的，再對照當地電商的評價、競品的價格與說法。\n嘴巴說的，跟市場上真的在賣的，放在一起看。", icon: "pen" },
           { number: "04", title: "一頁報告", body: "誰會買、多少錢會買、為什麼不買，附台菲兩地的價差對比。\n訪談跑完就給，不用等產品證。", icon: "file" },
         ],
@@ -233,7 +233,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         caption: "前 10 家實驗價",
         details: ["訪談跑完就給報告，不用等產品證"],
         paths: [
-          { label: "過了 →", body: "這筆抵進第三個月的寄賣包（5～6 萬），合起來就是 7 萬起手包" },
+          { label: "過了 →", body: "市場探查費可抵第三個月的寄賣包（5～6 萬），合起來就是 7 萬起手包" },
           { label: "沒過 →", body: "故事在這裡停。你花的是 1～2 萬，不是幾百萬", dark: true },
         ],
       },
@@ -241,7 +241,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     faqs: [
       { question: "市場探查沒過會怎樣？", answer: "報告會寫清楚為什麼、什麼條件改了可以再試。這是 1～2 萬買到的最有價值的答案之一。", takeaway: "報告會寫清楚原因，以及什麼條件改了可以再試" },
       { question: "可以只做市場探查嗎？", answer: "可以。市場探查是獨立的，你拿著那一頁去做任何決定都行。", takeaway: "可以，市場探查獨立計價" },
-      { question: "訪談的是誰？樣本夠嗎？", answer: "目前是當地有固定收入、會自己掏錢買東西的消費者，每一位都先用過試用包再聊。\n人數不多、集中在特定族群與地區，我們在每一份報告裡都寫明這件事。\n1～2 萬買的是方向，不是統計。方向對了，再花錢擴樣。", takeaway: "1～2 萬買的是方向，不是統計" },
+      { question: "訪談的是誰？樣本夠嗎？", answer: "目前是當地老師、家長等有固定收入、自己花錢買東西的消費者，每一位都先用過試用包再聊。\n人數不多、集中在特定族群與地區，我們在每一份報告裡都寫明這件事。\n1～2 萬買的是方向，不是統計。方向對了，再花錢擴樣。", takeaway: "1～2 萬買的是方向，不是統計" },
     ],
     next: { label: "下一章 →", title: "第三個月 · 寄賣", heading: "上架了，讓人先用過再說", href: "/services/consignment", image: "/images/hero-video/chapter-warehouse-1600.webp", imageAlt: "貨架上待出貨的包裹" },
     cta: { title: "從一次評估開始", body: CTA_LINE, action: "預約 30 分鐘 →", link: { label: "想先看我們實際問到了什麼？→ 小步出海法", href: "/services/methodology" } },
@@ -261,7 +261,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
     scenarios: [
       { title: "市場驗證過了，下一步卡住", body: "市場探查過了，想放貨去賣，但不知道證怎麼辦、貨放哪、誰來推", answer: "寄賣包一次處理：找到合適的通路、產品證代持、上架前的試用活動，一份合約。", image: "/images/services/scenarios/m3-1-1600.webp", imageAlt: "倉庫鐵架上的紙箱" },
       { title: "廣告投了，沒有人看見", body: "自己上過東南亞平台，投了廣告，沒人看見", answer: "菲律賓消費者看網紅、看活動、看有沒有人真的用過；寄賣期間先讓人用過，再談廣告", image: "/images/services/scenarios/m3-2-1600.webp", imageAlt: "手機上瀏覽購物應用程式" },
-      { title: "代理商只想抽成", body: "有代理商找上門，只想抽成，不管你賣不賣得動", answer: "通路夥伴按實際賣出結算，我們不要求獨家；證由持證進口商代持，換通路、換進口商，都只換一張合約。", image: "/images/services/scenarios/m3-3-1600.webp", imageAlt: "會議桌上準備簽署的合約" },
+      { title: "代理商只想抽成", body: "有代理商找上門，只想抽成，不管你賣不賣得動", answer: "通路夥伴按實際賣出結算，我們不要求獨家；合約要求進口商配合轉移，你不用從頭來；FDA 的轉移或重新通報程序仍要走。", image: "/images/services/scenarios/m3-3-1600.webp", imageAlt: "會議桌上準備簽署的合約" },
     ],
     sections: [
       {
@@ -276,7 +276,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       {
         type: "tracks",
         heading: "產品證審核的 6～12 週，兩條進度同時走",
-        passive: "持證進口商代辦、代持。資料歸你，換人只換一張合約",
+        passive: "持證進口商代辦、代持。資料歸你；合約要求進口商配合轉移，你不用從頭來；FDA 的轉移或重新通報程序仍要走。",
         activeLabel: "我們這一軌（每週都有進度）",
         active: [
           { label: "第 1～2 週", body: "選通路，試用包寄到；商品頁、當地說明、價格帶定下來。\n上架用的貨，等證下來再進。" },
@@ -290,7 +290,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
         heading: "寄賣包包含的四件事",
         items: [
           { title: "通路媒合", body: "替你找合適的菲律賓電商通路，談上架條件；貨放通路夥伴的倉，賣出才結算。", icon: "store" },
-          { title: "產品證代持", body: "化妝品、食品的證由持證進口商代辦、代持；換進口商只換一張合約。", icon: "badge-check" },
+          { title: "產品證代持", body: "化妝品、食品的證由持證進口商代辦、代持；合約要求進口商配合轉移，你不用從頭來；FDA 的轉移或重新通報程序仍要走。", icon: "badge-check" },
           { title: "社群試用", body: "證還沒下來的那段時間，先在當地社群讓人用過。", icon: "users" },
           { title: "市場報告", body: "把市場探查那一頁展開，補價格帶、競品、通路。", icon: "chart-column" },
         ],
@@ -319,14 +319,14 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       {
         type: "price",
         title: "5～6 萬",
-        caption: "市場探查費可抵。跟第一個月合起來，就是 7 萬起手包",
+        caption: "市場探查費可抵寄賣包。跟第一個月合起來，就是 7 萬起手包",
         details: ["產品證 6～12 週，證下來貨就上架；這段時間活動先跑", "通路的抽成依通路不同、產品到當地的包裝與說明調整另計，第一次談會先講清楚。"],
       },
     ],
     faqs: [
       { question: "為什麼不直接投廣告？", answer: "老實說，我們的經驗是不夠。菲律賓的消費者看網紅、看活動、看有沒有人真的用過，廣告只是其中一段。", takeaway: "菲律賓的消費者要先看到有人用過" },
       { question: "賣不動怎麼辦？", answer: "寄賣是賣多少算多少，不會逼你進貨。三個月看數字，賣不動我們會直接說。", takeaway: "賣多少算多少，三個月看數字" },
-      { question: "證掛在誰名下？", answer: "產品證由持證進口商代辦、代持。合約寫清楚轉移配合：換進口商只換一張合約，不用從頭重辦。我們不綁任何一家通路。", takeaway: "持證進口商代持，不綁任何一家通路" },
+      { question: "證掛在誰名下？", answer: "產品證由持證進口商代辦、代持。合約要求進口商配合轉移，你不用從頭來；FDA 的轉移或重新通報程序仍要走。我們不綁任何一家通路。", takeaway: "持證進口商代持，不綁任何一家通路" },
       { question: "你們是通路嗎？", answer: "我們不開店、不買斷你的貨。我們把你接到已經在賣的通路，然後把證、試用、數據、合約這些通路不做的事接起來。", takeaway: "不是，我們把你接到通路" },
     ],
     next: { label: "下一章 →", title: "第九個月 · 公司落地", heading: "開始想要在當地有自己的人", href: "/services/localization", image: "/images/hero-video/chapter-storefront-1600.webp", imageAlt: "夜晚街角的咖啡店與行人" },
@@ -486,14 +486,14 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
           { number: "步 01", title: "市場研究與選品", body: "哪一支產品先去、什麼規格、什麼價格帶。", icon: "search" },
           { number: "步 02", title: "送評與展覽", body: "寄樣給通路評估、安排展位，把買家帶到你桌前。", icon: "presentation" },
           { number: "步 03", title: "上桌談判", body: "合約條件、付款期、首單量。", icon: "handshake" },
-          { number: "步 04", title: "進通路", body: "時間看品類和通路。食品與保健品要先完成 FDA 註冊與標示，通常比較久；第一次談，我們會給你這支產品的時間表。", icon: "store" },
+          { number: "步 04", title: "進通路", body: "時間看品類和通路。食品與保健品要先符合美國 FDA 規定（設施登記、美國標示、可執行 FSVP 的美國進口商），通常比較久；第一次談，我們會給你這支產品的時間表。", icon: "store" },
         ],
       },
       {
         type: "two-cards",
         heading: "誰在做",
         items: [
-          { title: "北美團隊", body: "在當地執行：研究、送評、展覽、FDA 註冊與標示、談判。" },
+          { title: "北美團隊", body: "在當地執行：研究、送評、展覽、美國 FDA 規定與標示、談判。" },
           { title: "鹿飛", body: "在台灣當你的窗口：一份合約，有事找同一個人。" },
         ],
       },
@@ -504,7 +504,7 @@ export const CHAPTERS: Record<ChapterKey, Chapter> = {
       },
     ],
     faqs: [
-      { question: "北美通路要多久？", answer: "看品類和目標通路。食品與保健品要先完成 FDA 註冊與標示，通常比一般消費品久。第一次談，我們會給你這支產品的時間表。", takeaway: "看品類和通路" },
+      { question: "北美通路要多久？", answer: "看品類和目標通路。食品與保健品要先符合美國 FDA 規定（設施登記、美國標示、可執行 FSVP 的美國進口商），通常比較久。第一次談，我們會給你這支產品的時間表。", takeaway: "看品類和通路" },
       { question: "保證進得去嗎？", answer: "不保證。通路收不收，是通路決定的。我們保證的是每一步都有人追、每一步都讓你看到結果。產品還沒準備好面對北美的條件時，我們會直接建議你再等等——那也是一種答案。", takeaway: "不保證，但每一步都有人追" },
       { question: "跟菲律賓四章有關係嗎？", answer: "兩條線。北美由北美團隊在當地執行，鹿飛是你在台灣的窗口；要去北美的品牌如果需要英文客服，可以搭配海外客服。", takeaway: "兩條線，可搭配海外客服" },
     ],

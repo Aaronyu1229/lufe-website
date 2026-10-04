@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "landed-cost-before-export",
-  sourceFingerprint: "f2ccd3202f182eb1",
+  sourceFingerprint: "63bacccefc5902da",
   title: "Calculate landed cost before export quotations: what FOB, CIF, and DDP mean, and how to calculate tariffs",
   summary: "A customer asks for an FOB price. What does FOB mean, how does it differ from CIF and DDP, who can estimate the seven parts of landed cost, how are tariffs calculated, and why do we not publish tariff rates in this article?",
   readTime: "6 min read",
@@ -26,7 +26,7 @@ Landed cost is the total cost at the moment goods reach the destination warehous
 | 1 | **Ex-factory price** | You | Export packaging, outer cartons, pallets, and label changes required locally are often left out |
 | 2 | **International freight** | Freight forwarder (this is what Jumping Freight does) | Sea versus air freight, full-container versus consolidated shipments; origin-port charges, document fees, and peak-season surcharges |
 | 3 | **Insurance** | Freight forwarder or insurer | Most destination countries use "goods value + freight + insurance" as the basis for customs value, so insurance is not only insurance; the United States and Canada exclude international freight and insurance from customs value [16][17] |
-| 4 | **Destination-country tariff** | TradePilot or the destination country's official lookup tool | Incorrect HS-code classification, or assuming an FTA preference exists when Taiwan does not have one |
+| 4 | **Destination-country tariff** | TradePilot online tariff lookup tool or the destination country's official lookup tool | Incorrect HS-code classification, or assuming an FTA preference exists when Taiwan does not have one |
 | 5 | **Destination-country value-added tax/excise tax** | Destination-country tax law or customs broker | Payable at import, not when goods are sold; some categories have additional excise tax |
 | 6 | **Customs clearance and local delivery** | Destination-country customs broker or licensed importer [12] | The importer needs customs registration; FDA-regulated goods need registration before release |
 | 7 | **Warehousing, platform commissions, and returns** | Platform rate sheet or partner warehouse | First-year volume is small, so fixed costs cannot be spread out |
@@ -103,7 +103,7 @@ This article is rewritten from the February 2026 article, "Strategies for shifti
     },
     {
       q: "How are tariffs calculated? Can I estimate landed cost myself?",
-      a: "You can estimate the framework. Tariff is calculated on customs value: based on the transaction value, in practice plus freight and insurance [2]. Which price applies and who pays depend on the Incoterms on the quotation [1]. Look up the rate through TradePilot or the destination country's official tool, ask a freight forwarder for freight quotations, and consult destination-country tax law for local tax. But the HS code to declare and the costs included in customs value are often estimated incorrectly, so ask someone who has done it to check the first time.",
+      a: "You can estimate the framework. Tariff is calculated on customs value: based on the transaction value, in practice plus freight and insurance [2]. Which price applies and who pays depend on the Incoterms on the quotation [1]. Look up the rate through the TradePilot online tariff lookup tool or the destination country's official tool, ask a freight forwarder for freight quotations, and consult destination-country tax law for local tax. But the HS code to declare and the costs included in customs value are often estimated incorrectly, so ask someone who has done it to check the first time.",
     },
     {
       q: "Why does the article not include estimated figures?",

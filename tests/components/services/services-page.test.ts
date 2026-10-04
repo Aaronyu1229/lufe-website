@@ -33,7 +33,7 @@ describe("ServicesPage", () => {
   });
 
   it("uses the approved testing-panel description", () => {
-    expect(normalizedMarkup()).toContain("由當地老師與家長組成的試用面板，產品上架前先拿到真實反應");
+    expect(normalizedMarkup()).toContain("由當地老師、家長等有固定收入、自己花錢買東西的消費者組成的試用面板，產品上架前先拿到真實反應");
     expect(normalizedMarkup()).not.toContain("當地上班族與家長組成的測試面板");
   });
 

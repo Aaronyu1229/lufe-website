@@ -108,7 +108,7 @@ export const navbarMenuZh: NavbarMenuCopy = {
     allArticles: "看所有文章 →",
     subsidiesAndResources: "補助與資源",
     subsidyDescription: "政府補助整理",
-    tradePilotDescription: "線上報關工具",
+    tradePilotDescription: "線上關稅查詢工具",
   },
   about: {
     items: ["品牌故事", "團隊組成", "合作夥伴網絡", "品牌理念"],

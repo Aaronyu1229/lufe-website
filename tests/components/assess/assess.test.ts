@@ -21,7 +21,7 @@ describe("Assess", () => {
     expect(markup).not.toContain("Aaron Yu · 鹿飛創辦人");
     expect(markup).toContain('id="assess-quiz"');
     expect(markup).toContain("開始比對 ↓");
-    expect(markup).toContain("會和這三個案例比對");
+    expect(markup).toContain("會和兩個我們參與的案例，加上一個菲律賓夥伴自己的品牌比對");
     for (const caseItem of CASES) expect(markup).toContain(caseItem.title);
     expect(markup).not.toContain("bg-gold text-navy");
     expect(markup).not.toContain("rounded-");

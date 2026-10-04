@@ -3,9 +3,9 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "tradepilot-tariff-tutorial",
-  sourceFingerprint: "fce405f4b0c4adb4",
-  title: "How do you calculate tariffs? Use TradePilot to look up HS codes, tariffs, and landed cost for free",
-  summary: "How are tariffs calculated, and how do you look up an HS code? TradePilot is a free tool built by Jumping Freight that requires no registration: enter a product and amount, and AI assigns an HS code and breaks down customs duty and taxes through to landed cost.",
+  sourceFingerprint: "71a7e25dc9fb3a0f",
+  title: "How do you calculate tariffs? Use the TradePilot online tariff lookup tool to look up HS codes, tariffs, and landed cost for free",
+  summary: "How are tariffs calculated, and how do you look up an HS code? TradePilot is a free online tariff lookup tool that requires no registration: enter a product and amount, and AI assigns an HS code and breaks down customs duty and taxes through to landed cost.",
   readTime: "5 min read",
   content: [String.raw`> **Short answer:** Tariff calculations start with an HS code. TradePilot is free and requires no registration [1]: enter the product and amount, confirm the tariff heading, and you have the tariff portion.
 
@@ -15,13 +15,11 @@ You are the sales manager of a rice-cracker brand. Your owner will have a video 
 
 You search and first find a stream of tariff news, each article showing a different number. Then you find the U.S. customs tariff schedule. It is all in English, with thousands of headings, and you are not even sure which category rice crackers belong in: "rice products" or "baked snacks"? The rate can differ substantially if you classify it incorrectly. You want to ask the customs broker your company works with, but they have already gone home.
 
-You do not need a tariff analysis. You need a tool that can tell you in 3 minutes, "which heading this product is likely to fall under, what the rate is, and how the number is calculated," then let the customs broker confirm it tomorrow. That is why we built TradePilot.
+You do not need a tariff analysis. You need a tool that can tell you in 3 minutes, "which heading this product is likely to fall under, what the rate is, and how the number is calculated," then let the customs broker confirm it tomorrow. This is the kind of problem TradePilot can help with.
 
 ## What is TradePilot?
 
-TradePilot is a free tariff tool built by Jumping Freight. It requires no registration [1]. Enter a product name and amount, and AI assigns an HS code with a confidence score. It then breaks down customs duty, excise tax, and business tax through to landed cost, with a formula and regulatory basis for every item. Its data comes from Taiwan's Customs Administration announcements and it supports multiple currencies. It works in two directions: exports from Taiwan and imports into Taiwan.
-
-Jumping Freight has handled international logistics for 43 years, and customs declaration is part of daily work. We made this into a tool because too many first-time exporters have never been told clearly what price tariffs are calculated on.
+TradePilot is a free online tariff lookup tool. It requires no registration [1]. Enter a product name and amount, and AI assigns an HS code with a confidence score. It then breaks down customs duty, excise tax, and business tax through to landed cost, with a formula and regulatory basis for every item. Its data comes from Taiwan's Customs Administration announcements and it supports multiple currencies. It works in two directions: exports from Taiwan and imports into Taiwan.
 
 ## How do you look up an HS code and calculate tariffs? Three steps
 
@@ -81,8 +79,8 @@ Last verified: October 1, 2026. Use the current TradePilot page at tradepiloter.
   sources: [
     {
       id: 1,
-      title: "TradePilot homepage",
-      publisher: "Jumping Freight",
+      title: "TradePilot online tariff lookup tool",
+      publisher: "TradePilot",
       url: "https://tradepiloter.com",
       note: "Free and requires no registration; import and export tax calculations, tariff lookup, AI classification with confidence scores, multiple currencies, and data from Customs Administration announcements.",
     },

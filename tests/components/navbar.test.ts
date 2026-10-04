@@ -30,9 +30,9 @@ describe("Navbar", () => {
   it("groups the insights menu and shows TradePilot with its mark in desktop and mobile menus", () => {
     const markup = renderNavbar();
 
-    expect(markup).not.toContain("TradePilot - 線上報關工具");
+    expect(markup).not.toContain("TradePilot - 線上關稅查詢工具");
     expect(markup).toContain("tradepilot-gold.png");
-    expect(markup.match(/線上報關工具/g)).toHaveLength(2);
+    expect(markup.match(/線上關稅查詢工具/g)).toHaveLength(2);
     for (const label of ["依章節看文章", "工具與資源", "最新文章"]) expect(markup).toContain(label);
     expect(markup).not.toContain("第一個月：市場探查");
   });

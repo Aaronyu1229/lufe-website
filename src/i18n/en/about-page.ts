@@ -1,7 +1,7 @@
 import type { AboutPageCopy } from "@/i18n/zh/about-page";
 
 // Fingerprint of aboutPageZh and ABOUT_PHOTO_SLOTS this English was translated from; registry.test.ts prints the value after the first run.
-export const ABOUT_PAGE_SOURCE_FINGERPRINT = "8a7be8e1aecbbff7";
+export const ABOUT_PAGE_SOURCE_FINGERPRINT = "017169569d1c63d9";
 
 export const aboutPageEn: AboutPageCopy = {
   home: "Home",
@@ -79,7 +79,7 @@ export const aboutPageEn: AboutPageCopy = {
     lead: "That is why we founded LUFÉ. We break overseas expansion into smaller steps: spend NT$10,000–20,000 to see how the market responds, then decide whether to move forward. So the first conversation is only questions. Sometimes we will advise you to wait—that is also an answer.",
     roles: {
       taiwan: { title: "Taiwan core team", description: "Contracts, progress, and your point of contact are all in Taiwan. From the first assessment to the final chapter, you only need to work with one person. For goods that need shipping, leave customs clearance and transportation to Jumping Freight—our core business for 43 years." },
-      philippines: { title: "Philippine partners", description: "Once goods arrive in Manila, a group with years of local experience takes over. They run English-language education organizations and chain restaurants, growing a Taiwanese bubble-tea brand from one location to more than ten. The people for Market Test panels, Company Setup paperwork and legwork, and Call Center services all come from here." },
+      philippines: { title: "Philippine partners", description: "Once goods arrive in Manila, a group with years of local experience takes over. They run English-language education organizations and chain restaurants, growing our partners' own Taiwanese-tea brand from one location to more than ten. The people for Market Test panels, Company Setup paperwork and legwork, and Call Center services all come from here." },
       northAmerica: { title: "North America team", description: "Another path leads to North America. The local team researches, attends trade shows, brings in buyers, and sits at the negotiatingating table. They support a Taiwanese fish-floss brand through its first stage in the United States. They deliver North America Retail while the point of contact in Taiwan stays the same." },
     },
   },
@@ -94,7 +94,7 @@ export const aboutPageEn: AboutPageCopy = {
       northAmerica: { title: "North America", description: "North America team: research, trade shows, buyers, and negotiations" },
       southeastAsia: { title: "Southeast Asia", description: "Philippine partners: education organizations, chain restaurants, customer service teams, law firms, and licensed importers" },
       globalLogistics: { title: "Global logistics", description: "43 years of international freight forwarding at Jumping Freight: customs clearance, warehousing, sea and air freight, and last-mile delivery" },
-      technology: { title: "Technology tools", description: "Our in-house TradePilot tariff lookup tool is used by 2,400+ users. Using technology to lower the information barrier in cross-border business." },
+      technology: { title: "Technology tools", description: "TradePilot is an online tariff lookup tool used by 2,400+ users. Using technology to lower the information barrier in cross-border business." },
     },
   },
   beliefs: {

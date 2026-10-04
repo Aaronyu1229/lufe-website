@@ -1,7 +1,7 @@
 import type { AssessPageCopy } from "@/i18n/zh/assess-page";
 
 // Fingerprint of assessPageZh this English was translated from; registry.test.ts prints the value after the first run.
-export const ASSESS_PAGE_SOURCE_FINGERPRINT = "f194392843705efb";
+export const ASSESS_PAGE_SOURCE_FINGERPRINT = "5c960a55a631ceaf";
 
 export const assessPageEn: AssessPageCopy = {
   stageShort: { idea: "Starting out", tested: "Testing the waters", scaling: "Scaling" },
@@ -37,7 +37,7 @@ export const assessPageEn: AssessPageCopy = {
   northAmericaChapter: { text: "North America takes a different route. First see how North America Retail works →", href: "/services/north-america" },
   fallback: { headline: "Situation Check", loading: "Loading…" },
   entry: {
-    home: "Home", cases: "Cases", compare: "Compare", breadcrumb: "Situation Check", headline: ["See which case", "your situation is most like"], lead: "Three questions, about 2 minutes. Compare three cases we have worked on to find the closest one, how it was assessed at the time, and which chapter it usually starts with.", comparing: "Comparing", start: "Start the check ↓", scrollCue: "Scroll down", compareCases: "These three cases are used for comparison",
+    home: "Home", cases: "Cases", compare: "Compare", breadcrumb: "Situation Check", headline: ["See which case", "your situation is most like"], lead: "Three questions, about 2 minutes. Compare two cases we worked on and one our Philippine partners built themselves to find the closest one, how it was assessed at the time, and which chapter it usually starts with.", comparing: "Comparing", start: "Start the check ↓", scrollCue: "Scroll down", compareCases: "Two cases we worked on and one our Philippine partners built themselves are used for comparison",
   },
   narrative: {
     dimensions: { stage: "Stage", blocker: "Blocker", market: "Market" },

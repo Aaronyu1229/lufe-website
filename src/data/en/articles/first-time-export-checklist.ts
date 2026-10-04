@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "first-time-export-checklist",
-  sourceFingerprint: "e7b479557fae2a43",
+  sourceFingerprint: "9b93ff4e6ef3ae72",
   title: "What are the five steps for a first export? From confirming demand and product registration to export customs clearance and listing",
   summary: "How do you export for the first time? The greatest concern is not making a mistake, but not knowing what to do. Five stages: confirm demand, decide whose name holds the registration, calculate landed cost, choose a channel, and look after the store after listing. Where each step usually gets stuck, and which steps let you stop when complete.",
   readTime: "6 min read",
@@ -21,7 +21,7 @@ This article is for you: five stages, each with one question to answer, a usual 
 
 There is only one question to answer: **will people in this market pay when they see your product and price?** It is not "is the market big enough?" It is "will they buy yours?"
 
-Asking one hundred people in Taiwan cannot answer that question because they are not local consumers. Our approach is a [Market Test](/services/product-testing): send three products to Manila, have a table of local school teachers and parents pick them up and check the prices, then use a one-page report to explain who will buy, what price they will pay, and why they will not buy, with a Taiwan–Philippines price-gap comparison.
+Asking one hundred people in Taiwan cannot answer that question because they are not local consumers. Our approach is a [Market Test](/services/product-testing): send three products to Manila, let local teachers, parents, and other salaried consumers who pay for their own purchases pick them up and check the prices, then use a one-page report to explain who will buy, what price they will pay, and why they will not buy, with a Taiwan–Philippines price-gap comparison.
 
 **Sticking point:** Many brands skip this step and go straight to stage two to obtain registration. Only after the registration comes through do they discover that the price tier is wrong. The money and time spent on registration are then wasted.
 
@@ -85,7 +85,7 @@ We recommend doing the first three steps in order because each later answer is b
 A Market Test costs NT$10,000–20,000 and lets you stop after completion. The Consignment package costs NT$50,000–60,000, with the Market Test fee credited toward the Consignment package, for a combined starting amount of NT$70,000. Company Setup after that is quoted by project. Discuss the cost of the next step only once you reach it; do not budget millions from the beginning.
 
 **Do we have to apply for product registration ourselves?**
-In the Philippines, registration for food, health products, and cosmetics can only be held by a local licensed company; a Taiwan brand cannot hold it directly. The question is therefore not "apply ourselves," but whose name holds it and how the agreement is written. Under the Consignment package, a licensed importer applies for and holds it, your data belongs to you, and changing partners means changing only one agreement.
+In the Philippines, registration for food, health products, and cosmetics can only be held by a local licensed company; a Taiwan brand cannot hold it directly. The question is therefore not "apply ourselves," but whose name holds it and how the agreement is written. Under the Consignment package, a licensed importer applies for and holds it, your data belongs to you, and the contract requires the importer to cooperate with the transfer, so you do not start from scratch; the FDA transfer or re-notification procedure still applies.
 
 ## One small next step
 
@@ -103,7 +103,7 @@ Last verified: October 1, 2026. Follow official sources for each country's regul
     },
     {
       q: "Do we have to apply for product registration ourselves?",
-      a: "In the Philippines, food, health-product, and cosmetic registrations can only be held by local licensed companies; Taiwan brands cannot hold them directly. The question is therefore whose name holds the registration and how the agreement is written. Under the Consignment package, a licensed importer applies for and holds it, your data belongs to you, and changing partners means changing only one agreement.",
+      a: "In the Philippines, food, health-product, and cosmetic registrations can only be held by local licensed companies; Taiwan brands cannot hold them directly. The question is therefore whose name holds the registration and how the agreement is written. Under the Consignment package, a licensed importer applies for and holds it, your data belongs to you, and the contract requires the importer to cooperate with the transfer, so you do not start from scratch; the FDA transfer or re-notification procedure still applies.",
     },
   ],
   sources: [
@@ -144,8 +144,8 @@ Last verified: October 1, 2026. Follow official sources for each country's regul
     },
     {
       id: 6,
-      title: "TradePilot tariff lookup tool",
-      publisher: "Jumping Freight",
+      title: "TradePilot online tariff lookup tool",
+      publisher: "TradePilot",
       url: "https://tradepiloter.com",
       note: "Free and requires no registration; AI assigns an HS code and breaks down customs duty, excise tax, business tax, and landed cost.",
     },

@@ -61,7 +61,7 @@ export const casesPageZh: CasesPageCopy = {
   home: "首頁",
   breadcrumb: "案例",
   title: ["每一個判斷，", "都有案例可以對照"],
-  lead: "台灣品牌出海，大致有三種走法。下面是我們參與過、和我們在菲律賓的當地夥伴自己走過的案例，每一個都寫到當時最關鍵的那個決定。",
+  lead: "台灣品牌出海，大致有三種走法。下面是兩個我們參與的案例，加上一個菲律賓夥伴自己的品牌；每一個都寫到當時最關鍵的那個決定。",
   scrollCue: "往下看",
   roads: [
     { label: "第一條", title: "從零開始", body: "在當地從零做起。我們在菲律賓的當地夥伴，先做了一間英語教育機構，後來也從零做起一個連鎖手搖飲品牌", lesson: "找人比找店面難，第一批人決定後面所有事" },
@@ -75,7 +75,7 @@ export const casesPageZh: CasesPageCopy = {
     body: CTA_LINE,
     button: "預約 30 分鐘 →",
     assessHeading: "不確定自己比較像哪一條？",
-    assessBody: "三個問題，比對我們參與過的三個案例，找出最接近的一個",
+    assessBody: "三個問題，比對兩個我們參與的案例，加上一個菲律賓夥伴自己的品牌，找出最接近的一個",
     assessChips: ["階段", "卡點", "市場"],
     assessLabel: "開始比對",
   },

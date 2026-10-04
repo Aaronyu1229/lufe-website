@@ -37,7 +37,9 @@ describe("ChapterPage", () => {
       }
 
       expect(markup).not.toContain("你可能是這樣走到這裡的");
-      expect(markup).not.toContain("老師");
+      if (key === "m1") {
+        expect(markup).toContain("當地老師、家長等有固定收入、自己花錢買東西的消費者");
+      }
     }
   });
 
@@ -73,7 +75,7 @@ describe("ChapterPage", () => {
     }
   });
 
-  it("does not reveal teacher or education-background claims in service content", () => {
+  it("uses the approved Market Test participants without education-background claims", () => {
     const root = process.cwd();
     const files = [
       "src/data/chapters.ts",
@@ -83,9 +85,12 @@ describe("ChapterPage", () => {
       "src/components/services/RelatedReading.tsx",
     ];
 
+    const chapterCopy = readFileSync(path.join(root, "src/data/chapters.ts"), "utf8");
+    expect(chapterCopy).toContain("當地老師、家長等有固定收入、自己花錢買東西的消費者");
+    expect(chapterCopy).not.toContain("學校活動");
+
     for (const file of files) {
       const content = readFileSync(path.join(root, file), "utf8");
-      expect(content).not.toContain("老師");
       expect(content).not.toContain("教師");
       expect(content).not.toContain("英語教育體系");
       expect(content).not.toContain("出身");
