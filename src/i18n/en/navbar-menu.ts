@@ -28,14 +28,14 @@ export const navbarMenuEn: NavbarMenuCopy = {
     methodDescription: "A gradual way abroad · ask the market first, then invest",
     situationCheck: "2-minute Situation Check",
     featuredTitle: "Free initial assessment",
-    featuredBody: "30 minutes, using five questions from The LUFÉ Method to assess your conditions for going abroad",
-    featuredAction: "Book 30 minutes",
+    featuredBody: "30 minutes, using five questions from The LUFÉ Method to assess your conditions for overseas expansion",
+    featuredAction: "Book your free assessment →",
   },
   cases: {
     items: {
       "goat-milk-soap-global": { num: "North America", title: "How can North American buyers understand a Taiwanese goat milk soap brand?" },
       "fish-floss-us-fda": { num: "FDA", title: "What is the first hurdle for a Taiwanese fish floss brand entering the United States?" },
-      "bubble-tea": { num: "More than ten", title: "How did a hand-shaken tea brand grow from zero to more than ten stores in the Philippines?" },
+      "bubble-tea": { num: "More than ten", title: "How did a bubble tea brand grow from zero to more than ten stores in the Philippines?" },
     },
     allCases: "View all case studies →",
     tags: ["Food", "Electronics", "Apparel", "Beverages"],

@@ -255,6 +255,7 @@ export function MessageBox() {
           <input type="text" name="website" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />
           {submitError && <p className="mb-3 text-[12px] text-red-500">{copy.submitError}<a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
           <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-navy py-3 text-[15px] font-semibold text-white hover:bg-navy-l disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? copy.submitting : copy.submit}</button>
+          {locale === "en" && <p className="mt-2 text-center text-[12px] text-tx2">{copy.submittedBody}</p>}
         </form> : <div className="px-5 py-8 text-center"><h3 className="mb-1.5 text-[17px] font-semibold">{copy.submittedTitle}</h3><p className="text-[14.5px] font-light text-tx2">{copy.submittedBody}</p></div>}
       </div>
     </div>

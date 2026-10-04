@@ -10,7 +10,7 @@ export const subsidiesPageEn: SubsidiesPageCopy = {
   breadcrumb: "2026 government subsidies for overseas expansion",
   hero: {
     title: ["The government is helping you expand overseas.", "Do you know how to access it?"],
-    leadStart: "The International Trade Administration, Ministry of Economic Affairs, and Small and Medium Enterprise and Startup Administration have annual budgets worth hundreds of millions to help Taiwanese companies enter ",
+    leadStart: "The International Trade Administration, Ministry of Economic Affairs, and Small and Medium Enterprise and Startup Administration have annual budgets worth more than NT$100 million to help Taiwanese companies enter ",
     northAmerica: "North America",
     leadBetweenRegions: " and ",
     southeastAsia: "Southeast Asia",
@@ -23,7 +23,7 @@ export const subsidiesPageEn: SubsidiesPageCopy = {
   agencies: { tradeAlt: "International Trade Administration, Ministry of Economic Affairs", ministryAria: "Ministry of Economic Affairs", ministryName: "Ministry of Economic Affairs", smeaAlt: "Small and Medium Enterprise and Startup Administration, Ministry of Economic Affairs" },
   subsidyIntroHeading: ["Subsidies are not extra income; they", "reduce the actual cost of expanding overseas"],
   pillars: [
-    { title: "The funding is real", description: "The International Trade Administration and Ministry of Economic Affairs administer budgets worth hundreds of millions each year. The key is knowing how to apply and writing the proposal correctly." },
+    { title: "The funding is real", description: "The International Trade Administration and Ministry of Economic Affairs administer budgets worth more than NT$100 million each year. The key is knowing how to apply and writing the proposal correctly." },
     { title: "More than an application form", description: "The proposal must align with your business goals, and implementation needs deliverables and reports. LUFÉ's services themselves meet most completion requirements." },
     { title: "They can be combined", description: "One company can apply for different programs at the same time—for example, use exhibition funding for a U.S. show and market-development funding to build local channels." },
   ],

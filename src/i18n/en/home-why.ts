@@ -5,7 +5,7 @@ export const HOME_WHY_SOURCE_FINGERPRINT = "19aa4720485500d8";
 
 export const homeWhyEn: HomeWhyCopy = {
   heading: ["Consultants, trading companies, freight forwarders and customer service each handle one part,", "and the owner becomes the only point of contact"],
-  lead: "This is what a week often looks like for a business going abroad:",
+  lead: "This is what a week often looks like for a business expanding overseas:",
   weekdays: [
     ["Monday", "The consultant follows up on progress"],
     ["Tuesday", "The trading company follows up on payment"],
@@ -22,5 +22,5 @@ export const homeWhyEn: HomeWhyCopy = {
     { type: "Freight forwarder", desc: "Gets the goods there" },
     { type: "LUFÉ", desc: "One contract all the way", partner: "Jumping Freight" },
   ],
-  coverageTemplates: { covered: "{type} - {desc} covers {column}", partner: "{column} is handled by {partner}", missing: "{type} - {desc} does not cover {column}" },
+  coverageTemplates: { covered: "{type} — {desc} covers {column}", partner: "{column} is handled by {partner}", missing: "{type} — {desc} does not cover {column}" },
 };

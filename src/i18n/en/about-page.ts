@@ -7,9 +7,9 @@ export const aboutPageEn: AboutPageCopy = {
   home: "Home",
   breadcrumb: "About LUFÉ",
   hero: {
-    title: ["Starting with containers,", "walking with Taiwanese companies after arrival"],
+    title: ["We started with containers.", "Now we stay with Taiwanese brands after the goods arrive"],
     quote: "“Others drive for you. We help you find the road.”",
-    lead: "We help Taiwanese companies establish themselves in North America and Southeast Asia: market validation, channel entry, local teams, and customer service. One point of contact connects every part of going overseas. The story starts with Jumping Freight.",
+    lead: "We help Taiwanese companies establish themselves in North America and Southeast Asia: market validation, channel entry, local teams, and customer service. One point of contact connects every part of overseas expansion. The story starts with Jumping Freight.",
     scrollCue: "Scroll down",
   },
   storyChapters: [
@@ -31,8 +31,8 @@ export const aboutPageEn: AboutPageCopy = {
       title: "The goods arrived, but our clients’ work became harder every year",
       paragraphs: [
         "After each shipment, we would call to check in. What we heard was increasingly not about logistics: how to register a product locally, whose name a license should be under, and orders that came and went.",
-        "The pandemic years made this especially clear. In 09/2021, the global average rate for a 40-foot container rose to US$10,377—more than seven times the 2019 rate. For many clients, the problem was not getting goods shipped; it was that shipping them no longer made business sense.",
-        "The pandemic passed, but the pressure did not. Taiwan’s 1,710,000 small and medium enterprises sold NT$31.1 trillion in 2024, with only NT$3.2 trillion sold overseas—about one dollar in every ten. Taiwan’s population has been declining every month since 2024.",
+        "The pandemic years made this especially clear. In September 2021, the global average rate for a 40-foot container rose to US$10,377—more than seven times the 2019 rate. For many clients, the problem was not getting goods shipped; it was that shipping them no longer made business sense.",
+        "The pandemic passed, but the pressure did not. Taiwan’s 1.71 million small and medium enterprises sold NT$31.1 trillion in 2024, with only NT$3.2 trillion sold overseas—about one dollar in every ten. Taiwan’s population has been declining every month since 2024.",
       ],
       chartAfterParagraph: 1,
     },
@@ -75,12 +75,12 @@ export const aboutPageEn: AboutPageCopy = {
     ],
   },
   team: {
-    title: ["For Taiwanese companies going overseas,", "less fear and more certainty"],
+    title: ["Less fear, more certainty", "for Taiwanese companies expanding overseas"],
     lead: "That is why we founded LUFÉ. We break overseas expansion into smaller steps: spend NT$10,000–20,000 to see how the market responds, then decide whether to move forward. So the first conversation is only questions. Sometimes we will advise you to wait—that is also an answer.",
     roles: {
       taiwan: { title: "Taiwan core team", description: "Contracts, progress, and your point of contact are all in Taiwan. From the first assessment to the final chapter, you only need to work with one person. For goods that need shipping, leave customs clearance and transportation to Jumping Freight—our core business for 43 years." },
-      philippines: { title: "Philippine partners", description: "Once goods arrive in Manila, a group with years of local experience takes over. They run English-language education organizations and chain restaurants, growing a Taiwanese bubble-tea brand from one location to more than ten. The people for Market Test panels, Company Setup paperwork and errands, and Call Center services all come from here." },
-      northAmerica: { title: "North America team", description: "Another path leads to North America. The local team researches, attends trade shows, brings in buyers, and sits at the negotiating table. They are accompanying a Taiwanese fish-floss brand through its first stage in the United States. They deliver North America Retail while the point of contact in Taiwan stays the same." },
+      philippines: { title: "Philippine partners", description: "Once goods arrive in Manila, a group with years of local experience takes over. They run English-language education organizations and chain restaurants, growing a Taiwanese bubble-tea brand from one location to more than ten. The people for Market Test panels, Company Setup paperwork and legwork, and Call Center services all come from here." },
+      northAmerica: { title: "North America team", description: "Another path leads to North America. The local team researches, attends trade shows, brings in buyers, and sits at the negotiatingating table. They support a Taiwanese fish-floss brand through its first stage in the United States. They deliver North America Retail while the point of contact in Taiwan stays the same." },
     },
   },
   network: {

@@ -5,7 +5,7 @@ export const FOOTER_SOURCE_FINGERPRINT = "b5d9f6af5ae8e470";
 
 export const footerEn: FooterCopy = {
   brandPrefix: "LUF",
-  description: "Helping Taiwanese businesses establish themselves in North America and Southeast Asia: Market Test, Consignment, Company Setup and Call Center, with one point of contact through the first year abroad. Backed by Jumping Freight's 43 years of international logistics",
+  description: "Helping Taiwanese businesses establish themselves in North America and Southeast Asia: Market Test, Consignment, Company Setup and Call Center, with one point of contact through the first year abroad. Backed by Jumping Freight's 43 years of international logistics experience",
   servicesHeading: "Services",
   serviceLinks: ["All four chapters", "Market Test", "Consignment", "Company Setup", "Call Center", "North America Retail", "Operations Optimization", "The LUFÉ Method"],
   casesAndInsightsHeading: "Case studies & insights",

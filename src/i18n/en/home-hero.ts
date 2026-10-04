@@ -5,11 +5,11 @@ export const HOME_HERO_SOURCE_FINGERPRINT = "c3936aafbe734398";
 
 export const homeHeroEn: HomeHeroCopy = {
   ariaLabel: "Good products deserve a clear path abroad",
-  h1: "Helping Taiwanese businesses establish in North America and Southeast Asia — LUFÉ",
+  h1: "Helping Taiwanese businesses establish themselves in North America and Southeast Asia — LUFÉ",
   slides: [
     {
       chipLabel: "Product-market fit",
-      titleLines: ["Helping Taiwanese businesses", "establish in North America and Southeast Asia"],
+      titleLines: ["Helping Taiwanese businesses", "establish themselves in North America and Southeast Asia"],
       subtitle: "Does this market really want you? Market assessment, product testing and a decision framework — understand the odds first",
       primaryLabel: "See case studies",
       secondaryLabel: "Start a 2-minute Situation Check",
@@ -23,8 +23,8 @@ export const homeHeroEn: HomeHeroCopy = {
     },
     {
       chipLabel: "Foundation · 43 years of international logistics",
-      titleLines: ["People who have run ships", "understand the realities of going abroad"],
-      subtitle: "Going abroad is not something a report can deliver. LUFÉ builds on Jumping Freight's 43 years of international logistics experience to make product fit and channel sales work.",
+      titleLines: ["People who've spent decades in shipping", "understand what going overseas really takes"],
+      subtitle: "Overseas expansion is not something a report can deliver. LUFÉ builds on Jumping Freight's 43 years of international logistics experience to make product fit and channel sales work.",
       primaryLabel: "About Jumping Freight",
       secondaryLabel: "See all services",
     },

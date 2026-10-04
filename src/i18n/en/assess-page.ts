@@ -6,7 +6,7 @@ export const ASSESS_PAGE_SOURCE_FINGERPRINT = "f194392843705efb";
 export const assessPageEn: AssessPageCopy = {
   stageShort: { idea: "Starting out", tested: "Testing the waters", scaling: "Scaling" },
   blockerShort: { market: "Finding a market", channel: "Finding channels", cost: "Calculating costs", execution: "Lacking execution", compliance: "Handling regulations" },
-  marketShort: { us: "North America", sea: "The Philippines / Southeast Asia", japan: "Japan and Korea", europe: "Europe", other: "Other markets" },
+  marketShort: { us: "North America", sea: "the Philippines / Southeast Asia", japan: "Japan and Korea", europe: "Europe", other: "Other markets" },
   questions: [
     { id: "stage", label: "Where are you on the path to overseas expansion?", options: [
       { value: "idea", label: "Still selling in Taiwan; have not exported yet", hint: "Signal: the product is steady at home, but you have never actually landed a shipment overseas" },
@@ -30,7 +30,7 @@ export const assessPageEn: AssessPageCopy = {
   chapterHints: {
     market: { text: "People in a situation closest to yours usually begin with “Market Test” →", href: "/services/product-testing" },
     channel: { text: "People in a situation closest to yours usually begin with “Consignment” →", href: "/services/consignment" },
-    compliance: { text: "People in a situation closest to yours usually begin with “Consignment”: we handle product certification and registration →", href: "/services/consignment" },
+    compliance: { text: "People in a situation closest to yours usually begin with “Consignment”: we handle product registration →", href: "/services/consignment" },
     execution: { text: "People in a situation closest to yours usually begin with “Company Setup” →", href: "/services/localization" },
     cost: { text: "People in a situation closest to yours usually begin with “Operations Optimization” →", href: "/services/optimize" },
   },
@@ -41,14 +41,14 @@ export const assessPageEn: AssessPageCopy = {
   },
   narrative: {
     dimensions: { stage: "Stage", blocker: "Blocker", market: "Market" },
-    stageMatched: "You and they were both in {stage} — the same pressure point", stageMissed: "You are in {answer}; they were in {signature} — a different pace", blockerMatched: "Both were stuck on “{blocker}”", blockerMissed: "You are stuck on “{answer}”; they were stuck on “{signature}” — different terrain", marketMatched: "Target market matches: {market}", marketMissed: "You are looking at {answer}; they were working in {signature}",
+    stageMatched: "You're at the same stage they were: {stage}", stageMissed: "Your stage: {answer}. Theirs: {signature}. A different pace", blockerMatched: "Both were stuck on “{blocker}”", blockerMissed: "You are stuck on “{answer}”; they were stuck on “{signature}” — different terrain", marketMatched: "Target market matches: {market}", marketMissed: "You are looking at {answer}; they were working in {signature}",
     exact: { headline: "Your situation is almost exactly what they faced at the time", closing: "How they assessed the situation and what they did first can mostly be compared against your situation. The specifics still depend on your product; this case is worth reading from beginning to end." },
     close: { headline: "Two aligned — the same path, different terrain", closing: "Their decision logic can be used directly, but the specifics need to become your version. This case is worth reading to the end — learn how to think, then adapt how to act." },
     partial: { headline: "One aligned — a useful direction to consider", closing: "Learn how they thought and made decisions; do not copy what they did. If you want a comparison closer to your situation, 30 minutes is enough time to talk." },
     none: { headline: "All three dimensions differ — but the method still applies", closing: "You can scan this case quickly to see how they assessed the situation. Your situation may be better served by talking first before deciding; sometimes we suggest waiting, and that is also an answer." },
   },
   result: {
-    loading: "Loading results…", invalid: { headline: "This comparison link is incomplete", restart: "Compare again →" }, restart: "Start over", matched: "Matched", different: "Different", fullCase: "Read the full case →", alternativeMatch: "Match {score}/3", otherPath: "See the other path →", ctaTitle: "What would this method look like for your situation?", copied: "✓ Link copied", copy: "Copy this comparison", book: "Book 30 minutes →",
+    loading: "Loading results…", invalid: { headline: "This comparison link is incomplete", restart: "Compare again →" }, restart: "Start over", matched: "Matched", different: "Different", fullCase: "Read the full case →", alternativeMatch: "Match {score}/3", otherPath: "See the other path →", ctaTitle: "What would this method look like for your situation?", copied: "✓ Link copied", copy: "Copy this comparison", book: "Book your free assessment →",
   },
   scorecard: { total: "Try dragging · weighted total", go: "Proceed through the four chapters as usual", conditional: "Proceed after resolving one or two weak areas", hold: "Recommended to pause for 6–12 months until key conditions change", noGo: "Not recommended. LUFÉ will clearly explain what conditions could make it worth reconsidering", minimum: "LUFÉ's rule: below 60, we do not take the case" },
 };

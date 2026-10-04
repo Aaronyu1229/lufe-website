@@ -17,8 +17,8 @@ describe("English home page", () => {
     expectEnglishMarkup(html);
     expect(html).toContain("A brand&#x27;s first year in Manila");
     expect(html).toContain("Market Test");
-    if (getPublishedEnglishArticles().length > 0) expect(html).toContain("Practical insights on going abroad");
-    else expect(html).not.toContain("Practical insights on going abroad");
+    if (getPublishedEnglishArticles().length > 0) expect(html).toContain("Practical insights on overseas expansion");
+    else expect(html).not.toContain("Practical insights on overseas expansion");
   });
 
   it("uses the English canonical while the English site is closed", () => {

@@ -5,8 +5,8 @@ import type { HomeCtaCopy } from "@/i18n/zh/home-cta";
 export const HOME_CTA_SOURCE_FINGERPRINT = "c5f45e7d4f055b3a";
 
 export const homeCtaEn: HomeCtaCopy = {
-  heading: ["Start with an assessment,", "see the next step abroad clearly"],
+  heading: ["Start with an assessment and", "see your next step clearly"],
   line: CTA_LINE_EN,
-  primary: "Book 30 minutes →",
+  primary: "Book your free assessment →",
   secondary: "Not sure yet? Start a 2-minute Situation Check →",
 };

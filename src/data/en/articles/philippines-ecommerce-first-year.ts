@@ -11,9 +11,9 @@ export const article: EnglishArticle = {
 
 ## Scenario: a skincare owner wants to "quickly" open a Shopee store in the Philippines
 
-Your skincare products sell well on Shopee in Taiwan, and you know the seller dashboard inside out. Last month, an industry peer said Taiwanese goods are popular in the Philippines. You open the seller centre and look for the "cross-border" button, thinking that you can translate product pages into English, convert the prices to pesos, and leave the store there to see what happens.
+Your skincare products sell well on Shopee in Taiwan, and you know the seller dashboard inside out. Last month, an industry peer said Taiwanese goods are popular in the Philippines. You open the seller center and look for the "cross-border" button, thinking that you can translate product pages into English, convert the prices to pesos, and leave the store there to see what happens.
 
-After clicking through a few pages, you find that it does not work that way. Some platforms require a Philippine company registration, some cross-border programmes require a platform invitation, and your products are cosmetics, which need local Philippine FDA registration before being listed - and that registration cannot be held in your Taiwan company's name. Then a second question emerges: if goods ship from Taiwan, how long will customers wait? A third is even more practical: before ordering, someone asks in Taglish, "Do you have something for oily skin?" Who answers?
+After clicking through a few pages, you find that it does not work that way. Some platforms require a Philippine company registration, some cross-border programs require a platform invitation, and your products are cosmetics, which need local registration with the Philippine FDA before being listed — and that registration cannot be held in your Taiwan company's name. Then a second question emerges: if goods ship from Taiwan, how long will customers wait? A third is even more practical: before ordering, someone asks in Taglish, "Do you have something for oily skin?" Who answers?
 
 Those three questions are exactly the three things to settle in the first year. The platform is only the final step.
 
@@ -25,16 +25,16 @@ The Philippines' three major platforms have different rules on who can open a st
 
 | | Local store (Philippine company or citizen) | Cross-border store (Taiwan company opens directly) |
 |---|---|---|
-| Shopee Philippines | DTI or SEC registration and BIR tax registration (Form 2303) required [1] | Has a cross-border programme (SIP), by Shopee invitation only; sellers cannot apply themselves. The official page showing which sites Taiwan sellers can open requires sign-in, so this article could not verify it [2] |
+| Shopee Philippines | DTI or SEC registration and BIR tax registration (Form 2303) required [1] | Has a cross-border program (SIP), by Shopee invitation only; sellers cannot apply themselves. The official page showing which sites Taiwan sellers can open requires sign-in, so this article could not verify it [2] |
 | Lazada Philippines | Same as above | LazGlobal accepts applications with a Taiwan company registration certificate (third-party summary) [3] |
 | TikTok Shop Philippines | Official rules accept only companies registered in the Philippines; individual sellers must be Philippine citizens [4] | Not available [4] |
 
 Two rules apply across platforms:
 
-- **The Internet Transactions Act (RA 11967) has been fully implemented since 2025-06-20.** Online merchants must register with the DTI e-commerce office and disclose their company name, address, and contact details [5][9].
-- **Food, health products, and cosmetics require Philippine FDA registration regardless of the platform.** The FDA continues to work with platforms such as Shopee and Lazada to remove unregistered products [6]. A cross-border store does not remove this requirement, and the registration can only be held by a licensed company in the Philippines - which is why whose name the store uses must be decided first.
+- **The Internet Transactions Act (RA 11967) has been fully implemented since June 20, 2025.** Online merchants must register with the DTI e-commerce office and disclose their company name, address, and contact details [5][9].
+- **Food, health products, and cosmetics require registration with the Philippine FDA regardless of the platform.** The FDA continues to work with platforms such as Shopee and Lazada to remove unregistered products [6]. A cross-border store does not remove this requirement, and the registration can only be held by a licensed company in the Philippines — which is why whose name the store uses must be decided first.
 
-In practice, there are three first-year routes: establish your own Philippine company (the minimum paid-up capital requirement of 25,000,000 pesos also applies to foreign-owned online-only retail companies [7]), use a platform's cross-border programme (while the registration issue remains), or **place goods in a partner's warehouse and list the store under a licensed importer's name**. The third route is how our [Consignment package](/services/consignment) works: the licensed importer applies for and holds the registration, the agreement states that the data belongs to you, and changing partners means changing only one agreement.
+In practice, there are three first-year routes: establish your own Philippine company (the minimum paid-up capital requirement of 25,000,000 pesos also applies to foreign-owned online-only retail companies [7]), use a platform's cross-border program (while the registration issue remains), or **place goods in a partner's warehouse and list the store under a licensed importer's name**. The third route is how our [Consignment package](/services/consignment) works: the licensed importer applies for and holds the registration, the agreement states that the data belongs to you, and changing partners means changing only one agreement.
 
 ### Second: where stock sits
 
@@ -42,7 +42,7 @@ For a cross-border store, goods ship from Taiwan, customers see an "overseas sel
 
 ### Third: who replies to messages
 
-Return to the scenario's question, "Do you have something for oily skin?" Philippine consumers commonly ask questions through platform chat before ordering, in English or Taglish, and platforms also count response speed in store performance. There is no option to say "we will handle it once there are orders" - without replies, there will be no orders.
+Return to the scenario's question, "Do you have something for oily skin?" Philippine consumers commonly ask questions through platform chat before ordering, in English or Taglish, and platforms also count response speed in store performance. There is no option to say "we will handle it once there are orders" — without replies, there will be no orders.
 
 ## Which should you open first in the Philippines: Shopee, Lazada, or TikTok Shop?
 
@@ -63,7 +63,7 @@ Once the three things are settled, our general view is:
 ## Frequently asked questions
 
 **Can a Taiwan Shopee seller directly sell cross-border to the Philippines through Shopee?**
-You cannot open it simply by applying yourself. Shopee's cross-border programme is invitation-only [2], Lazada accepts applications from Taiwan companies [3], and TikTok Shop accepts only Philippine companies [4]. Products regulated by the FDA need local Philippine registration before listing regardless of where they are sold from [6].
+You cannot open it simply by applying yourself. Shopee's cross-border program is invitation-only [2], Lazada accepts applications from Taiwan companies [3], and TikTok Shop accepts only Philippine companies [4]. Products regulated by the FDA need local registration with the Philippine FDA before listing regardless of where they are sold from [6].
 
 **Should we open all three platforms in the first year?**
 We do not recommend it. Open one store first, review the numbers after three months, then decide whether to add another.
@@ -71,15 +71,15 @@ We do not recommend it. Open one store first, review the numbers after three mon
 **Who replies to messages after the listings go live?**
 In the Consignment package, a partner team looks after the store. If you will do it yourself, first make sure someone can reply during local hours.
 
-## One smallest next step
+## One small next step
 
-If you have completed a Market Test, the [Consignment package](/services/consignment) (NT$50,000-60,000, with the Market Test fee creditable) handles three things together: the store is listed under a licensed importer, stock is in a partner's warehouse, and someone looks after the store. If you have not done a Market Test, start there.
+If you have completed a Market Test, the [Consignment package](/services/consignment) (NT$50,000–60,000, with the Market Test fee credited toward the Consignment package) handles three things together: the store is listed under a licensed importer, stock is in a partner's warehouse, and someone looks after the store. If you have not done a Market Test, start there.
 
-This article is rewritten from the March 2026 article, "The 2026 Southeast Asian e-commerce market: three opportunities for Taiwanese brands." Last verified: 2026-10-01. Platform rules change faster than regulations, so check each platform's seller centre again before publishing.`],
+This article is rewritten from the March 2026 article, "The 2026 Southeast Asian e-commerce market: three opportunities for Taiwanese brands." Last verified: October 1, 2026. Platform rules change faster than regulations, so check each platform's seller center again before you list products.`],
   faq: [
     {
       q: "Can a Taiwan Shopee seller directly sell cross-border to the Philippines through Shopee?",
-      a: "You cannot open it simply by applying yourself. Shopee's cross-border programme (SIP) is invitation-only [2]; Lazada's LazGlobal accepts applications with Taiwan company registration certificates [3]; and TikTok Shop Philippines accepts only companies registered in the Philippines or Philippine citizens under its official rules [4]. Food, health products, and cosmetics also need local Philippine FDA registration before listing in the Philippines regardless of where they are sold from [6]; a cross-border store does not remove this requirement.",
+      a: "You cannot open it simply by applying yourself. Shopee's cross-border program (SIP) is invitation-only [2]; Lazada's LazGlobal accepts applications with Taiwan company registration certificates [3]; and TikTok Shop Philippines accepts only companies registered in the Philippines or Philippine citizens under its official rules [4]. Food, health products, and cosmetics also need local registration with the Philippine FDA before listing in the Philippines regardless of where they are sold from [6]; a cross-border store does not remove this requirement.",
     },
     {
       q: "Should we open all three platforms in the first year?",
@@ -100,7 +100,7 @@ This article is rewritten from the March 2026 article, "The 2026 Southeast Asian
     },
     {
       id: 2,
-      title: "Shopee cross-border programme (SIP) is invitation-only",
+      title: "Shopee cross-border program (SIP) is invitation-only",
       publisher: "EcomCrew (third-party summary)",
       url: "https://www.ecomcrew.com/how-to-become-a-cross-border-shopee-seller/",
       note: "Sellers cannot apply themselves. The official page showing which sites Taiwan sellers can activate requires sign-in and was not verified in this article.",
@@ -124,7 +124,7 @@ This article is rewritten from the March 2026 article, "The 2026 Southeast Asian
       title: "Full text of the Internet Transactions Act, RA 11967",
       publisher: "LawPhil (Philippine legal database)",
       url: "https://www.lawphil.net/statutes/repacts/ra2023/ra_11967_2023.html",
-      note: "The DTI fully implemented it from 2025-06-20; see the PNA report at https://www.pna.gov.ph/articles/1252762.",
+      note: "The DTI fully implemented it from June 20, 2025; see the PNA report at https://www.pna.gov.ph/articles/1252762.",
     },
     {
       id: 6,

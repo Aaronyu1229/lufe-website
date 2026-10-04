@@ -64,7 +64,7 @@ Once you decide on a term, **always write Incoterms 2020 plus the place on the q
 ## Frequently asked questions
 
 **For a first quotation, should I quote FOB or EXW?**
-For most first-time exporters, FOB is more suitable (consider FCA for containerised goods); EXW is not recommended. EXW is mainly suited to domestic trade, and the buyer may not be able to arrange export clearance in Taiwan [2]. With FOB, you complete export clearance and risk transfers to the buyer once goods are loaded on board [3].
+For most first-time exporters, FOB is more suitable (consider FCA for containerized goods); EXW is not recommended. EXW is mainly suited to domestic trade, and the buyer may not be able to arrange export clearance in Taiwan [2]. With FOB, you complete export clearance and risk transfers to the buyer once goods are loaded on board [3].
 
 **What is the difference between CIF and FOB?**
 The point of risk transfer is the same: when goods are loaded on board. The difference is that under CIF the seller also pays freight and minimum insurance to the destination port [4], so a CIF price is higher than an FOB price; the buyer pays duties under both.
@@ -72,15 +72,15 @@ The point of risk transfer is the same: when goods are loaded on board. The diff
 **Does DDP mean duty-paid delivery to the door? Can I quote DDP?**
 Yes. The seller delivers to the door and pays import duties [5]. But the seller must be able to arrange import clearance in the buyer’s country. If that is not possible, the ICC recommends DAP [2][5]. DDP is not recommended for a first export.
 
-## One smallest next step
+## One small next step
 
-Before replying to that email, do two things. Use [TradePilot](https://tradepiloter.com) to check the duty on your product in the buyer’s country, so you know how much the buyer will pay beyond FOB and the quotation does not stall halfway through. Then ask a freight forwarder for the cost of delivery to Kaohsiung Port, loading, and export clearance. You will then have your FOB price. If both steps are blocked, send us a message on LINE.
+Before replying to that email, do two things. Use [TradePilot](https://tradepiloter.com) to check the duty on your product in the buyer’s country, so you know how much the buyer will pay beyond FOB and the quotation does not stall halfway through. Then ask a freight forwarder for the cost of delivery to Kaohsiung Port, loading, and export clearance. You will then have your FOB price. If both steps are blocked, message us (LINE or email).
 
-This article is based on the ICC’s official Incoterms 2020 guidance and contains no freight or tariff-rate figures. Last verified: 2026-10-01.`],
+This article is based on the ICC’s official Incoterms 2020 guidance and contains no freight or tariff-rate figures. Last verified: October 1, 2026.`],
   faq: [
     {
       q: "For a first quotation, should I quote FOB or EXW?",
-      a: "For most first-time Taiwanese exporters, FOB is more suitable (consider FCA for containerised goods); EXW is not recommended. The ICC explains that EXW is mainly suited to domestic trade, and the buyer may not be able to arrange export clearance in Taiwan. With FOB, you complete export clearance and risk transfers to the buyer once goods are loaded on board, making the division of responsibility clear. For the responsibilities under FOB and common destination-port charges, see Jumping Freight’s What does FOB mean?",
+      a: "For most first-time Taiwanese exporters, FOB is more suitable (consider FCA for containerized goods); EXW is not recommended. The ICC explains that EXW is mainly suited to domestic trade, and the buyer may not be able to arrange export clearance in Taiwan. With FOB, you complete export clearance and risk transfers to the buyer once goods are loaded on board, making the division of responsibility clear. For the responsibilities under FOB and common destination-port charges, see Jumping Freight’s What does FOB mean?",
     },
     {
       q: "What is the difference between CIF and FOB?",
