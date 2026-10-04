@@ -17,5 +17,7 @@ export type EnglishArticle = {
 
 export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [agentVsDistributorExclusive.slug]: agentVsDistributorExclusive,
+  [fobCifDdpExplained.slug]: fobCifDdpExplained,
 };
 import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
+import { article as fobCifDdpExplained } from "./fob-cif-ddp-explained";
