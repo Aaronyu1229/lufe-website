@@ -12,6 +12,8 @@ import { RelatedReading, RelatedReadingContent } from "@/components/services/Rel
 import { SubsidiesCTASection } from "@/components/subsidy/SubsidiesCTASection";
 import { Carousel } from "@/components/ui/Carousel";
 import { ExpandCard } from "@/components/ui/ExpandCard";
+import { CHAPTER_ARTICLES } from "@/data/chapters";
+import { getPublishedEnglishArticles } from "@/lib/articles/english";
 
 import { expectEnglishMarkup } from "./helpers";
 
@@ -50,7 +52,10 @@ describe("shared component i18n", () => {
     expectEnglishMarkup(renderToStaticMarkup(createElement(ChapterBar, { current: "m1", locale: "en" })));
   });
 
-  it("omits related reading in English until English articles are available", async () => {
-    expect(renderToStaticMarkup(await RelatedReading({ chapter: "m1", locale: "en" }))).toBe("");
+  it("shows English related reading only for chapter articles that have English", async () => {
+    const markup = renderToStaticMarkup(await RelatedReading({ chapter: "m1", locale: "en" }));
+    const englishSlugs = new Set(getPublishedEnglishArticles().map((article) => article.slug));
+    if (CHAPTER_ARTICLES.m1.some((slug) => englishSlugs.has(slug))) expectEnglishMarkup(markup);
+    else expect(markup).toBe("");
   });
 });
