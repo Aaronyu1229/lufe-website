@@ -25,6 +25,8 @@ import { CASES_SOURCE_FINGERPRINT, CASES_EN, CASE_CARD_META_EN, INDUSTRIES_EN, M
 import { casesPageEn } from "./en/cases-page";
 import { ASSESS_PAGE_SOURCE_FINGERPRINT, assessPageEn } from "./en/assess-page";
 import { RESOURCES_PAGE_SOURCE_FINGERPRINT, resourcesPageEn } from "./en/resources-page";
+import { SUBSIDIES_EN, SUBSIDIES_SOURCE_FINGERPRINT } from "./en/subsidies";
+import { subsidiesPageEn } from "./en/subsidies-page";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -52,6 +54,8 @@ import { CASES, CASE_CARD_META, INDUSTRIES, MARKETS } from "@/data/cases";
 import { ABOUT_PHOTO_SLOTS } from "@/data/aboutPhotoSlots";
 import { assessPageZh } from "./zh/assess-page";
 import { resourcesPageZh } from "./zh/resources-page";
+import { subsidiesPageZh } from "./zh/subsidies-page";
+import { SUBSIDIES } from "@/data/subsidies";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -77,4 +81,5 @@ export const I18N_MODULES = [
   { name: "cases", zh: { copy: casesPageZh, cases: CASES, cardMeta: CASE_CARD_META, industries: INDUSTRIES, markets: MARKETS }, en: { copy: casesPageEn, cases: CASES_EN, cardMeta: CASE_CARD_META_EN, industries: INDUSTRIES_EN, markets: MARKETS_EN }, sourceFingerprint: CASES_SOURCE_FINGERPRINT, enFile: "src/i18n/en/cases.ts" },
   { name: "assess-page", zh: assessPageZh, en: assessPageEn, sourceFingerprint: ASSESS_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/assess-page.ts" },
   { name: "resources-page", zh: resourcesPageZh, en: resourcesPageEn, sourceFingerprint: RESOURCES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/resources-page.ts" },
+  { name: "subsidies", zh: { copy: subsidiesPageZh, subsidies: SUBSIDIES }, en: { copy: subsidiesPageEn, subsidies: SUBSIDIES_EN }, sourceFingerprint: SUBSIDIES_SOURCE_FINGERPRINT, enFile: "src/i18n/en/subsidies.ts" },
 ] as const;

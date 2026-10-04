@@ -1,5 +1,8 @@
 import { SUBSIDIES, type Subsidy, type SubsidyStage } from "@/data/subsidies";
 
+// Fingerprint of the Chinese subsidy data and page copy this English was translated from; registry.test.ts prints the value after the first run.
+export const SUBSIDIES_SOURCE_FINGERPRINT = "5191975067158c59";
+
 const [marketExpansion, overseasExhibition, supplyChainSupport, crossBorderEcommerce] = SUBSIDIES;
 
 export const SUBSIDIES_EN: readonly Subsidy[] = [
@@ -123,8 +126,8 @@ export const SUBSIDIES_EN: readonly Subsidy[] = [
       "Bonded-zone, customs-clearance, and tax incentives",
     ],
     coversDetail: [
-      { title: "R&D transformation subsidy", note: "Led by the Industrial Development Administration, with a total budget of NT$2,500,000,000. Dual-axis transformation, technology value addition, cross-sector integration, and market development. It can cover R&D personnel, commissioned research, testing and verification, and equipment purchases, with equipment costs no more than 40%.", limit: "NT$5,000,000 per project / NT$40,000,000 for an alliance" },
-      { title: "Overseas new-order acquisition", note: "Led by the International Trade Administration, with a total budget of NT$1,000,000,000. New overseas showrooms, service centers, distribution warehouses, agents, distributors, expanded exhibition participation, and joint-brand marketing. Company contribution 50% or more.", limit: "NT$5,000,000 per company / NT$20,000,000 jointly" },
+      { title: "R&D transformation subsidy", note: "Led by the Industrial Development Administration, with a total budget of NT$25,000,000,000. Dual-axis transformation, technology value addition, cross-sector integration, and market development. It can cover R&D personnel, commissioned research, testing and verification, and equipment purchases, with equipment costs no more than 40%.", limit: "NT$5,000,000 per project / NT$40,000,000 for an alliance" },
+      { title: "Overseas new-order acquisition", note: "Led by the International Trade Administration, with a total budget of NT$10,000,000,000. New overseas showrooms, service centers, distribution warehouses, agents, distributors, expanded exhibition participation, and joint-brand marketing. Company contribution 50% or more.", limit: "NT$5,000,000 per company / NT$20,000,000 jointly" },
       { title: "Reduced interest on trade finance", note: "Led by the Ministry of Finance, with a total credit line of NT$200,000,000,000. Annual rates are reduced by 1 percentage point for general companies, up to NT$1,000,000, and by 1.5 percentage points for small and medium enterprises, up to NT$1,200,000.", limit: "SME cap NT$1,200,000" },
       { title: "Preferential export-loan guarantees", note: "Expanded by the Small and Medium Enterprise Credit Guarantee Fund. Up to NT$60,000,000 per small or micro enterprise with a 95% guarantee; up to NT$100,000,000 per non-small-or-micro enterprise with an 80–90% guarantee. Guarantee fees are waived for 2 years.", limit: "Small or micro enterprise: NT$60,000,000" },
       { title: "Diversified-development loans for small and micro enterprises", note: "A Small and Medium Enterprise and Startup Administration program. Up to NT$35,000,000 per company at 2.22% interest. For loans up to NT$10,000,000, 1.5 percentage points of interest are waived for 6 months.", limit: "NT$35,000,000 per company" },

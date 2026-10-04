@@ -30,6 +30,10 @@ describe("LanguageToggle", () => {
     expect(render("/resources", true)).toContain('href="/en/resources"');
   });
 
+  it("links the subsidies page to its English twin", () => {
+    expect(render("/resources/subsidies", true)).toContain('href="/en/resources/subsidies"');
+  });
+
   it("falls back to /en when the page has no English yet", () => {
     expect(render("/insights", true)).toContain('href="/en"');
   });
