@@ -160,10 +160,12 @@ export const CHAPTER_ARTICLES = {
     "agent-vs-distributor-exclusive",
     "philippines-fda-lto-cpr-cpn",
     "philippines-cpr-transfer-change-importer",
+    "taiwan-food-export-philippines-steps",
+    "philippines-food-cosmetic-label-checklist",
   ],
   m9: ["manila-beverage-first-store-90-days"],
   after: [],
-  na: ["us-fda-registration-guide", "amazon-us-three-decisions"],
+  na: ["us-fda-registration-guide", "amazon-us-three-decisions", "us-fda-food-import-fsvp-prior-notice"],
   sub: ["overseas-exhibition-subsidy-115-upgrade"],
 } as const satisfies Record<ArticleChapterKey, readonly string[]>;
 

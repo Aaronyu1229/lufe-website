@@ -1375,6 +1375,288 @@ FDA 服務章程寫的處理天數是：食品經銷商 LTO 初次 14 個工作�
     lastVerified: "2026-10-04",
     updated: "2026-10-04",
   },
+  {
+    slug: "taiwan-food-export-philippines-steps",
+    category: "菲律賓",
+    date: "2026-10-10",
+    publishAt: "2026-10-10T09:00:00+08:00",
+    title: "台灣食品出口菲律賓怎麼走？從寄樣品到上架的流程與每一步文件",
+    summary: "台灣食品出口菲律賓，順序是找持 LTO 的進口商、申請樣品進口許可、備台灣官方證明送 CPR、改標籤、報關上架。用一張表列出每一步誰負責、要哪些文件，含菲律賓 FDA 樣品進口許可與食藥署自由銷售證明的官方規費與天數。",
+    readTime: "6 分鐘",
+    color: "sky",
+    content: [String.raw`> **先說答案：** 台灣食品出口菲律賓，順序是：找到持 LTO 的進口商、申請樣品進口許可、備台灣官方證明送 CPR、改標籤，最後才報關上架。
+
+## 情境：馬尼拉的採購說「先寄十盒樣品來」
+
+以下是假設的情境，不是特定客戶的故事。
+
+你家做牛軋糖。一位馬尼拉超市的採購在展會上試吃後，留了名片：「先寄十盒樣品來，我們評估看看。」
+
+你的第一個念頭是叫快遞寄過去就好。接著想到一串問題：樣品要不要申請什麼？對方說的「評估」之後，是不是還要辦菲律賓 FDA？台灣這邊要跑哪些證明？會不會樣品寄到了，正式的貨卻因為少一張文件進不去？
+
+這篇把食品出口菲律賓拆成六步，每一步寫清楚誰負責、要哪些文件。
+
+## 六個步驟一張表
+
+| 步驟 | 要做什麼 | 誰負責 | 要準備的文件 |
+|---|---|---|---|
+| 1. 找進口商 | 在菲律賓進口、經銷食品要有 LTO；所有 CPR 申請都要附有效 LTO [1][2] | 菲律賓進口商 | 對方的 LTO，看活動範圍有沒有食品進口 |
+| 2. 寄樣品 | 未登錄的加工食品為研發或測試進口，由持 LTO 的業者先向 FDA 申請進口許可 [2] | 進口商申請，你備文件 | 申請函、公證切結書、分析證明或自由銷售證明、形式發票、裝箱單、提單或空運提單 [2] |
+| 3. 台灣端備證 | 向食藥署申請自由銷售證明或衛生證明 [3] | 你（製造廠或品牌方） | 證明書正本或電子證明書 [3] |
+| 4. 送 CPR | 每個產品上市前登錄 [1] | 進口商送件 | 經銷協議或指定函、台灣官方證明、所有包裝規格的完整標籤稿 [2] |
+| 5. 改標籤 | 英文或菲律賓語、進口商名稱地址與原產國 [5] | 你改版，進口商確認 | 新版標籤 |
+| 6. 出貨報關 | 植物類原料或產品要先取得菲律賓農業部植物產業局的檢疫進口許可 [6] | 進口商與報關行 | 依品項而定 |
+
+回到情境：採購要的十盒樣品，走的是第 2 步；但真正決定能不能賣的，是第 4 步。
+
+## 第 2 步：樣品不是叫快遞寄過去就好
+
+菲律賓 FDA 的服務章程寫得很清楚：為研發或測試目的進口未登錄的加工食品，要由持 LTO 的業者申請進口許可，規費每張發票 Php 500＋1% 法研費，官方處理 3 個工作天 [2]。
+
+兩個細節要先知道：
+
+- **申請人是對方，不是你。** 許可要附有效的 LTO [2]，台灣公司沒有菲律賓 LTO，只能由進口商或經銷商申請。
+- **這張許可不能拿來做市場測試** [2]。樣品是給對方評估的，不是拿去賣、也不是拿去辦試賣活動。
+
+你這邊要準備的是分析證明或自由銷售證明，加上形式發票與裝箱單 [2]。
+
+## 第 3 步：台灣這邊要跑的證明
+
+菲律賓的 CPR 申請，進口品要附原產國主管機關發給製造廠的文件，下面五種擇一 [2]：
+
+- GMP 登記證明
+- 衛生證明
+- ISO 22000 或 FSSC 證書
+- HACCP 證書
+- 自由銷售證明，須經認可公會證明或菲律賓駐外單位驗證
+
+食藥署的申辦須知寫的是：自由銷售證明每件 3,000 元，最多 8 個工作天；衛生證明須實地查核的每件 8,000 元、最多 20 個工作天，不須實地查核的每件 3,400 元 [3]。食藥署 114 年 9 月 16 日起也提供電子證明書 [3]。
+
+如果你的工廠已經有 HACCP 或 ISO 22000 證書，先問進口商能不能直接用，省一趟申請。
+
+## 第 4 步：CPR 由進口商送，標籤要先改好
+
+CPR 是單一產品的上市前登錄 [1]，由持 LTO 的進口商送件，要附所有包裝規格的完整標籤稿 [2]。所以標籤改版（第 5 步）其實要在送件前完成。菲律賓的標示要用英文或菲律賓語，進口品還要標進口商名稱地址與原產國 [5]。
+
+2026 年起，加工食品登錄改用 FDA 新的 eServices 系統 [4]。LTO、CPR、CPN 三張證怎麼分，見[菲律賓 FDA 的 LTO、CPR、CPN 差在哪](/insights/philippines-fda-lto-cpr-cpn)。
+
+## 第 6 步：報關前先看兩件事
+
+- **原料是植物類的。** 茶葉、果乾這類植物產品，進口前要先取得菲律賓農業部植物產業局的檢疫進口許可 [6]。肉、乳、水產另有主管機關，查證日我們沒有打開原文，出貨前請進口商確認。
+- **台灣與菲律賓之間沒有自由貿易協定。** 國貿署列出的我國經濟合作與自由貿易協定夥伴中沒有菲律賓 [7]，關稅以菲律賓一般稅率計。
+
+誰付運費、在哪裡交貨，看你跟進口商談的貿易條件，躍馬的[國際貿易條件指南](https://jumping.group/insights/incoterms-trade-terms-guide)有逐條說明。
+
+## 什麼情況不建議現在出口
+
+- **還沒有進口商。** 樣品許可、CPR 都要對方的 LTO，沒有人接，前面五步都動不了。四種進入模式怎麼選，見[四種國際市場進入模式比較表](/insights/market-entry-modes-compared)。
+- **產品含肉類原料。** 主管機關與進口限制不同，不在這篇的範圍。
+- **還不知道菲律賓有沒有人買。** 樣品、證明、登錄都要錢和時間，先做[市場探查](/services/product-testing)，1～2 萬，做完可以停。
+
+## 常見問題
+
+**食品出口菲律賓要準備什麼文件？**
+台灣端是原產國官方文件擇一（GMP、衛生證明、ISO 22000 或 FSSC、HACCP、自由銷售證明）、經銷協議或指定函、完整標籤稿；菲律賓端是進口商的 LTO 與每個產品的 CPR [1][2]。
+
+**寄樣品到菲律賓要申請什麼？**
+未登錄的加工食品為研發或測試進口，要由持 LTO 的菲律賓業者向 FDA 申請進口許可，每張發票 Php 500＋1% 法研費，官方處理 3 個工作天，而且不能用於市場測試 [2]。
+
+**台灣和菲律賓有自由貿易協定嗎？**
+沒有。國貿署列出的協定夥伴中沒有菲律賓 [7]。
+
+## 一個最小的下一步
+
+回信給採購之前，先問他一句：「你們公司有 LTO 嗎？樣品進口許可可以由你們申請嗎？」對方答得出來，第 2 步就能動；答不出來，或你不確定台灣該跑哪一張證明，用 LINE 問我們一句。
+
+本文為經驗與實務整理，非法律意見。最後查證：2026-10-04。菲律賓 FDA 的規費與系統正在改版，送件前請以 FDA 現行公告為準。`],
+    faq: [{"q":"食品出口菲律賓要準備什麼文件？","a":"台灣端要準備原產國主管機關發給製造廠的文件擇一（GMP 登記、衛生證明、ISO 22000 或 FSSC、HACCP、自由銷售證明）、經銷協議或指定函，以及所有包裝規格的完整標籤稿；菲律賓端則是進口商的 LTO，與每個產品上市前的 CPR 登錄。"},{"q":"寄樣品到菲律賓要申請什麼？","a":"未登錄的加工食品為研發或測試目的進口，要由持 LTO 的菲律賓業者向 FDA 申請進口許可，規費每張發票 Php 500＋1% 法研費，官方處理 3 個工作天。這張許可不能用於市場測試。"},{"q":"台灣和菲律賓有自由貿易協定嗎？","a":"沒有。經濟部國際貿易署列出的我國經濟合作與自由貿易協定夥伴中沒有菲律賓，台灣食品進口菲律賓以一般稅率計。"}],
+    sources: [{"id":1,"title":"DOH Administrative Order No. 2014-0029（食品業者許可與加工食品登錄規則）","publisher":"菲律賓衛生部／FDA（FAOLEX 收錄全文）","url":"https://faolex.fao.org/docs/pdf/phi174226.pdf","note":"食品業者營運前須取得 LTO；加工食品上市前須登錄取得 CPR。"},{"id":2,"title":"FDA Citizen's Charter 2024（1st Edition, as of 18 July 2024）","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf","note":"研發用樣品進口許可：每張發票 Php 500＋1% LRF、3 個工作天、不得用於市場測試及應備文件；所有 CPR 申請須附有效 LTO；進口品 CPR 須附原產國主管機關文件擇一、經銷協議與完整標籤稿。"},{"id":3,"title":"外銷食品（添加物）英文衛生證明、加工衛生證明、檢驗報告、自由銷售證明申辦須知","publisher":"衛生福利部食品藥物管理署","url":"https://www.fda.gov.tw/TC/siteContent.aspx?sid=12413","note":"自由銷售證明每件 3,000 元、最多 8 個工作天；衛生證明須實地查核每件 8,000 元、最多 20 個工作天，不須查核每件 3,400 元；114 年 9 月 16 日起提供電子證明書。"},{"id":4,"title":"Philippines FDA Upgrades Food Registration with New eServices","publisher":"ChemLinked（法規媒體，報導 FDA Circular No. 2026-0002）","url":"https://food.chemlinked.com/news/food-news/philippines-fda-upgrades-food-registration-with-new-eservices","note":"2026-06-08 報導：加工食品登錄改用 eServices 新系統。"},{"id":5,"title":"DOH Administrative Order No. 2014-0030（預包裝食品標示規則修正版）","publisher":"菲律賓衛生部／FDA（FAOLEX 收錄全文）","url":"https://faolex.fao.org/docs/pdf/phi174223.pdf","note":"標示須用英文或菲律賓語；進口品須標進口商名稱地址與原產國。"},{"id":6,"title":"DA Department Circular, Series of 2016：Guidelines on the Importation of Plants, Planting Materials and Plant Products","publisher":"菲律賓農業部（FAOLEX 收錄全文）","url":"https://faolex.fao.org/docs/pdf/phi192241.pdf","note":"2016-06-09：植物產品進口前須取得植物產業局（BPI）核發的 SPS 進口許可（SPSIC）。"},{"id":7,"title":"經濟合作與自由貿易協定專區","publisher":"經濟部國際貿易署","url":"https://fta.trade.gov.tw/","note":"列出的協定夥伴含新加坡、紐西蘭、巴拉圭等，未含菲律賓。"}],
+    lastVerified: "2026-10-04",
+  },
+  {
+    slug: "philippines-food-cosmetic-label-checklist",
+    category: "菲律賓",
+    date: "2026-10-13",
+    publishAt: "2026-10-13T09:00:00+08:00",
+    title: "台灣食品標籤拿到菲律賓要改哪些地方？食品與化妝品標籤檢查清單",
+    summary: "台灣的食品標籤拿到菲律賓，要補英文、進口商與原產國、過敏原位置、日期寫法與批號；化妝品照東協標示規定補齊九項。用一張檢查表對照菲律賓 AO 2014-0030 與東協化妝品標示規定，並說明翻譯貼紙最長只能用 6 個月。",
+    readTime: "6 分鐘",
+    color: "gold",
+    content: [String.raw`> **先說答案：** 台灣的食品標籤拿到菲律賓，至少要補英文、進口商與原產國、過敏原位置、日期寫法和批號。化妝品則照東協標示規定補齊九項。
+
+## 情境：一盒鳳梨酥寄到馬尼拉，進口商回了一張清單
+
+以下是假設的情境，不是特定客戶的故事。
+
+你家做鳳梨酥，也做一款護手霜。馬尼拉的進口商看過樣品，願意幫你送菲律賓 FDA，但先回了一張清單：盒子上只有中文、沒有進口商、過敏原沒寫、有效日期寫成 2026/12/31、外盒印了大大的鳳梨照片。
+
+你看著這盒在台灣賣了很多年、標示從沒被挑過的包裝，第一個念頭是：「加一張英文貼紙不就好了？」
+
+這篇把「哪些貼紙能解決、哪些一定要改版」拆開。短版答案：在菲律賓，翻譯貼紙是過渡，不是解法。
+
+## 食品：一張表對照要改的九處
+
+菲律賓預包裝食品的標示規定是衛生部 AO 2014-0030 [1]。台灣的法源是食品安全衛生管理法第 22 條，要求以中文標示品名、內容物、淨重、廠商、原產地、有效日期、營養標示等 [4]。兩邊大方向相同，差在寫法。
+
+| 項目 | 菲律賓的規定 | 改版時檢查什麼 |
+|---|---|---|
+| 語言 | 英文或菲律賓語，或兩者並用；進口品用外文標示的，一定要附英文翻譯 [1] | 中文可以留，英文不能少 |
+| 品名 | 放在主展示面、粗體，字的大小要和面上最大的字（例如品牌名）相稱 [1] | 英文品名不能縮在角落 |
+| 成分 | 依比例由多到少；香料要分標天然、天然等同或人工 [1] | 只寫「香料」的要拆清楚 |
+| 過敏原 | 放在成分表正下方；必標含麩質穀物、甲殼類、蛋、魚、花生與大豆、乳（含乳糖）、樹堅果，以及每公斤 10 毫克以上的亞硫酸鹽 [1] | 麵粉、奶油、蛋都要列出 |
+| 淨重 | 用公制，與包裝底邊平行 [1] | 直式排版要轉向 |
+| 進口商與原產國 | 進口品要標進口商完整名稱、地址與原產國 [1] | 進口商沒定，標籤就定不了稿 |
+| 有效日期 | 依日、月、年的順序；日和年用數字，月份用英文字，例如 01 January 2012 [1] | 2026/12/31 這種寫法要改 |
+| 批號 | 壓印或用其他永久方式標在直接包裝上 [1] | 貼紙批號不算 |
+| 營養標示 | 強制；熱量、蛋白質、碳水化合物（含膳食纖維、糖）、脂肪（含飽和脂肪、反式脂肪、膽固醇）、鈉，依一般食用份量標示 [1] | 照菲律賓格式重排 |
+
+回到情境：清單上的五個問題，全都在這張表裡。
+
+## 包裝照片與宣稱：台灣文案最容易出事的地方
+
+**照片要和內容物一致。** 標籤上印水果、蔬菜、肉、魚、蛋的照片，產品裡就要真的有這些原料或其天然衍生物；如果另外加了香料來加強風味，要在照片旁邊明顯標「Flavor Added」[1]。情境裡的鳳梨照片，要看餡料裡實際有沒有鳳梨。
+
+**不能宣稱的話。** AO 2014-0030 禁止標籤宣稱食品能預防、治療疾病，也不能用 wholesome、healthful 這類講衛生的字眼；產品本來就不含的東西，也不能特別標「不含」[1]。營養與健康宣稱要照 FDA 指引與 Codex 準則 [1]。台灣常見的「無添加」字樣，翻成英文前要先對這幾條。
+
+## 貼紙能解決哪些事
+
+- **翻譯可以先用貼紙，但最長 6 個月。** 現有標籤用完之前，英文或菲律賓語翻譯可以用臨時貼紙；資訊要正確、清楚，全部放在同一張貼紙上，而且不能輕易撕掉 [1]。
+- **產品授權號碼可以用貼紙加。** 由 LTO 號碼與登錄號碼組成 [1]。
+- **進口商名稱地址能不能用貼紙加，AO 沒有明文。** 查證日我們查不到官方說法，送件前請進口商向 FDA 確認。
+
+所以比較穩的做法是：第一批用貼紙，同時開始改版。
+
+## 化妝品：照東協標示規定補齊九項
+
+菲律賓的化妝品跟著東協化妝品指令走。外包裝（沒有外包裝就印在直接包裝）要有：品名與功能、使用方法、全成分、製造國、負責在當地上市的公司名稱與地址、內容量、製造商批號、製造日或有效日期、特殊注意事項 [2]。
+
+- **全成分**依重量由多到少，濃度 1% 以下的可以不照順序 [2]。
+- **日期**前面要寫「expiry date」或「best before」；最短保存期限不到 30 個月的產品，一定要標有效日期 [2]。
+- **語言**是英文及／或本國語言或消費者看得懂的語言，會員國可以要求品名與功能、使用方法、負責公司、內容量、注意事項用本國語言 [2]。
+- 菲律賓 FDA 收化妝品資料時要附標籤樣本；原標籤不符東協規定的，要另附符合規定的標示稿 [3]。
+
+「負責在當地上市的公司」就是持有通報證的那一家。證掛在誰名下，我們在[菲律賓 FDA 的 LTO、CPR、CPN 差在哪](/insights/philippines-fda-lto-cpr-cpn)拆過。
+
+## 改版順序：五步
+
+1. **先確定進口商。** 標籤要寫他的名稱與地址；整條流程見[台灣食品出口菲律賓的流程與文件](/insights/taiwan-food-export-philippines-steps)。
+2. **拿成分表對過敏原與香料。**
+3. **照菲律賓格式重排營養標示。**
+4. **出英文標示稿，給進口商確認後再送件。**
+5. **第一批用翻譯貼紙，6 個月內換成新包裝。** 證拿到之後才被查到標籤違規、6 個月內沒改正的，食品 CPR 會被撤銷 [5]。
+
+## 什麼情況不建議現在改版
+
+- **還沒找到進口商。** 標籤少一欄，印了也要重印。
+- **還不知道菲律賓有沒有人買。** 改版要錢，先做[市場探查](/services/product-testing)，1～2 萬，做完可以停。
+- **產品要宣稱療效。** 那可能是藥品，不在這份清單的範圍。
+
+## 常見問題
+
+**食品標籤上應該標示哪些內容？**
+在菲律賓，預包裝食品至少要有品名、成分、過敏原、淨重、業者名稱地址（進口品加進口商與原產國）、批號、有效日期與營養標示 [1]。台灣則依食品安全衛生管理法第 22 條，以中文標示品名、內容物、淨重、食品添加物、廠商資訊、原產地、有效日期、營養標示等 [4]。
+
+**菲律賓的食品標籤可以只有中文嗎？**
+不行。標示要用英文或菲律賓語，進口品用外文標示的一定要附英文翻譯 [1]。
+
+**英文貼紙可以用多久？**
+翻譯貼紙是現有標籤用完前的過渡做法，最長 6 個月，而且要放在同一張、不易撕掉的貼紙上 [1]。
+
+## 一個最小的下一步
+
+拿一盒現在的包裝，照上面那張表逐列打勾。打不了勾的那幾列，就是改版清單；看不懂原文怎麼解讀的那一列，用 LINE 問我們一句。
+
+本文為經驗與實務整理，非法律意見。最後查證：2026-10-04。菲律賓 FDA 規定以當期公告為準。`],
+    faq: [{"q":"食品標籤上應該標示哪些內容？","a":"在菲律賓，預包裝食品依衛生部 AO 2014-0030，至少要有品名、成分、過敏原、淨重、業者名稱地址（進口品要加進口商與原產國）、批號、有效日期與營養標示。台灣則依食品安全衛生管理法第 22 條，以中文標示品名、內容物、淨重、食品添加物、廠商資訊、原產地、有效日期、營養標示等。"},{"q":"菲律賓的食品標籤可以只有中文嗎？","a":"不行。菲律賓規定標示要用英文或菲律賓語，或兩者並用；進口食品用外文標示的，一定要附上英文翻譯。"},{"q":"英文貼紙可以用多久？","a":"翻譯貼紙是現有標籤用完之前的過渡做法，最長 6 個月；所有資訊要正確、清楚，放在同一張貼紙上，而且貼紙不能輕易撕掉。比較穩的做法是第一批用貼紙，同時開始改版。"}],
+    sources: [{"id":1,"title":"DOH Administrative Order No. 2014-0030（預包裝食品標示規則修正版）","publisher":"菲律賓衛生部／FDA（FAOLEX 收錄全文）","url":"https://faolex.fao.org/docs/pdf/phi174223.pdf","note":"語言須為英文或菲律賓語，外文標示須附英文翻譯；進口品須標進口商名稱地址與原產國；過敏原置於成分表正下方；有效日期依日、月、年，月份用英文字；批號須永久標示；營養標示強制；翻譯貼紙最長 6 個月；禁止療效、wholesome 等宣稱與照片規定。"},{"id":2,"title":"Appendix II：ASEAN Cosmetic Labeling Requirements","publisher":"東協秘書處（ASEAN Cosmetic Directive）","url":"https://asean.org/wp-content/uploads/2012/05/Appendix-II-ASEAN-Cosmetic-Labeling-Requirements.pdf","note":"外包裝必要標示九項；全成分依重量遞減、濃度 1% 以下可不依序；日期前標 expiry date 或 best before，保存期限不到 30 個月須標有效日期；語言規定。"},{"id":3,"title":"Bureau Circular No. 2006-017","publisher":"菲律賓 FDA（前身 BFAD）","url":"https://www.fda.gov.ph/wp-content/uploads/2021/08/Bureau-Circular-No.-2006-017.pdf","note":"化妝品須附標籤樣本；原標籤不符東協標示規定者，須另附符合規定的標示稿。"},{"id":4,"title":"食品安全衛生管理法第 22 條","publisher":"法務部全國法規資料庫","url":"https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0040001&flno=22","note":"食品容器或外包裝應以中文及通用符號明顯標示品名、內容物、淨重、食品添加物、廠商、原產地、有效日期、營養標示等事項。"},{"id":5,"title":"DOH Administrative Order No. 2014-0029（食品業者許可與加工食品登錄規則）","publisher":"菲律賓衛生部／FDA（FAOLEX 收錄全文）","url":"https://faolex.fao.org/docs/pdf/phi174226.pdf","note":"產品或標籤違規，6 個月內未改正即撤銷 CPR。"}],
+    lastVerified: "2026-10-04",
+  },
+  {
+    slug: "us-fda-food-import-fsvp-prior-notice",
+    category: "北美市場",
+    date: "2026-10-15",
+    publishAt: "2026-10-15T09:00:00+08:00",
+    title: "FSVP 是什麼？美國 FDA 食品進口要做的三件事：設施登記、FSVP、Prior Notice",
+    summary: "FSVP 是美國進口商對境外食品供應商做的驗證，不是台灣工廠去申請的證。一般食品進美國，要工廠設施登記、進口商執行 FSVP、每批貨到港前事前通報。用一張表看誰負責、沒做會怎樣，並整理水產品、低酸罐頭與標示的特別規定。",
+    readTime: "6 分鐘",
+    color: "ember",
+    content: [String.raw`> **先說答案：** FSVP 是美國進口商對你的台灣工廠做的供應商驗證，不是你去申請的證。一般食品進美國，還要工廠設施登記、每批貨到港前事前通報。
+
+## 情境：洛杉磯的買家問「你們有 FSVP 嗎？」
+
+以下是假設的情境，不是特定客戶的故事。
+
+你家工廠做沙茶醬和辣椒醬，台灣通路穩定。洛杉磯一家亞洲超市的買家看過樣品，回信問：「你們有 FDA 登記號嗎？誰當 FSVP importer？」
+
+你上網查 FSVP，跳出來的是一串英文的訓練課程和顧問服務。你開始擔心：這是不是又一張要花錢申請的證？要多久？工廠要不要先被美國人稽核？
+
+先講結論：FSVP 不是證，是美國進口商的義務；但進口商做 FSVP 時，要的資料多半在你手上。下面把三件事拆開。
+
+## 三件事一張表
+
+| 事項 | 要做什麼 | 誰負責 | 沒做會怎樣 |
+|---|---|---|---|
+| 設施登記 | 製造、加工、包裝或儲存供美國食用食品的設施向 FDA 登記；境外設施要指定美國代理人；每逢偶數年 10 月 1 日到 12 月 31 日更新；不收費 [1][2] | 台灣工廠 | 食品可能在港口被扣留 [1] |
+| FSVP | 進口商做危害分析、評估供應商表現與食品風險、執行驗證活動 [3] | 美國進口商 | 報關時要填 FSVP 進口商的名稱、電子郵件與 FDA 認可的設施識別碼，FDA 認可的是 DUNS 號碼 [3][4] |
+| Prior Notice | 每批貨到港前向 FDA 通報：公路 2 小時、鐵路與空運 4 小時、海運 8 小時前；郵寄要在寄出前 [5] | 進口商或報關行 | 拒絕入境並留在港口 [5] |
+
+回到情境：買家問的兩件事，登記號是你工廠的事，FSVP importer 是他們那邊要有人當。
+
+## FSVP 是什麼？台灣工廠會被要什麼
+
+FSVP（外國供應商驗證計畫）要確保境外供應商生產的食品，公共衛生保護程度至少和美國對危害分析與預防性控制的要求相同，而且沒有摻偽、過敏原標示正確 [3]。
+
+**誰是 FSVP 進口商？** 入境時的美國貨主或收貨人；如果沒有美國貨主或收貨人，就是境外貨主指定、簽署同意書的美國代理人 [3]。台灣工廠本身不能當。
+
+**進口商的驗證活動**包括到廠稽核、抽樣檢驗、審查供應商的食品安全紀錄等 [3]。對你來說，實際會被要的是：食品安全計畫、檢驗報告，或配合一次稽核。
+
+兩個細節：
+
+- 紀錄至少保存 2 年，非英文的紀錄 FDA 要求時要提供英譯 [3]。中文的 HACCP 文件，要能翻成英文。
+- 極小型進口商適用簡化規定，門檻是前三年平均人類食品銷售加進口額低於 100 萬美元並經通膨調整 [3]；FDA 公布的調整後數字是 US$1,409,899 [6]。
+
+## 兩種特別情況：水產品、低酸罐頭與酸化食品
+
+**水產品走另一條規定。** 境外供應商須遵守、且已符合水產品 HACCP 規定的魚和水產品，不適用 FSVP；進口商改依 21 CFR 123.12 執行驗證 [7][8]。鹿飛的[魚鬆案例](/cases/fish-floss-us-fda)寫到：只用魚做的魚鬆由 FDA 管轄、屬於水產品；混入一定比例的肉鬆，就改由美國農業部管轄；乾燥的魚鬆要不要走低酸罐頭程序，要看實測的水活性 [9]。
+
+**低酸罐頭與酸化食品要先登記製程。** 加工廠開始生產後 10 天內以 Form FDA 2541 登記，並在登記後 60 天內、新產品包裝前申報製程；境外加工廠沒有做，FDA 會請財政部拒絕該產品入境 [10]。表格依產品不同，酸化食品用 2541e，低酸罐頭用 2541d、2541f 或 2541g [11]。情境裡的沙茶醬、辣椒醬，要先確認是不是酸化食品。
+
+## 標示：營養標示與 9 大過敏原
+
+- **營養標示**：除豁免項目外，供人食用並販售的食品都要有 [12]。
+- **過敏原**：2004 年 FALCPA 列了 8 種主要過敏原；2021 年 4 月 23 日簽署的 FASTER Act 把芝麻列為第 9 種，2023 年 1 月 1 日生效 [13]。沙茶醬常見的芝麻、黃豆、魚，都要逐一對。
+
+## 2026 年要知道的一件事
+
+FDA 的食品追溯規則（Food Traceability Rule），FDA 提案把合規日從 2026 年 1 月 20 日延到 2028 年 7 月 20 日 [14]；國會在 2026 年的撥款法案中也指示 FDA 在這天之前不得執法 [15]。延期的最終規則，查證日我們在聯邦公報查不到。
+
+## 什麼情況不建議現在做這些事
+
+- **還沒有美國進口商。** FSVP 與事前通報都要有人做，沒有人接，你這邊準備得再齊也出不了貨。
+- **產品含肉類。** 管轄可能改到美國農業部，不在這篇的範圍。
+- **產品是保健品。** 規定不同，見[美國 FDA 認證怎麼申請？保健品出口美國的五件事](/insights/us-fda-registration-guide)。
+- **還不知道美國通路要不要。** 先花小錢確認通路要不要你，見[北美通路](/services/north-america)。
+
+## 常見問題
+
+**fsvp是什麼？**
+FSVP 是美國的外國供應商驗證計畫，由美國進口商對境外食品供應商做危害分析、評估與驗證，確保進口食品的安全程度符合美國規定 [3]。它不是台灣工廠去申請的證。
+
+**台灣工廠可以自己當 FSVP 進口商嗎？**
+不行。FSVP 進口商是入境時的美國貨主或收貨人；沒有的話，是境外貨主指定、簽署同意書的美國代理人 [3]。
+
+**FDA 食品設施登記要錢嗎？**
+不用，登記免費 [1][2]。FDA 也不發登記證書，不承認民間業者出具的登記證明 [2]。
+
+## 一個最小的下一步
+
+回信給買家之前，先寫三行：工廠的 FDA 登記號、誰當 FSVP 進口商、誰送事前通報。寫不出來的那一行，用 LINE 問我們一句。
+
+本文為經驗與實務整理，非法律意見。最後查證：2026-10-04。FDA 規定以官方頁面當期版本為準。`],
+    faq: [{"q":"fsvp是什麼？","a":"FSVP（Foreign Supplier Verification Program，外國供應商驗證計畫）是美國進口商的義務：對境外食品供應商做危害分析、評估供應商表現，並執行到廠稽核、抽樣檢驗或審查紀錄等驗證活動，確保進口食品的安全程度符合美國規定。它不是台灣工廠去申請的證。"},{"q":"台灣工廠可以自己當 FSVP 進口商嗎？","a":"不行。FSVP 進口商是入境時的美國貨主或收貨人；如果沒有美國貨主或收貨人，就是境外貨主指定、並簽署同意書的美國代理人。"},{"q":"FDA 食品設施登記要錢嗎？","a":"不用，FDA 食品設施登記免費，境外設施要指定美國代理人，每逢偶數年 10 月 1 日到 12 月 31 日更新。FDA 也不發登記證書，不承認民間業者出具的登記證明。"}],
+    sources: [{"id":1,"title":"21 CFR Part 1 Subpart H：食品設施登記","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-1/subpart-H","note":"誰要登記、境外設施須有美國代理人、偶數年 10 月 1 日至 12 月 31 日更新、不收登記費；未登記者食品可能在港口被扣留。"},{"id":2,"title":"食品設施是否須繳登記費、及民間業者宣稱與 FDA 有關的問答","publisher":"美國 FDA","url":"https://www.fda.gov/food/guidance-regulation-food-and-dietary-supplements/questions-regarding-whether-food-facilities-are-required-pay-registration-fees-and-private","note":"登記免費；FDA 不發登記證書，也不承認民間業者出具的登記證書。"},{"id":3,"title":"21 CFR Part 1 Subpart L：外國供應商驗證計畫（FSVP）","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-1/subpart-L","note":"FSVP 進口商定義、危害分析、供應商評估與驗證活動、報關申報、紀錄保存 2 年與英譯、極小型進口商門檻。"},{"id":4,"title":"FSMA Final Rule on Foreign Supplier Verification Programs","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-final-rule-foreign-supplier-verification-programs-fsvp-importers-food-humans-and-animals","note":"FDA 認可 DUNS 號碼為 FSVP 可用的設施識別碼。"},{"id":5,"title":"21 CFR Part 1 Subpart I：進口食品事前通報（Prior Notice）","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-1/subpart-I","note":"公路 2 小時、鐵路與空運 4 小時、海運 8 小時前通報；郵寄須於寄出前；未通報者拒絕入境並留在港口。"},{"id":6,"title":"FSMA Inflation Adjusted Cut Offs","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-inflation-adjusted-cut-offs","note":"FSVP 極小型進口商（人類食品）通膨調整後門檻 US$1,409,899。"},{"id":7,"title":"21 CFR 1.501：FSVP 適用範圍","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-1/subpart-L/section-1.501","note":"供應商須遵守且已符合 part 120 或 part 123 的果汁、魚和水產品不適用 FSVP，改依 120.14 或 123.12。"},{"id":8,"title":"21 CFR 123.12：進口水產品的特別規定","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-123/subpart-A/section-123.12","note":"水產品進口商須有書面驗證程序，確認境外加工廠符合水產品 HACCP 規定。"},{"id":9,"title":"台灣魚鬆想進美國，第一關卡在哪裡？","publisher":"鹿飛 LUFÉ 案例","url":"https://lufe.world/cases/fish-floss-us-fda","note":"只用魚做的魚鬆由 FDA 管轄、屬水產品；混入一定比例肉鬆即改由美國農業部管轄；是否走低酸罐頭程序看實測水活性。"},{"id":10,"title":"21 CFR Part 108：緊急許可管制（低酸罐頭與酸化食品登記）","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-108","note":"開始生產後 10 天內以 Form FDA 2541 登記，登記後 60 天內且新產品包裝前申報製程；境外加工廠未遵守，產品拒絕入境。"},{"id":11,"title":"Establishment Registration & Process Filing for Acidified and Low-Acid Canned Foods","publisher":"美國 FDA","url":"https://www.fda.gov/food/registration-food-facilities-and-other-submissions/establishment-registration-process-filing-acidified-and-low-acid-canned-foods-lacf","note":"酸化食品用 Form FDA 2541e；低酸罐頭用 2541d、2541f 或 2541g。"},{"id":12,"title":"21 CFR 101.9：食品營養標示","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-101/subpart-A/section-101.9","note":"除豁免外，供人食用並販售的食品都須提供營養標示。"},{"id":13,"title":"Food Allergies","publisher":"美國 FDA","url":"https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies","note":"2004 年 FALCPA 列 8 種主要過敏原；2021 年 4 月 23 日 FASTER Act 將芝麻列為第 9 種，2023 年 1 月 1 日生效。"},{"id":14,"title":"Requirements for Additional Traceability Records for Certain Foods：Compliance Date Extension（Proposed Rule）","publisher":"美國聯邦公報 Federal Register","url":"https://www.federalregister.gov/documents/2025/08/07/2025-14967/requirements-for-additional-traceability-records-for-certain-foods-compliance-date-extension","note":"2025-08-07 提案：合規日由 2026 年 1 月 20 日延 30 個月至 2028 年 7 月 20 日。"},{"id":15,"title":"FSMA Final Rule on Requirements for Additional Traceability Records for Certain Foods","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-final-rule-requirements-additional-traceability-records-certain-foods","note":"國會在 2026 年的撥款法案中指示 FDA 在同一日期前不執行食品追溯規則。"}],
+    lastVerified: "2026-10-04",
+  },
 ] as const;
 
 export function getArticleBySlug(slug: string): Article | undefined {
@@ -1403,6 +1685,9 @@ const SLUG_IMAGE_MAP: Record<string, string> = {
   "philippines-fda-lto-cpr-cpn": "/images/services/pillar-team-collab-1600.webp",
   "philippines-cpr-transfer-change-importer": "/images/contact/form-bg-conversation-1600.webp",
   "market-entry-modes-compared": "/images/services/services-optimize-whiteboard-1600.webp",
+  "taiwan-food-export-philippines-steps": "/images/services/services-hero-dhl-1600.webp",
+  "philippines-food-cosmetic-label-checklist": "/images/services/stage-03-retail-aisle-1600.webp",
+  "us-fda-food-import-fsvp-prior-notice": "/images/hero-video/optimize-containers-1600.webp",
 };
 
 export function getArticleImage(article: Article): string {
