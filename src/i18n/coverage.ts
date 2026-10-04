@@ -1,5 +1,4 @@
 export const EN_PENDING: Readonly<Record<string, string>> = {
-  "/about/aaron-yu": "Plan2-D",
   "/assess": "Plan2-D",
   "/assess/result": "Plan2-D",
   "/resources": "Plan2-E",

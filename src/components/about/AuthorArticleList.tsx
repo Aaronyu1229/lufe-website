@@ -27,7 +27,7 @@ function categoryFromLocation(categories: readonly Category[]): AuthorArticleFil
   return categories.includes(category as Category) ? category as Category : "all";
 }
 
-export function AuthorArticleList({ articles }: { readonly articles: readonly InsightCard[] }) {
+export function AuthorArticleList({ articles, emptyLabel }: { readonly articles: readonly InsightCard[]; readonly emptyLabel?: string }) {
   const categories = useMemo(
     () => CATEGORY_ORDER.filter((category) => articles.some((article) => article.category === category)),
     [articles],
@@ -59,6 +59,8 @@ export function AuthorArticleList({ articles }: { readonly articles: readonly In
     window.addEventListener("popstate", syncCategory);
     return () => window.removeEventListener("popstate", syncCategory);
   }, [categories]);
+
+  if (articles.length === 0) return emptyLabel ? <p className="text-[15.5px] leading-[1.8] text-tx2">{emptyLabel}</p> : null;
 
   return (
     <>
