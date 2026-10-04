@@ -7,16 +7,18 @@ vi.mock("@/lib/articles/repository", () => ({
 }));
 
 import EnglishHome, { metadata } from "@/app/en/page";
+import { getPublishedEnglishArticles } from "@/lib/articles/english";
 
 import { expectEnglishMarkup } from "./helpers";
 
 describe("English home page", () => {
-  it("renders complete English without insights", () => {
+  it("renders complete English, with the insights section only when English articles exist", () => {
     const html = renderToStaticMarkup(createElement(EnglishHome));
     expectEnglishMarkup(html);
     expect(html).toContain("A brand&#x27;s first year in Manila");
     expect(html).toContain("Market Test");
-    expect(html).not.toContain("Practical insights on going abroad");
+    if (getPublishedEnglishArticles().length > 0) expect(html).toContain("Practical insights on going abroad");
+    else expect(html).not.toContain("Practical insights on going abroad");
   });
 
   it("uses the English canonical while the English site is closed", () => {
