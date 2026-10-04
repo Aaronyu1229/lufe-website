@@ -19,6 +19,9 @@ describe("number extraction", () => {
   it("converts comma-grouped 萬 amounts in Chinese", () => {
     expect(extractNumbers("聯合申請最高 2,000 萬", "zh")).toEqual([20000000]);
   });
+  it("normalizes ROC years, 億 amounts, and 成 or 折 percentages", () => {
+    expect(extractNumbers("115 年度總經費 930 億，保證成數 9.5 成，保費最低 1 折", "zh").sort((a, b) => a - b)).toEqual([10, 95, 2026, 93000000000]);
+  });
   it("reads comma-grouped English numbers", () => {
     expect(extractNumbers("NT$10,000–20,000 for the first 10 brands, Q1 2027", "en").sort((x, y) => x - y)).toEqual([1, 10, 2027, 10000, 20000]);
   });
