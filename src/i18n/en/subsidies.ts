@@ -1,7 +1,7 @@
 import { SUBSIDIES, type Subsidy, type SubsidyStage } from "@/data/subsidies";
 
 // Fingerprint of the Chinese subsidy data and page copy this English was translated from; registry.test.ts prints the value after the first run.
-export const SUBSIDIES_SOURCE_FINGERPRINT = "f9c0e2754043d422";
+export const SUBSIDIES_SOURCE_FINGERPRINT = "2cb9297c3ccb2037";
 
 const [marketExpansion, overseasExhibition, supplyChainSupport, crossBorderEcommerce] = SUBSIDIES;
 
