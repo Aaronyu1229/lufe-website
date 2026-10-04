@@ -1,6 +1,11 @@
 import Link from "next/link";
 
 import { TieredImage } from "@/components/TieredImage";
+import { CATEGORY_LABELS_EN } from "@/data/en/article-categories";
+import type { Category } from "@/data/articles";
+import { insightsEn } from "@/i18n/en/insights";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { insightsZh } from "@/i18n/zh/insights";
 import type { InsightCard } from "@/lib/articles/presentation";
 
 const colorMap: Record<string, string> = {
@@ -15,10 +20,17 @@ interface InsightArticleCardProps {
   readonly showSecondaryCategory?: boolean;
   readonly sizes?: string;
   readonly animationDelay?: string;
+  readonly locale?: Locale;
 }
 
 function isExternalImage(image: string): boolean {
   return /^https?:\/\//.test(image);
+}
+
+function categoryLabel(locale: Locale, label: string): string {
+  return locale === "en" && label in CATEGORY_LABELS_EN
+    ? CATEGORY_LABELS_EN[label as Category]
+    : label;
 }
 
 /** Shared article card used by the insights index and Aaron's author page. */
@@ -28,9 +40,14 @@ export function InsightArticleCard({
   showSecondaryCategory = false,
   sizes = "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 360px",
   animationDelay,
+  locale = "zh",
 }: InsightArticleCardProps) {
+  const copy = locale === "en" ? insightsEn : insightsZh;
+  const primaryLabel = categoryLabel(locale, primaryCategory);
+  const secondaryLabel = categoryLabel(locale, article.category);
+
   return (
-    <Link href={`/insights/${article.slug}`} style={animationDelay ? { animationDelay } : undefined} className="lufe-card lufe-insight-card group min-w-0 overflow-hidden border border-bd bg-white hover:border-gold/60">
+    <Link href={localizedHref(locale, `/insights/${article.slug}`)} style={animationDelay ? { animationDelay } : undefined} className="lufe-card lufe-insight-card group min-w-0 overflow-hidden border border-bd bg-white hover:border-gold/60">
       <div className="relative aspect-[16/10] overflow-hidden">
         {article.image ? (
           isExternalImage(article.image)
@@ -44,13 +61,13 @@ export function InsightArticleCard({
       </div>
       <div className="min-w-0 p-5 md:p-6">
         <div className="mb-3 flex flex-wrap items-center gap-2">
-          <span className={`px-2.5 py-[3px] text-[11px] font-medium ${colorMap[article.color]}`}>{primaryCategory}</span>
-          {showSecondaryCategory && article.category !== primaryCategory ? <span className="border border-bd px-2 py-[2px] text-[10px] text-tx3">{article.category}</span> : null}
+          <span className={`px-2.5 py-[3px] text-[11px] font-medium ${colorMap[article.color]}`}>{primaryLabel}</span>
+          {showSecondaryCategory && article.category !== primaryCategory ? <span className="border border-bd px-2 py-[2px] text-[10px] text-tx3">{secondaryLabel}</span> : null}
           <span className="text-[11px] text-tx3">{article.readTime}</span>
         </div>
         <h2 className="h3 mb-2 text-tx group-hover:text-gold-d">{article.title}</h2>
         <p className="line-clamp-3 text-[14.5px] leading-[1.8] text-tx2">{article.summary}</p>
-        <div className="mt-4 flex items-center justify-between gap-3 text-[13px] text-tx3"><span>{article.date}</span><span className="shrink-0 font-medium text-gold-d">閱讀更多 →</span></div>
+        <div className="mt-4 flex items-center justify-between gap-3 text-[13px] text-tx3"><span>{article.date}</span><span className="shrink-0 font-medium text-gold-d">{copy.card.readMore}</span></div>
       </div>
     </Link>
   );
