@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { LinkedInIcon } from "@/components/icons/LineIcons";
 import { HERO_VIDEOS } from "@/data/heroVideos";
+import { englishOnlyTrust } from "@/i18n/en-only/trust";
 import { aaronAuthorPageEn } from "@/i18n/en/aaron-author-page";
 import { localizedHref, type Locale } from "@/i18n/locale";
 import { aaronAuthorPageZh } from "@/i18n/zh/aaron-author-page";
@@ -49,6 +50,27 @@ export function AaronAuthorPage({ locale = "zh" }: { readonly locale?: Locale })
           </div>
         </div>
       </section>
+
+      {locale === "en" ? (
+        <section className="bg-cream py-[72px] md:py-[88px]">
+          <div className="lufe-container">
+            <div className="max-w-[820px]">
+              <h2 className="h2 text-tx">{englishOnlyTrust.aaron.heading}</h2>
+              <p className="mt-5 text-[17px] leading-[1.8] text-tx2">
+                {englishOnlyTrust.aaron.bodyBeforeEmail}
+                <a href={`mailto:${englishOnlyTrust.aaron.email}`} className="underline underline-offset-4 hover:text-tx">
+                  {englishOnlyTrust.aaron.email}
+                </a>
+                {englishOnlyTrust.aaron.bodyBeforeLinkedIn}
+                <a href="https://www.linkedin.com/in/wibp/" target="_blank" rel="me noopener" className="underline underline-offset-4 hover:text-tx">
+                  {englishOnlyTrust.aaron.linkedIn}
+                </a>
+                {englishOnlyTrust.aaron.bodyAfterLinkedIn}
+              </p>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
         <div className="lufe-container">

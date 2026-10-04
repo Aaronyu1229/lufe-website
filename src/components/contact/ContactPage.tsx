@@ -8,6 +8,7 @@ import { ScrollCue } from "@/components/ScrollCue";
 import { CalendarClockIcon, MailIcon, MapPinIcon, MessageIcon } from "@/components/icons/LineIcons";
 import { ChoiceGroup } from "@/components/ui/ChoiceGroup";
 import { HERO_VIDEOS } from "@/data/heroVideos";
+import { englishOnlyTrust } from "@/i18n/en-only/trust";
 import { contactPageEn } from "@/i18n/en/contact-page";
 import { localizedHref, type Locale } from "@/i18n/locale";
 import { contactPageZh } from "@/i18n/zh/contact-page";
@@ -199,6 +200,18 @@ export function ContactPage({ locale = "zh" }: { readonly locale?: Locale } = {}
           </aside>
 
           <section className="min-w-0 bg-cream p-6 md:p-10">
+            {locale === "en" ? (
+              <div className="mb-8 border-b border-bd pb-8">
+                <h2 className="h3">{englishOnlyTrust.contact.heading}</h2>
+                <p className="mt-3 text-[15px] leading-[1.8] text-tx2">
+                  {englishOnlyTrust.contact.bodyBeforeJumpingFreight}
+                  <a href="https://jumping.group" className="underline underline-offset-4 hover:text-tx">
+                    {englishOnlyTrust.contact.jumpingFreight}
+                  </a>
+                  {englishOnlyTrust.contact.bodyAfterJumpingFreight}
+                </p>
+              </div>
+            ) : null}
             <h2 className="h3">{copy.form.title}</h2>
             <p className="mb-8 mt-3 text-[15px] text-tx2">{copy.form.lead}</p>
             {submitted ? (
