@@ -2,35 +2,37 @@
 
 import type { MouseEvent } from "react";
 
+import { homeJumpingEn } from "@/i18n/en/home-jumping";
+import { type Locale } from "@/i18n/locale";
+import { homeJumpingZh, type HomeJumpingCopy } from "@/i18n/zh/home-jumping";
+
 import styles from "./JumpingRoute.module.css";
 
 type RouteNode = {
+  readonly id: string;
   readonly title: string;
   readonly note: string;
   readonly side: "jumping" | "handoff" | "lufe";
   readonly target?: string;
 };
 
-export const JUMPING_COPY = {
-  eyebrow: "躍馬企業 × 鹿飛",
-  title: ["從你的工廠，到菲律賓的貨架，", "是同一條路"],
-  intro: "這條路的前半段，躍馬企業走了 43 年：500 多個出口案件，30 多個國家。看了這麼多年，我們最清楚貨櫃門打開之後，品牌會卡在哪裡。所以成立了鹿飛，專門處理貨到了之後的事。",
-  jumping: { title: "躍馬企業 · 把貨送到", body: "報關、倉儲、海空運、最後一哩。貨怎麼過去、到岸成本大概多少，不用另外找人問。" },
-  lufe: { title: "鹿飛 · 到了之後", body: "陪台灣品牌走完在菲律賓的第一年。這四步，就在下面。" },
-  primaryExit: "往下看這四章 ↓",
-  secondaryExit: "現在只需要把貨送出去？找躍馬企業 ↗",
-} as const;
+const JUMPING_ROUTE_CONFIG = [
+  { id: "factory", side: "jumping" },
+  { id: "port", side: "jumping" },
+  { id: "sea", side: "jumping" },
+  { id: "handoff", side: "handoff" },
+  { id: "market-test", side: "lufe", target: "chapter-1" },
+  { id: "consignment", side: "lufe", target: "chapter-2" },
+  { id: "company-setup", side: "lufe", target: "chapter-3" },
+  { id: "call-center", side: "lufe", target: "chapter-4" },
+] as const;
 
-export const JUMPING_ROUTE: readonly RouteNode[] = [
-  { title: "台灣出廠", note: "報關、文件", side: "jumping" },
-  { title: "裝櫃出港", note: "倉儲、併櫃", side: "jumping" },
-  { title: "海上", note: "海空運", side: "jumping" },
-  { title: "櫃門打開", note: "鹿飛從這裡開始", side: "handoff" },
-  { title: "市場探查", note: "第一個月", side: "lufe", target: "chapter-1" },
-  { title: "寄賣", note: "第三個月", side: "lufe", target: "chapter-2" },
-  { title: "公司落地", note: "第九個月", side: "lufe", target: "chapter-3" },
-  { title: "海外客服", note: "之後的每一天", side: "lufe", target: "chapter-4" },
-];
+function createRoute(copy: HomeJumpingCopy): RouteNode[] {
+  return JUMPING_ROUTE_CONFIG.map((config, index) => ({ ...config, ...copy.nodes[index]! }));
+}
+
+export const JUMPING_COPY = homeJumpingZh;
+export const JUMPING_ROUTE = createRoute(homeJumpingZh);
 
 const FLASH_CLASS = "lufe-home-chapter-flash";
 
@@ -48,23 +50,26 @@ function scrollToTarget(event: MouseEvent<HTMLAnchorElement>, id: string, block:
   }
 }
 
-export function JumpingSection() {
+export function JumpingSection({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+  const copy = locale === "en" ? homeJumpingEn : homeJumpingZh;
+  const route = createRoute(copy);
+
   return (
     <section id="jumping" className="py-[80px] md:py-[104px]">
       <div className="lufe-container">
         <div className="max-w-[820px]">
           <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-navy [text-wrap:balance]">
             {/* Keep each comma phrase whole so "到" never strands at a line end on phones. */}
-            {JUMPING_COPY.title[0].split(/(?<=，)/).map((phrase) => <span key={phrase} className="inline-block">{phrase}</span>)}
+            {copy.title[0].split(locale === "zh" ? /(?<=，)/ : /(?<=,)/).map((phrase) => <span key={phrase} className="inline-block">{phrase}</span>)}
             <br />
-            <span className="text-gold-d">{JUMPING_COPY.title[1]}</span>
+            <span className="text-gold-d">{copy.title[1]}</span>
           </h2>
-          <p className="mt-6 max-w-[720px] text-[17px] leading-[1.8] text-tx2 md:text-[18px]">{JUMPING_COPY.intro}</p>
+          <p className="mt-6 max-w-[720px] text-[17px] leading-[1.8] text-tx2 md:text-[18px]">{copy.intro}</p>
         </div>
 
-        <ol role="list" aria-label="從台灣到菲律賓的同一條路" className={`${styles.route} mt-12 md:mt-16`}>
-          {JUMPING_ROUTE.map((node) => (
-            <li key={node.title} role="listitem" className={`${styles.node} ${node.side === "handoff" ? styles.handoff : node.side === "lufe" ? styles.lufe : ""}`}>
+        <ol role="list" aria-label={copy.routeAriaLabel} className={`${styles.route} mt-12 md:mt-16`}>
+          {route.map((node) => (
+            <li key={node.id} role="listitem" className={`${styles.node} ${node.side === "handoff" ? styles.handoff : node.side === "lufe" ? styles.lufe : ""}`}>
               <span className={styles.mark} aria-hidden="true"><span className={styles.dot} /></span>
               <span className={styles.text}>
                 {node.target ? (
@@ -80,18 +85,18 @@ export function JumpingSection() {
 
         <div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-2 md:gap-10">
           <div className="border-t-2 border-navy pt-5">
-            <h3 className="text-[19px] font-semibold leading-[1.4] text-navy">{JUMPING_COPY.jumping.title}</h3>
-            <p className="mt-2 text-[16px] leading-[1.8] text-tx2">{JUMPING_COPY.jumping.body}</p>
+            <h3 className="text-[19px] font-semibold leading-[1.4] text-navy">{copy.jumping.title}</h3>
+            <p className="mt-2 text-[16px] leading-[1.8] text-tx2">{copy.jumping.body}</p>
           </div>
           <div className="border-t-2 border-gold pt-5">
-            <h3 className="text-[19px] font-semibold leading-[1.4] text-gold-d">{JUMPING_COPY.lufe.title}</h3>
-            <p className="mt-2 text-[16px] leading-[1.8] text-tx2">{JUMPING_COPY.lufe.body}</p>
+            <h3 className="text-[19px] font-semibold leading-[1.4] text-gold-d">{copy.lufe.title}</h3>
+            <p className="mt-2 text-[16px] leading-[1.8] text-tx2">{copy.lufe.body}</p>
           </div>
         </div>
 
         <div className="mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-3">
-          <a href="#chapters" onClick={(event) => scrollToTarget(event, "chapters", "start", false)} className="lufe-press inline-block text-[16px] font-semibold text-gold-d underline-offset-4 hover:underline">{JUMPING_COPY.primaryExit}</a>
-          <a href="https://jumping.group" target="_blank" rel="noopener noreferrer" className="lufe-press inline-block text-[15px] text-tx3 underline-offset-4 hover:text-tx2 hover:underline">{JUMPING_COPY.secondaryExit}</a>
+          <a href="#chapters" onClick={(event) => scrollToTarget(event, "chapters", "start", false)} className="lufe-press inline-block text-[16px] font-semibold text-gold-d underline-offset-4 hover:underline">{copy.primaryExit}</a>
+          <a href="https://jumping.group" target="_blank" rel="noopener noreferrer" className="lufe-press inline-block text-[15px] text-tx3 underline-offset-4 hover:text-tx2 hover:underline">{copy.secondaryExit}</a>
         </div>
       </div>
     </section>
