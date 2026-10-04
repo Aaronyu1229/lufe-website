@@ -9,7 +9,7 @@ export function flattenStrings(value: unknown): string[] {
 
 // Single Chinese numerals (第三個月 -> Month 3) may appear as digits in English.
 const CHINESE_NUMERALS: Record<string, number> = { 一: 1, 二: 2, 兩: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10 };
-const WAN_PATTERN = /(\d+(?:\.\d+)?)(?:\s*[～~\-–]\s*(\d+(?:\.\d+)?))?\s*萬/g;
+const WAN_PATTERN = /(\d[\d,]*(?:\.\d+)?)(?:\s*[～~\-–]\s*(\d[\d,]*(?:\.\d+)?))?\s*萬/g;
 const NUMBER_PATTERN = /\d[\d,]*(?:\.\d+)?/g;
 
 export function extractNumbers(text: string, locale: Locale): number[] {
@@ -17,8 +17,8 @@ export function extractNumbers(text: string, locale: Locale): number[] {
   let rest = text;
   if (locale === "zh") {
     rest = text.replace(WAN_PATTERN, (_match, low: string, high: string | undefined) => {
-      numbers.push(Math.round(Number(low) * 10000));
-      if (high) numbers.push(Math.round(Number(high) * 10000));
+      numbers.push(Math.round(Number(low.replaceAll(",", "")) * 10000));
+      if (high) numbers.push(Math.round(Number(high.replaceAll(",", "")) * 10000));
       return " ";
     });
   }

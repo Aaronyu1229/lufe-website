@@ -16,6 +16,9 @@ describe("number extraction", () => {
   it("converts 萬 amounts and ranges in Chinese", () => {
     expect(extractNumbers("市場探查 1～2 萬，起手包 7 萬，前 10 家", "zh").sort((x, y) => x - y)).toEqual([10, 10000, 20000, 70000]);
   });
+  it("converts comma-grouped 萬 amounts in Chinese", () => {
+    expect(extractNumbers("聯合申請最高 2,000 萬", "zh")).toEqual([20000000]);
+  });
   it("reads comma-grouped English numbers", () => {
     expect(extractNumbers("NT$10,000–20,000 for the first 10 brands, Q1 2027", "en").sort((x, y) => x - y)).toEqual([1, 10, 2027, 10000, 20000]);
   });

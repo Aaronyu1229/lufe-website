@@ -1,20 +1,26 @@
 import Link from "next/link";
 
 import { TieredImage } from "@/components/TieredImage";
+import { homeLatestInsightsEn } from "@/i18n/en/home-latest-insights";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { homeLatestInsightsZh } from "@/i18n/zh/home-latest-insights";
 import type { InsightCard } from "@/lib/articles/presentation";
 
-export function LatestInsightsSection({ articles }: { articles: readonly InsightCard[] }) {
+export function LatestInsightsSection({ articles, locale = "zh" }: { readonly articles: readonly InsightCard[]; readonly locale?: Locale }) {
+  const copy = locale === "en" ? homeLatestInsightsEn : homeLatestInsightsZh;
+  if (locale === "en" || articles.length === 0) return null;
+
   return (
     <section className="bg-cream py-[80px] md:py-[104px]">
       <div className="lufe-container">
         <h2 className="font-sans text-[clamp(30px,4.4vw,52px)] font-[650] leading-[1.14] tracking-normal text-tx [text-wrap:balance]">
-          出海實務洞察，
+          {copy.heading[0]}
           <br />
-          <span className="text-gold-d">從市場、通路到法規</span>
+          <span className="text-gold-d">{copy.heading[1]}</span>
         </h2>
         <div className="mt-9 grid gap-5 md:grid-cols-3">
           {articles.map((article) => (
-            <Link key={article.slug} href={`/insights/${article.slug}`} className="lufe-card lufe-insight-card group border border-bd bg-white">
+            <Link key={article.slug} href={localizedHref(locale, `/insights/${article.slug}`)} className="lufe-card lufe-insight-card group border border-bd bg-white">
               <div className="relative aspect-[16/9] overflow-hidden">
                 <TieredImage src={article.image} alt={article.title} sizes="(min-width: 768px) 33vw, 100vw" className="absolute inset-0 h-full w-full object-cover" />
               </div>
@@ -27,7 +33,7 @@ export function LatestInsightsSection({ articles }: { articles: readonly Insight
             </Link>
           ))}
         </div>
-        <Link href="/insights" className="mt-7 inline-flex text-[16px] font-semibold text-sky">看所有文章 →</Link>
+        <Link href={localizedHref(locale, "/insights")} className="mt-7 inline-flex text-[16px] font-semibold text-sky">{copy.allArticles}</Link>
       </div>
     </section>
   );

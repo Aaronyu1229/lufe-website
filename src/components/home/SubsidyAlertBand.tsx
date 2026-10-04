@@ -1,69 +1,67 @@
 import Link from "next/link";
 import { getSubsidyBySlug, isSubsidyActive } from "@/data/subsidies";
+import { homeSubsidyAlertEn } from "@/i18n/en/home-subsidy-alert";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { homeSubsidyAlertZh } from "@/i18n/zh/home-subsidy-alert";
 
 /**
- * SubsidyAlertBand — 限期政府加碼 news flash
+ * SubsidyAlertBand — a limited-time government funding news flash.
  *
- * 為什麼存在：
- *   115 年度海外通路布建補助受理至 2026/10/30 18:00；截止後改推買主直達。
- *   這是「新聞事件」不是「常設資訊」，所以用編輯感、有 timestamp、有 urgency 的視覺處理，
- *   不是 marketing banner。
+ * Why it exists:
+ *   The current programme has a deadline; after it closes, the Buyer Direct programme is featured.
+ *   This is a news event, not permanent information, so it uses an editorial, timestamped treatment
+ *   rather than a marketing banner.
  *
- * 設計原則：
- *   - 不做動畫輪播、不做彈跳 CTA
- *   - 視覺上像一則編輯精選的快訊
- *   - 主 CTA 導向當期補助卡，讓使用者直接看細節
+ * Design principles:
+ *   - No animated carousel or pop-up CTA
+ *   - It looks like an editorial news flash
+ *   - The primary CTA links to the active funding card for the details
  *   - Secondary CTA links to /assess for a 2-minute situation comparison.
  *
  * The band uses the data deadline at build time and shows the selected programme's verifiedOn date.
  * Update src/data/subsidies.ts when the programme changes.
  */
-export function SubsidyAlertBand({ now = new Date() }: { readonly now?: Date }) {
+export function SubsidyAlertBand({ now = new Date(), locale = "zh" }: { readonly now?: Date; readonly locale?: Locale }) {
+  const copy = locale === "en" ? homeSubsidyAlertEn : homeSubsidyAlertZh;
   const marketExpansion = getSubsidyBySlug("market-expansion")!;
   const ecommerce = getSubsidyBySlug("cross-border-ecommerce")!;
   const isMarketExpansionOpen = isSubsidyActive(marketExpansion, now);
   const subsidy = isMarketExpansionOpen ? marketExpansion : ecommerce;
-  const badge = isMarketExpansionOpen ? "受理中" : "買主直達";
-  const title = isMarketExpansionOpen
-    ? "海外通路布建補助 2026/10/30 18:00 截止"
-    : "買主直達受理至 2027/9/15";
-  const description = isMarketExpansionOpen
-    ? "單家最高 500 萬，聯合申請最高 2,000 萬，或經費用罄即止"
-    : "邀海外買主來台洽談採購，每家最高 20 萬，或經費用罄即止";
+  const alert = isMarketExpansionOpen ? copy.marketExpansion : copy.ecommerce;
 
   return (
     <section
-      aria-label="限期政府補助加碼"
+      aria-label={copy.ariaLabel}
       className="bg-cream pb-[80px] md:pb-[104px]"
     >
       <div className="lufe-container">
         <div className="bg-navy px-7 py-9 text-white shadow-[0_30px_60px_-20px_rgba(16,27,48,0.35)] md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:px-14 md:py-11">
           <div className="min-w-0">
-          <span className="inline-flex bg-gold/15 px-3 py-[5px] text-[12px] font-semibold tracking-[0.04em] text-gold">{badge}</span>
+          <span className="inline-flex bg-gold/15 px-3 py-[5px] text-[12px] font-semibold tracking-[0.04em] text-gold">{alert.badge}</span>
           <h2 className="mt-3 font-sans text-[clamp(22px,2.6vw,30px)] font-semibold leading-[1.35] tracking-normal [text-wrap:balance]">
-            {title}
+            {alert.title}
           </h2>
           <p className="mt-2 max-w-[620px] text-[15px] leading-[1.75] text-white/70">
-            {description}
+            {alert.description}
           </p>
           <div className="mt-2 text-[12px] font-semibold tracking-[0.05em] text-gold/80">
-            資料確認：{subsidy.verifiedOn}
+            {copy.verifiedPrefix}{subsidy.verifiedOn}
           </div>
         </div>
 
           <div className="mt-6 flex shrink-0 flex-col gap-3 md:mt-0 md:items-end">
             <Link
-              href={`/resources/subsidies#${subsidy.slug}`}
+              href={localizedHref(locale, `/resources/subsidies#${subsidy.slug}`)}
               className="inline-flex items-center gap-2 bg-gold px-[26px] py-[14px] text-[16px] font-semibold text-navy"
             >
-              <span>看申請細節</span>
+              <span>{copy.primaryCta}</span>
               <span aria-hidden="true">→</span>
             </Link>
             <Link
-              href="/assess"
+              href={localizedHref(locale, "/assess")}
               className="inline-flex items-center gap-1.5 text-[16px] font-semibold text-gold"
             >
-              或先做 2 分鐘處境比對
+              {copy.secondaryCta}
               <span
                 aria-hidden="true"
                 className="h-[7px] w-[7px] shrink-0 rotate-[-45deg] border-b border-r border-current"

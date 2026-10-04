@@ -1,7 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+
+import { homeHeroEn } from "@/i18n/en/home-hero";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { homeHeroZh, type HomeHeroCopy } from "@/i18n/zh/home-hero";
 
 type SlideMedia = {
   type: "video";
@@ -27,16 +31,13 @@ type Slide = {
   media: SlideMedia;
 };
 
-export const HOME_HERO_SLIDES: Slide[] = [
+const HOME_HERO_SLIDE_CONFIG = [
   {
     id: "pillar-fit",
     heavyOverlay: true,
-    chipLabel: "產品適配性",
     chipHref: "#chapters",
-    titleLines: ["協助台灣企業", "在北美與東南亞落地"],
-    subtitle: "這個市場真的要你嗎？市場評估、產品測試、決策框架 — 先把勝率搞清楚",
-    primary: { label: "看真實案例", href: "/cases" },
-    secondary: { label: "先做 2 分鐘處境比對", href: "/assess" },
+    primary: { href: "/cases" },
+    secondary: { href: "/assess" },
     media: {
       type: "video",
       src: "/videos/hero/hero-cai-mep-1080.mp4",
@@ -53,12 +54,9 @@ export const HOME_HERO_SLIDES: Slide[] = [
   },
   {
     id: "pillar-channel",
-    chipLabel: "通路銷售力",
     chipHref: "#chapter-2",
-    titleLines: ["上得了架", "還要賣得動"],
-    subtitle: "通路進入、展會佈局、數位集客 — 把產品放進對的通路，讓消費者找得到",
-    primary: { label: "看完整服務內容", href: "/services" },
-    secondary: { label: "先做 2 分鐘處境比對", href: "/assess" },
+    primary: { href: "/services" },
+    secondary: { href: "/assess" },
     media: {
       type: "video",
       src: "/videos/hero/hero-map-planning-1080.mp4",
@@ -74,12 +72,9 @@ export const HOME_HERO_SLIDES: Slide[] = [
   {
     id: "logistics-moat",
     heavyOverlay: true,
-    chipLabel: "基石 · 43 年國際物流",
     chipHref: "#jumping",
-    titleLines: ["真的跑過船的人，", "才懂出海的眉角"],
-    subtitle: "出海不是報告寫得出來的。鹿飛站在躍馬企業 43 年的國際物流實戰上，幫你把產品適配跟通路銷售兩件事跑通",
-    primary: { label: "認識躍馬企業", href: "https://jumping.group", external: true },
-    secondary: { label: "看完整服務內容", href: "/services" },
+    primary: { href: "https://jumping.group", external: true },
+    secondary: { href: "/services" },
     media: {
       type: "video",
       src: "/videos/hero/hero-highway-aerial-1080.mp4",
@@ -92,11 +87,28 @@ export const HOME_HERO_SLIDES: Slide[] = [
       playbackRate: 1.0,
     },
   },
-];
+] as const;
+
+function createSlides(copy: HomeHeroCopy): Slide[] {
+  return HOME_HERO_SLIDE_CONFIG.map((config, index) => {
+    const text = copy.slides[index]!;
+    return {
+      ...config,
+      ...text,
+      titleLines: [text.titleLines[0], text.titleLines[1]],
+      primary: { ...config.primary, label: text.primaryLabel },
+      secondary: { ...config.secondary, label: text.secondaryLabel },
+    };
+  });
+}
+
+export const HOME_HERO_SLIDES = createSlides(homeHeroZh);
 
 const AUTOPLAY_MS = 10000;
 
-export function HeroSection() {
+export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
+  const copy = locale === "en" ? homeHeroEn : homeHeroZh;
+  const slides = useMemo(() => createSlides(copy), [copy]);
   const [isPortrait, setIsPortrait] = useState(false);
   const [rotationKey, setRotationKey] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -159,10 +171,10 @@ export function HeroSection() {
   useEffect(() => {
     if (paused || prefersReducedMotion) return;
     const timer = window.setTimeout(() => {
-      setActiveIndex((i) => (i + 1) % HOME_HERO_SLIDES.length);
+      setActiveIndex((i) => (i + 1) % slides.length);
     }, AUTOPLAY_MS);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, paused, prefersReducedMotion]);
+  }, [activeIndex, paused, prefersReducedMotion, slides.length]);
 
   // Mount the active slide only after window.load. Never un-mounts to avoid
   // re-downloading once seen.
@@ -190,8 +202,8 @@ export function HeroSection() {
       // playbackRate is tuned for the landscape footage. The portrait cuts are
       // close-ups of people, where speed changes read as unnatural, so they
       // always play at 1x.
-      const usingPortrait = isPortrait && !!HOME_HERO_SLIDES[i].media.portraitSrc;
-      video.playbackRate = usingPortrait ? 1.0 : HOME_HERO_SLIDES[i].media.playbackRate ?? 1.0;
+      const usingPortrait = isPortrait && !!slides[i].media.portraitSrc;
+      video.playbackRate = usingPortrait ? 1.0 : slides[i].media.playbackRate ?? 1.0;
       // Already playing (or already asked to): don't restart it. play()/pause()
       // flip `paused` synchronously, so it is a reliable "did we ask" flag.
       if (!video.paused) return;
@@ -201,7 +213,7 @@ export function HeroSection() {
     });
     // mountedMap matters: a slide jumped to directly is mounted one render
     // later than this effect first runs, and without it nothing ever plays it.
-  }, [activeIndex, isPortrait, mountedMap]);
+  }, [activeIndex, isPortrait, mountedMap, slides]);
 
   const goTo = useCallback((index: number) => {
     setActiveIndex(index);
@@ -213,27 +225,27 @@ export function HeroSection() {
 
     // Warm only after the current video can play, so it never competes with the
     // first video (or first-paint assets) during hydration.
-    const nextIndex = (index + 1) % HOME_HERO_SLIDES.length;
+    const nextIndex = (index + 1) % slides.length;
     setMountedMap((prev) => {
       if (prev[nextIndex]) return prev;
       return { ...prev, [nextIndex]: true };
     });
   };
 
-  const active = HOME_HERO_SLIDES[activeIndex];
+  const active = slides[activeIndex]!;
 
   return (
     <section
       className="lufe-hero h-[100svh] min-h-[640px]"
       role="region"
-      aria-label="好產品值得一條順暢的出海路"
+      aria-label={copy.ariaLabel}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
       {/* Layered backgrounds — cross-fade between slides */}
-      {HOME_HERO_SLIDES.map((slide, i) => {
+      {slides.map((slide, i) => {
         const isActive = i === activeIndex;
         const ready = readyMap[i] ?? false;
         const mounted = mountedMap[i] ?? false;
@@ -305,12 +317,12 @@ export function HeroSection() {
 
       {/* SEO: single stable H1 for the homepage. Visible H2 rotates per slide. */}
       <h1 className="sr-only">
-        協助台灣企業在北美與東南亞落地 — 鹿飛 LUFÉ
+        {copy.h1}
       </h1>
 
       {/* All slide copy stays in the server HTML; only the active layer is visible. */}
       <div className="lufe-container lufe-hero-content mt-auto pb-[104px] md:pb-[216px]">
-        {HOME_HERO_SLIDES.map((slide, i) => {
+        {slides.map((slide, i) => {
           const isActive = i === activeIndex;
 
           return (
@@ -342,7 +354,7 @@ export function HeroSection() {
               <div className="flex items-center gap-3 flex-wrap">
                 {slide.primary.external ? (
                   <a
-                    href={slide.primary.href}
+                    href={localizedHref(locale, slide.primary.href)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center bg-gold text-navy px-[26px] py-[14px] text-[16px] font-semibold"
@@ -351,14 +363,14 @@ export function HeroSection() {
                   </a>
                 ) : (
                   <Link
-                    href={slide.primary.href}
+                    href={localizedHref(locale, slide.primary.href)}
                     className="inline-flex items-center bg-gold text-navy px-[26px] py-[14px] text-[16px] font-semibold"
                   >
                     {slide.primary.label} →
                   </Link>
                 )}
                 <Link
-                  href={slide.secondary.href}
+                  href={localizedHref(locale, slide.secondary.href)}
                   className="inline-flex items-center border border-white/30 bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white backdrop-blur-[16px]"
                 >
                   {slide.secondary.label}
@@ -372,7 +384,7 @@ export function HeroSection() {
       {/* Bottom slide navigator — Bain-style distributed bar */}
       <div className="absolute left-0 right-0 bottom-0 z-10 border-t border-white/10 bg-gradient-to-t from-black/30 to-transparent backdrop-blur-[2px]">
         <div className="lufe-container flex h-[60px] items-stretch md:h-[76px]">
-          {HOME_HERO_SLIDES.map((slide, i) => {
+          {slides.map((slide, i) => {
             const isActive = i === activeIndex;
             return (
               <Link
