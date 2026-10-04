@@ -30,7 +30,6 @@ const STATIC_ROUTES: readonly RouteSpec[] = [
   { path: "/cases", priority: 0.9, changeFrequency: "weekly" },
   { path: "/insights", priority: 0.8, changeFrequency: "weekly" },
   { path: "/assess", priority: 0.9, changeFrequency: "monthly" },
-  { path: "/assess/result", priority: 0.9, changeFrequency: "monthly" },
   { path: "/about", priority: 0.7, changeFrequency: "monthly" },
   { path: "/about/aaron-yu", priority: 0.65, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.7, changeFrequency: "monthly" },
