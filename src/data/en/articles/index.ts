@@ -15,4 +15,7 @@ export type EnglishArticle = {
   }[];
 };
 
-export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {};
+export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
+  [agentVsDistributorExclusive.slug]: agentVsDistributorExclusive,
+};
+import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
