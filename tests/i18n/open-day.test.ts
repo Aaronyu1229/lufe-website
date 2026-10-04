@@ -88,7 +88,8 @@ describe("open-day hreflang", () => {
 describe("open-day sitemap", () => {
   it("includes every public English twin with reciprocal alternates and excludes scheduled articles", async () => {
     const entries = await sitemap();
-    const staticRoutes = EN_ROUTES.filter((route) => !route.includes("["));
+    // Noindex result pages (answers-dependent) are deliberately left out of the sitemap.
+    const staticRoutes = EN_ROUTES.filter((route) => !route.includes("[") && route !== "/assess/result");
 
     for (const path of staticRoutes) {
       const englishPath = localizedHref("en", path);
@@ -152,5 +153,15 @@ describe("open-day article data", () => {
     for (const article of getPublishedEnglishArticles()) {
       expect(EN_ARTICLES[article.slug]).toBeDefined();
     }
+  });
+});
+
+describe("assess result pages stay out of the index", () => {
+  it("omits /assess/result from the sitemap and marks the English result noindex", async () => {
+    const { default: sitemap } = await import("@/app/sitemap");
+    const urls = (await sitemap()).map((entry) => entry.url);
+    expect(urls.some((url) => url.includes("/assess/result"))).toBe(false);
+    const { metadata } = await import("@/app/en/assess/result/page");
+    expect(metadata.robots).toEqual({ index: false, follow: true });
   });
 });
