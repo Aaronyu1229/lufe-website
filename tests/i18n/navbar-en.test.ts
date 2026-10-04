@@ -12,6 +12,7 @@ vi.mock("next/navigation", () => ({
 }));
 
 import { Navbar } from "@/components/Navbar";
+import { getPublishedEnglishArticles } from "@/lib/articles/english";
 import type { InsightCard } from "@/lib/articles/presentation";
 
 const zhGolden = readFileSync("tests/fixtures/navbar.zh.html", "utf8");
@@ -47,6 +48,22 @@ describe("navbar i18n", () => {
   it("keeps links inside English routes", () => {
     pathname.current = "/en/services";
     expect(renderNavbar()).toContain('href="/en/services/consignment"');
+  });
+
+  it("shows the public language toggle on service and article routes", () => {
+    pathname.current = "/services";
+    const zhService = renderNavbar();
+    expect(zhService.match(/href="\/en\/services"/g)).toHaveLength(2);
+    expect(zhService).toContain("hover:bg-black/10");
+    expect(zhService).toContain("hover:bg-black/[.07]");
+
+    pathname.current = "/en/services";
+    const enService = renderNavbar();
+    expect(enService.match(/href="\/services"/g)).toHaveLength(2);
+
+    const article = getPublishedEnglishArticles()[0]!;
+    pathname.current = `/insights/${article.slug}`;
+    expect(renderNavbar().match(new RegExp(`href="/en/insights/${article.slug}"`, "g"))).toHaveLength(2);
   });
 
   it("renders the English latest article when supplied", () => {

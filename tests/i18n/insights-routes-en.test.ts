@@ -19,6 +19,7 @@ vi.mock("next/navigation", () => ({
 vi.mock("@/lib/articles/english", () => ({
   getEnglishArticle: (slug: string) => slug === englishArticle.slug ? englishArticle : undefined,
   getPublishedEnglishArticles: () => [englishArticle],
+  hasEnglishArticle: (slug: string) => slug === englishArticle.slug,
 }));
 
 import EnglishArticlePage, {
@@ -34,7 +35,14 @@ describe("English insights routes", () => {
   it("uses English metadata and canonical paths for English articles", async () => {
     await expect(generateMetadata({ params: Promise.resolve({ slug: englishArticle.slug }) })).resolves.toMatchObject({
       title: englishArticle.title,
-      alternates: { canonical: `/en/insights/${englishArticle.slug}` },
+      alternates: {
+        canonical: `https://lufe.world/en/insights/${englishArticle.slug}`,
+        languages: {
+          "zh-Hant": `/insights/${englishArticle.slug}`,
+          en: `/en/insights/${englishArticle.slug}`,
+          "x-default": `/insights/${englishArticle.slug}`,
+        },
+      },
     });
     await expect(generateMetadata({ params: Promise.resolve({ slug: "no-english-version" }) })).resolves.toEqual({ title: "Article not found" });
   });

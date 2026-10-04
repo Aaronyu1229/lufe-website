@@ -31,7 +31,14 @@ describe("English home page", () => {
     else expect(html).not.toContain("Practical insights on overseas expansion");
   });
 
-  it("uses the English canonical while the English site is closed", () => {
-    expect(metadata.alternates).toEqual({ canonical: "/en" });
+  it("uses an English canonical with reciprocal hreflang", () => {
+    expect(metadata.alternates).toEqual({
+      canonical: "/en",
+      languages: {
+        "zh-Hant": "/",
+        en: "/en",
+        "x-default": "/",
+      },
+    });
   });
 });

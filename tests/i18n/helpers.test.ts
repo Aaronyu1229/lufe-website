@@ -7,6 +7,10 @@ describe("expectEnglishMarkup", () => {
     expect(() => expectEnglishMarkup('<a href="/en/services">Services</a><a href="#x">x</a><img alt="A team" src="/images/a.webp">')).not.toThrow();
   });
 
+  it("allows the Chinese language-toggle label only", () => {
+    expect(() => expectEnglishMarkup('<a href="/en/services" hrefLang="zh-Hant" lang="zh-Hant">中文</a>')).not.toThrow();
+  });
+
   it("rejects Han anywhere, including attributes", () => {
     expect(() => expectEnglishMarkup('<img alt="團隊" src="/a.webp">')).toThrow();
   });

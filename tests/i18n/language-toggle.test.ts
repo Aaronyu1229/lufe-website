@@ -3,13 +3,14 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { LanguageToggle } from "@/components/i18n/LanguageToggle";
+import { getPublishedEnglishArticles } from "@/lib/articles/english";
 
 const render = (pathname: string, visible?: boolean) =>
   renderToStaticMarkup(createElement(LanguageToggle, { pathname, visible }));
 
 describe("LanguageToggle", () => {
-  it("renders nothing while English is closed", () => {
-    expect(render("/services")).toBe("");
+  it("renders by default when English is public", () => {
+    expect(render("/services")).toContain('href="/en/services"');
   });
 
   it("links a Chinese page to its English twin", () => {
@@ -36,5 +37,18 @@ describe("LanguageToggle", () => {
 
   it("links insights to its English route", () => {
     expect(render("/insights", true)).toContain('href="/en/insights"');
+  });
+
+  it("links article pages to their reciprocal routes", () => {
+    const article = getPublishedEnglishArticles()[0]!;
+
+    expect(render(`/insights/${article.slug}`)).toContain(`href="/en/insights/${article.slug}"`);
+    expect(render(`/en/insights/${article.slug}`)).toContain(`href="/insights/${article.slug}"`);
+  });
+
+  it("falls back to English insights for an article without English data", () => {
+    const missingSlug = `missing-english-article-${getPublishedEnglishArticles().length}`;
+
+    expect(render(`/insights/${missingSlug}`)).toContain('href="/en/insights"');
   });
 });

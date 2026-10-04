@@ -26,15 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getEnglishArticle(slug);
   if (!article) return { title: "Article not found" };
 
-  const path = `/en/insights/${article.slug}`;
   return createArticleMetadata({
-    path,
+    path: `/insights/${article.slug}`,
+    locale: "en",
     title: withoutSiteName(article.title),
     description: article.summary,
     image: getArticleImage(article),
     publishedTime: article.publishAt ?? toIsoDate(article.date),
     modifiedTime: toIsoDate(article.updated ?? article.date),
-    canonical: path,
   });
 }
 
@@ -78,6 +77,7 @@ export default async function EnglishArticlePage({ params }: Props) {
       dateModified={modifiedTime}
       canonical={canonical}
       citation={article.sources?.map((source) => source.url)}
+      locale="en"
     />
     {article.faq ? <FaqJsonLd items={article.faq.map(({ q, a }) => ({ question: q, answer: a }))} /> : null}
     <ArticleDetail article={article} image={image} related={related} locale="en" />
