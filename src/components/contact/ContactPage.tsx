@@ -8,6 +8,9 @@ import { ScrollCue } from "@/components/ScrollCue";
 import { CalendarClockIcon, MailIcon, MapPinIcon, MessageIcon } from "@/components/icons/LineIcons";
 import { ChoiceGroup } from "@/components/ui/ChoiceGroup";
 import { HERO_VIDEOS } from "@/data/heroVideos";
+import { contactPageEn } from "@/i18n/en/contact-page";
+import { localizedHref, type Locale } from "@/i18n/locale";
+import { contactPageZh } from "@/i18n/zh/contact-page";
 
 
 export const stageOptions = [
@@ -40,7 +43,8 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export function ContactPage() {
+export function ContactPage({ locale = "zh" }: { readonly locale?: Locale } = {}) {
+  const copy = locale === "en" ? contactPageEn : contactPageZh;
   const [formState, setFormState] = useState<ContactFormFields>({
     name: "",
     email: "",
@@ -157,14 +161,14 @@ export function ContactPage() {
         <HeroBackdrop src="/images/contact/hero-handshake-1600.webp" video={HERO_VIDEOS.contact} />
         <div className="lufe-container lufe-hero-content min-w-0 pb-[78px] pt-[148px] md:pb-[112px] md:pt-[170px]">
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap gap-2 text-[13px] text-white/60">
-            <Link href="/" className="hover:text-white">首頁</Link>
+            <Link href={localizedHref(locale, "/")} className="hover:text-white">{copy.home}</Link>
             <span aria-hidden="true" className="text-white/30">/</span>
-            <span className="text-white/75">聯絡鹿飛</span>
+            <span className="text-white/75">{copy.breadcrumb}</span>
           </nav>
-          <h1 className="h1 mb-6 max-w-[880px] text-white">聯絡鹿飛</h1>
-          <p className="lead max-w-[640px] !text-white/75">出海規劃、合作洽談或媒體邀約，留下訊息，一個工作天內回覆</p>
+          <h1 className="h1 mb-6 max-w-[880px] text-white">{copy.title}</h1>
+          <p className="lead max-w-[640px] !text-white/75">{copy.lead}</p>
         </div>
-        <ScrollCue />
+        <ScrollCue label={copy.scrollCue} />
       </section>
 
       <section className="bg-white py-[72px] md:py-[96px]">
@@ -173,26 +177,26 @@ export function ContactPage() {
             <dl>
               <div className="grid grid-cols-[24px_1fr] gap-4 border-t border-bd py-5">
                 <MailIcon size={20} className="mt-1 text-gold-d" />
-                <div><dt className="text-[13px] text-tx3">Email</dt><dd className="mt-1 text-[16px] text-tx"><a href="mailto:aaron.yu@reborn.in" className="hover:text-sky">aaron.yu@reborn.in</a></dd></div>
+                <div><dt className="text-[13px] text-tx3">{copy.contact.email}</dt><dd className="mt-1 text-[16px] text-tx"><a href="mailto:aaron.yu@reborn.in" className="hover:text-sky">aaron.yu@reborn.in</a></dd></div>
               </div>
               <div className="grid grid-cols-[24px_1fr] gap-4 border-t border-bd py-5">
                 <MapPinIcon size={20} className="mt-1 text-gold-d" />
-                <div><dt className="text-[13px] text-tx3">地點</dt><dd className="mt-1 text-[16px] text-tx">台北市｜線上會議為主</dd></div>
+                <div><dt className="text-[13px] text-tx3">{copy.contact.location}</dt><dd className="mt-1 text-[16px] text-tx">{copy.contact.locationValue}</dd></div>
               </div>
               <div className="grid grid-cols-[24px_1fr] gap-4 border-t border-bd py-5">
                 <CalendarClockIcon size={20} className="mt-1 text-gold-d" />
-                <div><dt className="text-[13px] text-tx3">服務時間</dt><dd className="mt-1 text-[16px] text-tx">週一至週五 09:00–18:00</dd></div>
+                <div><dt className="text-[13px] text-tx3">{copy.contact.hours}</dt><dd className="mt-1 text-[16px] text-tx">{copy.contact.hoursValue}</dd></div>
               </div>
               <div className="grid grid-cols-[24px_1fr] gap-4 border-y border-bd py-5">
                 <MessageIcon size={20} className="mt-1 text-gold-d" />
-                <div><dt className="text-[13px] text-tx3">回覆時間</dt><dd className="mt-1 text-[16px] text-tx">一個工作天內</dd></div>
+                <div><dt className="text-[13px] text-tx3">{copy.contact.replyTime}</dt><dd className="mt-1 text-[16px] text-tx">{copy.contact.replyTimeValue}</dd></div>
               </div>
             </dl>
           </aside>
 
           <section className="min-w-0 bg-cream p-6 md:p-10">
-            <h2 className="h3">留下你的需求</h2>
-            <p className="mb-8 mt-3 text-[15px] text-tx2">資訊越完整，第一次回覆越精準</p>
+            <h2 className="h3">{copy.form.title}</h2>
+            <p className="mb-8 mt-3 text-[15px] text-tx2">{copy.form.lead}</p>
             {submitted ? (
               <div className="py-12 text-center">
                 <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center border border-sky text-sky">
@@ -205,43 +209,43 @@ export function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                   <div>
-                    <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">姓名 *</label>
-                    <input type="text" name="name" required aria-required="true" value={formState.name} onChange={handleChange} onBlur={handleBlur} className={inputClass("name")} placeholder="你的姓名" />
+                    <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">{copy.form.name}</label>
+                    <input type="text" name="name" required aria-required="true" value={formState.name} onChange={handleChange} onBlur={handleBlur} className={inputClass("name")} placeholder={copy.form.namePlaceholder} />
                     {errors.name && touched.name && <p className="mt-1 text-[13px] text-red-500">{errors.name}</p>}
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">Email *</label>
+                    <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">{copy.form.email}</label>
                     <input type="email" name="email" required aria-required="true" value={formState.email} onChange={handleChange} onBlur={handleBlur} className={inputClass("email")} placeholder="you@company.com" />
                     {errors.email && touched.email && <p className="mt-1 text-[13px] text-red-500">{errors.email}</p>}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                   <div>
-                    <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">公司名稱</label>
-                    <input type="text" name="company" value={formState.company} onChange={handleChange} className="w-full border border-[rgba(26,26,46,0.14)] bg-white px-4 py-3 text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]" placeholder="公司名稱" />
+                    <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">{copy.form.company}</label>
+                    <input type="text" name="company" value={formState.company} onChange={handleChange} className="w-full border border-[rgba(26,26,46,0.14)] bg-white px-4 py-3 text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]" placeholder={copy.form.companyPlaceholder} />
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">電話</label>
-                    <input type="tel" name="phone" value={formState.phone} onChange={handleChange} className="w-full border border-[rgba(26,26,46,0.14)] bg-white px-4 py-3 text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]" placeholder="09xx-xxx-xxx" />
+                    <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">{copy.form.phone}</label>
+                    <input type="tel" name="phone" value={formState.phone} onChange={handleChange} className="w-full border border-[rgba(26,26,46,0.14)] bg-white px-4 py-3 text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]" placeholder={copy.form.phonePlaceholder} />
                   </div>
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">你的產品</label>
-                  <input type="text" name="product" value={formState.product} onChange={handleChange} className="w-full border border-[rgba(26,26,46,0.14)] bg-white px-4 py-3 text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]" placeholder="簡單描述你的產品或品牌" />
+                  <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">{copy.form.product}</label>
+                  <input type="text" name="product" value={formState.product} onChange={handleChange} className="w-full border border-[rgba(26,26,46,0.14)] bg-white px-4 py-3 text-[15.5px] outline-none focus:border-sky focus:shadow-[0_0_0_4px_rgba(58,107,132,0.15)]" placeholder={copy.form.productPlaceholder} />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">目前出海階段</label>
-                  <ChoiceGroup label="目前出海階段" options={stageOptions.map((option) => ({ value: option, label: option }))} value={formState.stage} onChange={handleStageChange} className="w-auto" />
+                  <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">{copy.form.stage}</label>
+                  <ChoiceGroup label={copy.form.stage} options={stageOptions.map((option, index) => ({ value: option, label: copy.stageLabels[index] ?? option }))} value={formState.stage} onChange={handleStageChange} className="w-auto" />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">你想問什麼？ *</label>
-                  <textarea name="message" rows={4} required aria-required="true" value={formState.message} onChange={handleChange} onBlur={handleBlur} className={`${inputClass("message")} resize-none`} placeholder="任何問題都可以，不確定也沒關係" />
+                  <label className="mb-1.5 block text-[13px] font-medium tracking-[1px]">{copy.form.message}</label>
+                  <textarea name="message" rows={4} required aria-required="true" value={formState.message} onChange={handleChange} onBlur={handleBlur} className={`${inputClass("message")} resize-none`} placeholder={copy.form.messagePlaceholder} />
                   {errors.message && touched.message && <p className="mt-1 text-[13px] text-red-500">{errors.message}</p>}
                 </div>
                 <input type="text" name="website" value={formState.website} onChange={handleChange} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />
-                <button type="submit" className="w-full cursor-pointer bg-gold py-3.5 text-[16.5px] font-semibold text-navy active:scale-[.97]">{isSubmitting ? "送出中…" : "送出表單"}</button>
+                <button type="submit" className="w-full cursor-pointer bg-gold py-3.5 text-[16.5px] font-semibold text-navy active:scale-[.97]">{isSubmitting ? copy.form.submitting : copy.form.submit}</button>
                 {submitError && <p className="text-center text-[13px] font-normal text-red-500">送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
-                <p className="text-center text-[13px] font-normal text-tx3">我們不會把你的資料分享給任何第三方。</p>
+                <p className="text-center text-[13px] font-normal text-tx3">{copy.form.privacy}</p>
               </form>
             )}
           </section>
