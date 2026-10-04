@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "agent-vs-distributor-exclusive",
-  sourceFingerprint: "4327bd6a1130f65f",
+  sourceFingerprint: "3702902594b6821d",
   title: "What is the difference between an agent, a distributor, and an exclusive arrangement? Before agreeing to exclusivity or stocking inventory, clarify who owns the goods",
   summary: "An agent does not buy the goods and earns commission; a distributor buys the goods outright and bears inventory risk. Exclusivity is not a third role—it is a condition added to either. This comparison table separates the three, sets out what you can accept or should decline on exclusivity and inventory, and explains the risk of whose name holds Philippine product registrations.",
   readTime: "6 min read",
@@ -56,7 +56,7 @@ The issue appears when you change partners. For food CPRs, Philippine Department
 
 That is why, in the Philippines, you should address registration ownership on the first day you negotiate an agency agreement, rather than on the day you separate. The contract should at least state that registration materials belong to you, that the partner must cooperate in a transfer, and who pays the costs.
 
-LUFÉ’s [Consignment package](/services/consignment) takes another approach: a partner licensed importer applies for and holds the registration on your behalf, the materials belong to you, and the agreement clearly requires cooperation with transfer. Changing partners then means changing one contract, without being tied to a particular channel. This is not the only solution, but it removes the question of whose name holds the registration from the agency-negotiation table.
+LUFÉ’s [Consignment package](/services/consignment) takes another approach: a partner licensed importer applies for and holds the registration on your behalf, and the materials belong to you. The contract requires the importer to cooperate with the transfer, so you do not start from scratch; the FDA transfer or re-notification procedure still applies, without tying you to a particular channel. This is not the only solution, but it removes the question of whose name holds the registration from the agency-negotiation table.
 
 ## When we do not recommend following this article as written
 

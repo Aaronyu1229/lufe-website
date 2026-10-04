@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "philippines-cpr-transfer-change-importer",
-  sourceFingerprint: "08af9a0d3a5ce66a",
+  sourceFingerprint: "2030026f65374c2d",
   title: "Your Philippines product registration is under the importer’s name. What happens when you need to change importers?",
   summary: "When a Philippines CPR is held in the importer’s name, changing importers requires the former certificate holder to provide a termination agreement or deed of assignment. A cosmetics CPN needs a new notification when the distribution company changes. We set out the FDA-required transfer documents, the situations that mean starting over, and five points to put in an agency agreement from day one.",
   readTime: "6 min read",
@@ -51,7 +51,7 @@ There is one useful card for the brand owner. When a new importer applies for a 
 4. **Term and scope of the appointment letter.** The appointment letter you issue specifies the term, products, and territory, and becomes ineffective on expiry or termination [2].
 5. **Cosmetics materials can be handed over.** A change of company requires a new notification [3], so the agreement should provide that formula, ingredient, and label data belong to the brand owner and can go directly to the next company.
 
-Our [Consignment](/services/consignment) package is one way of addressing these five points in advance: a partner importer holding the relevant certificate handles and holds the registration, the materials belong to you, and the agreement clearly requires cooperation with transfer. Changing partners then means changing one agreement. It is not the only solution, but it is much easier than opening the agreement only on the day a partnership breaks down.
+Our [Consignment](/services/consignment) package is one way of addressing these five points in advance: a partner importer holding the relevant certificate handles and holds the registration, and the materials belong to you. The contract requires the importer to cooperate with the transfer, so you do not start from scratch; the FDA transfer or re-notification procedure still applies. It is not the only solution, but it is much easier than opening the agreement only on the day a partnership breaks down.
 
 ## When we do not recommend following this article
 

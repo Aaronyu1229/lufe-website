@@ -1,7 +1,7 @@
 import { SUBSIDIES, type Subsidy, type SubsidyStage } from "@/data/subsidies";
 
 // Fingerprint of the Chinese subsidy data and page copy this English was translated from; registry.test.ts prints the value after the first run.
-export const SUBSIDIES_SOURCE_FINGERPRINT = "5191975067158c59";
+export const SUBSIDIES_SOURCE_FINGERPRINT = "f9c0e2754043d422";
 
 const [marketExpansion, overseasExhibition, supplyChainSupport, crossBorderEcommerce] = SUBSIDIES;
 
@@ -50,7 +50,7 @@ export const SUBSIDIES_EN: readonly Subsidy[] = [
       "Locations that cannot be developed: North Korea, Iran, Iraq, Syria, Sudan, Russia, Belarus, mainland China, including Hong Kong and Macao.",
       "The 2026 application period is May 29, 2026, to October 30, 2026, 18:00 (Taiwan time), or until funding is exhausted; projects run through November 30, 2027.",
     ],
-    lufeAngle: "LUFÉ focuses on channel entry and local execution. We help turn overseas-location evaluation, agent matching, and O2O development into a proposal that can pass review—market analysis, channel strategy, and measurable KPIs are normal deliverables. If you are going to an exhibition, this is not the program to use; use 02 Overseas Exhibition Subsidy.",
+    lufeAngle: "LUFÉ focuses on channel entry and local execution. We help turn overseas-location evaluation, agent matching, and O2O development into a proposal written around review priorities—market analysis, channel strategy, and measurable KPIs are normal deliverables. If you are going to an exhibition, this is not the program to use; use 02 Overseas Exhibition Subsidy.",
     deadline: "Closes October 30, 2026, 18:00 (Taiwan time) (or when funding is exhausted)",
     applicationNote: "Administrator: Chinese Management Association · toll-free consultation 0800-235-855",
   },
@@ -146,7 +146,7 @@ export const SUBSIDIES_EN: readonly Subsidy[] = [
       "The same matter may not receive duplicate subsidies. Multiple tools can be applied for in parallel, but the same expense cannot be claimed through 2 tools.",
       "In force from August 7, 2025, through December 31, 2027. Some measures close when budgets run out, so apply early.",
     ],
-    lufeAngle: "We have participated in an actual origin-transfer case from China to Vietnam, supporting the work from factory evaluation, supplier matching, and export process through renewed HS Code origin determination. The program's R&D subsidy and order acquisition correspond to our Operations Optimization-stage service; for renewed HS Code determination, TradePilot, the Jumping Freight Group tariff tool, can support scenario calculations.",
+    lufeAngle: "We have participated in an actual origin-transfer case from China to Vietnam, supporting the work from factory evaluation, supplier matching, and export process through renewed HS Code origin determination. The program's R&D subsidy and order acquisition correspond to our Operations Optimization-stage service; for renewed HS Code determination, the TradePilot online tariff lookup tool can support scenario calculations.",
     deadline: "In force through December 31, 2027",
     applicationNote: "Multiple interministerial tools · choose the application path by case",
   },

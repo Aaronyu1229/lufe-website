@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "why-philippines-first",
-  sourceFingerprint: "32151d0c4aef6476",
+  sourceFingerprint: "73aa1673f19a927c",
   title: "Which Southeast Asian market should you enter first? Vietnam, Thailand, Indonesia, and the Philippines compared, and why begin with the Philippines",
   summary: "Should Vietnam, Thailand, Indonesia, or the Philippines be your first Southeast Asian market? The Philippines is not the largest, but it is most suitable for a first-time, small-budget test that you can stop after completing. This article compares the four countries on the Barrier and Regulatory questions and identifies product categories that should not start there.",
   readTime: "6 min read",
@@ -62,7 +62,7 @@ Within ASEAN, Taiwan has an FTA only with Singapore (ASTEP); it has none with th
 
 ## One small next step
 
-First spend NT$10,000–20,000 on a [Market Test](/services/product-testing): send three products to Manila, have a table of teachers and parents pick them up and look at them, and receive a one-page report telling you who will buy, what price they will pay, and why they will not buy. If it does not pass, the story stops here; if it does, the money is credited toward the next chapter.
+First spend NT$10,000–20,000 on a [Market Test](/services/product-testing): send three products to Manila, let local teachers, parents, and other salaried consumers who pay for their own purchases pick them up and look at them, and receive a one-page report telling you who will buy, what price they will pay, and why they will not buy. If it does not pass, the story stops here; if it does, the Market Test fee is credited toward the Consignment package.
 
 This article is rewritten from the March 2026 article, "Vietnam market-entry guide." Its old URL now redirects here. Last verified: October 1, 2026. Regulations change, so review them again each quarter.`],
   faq: [
@@ -76,7 +76,7 @@ This article is rewritten from the March 2026 article, "Vietnam market-entry gui
     },
     {
       q: "Does Taiwan have a free trade agreement with the Philippines? Will tariffs be higher than in other countries?",
-      a: "Apart from ASTEP with Singapore, Taiwan has no free trade agreement with any ASEAN country, so the Philippines, Vietnam, Thailand, and Indonesia all use most-favored-nation (MFN) rates. The Philippines is not at a special disadvantage. You can check actual rates with the Philippine Tariff Commission's Tariff Finder or TradePilot.",
+      a: "Apart from ASTEP with Singapore, Taiwan has no free trade agreement with any ASEAN country, so the Philippines, Vietnam, Thailand, and Indonesia all use most-favored-nation (MFN) rates. The Philippines is not at a special disadvantage. You can check actual rates with the Philippine Tariff Commission's Tariff Finder or the TradePilot online tariff lookup tool.",
     },
   ],
   sources: [

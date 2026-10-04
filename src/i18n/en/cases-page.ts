@@ -5,7 +5,7 @@ export const casesPageEn: CasesPageCopy = {
   home: "Home",
   breadcrumb: "Case studies",
   title: ["Every decision", "has a case to compare"],
-  lead: "Taiwanese brands generally take one of three paths overseas. These are cases we have worked on and cases our local Philippine partners have taken themselves. Each one explains the decision that mattered most at the time.",
+  lead: "Taiwanese brands generally take one of three paths overseas. These are two cases we worked on and one our Philippine partners built themselves. Each one explains the decision that mattered most at the time.",
   scrollCue: "Scroll down",
   roads: [
     { label: "First path", title: "Start from zero", body: "Build from zero in the local market. Our Philippine partners first built an English-language education organization, then built a bubble-tea chain from zero.", lesson: "Finding people is harder than finding a storefront. The first team shapes everything that follows." },
@@ -19,7 +19,7 @@ export const casesPageEn: CasesPageCopy = {
     body: CTA_LINE_EN,
     button: "Book your free assessment →",
     assessHeading: "Not sure which path is closest?",
-    assessBody: "Three questions compare your situation with three cases we have worked on to find the closest one.",
+    assessBody: "Three questions compare your situation with two cases we worked on and one our Philippine partners built themselves to find the closest one.",
     assessChips: ["Stage", "Hurdle", "Market"],
     assessLabel: "Start the Situation Check",
   },

@@ -2,7 +2,7 @@ import type { HomeFaqItem } from "@/data/homeFaq";
 import type { HomeFaqCopy } from "@/i18n/zh/home-faq";
 
 // Fingerprint of homeFaqZh this English was translated from; registry.test.ts prints the new value when Chinese changes.
-export const HOME_FAQ_SOURCE_FINGERPRINT = "770baf5c38fa4542";
+export const HOME_FAQ_SOURCE_FINGERPRINT = "da3b20fdca9ea7e9";
 
 export const HOME_FAQ_ITEMS_EN: readonly HomeFaqItem[] = [
   {
@@ -14,7 +14,7 @@ export const HOME_FAQ_ITEMS_EN: readonly HomeFaqItem[] = [
   {
     num: "02",
     question: "How long does it take to see results?",
-    answer: "Market Test: once the panel is done, we give you that one page; no need to wait for registration.\nConsignment: product registration takes 6–12 weeks. School activities run during that time, and goods go on shelves when approval comes through.\nCompany Setup: it depends on the company you want to establish and how many people you need; we give a timeline in the first conversation.\nCall Center: first clients expected from Q1 2027; you can register now.\nWe do not say \"delivered in one month\" because we cannot compress registration time.",
+    answer: "Market Test: once the panel is done, we give you that one page; no need to wait for registration.\nConsignment: product registration takes 6–12 weeks. Community trials run during that time, and goods go on shelves when approval comes through.\nCompany Setup: it depends on the company you want to establish and how many people you need; we give a timeline in the first conversation.\nCall Center: first clients expected from Q1 2027; you can register now.\nWe do not say \"delivered in one month\" because we cannot compress registration time.",
     takeaway: "A report after Market Test · product registration takes 6–12 weeks",
   },
   {

@@ -24,18 +24,18 @@ export const subsidiesPageEn: SubsidiesPageCopy = {
   subsidyIntroHeading: ["Subsidies are not extra income; they", "reduce the actual cost of expanding overseas"],
   pillars: [
     { title: "The funding is real", description: "The International Trade Administration and Ministry of Economic Affairs administer budgets worth more than NT$100 million each year. The key is knowing how to apply and writing the proposal correctly." },
-    { title: "More than an application form", description: "The proposal must align with your business goals, and implementation needs deliverables and reports. LUFÉ's services themselves meet most completion requirements." },
+    { title: "More than an application form", description: "The proposal must align with your business goals, and implementation needs deliverables and reports. LUFÉ's deliverables (such as market analysis and KPIs) are the information commonly needed at closeout." },
     { title: "They can be combined", description: "One company can apply for different programs at the same time—for example, use exhibition funding for a U.S. show and market-development funding to build local channels." },
   ],
   plans: {
     heading: ["4 programs for", "different expansion stages"], segmentedLabel: "Subsidy programs", compareAction: "View key points ↓", amount: "Subsidy amount", timeline: "Timeline", stage: "Applicable stage", status: "Status", suitable: "Fits", covers: "Coverage and cost details", coversCount: " items", process: "Application and reimbursement process", processCount: " steps", notes: "Common pitfalls", notesCount: " points", lufeAngle: "How LUFÉ helps", assessAction: "Check whether I qualify →", officialAnnouncement: "Official announcement ↗", statuses: { open: "Open for applications", pending: "Awaiting announcement", closed: "Closed" },
   },
   faqs: [
-    { question: "Will LUFÉ apply for the subsidy for me?", answer: "We are not an application agency. But we can help you clearly explain why you are expanding overseas, where you are going, and how you will do it—the core of a proposal. Many clients use our assessment report directly as the basis for an application." },
+    { question: "Will LUFÉ apply for the subsidy for me?", answer: "We are not an application agency. But we can help you clearly explain why you are expanding overseas, where you are going, and how you will do it—the core of a proposal. Our assessment report can serve as a basis for an application." },
     { question: "Do I have to write the proposal myself?", answer: "Your company must submit the proposal itself; that is the rule. But LUFÉ provides complete market analysis, strategic planning, and an implementation plan, so you only need to organize the content in the official format." },
     { question: "Can I apply for multiple programs at the same time?", answer: "Yes. Different programs serve different purposes. For example, exhibition funding does not conflict with overseas channel-development funding. But the same expense cannot be claimed twice; that is the basic rule." },
     { question: "Is the approval rate high?", answer: "It differs by program, but applications with strategy, data, and clear business objectives are clearly more likely to pass. LUFÉ's deliverables match these three requirements. We will not guarantee an award, but we will raise your chances as far as we can." },
-    { question: "Is it too early to apply if I have not started expanding overseas?", answer: "The fourth cross-border e-commerce support program is designed for this situation: learn first with free resources, without investing first. Apply for larger programs after you have direction." },
+    { question: "Is it too early to apply if I have not started expanding overseas?", answer: "The fourth cross-border e-commerce support program is designed for this situation: learn first with free or low-threshold resources; some programs require a small co-payment or advance payment. Apply for larger programs after you have direction." },
   ],
   faqTitle: "What you are most likely to ask before applying",
   faqAskLabel: "Ask LUFÉ directly →",

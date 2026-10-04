@@ -1,11 +1,11 @@
 import type { HomeCasesCopy } from "@/i18n/zh/home-cases";
 
 // Fingerprint of homeCasesZh this English was translated from; registry.test.ts prints the new value when Chinese changes.
-export const HOME_CASES_SOURCE_FINGERPRINT = "bd6d12b916fa67d7";
+export const HOME_CASES_SOURCE_FINGERPRINT = "14ffe5a5328bcf01";
 
 export const homeCasesEn: HomeCasesCopy = {
   heading: ["Data sets the direction;", "experience shapes the approach"],
-  lead: "In the Philippines, we have helped partners take three different routes. Each started with a small-scale test, then adjusted and expanded based on the data.",
+  lead: "In the Philippines, two cases we worked on and one our Philippine partners built themselves took different routes. Each started with a small-scale test, then adjusted and expanded based on the data.",
   roads: [
     { label: "First route", title: "Starting from zero", detail: "Our local partners in the Philippines first built an English-language education institution;\nlater, they built a chain bubble tea brand from zero" },
     { label: "Second route", title: "Adapt, then bring it over", detail: "Taiwanese products arrive locally, change their formula, price and packaging,\nand become something local people are willing to pay for" },

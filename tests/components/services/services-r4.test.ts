@@ -14,11 +14,12 @@ const renderChapter = async (key: ChapterKey) =>
   renderToStaticMarkup(await ChapterPage({ chapter: CHAPTERS[key] }));
 
 describe("services round four", () => {
-  it("uses the professional product-testing heading without audience labels", async () => {
+  it("uses the approved product-testing participants", async () => {
     const markup = await renderChapter("m1");
 
     expect(markup).toContain("先驗證市場，再決定投入");
-    expect(markup).not.toMatch(/媽媽|家長|上班族/);
+    expect(markup).toContain("當地老師、家長等有固定收入、自己花錢買東西的消費者");
+    expect(markup).not.toMatch(/媽媽|上班族/);
   });
 
   it("uses the professional call-center h1", async () => {

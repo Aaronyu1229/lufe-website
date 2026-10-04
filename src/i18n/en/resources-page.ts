@@ -1,7 +1,7 @@
 import type { ResourcesPageCopy } from "@/i18n/zh/resources-page";
 
 // Fingerprint of resourcesPageZh this English was translated from; registry.test.ts prints the value after the first run.
-export const RESOURCES_PAGE_SOURCE_FINGERPRINT = "95c19b4c44dfbf84";
+export const RESOURCES_PAGE_SOURCE_FINGERPRINT = "2fe9590abe3cef11";
 
 export const resourcesPageEn: ResourcesPageCopy = {
   metadata: {
@@ -24,8 +24,8 @@ export const resourcesPageEn: ResourcesPageCopy = {
     items: [
       { href: "/cases", eyebrow: "Cases", title: "Work we have actually done", description: "The full process for each case: where it got stuck, how we decided, and what happened next", action: "See cases →" },
       { href: "/insights", eyebrow: "Insights and guides", title: "Practical articles on markets and regulations", description: "Analysis and practical guides organized by expansion stage", action: "Read articles →" },
-      { href: "/assess", eyebrow: "Situation Check", title: "Find the case most like yours in 2 minutes", description: "Three questions compare your situation with cases we have worked on and the decision methods used then", action: "Start the Situation Check →" },
-      { href: "https://tradepiloter.com", eyebrow: "TradePilot", title: "Online tariff lookup tool", description: "Developed by LUFÉ. Check tariff classifications before exporting.", action: "Go to TradePilot ↗", external: true, externalAriaLabel: "Go to TradePilot (opens in a new tab)" },
+      { href: "/assess", eyebrow: "Situation Check", title: "Find the case most like yours in 2 minutes", description: "Three questions compare your situation with two cases we worked on and one our Philippine partners built themselves, and the decision methods used then", action: "Start the Situation Check →" },
+      { href: "https://tradepiloter.com", eyebrow: "TradePilot", title: "Online tariff lookup tool", description: "Check tariff classifications before exporting.", action: "Go to TradePilot ↗", external: true, externalAriaLabel: "Go to TradePilot (opens in a new tab)" },
     ],
   },
 };

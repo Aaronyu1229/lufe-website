@@ -27,7 +27,7 @@ export const footerZh: FooterCopy = {
   resourceLinks: ["2 分鐘處境比對", "政府補助整理", "全部資源"],
   relatedBusinessesHeading: "相關企業",
   partners: [
-    { name: "TradePilot", note: "線上報關工具" },
+    { name: "TradePilot", note: "線上關稅查詢工具" },
     { name: "躍馬企業", note: "國際物流・官網" },
   ],
   contactHeading: "聯絡",

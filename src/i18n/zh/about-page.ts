@@ -137,7 +137,7 @@ export const aboutPageZh: AboutPageCopy = {
     lead: "這是成立鹿飛的原因。做法是把出海拆成小步：先花 1～2 萬看市場反應，再決定要不要往下走。所以第一次談，只問問題；有時候會建議你再等等，那也是一種答案",
     roles: {
       taiwan: { title: "台灣核心", description: "合約、進度、對口窗口都在台灣，從第一次評估到最後一章，你只需要找同一個人。要出的貨，交給躍馬報關、運送——那是我們 43 年的本業" },
-      philippines: { title: "菲律賓合作夥伴", description: "貨到了馬尼拉，接手的是一群在當地做了多年的人：他們經營英語教育機構與連鎖餐飲，把一個台灣手搖飲品牌從一家做到十幾家。市場探查的面板、落地的文件與跑腿、海外客服的人手，都從這裡出來" },
+      philippines: { title: "菲律賓合作夥伴", description: "貨到了馬尼拉，接手的是一群在當地做了多年的人：他們經營英語教育機構與連鎖餐飲，把夥伴自己的台灣茶飲品牌從一家做到十幾家。市場探查的面板、落地的文件與跑腿、海外客服的人手，都從這裡出來" },
       northAmerica: { title: "北美團隊", description: "另一條路通往北美。當地團隊做研究、跑展覽、引進買家、上談判桌，正陪一個台灣魚鬆品牌走美國的第一關。北美通路由他們執行，台灣這邊的窗口不換" },
     },
   },
@@ -152,7 +152,7 @@ export const aboutPageZh: AboutPageCopy = {
       northAmerica: { title: "北美", description: "北美團隊：研究、展覽、買家、談判" },
       southeastAsia: { title: "東南亞", description: "菲律賓合作夥伴：教育機構、連鎖餐飲、客服團隊、律師行、持證進口商" },
       globalLogistics: { title: "全球物流", description: "躍馬企業 43 年國際貨運承攬：報關、倉儲、海空運、最後一哩" },
-      technology: { title: "科技工具", description: "自主開發的 TradePilot 關稅查詢工具，2,400+ 用戶使用中。用科技降低跨境的資訊門檻" },
+      technology: { title: "科技工具", description: "TradePilot 線上關稅查詢工具，2,400+ 用戶使用中。用科技降低跨境的資訊門檻" },
     },
   },
   beliefs: {

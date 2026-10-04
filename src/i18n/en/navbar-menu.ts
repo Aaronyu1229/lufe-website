@@ -1,7 +1,7 @@
 import type { NavbarMenuCopy } from "@/i18n/zh/navbar-menu";
 
 // Fingerprint of navbarMenuZh this English was translated from; registry.test.ts prints the new value when Chinese changes.
-export const NAVBAR_MENU_SOURCE_FINGERPRINT = "a64e95289e551346";
+export const NAVBAR_MENU_SOURCE_FINGERPRINT = "4dc25c64e80a9c6e";
 
 export const navbarMenuEn: NavbarMenuCopy = {
   header: {
@@ -56,7 +56,7 @@ export const navbarMenuEn: NavbarMenuCopy = {
     allArticles: "View all articles →",
     subsidiesAndResources: "Subsidies & resources",
     subsidyDescription: "Government subsidy guide",
-    tradePilotDescription: "Online customs declaration tool",
+    tradePilotDescription: "Online tariff lookup tool",
   },
   about: {
     items: ["Brand story", "Team", "Partner network", "Brand philosophy"],

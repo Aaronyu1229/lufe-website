@@ -1,7 +1,7 @@
 import type { ServicesPageCopy } from "@/i18n/zh/services-page";
 
 // Fingerprint of servicesPageZh this English was translated from. registry.test.ts prints the new value when Chinese changes.
-export const SERVICES_PAGE_SOURCE_FINGERPRINT = "a453d9374a9c6ae7";
+export const SERVICES_PAGE_SOURCE_FINGERPRINT = "fbc0127a66a37752";
 
 export const servicesPageEn: ServicesPageCopy = {
   breadcrumbAriaLabel: "Breadcrumb",
@@ -52,7 +52,7 @@ export const servicesPageEn: ServicesPageCopy = {
   windowHeadingAccent: "connecting every partner on the ground",
   windowLead: "We own the contract, progress and quality; local testing, channels, legal work and hiring are split among our partners.",
   capabilities: [
-    { title: "Local tester panel", body: "A panel of local teachers and parents tries your product before launch, so you get real reactions first" },
+    { title: "Local tester panel", body: "A panel of local teachers, parents, and other salaried consumers who pay for their own purchases tries your product before launch, so you get real reactions first" },
     { title: "Licensed importer & channel partners", body: "A licensed local importer files and holds your product registration, so you don't need a company first; listings go through partner e-commerce channels" },
     { title: "Law firm & hiring partners", body: "Company registration, paperwork and hiring are handled by a local law firm and hiring partners" },
     { title: "Project management in Taiwan", body: "Contracts, progress and quality metrics sit with our Taiwan company — you deal with one point of contact" },

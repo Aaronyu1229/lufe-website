@@ -2,7 +2,7 @@ import { CTA_LINE_EN } from "@/data/cta";
 import { CASES, type CaseCardMeta, type CaseStudy } from "@/data/cases";
 
 // Fingerprint of the Chinese case copy and data this English was translated from; registry.test.ts prints the value after the first run.
-export const CASES_SOURCE_FINGERPRINT = "9136fed7a9cdd4dd";
+export const CASES_SOURCE_FINGERPRINT = "6007c80d3a586b79";
 
 const [goatMilkSoap, fishFloss, bubbleTea] = CASES;
 

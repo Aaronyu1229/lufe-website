@@ -46,8 +46,8 @@ export const resourcesPageZh: ResourcesPageCopy = {
     items: [
       { href: "/cases", eyebrow: "案例", title: "實際做過的案子", description: "每個案例的完整過程：卡在哪、怎麼判斷、後來怎麼走", action: "看案例 →" },
       { href: "/insights", eyebrow: "洞察與指南", title: "市場與法規的實務文章", description: "依出海階段整理的分析與實務指南", action: "讀文章 →" },
-      { href: "/assess", eyebrow: "處境比對", title: "2 分鐘找到最像你的案例", description: "三個問題，比對我們參與過的案例與當時的判斷方法", action: "開始比對 →" },
-      { href: "https://tradepiloter.com", eyebrow: "TradePilot", title: "線上關稅查詢工具", description: "鹿飛自主開發，出口前先把稅則查清楚", action: "前往 TradePilot ↗", external: true, externalAriaLabel: "前往 TradePilot（另開新分頁）" },
+      { href: "/assess", eyebrow: "處境比對", title: "2 分鐘找到最像你的案例", description: "三個問題，比對兩個我們參與的案例，加上一個菲律賓夥伴自己的品牌與當時的判斷方法", action: "開始比對 →" },
+      { href: "https://tradepiloter.com", eyebrow: "TradePilot", title: "線上關稅查詢工具", description: "出口前先把稅則查清楚", action: "前往 TradePilot ↗", external: true, externalAriaLabel: "前往 TradePilot（另開新分頁）" },
     ],
   },
 };

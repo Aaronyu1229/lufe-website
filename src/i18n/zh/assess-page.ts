@@ -103,7 +103,7 @@ export const assessPageZh: AssessPageCopy = {
   northAmericaChapter: { text: "北美走另一條線，先看「北美通路」怎麼做 →", href: "/services/north-america" },
   fallback: { headline: "處境比對", loading: "載入中…" },
   entry: {
-    home: "首頁", cases: "案例", compare: "比對", breadcrumb: "處境比對", headline: ["看看你的處境，", "跟哪個案例最像"], lead: "三個問題，約 2 分鐘。比對我們參與過的三個案例，找出最接近的一個、當時怎麼判斷，以及多半從哪一章開始。", comparing: "正在比對", start: "開始比對 ↓", scrollCue: "往下看", compareCases: "會和這三個案例比對",
+    home: "首頁", cases: "案例", compare: "比對", breadcrumb: "處境比對", headline: ["看看你的處境，", "跟哪個案例最像"], lead: "三個問題，約 2 分鐘。比對兩個我們參與的案例，加上一個菲律賓夥伴自己的品牌，找出最接近的一個、當時怎麼判斷，以及多半從哪一章開始。", comparing: "正在比對", start: "開始比對 ↓", scrollCue: "往下看", compareCases: "會和兩個我們參與的案例，加上一個菲律賓夥伴自己的品牌比對",
   },
   narrative: {
     dimensions: { stage: "階段", blocker: "卡點", market: "市場" },

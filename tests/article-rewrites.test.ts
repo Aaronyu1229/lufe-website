@@ -91,7 +91,7 @@ const reviewedArticles = articles.filter((article) => reviewedSlugs.has(article.
 const seoTitles = {
   "us-fda-registration-guide": "美國 FDA 認證怎麼申請？FDA 不發「認證」：保健品出口美國真正要做的五件事",
   "landed-cost-before-export": "出口報價前先算到岸成本：FOB、CIF、DDP 差在哪、關稅怎麼算",
-  "tradepilot-tariff-tutorial": "關稅怎麼計算？用 TradePilot 免費查 HS Code、關稅到落地成本",
+  "tradepilot-tariff-tutorial": "關稅怎麼計算？用 TradePilot 線上關稅查詢工具查 HS Code、關稅到落地成本",
   "product-testing-best-practices": "市場調查怎麼做？小預算的海外市場測試，先避開三個錯誤",
   "first-time-export-checklist": "第一次出口要走哪五步？從確認有人買、產品證到出口報關與上架",
   "overseas-exhibition-subsidy-115-upgrade": "參展補助怎麼申請？115 年海外參展補助每展最高 16 萬、補到 90%",
@@ -99,6 +99,13 @@ const seoTitles = {
   "philippines-ecommerce-first-year": "菲律賓電商第一年：蝦皮、Lazada、TikTok Shop 先開哪一個？店開誰名下",
   "amazon-us-three-decisions": "產品要上 Amazon 美國站嗎？台灣品牌先做這三個判斷",
 } as const;
+
+const ownerApprovedBody = (draft: Draft) => draft.slug === "agent-vs-distributor-exclusive"
+  ? draft.body.replace(
+    "鹿飛的[寄賣包](/services/consignment)用的是另一種做法：證由合作的持證進口商代辦、代持，資料歸你，合約寫清楚轉移配合，換人只換一張合約，不綁任何一家通路。這不是唯一解，但它把「證掛誰名下」從代理談判桌上拿掉了。",
+    "鹿飛的[寄賣包](/services/consignment)用的是另一種做法：證由合作的持證進口商代辦、代持，資料歸你；合約要求進口商配合轉移，你不用從頭來；FDA 的轉移或重新通報程序仍要走，不綁任何一家通路。這不是唯一解，但它把「證掛誰名下」從代理談判桌上拿掉了。",
+  )
+  : draft.body;
 
 describe("article rewrites and additions", () => {
   it("copies each approved new draft into a static article", () => {
@@ -113,7 +120,7 @@ describe("article rewrites and additions", () => {
         title: draft.title,
         summary: draft.excerpt,
         category: draft.category,
-        content: [draft.body],
+        content: [ownerApprovedBody(draft)],
         faq: draft.faq,
         sources: draft.sources,
         lastVerified: draft.lastVerified,

@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "philippines-ecommerce-first-year",
-  sourceFingerprint: "97059845c4d710ab",
+  sourceFingerprint: "afb4a9a564f3c43d",
   title: "The first year of e-commerce in the Philippines: Shopee, Lazada, or TikTok Shop first, and whose name should the store use?",
   summary: "If Shopee sales are strong in Taiwan, can you sell to the Philippines through Shopee cross-border? The first-year question is not which platform is largest. It is whose name the store uses, where stock sits, and who responds to messages. The three platforms' seller requirements and the difference between cross-border and local stores.",
   readTime: "6 min read",
