@@ -31,6 +31,27 @@ export interface MethodologyExample {
   readonly note: string;
 }
 
+export interface MethodologyDimension {
+  readonly name: string;
+  readonly question: string;
+  readonly criteria: string;
+  readonly redAt: string;
+}
+
+export type MethodologyDecisionVerdict = "Go" | "Conditional Go" | "Hold" | "No-Go";
+
+export interface MethodologyDecision {
+  readonly score: string;
+  readonly verdict: MethodologyDecisionVerdict;
+  readonly advice: string;
+}
+
+export interface MethodologyFoundation {
+  readonly lead: string;
+  readonly footnote: string;
+  readonly body: string;
+}
+
 export const METHODOLOGY_EXAMPLES: readonly MethodologyExample[] = [
   {
     key: "peanut",
@@ -82,7 +103,7 @@ export const REPORT_OUTLINE = [
   "相對優勢",
   "進入挑戰",
   "研究結論",
-] as const;
+];
 
 export const REPORT_DISCLAIMER = `每一份都寫清楚：樣本是誰、哪些是一手訪談、哪些是公開資料、信心度多高。
 報告的最後一句永遠是同一句——
@@ -91,7 +112,7 @@ export const REPORT_DISCLAIMER = `每一份都寫清楚：樣本是誰、哪些�
 export const SCALE_INTRO = `第一次談，我們會用五個問題把你的案子粗跑一遍。
 這五題有紅線，碰到就先停下來講清楚`;
 
-export const METHODOLOGY_DIMENSIONS = [
+export const METHODOLOGY_DIMENSIONS: readonly MethodologyDimension[] = [
   {
     name: "Market 市場",
     question: "這個市場夠大嗎？",
@@ -122,14 +143,14 @@ export const METHODOLOGY_DIMENSIONS = [
     criteria: "當地貿易政策穩定度、產品類別法規變動歷史、政治風險、退出成本",
     redAt: "這個品類近幾年被禁過、或被大幅加稅，風險要加權。",
   },
-] as const;
+];
 
-export const METHODOLOGY_DECISIONS = [
+export const METHODOLOGY_DECISIONS: readonly MethodologyDecision[] = [
   { score: "≥ 75", verdict: "Go", advice: "可以進，照四章走" },
   { score: "60–74", verdict: "Conditional Go", advice: "可以進，先解決一到兩個弱項" },
   { score: "45–59", verdict: "Hold", advice: "建議暫緩 6–12 個月，等關鍵變化" },
   { score: "< 45", verdict: "No-Go", advice: "不建議。我們會寫清楚什麼條件改了可以再看" },
-] as const;
+];
 
 export const DOUBLE_SCORE_COPY = `第一次是紙上分數。
 用公開數據、你給的成本、我們在當地的經驗打的。
@@ -166,7 +187,7 @@ export const COMPANIONSHIP_COPY = `報告交出去，不是結束。
 每一章結束，你都可以停。
 但只要你往下走，我們就在。`;
 
-export const METHODOLOGY_FOUNDATIONS = [
+export const METHODOLOGY_FOUNDATIONS: readonly MethodologyFoundation[] = [
   {
     lead: "「了解多一分，才投入多一分」來自國際化研究裡被引用最多的模型",
     footnote: "¹",
@@ -182,7 +203,7 @@ export const METHODOLOGY_FOUNDATIONS = [
     footnote: "³",
     body: "：\n過了這一關，才投下一筆",
   },
-] as const;
+];
 
 export const FOUNDATIONS_CLOSING = "我們做的，是把這三件事壓成一個台灣中小品牌負擔得起、三個月跑得完一輪的版本";
 

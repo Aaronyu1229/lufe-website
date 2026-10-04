@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import { Segmented } from "@/components/ui";
 import { useSpring } from "@/lib/motion";
 
-import { METHODOLOGY_EXAMPLES } from "./content";
+import { METHODOLOGY_EXAMPLES, type MethodologyExample } from "./content";
 
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function MethodologyExamples() {
-  const [activeKey, setActiveKey] = useState(METHODOLOGY_EXAMPLES[0]?.key ?? "peanut");
+export function MethodologyExamples({ examples = METHODOLOGY_EXAMPLES, label = "研究例子" }: { readonly examples?: readonly MethodologyExample[]; readonly label?: string }) {
+  const [activeKey, setActiveKey] = useState(examples[0]?.key ?? "peanut");
   const opacity = useSpring(1, { precision: 0.001 });
   const translateY = useSpring(0, { precision: 0.001 });
 
@@ -31,13 +31,13 @@ export function MethodologyExamples() {
 
   return <>
     <Segmented
-      label="研究例子"
+      label={label}
       value={activeKey}
       onChange={(key) => setActiveKey(key === "sunscreen" ? "sunscreen" : "peanut")}
-      options={METHODOLOGY_EXAMPLES.map((example) => ({ value: example.key, label: example.tab }))}
+      options={examples.map((example) => ({ value: example.key, label: example.tab }))}
       className="mt-8"
     />
-    {METHODOLOGY_EXAMPLES.map((example) => {
+    {examples.map((example) => {
       const active = example.key === activeKey;
 
       return <article
