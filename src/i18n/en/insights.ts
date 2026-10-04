@@ -5,7 +5,7 @@ export const insightsEn: InsightsCopy = {
     breadcrumb: "Insights & resources",
     tableOfContents: "Table of contents",
     sourcesSummary: "Sources and verification ({n} sources) · Last verified {date}",
-    published: "Published:",
+    published: "Published: ",
     relatedReading: "Related reading",
     backToArticles: "← Back to all articles",
     founderByline: "Aaron Yu · LUFÉ founder",

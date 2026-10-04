@@ -7,7 +7,7 @@ const EN_TITLE = "LUFÉ — Your first year in the Philippines, after the freigh
 const EN_DESCRIPTION = "Freight gets your goods there; the work starts after. LUFÉ walks Taiwanese brands through their first year in the Philippines: Market Test, Consignment, Company Setup and Call Center — four services, each with its own price. Start with NT$10,000–20,000 to see how the market responds. Our founder comes from Jumping Freight, backed by 43 years of international logistics.";
 
 export const metadata: Metadata = {
-  title: { default: EN_TITLE, template: "%s | LUFÉ" },
+  title: { absolute: EN_TITLE, template: "%s | LUFÉ" },
   description: EN_DESCRIPTION,
   keywords: "Philippines market entry, Taiwanese brands, importers in the Philippines, consignment, company registration Philippines, FDA registration Philippines, call center outsourcing, LUFÉ",
   openGraph: {
