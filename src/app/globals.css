@@ -256,7 +256,9 @@ button:not(:disabled):active,
 .lufe-chapter-line-done::after { content: ""; position: absolute; inset: 0; background: var(--color-gold); transform-origin: left; animation: lufe-fill-x .9s var(--ease-spring) both; }
 .lufe-chapter-line-preview { position: absolute; inset: 0; background: rgba(212,168,92,.5); transform: scaleX(0); transform-origin: left; transition: transform .32s cubic-bezier(.2,.8,.2,1); }
 .lufe-chapter-line-preview[data-on="true"] { transform: scaleX(1); }
-.lufe-chapter-peek { position: absolute; top: calc(100% + 8px); left: 0; display: none; padding: 8px 12px; border: 1px solid var(--color-bd); background: #fff; color: var(--color-tx2); font-size: 12.5px; line-height: 1.35; white-space: nowrap; pointer-events: none; opacity: 0; transform: translateY(-4px); transition: opacity .18s, transform .18s; }
+.lufe-chapter-peek { position: absolute; top: calc(100% + 8px); left: 0; display: none; padding: 8px 12px; border: 1px solid var(--color-bd); background: #fff; color: var(--color-tx2); font-size: 12.5px; line-height: 1.35; width: max-content; max-width: 16rem; white-space: normal; pointer-events: none; opacity: 0; transform: translateY(-4px); transition: opacity .18s, transform .18s; }
+/* Last chapter sits at the right edge; open its peek leftward so long (English) titles never widen the page. */
+div:last-child > .lufe-chapter-link .lufe-chapter-peek { left: auto; right: 0; }
 @keyframes lufe-fill-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes lufe-chapter-ping { from { transform: scale(1); opacity: .45; } to { transform: scale(2.4); opacity: 0; } }
 @media (hover: hover) and (min-width: 768px) {

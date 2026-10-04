@@ -12,6 +12,11 @@ import { HOME_FAQ_SOURCE_FINGERPRINT, homeFaqEn } from "./en/home-faq";
 import { HOME_CTA_SOURCE_FINGERPRINT, homeCtaEn } from "./en/home-cta";
 import { HOME_SUBSIDY_ALERT_SOURCE_FINGERPRINT, homeSubsidyAlertEn } from "./en/home-subsidy-alert";
 import { HOME_LATEST_INSIGHTS_SOURCE_FINGERPRINT, homeLatestInsightsEn } from "./en/home-latest-insights";
+import { CHAPTERS_SOURCE_FINGERPRINT, CHAPTERS_EN } from "./en/chapters";
+import { chapterPageEn } from "./en/chapter-page";
+import { METHODOLOGY_SOURCE_FINGERPRINT, methodologyPageEn } from "./en/methodology-page";
+import { methodologyContentEn } from "./en/methodology-content";
+import { OPTIMIZE_PAGE_SOURCE_FINGERPRINT, optimizePageEn } from "./en/optimize-page";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -26,6 +31,11 @@ import { homeFaqZh } from "./zh/home-faq";
 import { homeCtaZh } from "./zh/home-cta";
 import { homeSubsidyAlertZh } from "./zh/home-subsidy-alert";
 import { homeLatestInsightsZh } from "./zh/home-latest-insights";
+import { chapterPageZh } from "./zh/chapter-page";
+import { CHAPTERS } from "@/data/chapters";
+import { methodologyContentZh } from "./zh/methodology-content";
+import { methodologyPageZh } from "./zh/methodology-page";
+import { optimizePageZh } from "./zh/optimize-page";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -42,4 +52,7 @@ export const I18N_MODULES = [
   { name: "home-cta", zh: homeCtaZh, en: homeCtaEn, sourceFingerprint: HOME_CTA_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-cta.ts" },
   { name: "home-subsidy-alert", zh: homeSubsidyAlertZh, en: homeSubsidyAlertEn, sourceFingerprint: HOME_SUBSIDY_ALERT_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-subsidy-alert.ts" },
   { name: "home-latest-insights", zh: homeLatestInsightsZh, en: homeLatestInsightsEn, sourceFingerprint: HOME_LATEST_INSIGHTS_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-latest-insights.ts" },
+  { name: "chapters", zh: { copy: chapterPageZh, chapters: CHAPTERS }, en: { copy: chapterPageEn, chapters: CHAPTERS_EN }, sourceFingerprint: CHAPTERS_SOURCE_FINGERPRINT, enFile: "src/i18n/en/chapters.ts" },
+  { name: "methodology", zh: { copy: methodologyPageZh, content: methodologyContentZh }, en: { copy: methodologyPageEn, content: methodologyContentEn }, sourceFingerprint: METHODOLOGY_SOURCE_FINGERPRINT, enFile: "src/i18n/en/methodology-page.ts" },
+  { name: "optimize-page", zh: optimizePageZh, en: optimizePageEn, sourceFingerprint: OPTIMIZE_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/optimize-page.ts" },
 ] as const;

@@ -38,7 +38,7 @@ export const PILLARS: Record<PillarSlug, Pillar> = {
     services: [
       { title: "通路進入與媒合", desc: "北美 Costco、Walmart、Amazon；東南亞連鎖與在地通路的直接對接關係。", href: "/services/channel-entry" },
       { title: "展會與加盟佈局", desc: "食品展、消費電子展、加盟展的策展協助與現場陪同。" },
-      { title: "AI 集客引擎", desc: "SEO 文章月產 30 篇以上 + AI 搜尋引擎佈局（AIO），讓 ChatGPT、Perplexity 在回答相關問題時推薦你的品牌。自然流量平均成長 200%+。" },
+      { title: "AI 集客引擎", desc: "SEO 文章月產 30 篇以上 + AI 搜尋引擎佈局（AIO），讓 ChatGPT、Perplexity 在回答相關問題時推薦你的品牌。" },
     ],
     relatedStages: ["channel-entry"],
   },
