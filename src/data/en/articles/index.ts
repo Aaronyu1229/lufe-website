@@ -26,6 +26,7 @@ export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [usFdaRegistrationGuide.slug]: usFdaRegistrationGuide,
   [tradepilotTariffTutorial.slug]: tradepilotTariffTutorial,
   [landedCostBeforeExport.slug]: landedCostBeforeExport,
+  [whyPhilippinesFirst.slug]: whyPhilippinesFirst,
 };
 import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
 import { article as fobCifDdpExplained } from "./fob-cif-ddp-explained";
@@ -37,3 +38,4 @@ import { article as philippinesEcommerceFirstYear } from "./philippines-ecommerc
 import { article as usFdaRegistrationGuide } from "./us-fda-registration-guide";
 import { article as tradepilotTariffTutorial } from "./tradepilot-tariff-tutorial";
 import { article as landedCostBeforeExport } from "./landed-cost-before-export";
+import { article as whyPhilippinesFirst } from "./why-philippines-first";
