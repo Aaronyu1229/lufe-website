@@ -30,19 +30,41 @@
    - 正文 1,400～2,200 字；sources 陣列＋內文 [n] 註腳；`lastVerified` 當天；`date` 與 `publishAt` 用分配到的時段；作者同其他文章。
    - 封面圖：用 `public/images/**` 已有 WebP 分級、且**沒被其他文章用過**的圖；沒有合適的才用 free-assets（Pexels／Pixabay，可商用）下載，跑 `npm run images:build`。
    - 文中適當連到相關服務頁與 1～2 篇既有文章；在相關的既有文章「延伸閱讀」加回連（`src/data/chapters.ts`）。
+5b. **英文版**（每篇文章、同一個 PR）
+   - 為每篇新增或更新的中文文章，建立或更新 `src/data/en/articles/<slug>.ts`。檔案用以下格式；只翻譯文字欄位，`slug` 必須與中文文章相同：
+     ```ts
+     import type { EnglishArticle } from "./index";
+
+     // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
+     export const article: EnglishArticle = {
+       slug: "<slug>",
+       sourceFingerprint: "SET_AFTER_FIRST_RUN",
+       title: "…",
+       summary: "…",
+       readTime: "<n> min read",
+       content: [String.raw`…`],
+       faq: [{ q: "…", a: "…" }],
+       sources: [{ id: 1, title: "…", publisher: "…", url: "<same url>", note: "…" }],
+     };
+     ```
+   - 在 `src/data/en/articles/index.ts` 匯入該檔，並把它登記到 `EN_ARTICLES`：`import { article as <camelCaseSlug> } from "./<slug>";`，再加入 `[<camelCaseSlug>.slug]: <camelCaseSlug>,`。
+   - 英文必須忠實翻譯中文：段落數、`##` 標題數與表格欄數相同；`> **先說答案：**` 寫成 `> **Short answer:**`，`## 情境：…` 寫成 `## Scenario: …`；閱讀時間寫 `"<n> min read"`，n 與中文分鐘數相同；金額一律寫 `NT$`。不得杜撰中文沒有的主張、案例、經驗或數字。
+   - 內文站內連結保留中文路徑（例如 `/services/...`、`/insights/...`），渲染端會改成英文路徑。每個出處的 `id` 與 `url` 必須和中文相同，`title`、`publisher`、`note` 翻成英文。不得出現 `guarantee`、`guaranteed`、`golden decade` 或 `demographic dividend`（不分大小寫）。
+   - 先以 `SET_AFTER_FIRST_RUN` 建檔，執行 `npx vitest run tests/i18n`，把輸出印出的 fingerprint 複製到 `sourceFingerprint`，再執行同一指令直到全綠。
 6. **鐵律檢查（任何一條不過就不發這篇）**
    - 不得出現捏造經驗：`grep -nE "我們的客戶|某品牌|我們服務過|我們陪跑過|有一位客戶|去年我們"` 必須為 0。
    - 不得出現：「保證」「人口紅利」「黃金十年」「品測」。
    - 每個 [n] 都有對應 source；每個 source 至少被引用一次。
    - 數字必須有出處（方案公開價除外：市場探查 1～2 萬、寄賣包 5～6 萬、起手包 7 萬）。
    - 不碰法律意見的結論；涉及合約、勞動、商標時文末加「經驗與實務整理，非法律意見」。
+   - 英文也跑同一套檢查：不得出現 `guarantee`、`golden decade`、`demographic dividend`，且出處編號必須與中文一致。`npx vitest run tests/i18n` 必須全綠（含數字一致性）；英文不過，整篇（含中文）不發。
 7. **建置驗證**
    - `npm run font:rebuild`（新中文字）、`npx tsc --noEmit`、`npx eslint src`、`npx vitest run --maxWorkers=2`。
    - 建置：`until mkdir /tmp/lufe-build.lock 2>/dev/null; do sleep 30; done; npm run build; rmdir /tmp/lufe-build.lock`（只准 mkdir／rmdir）。
    - 守門寫法：`if <檢查>; then <下一步>; fi`，不准用 `&&` 串在 grep 後面。
 8. **上線**
    - commit（結尾 `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`）、push、`gh pr create --base main`（標題「content: 自動排程 <日期> 三篇」，描述列出 3 篇標題、主攻字與月量、publishAt、來源數）。
-   - 等 Vercel 檢查 pass（`gh pr checks <n>`，最多等 15 分鐘）後 `gh pr merge <n> --merge`。
+   - 等全部檢查 pass（含 GitHub `test`）（`gh pr checks <n>`，最多等 15 分鐘）後 `gh pr merge <n> --merge`。
    - 合併後確認：未到 publishAt 的文章在正式站要 404（還沒發布是對的）。
    - 在 QUEUE.md 勾選完成的題目（同一個 PR 內處理）。
 9. **紀錄**：在 `docs/blog-autopilot/LOG.md` 最上面加一段（同一個 PR 內）：日期、3 篇 slug＋publishAt、花費、異常。若流程中途失敗、無法合併：不要硬上，把失敗原因寫成一個新檔 `~/Nika/Handoff/queue/鹿飛部落格自動駕駛 失敗 <YYYY-MM-DD>.md`（Aaron 的 Obsidian 交接區）與 `~/dev/lufe-autopilot/LAST_FAILURE.md`，worktree 保留。
@@ -53,12 +75,12 @@
 1. DataForSEO：對所有已發布文章的主攻字查台灣 SERP（前 30 名），記下 lufe.world 的名次。
 2. Google Search Console（服務帳號已有「限制」權限，2026-10-01 開通）：`python3 ~/dev/lufe-autopilot/gsc.py sc-domain:lufe.world <上月1號> <上月最後一天> query 100` 與 `... page 100`，取上月各查詢字與各頁的點擊、曝光、平均名次；與上月比較。
 3. 依結果補 QUEUE：
-   - 排名 11～30 名的文章 → 列為「本月更新」：補一節搜尋者在問、我們沒寫的內容（看 SERP 的「其他人也問了」），更新 `updated` 與 `lastVerified`。每月最多更新 3 篇，併入當月第一個週日任務。
+   - 排名 11～30 名的文章 → 列為「本月更新」：補一節搜尋者在問、我們沒寫的內容（看 SERP 的「其他人也問了」），更新 `updated` 與 `lastVerified`。中文改了必須同步改英文並更新 fingerprint。每月最多更新 3 篇，併入當月第一個週日任務。
    - 用 DataForSEO `keywords_for_keywords` 找 5 個新題目（月量 ≥ 50、和鹿飛／躍馬專業相關、不是旅遊或消費者購物意圖），加到自動產線尾端。
 4. 報告寫到 `docs/blog-autopilot/reports/<YYYY-MM>.md`（繁體中文、白話，給 Aaron 看：發了幾篇、哪些字進前 30、下月計畫、花費），開 PR 合併；同時把摘要（5 行內）寫成新檔 `~/Nika/Handoff/queue/鹿飛部落格月報 <YYYY-MM>.md`。
 
 ## 不做的事
-- 不改網站版面、元件、樣式（只動 `articles.ts`、`chapters.ts`、字型子集、圖片與 `docs/blog-autopilot/`）。
+- 不改網站版面、元件、樣式（只動 `articles.ts`、`chapters.ts`、`src/data/en/articles/`、字型子集、圖片與 `docs/blog-autopilot/`）。
 - 不寫「訪談佇列」的題目。
 - 不刪任何既有文章或網址。
 - 不開任何付費服務。
