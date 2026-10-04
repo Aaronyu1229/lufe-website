@@ -1,5 +1,24 @@
 # 自動駕駛紀錄（新的在最上面）
 
+## 2026-10-04 每週任務
+- 開工檢查：`~/dev/lufe-autopilot/LAST_FAILURE.md` 不存在，無待補項目。
+- 排程（空檔由 `blog-schedule.mjs` 給出）：
+  - `taiwan-food-export-philippines-steps` → 2026-10-10T09:00:00+08:00（主攻字「食品出口」月量 140；7 個來源）
+  - `philippines-food-cosmetic-label-checklist` → 2026-10-13T09:00:00+08:00（主攻字「食品標籤」月量 260，「食品標示規定」260、「化妝品標示」170 為變體；5 個來源）
+  - `us-fda-food-import-fsvp-prior-notice` → 2026-10-15T09:00:00+08:00（主攻字「FSVP」月量 70；15 個來源）
+- 選題判斷：
+  - QUEUE 第 6 題原標「美國 FDA 390」，但既有文章 `us-fda-registration-guide`（保健品）已搶這個字；為避免自家互搶，改以「FSVP」為主攻字、限定一般食品，並在文中連回保健品篇。
+  - 三題都不在 jumping.group 的 insights 清單內；出貨報關段落連到躍馬〈incoterms-trade-terms-guide〉。
+  - 資訊增益：「食品出口」首頁多為貿易商與美、日題目，無菲律賓逐步流程；「食品標籤」首頁全是台灣本地標示；「FSVP」首頁全是英文，「其他人也問了」有「fsvp是什麼？」，已作為 FAQ 原句。
+  - 美國篇引用鹿飛 `/cases/fish-floss-us-fda` 案例頁既有內容，未加寫細節。
+- 上週檢查：`philippines-fda-lto-cpr-cpn`（10-03 發布）200、在 sitemap；其餘 13 篇皆 200；`philippines-cpr-transfer-change-importer`、`market-entry-modes-compared` 尚未到 publishAt，404 正確。
+- 花費：DataForSEO 約 US$0.096（搜尋量 1 次 0.09＋SERP 3 次 0.006）；查詢前餘額 US$33.26。
+- 異常與處理：
+  - `npx eslint src` 有 1 個 error：`src/components/about/FreightRateChart.tsx`（react-hooks/set-state-in-effect），來自 main 既有 commit 1217d10，非本 PR 變更；CI 只跑 vitest，依「不改元件」規則未動，請人工處理。
+  - 產文期間 main 合併了 PR #160～#162，已 rebase 到最新 main 並重跑字型子集、tsc、vitest、build。
+  - ChemLinked 來源對腳本回 403（瀏覽器可開，前一篇已用同一網址）。
+- 待查（文中寫「查不到」或未寫）：菲律賓 FDA Circular 2024-004 原文（網站 403，樣品 50 公斤上限等細節未引用，只用服務章程已確認的內容）；進口商名稱地址可否用貼紙加註；菲律賓動物與水產品進口許可（BAI、BFAR）原文；美國食品追溯規則延期的最終規則。
+
 ## 2026-10-01 每週任務（第一次執行）
 - 排程（空檔由 `blog-schedule.mjs` 給出）：
   - `philippines-fda-lto-cpr-cpn` → 2026-10-03T09:00:00+08:00（主攻字「菲律賓 FDA」月量 10；7 個來源）

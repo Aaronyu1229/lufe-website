@@ -32,6 +32,9 @@ export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [philippinesFdaLtoCprCpn.slug]: philippinesFdaLtoCprCpn,
   [philippinesCprTransferChangeImporter.slug]: philippinesCprTransferChangeImporter,
   [marketEntryModesCompared.slug]: marketEntryModesCompared,
+  [taiwanFoodExportPhilippinesSteps.slug]: taiwanFoodExportPhilippinesSteps,
+  [philippinesFoodCosmeticLabelChecklist.slug]: philippinesFoodCosmeticLabelChecklist,
+  [usFdaFoodImportFsvpPriorNotice.slug]: usFdaFoodImportFsvpPriorNotice,
 };
 import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
 import { article as fobCifDdpExplained } from "./fob-cif-ddp-explained";
@@ -49,3 +52,6 @@ import { article as amazonUsThreeDecisions } from "./amazon-us-three-decisions";
 import { article as philippinesFdaLtoCprCpn } from "./philippines-fda-lto-cpr-cpn";
 import { article as philippinesCprTransferChangeImporter } from "./philippines-cpr-transfer-change-importer";
 import { article as marketEntryModesCompared } from "./market-entry-modes-compared";
+import { article as taiwanFoodExportPhilippinesSteps } from "./taiwan-food-export-philippines-steps";
+import { article as philippinesFoodCosmeticLabelChecklist } from "./philippines-food-cosmetic-label-checklist";
+import { article as usFdaFoodImportFsvpPriorNotice } from "./us-fda-food-import-fsvp-prior-notice";
