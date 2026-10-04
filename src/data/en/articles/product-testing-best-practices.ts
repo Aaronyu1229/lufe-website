@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "product-testing-best-practices",
-  sourceFingerprint: "5bc4038fd2a0e98d",
+  sourceFingerprint: "0e0a6c5c1959e11a",
   title: "How do you conduct market research? Three mistakes to avoid in a small-budget overseas market test",
   summary: "How do you conduct market research before expanding overseas without spending money and still failing to get an answer you can use to decide? Three common mistakes are asking only people you know, running ads during the test, and looking only at sales without asking why. A useful test must answer four questions.",
   readTime: "5 min read",
@@ -23,7 +23,7 @@ The problem with the box in the scenario is not that the quantity is too small. 
 
 Even if you increase the quantity, if everyone who receives the product is from the same circle, such as Taiwanese people living locally, the signal you get is "nostalgia," not "market." Once amplified, that signal becomes distorted: the first batch sells because people miss the taste of Taiwan; the second batch does not sell because local people never saw it.
 
-A test that can support a decision needs local people who **do not know you** to see the product. Our [Market Test](/services/product-testing) uses teachers and parents from local schools [1]: teachers are locally employed people with higher incomes, and parents are the people who actually pay for purchases. Neither group has a connection with you; a frown is a frown.
+A test that can support a decision needs local people who **do not know you** to see the product. Our [Market Test](/services/product-testing) uses teachers and parents from local schools [1]: teachers are salaried adults who pay for their own purchases, and parents are the people who actually pay for purchases. Neither group has a connection with you; a frown is a frown.
 
 ## Mistake two: running ads while testing
 

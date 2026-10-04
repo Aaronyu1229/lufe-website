@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "amazon-us-three-decisions",
-  sourceFingerprint: "69d96f0d5b5ac4a7",
+  sourceFingerprint: "ea2702d12c86d0ce",
   title: "Should your product sell on Amazon US? Three decisions Taiwan brands should make first",
   summary: "Whether to sell on Amazon US is not a product-selection question; it is a decision question. Make three decisions: whether you can clear the regulatory and Amazon requirements, whether margin remains after landed cost and fees, and who will handle complaints and returns. Discuss product selection only after all three have answers.",
   readTime: "6 min read",
@@ -128,7 +128,7 @@ This article is adapted from the January 2026 article "Amazon category analysis:
       title: "Executive Order 14324: Suspension of the de minimis exemption",
       publisher: "Federal Register",
       url: "https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis",
-      note: "Effective August 29, 2025; mail shipments were suspended indefinitely on June 24, 2026 at https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry.",
+      note: "Effective 2025-08-29. On 2026-06-24, U.S. Customs and Border Protection (CBP) published two rules suspending the de minimis exemption for goods of US$800 or less indefinitely: all modes other than mail (effective the same day) at https://www.federalregister.gov/documents/2026/06/24/2026-12670/indefinite-suspension-of-the-de-minimis-exemption-for-merchandise-arriving-through-all-modes-other; and mail shipments (effective 2026-07-24) at https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry.",
     },
     {
       id: 7,

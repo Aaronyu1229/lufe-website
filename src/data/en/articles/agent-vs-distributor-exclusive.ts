@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "agent-vs-distributor-exclusive",
-  sourceFingerprint: "43b5ce35d5a111ac",
+  sourceFingerprint: "4327bd6a1130f65f",
   title: "What is the difference between an agent, a distributor, and an exclusive arrangement? Before agreeing to exclusivity or stocking inventory, clarify who owns the goods",
   summary: "An agent does not buy the goods and earns commission; a distributor buys the goods outright and bears inventory risk. Exclusivity is not a third role—it is a condition added to either. This comparison table separates the three, sets out what you can accept or should decline on exclusivity and inventory, and explains the risk of whose name holds Philippine product registrations.",
   readTime: "6 min read",
@@ -28,7 +28,7 @@ You realize the question is not “should I agree?” It is **how to separate th
 | How the partner earns money | Commission; 5–10% is common in the Philippines, varying by industry [2] | The spread between its purchase price and selling price | Exchanges exclusivity for better commission or discount terms |
 | Common contract terms | Territory, term, commission rate, termination notice [2] | Territory, term, minimum purchases, inventory, pricing policy, termination, and returns [3][4] | Performance threshold, term, territory, consequences of missing the threshold, and exit terms [3][4] |
 
-The most important cell in the table is the top left. **If the other party asks for one container, ask whether it will pay for that container.** If it pays, it is a distributor: the container is its purchase, and it bears the inventory risk. That is normal business. If it does not pay and merely asks to “store the goods in its warehouse and sell them for you,” it is an agent: the goods and risk remain yours, while it receives exclusive agency. The difference is not terminology; it is who pays.
+The most important cell in the table is the top left. **If the other party asks for one container, ask whether it will pay for that container.** If it pays, it is a distributor: the container is its purchase, and it bears the inventory risk. That is normal business. If it does not pay and merely asks to “store the goods in its warehouse and sell them for you,” it is not a distributor; this is in effect consignment: the goods and risk remain yours, while it receives exclusive agency. The difference is not terminology; it is who pays.
 
 ## Exclusivity and inventory commitments: what you can accept and what you should decline
 

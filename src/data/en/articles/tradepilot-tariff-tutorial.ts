@@ -3,7 +3,7 @@ import type { EnglishArticle } from "./index";
 // Fingerprint of the Chinese article this English was translated from; registry.test.ts prints the new value when Chinese changes.
 export const article: EnglishArticle = {
   slug: "tradepilot-tariff-tutorial",
-  sourceFingerprint: "c7754808f5f9df64",
+  sourceFingerprint: "fce405f4b0c4adb4",
   title: "How do you calculate tariffs? Use TradePilot to look up HS codes, tariffs, and landed cost for free",
   summary: "How are tariffs calculated, and how do you look up an HS code? TradePilot is a free tool built by Jumping Freight that requires no registration: enter a product and amount, and AI assigns an HS code and breaks down customs duty and taxes through to landed cost.",
   readTime: "5 min read",
@@ -39,7 +39,7 @@ Before tomorrow's video call, send the screenshot and tariff heading to the cust
 - **It will not decide Incoterms for you.** Who pays tariffs depends on whether you agree on FOB or DDP with the buyer. If the importer in the scenario wants an FOB price, it pays the tariff. You look up the tariff to help calculate its retail price and decide, "Can this price sell in the United States?"
 - **It will not determine customs' classification.** The customs broker and customs authorities have the final say on which heading applies.
 
-One other point that is often misunderstood: Taiwan has no FTA with any ASEAN country. Exports to the Philippines, Vietnam, Thailand, and Indonesia all use MFN rates [3]. Do not be encouraged by claims of "zero tariffs within ASEAN"; that applies between ASEAN member states. You can also check Philippine rates against the Tariff Commission's [Tariff Finder](https://finder.tariffcommission.gov.ph/) [2].
+One other point that is often misunderstood: apart from ASTEP with Singapore, Taiwan has no FTA with any ASEAN country. Exports to the Philippines, Vietnam, Thailand, and Indonesia all use MFN rates [3]. Do not be encouraged by claims of "zero tariffs within ASEAN"; that applies between ASEAN member states. You can also check Philippine rates against the Tariff Commission's [Tariff Finder](https://finder.tariffcommission.gov.ph/) [2].
 
 ## When we do not recommend relying only on the tool
 
@@ -98,7 +98,7 @@ Last verified: October 1, 2026. Use the current TradePilot page at tradepiloter.
       title: "Taiwan's current FTA: Singapore ASTEP",
       publisher: "Office of the President, Republic of China (Taiwan)",
       url: "https://english.president.gov.tw/NEWS/4289",
-      note: "Taiwan has no FTA with any ASEAN country and uses MFN rates. Its other FTA is New Zealand ANZTEC.",
+      note: "Within ASEAN, Taiwan has an agreement only with Singapore (ASTEP); other ASEAN members use MFN rates. For Taiwan's other signed agreements (including New Zealand ANZTEC), see the Ministry of Economic Affairs International Trade Administration at https://fta.trade.gov.tw/.",
     },
   ],
 };

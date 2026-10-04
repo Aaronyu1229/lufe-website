@@ -71,7 +71,7 @@ export const articles: readonly Article[] = [
 | 他怎麼賺 | 佣金；菲律賓常見 5～10%，各行業不同 [2] | 進貨價與售價的價差 | 用「獨家」換更好的佣金或折扣 |
 | 合約常見條款 | 地區、期限、佣金率、終止通知 [2] | 地區、期限、最低進貨、庫存、價格政策、終止與退貨 [3][4] | 業績門檻、期限、地區、未達標後果、退出條款 [3][4] |
 
-這張表最重要的一格是左上角。**對方要你出一櫃，先問：這一櫃他付不付錢？** 付錢，他是經銷商，一櫃是他的進貨，庫存風險他扛，這是正常生意。不付錢、只是「先放他倉庫幫你賣」，那他是代理，貨是你的，風險是你的，而他拿到的是獨家代理。這兩種情況差的不是名詞，是誰出錢。
+這張表最重要的一格是左上角。**對方要你出一櫃，先問：這一櫃他付不付錢？** 付錢，他是經銷商，一櫃是他的進貨，庫存風險他扛，這是正常生意。不付錢、只是「先放他倉庫幫你賣」，那他不是經銷商，這其實是寄賣：貨是你的，風險是你的，而他拿到的是獨家代理。這兩種情況差的不是名詞，是誰出錢。
 
 ## 要獨家、要壓貨：哪些可以答應，哪些要拒絕
 
@@ -126,8 +126,8 @@ export const articles: readonly Article[] = [
 本文為經驗與實務整理，非法律意見；簽約前請找律師看過。最後查證：2026-10-01，菲律賓 FDA 制度持續改版，換證程序以查證日現況為準。`],
     faq: [{"q":"代理商跟經銷商的差別是什麼？一句話講完。","a":"看貨是誰的。經銷商向你買斷貨、自己扛庫存、自己定售價，賺的是價差；代理商不買貨，幫你找客戶、促成訂單，貨和發票還是你對客戶，他賺佣金。獨家不是第三種身分，是加在代理商或經銷商上的一個條件。"},{"q":"菲律賓代理要獨家三年，可以答應嗎？","a":"可以談，但不能單獨答應。獨家要用三樣東西換：每年的業績門檻（沒達到就取消獨家或縮小地區）、明確的期限與地區、以及雙方都能退出的條款。對方不肯談門檻，通常代表他只想先把別人擋在門外。"},{"q":"產品證掛在代理商名下，以後要換人怎麼辦？","a":"以菲律賓食品為例，登錄證的所有權轉移要附「原持有人與新持有人之間的轉讓協議」，新持有人還要有自己的 LTO。也就是說，換人需要舊代理配合簽字；談不攏就要重新登錄。所以合約一開始就要寫證的歸屬與轉移配合義務。"}],
     sources: [{"id":1,"title":"Routes to market：Using an agent or distributor when exporting","publisher":"英國商業暨貿易部（business.gov.uk）","url":"https://www.business.gov.uk/export-from-uk/learn/categories/prepare-sell-new-country/routes-to-market/when-use-agent-or-distributor/","note":"代理商不持有庫存、你保留定價與行銷控制、賺佣金；經銷商向你批量買貨、在當地持有庫存、你可能失去部分定價控制。"},{"id":2,"title":"Philippines Country Commercial Guide：Distribution and Sales Channels","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/country-commercial-guides/philippines-distribution-and-sales-channels","note":"菲律賓常見兩種進口商：備貨經銷商（合約要求購買並持有約定數量的庫存）與 indenter（中介、不扛庫存）；代理佣金常見 5～10%；合約通常含期限、地區、獨家條款；終止通常約定 30 天通知。"},{"id":3,"title":"ICC Model Contract on Distributorship","publisher":"國際商會 ICC Academy","url":"https://academy.iccwbo.org/international-trade/e-books/model-contract-on-distributorship/","note":"範本附件 VII 為「保證最低業績」、附件 IX 為「庫存」；適用於經銷商作為買斷轉售者或進口商的情況。"},{"id":4,"title":"ICC Distributorship Contract（Sole Importer-Distributor）公開範本文本","publisher":"美國證券交易委員會 EDGAR（上市公司附件，依 ICC 範本訂立）","url":"https://www.sec.gov/Archives/edgar/data/1956741/000121390024080420/ea021456701ex10-1_cleancore.htm","note":"保證最低業績未達成時，供應商可在一個月通知後終止合約、取消獨家或縮小地區；轉售價由經銷商自定、供應商只能給建議價；經銷商須自費維持地區正常需求的庫存；終止時供應商可選擇按原價買回在庫新品。此為依 ICC 範本簽訂的實際合約，條號與 ICC 原版略有差異。"},{"id":5,"title":"DOH Administrative Order No. 2014-0029（食品業者許可與加工食品登錄規則）","publisher":"菲律賓衛生部／FDA（FAOLEX 收錄全文）","url":"https://faolex.fao.org/docs/pdf/phi174226.pdf","note":"已登錄產品的所有權轉移條件：產品無任何需重新初次登錄的變動、新持有人持有效 LTO，並附原持有人與新持有人之間的轉讓協議；更換製造商或配方視同初次登錄。"},{"id":6,"title":"Understanding the Philippines' CPR Requirements for Imported Foods","publisher":"ChemLinked（第三方整理）","url":"https://food.chemlinked.com/expert-article/understanding-the-philippines-certificate-of-product-registration-cpr-requirements-for-imported-foods","note":"外國製造商不能直接申請 CPR，須由持有效 LTO 的菲律賓進口商／經銷商申請，或自行設立當地公司。"},{"id":7,"title":"CPR Housing in the Philippines","publisher":"Triple i Consulting（第三方顧問公司）","url":"https://www.tripleiconsulting.com/cpr-housing-philippines-how-businesses-get-fda-product-registration-without-company/","note":"變更貿易商、進口商或經銷商需走 FDA 正式程序，文件可能包括有效 LTO、各方協議與原始 CPR。"},{"id":8,"title":"FDA Citizen's Charter：Issuance of Cosmetic Product Notification","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2025/09/1.-Issuance-of-Cosmetic-Product-Notification.pdf","note":"化妝品 CPN 的申請人須持有效 LTO，且 LTO 須列有化妝品經銷／進口／貿易活動。"}],
-    lastVerified: "2026-10-01",
-    updated: "2026-10-01",
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "fob-cif-ddp-explained",
@@ -582,14 +582,14 @@ FOB 的責任劃分，以及進口端在目的地港口常見的額外費用，�
 
 先釐清最常見的誤解：**FDA 不會「核准」膳食補充品。** 依 1994 年的 DSHEA 法，膳食補充品歸類為食品，FDA 無權在上市前審核產品的安全性、功效或標示；公司自己要負責產品安全、標示真實 [1]。所以「拿到 FDA 核准」這句話，對保健品來說不存在。經銷商說的「搞定」，指的是下面五件事做完、文件拿得出來。
 
-**「FDA 認證」這張證也不存在。** FDA 不發任何登記證書，也不承認民間業者出具的「登記證明」[9]；登記號只代表你登記了，不代表 FDA 核准或背書 [2]。食品與膳食補充品要做的，是設施登記、新膳食成分（NDI）上市前通知、標示合規 [2][3][4]；化妝品則依 MoCRA 做設施登記與產品列名、每兩年更新，FDA 同樣不發證明文件、登記號也不等於核准 [10]。所以市面上拿到的「FDA 認證」，多半是代辦業者自行出具的登記證明，或實驗室的檢測報告——兩者都不是 FDA 發的。
+**「FDA 認證」這張證也不存在。** FDA 不發任何登記證書，也不承認民間業者出具的「登記證明」[9]；登記號只代表你登記了，不代表 FDA 核准或背書 [2]。食品與膳食補充品要做的，是設施登記、新膳食成分（NDI）上市前通知、標示合規 [2][3][4]；化妝品則依 MoCRA 做設施登記（每兩年更新）與產品列名（每年更新），FDA 同樣不發證明文件、登記號也不等於核准 [10]。所以市面上拿到的「FDA 認證」，多半是代辦業者自行出具的登記證明，或實驗室的檢測報告——兩者都不是 FDA 發的。
 
 ## 五個步驟，照順序
 
 | 步驟 | 要做什麼 | 誰負責 | 常卡在哪 |
 |---|---|---|---|
 | 1. 確認產品分類 | 你的產品在美國法規下是膳食補充品、傳統食品，還是藥品？分類決定後面所有流程。 | 品牌方＋懂美國法規的人 | 配方裡有藥品成分或宣稱療效，就不是補充品 |
-| 2. 設施登記＋美國代理人 | 製造、加工、包裝、儲存的設施向 FDA 登記，每兩年更新；境外設施須指定在美國的代理人 [2] | 工廠（代工廠就是代工廠登記） | 代工廠沒登記、或美國代理人沒確認同意，登記號下不來 |
+| 2. 設施登記＋美國代理人 | 製造、加工、包裝、儲存的設施向 FDA 登記，每兩年更新；境外設施須指定在美國的代理人 [2]；製造、包裝、標示或儲存膳食補充品的工廠，境外的也要符合 cGMP（21 CFR Part 111）[11] | 工廠（代工廠就是代工廠登記） | 代工廠沒登記、或美國代理人沒確認同意，登記號下不來 |
 | 3. NDI 通知 | 含有 1994-10-15 之前未在美國銷售的新膳食成分，上市前至少 75 天向 FDA 提交安全性通知 [3] | 製造商或經銷商 | 以為台灣常用的成分在美國也「舊」，沒查 |
 | 4. 標示合規 | Supplement Facts 面板、成分表、製造商或經銷商名稱與地址，照 FDA 格式 [4] | 品牌方 | 把台灣標示直接翻成英文，格式不對 |
 | 5. 每批進口事前通報 | 貨到港前向 FDA 提交 Prior Notice：海運 8 小時、空運 4 小時前 [5]；進口商另須有 FSVP 計畫 [8] | 進口商或報關行 | 以為登記過就不用每批通報 |
@@ -598,9 +598,9 @@ FOB 的責任劃分，以及進口端在目的地港口常見的額外費用，�
 
 ## 台灣品牌最常踩的五個坑
 
-**一、把保健品當藥品宣傳。** 「改善視力」「預防黃斑部病變」這類疾病宣稱，膳食補充品不能用；只能做結構／功能宣稱（例如「有助於維持眼睛健康」），而且要附「本聲明未經 FDA 評估」的免責文字 [6]。台灣的文案拿去直接翻譯，最容易在這裡出事。
+**一、把保健品當藥品宣傳。** 「改善視力」「預防黃斑部病變」這類疾病宣稱，膳食補充品不能用；只能做結構／功能宣稱（例如「有助於維持眼睛健康」），而且要附「本聲明未經 FDA 評估」的免責文字 [6]。用了結構／功能宣稱，製造商、包裝商或經銷商要在首次上市後 30 天內通知 FDA [12]。台灣的文案拿去直接翻譯，最容易在這裡出事。
 
-**二、忽略州級規定。** 聯邦過了不代表每一州都過。例如加州 Proposition 65 要求在加州銷售（含網路）且曝露於清單化學物質的產品標示警語 [7]。要賣進加州的通路，這一條要先看。
+**二、忽略州級規定。** 聯邦過了不代表每一州都過。例如加州 Proposition 65 要求在加州銷售（含網路）的產品，若使人曝露於清單化學物質且超過安全港值，就要標示警語；員工少於 10 人的企業豁免 [7][13]。要賣進加州的通路，這一條要先看。
 
 **三、標示翻譯不合規。** Supplement Facts 不是把「營養標示」翻成英文，欄位、單位、順序都有規定 [4]。
 
@@ -630,11 +630,11 @@ FOB 的責任劃分，以及進口端在目的地港口常見的額外費用，�
 
 回信給經銷商之前，先把五個步驟各寫一行「誰負責、現在在哪一步」。寫不出來的那幾行，用 LINE 問我們一句。北美這條線我們是前期低服務費加成交抽成，第一次談給明確數字。
 
-最後查證：2026-10-01。FDA 規定以官方頁面當期版本為準。`],
+本文為經驗與實務整理，非法律意見。最後查證：2026-10-01。FDA 規定以官方頁面當期版本為準。`],
     faq: [{"q":"保健品要賣到美國，要先拿到 FDA 認證嗎？","a":"不用，也拿不到。依美國 DSHEA 法，膳食補充品歸類為食品，FDA 不在上市前核准產品或標示 [1]，也不發任何登記證書、不承認民間業者出具的「登記證明」[9]。公司自己要負責產品安全與標示真實；FDA 的角色主要在上市後：查廠、看標示、處理不良事件。"},{"q":"台灣工廠要做什麼？","a":"製造、加工、包裝或儲存供美國消費食品的設施，都要向 FDA 登記，並每兩年更新一次；境外設施還要指定一位在美國的代理人作為 FDA 的聯絡窗口。"},{"q":"什麼是 NDI 通知？","a":"如果你的產品含有 1994 年 10 月 15 日之前未在美國銷售的新膳食成分（New Dietary Ingredient），製造商或經銷商必須在上市前至少 75 天向 FDA 提交安全性通知。"}],
-    sources: [{"id":1,"title":"FDA 101：膳食補充品","publisher":"美國 FDA","url":"https://www.fda.gov/consumers/consumer-updates/fda-101-dietary-supplements","note":"FDA 無權在上市前核准膳食補充品的安全性、功效或標示。"},{"id":2,"title":"食品設施登記問答（第七版）","publisher":"美國 FDA","url":"https://www.fda.gov/files/food/published/Questions-and-Answers-Regarding-Food-Facility-Registration-(Seventh-Edition).pdf","note":"誰要登記、每兩年更新、境外設施須有美國代理人（21 CFR 1.227）。"},{"id":3,"title":"NDI 通知程序與時程指引","publisher":"美國 FDA","url":"https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-new-dietary-ingredient-notification-procedures-and-timeframes-dietary-supplements","note":"新膳食成分須於上市前至少 75 天提交通知。"},{"id":4,"title":"膳食補充品標示指引","publisher":"美國 FDA","url":"https://www.fda.gov/food/dietary-supplements-guidance-documents-regulatory-information/dietary-supplement-labeling-guide","note":"Supplement Facts 面板、成分表、製造商或經銷商名稱與地址。"},{"id":5,"title":"進口食品事前通報（Prior Notice）","publisher":"美國 FDA","url":"https://www.fda.gov/industry/fda-import-process/prior-notice-imported-foods","note":"海運到港前 8 小時、空運與鐵路 4 小時、陸運 2 小時。"},{"id":6,"title":"食品與膳食補充品的標示宣稱","publisher":"美國 FDA","url":"https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/label-claims-conventional-foods-and-dietary-supplements","note":"不得宣稱診斷、治療、預防疾病；結構／功能宣稱須附免責聲明。"},{"id":7,"title":"加州 Proposition 65 簡介","publisher":"加州環境健康危害評估辦公室 OEHHA","url":"https://www.p65warnings.ca.gov/about-proposition-65","note":"在加州銷售（含網路）且曝露於清單化學物質的產品須標示警語。"},{"id":8,"title":"FDA：食品進口美國的規定","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states","note":"進口商須有 FSVP（外國供應商驗證）計畫。"},{"id":9,"title":"食品設施是否須繳登記費、及民間業者宣稱與 FDA 有關的問答","publisher":"美國 FDA","url":"https://www.fda.gov/food/guidance-regulation-food-and-dietary-supplements/questions-regarding-whether-food-facilities-are-required-pay-registration-fees-and-private","note":"登記免費、不須透過第三方；FDA 不發登記證書，也不承認民間業者出具的登記證書（2024-03-05）。"},{"id":10,"title":"化妝品設施登記與產品列名（MoCRA）","publisher":"美國 FDA","url":"https://www.fda.gov/cosmetics/registration-listing-cosmetic-product-facilities-and-products","note":"設施每兩年更新登記、產品每年更新列名；FDA 不發證明文件，登記號與列名號不代表核准。"}],
-    lastVerified: "2026-10-01",
-    updated: "2026-10-01",
+    sources: [{"id":1,"title":"FDA 101：膳食補充品","publisher":"美國 FDA","url":"https://www.fda.gov/consumers/consumer-updates/fda-101-dietary-supplements","note":"FDA 無權在上市前核准膳食補充品的安全性、功效或標示。"},{"id":2,"title":"食品設施登記問答（第七版）","publisher":"美國 FDA","url":"https://www.fda.gov/files/food/published/Questions-and-Answers-Regarding-Food-Facility-Registration-(Seventh-Edition).pdf","note":"誰要登記、每兩年更新、境外設施須有美國代理人（21 CFR 1.227）。"},{"id":3,"title":"NDI 通知程序與時程指引","publisher":"美國 FDA","url":"https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-new-dietary-ingredient-notification-procedures-and-timeframes-dietary-supplements","note":"新膳食成分須於上市前至少 75 天提交通知。"},{"id":4,"title":"膳食補充品標示指引","publisher":"美國 FDA","url":"https://www.fda.gov/food/dietary-supplements-guidance-documents-regulatory-information/dietary-supplement-labeling-guide","note":"Supplement Facts 面板、成分表、製造商或經銷商名稱與地址。"},{"id":5,"title":"進口食品事前通報（Prior Notice）","publisher":"美國 FDA","url":"https://www.fda.gov/industry/fda-import-process/prior-notice-imported-foods","note":"海運到港前 8 小時、空運與鐵路 4 小時、陸運 2 小時。"},{"id":6,"title":"食品與膳食補充品的標示宣稱","publisher":"美國 FDA","url":"https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/label-claims-conventional-foods-and-dietary-supplements","note":"不得宣稱診斷、治療、預防疾病；結構／功能宣稱須附免責聲明。"},{"id":7,"title":"加州 Proposition 65 簡介","publisher":"加州環境健康危害評估辦公室 OEHHA","url":"https://www.p65warnings.ca.gov/about-proposition-65","note":"在加州銷售（含網路）且曝露於清單化學物質的產品須標示警語。"},{"id":8,"title":"FDA：食品進口美國的規定","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states","note":"進口商須有 FSVP（外國供應商驗證）計畫。"},{"id":9,"title":"食品設施是否須繳登記費、及民間業者宣稱與 FDA 有關的問答","publisher":"美國 FDA","url":"https://www.fda.gov/food/guidance-regulation-food-and-dietary-supplements/questions-regarding-whether-food-facilities-are-required-pay-registration-fees-and-private","note":"登記免費、不須透過第三方；FDA 不發登記證書，也不承認民間業者出具的登記證書（2024-03-05）。"},{"id":10,"title":"化妝品設施登記與產品列名（MoCRA）","publisher":"美國 FDA","url":"https://www.fda.gov/cosmetics/registration-listing-cosmetic-product-facilities-and-products","note":"設施每兩年更新登記、產品每年更新列名；FDA 不發證明文件，登記號與列名號不代表核准。"},{"id":11,"title":"21 CFR 111.1 膳食補充品 cGMP 適用對象","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-111/subpart-A/section-111.1","note":"製造、包裝、標示或儲存膳食補充品者適用，含進口或申請進口美國的膳食補充品。"},{"id":12,"title":"21 CFR 101.93 膳食補充品結構／功能宣稱通知","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-101/subpart-F/section-101.93","note":"首次上市後 30 天內，由製造商、包裝商或經銷商通知 FDA。"},{"id":13,"title":"Proposition 65 in Plain Language","publisher":"加州環境健康危害評估辦公室 OEHHA","url":"https://oehha.ca.gov/proposition-65/general-info/proposition-65-plain-language","note":"曝露量在安全港值以下不須警語；員工少於 10 人的企業不受警語規定約束（加州健康安全法 25249.11(b)）。"}],
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "tradepilot-tariff-tutorial",
@@ -676,7 +676,7 @@ TradePilot 是躍馬國際物流做的免費關稅工具，不用註冊 [1]。�
 - **它不會替你決定 Incoterms。** 關稅由誰付，看你跟買家談的是 FOB 還是 DDP。情境裡那位進口商如果要 FOB 價，關稅是他付；你查關稅是為了幫他算零售價、幫自己判斷「這個價格在美國賣得動嗎」。
 - **它不會保證海關的認定。** 最後用哪個號列，以報關行與海關為準。
 
-另外提醒一件常被誤會的事：台灣跟東協各國都沒有 FTA，去菲律賓、越南、泰國、印尼都走 MFN 稅率 [3]。看到「東協零關稅」不要高興，那是東協成員國之間的事。菲律賓的稅率也可以用關稅委員會的 [Tariff Finder](https://finder.tariffcommission.gov.ph/) 對一次 [2]。
+另外提醒一件常被誤會的事：台灣在東協只跟新加坡簽有 ASTEP，跟其他東協國家都沒有 FTA，去菲律賓、越南、泰國、印尼都走 MFN 稅率 [3]。看到「東協零關稅」不要高興，那是東協成員國之間的事。菲律賓的稅率也可以用關稅委員會的 [Tariff Finder](https://finder.tariffcommission.gov.ph/) 對一次 [2]。
 
 ## 什麼情況不建議只靠工具
 
@@ -702,9 +702,9 @@ TradePilot 是躍馬國際物流做的免費關稅工具，不用註冊 [1]。�
 
 最後查證：2026-10-01。工具功能以 tradepiloter.com 當期頁面為準。`],
     faq: [{"q":"TradePilot 要錢嗎？要註冊嗎？","a":"不用。免費、不用註冊。它用關務署公告的資料計算，每一筆稅費都附公式與法規依據。"},{"q":"HS Code 查詢出來的號列，可以直接拿去報關嗎？","a":"不建議。工具會附信心度，信心度低的要人工確認；最後報關用哪個號列，以報關行與海關認定為準。歸錯號列被海關改列，補稅與罰款都算你的。"},{"q":"查完關稅就知道到岸成本了嗎？","a":"還沒。關稅只是到岸成本七塊裡的一塊。運費、保險、當地報關、倉儲與平台抽成要另外問貨代與合作倉。TradePilot 給你的是結構裡變最快的那一格。"}],
-    sources: [{"id":1,"title":"TradePilot 首頁","publisher":"躍馬國際物流 JUMPING FREIGHT","url":"https://tradepiloter.com","note":"免費、不用註冊；進口與出口稅費計算、稅則查詢、AI 歸類附信心度、多幣別、資料來自關務署公告。"},{"id":2,"title":"Philippine Tariff Finder","publisher":"菲律賓關稅委員會","url":"https://finder.tariffcommission.gov.ph/about","note":"菲律賓 MFN 與各 FTA 稅率官方查詢，AHTN 2022 版。"},{"id":3,"title":"台灣現有 FTA：新加坡 ASTEP","publisher":"中華民國總統府","url":"https://english.president.gov.tw/NEWS/4289","note":"台灣與東協各國皆無 FTA，走 MFN 稅率；另一個 FTA 是紐西蘭 ANZTEC。"}],
-    lastVerified: "2026-10-01",
-    updated: "2026-10-01",
+    sources: [{"id":1,"title":"TradePilot 首頁","publisher":"躍馬國際物流 JUMPING FREIGHT","url":"https://tradepiloter.com","note":"免費、不用註冊；進口與出口稅費計算、稅則查詢、AI 歸類附信心度、多幣別、資料來自關務署公告。"},{"id":2,"title":"Philippine Tariff Finder","publisher":"菲律賓關稅委員會","url":"https://finder.tariffcommission.gov.ph/about","note":"菲律賓 MFN 與各 FTA 稅率官方查詢，AHTN 2022 版。"},{"id":3,"title":"台灣現有 FTA：新加坡 ASTEP","publisher":"中華民國總統府","url":"https://english.president.gov.tw/NEWS/4289","note":"東協國家中台灣只與新加坡簽有 ASTEP，其餘走 MFN 稅率；台灣其他已簽協定（紐西蘭 ANZTEC 等）見經濟部國際貿易署 https://fta.trade.gov.tw/。"}],
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "landed-cost-before-export",
@@ -732,7 +732,7 @@ TradePilot 是躍馬國際物流做的免費關稅工具，不用註冊 [1]。�
 |---|---|---|---|
 | 1 | **出廠價** | 你自己 | 出口包裝、外箱、棧板、當地要求的標籤改版，常沒算進去 |
 | 2 | **國際運費** | 貨代（躍馬做這個） | 海運與空運、整櫃與併櫃差很多；起運港費用、文件費、旺季附加費 |
-| 3 | **保險** | 貨代或保險公司 | 多數目的國用「貨價＋運費＋保險」當完稅價格基礎，保險不只是保險 |
+| 3 | **保險** | 貨代或保險公司 | 多數目的國用「貨價＋運費＋保險」當完稅價格基礎，保險不只是保險；美國、加拿大的完稅價格不含國際運費與保險 [16][17] |
 | 4 | **目的國關稅** | TradePilot、目的國官方查詢工具 | HS Code 歸錯、以為有 FTA 優惠但台灣沒有 |
 | 5 | **目的國加值稅／貨物稅** | 目的國稅法、報關行 | 進口時就要繳，不是賣出才繳；特定品類另有貨物稅 |
 | 6 | **報關與當地運送** | 目的國報關行、持證進口商 [12] | 進口商要有海關登記；FDA 管制品要有證才放行 |
@@ -742,9 +742,9 @@ TradePilot 是躍馬國際物流做的免費關稅工具，不用註冊 [1]。�
 
 **關稅算在哪個價格上，看 Incoterms。** 對方要 FOB 價，意思是運費與進口關稅都由他付；如果他改口要 DDP，就是你全包 [1]。報價單上沒寫 Incoterms，等於沒報價。
 
-**以菲律賓為例，稅是怎麼疊的。** 關稅以交易價格（貨價，實務上加運費與保險）為基礎 [2]；關稅之上再課 12% 加值稅，稅基是「完稅價格＋關稅」[3]；含糖飲料另有每公升 6 或 12 披索的貨物稅，進口完成品要在海關放行前繳 [4]——茶飲禮盒如果含糖，這一格不能漏。單票 FOB 價值 1 萬披索以下免稅 [2]，但這是給個人小包裹用的，不是讓你拆單避稅的。
+**以菲律賓為例，稅是怎麼疊的。** 關稅以交易價格（貨價，實務上加運費與保險）為基礎 [2]；關稅之上再課 12% 加值稅，稅基是「完稅價格＋關稅＋貨物稅（如有）＋其他規費」[3]；含糖飲料另有每公升 6 或 12 披索的貨物稅，進口完成品要在海關放行前繳 [4]——茶飲禮盒如果含糖，這一格不能漏。單票 FOB 價值 1 萬披索以下免稅 [2]，但這是給個人小包裹用的，不是讓你拆單避稅的。
 
-**台灣跟東協各國都沒有 FTA。** 去菲律賓、越南、泰國、印尼都走 MFN 稅率 [5]。看到「東協內部零關稅」的資訊，那是東協成員國之間的事，跟台灣出口無關。
+**台灣在東協只跟新加坡簽有 ASTEP，跟其他東協國家都沒有 FTA。** 去菲律賓、越南、泰國、印尼都走 MFN 稅率 [5]。看到「東協內部零關稅」的資訊，那是東協成員國之間的事，跟台灣出口無關。
 
 ## FOB、CIF、DDP 差在哪
 
@@ -804,9 +804,9 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 
 本文改寫自 2026 年 2 月的〈中美關稅戰下的產地轉移策略〉。最後查證：2026-10-01，關稅法源變動頻繁，時間軸只記錄到查證日。`],
     faq: [{"q":"關稅一直在變，現在估的到岸成本還有意義嗎？","a":"有。關稅只是到岸成本的其中一塊，其他幾塊（運費、保險、當地加值稅、報關、倉儲、平台抽成）變動沒那麼大。把結構先算出來，關稅那一格用查證日的稅率填，稅率變了只換那一格。"},{"q":"關稅怎麼計算？到岸成本可以自己估嗎？","a":"可以估個骨架。關稅算在完稅價格上：以交易價格為基礎，實務上加運費與保險 [2]；算在哪個價格、由誰付，看報價單上的 Incoterms [1]。稅率用 TradePilot 或目的國的官方查詢工具查，運費問貨代報價，當地稅看目的國的稅法。但「用哪個 HS Code 報」「哪些費用算進完稅價格」這兩件事常常估錯，第一次還是找做過的人對一次。"},{"q":"為什麼文章裡不放估算數字？","a":"因為同一支產品、同一個市場，走海運或空運、FOB 或 DDP、整櫃或併櫃，到岸成本可以差很多。放一個數字只會讓人拿錯的數字做決定。"}],
-    sources: [{"id":1,"title":"Incoterms 2020 各條件的關稅責任","publisher":"荷蘭商會 KVK（第三方整理）","url":"https://www.kvk.nl/en/international/incoterms-2020-everything-you-need-to-know/","note":"EXW、FOB、CIF 由買方付進口關稅；DDP 由賣方全包。"},{"id":2,"title":"RA 10863 關稅現代化法（CMTA）","publisher":"LawPhil（菲律賓法規庫）","url":"https://lawphil.net/statutes/repacts/ra2016/ra_10863_2016.html","note":"第 423 條 FOB／FCA 1 萬披索以下免稅；第 701 條交易價格為課稅基礎。"},{"id":3,"title":"菲律賓進口加值稅計算方式","publisher":"Respicio & Co.（第三方整理）","url":"https://www.respicio.ph/commentaries/how-to-compute-import-duties-vat-and-taxes-philippines","note":"12%，稅基為完稅價格加關稅。"},{"id":4,"title":"BIR RR 20-2018 含糖飲料貨物稅","publisher":"菲律賓國稅局 BIR","url":"https://bir-cdn.bir.gov.ph/local/pdf/RR%2020-2018.pdf","note":"每公升 6 披索／高果糖糖漿 12 披索；進口完成品放行前繳納。"},{"id":5,"title":"台灣現有 FTA：新加坡 ASTEP","publisher":"中華民國總統府","url":"https://english.president.gov.tw/NEWS/4289","note":"另一個是紐西蘭 ANZTEC，見美國國會圖書館 https://www.loc.gov/item/global-legal-monitor/2013-07-18/new-zealand-taiwan-free-trade-agreement-signed/。"},{"id":6,"title":"USTR 美台對等貿易協定說明","publisher":"美國貿易代表署","url":"https://ustr.gov/about/policy-offices/press-office/fact-sheets/2026/february/fact-sheet-us-taiwan-agreement-reciprocal-trade","note":"引用 EO 14257 與 EO 14346。"},{"id":7,"title":"EO 14324 暫停小額免稅","publisher":"美國聯邦公報 Federal Register","url":"https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis","note":"2025-08-29 生效；2026-06-24 郵政小包無限期暫停 https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry。"},{"id":8,"title":"Learning Resources v. Trump 判決摘要","publisher":"美國國會研究處 CRS","url":"https://www.congress.gov/crs-product/LSB11398","note":"2026-02-20，最高法院判 IEEPA 不授權課徵關稅。"},{"id":9,"title":"Section 122 臨時關稅說明","publisher":"Wiley 法律事務所","url":"https://www.wiley.law/alert-Trump-Imposes-Section-122-Tariffs-After-Halting-IEEPA-Tariffs-Previews-New-Section-301-Investigations","note":"2026-02-24 生效，法定最長 150 天。"},{"id":10,"title":"Section 301 關稅 7 月 25 日生效","publisher":"中央社 Focus Taiwan","url":"https://focustaiwan.tw/politics/202607240007","note":"台灣貨物 MFN 加 301 合計以 10% 為底；另見 Morgan Lewis 整理 https://www.morganlewis.com/pubs/2026/07/us-administration-rebuilds-global-tariff-program-under-section-301。"},{"id":11,"title":"Philippine Tariff Finder","publisher":"菲律賓關稅委員會","url":"https://finder.tariffcommission.gov.ph/about","note":"MFN 與各 FTA 稅率，AHTN 2022 版。"},{"id":12,"title":"菲律賓海關進口商登記（CPRS、BOC 認證）","publisher":"Triple i Consulting（第三方整理）","url":"https://www.tripleiconsulting.com/import-permit-philippines-secure-boc-accreditation-this-guide/"},{"id":13,"title":"Incoterms 2020 運輸義務、費用與風險一覽表（官方 wallchart）","publisher":"國際商會 ICC","url":"https://academy.iccwbo.org/wp-content/uploads/2020/08/803E_Incoterms-2020-Wallchart-A4.pdf","note":"十一個條件的費用／風險轉移點、出口／進口手續由誰辦；FOB、CIF 列在海運與內河運輸組；僅 CIF、CIP 標示賣方保險義務。"},{"id":14,"title":"Incoterms 2020 Checklist and Flowcharts（2024 更新）","publisher":"國際商會 ICC","url":"https://library.iccwbo.org/content/clp/Others/incoterms_2020_checklist_2024-update.pdf","note":"FOB 貨上船後分攤費用與風險、出口清關由賣方；CIF 賣方保險義務限最低等級（LMA/IUA Clauses C）；DDP 賣方負全責含進口清關，並提醒賣方未必能辦進口清關。"},{"id":15,"title":"Know Your Incoterms","publisher":"美國商務部國際貿易署 ITA","url":"https://www.trade.gov/know-your-incoterms","note":"FOB、CIF 屬海運與內河運輸專用的四個條件之一；Incoterms 不規範貨物所有權何時移轉。"}],
-    lastVerified: "2026-10-01",
-    updated: "2026-10-01",
+    sources: [{"id":1,"title":"Incoterms 2020 各條件的關稅責任","publisher":"荷蘭商會 KVK（第三方整理）","url":"https://www.kvk.nl/en/international/incoterms-2020-everything-you-need-to-know/","note":"EXW、FOB、CIF 由買方付進口關稅；DDP 由賣方全包。"},{"id":2,"title":"RA 10863 關稅現代化法（CMTA）","publisher":"LawPhil（菲律賓法規庫）","url":"https://lawphil.net/statutes/repacts/ra2016/ra_10863_2016.html","note":"第 423 條 FOB／FCA 1 萬披索以下免稅；第 701 條交易價格為課稅基礎。"},{"id":3,"title":"RA 10963（TRAIN 法）第 32 條修正 NIRC 第 107 條進口加值稅","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2017/ra_10963_2017.html","note":"12%，稅基為海關核定的完稅價格加關稅、貨物稅（如有）與其他規費，放行前繳納。"},{"id":4,"title":"BIR RR 20-2018 含糖飲料貨物稅","publisher":"菲律賓國稅局 BIR","url":"https://bir-cdn.bir.gov.ph/local/pdf/RR%2020-2018.pdf","note":"每公升 6 披索／高果糖糖漿 12 披索；進口完成品放行前繳納。"},{"id":5,"title":"台灣現有 FTA：新加坡 ASTEP","publisher":"中華民國總統府","url":"https://english.president.gov.tw/NEWS/4289","note":"東協國家中只有新加坡；台灣其他已簽協定（紐西蘭 ANZTEC 等）見經濟部國際貿易署 https://fta.trade.gov.tw/。"},{"id":6,"title":"USTR 美台對等貿易協定說明","publisher":"美國貿易代表署","url":"https://ustr.gov/about/policy-offices/press-office/fact-sheets/2026/february/fact-sheet-us-taiwan-agreement-reciprocal-trade","note":"引用 EO 14257 與 EO 14346。"},{"id":7,"title":"EO 14324 暫停小額免稅","publisher":"美國聯邦公報 Federal Register","url":"https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis","note":"2025-08-29 生效；2026-06-24 美國海關 CBP 公告兩項規則，將 800 美元以下小額免稅無限期暫停：郵政以外各種運輸方式（當日生效）https://www.federalregister.gov/documents/2026/06/24/2026-12670/indefinite-suspension-of-the-de-minimis-exemption-for-merchandise-arriving-through-all-modes-other；郵政小包（2026-07-24 生效）https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry。"},{"id":8,"title":"Learning Resources v. Trump 判決摘要","publisher":"美國國會研究處 CRS","url":"https://www.congress.gov/crs-product/LSB11398","note":"2026-02-20，最高法院判 IEEPA 不授權課徵關稅。"},{"id":9,"title":"Section 122 臨時關稅說明","publisher":"Wiley 法律事務所","url":"https://www.wiley.law/alert-Trump-Imposes-Section-122-Tariffs-After-Halting-IEEPA-Tariffs-Previews-New-Section-301-Investigations","note":"2026-02-24 生效，法定最長 150 天。"},{"id":10,"title":"Section 301 關稅 7 月 25 日生效","publisher":"中央社 Focus Taiwan","url":"https://focustaiwan.tw/politics/202607240007","note":"台灣貨物 MFN 加 301 合計以 10% 為底；另見 Morgan Lewis 整理 https://www.morganlewis.com/pubs/2026/07/us-administration-rebuilds-global-tariff-program-under-section-301。"},{"id":11,"title":"Philippine Tariff Finder","publisher":"菲律賓關稅委員會","url":"https://finder.tariffcommission.gov.ph/about","note":"MFN 與各 FTA 稅率，AHTN 2022 版。"},{"id":12,"title":"菲律賓海關進口商登記（CPRS、BOC 認證）","publisher":"Triple i Consulting（第三方整理）","url":"https://www.tripleiconsulting.com/import-permit-philippines-secure-boc-accreditation-this-guide/"},{"id":13,"title":"Incoterms 2020 運輸義務、費用與風險一覽表（官方 wallchart）","publisher":"國際商會 ICC","url":"https://academy.iccwbo.org/wp-content/uploads/2020/08/803E_Incoterms-2020-Wallchart-A4.pdf","note":"十一個條件的費用／風險轉移點、出口／進口手續由誰辦；FOB、CIF 列在海運與內河運輸組；僅 CIF、CIP 標示賣方保險義務。"},{"id":14,"title":"Incoterms 2020 Checklist and Flowcharts（2024 更新）","publisher":"國際商會 ICC","url":"https://library.iccwbo.org/content/clp/Others/incoterms_2020_checklist_2024-update.pdf","note":"FOB 貨上船後分攤費用與風險、出口清關由賣方；CIF 賣方保險義務限最低等級（LMA/IUA Clauses C）；DDP 賣方負全責含進口清關，並提醒賣方未必能辦進口清關。"},{"id":15,"title":"Know Your Incoterms","publisher":"美國商務部國際貿易署 ITA","url":"https://www.trade.gov/know-your-incoterms","note":"FOB、CIF 屬海運與內河運輸專用的四個條件之一；Incoterms 不規範貨物所有權何時移轉。"},{"id":16,"title":"19 U.S.C. 1401a 交易價格","publisher":"美國眾議院法律修訂顧問辦公室（美國法典）","url":"https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title19-section1401a&num=0&edition=prelim","note":"(b)(4)(A)：實付價格不含從出口國運到美國的國際運費、保險與相關服務費用。"},{"id":17,"title":"Memorandum D13-3-3：運輸及相關費用","publisher":"加拿大邊境服務署 CBSA","url":"https://www.cbsa-asfc.gc.ca/publications/dm-md/d13/d13-3-3-eng.html","note":"從直接起運地運往加拿大的運輸費用（含保險等相關費用）不計入完稅價格。"}],
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "go-no-go-framework",
@@ -853,7 +853,7 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 
 ## 一個打分的例子
 
-這是我們在方法論頁公開過的案例：一支保健品要進北美 Costco [1][2]。
+下面是一個假設的例子，數字只示範怎麼算，不是真實案例：一支保健品想進北美 Costco。
 
 | 維度 | 分數 | 備註 |
 |---|---|---|
@@ -863,9 +863,9 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 | Profitability | 78 | 毛利空間夠，要承受 Costco 條款 |
 | Regulatory | 80 | 北美法規穩定 |
 
-加權總分 74，結論是 Conditional Go，條件是配方微調符合北美口感。實際結果：6 個月上架，首月銷量超標 40%。
+加權總分 74.5（82×20%＋62×20%＋71×20%＋78×25%＋80×15%），未達 75，結論是 Conditional Go。
 
-重點不是結果好，是我們在決策前就知道「門檻」那題是弱點，所以提前補了。
+重點不是總分，是決策前就看得出「門檻」那題分數最低，那一題要先補。
 
 ## 什麼情況這套框架幫不上你
 
@@ -891,9 +891,9 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 
 最後查證：2026-10-01。五題的權重與紅線以方法論頁當期版本為準。`],
     faq: [{"q":"一定要先被評分才能開始嗎？","a":"不用。第一次談我們會粗跑一遍，30 分鐘，不收費。多數人是談完才知道自己在哪一格。"},{"q":"分數低就不能做嗎？","a":"60 分以下我們不接，這是對雙方的保護。但我們會寫清楚哪一題掉分、什麼條件改了可以再看。"},{"q":"市場與競爭兩題，出發前怎麼打分？","a":"這兩題在出發前只能用公開資料粗估，真實分數要等市場探查把產品放到當地人面前才會有。門檻與法規兩題，從公開法規就能先比出高低。"}],
-    sources: [{"id":1,"title":"鹿飛五題評分（方法論頁）","publisher":"鹿飛 LUFÉ","url":"https://lufe.world/services/methodology","note":"五個維度的權重、看什麼、紅線、四種結論，以及保健品進北美 Costco 的打分例子。"},{"id":2,"title":"案例：保健品怎麼從台灣走進北美 Costco","publisher":"鹿飛 LUFÉ","url":"https://lufe.world/cases/costco-health"}],
-    lastVerified: "2026-10-01",
-    updated: "2026-10-01",
+    sources: [{"id":1,"title":"鹿飛五題評分（方法論頁）","publisher":"鹿飛 LUFÉ","url":"https://lufe.world/services/methodology","note":"五個維度看什麼、紅線、四種結論。"}],
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "why-philippines-first",
@@ -923,15 +923,15 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 |---|---|---|---|---|
 | 官方語言／法規文件 | 菲律賓文與英文並列官方語言 [1] | 越南文 | 泰文 | 印尼文 |
 | 食品標籤語言 | 英文或菲律賓文皆可；外文標籤需附英文翻譯 [2] | 必須有越南文，進口品可貼越南文副標籤 [3] | 必須有泰文（品牌名可保留原文）[4] | 必須有印尼文標籤 [5] |
-| 產品證要掛在誰名下 | 當地持證進口商（LTO 持有者）名下，品牌方不能直接持有 [6] | 由越南境內企業申報；多數加工食品走自我申報，保健食品要登錄 [7] | 由泰國進口商登錄 [4] | 由印尼境內公司向 BPOM 登錄（ML 證）[5] |
-| 2026 年新增的硬門檻 | FDA 收費與登錄系統在改版中，費率以查證日為準 [6] | — | — | **2026-10-17 起進口食品、保健品、化妝品須有清真認證**（PP 42/2024）[8] |
+| 產品證要掛在誰名下 | 當地持證進口商（LTO 持有者）名下，沒有菲律賓公司的品牌方無法自己持有 [11] | 由越南境內企業申報；多數加工食品走自我申報，保健食品要登錄 [7] | 由泰國進口商登錄 [4] | 由印尼境內公司向 BPOM 登錄（ML 證）[5] |
+| 2026 年新增的硬門檻 | FDA 收費與登錄系統在改版中，費率以查證日為準 [6] | — | — | **2026-10-17 起進口食品、保健品、化妝品須有清真認證**（PP 42/2024）[8]；含非清真原料者改標示「非清真」[12] |
 | 台灣有無 FTA | 無，走 MFN 稅率 [9] | 無，走 MFN | 無，走 MFN | 無，走 MFN |
 
 回到你桌上那三份報告，這張表能回答的是：
 
 1. **菲律賓是四國中唯一可以全程用英文做事的市場。** 面板訪談、進口商合約、FDA 文件、電商後台，都不用先找翻譯。對第一次出海的品牌，省掉的不只是翻譯費，是「我看得懂對方在跟我說什麼」——合約看得懂，第一筆錢才敢簽。
 2. **四國都要靠當地持證進口商。** 這點菲律賓沒有比較好，也沒有比較差；差別在你跟這個進口商溝通用什麼語言、合約你看不看得懂。
-3. **印尼在 2026 年 10 月之後多了一道清真認證的硬門檻。** 食品、保健品、化妝品沒有認證就進不去。這不代表印尼不能做，而是它不適合當「第一次小預算驗證」的市場。
+3. **印尼在 2026 年 10 月之後多了一道清真認證的硬門檻。** 食品、保健品、化妝品沒有認證就進不去；含非清真原料的產品可以進口，但要標示「非清真」[12]。這不代表印尼不能做，而是它不適合當「第一次小預算驗證」的市場。
 4. **關稅上菲律賓並不吃虧。** 台灣跟四國都沒有 FTA，大家都是 MFN。稅率請用 [TradePilot](https://tradepiloter.com) 或菲律賓關稅委員會的 [Tariff Finder](https://finder.tariffcommission.gov.ph/) 查 [10]，我們不在文章裡放會過期的數字。
 
 ## 什麼情況我們不建議先去菲律賓
@@ -954,17 +954,17 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 不用。這篇回答的是「還沒有任何線索時先去哪裡試」。
 
 **台灣跟菲律賓有自由貿易協定嗎？關稅會不會比別國高？**
-台灣目前與東協任何一國都沒有 FTA（只有新加坡與紐西蘭）[9]，去四國都是 MFN 稅率，菲律賓不特別吃虧。
+台灣在東協只跟新加坡簽有 ASTEP，跟菲律賓、越南、泰國、印尼都沒有 FTA [9]，去四國都是 MFN 稅率，菲律賓不特別吃虧。
 
 ## 一個最小的下一步
 
 先花 1～2 萬做一次[市場探查](/services/product-testing)：三支產品寄到馬尼拉，一桌老師和家長拿起來看，一頁報告告訴你誰會買、多少錢會買、為什麼不買。沒過，故事在這裡停；過了，這筆錢抵進下一章。
 
 本文改寫自 2026 年 3 月的〈越南市場進入指南〉，舊網址已轉到這裡。最後查證：2026-10-01，法規會變，每季回頭對一次。`],
-    faq: [{"q":"越南市場不是比較大嗎？為什麼不先去越南？","a":"我們建議的不是「最大的市場」，是「最容易先確認的市場」。越南的食品標籤必須有越南文、申報要由越南境內企業做 [3][7]；菲律賓用英文就能做市場探查、法規文件與電商溝通，第一年可以花 1～2 萬先驗證，沒過就停。其他三國在語言與證照上第一步就要投入更多，不適合拿來當第一次驗證。"},{"q":"我的產品在越南或泰國已經有代理找上門，還要先去菲律賓嗎？","a":"不用。有具體通路或買家的市場，就從那個市場開始。這篇文章回答的是「還沒有任何線索時先去哪裡試」，不是「所有品牌都該先去菲律賓」。"},{"q":"台灣跟菲律賓有自由貿易協定嗎？關稅會不會比別國高？","a":"台灣目前與東協任何一國都沒有自由貿易協定（只有新加坡與紐西蘭），所以去菲律賓、越南、泰國、印尼都是走最惠國（MFN）稅率，菲律賓並不特別吃虧。實際稅率可在菲律賓關稅委員會的 Tariff Finder 或 TradePilot 查。"}],
-    sources: [{"id":1,"title":"1987 年菲律賓憲法第十四條第七節","publisher":"Official Gazette（菲律賓政府公報）","url":"https://www.officialgazette.gov.ph/constitutions/1987-constitution/","note":"官方語言為菲律賓文及英文。"},{"id":2,"title":"DOH AO 2014-0030 預包裝食品標籤規則","publisher":"FAOLEX（聯合國糧農組織法規庫）","url":"https://www.fao.org/faolex/results/details/en/c/LEX-FAOC174223/","note":"標籤須為英文或菲律賓文，外文標籤須附英文翻譯。"},{"id":3,"title":"越南 Decree 43/2017 商品標籤規定","publisher":"ChemLinked（第三方整理）","url":"https://food.chemlinked.com/foodpedia/vietnam-food-labeling-regulation","note":"標籤須為越南文，進口品可貼越南文副標籤。"},{"id":4,"title":"USDA FAIRS 泰國年度報告 TH2024-0036","publisher":"美國農業部海外農業局","url":"https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Bangkok_Thailand_TH2024-0036","note":"泰文標籤為基本要求，特定管制食品須由進口商先登錄。"},{"id":5,"title":"印尼 BPOM 進口食品 ML 登錄","publisher":"ChemLinked（第三方整理）","url":"https://food.chemlinked.com/foodpedia/indonesia-processed-food-regulation","note":"須由印尼境內公司申請，並附印尼文標籤。"},{"id":6,"title":"菲律賓 FDA AO 2024-0016 收費辦法","publisher":"菲律賓 FDA","url":"https://rrdportal.fda.gov.ph/docs/AO2024-0016.pdf","note":"收費辦法暫停實施；食品登錄新系統見 FDA Circular 2026-0002。"},{"id":7,"title":"越南 Decree 15/2018 食品申報與登錄","publisher":"CIRS Group（第三方整理）","url":"https://www.cirs-group.com/en/food/health-supplement-registration-in-vietnam-know-how-and-what-to-do","note":"多數加工食品走自我申報，保健食品等四類須登錄。"},{"id":8,"title":"印尼 PP 42/2024 進口品清真認證期限","publisher":"Emerhub（第三方整理）","url":"https://emerhub.com/indonesia/halal-certification-in-indonesia/","note":"進口食品、飲料、保健品、化妝品自 2026-10-17 起須持清真認證。"},{"id":9,"title":"台灣現有 FTA：新加坡 ASTEP","publisher":"中華民國總統府","url":"https://english.president.gov.tw/NEWS/4289","note":"另一個是紐西蘭 ANZTEC（2013）。"},{"id":10,"title":"Philippine Tariff Finder","publisher":"菲律賓關稅委員會","url":"https://finder.tariffcommission.gov.ph/about","note":"MFN 與各 FTA 稅率，AHTN 2022 版。"}],
-    lastVerified: "2026-10-01",
-    updated: "2026-10-01",
+    faq: [{"q":"越南市場不是比較大嗎？為什麼不先去越南？","a":"我們建議的不是「最大的市場」，是「最容易先確認的市場」。越南的食品標籤必須有越南文、申報要由越南境內企業做 [3][7]；菲律賓用英文就能做市場探查、法規文件與電商溝通，第一年可以花 1～2 萬先驗證，沒過就停。其他三國在語言與證照上第一步就要投入更多，不適合拿來當第一次驗證。"},{"q":"我的產品在越南或泰國已經有代理找上門，還要先去菲律賓嗎？","a":"不用。有具體通路或買家的市場，就從那個市場開始。這篇文章回答的是「還沒有任何線索時先去哪裡試」，不是「所有品牌都該先去菲律賓」。"},{"q":"台灣跟菲律賓有自由貿易協定嗎？關稅會不會比別國高？","a":"台灣在東協只跟新加坡簽有 ASTEP，跟其他東協國家都沒有自由貿易協定，所以去菲律賓、越南、泰國、印尼都是走最惠國（MFN）稅率，菲律賓並不特別吃虧。實際稅率可在菲律賓關稅委員會的 Tariff Finder 或 TradePilot 查。"}],
+    sources: [{"id":1,"title":"1987 年菲律賓憲法第十四條第七節","publisher":"Official Gazette（菲律賓政府公報）","url":"https://www.officialgazette.gov.ph/constitutions/1987-constitution/","note":"官方語言為菲律賓文及英文。"},{"id":2,"title":"DOH AO 2014-0030 預包裝食品標籤規則","publisher":"FAOLEX（聯合國糧農組織法規庫）","url":"https://www.fao.org/faolex/results/details/en/c/LEX-FAOC174223/","note":"標籤須為英文或菲律賓文，外文標籤須附英文翻譯。"},{"id":3,"title":"越南 Decree 43/2017 商品標籤規定","publisher":"ChemLinked（第三方整理）","url":"https://food.chemlinked.com/foodpedia/vietnam-food-labeling-regulation","note":"標籤須為越南文，進口品可貼越南文副標籤。"},{"id":4,"title":"USDA FAIRS 泰國年度報告 TH2024-0036","publisher":"美國農業部海外農業局","url":"https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Bangkok_Thailand_TH2024-0036","note":"泰文標籤為基本要求，特定管制食品須由進口商先登錄。"},{"id":5,"title":"印尼 BPOM 進口食品 ML 登錄","publisher":"ChemLinked（第三方整理）","url":"https://food.chemlinked.com/foodpedia/indonesia-processed-food-regulation","note":"須由印尼境內公司申請，並附印尼文標籤。"},{"id":6,"title":"菲律賓 FDA AO 2024-0016 收費辦法","publisher":"菲律賓 FDA","url":"https://rrdportal.fda.gov.ph/docs/AO2024-0016.pdf","note":"收費辦法暫停實施；食品登錄新系統見 FDA Circular 2026-0002。"},{"id":7,"title":"越南 Decree 15/2018 食品申報與登錄","publisher":"CIRS Group（第三方整理）","url":"https://www.cirs-group.com/en/food/health-supplement-registration-in-vietnam-know-how-and-what-to-do","note":"多數加工食品走自我申報，保健食品等四類須登錄。"},{"id":8,"title":"印尼 PP 42/2024 進口品清真認證期限","publisher":"Emerhub（第三方整理）","url":"https://emerhub.com/indonesia/halal-certification-in-indonesia/","note":"進口食品、飲料、保健品、化妝品自 2026-10-17 起須持清真認證。"},{"id":9,"title":"台灣現有 FTA：新加坡 ASTEP","publisher":"中華民國總統府","url":"https://english.president.gov.tw/NEWS/4289","note":"東協國家中只有新加坡；台灣其他已簽協定（紐西蘭 ANZTEC 等）見經濟部國際貿易署 https://fta.trade.gov.tw/。"},{"id":10,"title":"Philippine Tariff Finder","publisher":"菲律賓關稅委員會","url":"https://finder.tariffcommission.gov.ph/about","note":"MFN 與各 FTA 稅率，AHTN 2022 版。"},{"id":11,"title":"FDA Citizen's Charter 2024（1st Edition, as of 18 July 2024）","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf","note":"LTO 申請須附菲律賓 SEC 或 DTI 登記；所有 CPR 申請須附有效 LTO。"},{"id":12,"title":"BPJPH 在 WTO 會議重申：非清真產品可進口","publisher":"印尼清真產品保證機構 BPJPH","url":"https://bpjph.halal.go.id/detail/penegasan-bpjph-di-sidang-wto-dari-produk-nonhalal-dapat-diimpor-hingga-skema-registrasi-halal-luar-negeri/","note":"2025-06-25：非清真產品標示「非清真」後仍可進口與上市；進口食品、飲料與屠宰服務的清真認證期限延至 2026-10-17。"}],
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "product-testing-best-practices",
@@ -990,7 +990,7 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 
 就算你把量拉大，如果拿到產品的人都是同一個圈子（例如都是在當地的台灣人），你得到的訊號是「鄉愁」，不是「市場」。這種訊號放大之後會失真：第一批賣得動，是因為他們想念台灣的味道；第二批沒人買，因為當地人根本沒看到。
 
-能做決定的測試，要讓**不認識你的當地人**看到產品。我們的[市場探查](/services/product-testing)用的是當地學校的老師和家長 [1]：老師是當地高收入的工薪階層，家長是真正掏錢買東西的人。這兩群人跟你沒有關係，皺眉就是皺眉。
+能做決定的測試，要讓**不認識你的當地人**看到產品。我們的[市場探查](/services/product-testing)用的是當地學校的老師和家長 [1]：老師是有固定薪水、自己花錢買東西的上班族，家長是真正掏錢買東西的人。這兩群人跟你沒有關係，皺眉就是皺眉。
 
 ## 錯誤二：測試的時候同時投廣告
 
@@ -1049,8 +1049,8 @@ FOB 與 CIF 只適用海運與內河運輸 [13][15]；Incoterms 不處理所有�
 最後查證：2026-10-01。`],
     faq: [{"q":"寄樣品給當地朋友試吃，算不算市場調查？","a":"可以當第一步，但不能拿來做決定。朋友不會告訴你難吃，也不會告訴你他願意付多少錢。能做決定的測試，要讓不認識你的當地人看到產品和價錢，並且有人在旁邊記下他為什麼拿起來、為什麼放下。"},{"q":"測試一定要先出貨到當地嗎？","a":"不用出一櫃貨。市場探查是寄三支產品到馬尼拉，讓一桌當地學校的老師和家長拿起來看、翻價錢，面板跑完就給一頁報告，不用等產品證。"},{"q":"測試過了之後呢？","a":"報告會告訴你誰會買、多少錢會買、為什麼不買。過了，這筆費用抵進寄賣包，貨放合作夥伴的倉賣賣看，三個月看數字；沒過，報告寫清楚什麼條件改了可以再試，故事在這裡停。"}],
     sources: [{"id":1,"title":"市場探查怎麼做","publisher":"鹿飛 LUFÉ","url":"https://lufe.world/services/product-testing","note":"三支產品、一桌老師和家長、一頁報告；每支產品至少六個數據來源；1～2 萬。"}],
-    lastVerified: "2026-10-01",
-    updated: "2026-10-01",
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "amazon-us-three-decisions",
@@ -1127,9 +1127,9 @@ FDA 設施登記與標示合規之外，Amazon 自 2024 年起要求第三方 TI
 
 本文改寫自 2026 年 1 月的〈亞馬遜品類分析：如何找到你的藍海品項〉。最後查證：2026-10-01，Amazon 的品類政策改得比法規快，上架前請再對一次賣家中心。`],
     faq: [{"q":"從台灣直接寄小包裹到美國消費者手上，不就不用管進口的事了？","a":"2025 年 8 月 29 日起美國已暫停所有國家 800 美元以下小包裹的免稅待遇，2026 年 6 月改為無限期。直郵現在一樣要繳關稅，而且每一件都要。這條路已經不是「省事」的選項。"},{"q":"Amazon 會幫我當進口商嗎？","a":"不會。Amazon 官方寫明：你或你的服務商必須擔任出口商與進口商（importer of record），Amazon 不負責任何關稅與稅金。食品的話，進口商還要負責 FSVP（外國供應商驗證）。"},{"q":"台灣保健品上 Amazon 美國站需要什麼文件？","a":"除了美國 FDA 的設施登記與標示合規，Amazon 自 2024 年起要求膳食補充品經第三方檢測認證機構驗證，2026 年起更要求所有膳食補充品提供第三方 cGMP 驗證。沒有這些，上不了架。"}],
-    sources: [{"id":1,"title":"FDA：食品進口美國的規定","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states","note":"設施登記、Prior Notice、FSVP、標示；FSVP 最終規則 https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-final-rule-foreign-supplier-verification-programs-fsvp-importers-food-humans-and-animals。"},{"id":2,"title":"Amazon 膳食補充品政策與第三方驗證","publisher":"Amazon 賣家中心（需登入）／NutraIngredients","url":"https://www.nutraingredients.com/Article/2025/12/22/amazon-expands-tic-cgmp-requirement-to-all-supplement-products/","note":"政策頁 https://sellercentral.amazon.com/help/hub/reference/G201829010；2024-04 起 TIC 驗證，2026 年起全品項第三方 cGMP。"},{"id":3,"title":"MoCRA 化妝品法規現代化法","publisher":"美國 FDA","url":"https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra","note":"設施登記、產品列名、境外設施須指定美國代理人。"},{"id":4,"title":"Amazon：從海外賣到美國站","publisher":"Amazon 官方","url":"https://sell.amazon.com/global-selling/international-to-usa","note":"你或你的服務商須擔任出口商與進口商，Amazon 不負責 FBA 庫存的關稅與稅金。"},{"id":5,"title":"Amazon Brand Registry","publisher":"Amazon 官方","url":"https://sell.amazon.com/brand-registry","note":"需已註冊或申請中的商標。"},{"id":6,"title":"EO 14324 暫停小額免稅","publisher":"美國聯邦公報 Federal Register","url":"https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis","note":"2025-08-29 生效；2026-06-24 郵政小包無限期暫停 https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry。"},{"id":7,"title":"Amazon 美國賣家費用整理","publisher":"Feedvisor（第三方整理）","url":"https://feedvisor.com/university/referral-fee/","note":"專業方案月費 39.99 美元、多數品類成交抽成 15%；以賣家中心當期費率表為準。"},{"id":8,"title":"鹿飛五題評分（獲利紅線）","publisher":"鹿飛 LUFÉ","url":"https://lufe.world/services/methodology","note":"悲觀情境淨利率低於 5% 建議調整。"}],
-    lastVerified: "2026-10-01",
-    updated: "2026-10-01",
+    sources: [{"id":1,"title":"FDA：食品進口美國的規定","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states","note":"設施登記、Prior Notice、FSVP、標示；FSVP 最終規則 https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-final-rule-foreign-supplier-verification-programs-fsvp-importers-food-humans-and-animals。"},{"id":2,"title":"Amazon 膳食補充品政策與第三方驗證","publisher":"Amazon 賣家中心（需登入）／NutraIngredients","url":"https://www.nutraingredients.com/Article/2025/12/22/amazon-expands-tic-cgmp-requirement-to-all-supplement-products/","note":"政策頁 https://sellercentral.amazon.com/help/hub/reference/G201829010；2024-04 起 TIC 驗證，2026 年起全品項第三方 cGMP。"},{"id":3,"title":"MoCRA 化妝品法規現代化法","publisher":"美國 FDA","url":"https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra","note":"設施登記、產品列名、境外設施須指定美國代理人。"},{"id":4,"title":"Amazon：從海外賣到美國站","publisher":"Amazon 官方","url":"https://sell.amazon.com/global-selling/international-to-usa","note":"你或你的服務商須擔任出口商與進口商，Amazon 不負責 FBA 庫存的關稅與稅金。"},{"id":5,"title":"Amazon Brand Registry","publisher":"Amazon 官方","url":"https://sell.amazon.com/brand-registry","note":"需已註冊或申請中的商標。"},{"id":6,"title":"EO 14324 暫停小額免稅","publisher":"美國聯邦公報 Federal Register","url":"https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis","note":"2025-08-29 生效；2026-06-24 美國海關 CBP 公告兩項規則，將 800 美元以下小額免稅無限期暫停：郵政以外各種運輸方式（當日生效）https://www.federalregister.gov/documents/2026/06/24/2026-12670/indefinite-suspension-of-the-de-minimis-exemption-for-merchandise-arriving-through-all-modes-other；郵政小包（2026-07-24 生效）https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry。"},{"id":7,"title":"Amazon 美國賣家費用整理","publisher":"Feedvisor（第三方整理）","url":"https://feedvisor.com/university/referral-fee/","note":"專業方案月費 39.99 美元、多數品類成交抽成 15%；以賣家中心當期費率表為準。"},{"id":8,"title":"鹿飛五題評分（獲利紅線）","publisher":"鹿飛 LUFÉ","url":"https://lufe.world/services/methodology","note":"悲觀情境淨利率低於 5% 建議調整。"}],
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "philippines-fda-lto-cpr-cpn",
@@ -1214,10 +1214,11 @@ FDA 服務章程寫的處理天數是：食品經銷商 LTO 初次 14 個工作�
 
 把你要賣去菲律賓的品項列成一張表，三欄就好：**品名、是食品／保健食品／化妝品、包裝上寫了哪些功效。** 然後問對方一句：「你們的 LTO 上列了哪些活動？」表填得出來、對方答得出來，你已經知道要辦哪幾張證；卡住的那一欄，用 LINE 問我們一句。
 
-最後查證：2026-10-01。菲律賓 FDA 的費率與登錄系統正在改版，送件前請以 FDA 現行公告為準。`],
+本文為經驗與實務整理，非法律意見。最後查證：2026-10-01。菲律賓 FDA 的費率與登錄系統正在改版，送件前請以 FDA 現行公告為準。`],
     faq: [{"q":"菲律賓 FDA 註冊要多久？","a":"FDA 服務章程寫的處理天數是：食品經銷商 LTO 初次申請 14 個工作天、食品 CPR 變更 20 個工作天、化妝品 CPN 23 個工作天。這是官方處理時間，不含在台灣準備文件、翻譯與補件的時間；而且要先有 LTO，CPR 與 CPN 才能送。"},{"q":"台灣公司可以自己申請菲律賓 FDA 嗎？","a":"不行。LTO 要附菲律賓的公司登記文件，化妝品通報也只能由在菲律賓登記營業的公司提出。沒有當地公司的台灣品牌，會由當地持 LTO 的進口商或經銷商申請，證掛在他們名下。"},{"q":"化妝品也要辦 CPR 嗎？","a":"不用。化妝品走 CPN，是上市前通報；食品與保健食品才是 CPR 登錄。同一家當地公司同時賣兩類產品，LTO 上要列有對應的食品與化妝品活動。"}],
     sources: [{"id":1,"title":"DOH Administrative Order No. 2014-0029（食品業者許可與加工食品登錄規則）","publisher":"菲律賓衛生部／FDA（FAOLEX 收錄全文）","url":"https://faolex.fao.org/docs/pdf/phi174226.pdf","note":"食品業者營運前須取得 LTO；CPR 初次有效 2～5 年、展延 5 年；保健食品不得有療效宣稱；換製造商或配方視同初次登錄；違規 6 個月內未改正即撤銷 CPR。"},{"id":2,"title":"FDA Citizen's Charter 2024（1st Edition, as of 18 July 2024）","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf","note":"食品經銷商（進口、出口、批發）LTO 初次 Php 8,000＋1% LRF、14 個工作天，須附 SEC 或 DTI 登記；所有 CPR 申請須附有效 LTO；食品 CPR 第 1 類每年 Php 200、第 2 類 Php 250、保健食品 Php 1,000；CPR 變更 20 個工作天。"},{"id":3,"title":"Citizen's Charter：Issuance of Cosmetic Product Notification","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2025/09/1.-Issuance-of-Cosmetic-Product-Notification.pdf","note":"申請者為持有效 LTO、且列有化妝品製造、貿易或經銷進口活動的公司；1 年 Php 500、2 年 Php 1,000、3 年 Php 1,500＋1% LRF，每變體加 Php 100；處理 23 個工作天又 15 分鐘。"},{"id":4,"title":"ASEAN Cosmetic Directive：Frequently Asked Questions on Cosmetic Product Notification","publisher":"菲律賓 FDA（東協化妝品指令附錄 5）","url":"https://www.fda.gov.ph/wp-content/uploads/2021/03/FAQ_Notification.pdf","note":"第 1 題：上市前須通報並收到回覆；第 7 題：只有在當地登記營業的公司能提出通報；第 9 題：品牌名變更、因經銷權變更而換公司，須重新通報。"},{"id":5,"title":"Philippines FDA Upgrades Food Registration with New eServices","publisher":"ChemLinked（法規媒體，報導 FDA Circular No. 2026-0002）","url":"https://food.chemlinked.com/news/food-news/philippines-fda-upgrades-food-registration-with-new-eservices","note":"2026-06-08 報導：加工食品登錄改用 eServices 新系統；舊入口登錄產品的展延與變更，須以初次申請重新送件。"},{"id":6,"title":"Further Extension of the Suspension Period … Implementation of AO No. 2024-0016","publisher":"Andaman Medical（轉述衛生部 DC No. 2025-0574）","url":"https://andamanmed.com/philippines-further-extension-of-the-suspension-period-under-department-circular-no-2025-0240-and-its-subsequent-extension-pertaining-to-the-implementation-of-administrative-order-no-2024-0016-ent/","note":"2026-01-20：新收費 AO 2024-0016 的暫停再延長 120 個工作天；暫停期間沿用現行費率。"},{"id":7,"title":"Department Circular No. 2025-0240：Temporary Suspension for Sixty (60) Working Days of the Implementation of AO No. 2024-0016","publisher":"菲律賓衛生部／FDA","url":"https://www.fda.gov.ph/department-circular-no-2025-0240-all-undersecretaries-and-assistant-secretaries-directors-of-bureaus-services-and-centers-for-health-development-minister-of-health-bangsamoro-autonomous-region/","note":"2025 年 6 月起暫停新收費 60 個工作天。"}],
-    lastVerified: "2026-10-01",
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
   {
     slug: "philippines-cpr-transfer-change-importer",
@@ -1326,7 +1327,7 @@ FDA 服務章程寫的處理天數是：食品經銷商 LTO 初次 14 個工作�
 |---|---|---|---|---|
 | 誰買貨、扛庫存 | 經銷商向你下單、買斷、持有庫存 [1] | 不囤貨，客戶直接向你下單，他抽佣 [1] | 你的子公司 | 你；平台負責刊登與部分物流 [7] |
 | 你怎麼賺 | 出貨給經銷商的價差 | 售價全歸你，付他佣金，常見 5～10% [1] | 當地售價全歸你 | 平台售價扣平台費用 |
-| 食品、化妝品的證掛誰名下 | 經銷商：進口前要有 LTO，產品要有 CPR [5] | 下單進口的當地客戶，要自己有 LTO 與 CPR [1][5] | 你的子公司，用自己的 LTO 申請 [6] | 仍要當地持證公司；平台不能賣沒有許可資料的管制品 [9] |
+| 食品、化妝品的證掛誰名下 | 經銷商：進口前要有 LTO，產品要有 CPR（化妝品為 CPN）[5][10] | 下單進口的當地客戶，要自己有 LTO 與 CPR／CPN [1][5][10] | 你的子公司，用自己的 LTO 申請 [6] | 仍要當地持證公司；平台不能賣沒有許可資料的管制品 [9] |
 | 起步門檻（官方數字） | 低 | 低 | 外資內需企業原則上實收資本 US$200,000 起；直接零售給消費者則要 Php 2,500 萬 [3][4] | 低；寄到菲律賓的貨值 Php 10,000 以下免關稅 [8] |
 | 控制定價與客戶 | 低 | 高 | 最高 | 中，規則由平台定 [7] |
 | 退出難度 | 合約通常 30 天通知 [1]，但證在他名下 | 合約通常 30 天通知 [1] | 最難，要處理公司、人與證 | 最容易，下架即可 |
@@ -1335,11 +1336,11 @@ FDA 服務章程寫的處理天數是：食品經銷商 LTO 初次 14 個工作�
 
 ## 判斷步驟：照這個順序刪選項
 
-**第一步：產品要不要證？** 食品、飲料、保健食品、化妝品，在菲律賓進口前要有持 LTO 的當地進口商，每個產品首次進口前要有 CPR [5]。LTO 申請要附菲律賓的 SEC 或 DTI 登記文件 [6]。要證的產品，等於已經刪掉「只靠跨境電商」：電商法要求平台禁止販售沒有提供許可資料的管制商品 [9]，Php 10,000 的免稅門檻管的是關稅 [8]，不是 FDA。
+**第一步：產品要不要證？** 食品、飲料、保健食品、化妝品，在菲律賓進口前要有持 LTO 的當地進口商，每個產品首次進口前要有 CPR（化妝品是上市前通報 CPN）[5][10]。LTO 申請要附菲律賓的 SEC 或 DTI 登記文件 [6]。要證的產品，等於已經刪掉「只靠跨境電商」：電商法要求平台禁止販售沒有提供許可資料的管制商品 [9]，Php 10,000 的免稅門檻管的是關稅 [8]，不是 FDA。
 
 **第二步：你願意扛多少庫存？** 願意出貨就收款、不想管當地，選經銷商；願意保留定價、讓貨和發票在自己這邊，選代理商。這兩者的完整比較在[代理商、經銷商、獨家代理差在哪](/insights/agent-vs-distributor-exclusive)。
 
-**第三步：錢夠不夠自己設公司？** 菲律賓允許外國人 100% 持有內需企業，但實收資本低於 US$200,000 的中小企業保留給菲律賓人；符合先進技術、經認證新創、或直接雇用至少 15 名且過半為菲律賓籍員工，門檻可降到 US$100,000 [3]。要自己開店直接賣給消費者，外資零售商的實收資本最低 Php 2,500 萬，開多家店每店至少投資 Php 1,000 萬 [4]。這兩個數字，通常會讓第一年的品牌先把這個選項放到後面。
+**第三步：錢夠不夠自己設公司？** 菲律賓允許外國人 100% 持有內需企業，但實收資本低於 US$200,000 的微型與小型內需企業保留給菲律賓人；符合先進技術、經認證新創、或直接雇用至少 15 名且過半為菲律賓籍員工，門檻可降到 US$100,000 [3]。要自己開店直接賣給消費者，外資零售商的實收資本最低 Php 2,500 萬，開多家店每店至少投資 Php 1,000 萬 [4]。這兩個數字，通常會讓第一年的品牌先把這個選項放到後面。
 
 **第四步：誰當持證公司，換人時證怎麼走？** 不論選經銷商還是代理，證都掛在一家當地公司名下。換人時的規定，我們在[菲律賓產品證掛在進口商名下，以後要換人怎麼辦](/insights/philippines-cpr-transfer-change-importer)整理過；三張證的差別在[菲律賓 FDA 的 LTO、CPR、CPN 差在哪](/insights/philippines-fda-lto-cpr-cpn)。
 
@@ -1379,8 +1380,9 @@ FDA 服務章程寫的處理天數是：食品經銷商 LTO 初次 14 個工作�
 
 本文為經驗與實務整理，非法律意見；設立公司與簽訂代理、經銷合約前，請找菲律賓當地律師與會計師。最後查證：2026-10-01。`],
     faq: [{"q":"國際市場進入模式有哪些？中小企業該怎麼選？","a":"對中小品牌，實際上是四種：進口經銷商、代理商、自己設公司、跨境電商。美國國際貿易署把透過代理、經銷商和電商平台都歸為間接銷售，自己處理整個出口流程才算直接銷售。先看產品在當地要不要證，再看你願意扛多少庫存。"},{"q":"食品可以只靠跨境電商賣到菲律賓嗎？","a":"很難。菲律賓的食品進口前要有持 LTO 的當地進口商，每個產品首次進口前要有 CPR；電商法也要求平台禁止販售沒有提供許可資料的管制商品。小額包裹免稅門檻只免關稅，不免 FDA 登錄。"},{"q":"在菲律賓自己設公司要多少錢？","a":"看你做什麼。外資持有的內需企業，原則上實收資本 US$200,000 起，符合先進技術、經認證新創或雇用至少 15 名且過半為菲律賓籍員工等條件，可降到 US$100,000；直接零售給消費者的外資零售商，實收資本最低 Php 2,500 萬。這是法定門檻，不含租金、人事與證照費。"}],
-    sources: [{"id":1,"title":"Philippines Country Commercial Guide：Distribution and Sales Channels","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/country-commercial-guides/philippines-distribution-and-sales-channels","note":"當地代理或經銷商仍是進入與擴張市場的必要條件；兩種進口商：買斷持庫存的經銷商與不囤貨抽佣的 indenter；代理佣金常見 5～10%；合約通常約定 30 天解約通知。"},{"id":2,"title":"Sales Channels","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/sales-channels","note":"直接銷售：出口商自行處理整個出口流程；間接銷售：透過代理、代表、經銷商、批發商、出口中介或電商平台。"},{"id":3,"title":"Republic Act No. 11647（Foreign Investments Act 修正）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2022/ra_11647_2022.html","note":"外國人原則上可 100% 持有內需企業；實收資本低於 US$200,000 的微型與小型內需企業保留給菲律賓人；先進技術、經認證新創、或直接雇用至少 15 名且過半為菲律賓籍員工者，門檻降為 US$100,000。"},{"id":4,"title":"Republic Act No. 11595（Retail Trade Liberalization Act 修正）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2021/ra_11595_2021.html","note":"外國零售商實收資本最低 Php 25,000,000；開設多家店者，每店投資至少 Php 10,000,000。"},{"id":5,"title":"FAIRS Country Report Annual：Philippines（RP2026-0009）","publisher":"美國農業部海外農業局（USDA FAS）","url":"https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Manila_Philippines_RP2026-0009","note":"2026-04-21：菲律賓進口商進口前須取得 FDA 的 LTO；每項食品或飲料首次進口前須取得 CPR；只有經認證登記的個人或企業可以進口食品。"},{"id":6,"title":"FDA Citizen's Charter 2024（1st Edition, as of 18 July 2024）","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf","note":"食品貿易商與經銷商 LTO 初次申請，公司須附 SEC 登記證與公司章程，獨資須附 DTI 登記。"},{"id":7,"title":"台灣跨境專案服務條款","publisher":"蝦皮購物台灣","url":"https://help.shopee.tw/portal/4/article/77289","note":"版本生效日 2025-03-28：申請者須為依法設立的法人或登記的非法人組織；蝦皮得將商品刊登於境外蝦皮站並決定境外售價；賣家將商品送達台灣跨境指定地點，國際段物流等費用由蝦皮負擔；服務範圍依通知為準。"},{"id":8,"title":"Republic Act No. 10863（Customs Modernization and Tariff Act）Sec. 423","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2016/ra_10863_2016.html","note":"FOB 或 FCA 價值 Php 10,000 以下的貨物不課關稅與其他稅。"},{"id":9,"title":"Republic Act No. 11967（Internet Transactions Act of 2023）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2023/ra_11967_2023.html","note":"第 21 條：電商平台須在上架前盡可能向本國與外國線上商家收取身分或商業登記資料，並禁止販售未提供必要許可與執照資訊的管制商品。"}],
-    lastVerified: "2026-10-01",
+    sources: [{"id":1,"title":"Philippines Country Commercial Guide：Distribution and Sales Channels","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/country-commercial-guides/philippines-distribution-and-sales-channels","note":"當地代理或經銷商仍是進入與擴張市場的必要條件；兩種進口商：買斷持庫存的經銷商與不囤貨抽佣的 indenter；代理佣金常見 5～10%；合約通常約定 30 天解約通知。"},{"id":2,"title":"Sales Channels","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/sales-channels","note":"直接銷售：出口商自行處理整個出口流程；間接銷售：透過代理、代表、經銷商、批發商、出口中介或電商平台。"},{"id":3,"title":"Republic Act No. 11647（Foreign Investments Act 修正）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2022/ra_11647_2022.html","note":"外國人原則上可 100% 持有內需企業；實收資本低於 US$200,000 的微型與小型內需企業保留給菲律賓人；先進技術、經認證新創、或直接雇用至少 15 名且過半為菲律賓籍員工者，門檻降為 US$100,000。"},{"id":4,"title":"Republic Act No. 11595（Retail Trade Liberalization Act 修正）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2021/ra_11595_2021.html","note":"外國零售商實收資本最低 Php 25,000,000；開設多家店者，每店投資至少 Php 10,000,000。"},{"id":5,"title":"FAIRS Country Report Annual：Philippines（RP2026-0009）","publisher":"美國農業部海外農業局（USDA FAS）","url":"https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Manila_Philippines_RP2026-0009","note":"2026-04-21：菲律賓進口商進口前須取得 FDA 的 LTO；每項食品或飲料首次進口前須取得 CPR；只有經認證登記的個人或企業可以進口食品。"},{"id":6,"title":"FDA Citizen's Charter 2024（1st Edition, as of 18 July 2024）","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf","note":"食品貿易商與經銷商 LTO 初次申請，公司須附 SEC 登記證與公司章程，獨資須附 DTI 登記。"},{"id":7,"title":"台灣跨境專案服務條款","publisher":"蝦皮購物台灣","url":"https://help.shopee.tw/portal/4/article/77289","note":"版本生效日 2025-03-28：申請者須為依法設立的法人或登記的非法人組織；蝦皮得將商品刊登於境外蝦皮站並決定境外售價；賣家將商品送達台灣跨境指定地點，國際段物流等費用由蝦皮負擔；服務範圍依通知為準。"},{"id":8,"title":"Republic Act No. 10863（Customs Modernization and Tariff Act）Sec. 423","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2016/ra_10863_2016.html","note":"FOB 或 FCA 價值 Php 10,000 以下的貨物不課關稅與其他稅。"},{"id":9,"title":"Republic Act No. 11967（Internet Transactions Act of 2023）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2023/ra_11967_2023.html","note":"第 21 條：電商平台須在上架前盡可能向本國與外國線上商家收取身分或商業登記資料，並禁止販售未提供必要許可與執照資訊的管制商品。"},{"id":10,"title":"Citizen's Charter：Issuance of Cosmetic Product Notification","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2025/09/1.-Issuance-of-Cosmetic-Product-Notification.pdf","note":"化妝品以 CPN 上市前通報；申請者須持有效 LTO 且列有化妝品活動。"}],
+    lastVerified: "2026-10-04",
+    updated: "2026-10-04",
   },
 ] as const;
 
