@@ -10,7 +10,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 
+import { messageBoxEn } from "@/i18n/en/message-box";
+import { localeFromPathname, type Locale } from "@/i18n/locale";
+import { messageBoxZh } from "@/i18n/zh/message-box";
 import { clamp, draggable, nearest, project, rubberband, useSpring } from "@/lib/motion";
 
 interface MessageBoxContextValue {
@@ -39,8 +43,21 @@ export function MessageBoxProvider({ children }: { children: ReactNode }) {
 
 const emptyForm = { name: "", contact: "", message: "" };
 
+export type QuickLeadFields = typeof emptyForm & { website: string };
+
+export function buildQuickLeadPayload(fields: QuickLeadFields, page: string, lang: Locale) {
+  return {
+    form: "quick",
+    ...fields,
+    page,
+    lang,
+  };
+}
+
 export function MessageBox() {
   const { isOpen, close } = useMessageBox();
+  const locale = localeFromPathname(usePathname());
+  const copy = locale === "en" ? messageBoxEn : messageBoxZh;
   const [present, setPresent] = useState(false);
   const [closedPosition, setClosedPosition] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -99,7 +116,6 @@ export function MessageBox() {
 
     returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     presentRef.current = true;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- presence keeps the exit spring mounted.
     setPresent(true);
     const detents = stops();
     sheetY.to(window.innerWidth < 700 ? detents[0] : detents[1], { response: 0.45 });
@@ -159,9 +175,8 @@ export function MessageBox() {
   }, [dismiss, isOpen, sheetY, stops]);
 
   const validate = (field: keyof typeof emptyForm) => {
-    const messages = { name: "請填姓名", contact: "請留 Email 或電話", message: "請簡單說明一下" };
     const valid = Boolean(form[field].trim());
-    setErrors((current) => ({ ...current, [field]: valid ? "" : messages[field] }));
+    setErrors((current) => ({ ...current, [field]: valid ? "" : copy.fields[field].error }));
     return valid;
   };
 
@@ -173,9 +188,9 @@ export function MessageBox() {
 
   const handleSubmit = async () => {
     const nextErrors: Record<string, string> = {};
-    if (!form.name.trim()) nextErrors.name = "請填姓名";
-    if (!form.contact.trim()) nextErrors.contact = "請留 Email 或電話";
-    if (!form.message.trim()) nextErrors.message = "請簡單說明一下";
+    if (!form.name.trim()) nextErrors.name = copy.fields.name.error;
+    if (!form.contact.trim()) nextErrors.contact = copy.fields.contact.error;
+    if (!form.message.trim()) nextErrors.message = copy.fields.message.error;
     if (Object.keys(nextErrors).length) {
       setErrors(nextErrors);
       return;
@@ -188,11 +203,7 @@ export function MessageBox() {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          form: "quick",
-          ...form,
-          page: window.location.pathname,
-        }),
+        body: JSON.stringify(buildQuickLeadPayload(form, window.location.pathname, locale)),
       });
       const result = await response.json().catch(() => null) as {
         ok?: boolean;
@@ -222,8 +233,8 @@ export function MessageBox() {
     }, 300);
   };
 
-  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent("LUFÉ 快速留言")}&body=${encodeURIComponent(
-    `姓名：${form.name}\n聯絡方式：${form.contact}\n\n訊息：\n${form.message}`,
+  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent(copy.fallbackMailto.subject)}&body=${encodeURIComponent(
+    `${copy.fallbackMailto.name}：${form.name}\n${copy.fallbackMailto.contact}：${form.contact}\n\n${copy.fallbackMailto.message}：\n${form.message}`,
   )}`;
 
   const viewportHeight = typeof window === "undefined" ? 1 : window.innerHeight;
@@ -234,17 +245,17 @@ export function MessageBox() {
     <div ref={sheetRef} role="dialog" aria-modal="true" aria-labelledby="message-box-title" aria-hidden={!present} className="lufe-glass-panel fixed bottom-0 left-1/2 z-[200] flex h-[calc(100svh-40px)] w-[min(640px,100%)] flex-col text-tx" style={{ transform: `translate3d(-50%, ${sheetY.value}px, 0)`, visibility: present ? "visible" : "hidden" }}>
       <div ref={grabRef} className="touch-none select-none px-6 pb-[6px] pt-[10px] cursor-grab active:cursor-grabbing">
         <i className="mx-auto mb-[10px] block h-[5px] w-10 bg-black/20" />
-        <div className="flex items-center justify-between gap-3"><h3 id="message-box-title" className="text-[21px] font-semibold">聊聊你的產品</h3><button type="button" aria-label="關閉" onClick={handleClose} className="grid h-11 w-11 cursor-pointer place-items-center bg-black/[.06] text-[22px] text-tx2 hover:bg-black/[.1]">×</button></div>
+        <div className="flex items-center justify-between gap-3"><h3 id="message-box-title" className="text-[21px] font-semibold">{copy.title}</h3><button type="button" aria-label={copy.close} onClick={handleClose} className="grid h-11 w-11 cursor-pointer place-items-center bg-black/[.06] text-[22px] text-tx2 hover:bg-black/[.1]">×</button></div>
       </div>
       <div className="flex-1 overflow-auto overscroll-contain px-6 pb-8 pt-1">
         {!submitted ? <form noValidate onSubmit={(event) => { event.preventDefault(); void handleSubmit(); }}>
-          <Field label="你的姓名 *" error={errors.name}><input required aria-required="true" className={`w-full border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.name ? "border-red-400" : "border-bd"}`} placeholder="怎麼稱呼你？" value={form.name} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("name")} onChange={(event) => updateField("name", event.target.value)} /></Field>
-          <Field label="聯絡方式（Email 或電話）*" error={errors.contact}><input required aria-required="true" className={`w-full border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.contact ? "border-red-400" : "border-bd"}`} placeholder="方便我們回覆你" value={form.contact} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("contact")} onChange={(event) => updateField("contact", event.target.value)} /></Field>
-          <Field label="簡單說說你的產品跟想法 *" error={errors.message}><textarea required aria-required="true" className={`min-h-[68px] w-full resize-y border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.message ? "border-red-400" : "border-bd"}`} placeholder="例如：我們做鳳梨酥，想看看美國有沒有機會⋯⋯" value={form.message} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("message")} onChange={(event) => updateField("message", event.target.value)} /></Field>
+          <Field label={copy.fields.name.label} error={errors.name}><input required aria-required="true" className={`w-full border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.name ? "border-red-400" : "border-bd"}`} placeholder={copy.fields.name.placeholder} value={form.name} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("name")} onChange={(event) => updateField("name", event.target.value)} /></Field>
+          <Field label={copy.fields.contact.label} error={errors.contact}><input required aria-required="true" className={`w-full border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.contact ? "border-red-400" : "border-bd"}`} placeholder={copy.fields.contact.placeholder} value={form.contact} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("contact")} onChange={(event) => updateField("contact", event.target.value)} /></Field>
+          <Field label={copy.fields.message.label} error={errors.message}><textarea required aria-required="true" className={`min-h-[68px] w-full resize-y border px-[13px] py-2.5 text-[15px] outline-none focus:border-gold ${errors.message ? "border-red-400" : "border-bd"}`} placeholder={copy.fields.message.placeholder} value={form.message} onFocus={() => sheetY.to(0, { response: 0.4 })} onBlur={() => validate("message")} onChange={(event) => updateField("message", event.target.value)} /></Field>
           <input type="text" name="website" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />
-          {submitError && <p className="mb-3 text-[12px] text-red-500">送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
-          <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-navy py-3 text-[15px] font-semibold text-white hover:bg-navy-l disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? "送出中…" : "送出，我們一個工作天內回覆"}</button>
-        </form> : <div className="px-5 py-8 text-center"><h3 className="mb-1.5 text-[17px] font-semibold">收到了！</h3><p className="text-[14.5px] font-light text-tx2">我們會在一個工作天內回覆你。</p></div>}
+          {submitError && <p className="mb-3 text-[12px] text-red-500">{copy.submitError}<a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
+          <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-navy py-3 text-[15px] font-semibold text-white hover:bg-navy-l disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? copy.submitting : copy.submit}</button>
+        </form> : <div className="px-5 py-8 text-center"><h3 className="mb-1.5 text-[17px] font-semibold">{copy.submittedTitle}</h3><p className="text-[14.5px] font-light text-tx2">{copy.submittedBody}</p></div>}
       </div>
     </div>
   </>;

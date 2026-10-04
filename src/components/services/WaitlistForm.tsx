@@ -6,9 +6,9 @@ import { chapterPageEn } from "@/i18n/en/chapter-page";
 import { type Locale } from "@/i18n/locale";
 import { chapterPageZh } from "@/i18n/zh/chapter-page";
 
-type MonthlyVolume = "<100" | "100～500" | "500 以上" | "under-100" | "100-500" | "500-or-more" | "";
+export type MonthlyVolume = "<100" | "100～500" | "500 以上" | "under-100" | "100-500" | "500-or-more" | "";
 
-type WaitlistFields = {
+export type WaitlistFields = {
   name: string;
   email: string;
   monthlyVolume: MonthlyVolume;
@@ -32,6 +32,16 @@ const englishVolumeToSubmittedValue: Partial<Record<MonthlyVolume, string>> = {
   "500-or-more": "500 以上",
 };
 
+export function buildWaitlistLeadPayload(fields: WaitlistFields, page: string, lang: Locale) {
+  return {
+    form: "waitlist",
+    ...fields,
+    monthlyVolume: lang === "en" ? englishVolumeToSubmittedValue[fields.monthlyVolume] ?? "" : fields.monthlyVolume,
+    page,
+    lang,
+  };
+}
+
 export function WaitlistForm({ locale = "zh" }: { readonly locale?: Locale }) {
   const copy = locale === "en" ? chapterPageEn : chapterPageZh;
   const monthlyVolumeOptions = locale === "en"
@@ -53,11 +63,11 @@ export function WaitlistForm({ locale = "zh" }: { readonly locale?: Locale }) {
 
   const validate = (values = fields) => {
     const next: Record<string, string> = {};
-    if (!values.name.trim()) next.name = "請填寫品牌名稱";
-    if (!values.email.trim()) next.email = "請填寫 Email";
-    else if (!emailPattern.test(values.email)) next.email = "Email 格式不正確";
-    if (!values.monthlyVolume) next.monthlyVolume = "請選擇每月客訊量";
-    if (values.currentHandler.length > 100) next.currentHandler = "現在誰在接不可超過 100 字";
+    if (!values.name.trim()) next.name = copy.waitlist.errors.name;
+    if (!values.email.trim()) next.email = copy.waitlist.errors.email;
+    else if (!emailPattern.test(values.email)) next.email = copy.waitlist.errors.emailInvalid;
+    if (!values.monthlyVolume) next.monthlyVolume = copy.waitlist.errors.monthlyVolume;
+    if (values.currentHandler.length > 100) next.currentHandler = copy.waitlist.errors.currentHandler;
     return next;
   };
 
@@ -85,12 +95,7 @@ export function WaitlistForm({ locale = "zh" }: { readonly locale?: Locale }) {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          form: "waitlist",
-          ...fields,
-          monthlyVolume: locale === "en" ? englishVolumeToSubmittedValue[fields.monthlyVolume] ?? "" : fields.monthlyVolume,
-          page: window.location.pathname,
-        }),
+        body: JSON.stringify(buildWaitlistLeadPayload(fields, window.location.pathname, locale)),
       });
       const result = await response.json().catch(() => null) as {
         ok?: boolean;
@@ -111,8 +116,8 @@ export function WaitlistForm({ locale = "zh" }: { readonly locale?: Locale }) {
   };
 
   const submittedVolume = locale === "en" ? englishVolumeToSubmittedValue[fields.monthlyVolume] ?? "" : fields.monthlyVolume;
-  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent("LUFÉ 海外客服首批登記")}&body=${encodeURIComponent(
-    `品牌名稱：${fields.name}\nEmail：${fields.email}\n每月客訊：${submittedVolume}\n現在誰在接：${fields.currentHandler}`,
+  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent(copy.waitlist.fallbackMailto.subject)}&body=${encodeURIComponent(
+    `${copy.waitlist.fallbackMailto.name}：${fields.name}\n${copy.waitlist.fallbackMailto.email}：${fields.email}\n${copy.waitlist.fallbackMailto.monthlyVolume}：${submittedVolume}\n${copy.waitlist.fallbackMailto.currentHandler}：${fields.currentHandler}`,
   )}`;
 
   const inputClass = (name: string) =>
@@ -162,7 +167,7 @@ export function WaitlistForm({ locale = "zh" }: { readonly locale?: Locale }) {
       <button type="submit" disabled={isSubmitting} className="w-full cursor-pointer bg-gold py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l disabled:cursor-not-allowed disabled:opacity-50">
         {isSubmitting ? copy.waitlist.submitting : copy.waitlist.submit}
       </button>
-      {submitError ? <p className="text-center text-[13px] text-red-500">送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p> : null}
+      {submitError ? <p className="text-center text-[13px] text-red-500">{copy.waitlist.submitError}<a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p> : null}
     </form>
   );
 }

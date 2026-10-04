@@ -40,6 +40,21 @@ export type ChapterPageCopy = {
     readonly submitting: string;
     readonly submittedTitle: string;
     readonly submittedBody: string;
+    readonly errors: {
+      readonly name: string;
+      readonly email: string;
+      readonly emailInvalid: string;
+      readonly monthlyVolume: string;
+      readonly currentHandler: string;
+    };
+    readonly submitError: string;
+    readonly fallbackMailto: {
+      readonly subject: string;
+      readonly name: string;
+      readonly email: string;
+      readonly monthlyVolume: string;
+      readonly currentHandler: string;
+    };
   };
   readonly faq: {
     readonly title: string;
@@ -90,6 +105,21 @@ export const chapterPageZh: ChapterPageCopy = {
     submitting: "送出中…",
     submittedTitle: "收到了！",
     submittedBody: "我們會在一個工作天內用你提供的 Email 跟你約時間",
+    errors: {
+      name: "請填寫品牌名稱",
+      email: "請填寫 Email",
+      emailInvalid: "Email 格式不正確",
+      monthlyVolume: "請選擇每月客訊量",
+      currentHandler: "現在誰在接不可超過 100 字",
+    },
+    submitError: "送出失敗，請直接寄信給我們： ",
+    fallbackMailto: {
+      subject: "LUFÉ 海外客服首批登記",
+      name: "品牌名稱",
+      email: "Email",
+      monthlyVolume: "每月客訊",
+      currentHandler: "現在誰在接",
+    },
   },
   faq: {
     title: "常見問題",
