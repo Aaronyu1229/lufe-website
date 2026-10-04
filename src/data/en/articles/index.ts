@@ -23,6 +23,7 @@ export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [manilaBeverageFirstStore90Days.slug]: manilaBeverageFirstStore90Days,
   [overseasExhibitionSubsidy115Upgrade.slug]: overseasExhibitionSubsidy115Upgrade,
   [philippinesEcommerceFirstYear.slug]: philippinesEcommerceFirstYear,
+  [productTestingBestPractices.slug]: productTestingBestPractices,
   [usFdaRegistrationGuide.slug]: usFdaRegistrationGuide,
   [tradepilotTariffTutorial.slug]: tradepilotTariffTutorial,
   [landedCostBeforeExport.slug]: landedCostBeforeExport,
@@ -35,6 +36,7 @@ import { article as firstTimeExportChecklist } from "./first-time-export-checkli
 import { article as manilaBeverageFirstStore90Days } from "./manila-beverage-first-store-90-days";
 import { article as overseasExhibitionSubsidy115Upgrade } from "./overseas-exhibition-subsidy-115-upgrade";
 import { article as philippinesEcommerceFirstYear } from "./philippines-ecommerce-first-year";
+import { article as productTestingBestPractices } from "./product-testing-best-practices";
 import { article as usFdaRegistrationGuide } from "./us-fda-registration-guide";
 import { article as tradepilotTariffTutorial } from "./tradepilot-tariff-tutorial";
 import { article as landedCostBeforeExport } from "./landed-cost-before-export";
