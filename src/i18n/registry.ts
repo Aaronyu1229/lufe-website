@@ -11,6 +11,7 @@ import { HOME_WHY_SOURCE_FINGERPRINT, homeWhyEn } from "./en/home-why";
 import { HOME_FAQ_SOURCE_FINGERPRINT, homeFaqEn } from "./en/home-faq";
 import { HOME_CTA_SOURCE_FINGERPRINT, homeCtaEn } from "./en/home-cta";
 import { HOME_SUBSIDY_ALERT_SOURCE_FINGERPRINT, homeSubsidyAlertEn } from "./en/home-subsidy-alert";
+import { HOME_LATEST_INSIGHTS_SOURCE_FINGERPRINT, homeLatestInsightsEn } from "./en/home-latest-insights";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -24,6 +25,7 @@ import { homeWhyZh } from "./zh/home-why";
 import { homeFaqZh } from "./zh/home-faq";
 import { homeCtaZh } from "./zh/home-cta";
 import { homeSubsidyAlertZh } from "./zh/home-subsidy-alert";
+import { homeLatestInsightsZh } from "./zh/home-latest-insights";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -39,4 +41,5 @@ export const I18N_MODULES = [
   { name: "home-faq", zh: homeFaqZh, en: homeFaqEn, sourceFingerprint: HOME_FAQ_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-faq.ts" },
   { name: "home-cta", zh: homeCtaZh, en: homeCtaEn, sourceFingerprint: HOME_CTA_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-cta.ts" },
   { name: "home-subsidy-alert", zh: homeSubsidyAlertZh, en: homeSubsidyAlertEn, sourceFingerprint: HOME_SUBSIDY_ALERT_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-subsidy-alert.ts" },
+  { name: "home-latest-insights", zh: homeLatestInsightsZh, en: homeLatestInsightsEn, sourceFingerprint: HOME_LATEST_INSIGHTS_SOURCE_FINGERPRINT, enFile: "src/i18n/en/home-latest-insights.ts" },
 ] as const;
