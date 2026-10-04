@@ -30,27 +30,6 @@ function isReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-function BackToTopButton({
-  "aria-label": label,
-  visible,
-  onClick,
-}: {
-  readonly "aria-label": string;
-  readonly visible: boolean;
-  readonly onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      onClick={onClick}
-      className={`lufe-back-to-top ${visible ? "lufe-back-to-top-visible" : ""}`}
-    >
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 14 6-6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-    </button>
-  );
-}
-
 export function DelightLayer({ backToTopLabel = "回到頂端" }: { readonly backToTopLabel?: string } = {}) {
   const pathname = usePathname();
   const progressRef = useRef<HTMLDivElement>(null);
@@ -199,8 +178,13 @@ export function DelightLayer({ backToTopLabel = "回到頂端" }: { readonly bac
 
   return <>
     <div ref={progressRef} aria-hidden="true" className="lufe-reading-progress" />
-    {backToTopLabel === "回到頂端"
-      ? <BackToTopButton aria-label="回到頂端" visible={showTop} onClick={() => window.scrollTo({ top: 0, behavior: isReducedMotion() ? "auto" : "smooth" })} />
-      : <BackToTopButton aria-label={backToTopLabel} visible={showTop} onClick={() => window.scrollTo({ top: 0, behavior: isReducedMotion() ? "auto" : "smooth" })} />}
+    <button
+      type="button"
+      aria-label={backToTopLabel}
+      onClick={() => window.scrollTo({ top: 0, behavior: isReducedMotion() ? "auto" : "smooth" })}
+      className={`lufe-back-to-top ${showTop ? "lufe-back-to-top-visible" : ""}`}
+    >
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 14 6-6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+    </button>
   </>;
 }

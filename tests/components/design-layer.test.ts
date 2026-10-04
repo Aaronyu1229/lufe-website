@@ -58,7 +58,8 @@ describe("v5 design layer", () => {
     const delightCss = css.slice(css.indexOf(".lufe-reading-progress"));
     const layer = read("src/components/DelightLayer.tsx");
 
-    expect(layer).toContain('aria-label="回到頂端"');
+    expect(layer).toContain('backToTopLabel = "回到頂端"');
+    expect(layer).toContain("aria-label={backToTopLabel}");
     expect(layer).toContain('addEventListener("scroll", requestUpdate, { passive: true })');
     expect(layer).toContain("observer.unobserve(entry.target)");
     expect(css).not.toContain("lufe-mail");
