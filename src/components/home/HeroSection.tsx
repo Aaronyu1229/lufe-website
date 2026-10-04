@@ -174,7 +174,7 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
       setActiveIndex((i) => (i + 1) % slides.length);
     }, AUTOPLAY_MS);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, paused, prefersReducedMotion]);
+  }, [activeIndex, paused, prefersReducedMotion, slides.length]);
 
   // Mount the active slide only after window.load. Never un-mounts to avoid
   // re-downloading once seen.

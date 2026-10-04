@@ -1,5 +1,4 @@
 import { FaqSection } from "@/components/faq/FaqSection";
-import { HOME_FAQ_ITEMS } from "@/data/homeFaq";
 import { homeFaqEn } from "@/i18n/en/home-faq";
 import { type Locale } from "@/i18n/locale";
 import { homeFaqZh } from "@/i18n/zh/home-faq";
