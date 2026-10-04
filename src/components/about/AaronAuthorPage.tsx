@@ -7,13 +7,14 @@ import { aaronAuthorPageEn } from "@/i18n/en/aaron-author-page";
 import { localizedHref, type Locale } from "@/i18n/locale";
 import { aaronAuthorPageZh } from "@/i18n/zh/aaron-author-page";
 import { toInsightCard } from "@/lib/articles/presentation";
+import { getPublishedEnglishArticles } from "@/lib/articles/english";
 import { getArticlePublishedDate, getPublishedArticles } from "@/lib/articles/published";
 
 import { SubsidiesCTASection } from "../subsidy/SubsidiesCTASection";
 import { AuthorArticleList } from "./AuthorArticleList";
 
 export function AaronAuthorPage({ locale = "zh" }: { readonly locale?: Locale }) {
-  const publishedArticles = getPublishedArticles();
+  const publishedArticles = locale === "en" ? getPublishedEnglishArticles() : getPublishedArticles();
   const authorArticles = publishedArticles.map(toInsightCard);
   const latestDate = [...publishedArticles]
     .map(getArticlePublishedDate)
@@ -42,8 +43,7 @@ export function AaronAuthorPage({ locale = "zh" }: { readonly locale?: Locale })
           <p className="mb-8 max-w-[500px] whitespace-pre-line text-[17px] leading-[1.8] text-white/70">{copy.intro}</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px] text-white/60">
             <span>{copy.articleCountPrefix}{authorArticles.length}{copy.articleCountSuffix}</span>
-            <span aria-hidden="true">・</span>
-            <span>{copy.latestUpdatePrefix}{latestDate}</span>
+            {latestDate ? <><span aria-hidden="true">・</span><span>{copy.latestUpdatePrefix}{latestDate}</span></> : null}
             <span aria-hidden="true">・</span>
             <a href="https://www.linkedin.com/in/wibp/" target="_blank" rel="me noopener" className="inline-flex items-center gap-1 hover:text-white"><LinkedInIcon size={16} />LinkedIn</a>
           </div>
@@ -53,7 +53,7 @@ export function AaronAuthorPage({ locale = "zh" }: { readonly locale?: Locale })
       <section className="bg-white pb-[80px] pt-[60px] md:pb-[110px] md:pt-[80px]">
         <div className="lufe-container">
           <h2 className="h2 mb-10">{copy.articleHeading}</h2>
-          <AuthorArticleList articles={locale === "en" ? [] : authorArticles} emptyLabel={locale === "en" ? copy.emptyArticles : undefined} />
+          <AuthorArticleList articles={authorArticles} locale={locale} filterLabel={copy.articleFilter} allLabel={copy.allArticles} emptyLabel={locale === "en" ? copy.emptyArticles : undefined} />
         </div>
       </section>
 

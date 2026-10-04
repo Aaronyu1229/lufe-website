@@ -2,7 +2,7 @@ import { CTA_LINE_EN } from "@/data/cta";
 import type { AaronAuthorPageCopy } from "@/i18n/zh/aaron-author-page";
 
 // Fingerprint of aaronAuthorPageZh this English was translated from; registry.test.ts prints the value after the first run.
-export const AARON_AUTHOR_PAGE_SOURCE_FINGERPRINT = "2b513868d24e996c";
+export const AARON_AUTHOR_PAGE_SOURCE_FINGERPRINT = "03b20c7032fe1e32";
 
 export const aaronAuthorPageEn: AaronAuthorPageCopy = {
   home: "Home",
@@ -13,6 +13,8 @@ export const aaronAuthorPageEn: AaronAuthorPageCopy = {
   articleCountSuffix: "",
   latestUpdatePrefix: "Latest update ",
   articleHeading: "Founder’s Column",
+  articleFilter: "Article categories",
+  allArticles: "All",
   emptyArticles: "No English articles are available yet.",
   cta: {
     heading: "Still not sure where you are stuck?",
