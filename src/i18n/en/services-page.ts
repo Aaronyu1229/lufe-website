@@ -9,7 +9,7 @@ export const servicesPageEn: ServicesPageCopy = {
   breadcrumbServices: "Services",
   h1: "A brand's first year in Manila",
   lead: "Market Test, Consignment, Company Setup, Call Center — in their first year in the Philippines, most Taiwanese brands run into these four things, roughly in this order. We turned them into four services, each with a published price. Take one chapter, or go all the way.",
-  primaryCta: "Free 30-minute initial assessment →",
+  primaryCta: "Book your free assessment →",
   secondaryCta: "See the four chapters ↓",
   scrollCue: "Scroll down",
   chaptersHeading: "Four chapters, at your own pace",
@@ -31,7 +31,7 @@ export const servicesPageEn: ServicesPageCopy = {
       line: "Market Test → Consignment → Company Setup → Call Center. Take one chapter, or go all the way",
       specs: [
         ["Fits", "Consumer brands and restaurant chains with a product; never exported, or exported without gaining a foothold"],
-        ["Pricing", "A fixed price per chapter. Starter pack NT$70,000 (Market Test NT$10,000–20,000 + Consignment pack NT$50,000–60,000; the Market Test fee is credited). Company Setup is quoted per project, with a range in our first conversation; Call Center comes with a price range in our first conversation"],
+        ["Pricing", "A fixed price per chapter. Starter package NT$70,000 (Market Test NT$10,000–20,000 + Consignment package NT$50,000–60,000; the Market Test fee is credited toward the Consignment package). Company Setup is quoted per project, with a range in our first conversation; Call Center comes with a price range in our first conversation"],
         ["First step", "Market Test — a one-page report to decide what comes next"],
       ],
       cta: "Start with chapter one →",
@@ -68,12 +68,12 @@ export const servicesPageEn: ServicesPageCopy = {
     },
     {
       q: "How are the four services priced?",
-      a: "The numbers: Market Test NT$10,000–20,000 (pilot price for the first 10 brands); Consignment pack NT$50,000–60,000. Together they make the NT$70,000 starter pack, with the Market Test fee credited. Company Setup is quoted per project and Call Center comes with a range — both given in our first conversation.\nHonestly: we won't quote before we understand what you need. At our first meeting we want to hear how your product sells in Taiwan and why you want to go abroad.",
+      a: "The numbers: Market Test NT$10,000–20,000 (pilot price for the first 10 brands); Consignment package NT$50,000–60,000. Together they make the NT$70,000 starter package, with the Market Test fee credited toward the Consignment package. Company Setup is quoted per project and Call Center comes with a range — both given in our first conversation.\nHonestly: we won't quote before we understand what you need. At our first meeting we want to hear how your product sells in Taiwan and why you want to expand overseas.",
       takeaway: "A fixed price per chapter; a range in our first conversation",
     },
     {
       q: "How are you different from trading companies or consultancies?",
-      a: "Consultants write reports, traders buy and sell, freight forwarders move goods. We do four things under one contract and walk with you through the first year. Our founder comes from Jumping Freight, backed by 43 years of international logistics, so your goods won't get stuck at sea. We are not a trading company, and not a forwarder that just takes orders.",
+      a: "Consultants write reports, traders buy and sell, freight forwarders move goods. We do four things under one contract and walk with you through the first year. Our founder comes from Jumping Freight, backed by 43 years of international logistics experience, so your goods won't get stuck at sea. We are not a trading company, and not a forwarder that just takes orders.",
       takeaway: "Four things, one contract, through your first year",
     },
   ],

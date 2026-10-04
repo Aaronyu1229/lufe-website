@@ -15,7 +15,7 @@ export const resourcesPageEn: ResourcesPageCopy = {
   scrollCue: "Scroll down",
   subsidies: {
     heading: "Government subsidies for overseas expansion",
-    lead: "Plans related to overseas expansion from the International Trade Administration, Ministry of Economic Affairs, and Small and Medium Enterprise Administration, organized by who they fit, what they cover, and how to apply.",
+    lead: "Plans related to overseas expansion from the International Trade Administration, Ministry of Economic Affairs, and Small and Medium Enterprise and Startup Administration, organized by who they fit, what they cover, and how to apply.",
     columns: ["No.", "Program", "Agency", "Amount", "Timeline"],
     action: "See the full subsidy guide →",
   },

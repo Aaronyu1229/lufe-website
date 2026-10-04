@@ -20,7 +20,7 @@ export const chapterPageEn: ChapterPageCopy = {
     light: "Continue to Month 3 →",
   },
   trackDefaults: {
-    passive: "Product certification track (under review, moving forward)",
+    passive: "Product registration track (under review, moving forward)",
     active: "LUFÉ track (progress every week)",
   },
   table: {
@@ -38,7 +38,7 @@ export const chapterPageEn: ChapterPageCopy = {
     volumeOptions: ["<100", "100–500", "500 or more"],
     handlerLabel: "Who handles them now",
     handlerPlaceholder: "For example: the founder, Taiwan customer service, or no one yet",
-    submit: "Book a 30-minute initial assessment →",
+    submit: "Book your free assessment →",
     submitting: "Submitting…",
     submittedTitle: "Received",
     submittedBody: "We will use the email you provided to arrange a time within one business day.",

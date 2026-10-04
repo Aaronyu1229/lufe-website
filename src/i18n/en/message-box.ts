@@ -12,10 +12,10 @@ export const messageBoxEn: MessageBoxCopy = {
     message: { label: "Briefly tell us about your product and what you have in mind *", placeholder: "For example: We make pineapple cakes and would like to see whether there is an opportunity in the United States…", error: "Please briefly tell us about your inquiry" },
   },
   submitError: "We could not send your message. Please email us directly: ",
-  submit: "Send it — We reply within one business day",
+  submit: "Send →",
   submitting: "Sending…",
   submittedTitle: "Received",
-  submittedBody: "We will reply within one business day.",
+  submittedBody: "We reply within one business day.",
   fallbackMailto: {
     subject: "LUFÉ quick message",
     name: "Name",

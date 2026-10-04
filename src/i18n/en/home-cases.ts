@@ -4,7 +4,7 @@ import type { HomeCasesCopy } from "@/i18n/zh/home-cases";
 export const HOME_CASES_SOURCE_FINGERPRINT = "bd6d12b916fa67d7";
 
 export const homeCasesEn: HomeCasesCopy = {
-  heading: ["Use data to choose direction,", "use experience to adjust the approach"],
+  heading: ["Data sets the direction;", "experience shapes the approach"],
   lead: "In the Philippines, we have helped partners take three different routes. Each started with a small-scale test, then adjusted and expanded based on the data.",
   roads: [
     { label: "First route", title: "Starting from zero", detail: "Our local partners in the Philippines first built an English-language education institution;\nlater, they built a chain bubble tea brand from zero" },
@@ -15,11 +15,11 @@ export const homeCasesEn: HomeCasesCopy = {
     {
       tags: [{ label: "Beauty & personal care", variant: "sky" }, { label: "North America", variant: "gold" }],
       num: "North America",
-      numLabel: "Already in mainstream North American retail",
+      numLabel: "Already in North American mass retail",
       scalePrefix: "Taiwanese goat milk soap brand",
       title: "How do North American buyers understand a Taiwanese goat milk soap?",
       painLine: "There is nothing wrong with the product; the problem is that North American buyers do not understand it",
-      solutionLine: "The formula stays the same. What changes are the message and labeling, then it enters mainstream North American retail.",
+      solutionLine: "The formula stays the same. What changes are the message and labeling, then it enters North American mass retail.",
       route: { from: "Taiwan", to: "North America" },
     },
     {

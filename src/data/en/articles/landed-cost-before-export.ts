@@ -15,7 +15,7 @@ Your tea-drink gift boxes sell steadily in Taiwan department stores. One day, a 
 
 You open Excel. The first field is the ex-factory price, which you know best. You want to enter freight in the second field, but do not know whom to ask or how much sea freight differs from air freight. You want to enter tariff in the third field, but an online search shows three versions of U.S. tariff news from this year alone, and you have even less idea where to check for the Philippines. Then you remember that the product is food, so there may be another tax to pay at import.
 
-You realise that what is holding you up is not "how much is the tariff?" but **how many fields this table needs and whom to ask about each one.** This article is that table.
+You realize that what is holding you up is not "how much is the tariff?" but **how many fields this table needs and whom to ask about each one.** This article is that table.
 
 ## How do you calculate landed cost? Who can estimate the seven parts?
 
@@ -35,7 +35,7 @@ A few points need to be clear first. They are also exactly where the owner in th
 
 **Which price tariff is calculated on depends on Incoterms.** If the other party asks for an FOB price, it means that freight and import tariff are both its responsibility. If it changes its request to DDP, you cover everything [1]. A quotation without Incoterms is not a quotation.
 
-**Using the Philippines as an example, this is how the taxes stack.** Tariff is based on the transaction value (the goods value, in practice plus freight and insurance) [2]. On top of tariff, a 12% value-added tax applies, based on "customs value + tariff" [3]. Sugary drinks also have excise tax of 6 or 12 pesos per litre; imported finished products must pay it before customs release [4]. If the tea-drink gift box contains sugar, this field cannot be missed. A single shipment with an FOB value below 10,000 pesos is duty-free [2], but this is for small personal parcels, not a way to split shipments to avoid tax.
+**Using the Philippines as an example, this is how the taxes stack.** Tariff is based on the transaction value (the goods value, in practice plus freight and insurance) [2]. On top of tariff, a 12% value-added tax applies, based on "customs value + tariff" [3]. Sugary drinks also have excise tax of 6 or 12 pesos per liter; imported finished products must pay it before customs release [4]. If the tea-drink gift box contains sugar, this field cannot be missed. A single shipment with an FOB value of 10,000 pesos or less is duty-free [2], but this is for small personal parcels, not a way to split shipments to avoid tax.
 
 **Taiwan has no FTA with any ASEAN country.** Exports to the Philippines, Vietnam, Thailand, and Indonesia all use MFN rates [5]. Information about "zero tariffs within ASEAN" applies between ASEAN member states, not to exports from Taiwan.
 
@@ -51,7 +51,7 @@ FOB is one of the Incoterms 2020 rules published by the International Chamber of
 
 | Term | Who pays international freight | Who pays insurance | When risk transfers to the buyer | Who pays import tariff |
 |---|---|---|---|---|
-| FOB | Buyer | Incoterms does not require it; risk is the buyer's, so arrange your own cover | When the goods are loaded on board at the port of shipment | Buyer |
+| FOB | Buyer | Incoterms does not require it; risk is the buyer's, so the buyer insures if it wants cover | When the goods are loaded on board at the port of shipment | Buyer |
 | CIF | Seller | Seller, at the minimum level (Clauses C) | When the goods are loaded on board at the port of shipment | Buyer |
 | DDP | Seller | Incoterms does not require it; risk remains with the seller throughout | When the goods are delivered at the named destination | Seller |
 
@@ -61,11 +61,11 @@ FOB and CIF apply only to sea and inland-waterway transport [13][15]. Incoterms 
 
 Because in the past 18 months, the legal basis for U.S. tariffs alone has changed three times:
 
-- 2025-04-02: The United States imposed "reciprocal tariffs" on countries under IEEPA (EO 14257) [6]
-- 2025-08-29: The United States suspended duty-free treatment for parcels of US$800 or less from all countries (EO 14324); in June 2026, the suspension became indefinite [7]
-- 2026-02-20: The U.S. Supreme Court ruled that IEEPA does not authorise the president to impose tariffs (Learning Resources v. Trump) [8]
-- 2026-02-24: Temporary tariffs were imposed under Trade Act Section 122, which has a statutory maximum of 150 days [9]
-- 2026-07-24: Section 122 expired. From 2026-07-25, Section 301 tariffs applied to 60 economies; Taiwan goods start at 10% for MFN plus Section 301 [10]
+- April 2, 2025: The United States imposed "reciprocal tariffs" on countries under IEEPA (EO 14257) [6]
+- August 29, 2025: The United States suspended duty-free treatment for parcels of US$800 or less from all countries (EO 14324); in June 2026, the suspension became indefinite [7]
+- February 20, 2026: The U.S. Supreme Court ruled that IEEPA does not authorize the president to impose tariffs (Learning Resources v. Trump) [8]
+- February 24, 2026: Temporary tariffs were imposed under Trade Act Section 122, which has a statutory maximum of 150 days [9]
+- July 24, 2026: Section 122 expired. From July 25, 2026, Section 301 tariffs applied to 60 economies; the combined MFN + Section 301 rate on Taiwan-origin goods has a 10% floor [10]
 
 And that is only the United States. Any tariff rate printed in this article would be wrong three months later. Our approach is: **write the structure in the article and look up the rate for the day with a tool.**
 
@@ -76,7 +76,7 @@ And that is only the United States. Any tariff rate printed in this article woul
 ## When we do not recommend estimating yet
 
 - **You do not yet know how the product will enter the market.** Consignment, an agent, and setting up your own company involve different importers, different tax bases, and different parties paying tax. Decide the model first, then estimate cost.
-- **You do not yet know what price people will pay.** Landed cost is the denominator and selling price is the numerator. If you do not know the numerator, calculating the denominator has no meaning. This is why a [Market Test](/services/product-testing) comes first: its one-page report compares the Taiwan-Philippines price gap.
+- **You do not yet know what price people will pay.** Landed cost is the denominator and selling price is the numerator. If you do not know the numerator, calculating the denominator has no meaning. This is why a [Market Test](/services/product-testing) comes first: its one-page report compares the Taiwan–Philippines price gap.
 - **The product is FDA-regulated, but registration has not started.** Registration cost and time enter landed cost, while the Philippine FDA's fee rules have been suspended since 2025; use the position on the verification date. We will provide this part in the first discussion.
 - **You already have a regular freight forwarder, ship every month, and have long maintained a cost table.** You need updated tariff rates, not this article.
 
@@ -91,15 +91,15 @@ You can estimate the framework. Tariff is based on transaction value, in practic
 **Why does the article not include estimated figures?**
 For the same product and market, landed cost can differ greatly between sea and air freight, FOB and DDP, and full-container and consolidated shipments. Publishing one figure would only lead people to make decisions with the wrong number.
 
-## One smallest next step
+## One small next step
 
-First use [TradePilot](https://tradepiloter.com) to check your product and destination country and obtain the tariff field. Fill the other six fields using the table above. The fields you cannot complete are the ones to ask us about on LINE.
+First use [TradePilot](https://tradepiloter.com) to check your product and destination country and obtain the tariff field. Fill the other six fields using the table above. The fields you cannot complete are the ones to message us about (LINE or email).
 
-This article is rewritten from the February 2026 article, "Strategies for shifting origin amid the China-U.S. tariff war." Last verified: 2026-10-01. Tariff legal bases change frequently, and the timeline records information only through the verification date.`],
+This article is rewritten from the February 2026 article, "Strategies for shifting origin amid the China-U.S. tariff war." Last verified: October 1, 2026. Tariff legal bases change frequently, and the timeline records information only through the verification date.`],
   faq: [
     {
       q: "Tariffs keep changing. Does it still make sense to estimate landed cost now?",
-      a: "Yes. Tariff is only one part of landed cost. The other parts - freight, insurance, local value-added tax, customs clearance, warehousing, and platform commissions - do not change as quickly. Calculate the structure first, then fill the tariff field using the rate on the verification date. When the rate changes, replace only that field.",
+      a: "Yes. Tariff is only one part of landed cost. The other parts — freight, insurance, local value-added tax, customs clearance, warehousing, and platform commissions — do not change as quickly. Calculate the structure first, then fill the tariff field using the rate on the verification date. When the rate changes, replace only that field.",
     },
     {
       q: "How are tariffs calculated? Can I estimate landed cost myself?",
@@ -123,7 +123,7 @@ This article is rewritten from the February 2026 article, "Strategies for shifti
       title: "Customs Modernization and Tariff Act (CMTA), RA 10863",
       publisher: "LawPhil (Philippine legal database)",
       url: "https://lawphil.net/statutes/repacts/ra2016/ra_10863_2016.html",
-      note: "Section 423 exempts FOB/FCA shipments below 10,000 pesos; Section 701 makes transaction value the tax base.",
+      note: "Section 423 exempts FOB/FCA shipments of 10,000 pesos or less; Section 701 makes transaction value the tax base.",
     },
     {
       id: 3,
@@ -137,7 +137,7 @@ This article is rewritten from the February 2026 article, "Strategies for shifti
       title: "BIR RR 20-2018 excise tax on sugary drinks",
       publisher: "Philippine Bureau of Internal Revenue (BIR)",
       url: "https://bir-cdn.bir.gov.ph/local/pdf/RR%2020-2018.pdf",
-      note: "6 pesos per litre, or 12 pesos for high-fructose corn syrup; imported finished products pay before release.",
+      note: "6 pesos per liter, or 12 pesos for high-fructose corn syrup; imported finished products pay before release.",
     },
     {
       id: 5,
@@ -158,28 +158,28 @@ This article is rewritten from the February 2026 article, "Strategies for shifti
       title: "EO 14324 suspension of the de minimis exemption",
       publisher: "Federal Register",
       url: "https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis",
-      note: "Effective 2025-08-29; postal parcels suspended indefinitely from 2026-06-24 at https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry.",
+      note: "Effective August 29, 2025; postal parcels suspended indefinitely from June 24, 2026 at https://www.federalregister.gov/documents/2026/06/24/2026-12669/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry.",
     },
     {
       id: 8,
       title: "Learning Resources v. Trump decision summary",
       publisher: "U.S. Congressional Research Service (CRS)",
       url: "https://www.congress.gov/crs-product/LSB11398",
-      note: "On 2026-02-20, the Supreme Court held that IEEPA does not authorise tariffs.",
+      note: "On February 20, 2026, the Supreme Court held that IEEPA does not authorize tariffs.",
     },
     {
       id: 9,
       title: "Explanation of temporary tariffs under Section 122",
       publisher: "Wiley law firm",
       url: "https://www.wiley.law/alert-Trump-Imposes-Section-122-Tariffs-After-Halting-IEEPA-Tariffs-Previews-New-Section-301-Investigations",
-      note: "Effective 2026-02-24, with a statutory maximum of 150 days.",
+      note: "Effective February 24, 2026, with a statutory maximum of 150 days.",
     },
     {
       id: 10,
       title: "Section 301 tariffs effective on July 25",
       publisher: "Focus Taiwan",
       url: "https://focustaiwan.tw/politics/202607240007",
-      note: "Taiwan goods start at 10% for MFN plus Section 301. See also Morgan Lewis at https://www.morganlewis.com/pubs/2026/07/us-administration-rebuilds-global-tariff-program-under-section-301.",
+      note: "The combined MFN + Section 301 rate on Taiwan-origin goods has a 10% floor. See also Morgan Lewis at https://www.morganlewis.com/pubs/2026/07/us-administration-rebuilds-global-tariff-program-under-section-301.",
     },
     {
       id: 11,

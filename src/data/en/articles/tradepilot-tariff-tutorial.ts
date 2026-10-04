@@ -19,7 +19,7 @@ You do not need a tariff analysis. You need a tool that can tell you in 3 minute
 
 ## What is TradePilot?
 
-TradePilot is a free tariff tool built by Jumping Freight. It requires no registration [1]. Enter a product name and amount, and AI assigns an HS code with a confidence score. It then breaks down customs duty, excise tax, and business tax through to landed cost, with a formula and regulatory basis for every item. Its data comes from Customs Administration announcements and it supports multiple currencies. It works in two directions: exports from Taiwan and imports into Taiwan.
+TradePilot is a free tariff tool built by Jumping Freight. It requires no registration [1]. Enter a product name and amount, and AI assigns an HS code with a confidence score. It then breaks down customs duty, excise tax, and business tax through to landed cost, with a formula and regulatory basis for every item. Its data comes from Taiwan's Customs Administration announcements and it supports multiple currencies. It works in two directions: exports from Taiwan and imports into Taiwan.
 
 Jumping Freight has handled international logistics for 43 years, and customs declaration is part of daily work. We made this into a tool because too many first-time exporters have never been told clearly what price tariffs are calculated on.
 
@@ -59,11 +59,11 @@ We do not recommend it. Low-confidence results need human confirmation; the cust
 **Does checking the tariff tell me the landed cost?**
 Not yet. Tariff is only one of the seven parts; ask freight forwarders and partner warehouses about the others.
 
-## One smallest next step
+## One small next step
 
-Open [TradePilot](https://tradepiloter.com) now, look up the one product you most want to sell abroad, and save a screenshot of the heading and tax page. The next time you discuss overseas expansion with anyone, show this first. For the fields you cannot fill in, send us a message on LINE.
+Open [TradePilot](https://tradepiloter.com) now, look up the one product you most want to sell abroad, and save a screenshot of the heading and tax page. The next time you discuss overseas expansion with anyone, show this first. For the fields you cannot fill in, message us (LINE or email).
 
-Last verified: 2026-10-01. Use the current TradePilot page at tradepiloter.com for tool functions.`],
+Last verified: October 1, 2026. Use the current TradePilot page at tradepiloter.com for tool functions.`],
   faq: [
     {
       q: "Does TradePilot cost money? Do I need to register?",

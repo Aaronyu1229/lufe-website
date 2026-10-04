@@ -15,13 +15,13 @@ Your skincare products have sold through Taiwan's drugstore channels for eight y
 
 Your first reaction after the call is excitement; your second is unease. You search for the difference between an agent and a distributor and find that “agents do not buy goods, while distributors do.” But they immediately want a container, so are they an agent or a distributor? “Exclusive agent” sounds like they value your brand, but three years is a long time. What if they take exclusivity and then do not promote it? And their offer to handle the registrations sounds helpful, but if the registrations are in their name, who keeps them if you later want to change partners?
 
-You realise the question is not “should I agree?” It is **how to separate the three issues mixed together in this call and negotiate them individually.** Here is how.
+You realize the question is not “should I agree?” It is **how to separate the three issues mixed together in this call and negotiate them individually.** Here is how.
 
 ## Agents, distributors, and exclusivity: start with who owns the goods
 
 | What to compare | Agent | Distributor | Exclusive arrangement (agent or distributor) |
 |---|---|---|---|
-| Who buys the goods outright | No one. The agent facilitates orders; the goods and invoices remain between you and the local customer [1] | The distributor buys from you, usually in volume and at a discounted price [1] | Not a role, but a condition: only one company receives the territory |
+| Who buys the goods outright | Not the agent. The agent facilitates orders; the goods and invoices remain between you and the local customer [1] | The distributor buys from you, usually in volume and at a discounted price [1] | Not a role, but a condition: only one company receives the territory |
 | Who bears inventory risk | You (or your licensed importer) [1] | The distributor; the goods sit in its warehouse [1]. Philippine “stocking distributor” contracts commonly require it to buy and hold an agreed quantity [2] | Depends on whether it is an agent or distributor |
 | Who sets retail prices | You do; the agent advises on local market conditions [1] | The distributor does. The ICC model contract says distributors set prices freely and you may only give recommended prices [4] | Same as the underlying arrangement |
 | Brand control | You retain pricing and marketing control [1] | You lose some pricing and marketing control [1] | The longer the exclusivity and the larger the territory, the more control you give up |
@@ -43,14 +43,14 @@ The following follows the structure of the ICC model distributorship contract [3
 
 **Decline these, or at least do not accept the other party’s version as written:**
 
-- **Exclusivity with no threshold.** If they will not discuss minimum performance, they may not be confident in your brand. They may simply want to block your competitors—and you—from the market.
+- **Exclusivity with no threshold.** If they will not discuss minimum performance, they are usually not confident in your brand. They usually just want to block your competitors—and you—from the market.
 - **You finance the inventory while they get exclusivity.** The goods are yours, the risk is yours, and the exclusivity is theirs. None of the three is on your side. If goods genuinely need to be held locally, that is Consignment: you retain title and settle according to what sells.
 - **Product registrations, trademarks, domains, or social-media accounts in their name when the contract does not state ownership.** This deserves separate attention below because it is even harder to unwind in the Philippines than exclusivity.
 - **“You will not need to worry about anything.”** This usually means “you will not be able to see anything.” At minimum, the contract should require delivery of sales reports and customer data.
 
 ## The Philippines-specific issue: whose name holds the registration
 
-Without a Philippine company, a Taiwanese brand cannot itself hold a Philippine FDA registration. For food, a CPR must be applied for by a Philippine importer or distributor with a valid LTO [6]. For cosmetics, a CPN likewise must be notified by a local company with an LTO that lists cosmetic activities [8]. So when the agent in the scenario says “we will handle the registration,” that is not merely a favour; it is how the regulations work.
+Without a Philippine company, a Taiwanese brand cannot itself hold registration with the Philippine FDA. For food, a CPR must be applied for by a Philippine importer or distributor with a valid LTO [6]. For cosmetics, a CPN likewise must be notified by a local company with an LTO that lists cosmetic activities [8]. So when the agent in the scenario says “we will handle the registration,” that is not merely a favor; it is how the regulations work.
 
 The issue appears when you change partners. For food CPRs, Philippine Department of Health Administrative Order No. 2014-0029 says that transferring ownership of a registered product requires no changes that would require re-registration, a valid LTO for the new owner, and **a transfer agreement between the previous owner and the new owner** [5]. In other words, **changing agents requires the old agent’s signed cooperation**. Third-party practical guidance says the same: changing an importer or distributor must follow the FDA’s formal process, with documents including a valid LTO, agreements between the parties, and the original CPR [7]. If the separation turns hostile and the other party will not sign, re-registering the product is your remaining option.
 
@@ -71,16 +71,16 @@ LUFÉ’s [Consignment package](/services/consignment) takes another approach: a
 It comes down to who owns the goods. A distributor buys them from you, bears inventory risk, sets its own prices, and earns the margin; an agent does not buy goods, finds customers and facilitates orders, while you set the prices and the agent earns commission [1].
 
 **A Philippine agent wants three years of exclusivity. Can I agree?**
-You can negotiate it, but not agree to it on its own. Exchange exclusivity for three things: a performance threshold, a defined term and territory, and exit terms for both sides [3][4]. If the other party will not discuss a threshold, it may only want to block others from entering.
+You can negotiate it, but not agree to it on its own. Exchange exclusivity for three things: a performance threshold, a defined term and territory, and exit terms for both sides [3][4]. If the other party will not discuss a threshold, it usually only wants to block others from entering.
 
 **The product registration is in the agent’s name. What happens if I want to change partners later?**
 For Philippine food products, transferring ownership of a CPR requires a “transfer agreement between the previous owner and the new owner,” and the new owner must have its own LTO [5]. Changing partners therefore requires the old agent’s signed cooperation; if agreement is impossible, the product must be registered again. Write ownership and the duty to cooperate in a transfer into the contract from the start.
 
-## One smallest next step
+## One small next step
 
-Write the other party’s terms in three lines: **who pays for the container, what exclusivity is exchanged for, and whose name holds the registration.** If you can fill in all three, you already have more clarity than most owners receiving this kind of first call. For the line you cannot fill in, send us a message on LINE.
+Write the other party’s terms in three lines: **who pays for the container, what exclusivity is exchanged for, and whose name holds the registration.** If you can fill in all three, you already have more clarity than most owners receiving this kind of first call. For the line you cannot fill in, message us (LINE or email).
 
-Based on practical experience; not legal advice. Have a lawyer review the contract before signing. Last verified: 2026-10-01. The Philippine FDA system continues to change; use the position as of the verification date for registration-transfer procedures.`],
+Based on practical experience; not legal advice. Have a lawyer review the contract before signing. Last verified: October 1, 2026. The Philippine FDA system continues to change; use the position as of the verification date for registration-transfer procedures.`],
   faq: [
     {
       q: "What is the difference between an agent and a distributor, in one sentence?",
@@ -88,7 +88,7 @@ Based on practical experience; not legal advice. Have a lawyer review the contra
     },
     {
       q: "A Philippine agent wants three years of exclusivity. Can I agree?",
-      a: "You can negotiate it, but not agree to it on its own. Exchange exclusivity for three things: an annual performance threshold (missing it revokes exclusivity or reduces the territory), a defined term and territory, and terms that let both sides exit. If the other party will not discuss a threshold, it may only want to block others from entering.",
+      a: "You can negotiate it, but not agree to it on its own. Exchange exclusivity for three things: an annual performance threshold (missing it revokes exclusivity or reduces the territory), a defined term and territory, and terms that let both sides exit. If the other party will not discuss a threshold, it usually only wants to block others from entering.",
     },
     {
       q: "The product registration is in the agent’s name. What happens if I want to change partners later?",
@@ -148,7 +148,7 @@ Based on practical experience; not legal advice. Have a lawyer review the contra
     {
       id: 8,
       title: "FDA Citizen's Charter: Issuance of Cosmetic Product Notification",
-      publisher: "Philippines FDA",
+      publisher: "Philippine FDA",
       url: "https://www.fda.gov.ph/wp-content/uploads/2025/09/1.-Issuance-of-Cosmetic-Product-Notification.pdf",
       note: "An applicant for a cosmetic CPN must hold a valid LTO that lists cosmetic distribution, importation, or trading activities.",
     },

@@ -10,7 +10,7 @@ export const optimizePageEn: OptimizePageCopy = {
   breadcrumb: "Operations Optimization",
   heroTitle: "You are already running. Now make every mile more efficient.",
   heroScene: "Your product is selling overseas, but profit keeps seeming to disappear, work does not line up, and each month’s decisions feel like guesses. You may be stuck here already—this is not a first-year issue; it comes after you have made it through the first year.",
-  heroAction: "Free 30-minute initial assessment →",
+  heroAction: "Book your free assessment →",
   scrollCueLabel: "Scroll down",
   advanced: {
     title: "Advanced ·",
@@ -33,7 +33,7 @@ export const optimizePageEn: OptimizePageCopy = {
     imageAlt: "Reviewing logistics and operations data",
     headingPrefix: "Costs will not come down: ",
     headingHighlight: "start with your logistics statements",
-    body: "The founder comes from Jumping Freight, backed by 43 years of international logistics. We can see when numbers on a monthly statement should not look the way they do. We reassess transport methods, warehouse location, and return handling.",
+    body: "The founder comes from Jumping Freight, backed by 43 years of international logistics experience. We can see when numbers on a monthly statement should not look the way they do. We reassess transport methods, warehouse location, and return handling.",
     callout: "After the review, we tell you where you can save and whether it is worth changing. If it is not worth changing, we say so directly.",
   },
   sales: {
@@ -94,6 +94,6 @@ export const optimizePageEn: OptimizePageCopy = {
   closing: {
     title: "Talk about where you are stuck right now",
     line: CTA_LINE_EN,
-    action: "Free 30-minute initial assessment →",
+    action: "Book your free assessment →",
   },
 };

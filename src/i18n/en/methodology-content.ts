@@ -11,7 +11,7 @@ the price is too high, the flavor is wrong, and people do not understand what yo
 Then go back and change the product. Results are flat, or you lose money.
 
 Those millions bought a lesson.
-What we want to do is lower that tuition from millions to ten or twenty thousand—
+What we want to do is lower that tuition from millions of NT dollars to NT$10,000–20,000—
 ask the market for you before you spend heavily.
 
 Then we do not just hand over a report and leave.
@@ -51,7 +51,7 @@ That is what we mean by running alongside you.`,
   examplesClosing: "We do not answer for the market. We bring the market’s answers back and decide the next step with you.",
   firstMonthCopy: `In the first month, you receive one page:
 who would buy, what price they would pay, and why they would not buy.
-It is for making the next decision, not filing away.`,
+It is for making the next decision, not for filing away.`,
   thirdMonthIntro: `By the time you reach the Consignment chapter, there is a complete market study.
 The report we actually deliver looks like this:`,
   reportOutline: [
@@ -71,7 +71,7 @@ The final sentence of every report is the same—
 These five questions have red lines; if we encounter one, we stop and discuss it clearly first.`,
   dimensions: [
     { name: "Market", question: "Is this market large enough?", criteria: "Reachable market size, growth rate, what consumers are willing to pay, and the market’s stage", redAt: "If the reachable market cannot support the revenue you need, we suggest changing the market or product category." },
-    { name: "Barrier", question: "How much effort does entry take?", criteria: "Certification requirements and cost, channel-entry difficulty, localization work such as packaging, formula, and labeling, and regulatory gray areas", redAt: "If certification and compliance costs consume most of the first year’s gross margin, we do not recommend entering." },
+    { name: "Barrier", question: "How much effort does entry take?", criteria: "Product-registration requirements and costs, channel-entry difficulty, localization work such as packaging, formula, and labeling, and regulatory gray areas", redAt: "If product-registration and compliance costs consume most of the first year’s gross margin, we do not recommend entering." },
     { name: "Competition", question: "Can you compete?", criteria: "Concentration of the top ten brands’ market share, competitor moats, competitor weaknesses, and the likelihood of a price war", redAt: "If the largest brands already fill the shelves, we do not recommend competing head-on." },
     { name: "Profitability", question: "Can it work financially?", criteria: "Landed cost including FOB, tariffs, logistics, and insurance; channel commissions and marketing allocation; expected returns and exchanges; and foreign-exchange risk", redAt: "If a pessimistic scenario cannot produce a profit, adjust the structure before discussing entry." },
     { name: "Regulatory", question: "Could regulations change suddenly?", criteria: "Stability of local trade policy, history of product-category regulatory changes, political risk, and exit cost", redAt: "If this category has been banned or sharply taxed in recent years, the risk needs greater weight." },
@@ -94,7 +94,7 @@ Take the peanut-candy case: in the competitor comparison, the closest rival was 
 only after talking with five participants did we learn that the real barrier was the price they carried in their minds.
 
 Most assessments stop at the first score. We put the second score into the process.
-No matter how good it looks on paper, it does not compare with someone asking: where can I buy it?`,
+No matter how good it looks on paper, that is not the same as someone asking, “Where can I buy it?”`,
   rulesCopy: `When we encounter any red line, we say so first, then discuss whether to continue.
 
 Sometimes we will suggest waiting.
@@ -116,7 +116,7 @@ You can stop after every chapter.
 But as long as you keep going, we are here.`,
   foundations: [
     { lead: "“Understand a little more, invest a little more” comes from the most cited model in internationalization research", footnote: "¹", body: ":\nCompanies move overseas gradually: export first, then find an agent, then establish a presence. Investment follows understanding." },
-    { lead: "“Ask the market first with the smallest amount of money” comes from lean startup", footnote: "²", body: ":\nExchange the lowest cost for real learning, then decide whether to invest more." },
+    { lead: "“Ask the market first with the smallest amount of money” comes from the lean-startup approach", footnote: "²", body: ":\nExchange the lowest cost for real learning, then decide whether to invest more." },
     { lead: "“Every chapter has a gate” comes from stage-gate management in new-product development", footnote: "³", body: ":\nPass this gate before making the next investment." },
   ],
   foundationsClosing: "What we do is compress these three ideas into a version a Taiwanese small or medium-sized brand can afford and complete in one three-month cycle.",

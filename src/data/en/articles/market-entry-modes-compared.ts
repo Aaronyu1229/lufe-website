@@ -5,9 +5,9 @@ export const article: EnglishArticle = {
   slug: "market-entry-modes-compared",
   sourceFingerprint: "8255d7a96edef0cb",
   title: "Importers, agents, your own company, or cross-border e-commerce: four international market-entry modes compared, using the Philippines as an example",
-  summary: "For small and midsize brands, international market entry is effectively a choice among four options: an importing distributor, an agent, your own company, or cross-border e-commerce. This table compares who buys the goods, whose name holds the registration, how high the entry barrier is, and how hard it is to exit. It also explains why food and cosmetics cannot bypass the Philippines FDA through cross-border e-commerce.",
+  summary: "For small and medium-sized brands, international market entry is effectively a choice among four options: an importing distributor, an agent, your own company, or cross-border e-commerce. This table compares who buys the goods, whose name holds the registration, how high the entry barrier is, and how hard it is to exit. It also explains why food and cosmetics cannot bypass the Philippine FDA through cross-border e-commerce.",
   readTime: "6 min read",
-  content: [String.raw`> **Short answer:** For small and midsize brands, international market entry is a choice among four options: an importing distributor, an agent, your own company, or cross-border e-commerce. First check whether the product needs registration, then decide how much inventory you are willing to carry.
+  content: [String.raw`> **Short answer:** For small and medium-sized brands, international market entry is a choice among four options: an importing distributor, an agent, your own company, or cross-border e-commerce. First check whether the product needs registration, then decide how much inventory you are willing to carry.
 
 ## Scenario: four options are raised at the same board meeting
 
@@ -15,7 +15,7 @@ This is a hypothetical scenario, not a story about a specific client.
 
 Your company makes powdered beverages in Taiwan and has decided to try the Philippines this year. At a meeting, four people propose four directions. The sales manager says a Manila importer at a trade show wants samples: “The easiest way is to let them buy outright.” Another colleague knows a local agent who earns only commission and does not require you to hold inventory. The chief financial officer says that if you are going to do it, set up your own company: “Then the channels and customers will be ours.” A younger colleague responsible for e-commerce says to open a Shopee cross-border store and see how it sells.
 
-All four directions make sense, and all have worked for someone. But you realise that people are comparing different things: some are comparing money, some control, and some speed. No one has mentioned that beverages need a product registration certificate in the Philippines, and that certificate must be held under the name of a local company. That fact removes half the options before the discussion begins.
+All four directions make sense, and all have worked for someone. But you realize that people are comparing different things: some are comparing money, some control, and some speed. No one has mentioned that beverages need product registration in the Philippines, and that registration must be held under the name of a local company. That fact removes half the options before the discussion begins.
 
 ## The four modes in one table
 
@@ -32,17 +32,17 @@ The U.S. International Trade Administration describes the Philippines plainly: *
 
 ## Decision steps: remove options in this order
 
-**Step 1: Does the product need registration?** Food, beverages, dietary supplements, and cosmetics need a local importer holding an LTO before import into the Philippines, and every product needs a CPR before its first import [5]. An LTO application requires Philippines SEC or DTI registration documents [6]. For products that need registration, this effectively removes “cross-border e-commerce only”: the e-commerce law requires platforms to prohibit regulated goods that do not provide permit information [9]. The Php 10,000 duty-free threshold concerns customs duty [8], not FDA registration.
+**Step 1: Does the product need registration?** Food, beverages, food supplements, and cosmetics need a local importer holding an LTO before import into the Philippines, and every product needs a CPR before its first import [5]. An LTO application requires Philippines SEC or DTI registration documents [6]. For products that need registration, this effectively removes “cross-border e-commerce only”: the e-commerce law requires platforms to prohibit regulated goods that do not provide permit information [9]. The Php 10,000 duty-free threshold concerns customs duty [8], not registration with the Philippine FDA.
 
 **Step 2: How much inventory are you willing to carry?** If you want to ship the goods, receive payment, and avoid managing the local market, choose a distributor. If you want to retain pricing control and keep the goods and invoices on your side, choose an agent. The full comparison is in [the difference between agents, distributors, and exclusivity](/insights/agent-vs-distributor-exclusive).
 
-**Step 3: Can you afford to set up your own company?** The Philippines allows foreigners to own 100% of domestic-market enterprises, but small and midsize enterprises with paid-in capital below US$200,000 are reserved for Filipinos. The threshold can fall to US$100,000 for qualifying advanced technology, certified startups, or businesses that directly employ at least 15 people, more than half of them Filipino [3]. To open your own shop and sell directly to consumers, a foreign retailer needs paid-in capital of at least Php 25,000,000; each additional store requires investment of at least Php 10,000,000 [4]. These two figures usually lead first-year brands to put this option later.
+**Step 3: Can you afford to set up your own company?** The Philippines allows foreigners to own 100% of domestic-market enterprises, but micro and small domestic-market enterprises with paid-in capital below US$200,000 are reserved for Filipinos. The threshold can fall to US$100,000 for qualifying advanced technology, certified startups, or businesses that directly employ at least 15 people, more than half of them Filipino [3]. To open your own shop and sell directly to consumers, a foreign retailer needs paid-in capital of at least Php 25,000,000; each additional store requires investment of at least Php 10,000,000 [4]. These two figures usually lead first-year brands to put this option later.
 
-**Step 4: Which company holds the registration, and how does it move when you change parties?** Whether you choose a distributor or an agent, the registration is held under a local company’s name. We cover the rules for changing parties in [what happens when a Philippines product registration is under an importer’s name](/insights/philippines-cpr-transfer-change-importer), and the difference among the three documents in [the Philippines FDA’s LTO, CPR, and CPN](/insights/philippines-fda-lto-cpr-cpn).
+**Step 4: Which company holds the registration, and how does it move when you change parties?** Whether you choose a distributor or an agent, the registration is held under a local company’s name. We cover the rules for changing parties in [what happens when a Philippines product registration is under an importer’s name](/insights/philippines-cpr-transfer-change-importer), and the difference among the three documents in [the Philippine FDA’s LTO, CPR, and CPN](/insights/philippines-fda-lto-cpr-cpn).
 
 ## What cross-border e-commerce suits, and what it does not
 
-The main advantages of cross-border e-commerce are a quick start and an easy exit. In Shopee’s Taiwan cross-border program, for example, sellers must be legally established companies or registered organisations. The seller sends goods to a designated Taiwan consolidation point, Shopee bears international-leg logistics costs, and Shopee may list the goods on overseas sites and set overseas selling prices [7].
+The main advantages of cross-border e-commerce are a quick start and an easy exit. In Shopee’s Taiwan cross-border program, for example, sellers must be legally established companies or registered organizations. The seller sends goods to a designated Taiwan consolidation point, Shopee bears international-leg logistics costs, and Shopee may list the goods on overseas sites and set overseas selling prices [7].
 
 But know three things:
 
@@ -62,7 +62,7 @@ We cover how to choose a Philippines e-commerce platform separately in [the firs
 ## Frequently asked questions
 
 **What international market-entry modes are available, and how should small businesses choose?**
-For small and midsize brands, there are effectively four: an importing distributor, an agent, your own company, and cross-border e-commerce. The U.S. International Trade Administration classifies selling through agents, distributors, and e-commerce platforms as indirect sales; handling the entire export process yourself is direct sales [2]. First check whether the product needs registration locally, then decide how much inventory you are willing to carry.
+For small and medium-sized brands, there are effectively four: an importing distributor, an agent, your own company, and cross-border e-commerce. The U.S. International Trade Administration classifies selling through agents, distributors, and e-commerce platforms as indirect sales; handling the entire export process yourself is direct sales [2]. First check whether the product needs registration locally, then decide how much inventory you are willing to carry.
 
 **Can food be sold to the Philippines through cross-border e-commerce alone?**
 It is difficult. Before food is imported into the Philippines, a local importer must hold an LTO, and every product must have a CPR before its first import [5]. The e-commerce law also requires platforms to prohibit regulated goods that do not provide permit information [9]. The small-parcel duty-free threshold exempts duties only [8], not FDA registration.
@@ -70,15 +70,15 @@ It is difficult. Before food is imported into the Philippines, a local importer 
 **How much does it cost to set up your own company in the Philippines?**
 It depends on what you do. A foreign-owned domestic-market enterprise generally needs paid-in capital from US$200,000, which can fall to US$100,000 if it meets conditions such as advanced technology, certified startup status, or employing at least 15 people with more than half Filipino [3]. A foreign retailer selling directly to consumers needs paid-in capital of at least Php 25,000,000 [4]. These are legal thresholds and exclude rent, payroll, and licensing fees.
 
-## One smallest next step
+## One small next step
 
-Write two lines on paper: **Does my product need registration? How much inventory am I willing to carry in the first year?** If the answer to the first line is “yes,” remove cross-border e-commerce first. If the answer to the second is “I do not want to carry inventory,” remove a distributor first. The remaining options are the ones worth discussing. If you cannot answer either line, ask us on LINE.
+Write two lines on paper: **Does my product need registration? How much inventory am I willing to carry in the first year?** If the answer to the first line is “yes,” remove cross-border e-commerce first. If the answer to the second is “I do not want to carry inventory,” remove a distributor first. The remaining options are the ones worth discussing. If you cannot answer either line, message us (LINE or email).
 
-Based on practical experience; not legal advice. Before establishing a company or signing an agency or distribution agreement, consult a lawyer and accountant in the Philippines. Last verified: 2026-10-01.`],
+Based on practical experience; not legal advice. Before establishing a company or signing an agency or distribution agreement, consult a lawyer and accountant in the Philippines. Last verified: October 1, 2026.`],
   faq: [
     {
       q: "What international market-entry modes are available, and how should small businesses choose?",
-      a: "For small and midsize brands, there are effectively four: an importing distributor, an agent, your own company, and cross-border e-commerce. The U.S. International Trade Administration classifies selling through agents, distributors, and e-commerce platforms as indirect sales; handling the entire export process yourself is direct sales. First check whether the product needs registration locally, then decide how much inventory you are willing to carry.",
+      a: "For small and medium-sized brands, there are effectively four: an importing distributor, an agent, your own company, and cross-border e-commerce. The U.S. International Trade Administration classifies selling through agents, distributors, and e-commerce platforms as indirect sales; handling the entire export process yourself is direct sales. First check whether the product needs registration locally, then decide how much inventory you are willing to carry.",
     },
     {
       q: "Can food be sold to the Philippines through cross-border e-commerce alone?",
@@ -123,12 +123,12 @@ Based on practical experience; not legal advice. Before establishing a company o
       title: "FAIRS Country Report Annual: Philippines (RP2026-0009)",
       publisher: "U.S. Department of Agriculture Foreign Agricultural Service (USDA FAS)",
       url: "https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Manila_Philippines_RP2026-0009",
-      note: "On 2026-04-21: before import, Philippines importers must obtain an FDA LTO; each food or beverage product must obtain a CPR before first import; only accredited registered individuals or businesses may import food.",
+      note: "On April 21, 2026: before import, Philippines importers must obtain an FDA LTO; each food or beverage product must obtain a CPR before first import; only accredited registered individuals or businesses may import food.",
     },
     {
       id: 6,
       title: "FDA Citizen’s Charter 2024 (1st Edition, as of 18 July 2024)",
-      publisher: "Philippines FDA",
+      publisher: "Philippine FDA",
       url: "https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf",
       note: "For initial LTO applications by food traders and distributors, companies must provide an SEC certificate of registration and articles of incorporation; sole proprietors must provide DTI registration.",
     },
@@ -137,7 +137,7 @@ Based on practical experience; not legal advice. Before establishing a company o
       title: "Taiwan cross-border program terms of service",
       publisher: "Shopee Taiwan",
       url: "https://help.shopee.tw/portal/4/article/77289",
-      note: "Effective 2025-03-28: applicants must be legally established corporations or registered unincorporated organisations. Shopee may list products on overseas Shopee sites and set overseas selling prices. Sellers deliver products to a designated Taiwan cross-border location, while Shopee bears international-leg logistics and related costs. Service scope follows Shopee’s notices.",
+      note: "Effective March 28, 2025: applicants must be legally established corporations or registered unincorporated organizations. Shopee may list products on overseas Shopee sites and set overseas selling prices. Sellers deliver products to a designated Taiwan cross-border location, while Shopee bears international-leg logistics and related costs. Service scope follows Shopee’s notices.",
     },
     {
       id: 8,
@@ -151,7 +151,7 @@ Based on practical experience; not legal advice. Before establishing a company o
       title: "Republic Act No. 11967 (Internet Transactions Act of 2023)",
       publisher: "Philippines Congress (full text collected by Lawphil)",
       url: "https://lawphil.net/statutes/repacts/ra2023/ra_11967_2023.html",
-      note: "Section 21: before listing, e-commerce platforms must, as far as practicable, collect identity or business-registration information from domestic and foreign online merchants and prohibit regulated goods that do not provide necessary permit and licence information.",
+      note: "Section 21: before listing, e-commerce platforms must, as far as practicable, collect identity or business-registration information from domestic and foreign online merchants and prohibit regulated goods that do not provide necessary permit and license information.",
     },
   ],
 };

@@ -15,11 +15,11 @@ You make snacks that have sold in Taiwan for many years. Distribution is stable,
 
 You have read them three times, but still cannot answer the question that actually matters: **Which country should receive the first expenditure?** Not millions, but a small initial amount to see whether local people will pay; if they will not, you need to be able to stop without being trapped in a contract already signed.
 
-What the reports do not tell you is where the first step will get stuck: what language the contract uses, whose name the product certificate is under, and whether labels need to be reprinted. These can all be checked before departure, and they determine the size of your first expenditure. We use these points below to compare the four countries.
+What the reports do not tell you is where the first step will get stuck: what language the contract uses, whose name holds the product registration, and whether labels need to be reprinted. These can all be checked before you enter the market, and they determine the size of your first expenditure. We use these points below to compare the four countries.
 
 ## Vietnam, Thailand, Indonesia, or the Philippines? Compare the Barrier and Regulatory questions
 
-We use the [five-question assessment](/services/methodology) to decide whether to go: market, barrier, competition, profitability, and regulatory. The Market and Competition questions need a [Market Test](/services/product-testing) that puts the product in front of local people before they have real scores; **but the Barrier and Regulatory questions can be compared from public regulations before departure.** For a first overseas expansion, these are the two questions we examine: which country has the lowest barrier for the first step, and whose regulations are least likely to stop you before you begin.
+We use the [five-question assessment](/services/methodology) to decide whether to go: market, barrier, competition, profitability, and regulatory. The Market and Competition questions need a [Market Test](/services/product-testing) that puts the product in front of local people before they have real scores; **but the Barrier and Regulatory questions can be compared from public regulations before you enter the market.** For a first overseas expansion, these are the two questions we examine: which country has the lowest barrier for the first step, and whose regulations are least likely to stop you before you begin.
 
 The table below includes only verified regulatory facts, not market-size figures. Those figures come from different sources and do not tell you how to take the first step.
 
@@ -27,8 +27,8 @@ The table below includes only verified regulatory facts, not market-size figures
 |---|---|---|---|---|
 | Official languages / regulatory documents | Filipino and English are co-official languages [1] | Vietnamese | Thai | Indonesian |
 | Food-label language | English or Filipino is permitted; a foreign-language label needs an English translation [2] | Vietnamese is required; imported products may use a supplementary Vietnamese label [3] | Thai is required (brand names may remain in the original language) [4] | An Indonesian-language label is required [5] |
-| Whose name holds the product certificate | A locally licensed importer (the LTO holder); the brand owner cannot hold it directly [6] | Filed by an enterprise within Vietnam; most processed food uses self-declaration, while health foods require registration [7] | Registered by a Thai importer [4] | Registered with BPOM by an Indonesian company (an ML certificate) [5] |
-| New hard barrier in 2026 | FDA fees and the registration system are being revised; use the position on the verification date for fees [6] | — | — | **From 2026-10-17, imported food, health supplements, and cosmetics require halal certification** (PP 42/2024) [8] |
+| Whose name holds the product registration | A locally licensed importer (the LTO holder); the brand owner cannot hold it directly [6] | Filed by an enterprise within Vietnam; most processed food uses self-declaration, while health foods require registration [7] | Registered by a Thai importer [4] | Registered with BPOM by an Indonesian company (an ML certificate) [5] |
+| New hard barrier in 2026 | FDA fees and the registration system are being revised; use the position on the verification date for fees [6] | — | — | **From October 17, 2026, imported food, health supplements, and cosmetics require halal certification** (PP 42/2024) [8] |
 | Does Taiwan have an FTA? | No; MFN rates apply [9] | No; MFN rates apply | No; MFN rates apply | No; MFN rates apply |
 
 For the three reports on your desk, this table answers the following:
@@ -60,11 +60,11 @@ No. This article answers where to test first when you have no leads at all.
 **Does Taiwan have a free trade agreement with the Philippines? Will tariffs be higher than in other countries?**
 Taiwan currently has no FTA with any ASEAN country (only Singapore and New Zealand) [9]. All four countries use MFN rates, so the Philippines is not at a special disadvantage.
 
-## One smallest next step
+## One small next step
 
 First spend NT$10,000–20,000 on a [Market Test](/services/product-testing): send three products to Manila, have a table of teachers and parents pick them up and look at them, and receive a one-page report telling you who will buy, what price they will pay, and why they will not buy. If it does not pass, the story stops here; if it does, the money is credited toward the next chapter.
 
-This article is rewritten from the March 2026 article, "Vietnam market-entry guide." Its old URL now redirects here. Last verified: 2026-10-01. Regulations change, so review them again each quarter.`],
+This article is rewritten from the March 2026 article, "Vietnam market-entry guide." Its old URL now redirects here. Last verified: October 1, 2026. Regulations change, so review them again each quarter.`],
   faq: [
     {
       q: "Is Vietnam not the larger market? Why not start there?",
@@ -96,7 +96,7 @@ This article is rewritten from the March 2026 article, "Vietnam market-entry gui
     },
     {
       id: 3,
-      title: "Vietnam Decree 43/2017 goods-labelling requirements",
+      title: "Vietnam Decree 43/2017 goods-labeling requirements",
       publisher: "ChemLinked (third-party summary)",
       url: "https://food.chemlinked.com/foodpedia/vietnam-food-labeling-regulation",
       note: "Vietnamese labels are required; imported products may use a supplementary Vietnamese label.",
@@ -134,7 +134,7 @@ This article is rewritten from the March 2026 article, "Vietnam market-entry gui
       title: "Indonesia PP 42/2024 deadline for halal certification of imported goods",
       publisher: "Emerhub (third-party summary)",
       url: "https://emerhub.com/indonesia/halal-certification-in-indonesia/",
-      note: "Imported food, beverages, health supplements, and cosmetics require halal certification from 2026-10-17.",
+      note: "Imported food, beverages, health supplements, and cosmetics require halal certification from October 17, 2026.",
     },
     {
       id: 9,
