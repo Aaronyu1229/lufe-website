@@ -27,6 +27,8 @@ import { ASSESS_PAGE_SOURCE_FINGERPRINT, assessPageEn } from "./en/assess-page";
 import { RESOURCES_PAGE_SOURCE_FINGERPRINT, resourcesPageEn } from "./en/resources-page";
 import { SUBSIDIES_EN, SUBSIDIES_SOURCE_FINGERPRINT } from "./en/subsidies";
 import { subsidiesPageEn } from "./en/subsidies-page";
+import { LEAD_ERRORS_SOURCE_FINGERPRINT, leadErrorsEn } from "./en/lead-errors";
+import { MESSAGE_BOX_SOURCE_FINGERPRINT, messageBoxEn } from "./en/message-box";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -56,6 +58,8 @@ import { assessPageZh } from "./zh/assess-page";
 import { resourcesPageZh } from "./zh/resources-page";
 import { subsidiesPageZh } from "./zh/subsidies-page";
 import { SUBSIDIES } from "@/data/subsidies";
+import { leadErrorsZh } from "./zh/lead-errors";
+import { messageBoxZh } from "./zh/message-box";
 import { EN_ARTICLES } from "@/data/en/articles";
 import { articles } from "@/data/articles";
 import { articleZhText } from "@/lib/articles/english";
@@ -85,6 +89,8 @@ export const I18N_MODULES = [
   { name: "assess-page", zh: assessPageZh, en: assessPageEn, sourceFingerprint: ASSESS_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/assess-page.ts" },
   { name: "resources-page", zh: resourcesPageZh, en: resourcesPageEn, sourceFingerprint: RESOURCES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/resources-page.ts" },
   { name: "subsidies", zh: { copy: subsidiesPageZh, subsidies: SUBSIDIES }, en: { copy: subsidiesPageEn, subsidies: SUBSIDIES_EN }, sourceFingerprint: SUBSIDIES_SOURCE_FINGERPRINT, enFile: "src/i18n/en/subsidies.ts" },
+  { name: "lead-errors", zh: leadErrorsZh, en: leadErrorsEn, sourceFingerprint: LEAD_ERRORS_SOURCE_FINGERPRINT, enFile: "src/i18n/en/lead-errors.ts" },
+  { name: "message-box", zh: messageBoxZh, en: messageBoxEn, sourceFingerprint: MESSAGE_BOX_SOURCE_FINGERPRINT, enFile: "src/i18n/en/message-box.ts" },
   ...Object.values(EN_ARTICLES).map((en) => {
     const zh = articles.find((article) => article.slug === en.slug)!;
     const { slug: _slug, sourceFingerprint, ...enText } = en;

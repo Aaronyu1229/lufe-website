@@ -1,4 +1,7 @@
 import { createLead, updateLeadNotification, type LeadValues } from "@/lib/leads/repository";
+import { leadErrorsEn } from "@/i18n/en/lead-errors";
+import { type Locale } from "@/i18n/locale";
+import { leadErrorsZh } from "@/i18n/zh/lead-errors";
 
 type LeadForm = "quick" | "contact" | "waitlist";
 
@@ -15,6 +18,7 @@ type LeadInput = {
   monthlyVolume: string;
   currentHandler: string;
   page: string;
+  lang: Locale;
 };
 
 type LeadNotification = {
@@ -24,7 +28,7 @@ type LeadNotification = {
   company?: string;
   email?: string;
   phone?: string;
-  lang: "zh";
+  lang: Locale;
   page?: string;
   msg?: string;
 };
@@ -59,15 +63,21 @@ const cut = (value: string, length: number): string => Array.from(value).slice(0
 const validationResponse = (errors: Record<string, string>): Response =>
   Response.json({ ok: false, errors }, { status: 400 });
 
+const localeFromLead = (body: unknown): Locale =>
+  body && typeof body === "object" && !Array.isArray(body) && (body as Record<string, unknown>).lang === "en"
+    ? "en"
+    : "zh";
+
 const validateLead = (body: unknown): { input?: LeadInput; errors?: Record<string, string> } => {
+  const messages = localeFromLead(body) === "en" ? leadErrorsEn : leadErrorsZh;
   if (!body || typeof body !== "object" || Array.isArray(body)) {
-    return { errors: { form: "表單格式不正確" } };
+    return { errors: { form: messages.invalidForm } };
   }
 
   const record = body as Record<string, unknown>;
   const form = stringValue(record.form);
   if (form !== "quick" && form !== "contact" && form !== "waitlist") {
-    return { errors: { form: "表單格式不正確" } };
+    return { errors: { form: messages.invalidForm } };
   }
 
   const input: LeadInput = {
@@ -79,42 +89,43 @@ const validateLead = (body: unknown): { input?: LeadInput; errors?: Record<strin
     company: stringValue(record.company),
     product: stringValue(record.product),
     stage: stringValue(record.stage),
-    message: form === "waitlist" ? "海外客服首批登記" : stringValue(record.message),
+    message: form === "waitlist" ? (localeFromLead(body) === "en" ? "Call Center waitlist" : "海外客服首批登記") : stringValue(record.message),
     monthlyVolume: stringValue(record.monthlyVolume),
     currentHandler: stringValue(record.currentHandler),
     page: stringValue(record.page),
+    lang: localeFromLead(body),
   };
   const errors: Record<string, string> = {};
 
   if (input.form === "quick") {
-    if (!input.name) errors.name = "請填姓名";
-    if (!input.contact) errors.contact = "請留 Email 或電話";
-    if (!input.message) errors.message = "請簡單說明一下";
+    if (!input.name) errors.name = messages.quick.name;
+    if (!input.contact) errors.contact = messages.quick.contact;
+    if (!input.message) errors.message = messages.quick.message;
   } else if (input.form === "contact") {
-    if (!input.name) errors.name = "請填寫姓名";
-    if (!input.email) errors.email = "請填寫 Email";
-    else if (!emailPattern.test(input.email)) errors.email = "Email 格式不正確";
-    if (!input.message) errors.message = "請填寫你的問題";
+    if (!input.name) errors.name = messages.contact.name;
+    if (!input.email) errors.email = messages.contact.email;
+    else if (!emailPattern.test(input.email)) errors.email = messages.contact.emailInvalid;
+    if (!input.message) errors.message = messages.contact.message;
   } else {
-    if (!input.name) errors.name = "請填寫品牌名稱";
-    if (!input.email) errors.email = "請填寫 Email";
-    else if (!emailPattern.test(input.email)) errors.email = "Email 格式不正確";
-    if (!input.monthlyVolume) errors.monthlyVolume = "請選擇每月客訊量";
+    if (!input.name) errors.name = messages.waitlist.name;
+    if (!input.email) errors.email = messages.waitlist.email;
+    else if (!emailPattern.test(input.email)) errors.email = messages.waitlist.emailInvalid;
+    if (!input.monthlyVolume) errors.monthlyVolume = messages.waitlist.monthlyVolume;
     else if (!monthlyVolumes.includes(input.monthlyVolume as (typeof monthlyVolumes)[number])) {
-      errors.monthlyVolume = "每月客訊量不正確";
+      errors.monthlyVolume = messages.waitlist.monthlyVolumeInvalid;
     }
   }
 
-  if (!errors.name && input.name.length > maxLengths.name) errors.name = "姓名不可超過 100 字";
-  if (input.contact.length > maxLengths.contact) errors.contact = "聯絡方式不可超過 100 字";
-  if (!errors.email && input.email.length > maxLengths.email) errors.email = "Email 不可超過 150 字";
-  if (input.phone.length > maxLengths.phone) errors.phone = "電話不可超過 100 字";
-  if (input.company.length > maxLengths.company) errors.company = "公司名稱不可超過 100 字";
-  if (input.product.length > maxLengths.product) errors.product = "產品不可超過 200 字";
-  if (input.stage.length > maxLengths.stage) errors.stage = "出海階段不可超過 60 字";
-  if (!errors.message && input.message.length > maxLengths.message) errors.message = "訊息不可超過 3000 字";
+  if (!errors.name && input.name.length > maxLengths.name) errors.name = messages.maxLength.name;
+  if (input.contact.length > maxLengths.contact) errors.contact = messages.maxLength.contact;
+  if (!errors.email && input.email.length > maxLengths.email) errors.email = messages.maxLength.email;
+  if (input.phone.length > maxLengths.phone) errors.phone = messages.maxLength.phone;
+  if (input.company.length > maxLengths.company) errors.company = messages.maxLength.company;
+  if (input.product.length > maxLengths.product) errors.product = messages.maxLength.product;
+  if (input.stage.length > maxLengths.stage) errors.stage = messages.maxLength.stage;
+  if (!errors.message && input.message.length > maxLengths.message) errors.message = messages.maxLength.message;
   if (input.currentHandler.length > maxLengths.currentHandler) {
-    errors.currentHandler = "現在誰在接不可超過 100 字";
+    errors.currentHandler = messages.maxLength.currentHandler;
   }
 
   return Object.keys(errors).length > 0 ? { errors } : { input };
@@ -124,9 +135,11 @@ const notificationPayload = (input: LeadInput): LeadNotification => {
   const payload: LeadNotification = {
     kind: "inquiry",
     source: input.form === "quick"
-      ? "快速留言"
-      : input.form === "contact" ? "聯絡頁完整表單" : "海外客服首批登記",
-    lang: "zh",
+      ? input.lang === "en" ? "Quick message" : "快速留言"
+      : input.form === "contact"
+        ? input.lang === "en" ? "Contact form" : "聯絡頁完整表單"
+        : input.lang === "en" ? "Call Center waitlist" : "海外客服首批登記",
+    lang: input.lang,
   };
 
   if (input.name) payload.name = cut(input.name, 100);
@@ -144,13 +157,15 @@ const notificationPayload = (input: LeadInput): LeadNotification => {
   const message = input.form === "waitlist"
     ? [
       input.message,
-      `每月客訊：${input.monthlyVolume}`,
-      `現在誰在接：${input.currentHandler || "未填寫"}`,
+      input.lang === "en" ? `Monthly messages: ${input.monthlyVolume}` : `每月客訊：${input.monthlyVolume}`,
+      input.lang === "en"
+        ? `Current handler: ${input.currentHandler || "Not provided"}`
+        : `現在誰在接：${input.currentHandler || "未填寫"}`,
     ]
     : [
       input.message,
-      ...(input.product ? [`產品：${input.product}`] : []),
-      ...(input.stage ? [`出海階段：${input.stage}`] : []),
+      ...(input.product ? [input.lang === "en" ? `Product: ${input.product}` : `產品：${input.product}`] : []),
+      ...(input.stage ? [input.lang === "en" ? `Stage: ${input.stage}` : `出海階段：${input.stage}`] : []),
     ];
   payload.msg = cut(message.join("\n"), 3000);
 
@@ -200,7 +215,7 @@ export async function POST(request: Request): Promise<Response> {
   try {
     body = await request.json();
   } catch {
-    return validationResponse({ form: "表單格式不正確" });
+    return validationResponse({ form: leadErrorsZh.invalidForm });
   }
 
   if (body && typeof body === "object" && !Array.isArray(body)
@@ -209,7 +224,7 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const validation = validateLead(body);
-  if (!validation.input) return validationResponse(validation.errors ?? { form: "表單格式不正確" });
+  if (!validation.input) return validationResponse(validation.errors ?? { form: leadErrorsZh.invalidForm });
 
   const input = validation.input;
   const quickContactIsEmail = input.form === "quick" && input.contact.includes("@");

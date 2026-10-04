@@ -39,6 +39,10 @@ export function buildContactLeadPayload(fields: ContactFormFields, page: string)
   };
 }
 
+export function buildLocalizedContactLeadPayload(fields: ContactFormFields, page: string, lang: Locale) {
+  return { ...buildContactLeadPayload(fields, page), lang };
+}
+
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -63,10 +67,10 @@ export function ContactPage({ locale = "zh" }: { readonly locale?: Locale } = {}
 
   const validate = (fields = formState) => {
     const errs: Record<string, string> = {};
-    if (!fields.name.trim()) errs.name = "請填寫姓名";
-    if (!fields.email.trim()) errs.email = "請填寫 Email";
-    else if (!isValidEmail(fields.email)) errs.email = "Email 格式不正確";
-    if (!fields.message.trim()) errs.message = "請填寫你的問題";
+    if (!fields.name.trim()) errs.name = copy.form.errors.name;
+    if (!fields.email.trim()) errs.email = copy.form.errors.email;
+    else if (!isValidEmail(fields.email)) errs.email = copy.form.errors.emailInvalid;
+    if (!fields.message.trim()) errs.message = copy.form.errors.message;
     return errs;
   };
 
@@ -119,7 +123,7 @@ export function ContactPage({ locale = "zh" }: { readonly locale?: Locale } = {}
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(buildContactLeadPayload(formState, window.location.pathname)),
+        body: JSON.stringify(buildLocalizedContactLeadPayload(formState, window.location.pathname, locale)),
       });
       const result = await response.json().catch(() => null) as {
         ok?: boolean;
@@ -144,8 +148,8 @@ export function ContactPage({ locale = "zh" }: { readonly locale?: Locale } = {}
     }
   };
 
-  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent("LUFÉ 聯絡頁完整表單")}&body=${encodeURIComponent(
-    `姓名：${formState.name}\nEmail：${formState.email}\n公司名稱：${formState.company}\n電話：${formState.phone}\n產品：${formState.product}\n出海階段：${formState.stage}\n\n訊息：\n${formState.message}`,
+  const fallbackMailto = `mailto:aaron.yu@reborn.in?subject=${encodeURIComponent(copy.form.fallbackMailto.subject)}&body=${encodeURIComponent(
+    `${copy.form.fallbackMailto.name}：${formState.name}\n${copy.form.fallbackMailto.email}：${formState.email}\n${copy.form.fallbackMailto.company}：${formState.company}\n${copy.form.fallbackMailto.phone}：${formState.phone}\n${copy.form.fallbackMailto.product}：${formState.product}\n${copy.form.fallbackMailto.stage}：${formState.stage}\n\n${copy.form.fallbackMailto.message}：\n${formState.message}`,
   )}`;
 
   const inputClass = (name: string) =>
@@ -202,8 +206,8 @@ export function ContactPage({ locale = "zh" }: { readonly locale?: Locale } = {}
                 <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center border border-sky text-sky">
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 14L12 19L21 10" stroke="currentColor" className="text-sky" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </div>
-                <h3 className="h3 mb-2">收到了！</h3>
-                <p className="text-[15.5px] leading-[1.8] text-tx2">我們會在 <span className="font-semibold text-tx">一個工作天內</span>用你提供的 Email 回覆你。</p>
+                <h3 className="h3 mb-2">{copy.form.submittedTitle}</h3>
+                <p className="text-[15.5px] leading-[1.8] text-tx2">{copy.form.submittedBefore}<span className="font-semibold text-tx">{copy.form.submittedEmphasis}</span>{copy.form.submittedAfter}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5" noValidate>
@@ -244,7 +248,7 @@ export function ContactPage({ locale = "zh" }: { readonly locale?: Locale } = {}
                 </div>
                 <input type="text" name="website" value={formState.website} onChange={handleChange} autoComplete="off" tabIndex={-1} aria-hidden="true" className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" />
                 <button type="submit" className="w-full cursor-pointer bg-gold py-3.5 text-[16.5px] font-semibold text-navy active:scale-[.97]">{isSubmitting ? copy.form.submitting : copy.form.submit}</button>
-                {submitError && <p className="text-center text-[13px] font-normal text-red-500">送出失敗，請直接寄信給我們： <a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
+                {submitError && <p className="text-center text-[13px] font-normal text-red-500">{copy.form.submitError}<a href={fallbackMailto} className="underline">aaron.yu@reborn.in</a></p>}
                 <p className="text-center text-[13px] font-normal text-tx3">{copy.form.privacy}</p>
               </form>
             )}

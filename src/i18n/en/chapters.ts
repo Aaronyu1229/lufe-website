@@ -2,7 +2,7 @@ import { CTA_LINE_EN } from "@/data/cta";
 import { CHAPTERS, type Chapter, type ChapterKey } from "@/data/chapters";
 
 // Fingerprint of the Chinese this English was translated from; registry.test.ts prints the new value when Chinese changes.
-export const CHAPTERS_SOURCE_FINGERPRINT = "9d3111f863cc2fe7";
+export const CHAPTERS_SOURCE_FINGERPRINT = "93bfbbd0a0863fe2";
 
 export const CHAPTERS_EN: Record<ChapterKey, Chapter> = {
   m1: {

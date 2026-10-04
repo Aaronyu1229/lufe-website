@@ -42,6 +42,21 @@ export const chapterPageEn: ChapterPageCopy = {
     submitting: "Submitting…",
     submittedTitle: "Received",
     submittedBody: "We will use the email you provided to arrange a time within one business day.",
+    errors: {
+      name: "Please enter your brand name",
+      email: "Please enter your email address",
+      emailInvalid: "Please enter a valid email address",
+      monthlyVolume: "Please select your monthly customer-message volume",
+      currentHandler: "Current handler must be 100 characters or fewer",
+    },
+    submitError: "We could not send your message. Please email us directly: ",
+    fallbackMailto: {
+      subject: "LUFÉ Call Center waitlist",
+      name: "Brand name",
+      email: "Email",
+      monthlyVolume: "Monthly messages",
+      currentHandler: "Current handler",
+    },
   },
   faq: {
     title: "Frequently asked questions",
