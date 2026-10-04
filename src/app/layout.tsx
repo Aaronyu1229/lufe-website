@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { FooterSwitch } from "@/components/FooterSwitch";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
 import { SiteStructuredData } from "@/components/seo/StructuredData";
 import { toInsightCard } from "@/lib/articles/presentation";
@@ -58,6 +59,9 @@ const DEFAULT_DESCRIPTION = "貨代把貨送到，故事才開始。鹿飛陪台
 const DEFAULT_KEYWORDS = "台灣企業出海,菲律賓落地,菲律賓市場探查,菲律賓寄賣,菲律賓公司落地,海外客服外包,菲律賓 call center,出海起手包,連鎖餐飲出海,美妝出海菲律賓,北美通路,Costco 上架,鹿飛,LUFÉ";
 
 export const revalidate = 300;
+
+const SHOULD_RENDER_GOOGLE_ANALYTICS =
+  process.env.NODE_ENV === "production" && process.env.VERCEL_ENV !== "preview";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -147,6 +151,7 @@ export default function RootLayout({
           <FooterSwitch />
           <MessageBox />
         </MessageBoxProvider>
+        {SHOULD_RENDER_GOOGLE_ANALYTICS && <GoogleAnalytics />}
       </body>
     </html>
   );
