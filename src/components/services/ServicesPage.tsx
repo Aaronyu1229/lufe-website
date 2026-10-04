@@ -9,6 +9,7 @@ import { SnapRail } from "@/components/motion/SnapRail";
 import { BuildingIcon, PackageIcon, TargetIcon, UsersIcon } from "@/components/icons/LineIcons";
 import { FaqSection } from "@/components/faq/FaqSection";
 import { HERO_VIDEOS } from "@/data/heroVideos";
+import { englishOnlyTrust } from "@/i18n/en-only/trust";
 import { servicesPageEn } from "@/i18n/en/services-page";
 import { localizedHref, type Locale } from "@/i18n/locale";
 import { servicesPageZh } from "@/i18n/zh/services-page";
@@ -164,6 +165,23 @@ export function ServicesPage({ locale = "zh" }: ServicesPageProps) {
       </section>
 
       <FaqSection title={copy.faqTitle} askLabel={copy.faqAsk} moreLabel={copy.faqMore} idPrefix="services-faq" items={copy.faqs.map((faq, index) => ({ num: String(index + 1).padStart(2, "0"), question: faq.q, answer: faq.a, takeaway: faq.takeaway }))} className="bg-white py-[72px] md:py-[96px]" />
+
+      {locale === "en" ? (
+        <section className="bg-cream py-[72px] md:py-[88px]">
+          <div className="lufe-container">
+            <div className="max-w-[820px]">
+              <h2 className="h2 text-tx">{englishOnlyTrust.services.heading}</h2>
+              <p className="mt-5 text-[17px] leading-[1.8] text-tx2">
+                {englishOnlyTrust.services.bodyBeforeJumpingFreight}
+                <a href="https://jumping.group" target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-tx">
+                  {englishOnlyTrust.services.jumpingFreight}
+                </a>
+                {englishOnlyTrust.services.bodyAfterJumpingFreight}
+              </p>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="bg-navy py-[78px] text-white md:py-[96px]"><div className="lufe-container"><div className="mx-auto max-w-[720px] text-center"><h2 className="h2 text-white">{copy.ctaHeading}</h2><p className="mt-4 text-[16px] leading-[1.85] text-white/70">{copy.ctaLine}</p><ContactButton className="mt-8 cursor-pointer bg-gold px-7 py-3.5 text-[16px] font-semibold text-navy hover:bg-gold-l">{copy.primaryCta}</ContactButton></div></div></section>
     </>

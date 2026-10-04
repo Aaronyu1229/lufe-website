@@ -10,7 +10,10 @@ import { expectEnglishMarkup } from "./helpers";
 
 describe("Aaron author page i18n", () => {
   it("keeps Chinese byte-identical", () => {
-    expect(renderToStaticMarkup(createElement(AaronAuthorPage))).toBe(readFileSync("tests/fixtures/aaron-author-page.zh.html", "utf8"));
+    const markup = renderToStaticMarkup(createElement(AaronAuthorPage));
+
+    expect(markup).not.toContain("About Aaron Yu");
+    expect(markup).toBe(readFileSync("tests/fixtures/aaron-author-page.zh.html", "utf8"));
   });
 
   it("renders complete English with English articles or the empty state", () => {
@@ -18,6 +21,7 @@ describe("Aaron author page i18n", () => {
     const [latest] = getPublishedEnglishArticles();
 
     expectEnglishMarkup(markup);
+    expect(markup).toContain("About Aaron Yu");
     if (latest) expect(markup).toContain(renderToStaticMarkup(createElement("span", null, latest.title)).slice(6, -7));
     else expect(markup).toContain("No English articles are available yet.");
   });

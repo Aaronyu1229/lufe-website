@@ -12,12 +12,16 @@ const zhGolden = readFileSync("tests/fixtures/services-page.zh.html", "utf8");
 
 describe("services page i18n", () => {
   it("keeps the Chinese page byte-identical", () => {
-    expect(renderToStaticMarkup(createElement(ServicesPage))).toBe(zhGolden);
+    const html = renderToStaticMarkup(createElement(ServicesPage));
+
+    expect(html).not.toContain("How we work with you");
+    expect(html).toBe(zhGolden);
   });
 
   it("renders English with no Chinese text", () => {
     const html = renderToStaticMarkup(createElement(ServicesPage, { locale: "en" }));
     expectEnglishMarkup(html);
+    expect(html).toContain("How we work with you");
     expect(html).toContain("A brand&#x27;s first year in Manila");
     expect(html).toContain("Market Test");
     expect(html).toContain("Call Center");
