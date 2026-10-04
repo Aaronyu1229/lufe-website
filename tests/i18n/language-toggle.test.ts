@@ -27,6 +27,6 @@ describe("LanguageToggle", () => {
   });
 
   it("falls back to /en when the page has no English yet", () => {
-    expect(render("/assess", true)).toContain('href="/en"');
+    expect(render("/resources", true)).toContain('href="/en"');
   });
 });

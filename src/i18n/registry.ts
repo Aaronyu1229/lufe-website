@@ -23,6 +23,7 @@ import { ABOUT_PHOTO_SLOTS_EN } from "./en/about-photo-slots";
 import { AARON_AUTHOR_PAGE_SOURCE_FINGERPRINT, aaronAuthorPageEn } from "./en/aaron-author-page";
 import { CASES_SOURCE_FINGERPRINT, CASES_EN, CASE_CARD_META_EN, INDUSTRIES_EN, MARKETS_EN } from "./en/cases";
 import { casesPageEn } from "./en/cases-page";
+import { ASSESS_PAGE_SOURCE_FINGERPRINT, assessPageEn } from "./en/assess-page";
 import { servicesPageZh } from "./zh/services-page";
 import { navbarCriticalZh } from "./zh/navbar-critical";
 import { navbarMenuZh } from "./zh/navbar-menu";
@@ -48,6 +49,7 @@ import { aaronAuthorPageZh } from "./zh/aaron-author-page";
 import { casesPageZh } from "./zh/cases-page";
 import { CASES, CASE_CARD_META, INDUSTRIES, MARKETS } from "@/data/cases";
 import { ABOUT_PHOTO_SLOTS } from "@/data/aboutPhotoSlots";
+import { assessPageZh } from "./zh/assess-page";
 
 export const I18N_MODULES = [
   { name: "services-page", zh: servicesPageZh, en: servicesPageEn, sourceFingerprint: SERVICES_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/services-page.ts" },
@@ -71,4 +73,5 @@ export const I18N_MODULES = [
   { name: "about-page", zh: { copy: aboutPageZh, photoSlots: ABOUT_PHOTO_SLOTS }, en: { copy: aboutPageEn, photoSlots: ABOUT_PHOTO_SLOTS_EN }, sourceFingerprint: ABOUT_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/about-page.ts" },
   { name: "aaron-author-page", zh: aaronAuthorPageZh, en: aaronAuthorPageEn, sourceFingerprint: AARON_AUTHOR_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/aaron-author-page.ts" },
   { name: "cases", zh: { copy: casesPageZh, cases: CASES, cardMeta: CASE_CARD_META, industries: INDUSTRIES, markets: MARKETS }, en: { copy: casesPageEn, cases: CASES_EN, cardMeta: CASE_CARD_META_EN, industries: INDUSTRIES_EN, markets: MARKETS_EN }, sourceFingerprint: CASES_SOURCE_FINGERPRINT, enFile: "src/i18n/en/cases.ts" },
+  { name: "assess-page", zh: assessPageZh, en: assessPageEn, sourceFingerprint: ASSESS_PAGE_SOURCE_FINGERPRINT, enFile: "src/i18n/en/assess-page.ts" },
 ] as const;

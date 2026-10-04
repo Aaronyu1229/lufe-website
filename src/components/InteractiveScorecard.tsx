@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Locale } from "@/i18n/locale";
+import { assessPageEn } from "@/i18n/en/assess-page";
+import { assessPageZh } from "@/i18n/zh/assess-page";
 
 type Dimension = {
   readonly name: string;
@@ -13,14 +15,13 @@ const weights = [20, 20, 20, 25, 15] as const;
 
 type Verdict = {
   readonly name: "Go" | "Conditional Go" | "Hold" | "No-Go";
-  readonly detail: string;
 };
 
 function verdictFor(score: number): Verdict {
-  if (score >= 75) return { name: "Go", detail: "可以進，照四章正常走" };
-  if (score >= 60) return { name: "Conditional Go", detail: "可以進，先解決一到兩個弱項" };
-  if (score >= 45) return { name: "Hold", detail: "建議暫緩 6–12 個月，等關鍵變化" };
-  return { name: "No-Go", detail: "不建議，鹿飛會寫清楚什麼條件改了可以再看" };
+  if (score >= 75) return { name: "Go" };
+  if (score >= 60) return { name: "Conditional Go" };
+  if (score >= 45) return { name: "Hold" };
+  return { name: "No-Go" };
 }
 
 export function InteractiveScorecard({ dimensions, locale = "zh" }: { readonly dimensions: readonly Dimension[]; readonly locale?: Locale }) {
@@ -37,9 +38,7 @@ export function InteractiveScorecard({ dimensions, locale = "zh" }: { readonly d
     });
   }, [verdict.name]);
 
-  const copy = locale === "en"
-    ? { total: "Drag to try · weighted total", go: "Proceed through the four chapters", conditional: "Proceed after resolving one or two weak areas", hold: "Recommended to pause for 6–12 months until key conditions change", noGo: "Not recommended. LUFÉ will explain which conditions need to change before reviewing again", minimum: "LUFÉ's rule: below 60, we do not take the case" }
-    : { total: "拖拖看 · 加權總分", go: "可以進，照四章正常走", conditional: "可以進，先解決一到兩個弱項", hold: "建議暫緩 6–12 個月，等關鍵變化", noGo: "不建議，鹿飛會寫清楚什麼條件改了可以再看", minimum: "鹿飛的規矩：不到 60 分，不接" };
+  const copy = locale === "en" ? assessPageEn.scorecard : assessPageZh.scorecard;
   const detail = verdict.name === "Go" ? copy.go : verdict.name === "Conditional Go" ? copy.conditional : verdict.name === "Hold" ? copy.hold : copy.noGo;
 
   return (
