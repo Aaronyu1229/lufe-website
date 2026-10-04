@@ -97,13 +97,19 @@ type InsightsNavigation = {
   readonly publishedArticleSlugs: readonly string[];
 };
 
+function decodeLatestArticle(payload: string | undefined): InsightCard | undefined {
+  if (!payload) return undefined;
+  const bytes = Uint8Array.from(atob(payload), (character) => character.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes)) as InsightCard;
+}
+
 export function Navbar({
   children,
-  latestArticle,
+  latestArticlePayload,
   publishedArticleSlugs = [],
 }: {
   readonly children?: ReactNode;
-  readonly latestArticle?: InsightCard;
+  readonly latestArticlePayload?: string;
   readonly publishedArticleSlugs?: readonly string[];
 }) {
   const rawPathname = usePathname() ?? "/";
@@ -111,6 +117,7 @@ export function Navbar({
   const locale = localeFromPathname(rawPathname);
   const critical = locale === "en" ? navbarCriticalEn : navbarCriticalZh;
   const menu = locale === "en" ? navbarMenuEn : navbarMenuZh;
+  const latestArticle = locale === "zh" ? decodeLatestArticle(latestArticlePayload) : undefined;
   const { open: openMessageBox } = useMessageBox();
   const darkHero = pathnameHasDarkHero(pathname);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);

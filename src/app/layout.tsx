@@ -132,6 +132,9 @@ export default function RootLayout({
 }>) {
   const publishedArticles = getPublishedArticles();
   const latestArticle = publishedArticles[0] ? toInsightCard(publishedArticles[0]) : undefined;
+  const latestArticlePayload = latestArticle
+    ? Buffer.from(JSON.stringify(latestArticle), "utf8").toString("base64")
+    : undefined;
 
   return (
     <html
@@ -141,7 +144,7 @@ export default function RootLayout({
       <body>
         <MessageBoxProvider>
           <SiteStructuredData />
-          <Navbar latestArticle={latestArticle} publishedArticleSlugs={publishedArticles.map((article) => article.slug)}>
+          <Navbar latestArticlePayload={latestArticlePayload} publishedArticleSlugs={publishedArticles.map((article) => article.slug)}>
             <main id="main-content">{children}</main>
           </Navbar>
           <FooterSwitch />

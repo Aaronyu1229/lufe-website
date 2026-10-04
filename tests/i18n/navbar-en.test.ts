@@ -15,7 +15,18 @@ import { Navbar } from "@/components/Navbar";
 
 const zhGolden = readFileSync("tests/fixtures/navbar.zh.html", "utf8");
 
-const renderNavbar = () => renderToStaticMarkup(createElement(Navbar));
+const chineseArticlePayload = Buffer.from(JSON.stringify({
+  slug: "fixture",
+  category: "出海實戰",
+  date: "2026-10-04",
+  title: "中文文章標題",
+  summary: "中文文章摘要",
+  readTime: "5 分鐘",
+  color: "sky",
+  image: "/images/hero/hero-poster-1600.webp",
+}), "utf8").toString("base64");
+
+const renderNavbar = (latestArticlePayload?: string) => renderToStaticMarkup(createElement(Navbar, { latestArticlePayload }));
 
 describe("navbar i18n", () => {
   it("keeps the Chinese navbar byte-identical", () => {
@@ -25,7 +36,7 @@ describe("navbar i18n", () => {
 
   it("renders complete English", () => {
     pathname.current = "/en/services";
-    const html = renderNavbar();
+    const html = renderNavbar(chineseArticlePayload);
 
     expectEnglishMarkup(html);
     for (const label of ["Market Test", "Consignment", "Company Setup", "Call Center", "North America Retail"]) {
