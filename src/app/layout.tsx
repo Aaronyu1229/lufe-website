@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { FooterSwitch } from "@/components/FooterSwitch";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { MessageBox, MessageBoxProvider } from "@/components/MessageBox";
+import { WebVitalsReporter } from "@/components/WebVitalsReporter";
 import { SiteStructuredDataSwitch } from "@/components/seo/SiteStructuredDataSwitch";
 import { toInsightCard } from "@/lib/articles/presentation";
 import { getPublishedEnglishArticles } from "@/lib/articles/english";
@@ -154,7 +155,12 @@ export default function RootLayout({
           <FooterSwitch />
           <MessageBox />
         </MessageBoxProvider>
-        {SHOULD_RENDER_GOOGLE_ANALYTICS && <GoogleAnalytics />}
+        {SHOULD_RENDER_GOOGLE_ANALYTICS && (
+          <>
+            <GoogleAnalytics />
+            <WebVitalsReporter />
+          </>
+        )}
       </body>
     </html>
   );
