@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { createElement } from "react";
+import { createElement, type ComponentType } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
@@ -30,6 +30,8 @@ const englishDimensions = [
   { name: "Compliance", weight: "15%" },
 ];
 
+const AssessResultForTest = AssessResult as ComponentType<NonNullable<Parameters<typeof AssessResult>[0]>>;
+
 describe("Situation Check i18n", () => {
   it("keeps Chinese byte-identical", () => {
     expect(renderToStaticMarkup(createElement(EntryScreen))).toBe(readFileSync("tests/fixtures/assess-entry.zh.html", "utf8"));
@@ -40,7 +42,7 @@ describe("Situation Check i18n", () => {
 
   it("renders the Situation Check controls and result in complete English", () => {
     expectEnglishMarkup(renderToStaticMarkup(createElement(EntryScreen, { locale: "en" })));
-    expectEnglishMarkup(renderToStaticMarkup(createElement(AssessResult, { locale: "en" } as any)));
+    expectEnglishMarkup(renderToStaticMarkup(createElement(AssessResultForTest, { locale: "en" })));
     expectEnglishMarkup(renderToStaticMarkup(createElement(MatcherFlow, {
       questions: assessPageEn.questions,
       previousLabel: assessPageEn.matcher.previous,

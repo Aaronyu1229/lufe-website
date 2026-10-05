@@ -87,7 +87,7 @@ export function AccordionItem({ id, num, header, children, defaultOpen = false }
     <div className="border-t border-bd last:border-b">
       <button type="button" aria-expanded={open} aria-controls={id} onClick={toggle} className="group grid w-full cursor-pointer grid-cols-[minmax(0,1fr)_32px] items-center gap-4 py-6 text-left outline-none focus-visible:ring-2 focus-visible:ring-gold">
         <span className="grid min-w-0 grid-cols-[42px_minmax(0,1fr)] items-center gap-3 md:grid-cols-[58px_minmax(0,1fr)] md:gap-4">
-          <span className={`font-[var(--font-inter)] text-[28px] font-semibold leading-[1.4] tabular-nums ${open ? "text-gold-d" : "text-tx3/40"}`}>{num}</span>
+          <span className={`font-[var(--font-inter)] text-[28px] font-semibold leading-[1.4] tabular-nums ${open ? "text-gold-d" : "text-tx3"}`}>{num}</span>
           {header}
         </span>
         <span aria-hidden="true" className="grid h-8 w-8 place-items-center border border-bd text-tx [@media(hover:hover)]:group-hover:border-gold-d">

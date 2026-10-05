@@ -16,7 +16,10 @@ export function FreightRateChart({ copy = aboutPageZh.freightRateChart }: { read
     const element = ref.current;
     if (!element) return;
     // Bars grow once, when the chart is mostly on screen; reduced motion shows the final state.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setShown(true); return; }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const frame = window.requestAnimationFrame(() => setShown(true));
+      return () => window.cancelAnimationFrame(frame);
+    }
     const observer = new IntersectionObserver(([entry]) => {
       if (entry?.isIntersecting) { setShown(true); observer.disconnect(); }
     }, { threshold: 0.6 });

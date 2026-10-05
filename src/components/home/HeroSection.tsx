@@ -31,6 +31,11 @@ type Slide = {
   media: SlideMedia;
 };
 
+interface IdleWindow {
+  readonly requestIdleCallback?: (callback: IdleRequestCallback) => number;
+  readonly cancelIdleCallback?: (handle: number) => void;
+}
+
 const HOME_HERO_SLIDE_CONFIG = [
   {
     id: "pillar-fit",
@@ -115,8 +120,9 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
   const [paused, setPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [readyMap, setReadyMap] = useState<Record<number, boolean>>({});
+  const [posterMap, setPosterMap] = useState<Record<number, boolean>>({ 0: true });
   // Keep every <video> out of the server HTML. The poster owns the first paint;
-  // videos become eligible only once window.load has finished the page's critical work.
+  // videos become eligible only after the browser has had an idle turn to paint it.
   const [canMountVideos, setCanMountVideos] = useState(false);
   const [mountedMap, setMountedMap] = useState<Record<number, boolean>>({});
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
@@ -149,23 +155,45 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
     return () => mql.removeEventListener("change", update);
   }, []);
 
-  // Do not compete with the LCP font, poster, or other load-critical assets.
-  // When hydration happens after load, mount straight away; reduced-motion keeps
-  // the poster-only behavior and never adds a video element.
+  // Do not let non-LCP media start in the same turn as the first rendered frame.
+  // `loading="lazy"` alone is insufficient for the other posters because their
+  // absolutely positioned layers are still in the viewport. Videos remain
+  // poster-only for reduced-motion users.
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const enableVideoMounting = () => {
+    const idleWindow = window as unknown as IdleWindow;
+    let idleCallback: number | undefined;
+    let timeout: number | undefined;
+
+    const enableDeferredMedia = () => {
+      setPosterMap((prev) => {
+        const next = { ...prev };
+        for (let i = 1; i < slides.length; i += 1) next[i] = true;
+        return next;
+      });
       if (!mql.matches) setCanMountVideos(true);
     };
 
+    const scheduleDeferredMedia = () => {
+      if (idleWindow.requestIdleCallback) {
+        idleCallback = idleWindow.requestIdleCallback(enableDeferredMedia);
+      } else {
+        timeout = window.setTimeout(enableDeferredMedia, 200);
+      }
+    };
+
     if (document.readyState === "complete") {
-      enableVideoMounting();
-      return;
+      scheduleDeferredMedia();
+    } else {
+      window.addEventListener("load", scheduleDeferredMedia, { once: true });
     }
 
-    window.addEventListener("load", enableVideoMounting, { once: true });
-    return () => window.removeEventListener("load", enableVideoMounting);
-  }, []);
+    return () => {
+      window.removeEventListener("load", scheduleDeferredMedia);
+      if (idleCallback !== undefined) idleWindow.cancelIdleCallback?.(idleCallback);
+      if (timeout !== undefined) window.clearTimeout(timeout);
+    };
+  }, [slides.length]);
 
   // Autoplay carousel
   useEffect(() => {
@@ -216,6 +244,7 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
   }, [activeIndex, isPortrait, mountedMap, slides]);
 
   const goTo = useCallback((index: number) => {
+    setPosterMap((prev) => (prev[index] ? prev : { ...prev, [index]: true }));
     setActiveIndex(index);
   }, []);
 
@@ -248,6 +277,7 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
       {slides.map((slide, i) => {
         const isActive = i === activeIndex;
         const ready = readyMap[i] ?? false;
+        const hasPoster = posterMap[i] ?? false;
         const mounted = mountedMap[i] ?? false;
         return (
           <div
@@ -264,16 +294,18 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
                 Not next/image: this is one of three absolutely-positioned layers
                 that cross-fade, and the WebP tiers are already committed, so the
                 optimizer would only add billed transforms. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={slide.media.posterFallback}
-              srcSet={slide.media.posterSrcSet}
-              sizes="100vw"
-              alt=""
-              loading={i === 0 ? "eager" : "lazy"}
-              fetchPriority={i === 0 ? "high" : "low"}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            {hasPoster && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={slide.media.posterFallback}
+                srcSet={slide.media.posterSrcSet}
+                sizes="100vw"
+                alt=""
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "low"}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
             {mounted && (
               <video
                 ref={(el) => {
@@ -364,6 +396,7 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
                 ) : (
                   <Link
                     href={localizedHref(locale, slide.primary.href)}
+                    prefetch={false}
                     className="inline-flex items-center bg-gold text-navy px-[26px] py-[14px] text-[16px] font-semibold"
                   >
                     {slide.primary.label} →
@@ -371,6 +404,7 @@ export function HeroSection({ locale = "zh" }: { readonly locale?: Locale }) {
                 )}
                 <Link
                   href={localizedHref(locale, slide.secondary.href)}
+                  prefetch={false}
                   className="inline-flex items-center border border-white/30 bg-white/15 px-[26px] py-[14px] text-[16px] font-semibold text-white backdrop-blur-[16px]"
                 >
                   {slide.secondary.label}

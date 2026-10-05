@@ -100,7 +100,7 @@ export function Footer({ locale = "zh" }: FooterProps) {
             ))}
           </div>
           <div className="mt-[18px] grid gap-[12px] border-t border-white/10 pt-[14px]">
-            <p className="text-[12px] text-white/45">{copy.relatedBusinessesHeading}</p>
+            <p className="text-[12px] text-white/50">{copy.relatedBusinessesHeading}</p>
             {partnerLinks.map((partner, index) => (
               <a key={partner.href} href={partner.href} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2.5">
                 <span className="grid h-[22px] w-[22px] shrink-0 place-items-center opacity-75 transition-opacity group-hover:opacity-100">
@@ -110,7 +110,7 @@ export function Footer({ locale = "zh" }: FooterProps) {
                   <span className="block text-[14px] text-white/85 transition-colors group-hover:text-white">
                     {copy.partners[index].name}<span aria-hidden="true" className="ml-1 text-[12px] opacity-60">↗</span>
                   </span>
-                  <span className="mt-0.5 block text-[12.5px] text-white/45">{copy.partners[index].note}</span>
+                  <span className="mt-0.5 block text-[12.5px] text-white/50">{copy.partners[index].note}</span>
                 </span>
               </a>
             ))}
