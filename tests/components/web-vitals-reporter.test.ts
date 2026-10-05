@@ -46,7 +46,10 @@ describe("reportWebVitals", () => {
 
     reportWebVitals(metric("FCP"));
 
-    expect(window.dataLayer).toEqual([[
+    // gtag.js only reads Arguments objects from dataLayer, never plain arrays.
+    const queued = window.dataLayer?.[0];
+    expect(Object.prototype.toString.call(queued)).toBe("[object Arguments]");
+    expect(Array.from(queued as unknown as ArrayLike<unknown>)).toEqual([
       "event",
       "FCP",
       {
@@ -58,6 +61,6 @@ describe("reportWebVitals", () => {
         page_path: "/",
         non_interaction: true,
       },
-    ]]);
+    ]);
   });
 });

@@ -39,16 +39,15 @@ export const reportWebVitals: ReportWebVitalsCallback = (metric) => {
     non_interaction: true,
   };
 
-  window.gtag?.("event", metric.name, parameters);
-  if (window.gtag) {
-    return;
+  if (!window.gtag) {
+    // Same stub as the GA snippet: gtag.js only processes Arguments objects, not arrays.
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer?.push(arguments as unknown as GtagArguments);
+    };
   }
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag(...args: GtagArguments) {
-    window.dataLayer?.push(args);
-  }
-  gtag("event", metric.name, parameters);
+  window.gtag("event", metric.name, parameters);
 };
 
 export function WebVitalsReporter() {
