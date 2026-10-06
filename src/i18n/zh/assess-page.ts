@@ -43,7 +43,6 @@ export type AssessPageCopy = {
     readonly exact: { readonly headline: string; readonly closing: string };
     readonly close: { readonly headline: string; readonly closing: string };
     readonly partial: { readonly headline: string; readonly closing: string };
-    readonly none: { readonly headline: string; readonly closing: string };
   };
   readonly result: {
     readonly loading: string;
@@ -110,8 +109,7 @@ export const assessPageZh: AssessPageCopy = {
     stageMatched: "你和他們都在{stage} — 同樣的壓力點", stageMissed: "你在{answer}，他們當時在{signature} — 節奏不同", blockerMatched: "都卡在「{blocker}」這件事上", blockerMissed: "你卡在「{answer}」，他們當時卡在「{signature}」 — 不同的戰場", marketMatched: "目標市場一致：{market}", marketMissed: "你看{answer}，他們做的是{signature}",
     exact: { headline: "你的處境，幾乎就是他們當時遇到的事", closing: "他們當時怎麼判斷、先做了哪一步，大多能拿來對照你的情況。具體做法還是要看你的產品，這份值得從頭讀到尾。" },
     close: { headline: "兩項對齊 — 同路但不同戰場", closing: "他們的判斷邏輯可以直接用，但具體做法要換成你的版本。這份案例值得讀到最後 — 學怎麼想，換怎麼做" },
-    partial: { headline: "一項對齊 — 可以當參考方向", closing: "學他們怎麼想事情、怎麼做決定，不要照抄他們做的事。想對照更貼近你的狀況，30 分鐘就能聊。" },
-    none: { headline: "三個維度都不同 — 但判斷方法仍然能用", closing: "這份案例可以快速瀏覽，看他們當時怎麼判斷就好。你的狀況，也許適合先聊一次再決定；有時候我們會建議你再等等，那也是一種答案。" },
+    partial: { headline: "只有一項對齊 — 但判斷方法仍然能用", closing: "這份案例可以快速瀏覽，學他們怎麼想事情、怎麼做決定，不要照抄他們做的事。你的狀況，也許適合先聊 30 分鐘再決定；有時候我們會建議你再等等，那也是一種答案。" },
   },
   result: {
     loading: "載入結果…", invalid: { headline: "這份比對連結不完整", restart: "重新比對 →" }, restart: "重新比對", matched: "相同", different: "不同", fullCase: "讀完整案例 →", alternativeMatch: "吻合 {score}/3", otherPath: "看另一條路 →", ctaTitle: "想知道這個方法放在你身上會長什麼樣？", copied: "✓ 連結已複製", copy: "複製這份比對", book: "預約 30 分鐘 →",

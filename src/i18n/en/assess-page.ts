@@ -1,7 +1,7 @@
 import type { AssessPageCopy } from "@/i18n/zh/assess-page";
 
 // Fingerprint of assessPageZh this English was translated from; registry.test.ts prints the value after the first run.
-export const ASSESS_PAGE_SOURCE_FINGERPRINT = "5c960a55a631ceaf";
+export const ASSESS_PAGE_SOURCE_FINGERPRINT = "9fc33be139da3625";
 
 export const assessPageEn: AssessPageCopy = {
   stageShort: { idea: "Starting out", tested: "Testing the waters", scaling: "Scaling" },
@@ -44,8 +44,7 @@ export const assessPageEn: AssessPageCopy = {
     stageMatched: "You're at the same stage they were: {stage}", stageMissed: "Your stage: {answer}. Theirs: {signature}. A different pace", blockerMatched: "Both were stuck on “{blocker}”", blockerMissed: "You are stuck on “{answer}”; they were stuck on “{signature}” — different terrain", marketMatched: "Target market matches: {market}", marketMissed: "You are looking at {answer}; they were working in {signature}",
     exact: { headline: "Your situation is almost exactly what they faced at the time", closing: "How they assessed the situation and what they did first can mostly be compared against your situation. The specifics still depend on your product; this case is worth reading from beginning to end." },
     close: { headline: "Two aligned — the same path, different terrain", closing: "Their decision logic can be used directly, but the specifics need to become your version. This case is worth reading to the end — learn how to think, then adapt how to act." },
-    partial: { headline: "One aligned — a useful direction to consider", closing: "Learn how they thought and made decisions; do not copy what they did. If you want a comparison closer to your situation, 30 minutes is enough time to talk." },
-    none: { headline: "All three dimensions differ — but the method still applies", closing: "You can scan this case quickly to see how they assessed the situation. Your situation may be better served by talking first before deciding; sometimes we suggest waiting, and that is also an answer." },
+    partial: { headline: "Only one aligned — but the method still applies", closing: "You can scan this case quickly: learn how they thought and made decisions, but do not copy what they did. Your situation may be better served by a 30-minute talk before deciding; sometimes we suggest waiting, and that is also an answer." },
   },
   result: {
     loading: "Loading results…", invalid: { headline: "This comparison link is incomplete", restart: "Compare again →" }, restart: "Start over", matched: "Matched", different: "Different", fullCase: "Read the full case →", alternativeMatch: "Match {score}/3", otherPath: "See the other path →", ctaTitle: "What would this method look like for your situation?", copied: "✓ Link copied", copy: "Copy this comparison", book: "Book your free assessment →",

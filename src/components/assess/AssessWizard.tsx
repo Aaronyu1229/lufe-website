@@ -127,8 +127,7 @@ function buildNarrative(result: MatchResult, answers: Answers, copy: AssessPageC
 
   const narrative = result.score === 3 ? copy.narrative.exact
     : result.score === 2 ? copy.narrative.close
-      : result.score === 1 ? copy.narrative.partial
-        : copy.narrative.none;
+      : copy.narrative.partial;
   return { ...narrative, pieces };
 }
 
