@@ -21,7 +21,7 @@ import { toEnglishArticle } from "@/lib/articles/english";
 import { toInsightCard } from "@/lib/articles/presentation";
 import { getPublishedArticles } from "@/lib/articles/published";
 
-import { expectEnglishMarkup } from "./helpers";
+import { atFixtureTime, expectEnglishMarkup } from "./helpers";
 
 const chineseArticle = articles[0];
 const englishSource: EnglishArticle = {
@@ -47,10 +47,10 @@ describe("insight component i18n", () => {
     expect(markup).toBe(readFileSync("tests/fixtures/article-detail.zh.html", "utf8"));
   });
 
-  it("keeps Chinese InsightsPage byte-identical", () => {
-    const markup = renderToStaticMarkup(createElement(InsightsPage, {
+  it("keeps Chinese InsightsPage byte-identical", async () => {
+    const markup = await atFixtureTime(() => renderToStaticMarkup(createElement(InsightsPage, {
       articles: getPublishedArticles().map(toInsightCard),
-    }));
+    })));
 
     expect(markup).toBe(readFileSync("tests/fixtures/insights-page.zh.html", "utf8"));
   });

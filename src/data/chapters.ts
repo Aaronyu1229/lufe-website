@@ -151,6 +151,7 @@ export const CHAPTER_ARTICLES = {
     "product-testing-best-practices",
     "why-philippines-first",
     "market-entry-modes-compared",
+    "philippines-market-assessment-deck",
   ],
   m3: [
     "fob-cif-ddp-explained",
@@ -162,6 +163,8 @@ export const CHAPTER_ARTICLES = {
     "philippines-cpr-transfer-change-importer",
     "taiwan-food-export-philippines-steps",
     "philippines-food-cosmetic-label-checklist",
+    "philippines-registration-waiting-period",
+    "distribution-agreement-clause-checklist",
   ],
   m9: ["manila-beverage-first-store-90-days"],
   after: [],
