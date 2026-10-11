@@ -6,11 +6,11 @@ import { describe, expect, it } from "vitest";
 import { AaronAuthorPage } from "@/components/about/AaronAuthorPage";
 import { getPublishedEnglishArticles } from "@/lib/articles/english";
 
-import { expectEnglishMarkup } from "./helpers";
+import { atFixtureTime, expectEnglishMarkup } from "./helpers";
 
 describe("Aaron author page i18n", () => {
-  it("keeps Chinese byte-identical", () => {
-    const markup = renderToStaticMarkup(createElement(AaronAuthorPage));
+  it("keeps Chinese byte-identical", async () => {
+    const markup = await atFixtureTime(() => renderToStaticMarkup(createElement(AaronAuthorPage)));
 
     expect(markup).not.toContain("About Aaron Yu");
     expect(markup).toBe(readFileSync("tests/fixtures/aaron-author-page.zh.html", "utf8"));

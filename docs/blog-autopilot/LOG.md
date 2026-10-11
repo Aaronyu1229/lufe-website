@@ -1,5 +1,26 @@
 # 自動駕駛紀錄（新的在最上面）
 
+## 2026-10-11 每週任務
+- 開工檢查：`~/dev/lufe-autopilot/LAST_FAILURE.md` 不存在，無待補項目。
+- 排程（空檔由 `blog-schedule.mjs` 給出）：
+  - `philippines-market-assessment-deck` → 2026-10-17T09:00:00+08:00（主攻字「市場分析報告」月量 40；7 個來源）
+  - `philippines-registration-waiting-period` → 2026-10-20T09:00:00+08:00（主攻字「產品登記」月量 20；5 個來源）
+  - `distribution-agreement-clause-checklist` → 2026-10-22T09:00:00+08:00（主攻字「經銷合約」月量 50，「經銷合約範本」「經銷商合約」「代理合約」各 30 為變體；6 個來源）
+- 選題判斷：
+  - 三題都不在 jumping.group 的 insights 清單內；合約篇的交貨條件連到躍馬〈incoterms-trade-terms-guide〉。
+  - QUEUE 第 8 題原標「產品證要 6～12 週」：查不到「6～12 週」的官方出處，改用 FDA 服務章程的官方處理天數（LTO 14、CPR 變更 20、CPN 23 個工作天），標題改為「產品登記還沒下來，這段時間可以先做哪三件事」。食品 CPR 初次申請的官方天數章程未單獨列出，未寫。
+  - 「查驗登記」月量 260 但 SERP 全是台灣食藥署國內登記，意圖不符，未採用；「產品登記」SERP 也全是台灣化粧品與貨物稅，無菲律賓內容（資訊增益）。
+  - 合約篇與既有〈agent-vs-distributor-exclusive〉區隔：該篇談獨家與壓貨，本篇是 12 條全條款清單，重點放在台灣範本沒有的商標與產品證；「保證最低業績」依鐵律改寫為「約定最低業績」（英文 agreed minimum sales）。
+  - 「市場分析報告」SERP 前 6 名都是市場研究定義與步驟，沒有給決策用的頁面大綱與停損點。
+- 上週檢查：`philippines-cpr-transfer-change-importer`（10-06）、`market-entry-modes-compared`（10-08）、`taiwan-food-export-philippines-steps`（10-10）皆 200；`philippines-food-cosmetic-label-checklist`、`us-fda-food-import-fsvp-prior-notice` 尚未到 publishAt，404 正確；其餘 14 篇皆 200。
+- 花費：DataForSEO 約 US$0.096（搜尋量 1 次 0.09＋SERP 3 次 0.006）；查詢前餘額 US$33.04。
+- 異常與處理：
+  - **sitemap 沒有自動更新**：正式站 `sitemap.xml` 的 lastmod 全是 2026-10-06T00:24:03Z（最後一次部署），10-06、10-08、10-10 三篇已上線（200、列表頁有）卻不在 sitemap。`src/app/sitemap.ts` 雖設 `revalidate = 300`，實際沒有重新產生。本 PR 合併會觸發部署而暫時補上，但之後每篇排程文章都會等到下一次部署才進 sitemap。依「不改網站」規則未動 `sitemap.ts`，請人工處理（例如改成動態或用排程 revalidate）。
+  - **中文頁面 fixture 測試會隨時間失效**：`tests/i18n` 的 5 個「Chinese byte-identical」測試（首頁、/insights、m1、m3 章節、作者頁）用真實時間渲染，10-06 第一篇排程文章上線後，乾淨的 main 也會失敗（已在 origin/main 驗證 5 failed）。已新增 `atFixtureTime()`（`tests/i18n/helpers.ts`），只在這 5 個渲染時把時間固定在 fixture 產生時的 2026-10-05 12:00；main 套用後 234/234 通過。未改任何 fixture 或元件。
+  - 一致性檢查把英文出處標題的「July 2024」讀成數字 7；`philippines-registration-waiting-period` 的 FDA 服務章程出處中文標題改為「（第 1 版，2024 年 7 月 18 日）」。
+  - `npx eslint src`：0 error、4 warning（上週的 FreightRateChart error 已不在）。
+- 待查：食品 CPR 初次申請在新 eServices 系統下的官方處理天數；IPOPHL 商標申請規費與審查時間（文中未寫）。
+
 ## 2026-10-04 每週任務
 - 開工檢查：`~/dev/lufe-autopilot/LAST_FAILURE.md` 不存在，無待補項目。
 - 排程（空檔由 `blog-schedule.mjs` 給出）：

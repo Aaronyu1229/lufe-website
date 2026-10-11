@@ -10,14 +10,14 @@ import { ChapterPage } from "@/components/services/ChapterPage";
 import { CHAPTERS } from "@/data/chapters";
 import { CHAPTERS_EN } from "@/i18n/en/chapters";
 
-import { expectEnglishMarkup } from "./helpers";
+import { atFixtureTime, expectEnglishMarkup } from "./helpers";
 
 const chapterKeys = ["m1", "m3", "m9", "after", "na"] as const;
 
 describe("chapter pages i18n", () => {
   for (const key of chapterKeys) {
     it(`keeps ${key} Chinese byte-identical`, async () => {
-      expect(renderToStaticMarkup(await ChapterPage({ chapter: CHAPTERS[key] }))).toBe(readFileSync(`tests/fixtures/chapter-${key}.zh.html`, "utf8"));
+      expect(await atFixtureTime(async () => renderToStaticMarkup(await ChapterPage({ chapter: CHAPTERS[key] })))).toBe(readFileSync(`tests/fixtures/chapter-${key}.zh.html`, "utf8"));
     });
 
     it(`renders complete English for ${key}`, async () => {

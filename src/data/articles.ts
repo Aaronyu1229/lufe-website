@@ -1657,6 +1657,281 @@ FSVP 是美國的外國供應商驗證計畫，由美國進口商對境外食品
     sources: [{"id":1,"title":"21 CFR Part 1 Subpart H：食品設施登記","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-1/subpart-H","note":"誰要登記、境外設施須有美國代理人、偶數年 10 月 1 日至 12 月 31 日更新、不收登記費；未登記者食品可能在港口被扣留。"},{"id":2,"title":"食品設施是否須繳登記費、及民間業者宣稱與 FDA 有關的問答","publisher":"美國 FDA","url":"https://www.fda.gov/food/guidance-regulation-food-and-dietary-supplements/questions-regarding-whether-food-facilities-are-required-pay-registration-fees-and-private","note":"登記免費；FDA 不發登記證書，也不承認民間業者出具的登記證書。"},{"id":3,"title":"21 CFR Part 1 Subpart L：外國供應商驗證計畫（FSVP）","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-1/subpart-L","note":"FSVP 進口商定義、危害分析、供應商評估與驗證活動、報關申報、紀錄保存 2 年與英譯、極小型進口商門檻。"},{"id":4,"title":"FSMA Final Rule on Foreign Supplier Verification Programs","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-final-rule-foreign-supplier-verification-programs-fsvp-importers-food-humans-and-animals","note":"FDA 認可 DUNS 號碼為 FSVP 可用的設施識別碼。"},{"id":5,"title":"21 CFR Part 1 Subpart I：進口食品事前通報（Prior Notice）","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-1/subpart-I","note":"公路 2 小時、鐵路與空運 4 小時、海運 8 小時前通報；郵寄須於寄出前；未通報者拒絕入境並留在港口。"},{"id":6,"title":"FSMA Inflation Adjusted Cut Offs","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-inflation-adjusted-cut-offs","note":"FSVP 極小型進口商（人類食品）通膨調整後門檻 US$1,409,899。"},{"id":7,"title":"21 CFR 1.501：FSVP 適用範圍","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-1/subpart-L/section-1.501","note":"供應商須遵守且已符合 part 120 或 part 123 的果汁、魚和水產品不適用 FSVP，改依 120.14 或 123.12。"},{"id":8,"title":"21 CFR 123.12：進口水產品的特別規定","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-123/subpart-A/section-123.12","note":"水產品進口商須有書面驗證程序，確認境外加工廠符合水產品 HACCP 規定。"},{"id":9,"title":"台灣魚鬆想進美國，第一關卡在哪裡？","publisher":"鹿飛 LUFÉ 案例","url":"https://lufe.world/cases/fish-floss-us-fda","note":"只用魚做的魚鬆由 FDA 管轄、屬水產品；混入一定比例肉鬆即改由美國農業部管轄；是否走低酸罐頭程序看實測水活性。"},{"id":10,"title":"21 CFR Part 108：緊急許可管制（低酸罐頭與酸化食品登記）","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-108","note":"開始生產後 10 天內以 Form FDA 2541 登記，登記後 60 天內且新產品包裝前申報製程；境外加工廠未遵守，產品拒絕入境。"},{"id":11,"title":"Establishment Registration & Process Filing for Acidified and Low-Acid Canned Foods","publisher":"美國 FDA","url":"https://www.fda.gov/food/registration-food-facilities-and-other-submissions/establishment-registration-process-filing-acidified-and-low-acid-canned-foods-lacf","note":"酸化食品用 Form FDA 2541e；低酸罐頭用 2541d、2541f 或 2541g。"},{"id":12,"title":"21 CFR 101.9：食品營養標示","publisher":"美國聯邦法規 eCFR","url":"https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-101/subpart-A/section-101.9","note":"除豁免外，供人食用並販售的食品都須提供營養標示。"},{"id":13,"title":"Food Allergies","publisher":"美國 FDA","url":"https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies","note":"2004 年 FALCPA 列 8 種主要過敏原；2021 年 4 月 23 日 FASTER Act 將芝麻列為第 9 種，2023 年 1 月 1 日生效。"},{"id":14,"title":"Requirements for Additional Traceability Records for Certain Foods：Compliance Date Extension（Proposed Rule）","publisher":"美國聯邦公報 Federal Register","url":"https://www.federalregister.gov/documents/2025/08/07/2025-14967/requirements-for-additional-traceability-records-for-certain-foods-compliance-date-extension","note":"2025-08-07 提案：合規日由 2026 年 1 月 20 日延 30 個月至 2028 年 7 月 20 日。"},{"id":15,"title":"FSMA Final Rule on Requirements for Additional Traceability Records for Certain Foods","publisher":"美國 FDA","url":"https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-final-rule-requirements-additional-traceability-records-certain-foods","note":"國會在 2026 年的撥款法案中指示 FDA 在同一日期前不執行食品追溯規則。"}],
     lastVerified: "2026-10-04",
   },
+  {
+    slug: "philippines-market-assessment-deck",
+    category: "出海實戰",
+    date: "2026-10-17",
+    publishAt: "2026-10-17T09:00:00+08:00",
+    title: "市場分析報告怎麼寫？老闆叫你評估菲律賓市場，簡報放這 12 頁就夠（附大綱）",
+    summary: "市場分析報告是給老闆做決定的，不是展示資料。用一張表列出評估菲律賓市場的 12 頁大綱：每頁回答什麼、放什麼、資料去哪找，並說明最常寫錯的五頁，以及最後一頁的停損點怎麼寫。",
+    readTime: "6 分鐘",
+    color: "gold",
+    content: [String.raw`> **先說答案：** 市場分析報告是給老闆做決定的，不是展示資料。評估菲律賓市場，12 頁就夠：第 1 頁寫結論，最後一頁寫做到什麼就繼續、什麼就停。
+
+## 情境：週五前要交一份「菲律賓市場評估」
+
+以下是假設的情境，不是特定客戶的故事。
+
+你在一家做調味醬的公司負責業務。週一老闆在會議上說：「有人說菲律賓不錯，你評估一下，週五給我看。」沒有預算、沒有範圍，也沒說要多少頁。
+
+你上網查「市場分析報告怎麼寫」，看到的是市場研究的定義、五個步驟、各種分析工具。這些都對，但週五你要面對的只有一個問題：老闆看完，能不能說出「做」或「不做」。四十頁的產業資料做不到這件事，因為他真正想知道的是三件事：有沒有人買、要花多少、多久看得到結果。
+
+下面這份 12 頁大綱，就是照這三件事排的。每一頁回答一個問題，寫清楚放什麼、資料去哪裡找。
+
+## 12 頁大綱一張表
+
+| 頁 | 這頁回答什麼 | 放什麼 | 資料從哪來 |
+|---|---|---|---|
+| 1 | 結論 | 建議做、不做或先小額試，一句理由，要花多少 | 整份報告 |
+| 2 | 這次要決定什麼 | 只決定要不要花第一筆錢，不決定設公司 | 老闆的原話 |
+| 3 | 市場有多大 | 人口與經濟成長，只放兩三個數字 [1][2] | 官方統計 |
+| 4 | 誰會買 | 目標客人是誰、在哪裡買、現在用什麼替代 | 當地實地觀察 |
+| 5 | 貨架上有誰 | 同類商品的售價、容量、通路 | 當地超市與電商 |
+| 6 | 要什麼證 | LTO、CPR 或 CPN 誰辦、官方處理天數 [4][5][7] | 菲律賓 FDA |
+| 7 | 怎麼進去 | 經銷、代理、自己設公司、跨境電商選哪個 [3][6] | 進入模式比較 |
+| 8 | 每一件到貨要多少錢 | 從出廠價算到當地貨架價 | 到岸成本試算 |
+| 9 | 時間表 | 從找進口商到上架的每一步 | 第 6、7 頁 |
+| 10 | 最大的三個風險 | 每個風險寫「發生了怎麼辦」 | 第 4～9 頁 |
+| 11 | 第一筆錢花在哪 | 金額、買到什麼答案 | 方案報價 |
+| 12 | 決策與停損點 | 做到什麼就繼續、什麼就停 | 老闆拍板 |
+
+## 最常寫錯的五頁
+
+**第 1 頁：結論放最前面。** 老闆可能只看這一頁。寫三行：建議、理由、金額。不要寫「菲律賓市場潛力大」，要寫「建議先花多少錢確認一件事，再決定要不要找進口商」。
+
+**第 3 頁：市場大小只放兩三個數字。** 菲律賓 2024 年人口普查的官方數字是 112,729,484 人（以 2024 年 7 月 1 日為準）[1]；美國商務部的國家商務指南寫，菲律賓經濟 2024 年成長 5.6% [2]。這兩個數字足夠說明這不是小市場，但它們不會告訴你有沒有人買你的醬。這一頁不要超過一頁。
+
+**第 5 頁：貨架比產業報告有用。** 對第一次出海的品牌，當地同類商品的售價、容量和品牌，比市場規模更能回答「我的價格放得進去嗎」。拍照、記價格、記在哪一層架上。
+
+**第 6 頁：先寫證，再談通路。** 菲律賓的食品進口商要先有 FDA 的 LTO，每項食品首次進口前要有 CPR [4]；化妝品是上市前通報 CPN，由持 LTO 的當地公司提出 [7]。FDA 服務章程列的官方處理時間是：食品經銷商 LTO 初次 14 個工作天 [5]、化妝品 CPN 23 個工作天 [7]，不含準備文件與補件。這一頁寫錯，第 9 頁的時間表就會全錯。三張證的差別見[菲律賓 FDA 的 LTO、CPR、CPN 差在哪](/insights/philippines-fda-lto-cpr-cpn)。
+
+**第 7 頁：進入模式寫成選擇題。** 美國商務部對菲律賓的描述是：當地代理商或經銷商，仍是進入與擴張市場的必要條件 [3]。自己設公司的門檻也要寫出來：外資內需企業原則上實收資本 US$200,000 起 [6]。四種模式的完整比較在[四種國際市場進入模式比較表](/insights/market-entry-modes-compared)。
+
+第 8 頁的成本，可以照[出口報價前先算到岸成本](/insights/landed-cost-before-export)的算法拆，關稅用 [TradePilot](/insights/tradepilot-tariff-tutorial) 查。
+
+## 第 12 頁：把停損點寫出來
+
+多數市場分析報告停在「建議」。但老闆要的是能執行的決定，所以最後一頁寫成三行：
+
+- **繼續的條件：** 例如，目標客人願意用你預設的價格買。
+- **停下的條件：** 例如，價格要降到成本以下才有人買，或找不到願意持證的進口商。
+- **這一輪花多少、多久有答案。**
+
+寫得出停損點的報告，老闆比較敢批第一筆錢，因為他知道最壞的情況花多少。判斷框架可以參考[我們怎麼判斷一個出海案子值不值得做](/insights/go-no-go-framework)。
+
+## 什麼情況不建議照這篇做
+
+- **老闆已經決定要做，要的是執行計畫。** 那份文件的重點是時程與分工，不是要不要做。
+- **你要的是投資等級的產業研究**，例如要不要在當地設廠。那需要完整的市場規模、法規與財務模型，12 頁不夠。
+- **產品在當地不需要 FDA 登錄。** 第 6 頁縮成一行，把篇幅留給通路與價格。
+- **你手上完全沒有當地的價格與客人反應。** 第 4、5 頁空著，報告就只剩二手資料。先做[市場探查](/services/product-testing)，1～2 萬，做完可以停。
+
+## 常見問題
+
+**市場分析報告要包含哪些內容？**
+給老闆做決定的版本，要包含：結論、市場大小、誰會買、競品貨架、法規門檻、進入模式、成本、時間表、風險、第一筆預算與停損點。市場大小只放兩三個官方數字 [1][2]，篇幅留給有沒有人買與要花多少。
+
+**評估菲律賓市場，法規那頁要寫什麼？**
+寫誰要辦哪張證、官方處理多久。食品進口商要先有 LTO，產品首次進口前要有 CPR [4]；化妝品由持 LTO 的當地公司提出 CPN，官方處理 23 個工作天 [7]。這不含準備與補件的時間。
+
+**評估簡報要做幾頁才夠？**
+給決策用，12 頁就夠：第 1 頁結論，最後一頁停損點，中間每頁回答一個問題。資料多的部分放附錄，不要塞進主簡報。
+
+## 一個最小的下一步
+
+打開一張空白投影片，先寫第 12 頁：做到什麼就繼續、什麼就停。寫不出來，代表你還不知道要評估什麼；寫得出來，其餘 11 頁都是在找證據。卡在哪一頁，用 LINE 問我們一句。
+
+最後查證：2026-10-11。FDA 處理天數以服務章程當期版本為準。`],
+    faq: [{"q":"市場分析報告要包含哪些內容？","a":"給老闆做決定的版本，要包含：結論、市場大小、誰會買、競品貨架、法規門檻、進入模式、成本、時間表、風險、第一筆預算與停損點。市場大小只放兩三個官方數字，例如菲律賓 2024 年人口普查的 112,729,484 人，篇幅留給有沒有人買與要花多少。"},{"q":"評估菲律賓市場，法規那頁要寫什麼？","a":"寫誰要辦哪張證、官方處理多久。食品進口商要先有 FDA 的 LTO，每項食品首次進口前要有 CPR；化妝品由持 LTO 的當地公司提出 CPN，FDA 服務章程列的官方處理時間是 23 個工作天。這不含準備文件與補件的時間。"},{"q":"評估簡報要做幾頁才夠？","a":"給決策用，12 頁就夠：第 1 頁寫結論，最後一頁寫停損點，中間每頁回答一個問題。資料多的部分放附錄，不要塞進主簡報。"}],
+    sources: [{"id":1,"title":"Proclamation No. 973, s. 2025（2024 年人口普查結果公告）","publisher":"菲律賓總統府（Lawphil 收錄全文）","url":"https://lawphil.net/executive/proc/proc2025/proc_973_2025.html","note":"2025-07-11 簽署：菲律賓截至 2024 年 7 月 1 日的總人口為 112,729,484 人。"},{"id":2,"title":"Philippines Country Commercial Guide：Market Overview","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/country-commercial-guides/philippines-market-overview","note":"最後發布日 2026-05-08：菲律賓經濟 2024 年成長 5.6%。"},{"id":3,"title":"Philippines Country Commercial Guide：Distribution and Sales Channels","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/country-commercial-guides/philippines-distribution-and-sales-channels","note":"當地代理或經銷商仍是進入與擴張市場的必要條件；代理佣金常見 5～10%；合約通常約定 30 天解約通知。"},{"id":4,"title":"FAIRS Country Report Annual：Philippines（RP2026-0009）","publisher":"美國農業部海外農業局（USDA FAS）","url":"https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Manila_Philippines_RP2026-0009","note":"2026-04-21：菲律賓進口商進口前須取得 FDA 的 LTO；每項食品或飲料首次進口前須取得 CPR。"},{"id":5,"title":"FDA Citizen's Charter 2024（1st Edition, as of 18 July 2024）","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf","note":"食品經銷商（進口、出口、批發）LTO 初次申請，官方處理 14 個工作天；所有 CPR 申請須附有效 LTO。"},{"id":6,"title":"Republic Act No. 11647（Foreign Investments Act 修正）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra2022/ra_11647_2022.html","note":"外國人原則上可 100% 持有內需企業；實收資本低於 US$200,000 的微型與小型內需企業保留給菲律賓人。"},{"id":7,"title":"Citizen's Charter：Issuance of Cosmetic Product Notification","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2025/09/1.-Issuance-of-Cosmetic-Product-Notification.pdf","note":"申請者為持有效 LTO、且列有化妝品活動的公司；官方處理 23 個工作天又 15 分鐘。"}],
+    lastVerified: "2026-10-11",
+  },
+  {
+    slug: "philippines-registration-waiting-period",
+    category: "菲律賓",
+    date: "2026-10-20",
+    publishAt: "2026-10-20T09:00:00+08:00",
+    title: "菲律賓產品登記還沒下來，這段時間可以先做哪三件事？商標、標籤、成本",
+    summary: "菲律賓產品登記送出後的等待期，先做三件越晚做越貴的事：用自己的名義申請菲律賓商標、把標籤定稿、用當地貨架價驗證成本。附 FDA 服務章程的官方處理天數，以及等待期不該做的事。",
+    readTime: "6 分鐘",
+    color: "sky",
+    content: [String.raw`> **先說答案：** 菲律賓產品登記送出後，等待期先做三件事：用自己的名義在菲律賓申請商標、把標籤定稿、用當地貨架價驗證成本。商品貨先不要出。
+
+## 情境：進口商說「證送出去了，等就好」
+
+以下是假設的情境，不是特定客戶的故事。
+
+你家做保養品。馬尼拉的進口商上週來信：產品通報已經送進菲律賓 FDA，「接下來等就好」。
+
+你鬆了一口氣，接著開始不安。要等多久？等的這段時間，工廠要不要先排產？當地的廣告要不要先投？有同事建議先出一批貨放在對方倉庫，證一下來就能上架。
+
+等待期最常見的錯，是把時間花在「證下來以後才有用」的事上，卻跳過「證下來之前就該做完」的事。下面先看官方要等多久，再講三件現在就能做、而且越晚做越貴的事。
+
+## 先弄清楚：官方要等多久
+
+| 項目 | 誰申請 | 官方處理時間 |
+|---|---|---|
+| 食品經銷商 LTO（初次） | 菲律賓進口商 | 14 個工作天 [1] |
+| 食品 CPR 變更（例如改品牌名） | 持 LTO 的進口商 | 20 個工作天 [1] |
+| 化妝品 CPN | 持 LTO、且列有化妝品活動的當地公司 | 23 個工作天又 15 分鐘 [2] |
+
+這些是 FDA 的官方處理時間，不含在台灣準備文件、翻譯與補件的時間，而且要先有 LTO，產品登記才能送 [1]。FDA 在 2026 年改用新的線上系統，舊系統登錄產品的展延與變更，要在新系統以初次申請重新送件 [3]，實際進度以進口商在系統上看到的狀態為準。
+
+還有一條不能跳過：每項食品首次進口前就要有 CPR [4]。**證沒下來之前，商品貨不要出。**
+
+## 第一件事：用自己的名義在菲律賓申請商標
+
+菲律賓的商標權靠註冊取得：智慧財產法第 122 條寫明，商標權利經由依法有效的註冊取得 [5]。你在台灣註冊的商標，不會自動在菲律賓生效。
+
+這件事要跟產品登記同時做，理由是：產品證已經掛在進口商名下，商標如果也讓進口商去申請，以後換人時你手上又少了一張牌。換人的規定，我們在[菲律賓產品證掛在進口商名下，以後要換人怎麼辦](/insights/philippines-cpr-transfer-change-importer)整理過。
+
+三個要先知道的規定：
+
+- **用你自己的名義申請**，不是進口商的名義。
+- **要指定菲律賓的收件人。** 申請人在菲律賓沒有住所或營業據點，要以書面指定一位居住在菲律賓的人收受通知 [5]。
+- **三年內要交使用聲明。** 從申請日起三年內，要提出實際使用的聲明與證據，沒交，申請會被駁回或從註冊簿移除 [5]。所以申請的時間點，最好落在你確定會上市的時候，也就是現在。
+
+## 第二件事：把標籤定稿，不要等證下來再改
+
+進口品的 CPR 申請要附完整的標籤稿 [1]。證下來之後才改包裝，可能要再走一次變更：FDA 服務章程裡，改品牌名要附品牌所有人的授權，變更案官方處理 20 個工作天 [1]。
+
+所以等待期是檢查標籤的時間：品名、成分、淨重、進口商名稱地址、日期的寫法，逐項對過[菲律賓食品與化妝品標籤檢查清單](/insights/philippines-food-cosmetic-label-checklist)。定稿後再下印刷單，不要一次印一整年的量。
+
+## 第三件事：用當地貨架價驗證你的成本
+
+證下來那天，進口商會問的第一個問題是：出貨價多少？
+
+等待期可以先把這題算好：從出廠價開始，加上運費、關稅、進口商與通路的利潤，算到當地貨架價，再對照同類商品在當地超市與電商上的售價。算法照[出口報價前先算到岸成本](/insights/landed-cost-before-export)，關稅用 [TradePilot](/insights/tradepilot-tariff-tutorial) 查。算出來比當地同類商品貴很多，現在調整容量或規格，比證下來之後再改便宜。
+
+如果你連當地的價格帶都不清楚，可以趁這段時間做一輪[市場探查](/services/product-testing)：1～2 萬，看當地人會不會買、多少錢會買。
+
+## 等待期不建議做的事
+
+- **先出一批貨放倉庫。** 食品首次進口前就要有 CPR [4]，證沒下來，貨可能進不了關。
+- **先在當地投廣告。** 產品還不能賣，廣告帶來的詢問接不住。
+- **讓進口商用他的名義申請你的商標。** 理由見第一件事。
+
+## 什麼情況不建議照這篇做
+
+- **產品在菲律賓不需要 FDA 登錄。** 沒有等待期，三件事直接做。
+- **你的商標在菲律賓已經被別人申請。** 先找當地律師，這已經不是等待期的事。
+- **你還沒找到進口商。** 那還沒開始等，先看[台灣食品出口菲律賓怎麼走](/insights/taiwan-food-export-philippines-steps)。
+
+## 常見問題
+
+**菲律賓產品登記要多久？**
+FDA 服務章程寫的官方處理時間是：食品經銷商 LTO 初次 14 個工作天、食品 CPR 變更 20 個工作天 [1]、化妝品 CPN 23 個工作天又 15 分鐘 [2]。這不含準備文件與補件的時間；要先有 LTO，產品登記才能送。
+
+**台灣註冊的商標在菲律賓有效嗎？**
+不會自動有效。菲律賓智慧財產法規定商標權經由註冊取得 [5]，要在菲律賓另外申請；申請人在當地沒有住所或營業據點，要指定一位居住在菲律賓的人收受通知 [5]。
+
+**產品登記還沒下來，可以先出貨嗎？**
+商品貨不建議。菲律賓每項食品首次進口前就要有 CPR [4]。研發或測試用的樣品另有進口許可，流程見台灣食品出口菲律賓那一篇。
+
+## 一個最小的下一步
+
+今天先做一件事：到菲律賓智慧財產局（IPOPHL）的商標查詢系統，用你的品牌名查一次有沒有人申請過。沒有，就開始找當地代理人申請；有，用 LINE 問我們一句。
+
+本文為經驗與實務整理，非法律意見；商標申請請找菲律賓當地代理人或律師。最後查證：2026-10-11，菲律賓 FDA 系統正在改版，以 FDA 現行公告為準。`],
+    faq: [{"q":"菲律賓產品登記要多久？","a":"菲律賓 FDA 服務章程寫的官方處理時間是：食品經銷商 LTO 初次申請 14 個工作天、食品 CPR 變更 20 個工作天、化妝品 CPN 23 個工作天又 15 分鐘。這不含在台灣準備文件、翻譯與補件的時間；而且要先有 LTO，產品登記才能送。"},{"q":"台灣註冊的商標在菲律賓有效嗎？","a":"不會自動有效。菲律賓智慧財產法第 122 條規定商標權經由註冊取得，要在菲律賓另外申請；申請人在當地沒有住所或營業據點，要以書面指定一位居住在菲律賓的人收受通知，並在申請日起三年內提出實際使用的聲明。"},{"q":"產品登記還沒下來，可以先出貨嗎？","a":"商品貨不建議。菲律賓每項食品首次進口前就要有 CPR，證沒下來，貨可能進不了關。研發或測試用的樣品另有進口許可，由持 LTO 的菲律賓業者申請。"}],
+    sources: [{"id":1,"title":"FDA Citizen's Charter 2024（第 1 版，2024 年 7 月 18 日）","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2024/07/CC_FDA-CC-2024-as-of-18-July-2024.pdf","note":"食品經銷商 LTO 初次申請 14 個工作天；所有 CPR 申請須附有效 LTO；進口品 CPR 須附完整標籤稿；變更類型 2a 改品牌名須附品牌所有人授權；CPR 變更 20 個工作天。"},{"id":2,"title":"Citizen's Charter：Issuance of Cosmetic Product Notification","publisher":"菲律賓 FDA","url":"https://www.fda.gov.ph/wp-content/uploads/2025/09/1.-Issuance-of-Cosmetic-Product-Notification.pdf","note":"申請者須持有效 LTO 且列有化妝品活動；官方處理 23 個工作天又 15 分鐘；1 年 Php 500＋1% LRF 起。"},{"id":3,"title":"Philippines FDA Upgrades Food Registration with New eServices","publisher":"ChemLinked（法規媒體，報導 FDA Circular No. 2026-0002）","url":"https://food.chemlinked.com/news/food-news/philippines-fda-upgrades-food-registration-with-new-eservices","note":"2026-06-08 報導：舊入口登錄產品的展延與變更，須在新系統以初次申請重新送件。"},{"id":4,"title":"FAIRS Country Report Annual：Philippines（RP2026-0009）","publisher":"美國農業部海外農業局（USDA FAS）","url":"https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=FAIRS+Country+Report+Annual_Manila_Philippines_RP2026-0009","note":"2026-04-21：菲律賓進口商進口前須取得 FDA 的 LTO；每項食品或飲料首次進口前須取得 CPR。"},{"id":5,"title":"Republic Act No. 8293（Intellectual Property Code of the Philippines）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra1997/ra_8293_1997.html","note":"第 122 條：商標權經由依法有效註冊取得；第 124.2 條：申請日起三年內須提出實際使用聲明與證據，否則駁回或從註冊簿移除；第 125 條：在菲律賓無住所或營業據點的申請人，須書面指定居住於菲律賓的人收受通知。"}],
+    lastVerified: "2026-10-11",
+  },
+  {
+    slug: "distribution-agreement-clause-checklist",
+    category: "出海實戰",
+    date: "2026-10-22",
+    publishAt: "2026-10-22T09:00:00+08:00",
+    title: "經銷合約要寫什麼？海外經銷簽約前的 12 項條款清單（含商標與產品證）",
+    summary: "經銷合約至少要寫清楚 12 件事，從地區、期限、獨家門檻到終止與爭議。台灣國內範本多半沒寫的兩條，是海外經銷拆夥時最難收回的：商標由誰申請、產品證掛在誰名下。附逐條打勾用的條款清單。",
+    readTime: "6 分鐘",
+    color: "ember",
+    content: [String.raw`> **先說答案：** 經銷合約至少要寫清楚 12 件事：產品地區、期限、獨家門檻、價格、付款、交貨、庫存、報表、商標、產品證、終止、爭議。海外經銷最常漏的是商標與產品證。
+
+## 情境：對方寄來一份三頁的英文合約
+
+以下是假設的情境，不是特定客戶的故事。
+
+你家做冷凍水餃，和菲律賓一家進口商談了兩個月，對方終於寄來合約。三頁英文，寫了價格、付款、一年期限，最後一段寫「雙方同意以友好協商解決爭議」。
+
+你上網找「經銷合約範本」，找到的多半是台灣國內用的版本：轉售價格、商品責任、智慧財產權歸屬。這些都對，但你發現，對方的三頁合約和台灣範本都沒寫兩件事：產品證掛在誰名下、你的商標在菲律賓由誰申請。
+
+這兩件事，台灣國內經銷用不到，海外經銷卻是拆夥時最難收回的。下面是一份簽約前可以逐條打勾的清單。
+
+## 經銷合約 12 項條款清單
+
+| # | 條款 | 要寫清楚什麼 | 參考 |
+|---|---|---|---|
+| 1 | 產品與地區 | 哪些品項；全菲律賓，還是某個城市或通路 | [1][2] |
+| 2 | 期限與續約 | 幾年、怎麼續、提前多久通知 | [2] |
+| 3 | 獨家與最低業績 | 有沒有獨家；約定最低業績沒達到的後果 | [1][2] |
+| 4 | 價格 | 你賣給他的價格、調價要提前多久通知 | [2] |
+| 5 | 付款 | 幾天內付款、貨款付清前貨權歸誰 | [2] |
+| 6 | 交貨條件 | 用哪一個 Incoterms 規則、交貨期 | [2] |
+| 7 | 庫存 | 經銷商要維持多少庫存 | [1][2] |
+| 8 | 報表與資訊 | 多久交一次銷售報告與預測 | [2] |
+| 9 | 商標 | 經銷商不得以自己的名義註冊你的商標 | [2][5] |
+| 10 | 產品證 | 登錄資料副本歸誰、換人時配合轉移的義務 | [4] |
+| 11 | 終止與終止後 | 通知期、重大違約、在庫商品買回 | [2][3] |
+| 12 | 準據法與爭議 | 用哪國法律、在哪裡仲裁或訴訟 | [2] |
+
+下面挑最常被寫錯的幾條說明。
+
+## 第 3 條：獨家一定要配門檻
+
+一份依國際商會（ICC）經銷合約範本訂立的公開合約，把「業績目標」和「約定最低業績」分開：目標沒達到不算違約；約定最低業績沒達到，供應商可以在一個月通知後終止合約、取消獨家或縮小地區 [2]。要不要給獨家、要不要壓貨，我們在[代理商、經銷商、獨家代理差在哪](/insights/agent-vs-distributor-exclusive)寫過。
+
+## 第 5、6 條：貨權與交貨條件
+
+同一份合約寫明：貨款全數付清之前，貨物所有權仍歸供應商 [2]。這一句讓你在對方付不出錢時，仍有主張的依據。交貨條件寫一個明確的 Incoterms 規則與地點，不要只寫「CIF 菲律賓」卻沒寫哪個港；各條件的差別可以看躍馬的 [Incoterms 貿易條件指南](https://jumping.group/insights/incoterms-trade-terms-guide)。
+
+## 第 9、10 條：海外經銷最常漏的兩條
+
+**商標。** 菲律賓的商標權靠註冊取得 [5]。依 ICC 範本訂立的那份合約寫明，經銷商不得註冊供應商的商標或容易混淆的近似商標，合約終止後要停止使用 [2]。但合約只能禁止對方搶先，商標仍要你自己去菲律賓申請；申請要注意的三個規定，見[菲律賓產品登記還沒下來，這段時間可以先做的三件事](/insights/philippines-registration-waiting-period)。
+
+**產品證。** 菲律賓食品的 CPR 由持 LTO 的當地業者持有；已登錄產品要轉給新持有人，要附原持有人與新持有人之間的轉讓協議 [4]。換句話說，換經銷商需要舊經銷商簽字。合約至少要寫：登錄資料副本歸你、終止時對方有配合轉移的義務、轉移費用誰出。
+
+如果你的合約一個字都沒提到這兩件事，簽之前先補。
+
+## 第 11 條：終止與終止後
+
+美國商務部的菲律賓國家商務指南提到，當地代理與經銷合約通常約定 30 天的解約通知 [3]。ICC 架構的合約則有幾個值得參考的設計：重大違約可以立即終止；終止後，經銷商可選擇請供應商按原價買回在庫的新品；終止後要歸還宣傳資料 [2]。
+
+在菲律賓，終止後最麻煩的通常不是庫存，而是第 10 條的證。這兩條要一起看。
+
+## 第 12 條：不要只寫「友好協商」
+
+那份 ICC 架構的合約，把爭議交給國際商會的仲裁規則處理 [2]。你不一定要用同樣的寫法，但要寫清楚：用哪個國家的法律、在哪裡解決、用什麼語言。只寫「友好協商」，等於真的吵起來時什麼都沒約定。這一條請律師依你的情況決定。
+
+另外，台灣範本常見的轉售價格條款，是依公平交易法第 19 條寫的：事業不得限制交易相對人轉售商品的價格，但有正當理由者不在此限 [6]。海外經銷的價格條款，請當地律師一併看過菲律賓的規定，不要直接照抄。
+
+## 什麼情況不建議照這篇做
+
+- **對方是大型連鎖通路。** 通路談的是上架合約，條款結構不同。
+- **你找的是代理商，不是經銷商。** 代理不買貨、抽佣，合約重點是佣金與授權範圍，部分條款不適用。
+- **合約金額大，或涉及在當地設廠、合資。** 這份清單不夠，要請律師從頭擬。
+- **還不確定當地有人要買。** 合約談得再好，沒有銷量也沒用。先做[市場探查](/services/product-testing)，1～2 萬，做完可以停。
+
+## 常見問題
+
+**經銷合約要寫什麼？**
+至少 12 件事：產品與地區、期限、獨家與最低業績、價格、付款、交貨條件、庫存、報表、商標、產品證、終止、準據法與爭議 [1][2]。海外經銷最常漏的是商標與產品證。
+
+**經銷商和代理商有什麼區別？**
+看貨是誰的。經銷商向你買斷、持有庫存；代理商不囤貨，客戶直接向你下單，代理抽佣 [3]。合約重點因此不同：經銷合約談庫存與價格，代理合約談佣金。
+
+**經銷合約範本可以直接用嗎？**
+可以當清單，不建議直接簽。台灣範本是為國內經銷寫的，通常沒有產品證與海外商標的條款；ICC 的國際經銷合約範本 [1] 結構較完整，但仍要依當地法規調整。
+
+## 一個最小的下一步
+
+把對方寄來的合約打開，用上面那張表逐條打勾。沒打到勾的那幾條，就是你下一封回信要問的問題。看不懂哪一條，用 LINE 問我們一句。
+
+本文為經驗與實務整理，非法律意見；簽約前請找律師看過。最後查證：2026-10-11。`],
+    faq: [{"q":"經銷合約要寫什麼？","a":"至少 12 件事：產品與地區、期限與續約、獨家與最低業績、價格、付款、交貨條件、庫存、報表、商標、產品證、終止與終止後、準據法與爭議。海外經銷最常漏的是商標由誰申請，以及產品證掛在誰名下、換人時怎麼轉移。"},{"q":"經銷商和代理商有什麼區別？","a":"看貨是誰的。經銷商向你買斷、持有庫存；代理商不囤貨，客戶直接向你下單，代理抽佣。合約重點因此不同：經銷合約談庫存與價格，代理合約談佣金與授權範圍。"},{"q":"經銷合約範本可以直接用嗎？","a":"可以當清單，不建議直接簽。台灣範本是為國內經銷寫的，通常沒有產品證與海外商標的條款；國際商會（ICC）的國際經銷合約範本結構較完整，但仍要依當地法規調整，簽之前請律師看過。"}],
+    sources: [{"id":1,"title":"ICC Model Contract on Distributorship","publisher":"國際商會 ICC Academy","url":"https://academy.iccwbo.org/international-trade/e-books/model-contract-on-distributorship/","note":"範本附件 VII 為「約定最低業績」、附件 IX 為「庫存」；適用於經銷商作為買斷轉售者或進口商的情況。"},{"id":2,"title":"ICC Distributorship Contract（Sole Importer-Distributor）公開範本文本","publisher":"美國證券交易委員會 EDGAR（上市公司附件，依 ICC 範本訂立）","url":"https://www.sec.gov/Archives/edgar/data/1956741/000121390024080420/ea021456701ex10-1_cleancore.htm","note":"依 ICC 範本訂立的實際合約：第 1 條獨家地區；附件 VII 約定最低業績未達成，供應商可在一個月通知後終止、取消獨家或縮小地區；第 7.2 條調價須提前六個月通知；第 7.4 條貨款付清前所有權歸供應商；附件 VI 付款與 Incoterms；第 10 條與附件 V 報告義務；第 13 條經銷商不得註冊供應商商標、終止後停止使用；第 15 條庫存；第 19 條期限；第 20.1 條重大違約可立即終止；第 22 條歸還資料與在庫新品按原價買回；第 23 條 ICC 仲裁。"},{"id":3,"title":"Philippines Country Commercial Guide：Distribution and Sales Channels","publisher":"美國商務部國際貿易署（trade.gov）","url":"https://www.trade.gov/country-commercial-guides/philippines-distribution-and-sales-channels","note":"菲律賓常見兩種進口商：買斷並持有庫存的經銷商與不囤貨抽佣的 indenter；合約通常約定 30 天解約通知。"},{"id":4,"title":"DOH Administrative Order No. 2014-0029（食品業者許可與加工食品登錄規則）","publisher":"菲律賓衛生部／FDA（FAOLEX 收錄全文）","url":"https://faolex.fao.org/docs/pdf/phi174226.pdf","note":"已登錄產品的所有權轉移條件：產品無需重新登錄的變動、新持有人持有效 LTO，並附原持有人與新持有人之間的轉讓協議。"},{"id":5,"title":"Republic Act No. 8293（Intellectual Property Code of the Philippines）","publisher":"菲律賓國會（Lawphil 收錄全文）","url":"https://lawphil.net/statutes/repacts/ra1997/ra_8293_1997.html","note":"第 122 條：商標權經由依法有效註冊取得。"},{"id":6,"title":"公平交易法 第 19 條","publisher":"全國法規資料庫（法務部）","url":"https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0150002&flno=19","note":"事業不得限制其交易相對人，就供給之商品轉售與第三人或第三人再轉售時之價格；但有正當理由者，不在此限。"}],
+    lastVerified: "2026-10-11",
+  },
 ] as const;
 
 export function getArticleBySlug(slug: string): Article | undefined {
@@ -1688,6 +1963,9 @@ const SLUG_IMAGE_MAP: Record<string, string> = {
   "taiwan-food-export-philippines-steps": "/images/services/services-hero-dhl-1600.webp",
   "philippines-food-cosmetic-label-checklist": "/images/services/stage-03-retail-aisle-1600.webp",
   "us-fda-food-import-fsvp-prior-notice": "/images/hero-video/optimize-containers-1600.webp",
+  "philippines-market-assessment-deck": "/images/hero-video/methodology-whiteboard-1600.webp",
+  "philippines-registration-waiting-period": "/images/hero-video/chapter-warehouse-1600.webp",
+  "distribution-agreement-clause-checklist": "/images/hero-video/subsidies-desk-1600.webp",
 };
 
 export function getArticleImage(article: Article): string {

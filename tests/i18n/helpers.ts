@@ -1,4 +1,17 @@
-import { expect } from "vitest";
+import { expect, vi } from "vitest";
+
+// The Chinese fixtures were captured before the 2026-10-06 scheduled article went live; pin the clock so later publications do not change them.
+const FIXTURE_TIME = new Date("2026-10-05T12:00:00+08:00");
+
+export async function atFixtureTime<T>(render: () => T | Promise<T>): Promise<T> {
+  vi.useFakeTimers({ toFake: ["Date"] });
+  vi.setSystemTime(FIXTURE_TIME);
+  try {
+    return await render();
+  } finally {
+    vi.useRealTimers();
+  }
+}
 
 const isLocalizable = (href: string) => {
   if (!href.startsWith("/") || href.startsWith("//")) return false;

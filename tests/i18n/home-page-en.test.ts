@@ -11,11 +11,11 @@ import EnglishHome, { metadata } from "@/app/en/page";
 import Home from "@/app/page";
 import { getPublishedEnglishArticles } from "@/lib/articles/english";
 
-import { expectEnglishMarkup } from "./helpers";
+import { atFixtureTime, expectEnglishMarkup } from "./helpers";
 
 describe("English home page", () => {
   it("keeps the Chinese page byte-identical without the English-only trust block", async () => {
-    const html = renderToStaticMarkup(await Home());
+    const html = await atFixtureTime(async () => renderToStaticMarkup(await Home()));
 
     expect(html).not.toContain("Who we are");
     expect(html).toBe(readFileSync("tests/fixtures/home-page.zh.html", "utf8"));

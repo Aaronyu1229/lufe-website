@@ -35,6 +35,9 @@ export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [taiwanFoodExportPhilippinesSteps.slug]: taiwanFoodExportPhilippinesSteps,
   [philippinesFoodCosmeticLabelChecklist.slug]: philippinesFoodCosmeticLabelChecklist,
   [usFdaFoodImportFsvpPriorNotice.slug]: usFdaFoodImportFsvpPriorNotice,
+  [philippinesMarketAssessmentDeck.slug]: philippinesMarketAssessmentDeck,
+  [philippinesRegistrationWaitingPeriod.slug]: philippinesRegistrationWaitingPeriod,
+  [distributionAgreementClauseChecklist.slug]: distributionAgreementClauseChecklist,
 };
 import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
 import { article as fobCifDdpExplained } from "./fob-cif-ddp-explained";
@@ -55,3 +58,6 @@ import { article as marketEntryModesCompared } from "./market-entry-modes-compar
 import { article as taiwanFoodExportPhilippinesSteps } from "./taiwan-food-export-philippines-steps";
 import { article as philippinesFoodCosmeticLabelChecklist } from "./philippines-food-cosmetic-label-checklist";
 import { article as usFdaFoodImportFsvpPriorNotice } from "./us-fda-food-import-fsvp-prior-notice";
+import { article as philippinesMarketAssessmentDeck } from "./philippines-market-assessment-deck";
+import { article as philippinesRegistrationWaitingPeriod } from "./philippines-registration-waiting-period";
+import { article as distributionAgreementClauseChecklist } from "./distribution-agreement-clause-checklist";
