@@ -38,6 +38,9 @@ export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [philippinesMarketAssessmentDeck.slug]: philippinesMarketAssessmentDeck,
   [philippinesRegistrationWaitingPeriod.slug]: philippinesRegistrationWaitingPeriod,
   [distributionAgreementClauseChecklist.slug]: distributionAgreementClauseChecklist,
+  [taiwanProductsPhilippinesBarriers.slug]: taiwanProductsPhilippinesBarriers,
+  [howToReadMarketResearchReport.slug]: howToReadMarketResearchReport,
+  [firstYearOverseasSmallBudget.slug]: firstYearOverseasSmallBudget,
 };
 import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
 import { article as fobCifDdpExplained } from "./fob-cif-ddp-explained";
@@ -61,3 +64,6 @@ import { article as usFdaFoodImportFsvpPriorNotice } from "./us-fda-food-import-
 import { article as philippinesMarketAssessmentDeck } from "./philippines-market-assessment-deck";
 import { article as philippinesRegistrationWaitingPeriod } from "./philippines-registration-waiting-period";
 import { article as distributionAgreementClauseChecklist } from "./distribution-agreement-clause-checklist";
+import { article as taiwanProductsPhilippinesBarriers } from "./taiwan-products-philippines-barriers";
+import { article as howToReadMarketResearchReport } from "./how-to-read-market-research-report";
+import { article as firstYearOverseasSmallBudget } from "./first-year-overseas-small-budget";
