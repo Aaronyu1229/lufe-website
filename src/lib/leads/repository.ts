@@ -60,6 +60,19 @@ export const createLead = async (values: LeadValues): Promise<string | null> => 
   return rows[0]?.id ?? null;
 };
 
+export const countRecentLeads = async (): Promise<number | null> => {
+  const sql = getDatabase();
+  if (!sql) return null;
+
+  const rows = await sql<{ count: number }[]>`
+    SELECT COUNT(*)::int AS count
+    FROM lufe.leads
+    WHERE created_at >= NOW() - ${10 * 60} * INTERVAL '1 second'
+  `;
+
+  return rows[0]?.count ?? 0;
+};
+
 export const updateLeadNotification = async (
   id: string,
   notified: boolean,

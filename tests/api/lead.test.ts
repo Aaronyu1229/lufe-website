@@ -1,12 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const state = vi.hoisted(() => ({
+  countRecentLeads: vi.fn(),
   createLead: vi.fn(),
   updateLeadNotification: vi.fn(),
   fetch: vi.fn(),
 }));
 
 vi.mock("@/lib/leads/repository", () => ({
+  countRecentLeads: state.countRecentLeads,
   createLead: state.createLead,
   updateLeadNotification: state.updateLeadNotification,
 }));
@@ -17,9 +19,16 @@ const environmentKeys = ["LUFE_DATABASE_URL", "JP_LEAD_URL", "LUFE_LEAD_SECRET"]
 const originalEnvironment = new Map(environmentKeys.map((key) => [key, process.env[key]]));
 const consoleError = vi.fn();
 
-const request = (body: unknown) => new Request("http://localhost/api/lead", {
+let requestNumber = 0;
+
+const request = (body: unknown, headers: Record<string, string> = {}) => new Request("http://localhost/api/lead", {
   method: "POST",
-  headers: { "content-type": "application/json", "user-agent": "vitest" },
+  headers: {
+    "content-type": "application/json",
+    "user-agent": "vitest",
+    "x-real-ip": `192.0.2.${++requestNumber}`,
+    ...headers,
+  },
   body: JSON.stringify(body),
 });
 
@@ -59,6 +68,7 @@ const waitlistLead = (overrides: Record<string, unknown> = {}) => ({
 });
 
 beforeEach(() => {
+  state.countRecentLeads.mockReset().mockResolvedValue(0);
   state.createLead.mockReset().mockResolvedValue("lead-1");
   state.updateLeadNotification.mockReset().mockResolvedValue(undefined);
   state.fetch.mockReset().mockResolvedValue(new Response(null, { status: 204 }));
@@ -169,7 +179,7 @@ describe("POST /api/lead", () => {
   });
 
   it("saves the lead and sends the exact notification payload", async () => {
-    const response = await POST(request(contactLead()));
+    const response = await POST(request(contactLead(), { "x-real-ip": "203.0.113.10" }));
 
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual({ ok: true });
@@ -197,6 +207,7 @@ describe("POST /api/lead", () => {
       headers: {
         "Content-Type": "application/json",
         "X-Hook-Secret": "lead-secret",
+        "X-Visitor-IP": "203.0.113.10",
       },
     });
     const payload = JSON.parse(options.body as string);
@@ -266,6 +277,49 @@ describe("POST /api/lead", () => {
     expect(state.fetch).toHaveBeenCalledTimes(1);
     expect(state.updateLeadNotification).not.toHaveBeenCalled();
     expect(consoleError).toHaveBeenCalledWith("[lead] database insert failed");
+  });
+
+  it("uses the first forwarded IP when a real IP is unavailable", async () => {
+    const response = await POST(request(quickLead(), {
+      "x-real-ip": "",
+      "x-forwarded-for": "198.51.100.4, 203.0.113.7",
+    }));
+
+    expect(response.status).toBe(200);
+    const [, options] = state.fetch.mock.calls[0] as [string, RequestInit];
+    expect(options.headers).toMatchObject({ "X-Visitor-IP": "198.51.100.4" });
+  });
+
+  it("limits each IP to five valid submissions in ten minutes", async () => {
+    const headers = { "x-real-ip": "198.51.100.5" };
+
+    for (let index = 0; index < 5; index += 1) {
+      expect((await POST(request(quickLead(), headers))).status).toBe(200);
+    }
+
+    const response = await POST(request(quickLead(), headers));
+
+    expect(response.status).toBe(429);
+    await expect(response.json()).resolves.toEqual({
+      ok: false,
+      message: "送出太頻繁，請稍後再試，或直接寫信給我們",
+    });
+    expect(state.createLead).toHaveBeenCalledTimes(5);
+    expect(state.fetch).toHaveBeenCalledTimes(5);
+  });
+
+  it("does not write or notify when more than thirty leads exist in ten minutes", async () => {
+    state.countRecentLeads.mockResolvedValue(31);
+
+    const response = await POST(request(quickLead()));
+
+    expect(response.status).toBe(429);
+    await expect(response.json()).resolves.toEqual({
+      ok: false,
+      message: "送出太頻繁，請稍後再試，或直接寫信給我們",
+    });
+    expect(state.createLead).not.toHaveBeenCalled();
+    expect(state.fetch).not.toHaveBeenCalled();
   });
 
   it("returns 502 when both saving and notification fail", async () => {
