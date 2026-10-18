@@ -88,15 +88,20 @@ export const isGhostAdminRequest = (request: Request): boolean => {
   if (!header || typeof header !== "object" || !payload || typeof payload !== "object") return false;
 
   const { alg, kid, typ } = header as Record<string, unknown>;
-  const { aud, exp } = payload as Record<string, unknown>;
+  const { aud, exp, iat } = payload as Record<string, unknown>;
+  const now = Math.floor(Date.now() / 1000);
   if (
     alg !== "HS256" ||
     typ !== "JWT" ||
     kid !== key.id ||
     aud !== "/admin/" ||
     typeof exp !== "number" ||
+    typeof iat !== "number" ||
     !Number.isFinite(exp) ||
-    exp <= Math.floor(Date.now() / 1000)
+    !Number.isFinite(iat) ||
+    exp <= now ||
+    iat > now + 60 ||
+    exp - iat > 300
   ) {
     return false;
   }

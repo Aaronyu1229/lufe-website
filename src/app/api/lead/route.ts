@@ -1,4 +1,4 @@
-import { createLead, updateLeadNotification, type LeadValues } from "@/lib/leads/repository";
+import { countRecentLeads, createLead, updateLeadNotification, type LeadValues } from "@/lib/leads/repository";
 import { leadErrorsEn } from "@/i18n/en/lead-errors";
 import { type Locale } from "@/i18n/locale";
 import { leadErrorsZh } from "@/i18n/zh/lead-errors";
@@ -53,6 +53,11 @@ const maxLengths = {
 } as const;
 
 const monthlyVolumes = ["<100", "100～500", "500 以上"] as const;
+const ipRateLimitWindowMs = 10 * 60 * 1000;
+const ipRateLimitMax = 5;
+const databaseRateLimitMax = 30;
+const rateLimitMessage = "送出太頻繁，請稍後再試，或直接寫信給我們";
+const submissionsByIp = new Map<string, number[]>();
 
 const stringValue = (value: unknown): string => typeof value === "string" ? value.trim() : "";
 
@@ -62,6 +67,28 @@ const cut = (value: string, length: number): string => Array.from(value).slice(0
 
 const validationResponse = (errors: Record<string, string>): Response =>
   Response.json({ ok: false, errors }, { status: 400 });
+
+const rateLimitResponse = (): Response => Response.json(
+  { ok: false, message: rateLimitMessage },
+  { status: 429 },
+);
+
+const visitorIp = (request: Request): string =>
+  request.headers.get("x-real-ip")?.trim()
+  || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+  || "unknown";
+
+const isIpRateLimited = (ip: string): boolean => {
+  const now = Date.now();
+  const cutoff = now - ipRateLimitWindowMs;
+  const submissions = (submissionsByIp.get(ip) ?? []).filter((timestamp) => timestamp > cutoff);
+
+  if (submissions.length >= ipRateLimitMax) return true;
+
+  submissions.push(now);
+  submissionsByIp.set(ip, submissions);
+  return false;
+};
 
 const localeFromLead = (body: unknown): Locale =>
   body && typeof body === "object" && !Array.isArray(body) && (body as Record<string, unknown>).lang === "en"
@@ -172,7 +199,7 @@ const notificationPayload = (input: LeadInput): LeadNotification => {
   return payload;
 };
 
-const notifyLead = async (payload: LeadNotification): Promise<NotificationResult> => {
+const notifyLead = async (payload: LeadNotification, ip: string): Promise<NotificationResult> => {
   const leadUrl = process.env.JP_LEAD_URL;
   const leadSecret = process.env.LUFE_LEAD_SECRET;
   const missing = [
@@ -192,6 +219,7 @@ const notifyLead = async (payload: LeadNotification): Promise<NotificationResult
       headers: {
         "Content-Type": "application/json",
         "X-Hook-Secret": leadSecret,
+        "X-Visitor-IP": ip,
       },
       body: JSON.stringify(payload),
       signal: AbortSignal.timeout(5_000),
@@ -227,6 +255,8 @@ export async function POST(request: Request): Promise<Response> {
   if (!validation.input) return validationResponse(validation.errors ?? { form: leadErrorsZh.invalidForm });
 
   const input = validation.input;
+  const ip = visitorIp(request);
+  if (isIpRateLimited(ip)) return rateLimitResponse();
   const quickContactIsEmail = input.form === "quick" && input.contact.includes("@");
   const lead: LeadValues = {
     form: input.form,
@@ -253,6 +283,8 @@ export async function POST(request: Request): Promise<Response> {
     console.error("[lead] LUFE_DATABASE_URL is missing; lead was not saved to the database");
   } else {
     try {
+      const recentLeadCount = await countRecentLeads();
+      if (recentLeadCount !== null && recentLeadCount > databaseRateLimitMax) return rateLimitResponse();
       leadId = await createLead(lead);
       if (!leadId) console.error("[lead] database insert did not return a lead id");
     } catch {
@@ -260,7 +292,7 @@ export async function POST(request: Request): Promise<Response> {
     }
   }
 
-  const notification = await notifyLead(notificationPayload(input));
+  const notification = await notifyLead(notificationPayload(input), ip);
 
   if (leadId) {
     try {

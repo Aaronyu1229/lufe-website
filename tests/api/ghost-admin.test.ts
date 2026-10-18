@@ -96,6 +96,7 @@ const createToken = (
   })).toString("base64url");
   const encodedPayload = Buffer.from(JSON.stringify({
     aud: "/admin/",
+    iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 300,
     ...payload,
   })).toString("base64url");
@@ -231,6 +232,12 @@ describe("Ghost-compatible Admin API", () => {
     ["wrong audience", createToken({ aud: "/other/" })],
     ["alg none", createToken({}, { alg: "none" })],
     ["wrong key id", createToken({}, { kid: "not-the-key-id" })],
+    ["missing issued-at time", createToken({ iat: undefined })],
+    ["issued-at time more than one minute in the future", createToken({ iat: Math.floor(Date.now() / 1000) + 61 })],
+    ["lifetime longer than five minutes", createToken({
+      iat: Math.floor(Date.now() / 1000),
+      exp: Math.floor(Date.now() / 1000) + 301,
+    })],
   ])("returns 401 for %s", async (_label, token) => {
     const response = await getPostBySlug(
       getRequest("http://localhost/ghost/api/admin/posts/slug/anything/", { authorization: `Ghost ${token}` }),
