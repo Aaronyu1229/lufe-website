@@ -41,6 +41,9 @@ export const EN_ARTICLES: Readonly<Record<string, EnglishArticle>> = {
   [taiwanProductsPhilippinesBarriers.slug]: taiwanProductsPhilippinesBarriers,
   [howToReadMarketResearchReport.slug]: howToReadMarketResearchReport,
   [firstYearOverseasSmallBudget.slug]: firstYearOverseasSmallBudget,
+  [philippinesAdsNotEnough.slug]: philippinesAdsNotEnough,
+  [overseasMarketExitChecklist.slug]: overseasMarketExitChecklist,
+  [overseasExpansionProviderQuestions.slug]: overseasExpansionProviderQuestions,
 };
 import { article as agentVsDistributorExclusive } from "./agent-vs-distributor-exclusive";
 import { article as fobCifDdpExplained } from "./fob-cif-ddp-explained";
@@ -67,3 +70,6 @@ import { article as distributionAgreementClauseChecklist } from "./distribution-
 import { article as taiwanProductsPhilippinesBarriers } from "./taiwan-products-philippines-barriers";
 import { article as howToReadMarketResearchReport } from "./how-to-read-market-research-report";
 import { article as firstYearOverseasSmallBudget } from "./first-year-overseas-small-budget";
+import { article as philippinesAdsNotEnough } from "./philippines-ads-not-enough";
+import { article as overseasMarketExitChecklist } from "./overseas-market-exit-checklist";
+import { article as overseasExpansionProviderQuestions } from "./overseas-expansion-provider-questions";
