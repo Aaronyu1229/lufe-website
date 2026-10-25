@@ -154,6 +154,7 @@ export const CHAPTER_ARTICLES = {
     "philippines-market-assessment-deck",
     "how-to-read-market-research-report",
     "first-year-overseas-small-budget",
+    "overseas-expansion-provider-questions",
   ],
   m3: [
     "fob-cif-ddp-explained",
@@ -168,6 +169,8 @@ export const CHAPTER_ARTICLES = {
     "philippines-registration-waiting-period",
     "distribution-agreement-clause-checklist",
     "taiwan-products-philippines-barriers",
+    "philippines-ads-not-enough",
+    "overseas-market-exit-checklist",
   ],
   m9: ["manila-beverage-first-store-90-days"],
   after: [],

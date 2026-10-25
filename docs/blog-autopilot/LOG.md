@@ -1,5 +1,28 @@
 # 自動駕駛紀錄（新的在最上面）
 
+## 2026-10-25 每週任務
+- 開工檢查：`~/dev/lufe-autopilot/LAST_FAILURE.md` 不存在，無待補項目。
+- 排程（空檔由 `blog-schedule.mjs` 給出）：
+  - `philippines-ads-not-enough` → 2026-10-31T09:00:00+08:00（主攻字「東南亞 電商」月量 30，「菲律賓 電商」「菲律賓 廣告」各 10 為變體；5 個來源）
+  - `overseas-market-exit-checklist` → 2026-11-03T09:00:00+08:00（主攻字「退出市場」月量 10，「退出策略」10 為變體；6 個來源）
+  - `overseas-expansion-provider-questions` → 2026-11-05T09:00:00+08:00（主攻字「拓展海外市場」月量 10，「海外市場拓展」「海外拓展」各 10 為變體；9 個來源）
+- 選題判斷：
+  - 三題都不在 jumping.group 的 insights 清單內；服務商篇的「已有買家下單」情況連到躍馬〈incoterms-trade-terms-guide〉。
+  - 原先想用的主攻字意圖不符、未採用：「廣告投放」（4,400）與「KOL 行銷」（110）SERP 全是台灣 FB／IG／Google 投放教學與 KOL 定義；「菲律賓蝦皮」（140）是消費者購物；「菲律賓 網紅」（70）是網紅排行與社會新聞；「撤場」（70）是展覽撤展；「撤資」（70）、「停損」（390）是股市；「結束營業」（880）、「公司解散」（390）是台灣國內程序；「海外市場開發」（10）是 B2B 陌生開發；「代營運」（20）是台灣電商代營運。
+  - 資訊增益：「東南亞 電商」首頁是平台排名與市場潛力，沒有「廣告之前的法規與平台關卡」；「退出市場」首頁全是企業退出新聞，沒有任何撤場清單；「拓展海外市場」首頁全是貿易署補助公告與說明會，沒有「怎麼評估服務商」。
+  - 廣告篇引用鹿飛 `/services/consignment` 頁既有的「為什麼不直接投廣告」問答原句；撤場篇引用 `/services/product-testing` 頁「報告會寫清楚為什麼、什麼條件改了可以再試」；服務商篇引用 `/services` 頁「每一章獨立計價……」。皆為站上現有文字，未加寫。
+  - 法規重點：RA 9711 第 11 條禁止對未登記健康產品做廣告；AO 2014-0029 加工食品須先登記才能販售或廣告、換標籤用於廣告前須通報；RA 11967（網路交易法）第 15、21、27 條；RA 8293 第 124.2、145 條實際使用聲明；RA 9803 食品捐贈免責；RA 11232 第 134、135 條自願解散；美國商務部菲律賓商業指南（30 天解約通知、代理佣金 5～10%）。
+  - 服務商篇 FAQ「代理商怎麼賺錢？」取自「代營運」SERP 的「其他人也問了」；撤場篇 FAQ「撤場是什麼意思？」取自「撤場」SERP。
+- 上週檢查：`philippines-registration-waiting-period`（10-20）、`distribution-agreement-clause-checklist`（10-22）、`taiwan-products-philippines-barriers`（10-24）皆 200；`how-to-read-market-research-report`、`first-year-overseas-small-budget` 尚未到 publishAt，404 正確；其餘 20 篇皆 200。
+- 花費：DataForSEO 約 US$0.21（搜尋量 2 次 0.18＋SERP 14 次 0.028）；查詢前餘額 US$31.87。
+- 異常與處理：
+  - **sitemap 仍然沒有自動更新（第三週，未修）**：正式站 `sitemap.xml` 80 筆 lastmod 全是 2026-10-19T01:12:47Z，10-20、10-22、10-24 三篇已上線（200）卻不在 sitemap。本 PR 合併會觸發部署而暫時補上；依「不改網站」規則未動 `sitemap.ts`，仍請人工處理。
+  - **`~/.npm` 快取擁有者不是目前使用者**：`npm ci` 失敗（EACCES，npm 建議 `sudo chown -R 502:20 ~/.npm`）。本次改用暫存快取 `npm_config_cache=/tmp/lufe-npm-cache` 完成，未動 `~/.npm`；請 Aaron 執行上述 chown，或在 `run.sh` 設定暫存快取。
+  - `npx eslint src`：2 error、4 warning。2 個 error 是 `src/components/MessageBox.tsx` 與 `src/components/about/NetworkGlobe.tsx` 的 react-hooks/set-state-in-effect，本 PR 未動這兩個檔（與 origin/main 相同）；CI 只跑 vitest，依「不改元件」規則未處理，請人工確認。
+  - 菲律賓 FDA 網站對腳本的搜尋與 verification 入口回 403，服務商篇未引用 FDA 查證入口；經濟部商工登記查詢（findbiz）也擋腳本，未引用。
+  - 字型子集有 1 個字元由系統字型繪製，是既有的 FALLBACK 項目，本次未新增。
+- 待查：菲律賓化妝品通報在撤場後是否需主動註銷（ACD FAQ 只寫換公司要重新通報）；FDA 查證入口的官方說明頁（下次可用瀏覽器查）。
+
 ## 2026-10-18 每週任務
 - 開工檢查：`~/dev/lufe-autopilot/LAST_FAILURE.md` 不存在，無待補項目。
 - 排程（空檔由 `blog-schedule.mjs` 給出）：
