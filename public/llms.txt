@@ -1,0 +1,61 @@
+# 鹿飛 LUFÉ
+
+> 台灣品牌進菲律賓的第一年夥伴：市場探查、寄賣、公司落地、海外客服，另有北美通路與運營優化。創辦人來自躍馬企業（jumping.group，國際貨運承攬 43 年）。
+> LUFÉ helps Taiwanese brands through their first year in the Philippines: market testing, consignment, local entity setup and overseas customer service, plus North America retail channels.
+
+貨代把貨送到，故事才開始。鹿飛陪台灣品牌走完在菲律賓的第一年：市場探查、寄賣、公司落地、海外客服，四個方案各有價，先花 1～2 萬看市場反應。創辦人來自躍馬企業，底下是 43 年的國際物流。
+
+繁體中文頁面在網站根目錄，英文版在 `/en/`。物流、報關、HS Code、Incoterms 細節由姊妹站躍馬企業 https://jumping.group 說明；關稅數字查詢用 https://tradepiloter.com 。
+Traditional Chinese at the root; English under `/en/`.
+
+## 服務 Services
+
+- [服務｜一家品牌在馬尼拉的第一年](https://lufe.world/services): 市場探查、寄賣、公司落地、海外客服——同一家公司在不同月份會遇到的四件事，我們做成四個方案。
+- [市場探查｜先驗證市場，再決定投入](https://lufe.world/services/product-testing): 在台灣問了一百個人，還是不知道當地消費者會不會買單。市場探查把產品帶到當地，直接取得市場反應。
+- [寄賣｜上架了，讓人先用過再說](https://lufe.world/services/consignment): 報告說可以。接下來的問題是：證要多久、貨放哪、上了架誰來推。
+- [公司落地｜開始想要在當地有自己的人](https://lufe.world/services/localization): 賣得動了。你開始想：要不要開一間自己的公司、找第一個員工、把證掛到自己名下。然後你發現，每一件事都需要有人在當地。
+- [海外客服｜交給專業英語團隊](https://lufe.world/services/call-center): 一封英文客訴信。退貨、換貨、問哪裡有賣。你不會想為了這件事養一組人，但也不能不回。
+- [北美通路｜台灣品牌進北美零售通路](https://lufe.world/services/north-america): 參過展、寄過樣品、沒有下文——很多品牌的北美故事停在這裡。北美通路由北美團隊在當地執行：選品、送評、展覽、上桌談判；鹿飛是你在台灣的窗口。
+- [運營優化｜已經在海外的品牌](https://lufe.world/services/optimize): 產品已經在海外賣，但利潤被運費吃掉、事情對不上、決策像在猜。創辦人來自躍馬企業，背後是 43 年的國際物流；先用 30 分鐘，告訴你卡在哪一段。
+- [小步出海法 — 鹿飛方法論｜市場不會因為你準備好了就要你](https://lufe.world/services/methodology): 鹿飛的出海方法論：先用一兩萬問菲律賓市場，再決定投多少。兩個真實研究例子、五個評估問題、打兩次分。
+## 案例 Cases
+
+- [一塊台灣羊奶皂，怎麼讓北美買家看懂？](https://lufe.world/cases/goat-milk-soap-global): 產品本身沒有問題，卡住的是北美買家看不懂它。配方不動，改的是說法與標示，再帶進北美的量販通路。
+- [台灣魚鬆想進美國，第一關卡在哪裡？](https://lufe.world/cases/fish-floss-us-fda): 原本以為是行銷問題，盤點後發現先要過的是法規與成分。一個台灣魚鬆品牌進美國的第一段：FDA 規範、成分調整點、產品怎麼被介紹、包裝怎麼改。
+- [一個手搖飲品牌，怎麼在菲律賓從零做到十幾家？](https://lufe.world/cases/bubble-tea): 我們在菲律賓的當地夥伴從零做起的手搖飲品牌：從台灣茶出發，改成當地的口味與價格，先開第一家驗證，再開放加盟，現在十幾家。
+## 洞察文章 Insights
+
+- [代理商、經銷商、獨家代理差在哪？對方要獨家、要你壓貨之前，先弄清楚貨是誰的](https://lufe.world/insights/agent-vs-distributor-exclusive): 代理商不買貨、抽佣金，經銷商買斷貨、扛庫存；「獨家」不是第三種身分，是加在兩者上的條件。用一張比較表分清三者，列出獨家與壓貨哪些能答應、哪些要拒絕，以及在菲律賓證掛在誰名下的風險。
+- [FOB、CIF、DDP 是什麼意思？第一次出口報價，五個 Incoterms 條件一次看懂](https://lufe.world/insights/fob-cif-ddp-explained): FOB 意思是貨上船前賣方負責、上船後買方負責；CIF 多了運費與最低保險；DDP 是賣方包到門、連進口關稅都付。用一張表比 EXW、FOB、CIF、DAP、DDP 誰負責什麼、風險何時轉、關稅誰付，以及第一次報價怎麼選。
+- [參展補助怎麼申請？115 年海外參展補助每展最高 16 萬、補到 90%](https://lufe.world/insights/overseas-exhibition-subsidy-115-upgrade): 貿易署海外參展補助怎麼申請：一攤 12 萬、封頂 16 萬、最高補 90%。受理時間、六項可補項目、展後核銷順序，以及哪三個點最常讓錢拿不回來。
+- [台灣手搖品牌在馬尼拉開第一家店，前 90 天會碰到哪三個問題？口味、定價、坪數](https://lufe.world/insights/manila-beverage-first-store-90-days): 從簽約到首店開幕的 90 天，台灣手搖品牌在馬尼拉會碰到三個跟台灣不一樣的決定：糖度與配料怎麼調、披索要標在哪個價格帶、首店要多大。這不是策略簡報，是開第一家店之前就要想清楚的三件事。
+- [菲律賓電商第一年：蝦皮、Lazada、TikTok Shop 先開哪一個？店開誰名下](https://lufe.world/insights/philippines-ecommerce-first-year): 台灣蝦皮賣得好，能不能直接用蝦皮跨境賣到菲律賓？第一年的問題不是哪個平台最大，是店開在誰名下、貨放哪、誰回訊息。三個平台的開店門檻、跨境與本地店的差別。
+- [第一次出口要走哪五步？從確認有人買、產品證到出口報關與上架](https://lufe.world/insights/first-time-export-checklist): 第一次出口怎麼做？最怕的不是做錯，是不知道該做什麼。五個階段：確認有人買、證掛誰名下、算到岸成本、選通路、上架顧店；每一步通常卡在哪、哪一步做完可以停。
+- [美國 FDA 認證怎麼申請？FDA 不發「認證」：保健品出口美國真正要做的五件事](https://lufe.world/insights/us-fda-registration-guide): 很多人問美國 FDA 認證怎麼辦，但 FDA 不「核准」保健品，也不發「認證」。真正要做的是工廠登記＋美國代理人、新成分事前通知、標示照格式、每批貨事前通報。
+- [關稅怎麼計算？用 TradePilot 線上關稅查詢工具查 HS Code、關稅到落地成本](https://lufe.world/insights/tradepilot-tariff-tutorial): 關稅怎麼計算、HS Code 怎麼查？TradePilot 是免費線上關稅查詢工具，不用註冊：輸入產品與金額，AI 歸 HS Code、拆出關稅與稅費到落地成本。
+- [出口報價前先算到岸成本：FOB、CIF、DDP 差在哪、關稅怎麼算](https://lufe.world/insights/landed-cost-before-export): 客戶要 FOB 價，FOB 是什麼意思、跟 CIF、DDP 差在哪？到岸成本七塊由誰幫你估、關稅怎麼算，以及為什麼我們不在文章裡放稅率。
+- [我們怎麼判斷一個出海案子值不值得做？決策前的五個問題](https://lufe.world/insights/go-no-go-framework): 出海的決定太常靠感覺。我們用五個問題看一個案子：市場、門檻、競爭、獲利、法規；條件還沒齊時，我們會直接建議你先不要出去。這篇把每一題看什麼攤開，30 分鐘初步評估用的也是這五個問題。
+- [東南亞市場先去哪一國？越南、泰國、印尼、菲律賓比較，為什麼先從菲律賓開始](https://lufe.world/insights/why-philippines-first): 東南亞市場第一站該選越南、泰國、印尼還是菲律賓？不是菲律賓最大，是它最適合「第一次、小預算、做完可以停」。用門檻與法規兩題比四國，並寫出哪些品類不該先去。
+- [市場調查怎麼做？小預算的海外市場測試，先避開三個錯誤](https://lufe.world/insights/product-testing-best-practices): 出海前的市場調查怎麼做，才不會花了錢卻拿不到能做決定的答案？三個常見錯誤：只問自己人、測試時投廣告、只看銷量不問原因；以及有用的測試要回答的四個問題。
+- [產品要上 Amazon 美國站嗎？台灣品牌先做這三個判斷](https://lufe.world/insights/amazon-us-three-decisions): 要不要上 Amazon 美國站，不是選品題，是決策題。三個判斷：法規與 Amazon 門檻跨不跨得過、到岸之後毛利還在不在、客訴與退貨誰接。三題都過再談選品。
+- [菲律賓 FDA 的 LTO、CPR、CPN 差在哪？食品、保健食品、化妝品各要辦哪一張](https://lufe.world/insights/philippines-fda-lto-cpr-cpn): 菲律賓 FDA 的 LTO 是給公司的營業許可，CPR 是食品的產品登錄證，CPN 是化妝品的通報證，先有 LTO 才能辦後兩張。用一張表比三張證管什麼、誰持有、官方規費與天數，整理 2025～2026 年費率暫停與登錄系統換新的影響。
+- [菲律賓產品證掛在進口商名下，以後要換人怎麼辦？CPR 轉移與 CPN 重新通報要先談的事](https://lufe.world/insights/philippines-cpr-transfer-change-importer): 菲律賓 CPR 掛在進口商名下，換進口商要舊持證公司出具終止協議或讓渡書；化妝品 CPN 因經銷權換公司則要重新通報。整理 FDA 規定的轉移文件、哪些情況等於重辦，以及簽代理合約第一天就該寫進去的五件事。
+- [找進口商、找代理、自己設公司、跨境電商：四種國際市場進入模式比較表（以菲律賓為例）](https://lufe.world/insights/market-entry-modes-compared): 國際市場進入模式對中小品牌來說，實際上是四選一：進口經銷商、代理商、自己設公司、跨境電商。用一張表比較誰買貨、證掛誰名下、門檻多高、退出多難，並說明為什麼食品與化妝品走跨境電商也繞不過菲律賓 FDA。
+- [台灣食品出口菲律賓怎麼走？從寄樣品到上架的流程與每一步文件](https://lufe.world/insights/taiwan-food-export-philippines-steps): 台灣食品出口菲律賓，順序是找持 LTO 的進口商、申請樣品進口許可、備台灣官方證明送 CPR、改標籤、報關上架。用一張表列出每一步誰負責、要哪些文件，含菲律賓 FDA 樣品進口許可與食藥署自由銷售證明的官方規費與天數。
+- [台灣食品標籤拿到菲律賓要改哪些地方？食品與化妝品標籤檢查清單](https://lufe.world/insights/philippines-food-cosmetic-label-checklist): 台灣的食品標籤拿到菲律賓，要補英文、進口商與原產國、過敏原位置、日期寫法與批號；化妝品照東協標示規定補齊九項。用一張檢查表對照菲律賓 AO 2014-0030 與東協化妝品標示規定，並說明翻譯貼紙最長只能用 6 個月。
+- [FSVP 是什麼？美國 FDA 食品進口要做的三件事：設施登記、FSVP、Prior Notice](https://lufe.world/insights/us-fda-food-import-fsvp-prior-notice): FSVP 是美國進口商對境外食品供應商做的驗證，不是台灣工廠去申請的證。一般食品進美國，要工廠設施登記、進口商執行 FSVP、每批貨到港前事前通報。用一張表看誰負責、沒做會怎樣，並整理水產品、低酸罐頭與標示的特別規定。
+- [市場分析報告怎麼寫？老闆叫你評估菲律賓市場，簡報放這 12 頁就夠（附大綱）](https://lufe.world/insights/philippines-market-assessment-deck): 市場分析報告是給老闆做決定的，不是展示資料。用一張表列出評估菲律賓市場的 12 頁大綱：每頁回答什麼、放什麼、資料去哪找，並說明最常寫錯的五頁，以及最後一頁的停損點怎麼寫。
+- [菲律賓產品登記還沒下來，這段時間可以先做哪三件事？商標、標籤、成本](https://lufe.world/insights/philippines-registration-waiting-period): 菲律賓產品登記送出後的等待期，先做三件越晚做越貴的事：用自己的名義申請菲律賓商標、把標籤定稿、用當地貨架價驗證成本。附 FDA 服務章程的官方處理天數，以及等待期不該做的事。
+- [經銷合約要寫什麼？海外經銷簽約前的 12 項條款清單（含商標與產品證）](https://lufe.world/insights/distribution-agreement-clause-checklist): 經銷合約至少要寫清楚 12 件事，從地區、期限、獨家門檻到終止與爭議。台灣國內範本多半沒寫的兩條，是海外經銷拆夥時最難收回的：商標由誰申請、產品證掛在誰名下。附逐條打勾用的條款清單。
+- [保健食品出口菲律賓卡在哪一關？台灣賣得好的食品、保健、保養品分開講](https://lufe.world/insights/taiwan-products-philippines-barriers): 台灣賣得好的產品去菲律賓，食品、保健食品、保養品卡的關不一樣：食品卡原廠文件，保健食品卡宣稱，保養品卡配方與成分比例。用一張表對照三類要辦的證、官方規費與最常卡的地方，附菲律賓 FDA 與東協化妝品指令的原文出處。
+- [市場調查報告怎麼看？拿到一份報告，先問這 6 個問題再做決定](https://lufe.world/insights/how-to-read-market-research-report): 市場調查報告要看的不是結論，是結論怎麼來的。照美國民意研究協會（AAPOR）的揭露標準，整理拿到報告時該問的 6 個問題：誰出錢、問了誰、問了多少人、何時問、怎麼問、報告承認哪些限制，並說明哪些數字可以先略過。
+## 其他 Other
+
+- [案例 · 菲律賓與北美通路](https://lufe.world/cases): 三種出海走法、三個案例：台灣羊奶皂配方不動、改說法與標示走進北美量販通路、台灣魚鬆先過 FDA 再談美國上市、一個手搖飲品牌在菲律賓從零做到十幾家。每個案例都寫到當時最關鍵的決定。
+- [洞察 · 出海第一年會遇到的事](https://lufe.world/insights): 按出海第一年的順序整理：第一個月問市場、第三個月談寄賣、第九個月談公司落地，以及北美通路。台灣品牌進菲律賓之前，先把常見的卡點讀一遍。
+- [2 分鐘處境比對](https://lufe.world/assess): 三個問題，看你的出海處境跟我們參與過的哪個案例最像，以及多半從哪一章開始。想聽具體判斷，再約 30 分鐘。
+- [關於鹿飛 · 躍馬 43 年之後，再往前走一步](https://lufe.world/about): 躍馬做國際貨運承攬 43 年，我們看見客戶的貨送到了，問題卻留在抵達之後。鹿飛從那裡開始：市場探查、寄賣、公司落地、海外客服，陪台灣品牌走完在菲律賓的第一年。
+- [Aaron Yu · 創辦人專欄](https://lufe.world/about/aaron-yu): 鹿飛 LUFÉ 創辦人專欄。創辦人來自躍馬企業，寫台灣品牌進菲律賓第一年會卡住的事：市場探查、寄賣、公司落地，以及北美通路。
+- [聯絡我們](https://lufe.world/contact): 留言、預約諮詢、LINE 或 Email，選擇最方便的方式跟我們聊聊你的出海計畫。
+- [資源 · 出海補助與工具](https://lufe.world/resources): 正在開放的政府出海補助、案例、實務文章與比對工具——一個入口看完所有可以幫你出海的資源。
+- [2026 政府出海補助](https://lufe.world/resources/subsidies): 貿易署、經濟部、外貿協會——四個和出海直接相關的計畫，幫台灣企業降低出海成本。鹿飛整理的實戰版本，直接告訴你哪個適合你。
