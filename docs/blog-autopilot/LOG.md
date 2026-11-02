@@ -1,5 +1,16 @@
 # 自動駕駛紀錄（新的在最上面）
 
+## 2026-11-02 每月任務（10 月月報，自動駕駛最後一次執行）
+- 開工檢查：`~/dev/lufe-autopilot/LAST_FAILURE.md` 不存在，無待補項目。
+- 報告：`docs/blog-autopilot/reports/2026-10.md`。
+- 排名：26 篇已發布文章、37 個主攻字／變體，DataForSEO 台灣前 30 名全部沒有 lufe.world。
+- Search Console 10 月：全站曝光 575、點擊 9；文章頁曝光 437、點擊 5。9 月查詢回傳 0 筆，無法比較。
+- QUEUE：「本月更新」列 3 篇（`overseas-exhibition-subsidy-115-upgrade`、`tradepilot-tariff-tutorial`、`product-testing-best-practices`），自動產線尾端加 5 題；自動駕駛已停，要 Aaron 說恢復才會做。
+- 花費：DataForSEO 約 US$0.64（餘額 US$29.57 → US$28.93）。
+- 異常：
+  - sitemap 第四週沒自動更新：88 筆 lastmod 全是 2026-10-28，10-29、10-31 兩篇不在其中。
+  - 英文 `/en/insights/first-year-overseas-small-budget`、`/en/insights/philippines-ads-not-enough` 404（中文 200）：`src/app/en/insights/[slug]/page.tsx` 的 `dynamicParams = false`，部署後才到 publishAt 的英文文章不會產生。依規則未改程式，請人工處理；11-03、11-05 英文版會遇到同樣問題。
+
 ## 2026-10-25 每週任務
 - 開工檢查：`~/dev/lufe-autopilot/LAST_FAILURE.md` 不存在，無待補項目。
 - 排程（空檔由 `blog-schedule.mjs` 給出）：
