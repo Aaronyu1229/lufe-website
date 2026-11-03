@@ -85,6 +85,15 @@ describe("technical SEO", () => {
     ]));
   });
 
+  it("uses an article's updated date for its sitemap lastModified", async () => {
+    const article = articles[0];
+    const entries = await sitemap();
+    const entry = entries.find(({ url }) => url === `https://lufe.world/insights/${article.slug}`);
+
+    expect(entry?.lastModified).toBe(article.updated);
+    expect(entry?.lastModified).not.toBeInstanceOf(Date);
+  });
+
   it("keeps each product-testing FAQPage answer identical to the displayed FAQ data", async () => {
     const markup = await renderAsync(createElement(ProductTestingPage));
     const faqPage = findJsonLd(markup, "FAQPage");

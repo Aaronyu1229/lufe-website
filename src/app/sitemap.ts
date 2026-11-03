@@ -108,7 +108,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const path = `/insights/${article.slug}`;
       return {
         url: siteUrl(path),
-        lastModified: now,
+        lastModified: article.updated ?? article.publishAt ?? now,
         changeFrequency: "monthly" as const,
         priority: 0.65,
         ...(EN_PUBLIC && hasEnglishArticle(article.slug) ? { alternates: languageAlternates(path) } : {}),
@@ -120,7 +120,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const path = `/insights/${article.slug}`;
       return {
         url: siteUrl(localizedHref("en", path)),
-        lastModified: now,
+        lastModified: article.updated ?? article.publishAt ?? now,
         changeFrequency: "monthly" as const,
         priority: 0.65,
         alternates: languageAlternates(path),
