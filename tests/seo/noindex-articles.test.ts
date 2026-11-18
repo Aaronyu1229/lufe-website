@@ -30,6 +30,7 @@ const NOINDEX_SLUGS = [
   "first-year-overseas-small-budget",
   "philippines-ads-not-enough",
   "overseas-market-exit-checklist",
+  "overseas-expansion-provider-questions",
 ] as const;
 
 const INDEXABLE_SLUGS = [
