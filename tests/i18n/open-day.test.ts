@@ -22,6 +22,7 @@ import { getPublishedEnglishArticles, hasEnglishArticle } from "@/lib/articles/e
 import { EN_SITE_DESCRIPTION } from "@/lib/english-site";
 import { createPageMetadata } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
+import { isNoindexArticle } from "@/data/seo-noindex";
 
 const mutableArticles = articles as unknown as Article[];
 const expectedLanguages = (path: string) => ({
@@ -107,7 +108,8 @@ describe("open-day sitemap", () => {
       }));
     }
 
-    for (const article of getPublishedEnglishArticles()) {
+    // Noindex articles are deliberately left out of the sitemap (covered by tests/seo/noindex-articles.test.ts).
+    for (const article of getPublishedEnglishArticles().filter((candidate) => !isNoindexArticle(candidate.slug))) {
       const path = `/insights/${article.slug}`;
       expect(entries).toContainEqual(expect.objectContaining({
         url: `${SITE_URL}/en${path}`,

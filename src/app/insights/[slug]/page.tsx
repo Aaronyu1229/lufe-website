@@ -9,6 +9,7 @@ import { getArticlePublishedDate, getPublishedArticles, isPublished } from "@/li
 import { getPublishedArticleBySlug, listPublishedArticles, type DatabaseArticle } from "@/lib/articles/repository";
 import { SITE_URL } from "@/lib/site";
 import { createArticleMetadata, toAbsoluteUrl, toIsoDate, withoutSiteName } from "@/lib/seo";
+import { isNoindexArticle } from "@/data/seo-noindex";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -29,14 +30,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (staticArticle) {
     if (!isPublished(staticArticle)) return { title: "文章未找到" };
 
-    return createArticleMetadata({
-      path: `/insights/${staticArticle.slug}`,
-      title: withoutSiteName(staticArticle.title),
-      description: staticArticle.summary,
-      image: getArticleImage(staticArticle),
-      publishedTime: staticArticle.publishAt ?? toIsoDate(staticArticle.date),
-      modifiedTime: toIsoDate(staticArticle.updated ?? staticArticle.date),
-    });
+    return {
+      ...createArticleMetadata({
+        path: `/insights/${staticArticle.slug}`,
+        title: withoutSiteName(staticArticle.title),
+        description: staticArticle.summary,
+        image: getArticleImage(staticArticle),
+        publishedTime: staticArticle.publishAt ?? toIsoDate(staticArticle.date),
+        modifiedTime: toIsoDate(staticArticle.updated ?? staticArticle.date),
+      }),
+      ...(isNoindexArticle(staticArticle.slug) ? { robots: { index: false, follow: true } } : {}),
+    };
   }
 
   const databaseArticle = await getPublishedArticleBySlug(slug);
