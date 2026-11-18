@@ -6,6 +6,7 @@ import { getPublishedEnglishArticles, hasEnglishArticle } from "@/lib/articles/e
 import { listPublishedArticles } from "@/lib/articles/repository";
 import { getPublishedArticles } from "@/lib/articles/published";
 import { SITE_URL } from "@/lib/site";
+import { isNoindexArticle } from "@/data/seo-noindex";
 
 export const revalidate = 300;
 
@@ -104,6 +105,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     : [];
 
   const articleEntries: MetadataRoute.Sitemap = getPublishedArticles(now)
+    .filter((article) => !isNoindexArticle(article.slug))
     .map((article) => {
       const path = `/insights/${article.slug}`;
       return {
@@ -116,7 +118,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
   const englishArticleEntries: MetadataRoute.Sitemap = EN_PUBLIC
-    ? getPublishedEnglishArticles(now).map((article) => {
+    ? getPublishedEnglishArticles(now).filter((article) => !isNoindexArticle(article.slug)).map((article) => {
       const path = `/insights/${article.slug}`;
       return {
         url: siteUrl(localizedHref("en", path)),

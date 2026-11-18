@@ -9,6 +9,7 @@ import { CHAPTER_ARTICLES, type ArticleChapterKey } from "@/data/chapters";
 import { getEnglishArticle, getPublishedEnglishArticles } from "@/lib/articles/english";
 import { toInsightCard, type InsightCard } from "@/lib/articles/presentation";
 import { createArticleMetadata, toAbsoluteUrl, toIsoDate, withoutSiteName } from "@/lib/seo";
+import { isNoindexArticle } from "@/data/seo-noindex";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,15 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getEnglishArticle(slug);
   if (!article) return { title: "Article not found" };
 
-  return createArticleMetadata({
-    path: `/insights/${article.slug}`,
-    locale: "en",
-    title: withoutSiteName(article.title),
-    description: article.summary,
-    image: getArticleImage(article),
-    publishedTime: article.publishAt ?? toIsoDate(article.date),
-    modifiedTime: toIsoDate(article.updated ?? article.date),
-  });
+  return {
+    ...createArticleMetadata({
+      path: `/insights/${article.slug}`,
+      locale: "en",
+      title: withoutSiteName(article.title),
+      description: article.summary,
+      image: getArticleImage(article),
+      publishedTime: article.publishAt ?? toIsoDate(article.date),
+      modifiedTime: toIsoDate(article.updated ?? article.date),
+    }),
+    ...(isNoindexArticle(article.slug) ? { robots: { index: false, follow: true } } : {}),
+  };
 }
 
 function chapterForSlug(slug: string): ArticleChapterKey | undefined {
