@@ -17,6 +17,7 @@ export const NOINDEX_ARTICLE_SLUGS: ReadonlySet<string> = new Set([
   "first-year-overseas-small-budget",
   "philippines-ads-not-enough",
   "overseas-market-exit-checklist",
+  "overseas-expansion-provider-questions",
 ]);
 
 export function isNoindexArticle(slug: string): boolean {

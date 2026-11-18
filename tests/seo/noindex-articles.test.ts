@@ -48,7 +48,7 @@ const INDEXABLE_SLUGS = [
 describe("noindex articles", () => {
   it("has exactly the requested static articles in both language datasets", () => {
     expect([...NOINDEX_ARTICLE_SLUGS]).toEqual(NOINDEX_SLUGS);
-    expect(NOINDEX_ARTICLE_SLUGS.size).toBe(17);
+    expect(NOINDEX_ARTICLE_SLUGS.size).toBe(18);
 
     for (const slug of NOINDEX_SLUGS) {
       expect(articles.some((article) => article.slug === slug)).toBe(true);
